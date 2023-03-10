@@ -157,6 +157,9 @@
     top: 14px;
     right: 20px;
     font-size: 0;
+    background: none;
+    border: none;
+    padding: 0;
 }
 
 .share-content .share-header .share-title{

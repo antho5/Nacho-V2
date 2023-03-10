@@ -5,9 +5,9 @@
 {{ 'component-breadcrumb.css' | asset_url | stylesheet_tag }}
 
 {%- unless template == 'index' -%}
-    <div class="breadcrumb-container style--line_clamp_1">
+    <breadcrumb-component class="breadcrumb-container style--line_clamp_1">
         <nav class="breadcrumb breadcrumb-{{ alignment }}" role="navigation" aria-label="breadcrumbs">
-        <a class="link home-link" href="/">{{ 'general.breadcrumb.home' | t }}</a>  
+        <a class="link home-link" href="{{ routes.cart_url | split: '/cart' | first | append: '/'  }}">{{ 'general.breadcrumb.home' | t }}</a>  
             {%- if template contains 'product' -%} 
                 {%- if collection -%}
                     <span class="separate" aria-hidden="true">
@@ -76,5 +76,53 @@
             {%- endif -%}
             <span class="observe-element" style="width: 1px; height: 1px; background: transparent; display: inline-block; flex-shrink: 0;"></span>
         </nav>
-    </div>
+    </breadcrumb-component>
+
+    <script type="text/javascript">
+        class BreadcrumbComponent extends HTMLElement {
+            constructor() {
+                super();
+            }
+
+            connectedCallback() {
+                this.firstLink = this.querySelector('.link.home-link')
+                this.lastLink = this.querySelector('.observe-element')
+
+                this.classList.add('initialized');
+
+                this.initObservers();
+            }
+
+            static createHandler(position = 'first', breadcrumb = null) {
+                const handler = (entries, observer) => {
+                    entries.forEach(entry => {
+                        if (breadcrumb == null) return observer.disconnect();
+
+                        if (entry.isIntersecting ) {
+                            breadcrumb.classList.add(`disable-${position}`);
+                        } else {
+                            breadcrumb.classList.remove(`disable-${position}`);
+                        }
+                    })
+                }
+
+                return handler;
+            }
+
+            initObservers() {
+                const scrollToFirstHandler = BreadcrumbComponent.createHandler('first', this);
+                const scrollToLastHandler = BreadcrumbComponent.createHandler('last', this);
+                
+                this.scrollToFirstObserver = new IntersectionObserver(scrollToFirstHandler, { threshold: 1 });
+                this.scrollToLastObserver = new IntersectionObserver(scrollToLastHandler, { threshold: 0.6 });
+
+                this.scrollToFirstObserver.observe(this.firstLink);
+                this.scrollToLastObserver.observe(this.lastLink);
+            }
+        }   
+
+        window.addEventListener('load', () => {
+            customElements.define('breadcrumb-component', BreadcrumbComponent);
+        })
+    </script>
 {%- endunless -%}

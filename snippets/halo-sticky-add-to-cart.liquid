@@ -28,8 +28,12 @@
                                 {{ product.title | escape }}
                             </h4>
                             {% if sticky_atc_layout == '1' %}
+                                {% assign compare_price = current_variant.compare_at_price | money %}
                                 {% assign subtotal = current_variant.price | money %}
-                                <div class="sticky-price">
+                                <div class="sticky-price{% if compare_price != blank %} has-compare-price{% endif %}">
+                                    {% if compare_price != blank %}
+                                    <s class="money-compare-price">{{ compare_price }}</s>
+                                    {% endif %}
                                     <span class="money-subtotal">{{ subtotal }}</span>
                                 </div>
                             {% endif %}
@@ -180,9 +184,9 @@
                             {%- case media.media_type -%}
                                 {%- when 'image' -%}
                                     <div class="productView-thumbnail filter-{{ media.alt | handle }}" data-media-id="{{ section.id }}-{{ media.id }}">
-                                        <a class="productView-thumbnail-link animated-loading" href="javascript:void(0)" data-image="{{ media | img_url: 'original' }}">
+                                        <div class="productView-thumbnail-link animated-loading" data-image="{{ media | img_url: 'original' }}">
                                             <img src="{{ media | img_url: 'master' }}" alt="{{ media.alt | escape }}" title="{{ media.alt | escape }}" loading="lazy" />
-                                        </a>
+                                        </div>
                                     </div>
                                 {%- when 'external_video' -%}
                                     {%- if video_layout == 'thumbnail' -%}
@@ -235,12 +239,16 @@
                     <h4 class="sticky-title">
                         {{ product.title | escape }}
                     </h4>
-                    {% if sticky_atc_layout == '1' %}
+                    {%- if sticky_atc_layout == '1' -%}
+                        {% assign compare_price = current_variant.compare_at_price | money %}
                         {% assign subtotal = current_variant.price | money %}
-                        <div class="sticky-price">
+                        <div class="sticky-price{% if compare_price != blank %} has-compare-price{% endif %}">
+                            {% if compare_price != blank %}
+                              <s class="money-compare-price">{{ compare_price }}</s>
+                            {% endif %}
                             <span class="money-subtotal">{{ subtotal }}</span>
                         </div>
-                    {% endif %}
+                    {%- endif -%}
                 </div>
                 {% render 'product-variant-sticky-mobile',
                     block: block,

@@ -18,234 +18,52 @@
     if block_banner != blank
         assign show_banner = true
     endif
+
+    assign color_title = section.settings.color_title
+    assign fontsize_title = section.settings.fontsize_title
+    assign fontsize_title_mb = section.settings.fontsize_title_mb
+    assign border_color_title = section.settings.border_color_title
+    assign border_color_title2 = section.settings.border_color_title2
+
+    assign mg_top_desktop = section.settings.mg_top_desktop
+    assign mg_top_tablet = section.settings.mg_top_tablet
+    assign mg_top_mobile = section.settings.mg_top_mobile
+
+    assign mg_bottom_desktop = section.settings.mg_bottom_desktop
+    assign mg_bottom_tablet = section.settings.mg_bottom_tablet
+    assign mg_bottom_mobile = section.settings.mg_bottom_mobile
+
+    assign padding_full_width = section.settings.padding_full_width
+
+    assign mg_bottom_title = section.settings.mg_bottom_title
+
+    assign mg_bottom_title_tab = section.settings.mg_bottom_title_tab
+    assign fontsize_tab = section.settings.fontsize_tab
+    assign fontsize_tab_mb = section.settings.fontsize_tab_mb
+    assign font_weight_tab = section.settings.font_weight_tab
+    assign font_weight_active_tab = section.settings.font_weight_active_tab
+    assign line_height_tab = section.settings.line_height_tab
+    assign line_height_tab_mobile = section.settings.line_height_tab_mobile
+    assign min_width = section.settings.min_width_tab
+    assign border_tab_radius = section.settings.border_tab_radius
+    assign border_width_tab = section.settings.border_width_tab
+    assign color_tab = section.settings.color_tab
+    assign bg_color_tab = section.settings.bg_color_tab
+    assign bg_color_gradient_tab = section.settings.bg_color_gradient_tab
+    assign border_color_tab = section.settings.border_color_tab
+    assign color_tab_active = section.settings.color_tab_active
+    assign bg_color_tab_active = section.settings.bg_color_tab_active
+    assign bg_color_gradient_tab_active = section.settings.bg_color_gradient_tab_active
+
+    assign min_width_button = section.settings.min_width_button
+    assign color_separation = section.settings.color_separation
+
+    if layout == 'scroll'
+        assign show_half = section.settings.show_half
+    endif
 -%}
-<div class="product-tab-block product-block section-block-{{section.id}}" {% if block_banners.size > 1  %}data-loader-script="{{ 'halo.product-tab-banner.js' | asset_url }}"{% endif %}>
-    <{% if swipe %}product-slider-component{% else %}div{% endif %} class="halo-block halo-product-block" id="halo-product-block-{{ section.id }}" data-product-tab-block data-limit="{{ limit }}" data-layout="{{ layout }}" sectionId="{{ section.id }}"
-    >
-        <div class="{% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%}container-full{% else %}container{% endif %}">
-            {%- if show_banner -%}
-                <div class="halo-block-top">
-                    {%- if block_title != blank -%}
-                        <div class="halo-block-header text-{{ block_title_align }} has__banner">
-                            <h3 class="title">
-                                <span class="text">{{ block_title | escape }}</span>
-                            </h3>
-                        </div>
-                    {%- endif -%}
-                    <ul class="list-product-tabs list-tab__{{ section.settings.tab_title_style }}{% if enable_scroll_title %} enable_scroll_tab disable-srollbar{% endif %} has__banner">
-                        {% for block in block_tabs %}
-                        <li>
-                            <a href="#" data-target="#product-tab-{{ section.id }}-{{ block.id }}" data-product-tabTop data-href="{{ collections[block.settings.collection].url }}?view=ajax_product_block" class="tab-links{% if forloop.first %} active{% endif %}">
-                                {{ block.settings.title }}
-                            </a>
-                        </li>
-                            {%- if section.settings.separation -%}
-                            {%- unless forloop.last -%}
-                            <li class="separation separation--{{section.settings.style_separation}}" style="--bg-color: {{ section.settings.color_separation }}">/</li>
-                            {%- endunless -%}
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="product-tab--block-has__banner has__banner--{{ section.settings.position }}" style="--width-box-banner: {{ section.settings.width_banner | append: '%' }}">
-                    <div class="product-block__banner">
-                        <div class="list_banner_item" {% if block_banners.size > 1  %}data-banner-product{% endif %}>
-                            {%- for block in block_banners -%}
-                            {%- assign preview_img = block.settings.image -%}
-                            <figure style="max-width: {{ preview_img.width }}px">
-                                <div class="product-block__image adaptive_height" style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
-                                    {% if block.settings.image != blank %}
-                                        <img {% if settings.enable_lazyload %}data-{% endif %}srcset="{%- if preview_img.width >= 375 -%}{{ preview_img | img_url: '375x' }} 375w,{%- endif -%}
-                                        {%- if preview_img.width >= 750 -%}{{ preview_img | img_url: '750x' }} 750w,{%- endif -%}
-                                        {%- if preview_img.width >= 1100 -%}{{ preview_img | img_url: '1100x' }} 1100w,{%- endif -%}
-                                        {{ preview_img | img_url: 'master' }} {{ preview_img.width }}w"
-                                        sizes="(min-width: 1100px) 535px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" 
-                                        alt="{{ preview_img.alt  | escape }}"
-                                        width="{{ preview_img.width }}"
-                                        height="{{ preview_img.width | divided_by: img_url.aspect_ratio }}"
-                                        {% if settings.enable_lazyload %}class="lazyload"{% endif %}
-                                        />
-                                    {% else %}
-                                        <div class="not_img" style="--height_not_img: 530px">
-                                        300 x 530px
-                                        </div>  
-                                    {% endif %}
-                                </div> 
-                                {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
-                            </figure>
-                            {%- endfor -%}
-                        </div>
-                    </div>
-                    <div class="product-block__grid">
-            {%- else -%}
-                {%- if block_title != blank -%}
-                    <div class="halo-block-header text-{{ block_title_align }}">
-                        <h3 class="title">
-                            <span class="text">{{ block_title | escape }}</span>
-                        </h3>
-                    </div>
-                {%- endif -%}
-            {%- endif -%}
-                    <div class="halo-block-content">
-                        {%- unless show_banner -%}
-                        <ul class="list-product-tabs list-tab__{{ section.settings.tab_title_style }}{% if enable_scroll_title %} enable_scroll_tab disable-srollbar{% endif %}">
-                            {% for block in block_tabs %}
-                            <li>
-                                <a href="#" data-target="#product-tab-{{ section.id }}-{{ block.id }}" data-product-tabTop data-href="{{ collections[block.settings.collection].url }}?view=ajax_product_block" class="tab-links{% if forloop.first %} active{% endif %}">
-                                    {{ block.settings.title }}
-                                </a>
-                            </li>
-                                {%- if section.settings.separation -%}
-                                {%- unless forloop.last -%}
-                                <li class="separation separation--{{section.settings.style_separation}}" style="--bg-color: {{ section.settings.color_separation }}">/</li>
-                                {%- endunless -%}
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                        {%- endunless -%}
 
-                        <div class="product-tabs-content">
-                            {%- liquid
-                                assign product_limit = 0
-                                assign column = section.settings.product_block_per_row
-                                if infinite_scroll
-                                    assign product_limit = limit
-                                endif
-                            -%}
-                            {% for block in block_tabs %}
-                            {% if block.type == 'ProductTabs' %}
-                            <div class="tab-content{% if forloop.first %} active{% endif %} {% if layout == 'scroll' %}is-scroll{% endif %}" data-product-TabContent id="product-tab-{{ section.id }}-{{ block.id }}" {% if layout == 'scroll' %}data-drag-container{% endif %}>
-                                {%- if layout == 'grid' -%}
-                                    {%- liquid
-                                        assign product_limit = 0
-                                        assign column = section.settings.product_block_per_row
-                                        if infinite_scroll
-                                            assign product_limit = limit
-                                        endif
-                                    -%}
-                                    <div class="products-grid products-load column-{{ column }}{% if swipe %} slider slider--tablet grid grid--peek{% endif %}" data-products-to-show="{{ limit }}">
-                                {%- elsif layout == 'slider' -%}
-                                    {%- liquid
-                                        assign column = section.settings.product_block_show
-                                        assign dots = section.settings.product_block_dots
-                                        assign arrows = section.settings.product_block_arrows
-                                    -%}
-                                    <div class="products-carousel products-load column-{{ column }}{% if show_banner %} has__banner_tab{% endif %}"
-                                        data-item-to-show="{{ column }}"
-                                        data-item-dots="{{ dots }}"
-                                        data-item-arrows="{{ arrows }}"
-                                    >
-                                {% elsif layout == 'scroll' %}
-                                    {% liquid
-                                        assign column = section.settings.product_block_per_view 
-                                        assign show_half = section.settings.show_half 
-        
-                                        assign scroll_height = section.settings.scroll_height | append: 'px'
-                                        assign scroll_track_bg = section.settings.scroll_track_bg
-                                        assign scroll_thumb_color = section.settings.scroll_thumb_color
-                                        assign scroll_thumb_hover_color = section.settings.scroll_thumb_hover_color
-                                    %}
-                                    <div class="products-cursor handleMouseLeave">
-                                        <div class="products-cursor__outer">
-                                            <div class="products-cursor__inner">
-                                                <img src="{{ 'bg-cursor.png' | asset_url }}" alt="Cursor" class="products-cursor__image">
-                                                <svg viewBox="0 0 448 512" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow products-cursor__icon" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M311.03 131.515l-7.071 7.07c-4.686 4.686-4.686 12.284 0 16.971L387.887 239H12c-6.627 0-12 5.373-12 12v10c0 6.627 5.373 12 12 12h375.887l-83.928 83.444c-4.686 4.686-4.686 12.284 0 16.971l7.071 7.07c4.686 4.686 12.284 4.686 16.97 0l116.485-116c4.686-4.686 4.686-12.284 0-16.971L328 131.515c-4.686-4.687-12.284-4.687-16.97 0z"></path>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div 
-                                        class="products-load products-flex disable-srollbar-mb column-{{ column }}{% if show_half %} show-half{% endif %}{% if swipe %} slider slider--tablet grid{% endif %}" 
-                                        data-drag-parent
-                                        style="--count: {{ column }};
-                                            --scrollbar-height: {{ scroll_height }};
-                                            --scrollbar-track-color: {% if scroll_track_bg != blank and scroll_track_bg != 'rgba(0,0,0,0)' %}{{ scroll_track_bg }} {% endif %};
-                                            --scrollbar-thumb-color: {% if scroll_thumb_color != blank and scroll_thumb_color != 'rgba(0,0,0,0)' %}{{ scroll_thumb_color }} {% endif %};
-                                            --scrollbar-thumb-hover-color: {% if scroll_thumb_hover_color != blank and scroll_thumb_hover_color != 'rgba(0,0,0,0)' %}{{ scroll_thumb_hover_color }} {% endif %};
-                                        "
-                                    >    
-                                {%- endif -%}
-                                        <div class="loading text-center" {% if layout == 'scroll' %}style="margin-left: auto; margin-right: auto;"{% endif %}></div>
-                                    </div>
-                                {%- assign collection = block.settings.collection -%}
-                                {%- if infinite_scroll and collections[collection].handle != '' and layout == 'grid' -%}
-                                {%- assign product_total = collections[collection].all_products_count -%}
-                                {%- if product_total > product_limit -%}
-                                    <div class="product-infinite-scroll text-center {% if swipe %}hidden-mobile{% endif %}" data-product-infinite>
-                                        <a class="button button--secondary"
-                                            data-collection="{{ collection.handle }}"
-                                            data-limit="{{ product_limit }}"
-                                            data-swipe="{{ swipe }}"
-                                            data-page="2"
-                                            data-total="{{ product_total }}"
-                                            data-image-ratio="{{ image_ratio }}"
-                                            href="#"
-                                            sectionId="{{ section.id }}"
-                                            {% if product_total <= product_limit %}
-                                                disabled="disabled"
-                                            {% endif %}
-                                        >
-                                            {{ 'general.button_load_more.default' | t }}
-                                        </a>
-                                    </div>
-                                {%- endif -%}
-                                {%- endif -%}
-                            </div>
-                            {% endif %}
-                            {% endfor %}
-                        </div>
-                        
-                    </div>
-            {%- if show_banner -%}
-                </div>
-            </div>
-            {%- endif -%}
-        </div>
-    </{% if swipe %}product-slider-component{% else %}div{% endif %}>
-</div>
 <style>
-    {%- liquid
-        assign color_title = section.settings.color_title
-        assign fontsize_title = section.settings.fontsize_title
-        assign fontsize_title_mb = section.settings.fontsize_title_mb
-        assign border_color_title = section.settings.border_color_title
-        assign border_color_title2 = section.settings.border_color_title2
-
-        assign mg_top_desktop = section.settings.mg_top_desktop
-        assign mg_top_tablet = section.settings.mg_top_tablet
-        assign mg_top_mobile = section.settings.mg_top_mobile
-
-        assign mg_bottom_desktop = section.settings.mg_bottom_desktop
-        assign mg_bottom_tablet = section.settings.mg_bottom_tablet
-        assign mg_bottom_mobile = section.settings.mg_bottom_mobile
-
-        assign padding_full_width = section.settings.padding_full_width
-
-        assign mg_bottom_title = section.settings.mg_bottom_title
-
-        assign mg_bottom_title_tab = section.settings.mg_bottom_title_tab
-        assign fontsize_tab = section.settings.fontsize_tab
-        assign fontsize_tab_mb = section.settings.fontsize_tab_mb
-        assign font_weight_tab = section.settings.font_weight_tab
-        assign font_weight_active_tab = section.settings.font_weight_active_tab
-        assign line_height_tab = section.settings.line_height_tab
-        assign line_height_tab_mobile = section.settings.line_height_tab_mobile
-        assign min_width = section.settings.min_width_tab
-        assign border_tab_radius = section.settings.border_tab_radius
-        assign border_width_tab = section.settings.border_width_tab
-        assign color_tab = section.settings.color_tab
-        assign bg_color_tab = section.settings.bg_color_tab
-        assign bg_color_gradient_tab = section.settings.bg_color_gradient_tab
-        assign border_color_tab = section.settings.border_color_tab
-        assign color_tab_active = section.settings.color_tab_active
-        assign bg_color_tab_active = section.settings.bg_color_tab_active
-        assign bg_color_gradient_tab_active = section.settings.bg_color_gradient_tab_active
-
-        assign min_width_button = section.settings.min_width_button
-        assign color_separation = section.settings.color_separation
-    -%}
-
     .section-block-{{section.id}} {
         {%- if section.settings.type_tab_font == 'font_1' -%}
         --font-tab: var(--font-tab-type-1);
@@ -510,6 +328,327 @@
         {% endif %}
     }
 </style>
+
+<product-tabs-section>
+    {% if settings.banner_animation == 'effect_1' %}<animated-component>{% endif %}
+        <div class="product-tab-block product-block section-block-{{section.id}}" {% if block_banners.size > 1  %}data-loader-script="{{ 'halo.product-tab-banner.js' | asset_url }}"{% endif %}>
+            <{% if swipe %}product-slider-component{% else %}div{% endif %} class="halo-block halo-product-block" id="halo-product-block-{{ section.id }}" data-product-tab-block data-limit="{{ limit }}" data-layout="{{ layout }}" sectionId="{{ section.id }}"
+            >
+                <div class="{% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%}container-full{% else %}container{% endif %}">
+                    {%- if show_banner -%}
+                        <div class="halo-block-top">
+                            {%- if block_title != blank -%}
+                                <div class="halo-block-header text-{{ block_title_align }} has__banner">
+                                    <h3 class="title">
+                                        <span class="text">{{ block_title | escape }}</span>
+                                    </h3>
+                                </div>
+                            {%- endif -%}
+                            <ul class="list-product-tabs list-tab__{{ section.settings.tab_title_style }}{% if enable_scroll_title %} enable_scroll_tab disable-srollbar{% endif %} has__banner">
+                                {% for block in block_tabs %}
+                                <li>
+                                    <a href="javascript:void(0)" data-target="#product-tab-{{ section.id }}-{{ block.id }}" data-product-tabTop data-href="{{ collections[block.settings.collection].url }}?view=ajax_product_block" class="tab-links{% if forloop.first %} active{% endif %}">
+                                        {{ block.settings.title }}
+                                    </a>
+                                </li>
+                                    {%- if section.settings.separation -%}
+                                    {%- unless forloop.last -%}
+                                    <li class="separation separation--{{section.settings.style_separation}}" style="--bg-color: {{ section.settings.color_separation }}">/</li>
+                                    {%- endunless -%}
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="product-tab--block-has__banner has__banner--{{ section.settings.position }}" style="--width-box-banner: {{ section.settings.width_banner | append: '%' }}">
+                            <div class="product-block__banner" data-animate="{{ settings.banner_animation }}">
+                                <div class="list_banner_item" {% if block_banners.size > 1  %}data-banner-product{% endif %}>
+                                    {%- for block in block_banners -%}
+                                    {%- assign preview_img = block.settings.image -%}
+                                    <figure style="max-width: {{ preview_img.width }}px">
+                                        <div class="product-block__image adaptive_height" style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
+                                            {% if block.settings.image != blank %}
+                                                <img {% if settings.enable_lazyload %}data-{% endif %}srcset="{%- if preview_img.width >= 375 -%}{{ preview_img | img_url: '375x' }} 375w,{%- endif -%}
+                                                {%- if preview_img.width >= 750 -%}{{ preview_img | img_url: '750x' }} 750w,{%- endif -%}
+                                                {%- if preview_img.width >= 1100 -%}{{ preview_img | img_url: '1100x' }} 1100w,{%- endif -%}
+                                                {{ preview_img | img_url: 'master' }} {{ preview_img.width }}w"
+                                                sizes="(min-width: 1100px) 535px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)" 
+                                                alt="{{ preview_img.alt  | escape }}"
+                                                width="{{ preview_img.width }}"
+                                                height="{{ preview_img.width | divided_by: img_url.aspect_ratio }}"
+                                                {% if settings.enable_lazyload %}class="lazyload"{% endif %}
+                                                />
+                                            {% else %}
+                                                <div class="not_img" style="--height_not_img: 530px">
+                                                300 x 530px
+                                                </div>  
+                                            {% endif %}
+                                        </div> 
+                                        {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
+                                    </figure>
+                                    {%- endfor -%}
+                                </div>
+                            </div>
+                            <div class="product-block__grid">
+                    {%- else -%}
+                        {%- if block_title != blank -%}
+                            <div class="halo-block-header text-{{ block_title_align }}">
+                                <h3 class="title">
+                                    <span class="text">{{ block_title | escape }}</span>
+                                </h3>
+                            </div>
+                        {%- endif -%}
+                    {%- endif -%}
+                            <div class="halo-block-content {% if layout == 'scroll'%}is-scroll{% endif %}">
+                                {%- unless show_banner -%}
+                                <ul class="list-product-tabs list-tab__{{ section.settings.tab_title_style }}{% if enable_scroll_title %} enable_scroll_tab disable-srollbar{% endif %}">
+                                    {% for block in block_tabs %}
+                                    <li>
+                                        <a href="javascript:void(0)" data-target="#product-tab-{{ section.id }}-{{ block.id }}" data-product-tabTop data-href="{{ collections[block.settings.collection].url }}?view=ajax_product_block" class="tab-links{% if forloop.first %} active{% endif %}">
+                                            {{ block.settings.title }}
+                                        </a>
+                                    </li>
+                                        {%- if section.settings.separation -%}
+                                        {%- unless forloop.last -%}
+                                        <li class="separation separation--{{section.settings.style_separation}}" style="--bg-color: {{ section.settings.color_separation }}">/</li>
+                                        {%- endunless -%}
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                                {%- endunless -%}
+
+                                <div class="product-tabs-content">
+                                    {%- liquid
+                                        assign product_limit = 0
+                                        assign column = section.settings.product_block_per_row
+                                        if infinite_scroll
+                                            assign product_limit = limit
+                                        endif
+                                    -%}
+                                    {% for block in block_tabs %}
+                                        {% if block.type == 'ProductTabs' %}
+                                            {% if layout == 'scroll' %}<product-scroller>{% endif %}
+                                                <div class="tab-content{% if forloop.first %} active{% endif %} {% if layout == 'scroll' %}is-scroll{% endif %}" data-product-TabContent id="product-tab-{{ section.id }}-{{ block.id }}" {% if layout == 'scroll' %}data-drag-container{% endif %}>
+                                                    {%- if layout == 'grid' -%}
+                                                        {%- liquid
+                                                            assign product_limit = 0
+                                                            assign column = section.settings.product_block_per_row
+                                                            if infinite_scroll
+                                                                assign product_limit = limit
+                                                            endif
+                                                        -%}
+                                                        <div class="products-grid products-load column-{{ column }}{% if swipe %} slider slider--tablet grid grid--peek{% endif %}" data-products-to-show="{{ limit }}">
+                                                    {%- elsif layout == 'slider' -%}
+                                                        {%- liquid
+                                                            assign column = section.settings.product_block_show
+                                                            assign dots = section.settings.product_block_dots
+                                                            assign dots_mb = section.settings.product_block_dots_mb
+                                                            assign arrows = section.settings.product_block_arrows
+                                                            assign arrows_mb = section.settings.product_block_arrows_mb
+                                                        -%}
+                                                        <div class="products-carousel products-load column-{{ column }}{% if show_banner %} has__banner_tab{% endif %}"
+                                                            data-item-to-show="{{ column }}"
+                                                            data-item-dots="{{ dots }}"
+                                                            data-item-dots-mb="{{ dots_mb }}"
+                                                            data-item-arrows="{{ arrows }}"
+                                                            data-item-arrows-mb="{{ arrows_mb }}"
+                                                        >
+                                                    {% elsif layout == 'scroll' %}
+                                                        {% liquid
+                                                            assign column = section.settings.product_block_per_view 
+                                                            assign show_half = section.settings.show_half 
+                            
+                                                            assign scroll_height = section.settings.scroll_height | append: 'px'
+                                                            assign scroll_track_bg = section.settings.scroll_track_bg
+                                                            assign scroll_thumb_color = section.settings.scroll_thumb_color
+                                                            assign scroll_thumb_hover_color = section.settings.scroll_thumb_hover_color
+                                                            assign enable_hover_drag_icon = section.settings.enable_hover_drag_icon
+                                                        %}
+                                                        <div class="products-cursor handleMouseLeave" data-enable-hover="{{ enable_hover_drag_icon }}">
+                                                            <div class="products-cursor__outer">
+                                                                <div class="products-cursor__inner">
+                                                                    <img src="{{ 'bg-cursor.png' | asset_url }}" alt="Cursor" class="products-cursor__image">
+                                                                    <svg viewBox="0 0 448 512" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow products-cursor__icon" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M311.03 131.515l-7.071 7.07c-4.686 4.686-4.686 12.284 0 16.971L387.887 239H12c-6.627 0-12 5.373-12 12v10c0 6.627 5.373 12 12 12h375.887l-83.928 83.444c-4.686 4.686-4.686 12.284 0 16.971l7.071 7.07c4.686 4.686 12.284 4.686 16.97 0l116.485-116c4.686-4.686 4.686-12.284 0-16.971L328 131.515c-4.686-4.687-12.284-4.687-16.97 0z"></path>
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div 
+                                                            class="products-load is-scroll products-flex disable-srollbar-mb column-{{ column }}{% if show_half %} show-half{% endif %}{% if swipe %} slider slider--tablet grid{% endif %}"
+                                                            data-drag-parent
+                                                            style="--count: {{ column }};
+                                                                --scrollbar-height: {{ scroll_height }};
+                                                                --scrollbar-track-color: {% if scroll_track_bg != blank and scroll_track_bg != 'rgba(0,0,0,0)' %}{{ scroll_track_bg }} {% endif %};
+                                                                --scrollbar-thumb-color: {% if scroll_thumb_color != blank and scroll_thumb_color != 'rgba(0,0,0,0)' %}{{ scroll_thumb_color }} {% endif %};
+                                                                --scrollbar-thumb-hover-color: {% if scroll_thumb_hover_color != blank and scroll_thumb_hover_color != 'rgba(0,0,0,0)' %}{{ scroll_thumb_hover_color }} {% endif %};
+                                                            "
+                                                        >    
+                                                    {%- endif -%}
+                                                            {%- liquid
+                                                                assign collection = block.settings.collection
+                                                                for tag in current_tags 
+                                                                    if tag contains 'limit='
+                                                                        assign limit = tag | remove: 'limit='
+                                                                    elsif tag contains 'sectionId='
+                                                                        assign sectionId = tag | remove: 'sectionId='
+                                                                    elsif tag contains 'imageRatio='
+                                                                        assign image_ratio = tag | remove: 'imageRatio='
+                                                                    elsif tag contains 'swipe='
+                                                                        assign swipe = tag | remove: 'swipe='
+                                                                    elsif tag contains 'hasCountdown='
+                                                                        assign hasCountdown = tag | remove: 'hasCountdown='
+                                                                    endif
+                                                                endfor
+                                                            -%}
+
+                                                            {%- if collection.products[0] != nil -%}
+                                                                {%- for product in collection.products limit: limit -%}
+                                                                    <div class="product{% if swipe == 'true' %} slider__slide grid__item{% endif %}">
+                                                                        {% render 'product-grid-layout',
+                                                                            product_card_product: product,
+                                                                            portrait_aspect_ratio: '125',
+                                                                            serial: forloop.index,
+                                                                            sectionId: sectionId,
+                                                                            media_size: image_ratio,
+                                                                            hasCountdown: hasCountdown,
+                                                                            loading: true
+                                                                        %}
+                                                                    </div>
+                                                                {%- endfor -%}
+                                                            {%- else -%}
+                                                                {%- for product in (1..limit) -%}
+                                                                    <div class="product{% if swipe %} slider__slide grid__item{% endif %}">
+                                                                        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                                                                        {% render 'product-card-placeholder',
+                                                                            index: current
+                                                                        %}
+                                                                    </div>
+                                                                {%- endfor -%}
+                                                            {%- endif -%}
+                                                        </div>
+                                                    {%- assign collection = block.settings.collection -%}
+                                                    {%- if infinite_scroll and collections[collection].handle != '' and layout == 'grid' -%}
+                                                    {%- assign product_total = collections[collection].all_products_count -%}
+                                                    {%- if product_total > product_limit -%}
+                                                        <div class="product-infinite-scroll text-center {% if swipe %}hidden-mobile{% endif %}" data-product-infinite>
+                                                            <button type="button" class="button button--secondary"
+                                                                data-collection="{{ collection.handle }}"
+                                                                data-limit="{{ product_limit }}"
+                                                                data-swipe="{{ swipe }}"
+                                                                data-page="2"
+                                                                data-total="{{ product_total }}"
+                                                                data-image-ratio="{{ image_ratio }}"
+                                                                sectionId="{{ section.id }}"
+                                                                {% if product_total <= product_limit %}
+                                                                    disabled="disabled"
+                                                                {% endif %}
+                                                            >
+                                                                {{ 'general.button_load_more.default' | t }}
+                                                            </button>
+                                                        </div>
+                                                    {%- endif -%}
+                                                    {%- endif -%}
+                                                </div>
+                                            {% if layout == 'scroll' %}</product-scroller>{% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                    {%- if show_banner -%}
+                        </div>
+                    </div>
+                    {%- endif -%}
+                </div>
+            </{% if swipe %}product-slider-component{% else %}div{% endif %}>
+        </div>
+    {% if settings.banner_animation == 'effect_1' %}</animated-component>{% endif %}
+</product-tabs-section>
+
+{%- if layout == 'scroll' and section.settings.enable_hover_drag_icon -%}
+    <script src="{{ 'gsap.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<script type="text/javascript">
+    if (typeof productTabSection == 'undefined') {
+        class ProductTabsSection extends HTMLElement {
+            constructor() {
+                super(); 
+                this.section = this.querySelector('[data-product-tab-block]');
+                this.tabLinks = [...this.querySelectorAll('[data-product-tabTop]')];
+                this.tabContents = [...this.querySelectorAll('[data-product-tabContent]')];
+                this.limit = parseInt(this.section.dataset.limit)
+
+                this.initProductTabClick(); 
+
+            }
+        
+            initProductTabClick() {
+                this.linkActive = this.tabLinks.find(tabLink => tabLink.classList.contains('active'));
+                this.activeTabContent = this.tabContents.find(tabContent => tabContent.classList.contains('active'));
+        
+                this.handleAfterClick();
+        
+                this.tabLinks.forEach(tabLink => {
+                    tabLink.addEventListener('click', this.handleTabClick.bind(this))
+                })
+            }
+        
+            handleTabClick(e) {
+                e.preventDefault();
+                e.stopPropagation(); 
+        
+                const clickedTabLink = e.target
+        
+                if (clickedTabLink.classList.contains('active')) return 
+        
+                this.linkActive.classList.remove('active');
+                this.activeTabContent.classList.remove('active'); 
+        
+                const currentTabContent = this.querySelector(clickedTabLink.dataset.target);
+        
+                clickedTabLink.classList.add('active');
+                currentTabContent.classList.add('active');
+        
+                this.linkActive = clickedTabLink 
+                this.activeTabContent = currentTabContent
+        
+                $(this.activeTabContent.querySelector('.slick-slider')).slick('refresh');
+        
+                this.handleAfterClick();
+            }
+
+            handleAfterClick() {
+                this.currentTabContent = this.activeTabContent.querySelector('.products-load');
+                
+                if(window.wishlist.show){
+                    {typeof window.sharedFunctions?.setLocalStorageProductForWishlist === 'function' && window.sharedFunctions.setLocalStorageProductForWishlist()}
+                }
+                
+                if (window.sharedFunctions?.checkNeedToConvertCurrency()) {
+                    Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                };
+                
+                if (this.currentTabContent.classList.contains('products-carousel')) {
+                    window.sharedFunctions?.productBlockSilder($(this.activeTabContent))
+                }   
+
+                if (window.review.show && $('.shopify-product-reviews-badge').length > 0 && window.SPR != null && typeof window.SPR.registerCallbacks === 'functions') {
+                    return window.SPR.registerCallbacks(), window.SPR.initRatingHandler(), window.SPR.initDomEls(), window.SPR.loadProducts(), window.SPR.loadBadges();
+                }
+
+                if (this.querySelector('[data-enable-hover]') != null && this.querySelector('[data-enable-hover]').dataset.enableHover === 'true') {
+                    window.sharedFunctions?.productBlockScroller($(this.activeTabContent));
+                }
+            }
+        }   
+        
+        window.addEventListener('load', () => {
+            customElements.define('product-tabs-section', ProductTabsSection)
+        })
+            
+        var productTabSection = ProductTabsSection;
+    }
+</script>
 
 {% schema %}
 {
@@ -807,14 +946,26 @@
         {
             "type": "checkbox",
             "id": "product_block_dots",
-            "label": "t:sections.product_block.settings.slider.product_block_dots",
+            "label": "t:sections.product_block.settings.slider.product_block_dots_desk",
             "default": false
         },
         {
             "type": "checkbox",
-            "id": "product_block_arrows",
-            "label": "t:sections.product_block.settings.slider.product_block_arrows",
+            "id": "product_block_dots_mb",
+            "label": "t:sections.product_block.settings.slider.product_block_dots_mb",
             "default": true
+        },  
+        {
+            "type": "checkbox",
+            "id": "product_block_arrows",
+            "label": "t:sections.product_block.settings.slider.product_block_arrows_desk",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "product_block_arrows_mb",
+            "label": "t:sections.product_block.settings.slider.product_block_arrows_mb",
+            "default": false
         },
         {
             "type": "select",
@@ -899,6 +1050,12 @@
             "id": "scroll_thumb_hover_color",
             "label": "t:sections.product_block.settings.scroll.scroll_thumb_hover_color",
             "default": "#444"
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_hover_drag_icon",
+            "label": "t:sections.product_block.settings.scroll.enable_hover_drag_icon",
+            "default": true
         },
         {
             "type": "header",

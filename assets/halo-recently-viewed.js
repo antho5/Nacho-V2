@@ -18,7 +18,7 @@ class RecentlyViewed extends HTMLElement {
         var cookieValue = $.cookie('shopify_recently_viewed');
 
         if (!(cookieValue !== null && cookieValue !== undefined && cookieValue !== "")){
-            this.noProduct.style.display = 'flex';
+            this.noProduct ? this.noProduct.style.display = 'flex' : null;
             this.popup.classList.add('is-show');
         } else {
             var limit = this.limit,
@@ -145,8 +145,8 @@ class RecentlyViewed extends HTMLElement {
                                 vertical: true,
                                 slidesToScroll: 1,
                                 adaptiveHeight: true,
-                                nextArrow: '<button type="button" class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><title>ic-arrow-right</title><path d="M15.111 12L8 4.889 8.889 4l8 8-8 8L8 19.111z"></path></svg></button>', 
-                                prevArrow: '<button type="button" class="slick-prev"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><title>ic-arrow-left</title><path d="M8.778 12l7.111-7.111L15 4l-8 8 8 8 .889-.889z"></path></svg></button>',
+                                nextArrow: '<button type="button" class="slick-next" aria-label="Next"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><title>ic-arrow-right</title><path d="M15.111 12L8 4.889 8.889 4l8 8-8 8L8 19.111z"></path></svg></button>', 
+                                prevArrow: '<button type="button" class="slick-prev" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><title>ic-arrow-left</title><path d="M8.778 12l7.111-7.111L15 4l-8 8 8 8 .889-.889z"></path></svg></button>',
                                 responsive: [
                                     {
                                         breakpoint: 768,
@@ -167,8 +167,8 @@ class RecentlyViewed extends HTMLElement {
                                 vertical: true,
                                 slidesToScroll: 1,
                                 adaptiveHeight: true,
-                                nextArrow: '<button type="button" class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><title>ic-arrow-right</title><path d="M15.111 12L8 4.889 8.889 4l8 8-8 8L8 19.111z"></path></svg></button>', 
-                                prevArrow: '<button type="button" class="slick-prev"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><title>ic-arrow-left</title><path d="M8.778 12l7.111-7.111L15 4l-8 8 8 8 .889-.889z"></path></svg></button>',
+                                nextArrow: '<button type="button" class="slick-next" aria-label="Next"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><title>ic-arrow-right</title><path d="M15.111 12L8 4.889 8.889 4l8 8-8 8L8 19.111z"></path></svg></button>', 
+                                prevArrow: '<button type="button" class="slick-prev" aria-label="Previous"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><title>ic-arrow-left</title><path d="M8.778 12l7.111-7.111L15 4l-8 8 8 8 .889-.889z"></path></svg></button>',
                                 responsive: [
                                     {
                                         breakpoint: 768,
@@ -184,12 +184,6 @@ class RecentlyViewed extends HTMLElement {
                     }
                 }
             }
-        } else {
-            this.closeTab();
-
-            $('html, body').animate({
-                scrollTop: 0
-            }, 700);
         }
 
         if (document.body.classList.contains('recently-popup-mb-show')){
@@ -224,3 +218,51 @@ class RecentlyViewed extends HTMLElement {
 }
 
 customElements.define('recently-viewed-popup', RecentlyViewed);
+
+class BackToTopButton extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.sideIcons = [...document.getElementsByClassName('recently-viewed-icon')];
+
+        this.addEventListener('click', e => {
+            e.preventDefault();
+
+            this.sideIcons.forEach(icon => {
+                const popup = document.getElementById(icon.dataset.target);
+
+                if (!popup) return;
+
+                popup.classList.remove('is-open');
+                popup.classList.remove('is-visible');
+            })
+            
+            $('html, body').animate({
+                scrollTop: 0
+            }, 700);
+
+        })
+
+        window.addEventListener('scroll', this.onScroll.bind(this));
+    }
+
+    onScroll() {
+        const currentTop = window.pageYOffset || document.body.scrollTop;
+        const pageHeight = document.body.scrollHeight;
+
+        if (currentTop / pageHeight <= 0.07) return this.hide();
+        this.show();
+    }
+
+    hide() {
+        this.dataset.scrollToTop = false;   
+    }
+
+    show() {
+        this.dataset.scrollToTop = true;   
+    }
+}
+
+customElements.define('back-to-top-button', BackToTopButton);

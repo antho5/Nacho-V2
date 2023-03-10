@@ -1,5 +1,16 @@
 <!doctype html>
-<html class="no-js" lang="{{ request.locale.iso_code }}">
+{%- liquid
+    if settings.list_iso_rtl != blank
+        assign locale_iso_code = request.locale.iso_code
+        assign arr_list_rtl = settings.list_iso_rtl | remove:' ' | split:',' 
+        if arr_list_rtl contains locale_iso_code
+            assign enable_iso_rtl = true
+        else
+            assign enable_iso_rtl = false
+        endif
+    endif
+-%}
+<html class="no-js" lang="{{ request.locale.iso_code }}"{% if settings.enable_layout_rtl and enable_iso_rtl %} dir="rtl"{% endif %}>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,82 +35,80 @@
         {{ content_for_header }}
 
         {% render 'variable' %}
-
-        {{ 'base.css' | asset_url | stylesheet_tag }}
-
-        {%- if settings.use_custom_css -%}
-            {{ 'custom.css' | asset_url | stylesheet_tag }}
-        {%- endif -%}
+        {% render 'global-style' %}
+        {% render 'global-script' %}
 
         <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+
+        {%- liquid
+            if settings.layout_header == 'full'
+                assign layout_header = 'header-full-width'
+            elsif settings.layout_header == 'boxed'
+                assign layout_header = 'header-boxed'
+            elsif settings.layout_header == 'custom_width'
+                assign layout_header = 'header-custom-width'
+            endif
+        
+            if settings.layout_body == 'full'
+                assign layout_body = 'body-full-width'
+            elsif settings.layout_body == 'boxed'
+                assign layout_body = 'body-boxed'
+            elsif settings.layout_body == 'custom_width'
+                assign layout_body = 'body-custom-width'
+            endif
+        
+            if settings.layout_footer == 'full'
+                assign layout_footer = 'footer-full-width'
+            elsif settings.layout_footer == 'boxed'
+                assign layout_footer = 'footer-boxed'
+            elsif settings.layout_footer == 'custom_width'
+                assign layout_footer = 'footer-custom-width'
+            endif
+        
+            if settings.style_dots == '02'
+                assign style_dots = 'style-dots-2'
+            endif
+        
+            if settings.style_arrows == '02'
+                assign style_arrows = 'style-arrows-2'
+            endif
+        
+            if settings.product_card_layout == '02'
+                assign product_card_layout = 'product-card-layout-02'
+            elsif settings.product_card_layout == '03'
+                assign product_card_layout = 'product-card-layout-03'
+            elsif settings.product_card_layout == '04'
+                assign product_card_layout = 'product-card-layout-04'
+            elsif settings.product_card_layout == '05'
+                assign product_card_layout = 'product-card-layout-05'
+            elsif settings.product_card_layout == '06'
+                assign product_card_layout = 'product-card-layout-06'
+            elsif settings.product_card_layout == '07'
+                assign product_card_layout = 'product-card-layout-07'
+            else
+                assign product_card_layout = 'product-card-layout-01'
+            endif
+        
+            if settings.quick_shop_type == '2'
+                assign quick_shop_type = 'quick_shop_option_2'
+            elsif  settings.quick_shop_type == '3'
+                assign quick_shop_type = 'quick_shop_option_3'
+            endif
+        
+            unless request.design_mode
+                if settings.banner_animation == 'effect_1' 
+                    assign banner_animation = 'banner-animation-1'
+                endif
+            endunless
+        
+            if settings.style_text_size_varriant == '02'
+                assign style_text_size_varriant = 'size_varriant_style_2'
+            endif
+        -%}
     </head>
 
-    {%- liquid
-        if settings.layout_header == 'full'
-            assign layout_header = 'header-full-width'
-        elsif settings.layout_header == 'boxed'
-            assign layout_header = 'header-boxed'
-        elsif settings.layout_header == 'custom_width'
-            assign layout_header = 'header-custom-width'
-        endif
-    
-        if settings.layout_body == 'full'
-            assign layout_body = 'body-full-width'
-        elsif settings.layout_body == 'boxed'
-            assign layout_body = 'body-boxed'
-        elsif settings.layout_body == 'custom_width'
-            assign layout_body = 'body-custom-width'
-        endif
-  
-        if settings.layout_footer == 'full'
-            assign layout_footer = 'footer-full-width'
-        elsif settings.layout_footer == 'boxed'
-            assign layout_footer = 'footer-boxed'
-        elsif settings.layout_footer == 'custom_width'
-            assign layout_footer = 'footer-custom-width'
-        endif
-
-        if settings.style_dots == '02'
-            assign style_dots = 'style-dots-2'
-        endif
-
-        if settings.style_arrows == '02'
-            assign style_arrows = 'style-arrows-2'
-        endif
-
-        if settings.product_card_layout == '02'
-            assign product_card_layout = 'product-card-layout-02'
-        elsif settings.product_card_layout == '03'
-            assign product_card_layout = 'product-card-layout-03'
-        elsif settings.product_card_layout == '04'
-            assign product_card_layout = 'product-card-layout-04'
-        elsif settings.product_card_layout == '05'
-            assign product_card_layout = 'product-card-layout-05'
-        else
-            assign product_card_layout = 'product-card-layout-01'
-        endif
-
-        if settings.quick_shop_type == '2'
-            assign quick_shop_type = 'quick_shop_option_2'
-        elsif  settings.quick_shop_type == '3'
-            assign quick_shop_type = 'quick_shop_option_3'
-        endif
-
-        unless request.design_mode
-            if settings.banner_animation == 'effect_1' 
-                assign banner_animation = 'banner-animation-1'
-            endif
-        endunless
-
-        if settings.style_text_size_varriant == '02'
-            assign style_text_size_varriant = 'size_varriant_style_2'
-        endif 
-    -%}
-
-    <body class="template-{{ request.page_type }} {{layout_header}} {{layout_body}} {{layout_footer}} {{style_dots}} {{style_text_size_varriant}} {{style_arrows}} {{product_card_layout}} {{ banner_animation }}{% if settings.enable_button_disable_arrows %} enable_button_disable_arrows{% endif %}{% if settings.display_text_color_title %} enable_text_color_title{% endif %}{% if settings.style_text_color_varriant == '02' %} style_2_text_color_varriant{% endif %}{% if settings.hide_compare_homepage %} hide_compare_homepage{% endif %} {{ quick_shop_type }}{% if settings.show_image_loading %} show_image_loading{% endif %}{% if settings.show_effect_close %} show_effect_close{% endif %}">
-        <div class="body-content-wrapper">    
-            {% render 'global-style' %}
-            {% render 'global-script' %}
+    <body class="template-{{ request.page_type }} {{layout_header}} {{layout_body}} {{layout_footer}} {{style_dots}} {{style_text_size_varriant}} {{style_arrows}} {{product_card_layout}} {{ banner_animation }}{% if settings.enable_button_disable_arrows %} enable_button_disable_arrows{% endif %}{% if settings.display_text_color_title %} enable_text_color_title{% endif %}{% if settings.style_text_color_varriant == '02' %} style_2_text_color_varriant{% endif %}{% if settings.hide_compare_homepage %} hide_compare_homepage{% endif %} {{ quick_shop_type }}{% if settings.show_image_loading %} show_image_loading{% endif %}{% if settings.show_effect_close %} show_effect_close{% endif %}{% if settings.enable_layout_rtl and enable_iso_rtl %} layout_rtl{% endif %}">
+        <div class="body-content-wrapper">
             <a class="skip-to-content-link button visually-hidden" href="#MainContent">
                 {{ "accessibility.skip_to_text" | t }}
             </a>
@@ -132,9 +141,9 @@
         </div>
         {% render 'halo-popup' %}
 
-        {% if settings.enable_view_documentation %}
+        {%- if settings.enable_view_documentation -%}
             {% render 'theme-editor-notification' %}
-        {% endif %}
+        {%- endif -%}
 
         {% render 'theme-demo-notification' %}
 

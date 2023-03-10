@@ -17,6 +17,7 @@
     assign main_image_arrows_mobile = section.settings.main_image_arrows_mobile
     assign main_image_counter_mobile = section.settings.main_image_counter_mobile
     assign main_image_enable_parallax_mb = section.settings.main_image_enable_parallax_mb
+    assign main_image_show_zoom_icon_mb = section.settings.main_image_show_zoom_icon_mb
     assign main_image_layout = section.settings.main_image_layout
     assign show_thumbnail_mobile = section.settings.show_thumbnail_mobile
     assign max_thumbnail_to_show = section.settings.thumbnail_to_show
@@ -191,6 +192,18 @@
                 else
                     assign has_product_combo = false
                 endif
+            when 'complementary_products'
+                assign complementary_product_title = block.settings.complementary_product_title
+                assign complementary_product_arrows = block.settings.complementary_product_arrows
+                assign complementary_product_dots = block.settings.complementary_product_dots
+                assign complementary_product_layout = block.settings.complementary_product_layout
+                if complementary_product_layout == "1"
+                    assign complementary_product_limit_1 = block.settings.complementary_product_limit_1
+                endif
+                if complementary_product_layout == "2"
+                    assign complementary_product_limit_2 = block.settings.complementary_product_limit_2
+                    assign complementary_product_object = block.settings.complementary_product_object
+                endif
         endcase
     endfor
 
@@ -243,10 +256,11 @@
         if customization_option_type == 'all'
             assign has_customization_option = true
         elsif customization_option_type == 'tag'
-            assign customization_option_tags = settings.customization_option_tags | split: "," | strip | downcase | handle
+            assign customization_option_tags = settings.customization_option_tags | downcase | strip | split: ","
             for tag in customization_option_tags
-                assign tagtitle = tag | escape | downcase | handle
-                if product.tags contains tagtitle
+                assign tagtitle = tag | strip
+                assign productTag = product.tags | downcase
+                if productTag contains tagtitle
                     assign has_customization_option = true
                 endif
             endfor
@@ -337,8 +351,9 @@
     }
 
     @media (min-width: 1025px) {
-        {% if container == 'full' %}
-            #ProductSection-{{ section.id }} > .container-full {
+        {% if container == 'fullwidth' %}
+            #ProductSection-{{ section.id }} > .container-full,
+            #ProductSection-{{ section.id }} .moreItem-breadcrumb {
                 padding-left: {{ padding_full_width | append: 'px' }};
                 padding-right: {{ padding_full_width | append: 'px' }};
             }
@@ -389,6 +404,13 @@
 {%- endif -%}
 <div class="product-details product-default{% if has_sidebar %} has-sidebar{% endif %}" data-section-id="{{ section.id }}" data-section-type="product" id="ProductSection-{{ section.id }}" data-has-combo="{{ has_product_combo }}" data-image-opo>
     {% if has_breadcrumb %}
+        {%- liquid
+            if breadcrumb_gradient != 'rgba(0,0,0,0)' or breadcrumb_bg != 'rgba(0,0,0,0)' or breadcrumb_gradient_mb != 'rgba(0,0,0,0)' or breadcrumb_bg_mb != 'rgba(0,0,0,0)'
+                assign breadcrumb_has_bg = true
+            else
+                assign breadcrumb_has_bg = false
+            endif
+        -%}
         <div class="productView-moreItem moreItem-breadcrumb {% unless check_breadcrumb_full %}hidden-on-desktop{% endunless %}"
             style="--spacing-top: {{ breadcrumb_mg_top_desktop | append: 'px' }};
             --spacing-bottom: {{ breadcrumb_mg_bottom_desktop | append: 'px' }};
@@ -398,11 +420,17 @@
             --breadcrumb-mb-bg: {% if breadcrumb_gradient_mb != blank and breadcrumb_gradient_mb != 'rgba(0,0,0,0)' %}{{ breadcrumb_gradient_mb }}{% elsif breadcrumb_bg_mb != blank and breadcrumb_bg_mb != 'rgba(0,0,0,0)' %}{{ breadcrumb_bg_mb }}{% else %}#fff{% endif %};
             "
         >
-            <div class="{% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%}container-full{% else %}container{% endif %}">
-                {% render 'breadcrumb',
-                    alignment: breadcrumb_alignment
-                %}
-            </div>
+            {% if breadcrumb_has_bg %}
+                <div class="breadcrumb-bg">
+            {% endif %}
+                <div class="{% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%}container-full{% else %}container{% endif %}">
+                    {% render 'breadcrumb',
+                        alignment: breadcrumb_alignment
+                    %}
+                </div>
+            {% if breadcrumb_has_bg %}
+                </div>
+            {% endif %}
         </div>
     {% endif %}
     <div class="{% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%}container-full{% else %}container{% endif %} productView-container">
@@ -674,17 +702,19 @@
                                         {%- endfor -%}
                                     </div>
                                 {%- endif -%}
-                                <div class="productView-iconZoom">
-                                    {% render 'icon-zoom-1' %}
-                                </div>
+                                {%- if main_image_show_zoom_icon_mb -%}
+                                    <div class="productView-iconZoom">
+                                        {% render 'icon-zoom-1' %}
+                                    </div>
+                                {%- endif -%}
                                 {%- if show_compare_color and isColor and compare_layout == '2' -%}
                                     <div class="productView-compareColor style-{{ compare_layout }}">
-                                        <a class="link" href="javascript:void(0);" aria-label="link" data-open-compare-color-popup>
+                                        <button type="button" class="link" aria-label="{{ 'compare_color.general.title' | t }}" data-open-compare-color-popup>
                                             <span class="visually-hidden">
                                                 {{ 'compare_color.general.title' | t }}
                                             </span>
                                             {% render 'icon-compare-color' %}
-                                        </a>
+                                        </button>
                                     </div>
                                 {%- endif -%}
                             </div>
@@ -695,15 +725,15 @@
                                             {%- case media.media_type -%}
                                                 {%- when 'image' -%}
                                                     <div class="productView-thumbnail{% if show_variant_image_group %} filter-{{ media.alt | handle }}{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}">
-                                                        <a class="productView-thumbnail-link animated-loading" href="javascript:void(0)" data-image="{{ media | img_url: 'medium' }}">
-                                                            <img src="{{ media | img_url: 'medium' }}" alt="{{ media.alt | escape }}" title="{{ media.alt | escape }}" loading="lazy" />
-                                                        </a>
+                                                        <div class="productView-thumbnail-link animated-loading" data-image="{{ media | img_url: 'large' }}">
+                                                            <img src="{%- if thumnail_layout == '3' -%}{{ media | img_url: 'large' }}{% else %}{{ media | img_url: 'medium' }}{% endif %}" alt="{{ media.alt | escape }}" title="{{ media.alt | escape }}" loading="lazy" />
+                                                        </div>
                                                     </div>
                                                 {%- when 'external_video' -%}
                                                     {%- if video_layout == 'thumbnail' -%}
                                                         <div class="productView-thumbnail" data-media-id="{{ section.id }}-{{ media.id }}">
                                                             <div class="productView-thumbnail-link animated-loading">
-                                                                <img src="{{ media | img_url: 'medium' }}" alt="{{ media.alt | escape }}" title="{{ media.alt | escape }}" loading="lazy" />
+                                                                <img src="{%- if thumnail_layout == '3' -%}{{ media | img_url: 'large' }}{% else %}{{ media | img_url: 'medium' }}{% endif %}" alt="{{ media.alt | escape }}" title="{{ media.alt | escape }}" loading="lazy" />
                                                             </div>
                                                             <div class="productView-thumbnail-icon">
                                                                 {% render 'icon-video' %}
@@ -968,6 +998,7 @@
                                             {% render 'product-hot-stock',
                                                 block: block,
                                                 product: product,
+                                                variantCount: variantCount,
                                                 show_hot_stock: show_hot_stock,
                                                 productMaxStock: productMaxStock,
                                                 current_variant: current_variant
@@ -1150,10 +1181,69 @@
                                         {%- endif -%}
                                     {%- when 'custom_liquid' -%}
                                         {{ block.settings.custom_liquid }}
+                                    {%- when 'complementary_products' -%}
+                                        <div class="productView-moreItem"
+                                            style="--spacing-top: {{ spacing_top | append: 'px' }};
+                                            --spacing-bottom: {{ spacing_bottom | append: 'px' }};
+                                            "
+                                        >
+                                            <complementary-products class="productView-complementary complementary-products style-{{ complementary_product_layout }} no-js-hidden" id="complementary-product-data" data-complementary-product data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=10&intent=complementary">
+                                                {%- if recommendations.performed and recommendations.products_count > 0 -%}
+                                                    {%- if complementary_product_title -%}
+                                                        <div class="complementary-products-title">
+                                                            <div class="title">
+                                                                <span class="text">
+                                                                    {{ complementary_product_title | escape }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    {%- endif -%}
+                                                    <div class="complementary-products-slider" {% if complementary_product_layout == "2" %}style="--complementary-object-fit: {{ complementary_product_object }};"{% endif %}>
+                                                        <div class="products-carousel {% if complementary_product_layout == "1" %}column-{{ complementary_product_limit }}{% endif %}"
+                                                            data-item-arrows= "{{ complementary_product_arrows }}" 
+                                                            data-item-dots= "{{ complementary_product_dots }}"
+                                                            {% if complementary_product_layout == "1" %}
+                                                                data-item-to-show="{{ complementary_product_limit_1 }}"
+                                                            {% endif %}
+                                                            {% if complementary_product_layout == "2" %}
+                                                                data-item-rows="{{ complementary_product_limit_2 }}"
+                                                            {% endif %}
+                                                        >
+                                                            {%- if complementary_product_layout == "1" -%}
+                                                                {%- for product in recommendations.products limit: limit -%}
+                                                                    <div class="product">
+                                                                        {% render 'product-grid-layout',
+                                                                            product_card_product: product,
+                                                                            media_size: image_ratio,
+                                                                            portrait_aspect_ratio: portrait_aspect_ratio,
+                                                                            serial: forloop.index,
+                                                                            sectionId: section.id,
+                                                                            show_list: true,
+                                                                            loading: true
+                                                                        %}
+                                                                    </div>
+                                                                {%- endfor -%}
+                                                            {%- endif -%}
+
+                                                            {%- if complementary_product_layout == "2" -%}
+                                                                {%- for product in recommendations.products limit: limit offset: continue -%}
+                                                                    <div class="product">
+                                                                        {% render 'product-card-custom',
+                                                                            product_card_product: product
+                                                                        %}
+                                                                    </div>
+                                                                {%- endfor -%}
+                                                            {%- endif -%}
+                                                        </div>
+                                                    </div>
+                                                {%- endif-%}
+                                            </complementary-products>
+                                            <script src="{{ "build-complementary-products.js" | asset_url }}" defer></script>
+                                        </div>
                                 {%- endcase -%}
                             {%- endfor -%}
                             {%- if show_tab -%}
-                                {%- if tab_layout == 'vertical' or tab_layout == 'vertical_popup' or tab_layout == 'popup' -%}
+                                {%- if tab_layout == 'vertical' or tab_layout == 'vertical_sidebar' or tab_layout == 'popup' -%}
                                     {% render 'halo-product-tab',
                                         product: product,
                                         section: section,
@@ -1237,6 +1327,9 @@
 {%- endif -%}
 {%- if product_image_popup == 'fancybox' -%}
     <script src="{{ 'fancybox.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+{%- if zoomed_image and main_image_show_custom_cursor != true -%}
+    <script src="{{ 'zoomed-image.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
 {% render 'schema',

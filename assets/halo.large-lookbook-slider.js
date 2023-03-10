@@ -23,6 +23,7 @@
                         centerMode: true,
                         centerPadding: '20%',
                         speed: 400,
+                        rtl: window.rtl_slick,
                         responsive: [{
                             breakpoint: 1024,
                             settings: {

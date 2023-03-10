@@ -292,14 +292,15 @@ class VariantQuickViewSelects extends HTMLElement {
     }
 
     updateProductInfo() {
-        fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&view=quick_view`)
-            .then((response) => response.text())
-            .then((responseText) => {
-                const id = `product-price-${this.dataset.product}`;
-                const html = new DOMParser().parseFromString(responseText, 'text/html')
-                const destination = document.getElementById(`product-quick-view-price-${this.dataset.product}`);
-                const source = html.getElementById(id);
+        const fetchPrice = async () => {
+            try {
+                const res = await fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&view=ajax_product_price`);
+                const text = await res.text();
+                const html = new DOMParser().parseFromString(text, 'text/html');
 
+                const destination = document.getElementById(`product-quick-view-price-${this.dataset.product}`);
+                const source = html.querySelector('body');
+                
                 if (source && destination) {
                     destination.innerHTML = source.innerHTML;
                 }
@@ -311,7 +312,12 @@ class VariantQuickViewSelects extends HTMLElement {
                 }
 
                 destination?.classList.remove('visibility-hidden');
-        });
+            } catch (err) { 
+                console.log('Something went wrong to fetch data!')
+            }   
+        }           
+
+        fetchPrice();
     }
 
     updateAttribute(unavailable = true, disable = true){
@@ -331,7 +337,7 @@ class VariantQuickViewSelects extends HTMLElement {
         if(unavailable){
             let text = window.variantStrings.unavailable;
 
-            this.quantityInput.setAttribute('disabled', true);
+            this.quantityInput?.setAttribute('disabled', true);
 
             if(this.notifyMe){
                 this.notifyMe.style.display = 'none';
@@ -343,16 +349,16 @@ class VariantQuickViewSelects extends HTMLElement {
 
             addButton.setAttribute('disabled', true);
             addButton.textContent = text;
-            this.quantityInput.closest('quantity-quick-view-input').classList.add('disabled');
+            this.quantityInput?.closest('quantity-quick-view-input').classList.add('disabled');
         } else {
             if (disable) {
                 let text = window.variantStrings.soldOut;
 
-                this.quantityInput.setAttribute('data-price', this.currentVariant?.price);
-                this.quantityInput.setAttribute('disabled', true);
+                this.quantityInput?.setAttribute('data-price', this.currentVariant?.price);
+                this.quantityInput?.setAttribute('disabled', true);
                 addButton.setAttribute('disabled', true);
                 addButton.textContent = text;
-                this.quantityInput.closest('quantity-quick-view-input').classList.add('disabled');
+                this.quantityInput?.closest('quantity-quick-view-input').classList.add('disabled');
 
                 if(this.inventoryProp){
                     this.inventoryProp.querySelector('.productView-info-value').textContent = window.inventory_text.outOfStock;
@@ -382,15 +388,14 @@ class VariantQuickViewSelects extends HTMLElement {
                     if(inven_array != undefined) {
                         inven_num = inven_array[this.currentVariant.id];
                         inventoryQuantity = parseInt(inven_num);
-                        // console.log(this.quantityInput)
                         if (typeof inventoryQuantity != 'undefined'){
                             if(inventoryQuantity > 0) {
-                                this.quantityInput.setAttribute('data-inventory-quantity', inventoryQuantity);
+                                this.quantityInput?.setAttribute('data-inventory-quantity', inventoryQuantity);
                             } else {
-                                this.quantityInput.removeAttribute('data-inventory-quantity');
+                                this.quantityInput?.removeAttribute('data-inventory-quantity');
                             }
                         } else {
-                            this.quantityInput.setAttribute('data-inventory-quantity', inventoryQuantity);
+                            this.quantityInput?.setAttribute('data-inventory-quantity', inventoryQuantity);
                         }
                     }
                 }
@@ -405,17 +410,17 @@ class VariantQuickViewSelects extends HTMLElement {
                     text = window.variantStrings.addToCart;
                 }
 
-                this.quantityInput.setAttribute('data-price', this.currentVariant?.price);
-                this.quantityInput.removeAttribute('disabled');
+                this.quantityInput?.setAttribute('data-price', this.currentVariant?.price);
+                this.quantityInput?.removeAttribute('disabled');
 
                 addButton.innerHTML = text;
                 addButton.removeAttribute('disabled');
-                this.quantityInput.removeAttribute('disabled');
-                this.quantityInput.closest('quantity-quick-view-input').classList.remove('disabled');
+                this.quantityInput?.removeAttribute('disabled');
+                this.quantityInput?.closest('quantity-quick-view-input').classList.remove('disabled');
               
                 if(window.quick_view_subtotal.show) {
                     let subTotal = 0;
-                    let price = this.quantityInput.dataset.price
+                    let price = this.quantityInput?.dataset.price
                         
                     subTotal = quantityInputValue * price;
                     subTotal = Shopify.formatMoney(subTotal, window.money_format);
@@ -517,8 +522,8 @@ class VariantQuickViewSelects extends HTMLElement {
 
     checkQuantityWhenVariantChange() {
         var quantityInput = this.closest('.productView-details').querySelector('input.quantity__input')
-        var maxValue = parseInt(quantityInput.dataset.inventoryQuantity);
-        var inputValue = parseInt(quantityInput.value);
+        var maxValue = parseInt(quantityInput?.dataset.inventoryQuantity);
+        var inputValue = parseInt(quantityInput?.value);
         
         let value = inputValue 
 
@@ -530,7 +535,7 @@ class VariantQuickViewSelects extends HTMLElement {
 
         if (value < 1 || isNaN(value)) value = 1 
 
-        quantityInput.value = value
+        if (quantityInput != null) quantityInput.value = value
 
         document.getElementById('product-add-to-cart').dataset.available = this.currentVariant.available && maxValue <= 0
     }

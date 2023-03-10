@@ -20,37 +20,31 @@
             <div class="container">
                 <div class="header-top--wrapper">
                     <div class="header-top--left header__logo text-left clearfix">
-                        {%- if request.page_type == 'index' -%}
-                            <h1 class="header__heading">
-                        {%- else -%}
-                            <div class="header__heading">
-                        {%- endif -%}
+                        <{% if request.page_type == 'index' %}h1{% else %}div{% endif %} class="header__heading">
                             <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
                                 {%- if section.settings.logo != blank -%}
-                                    {%- assign image = section.settings.logo -%}
-                                    {%- assign image_size = section.settings.logo_width | append: 'x' -%}
-                                    <img srcset="{{ image | img_url: image_size }} 1x, {{ image | img_url: image_size, scale: 2 }} 2x"
-                                        src="{{ image | img_url: image_size }}"
+                                    {%- assign logo = section.settings.logo -%}
+                                    {%- assign logo_width = section.settings.logo_width -%}
+                                    {%- assign logo_width_img = logo_width | append: 'x' -%}
+                                    {%- assign logo_width_retina = logo_width | times: 2 | append: 'x'  -%}
+                                    {%- assign logo_height = logo_width | divided_by: logo.aspect_ratio | round -%}
+                                    <img srcset="{{ logo | img_url: logo_width_img }} 1x, {{ logo | img_url: logo_width_retina }} 2x"
+                                        src="{{ logo | img_url: logo_width_img }}"
                                         loading="lazy"
                                         class="header__heading-logo"
-                                        alt="{{ image.alt | default: shop.name | escape }}"
-                                        width="{{ section.settings.logo_width }}"
-                                        height="{{ section.settings.logo_width | divided_by: image.aspect_ratio }}">
+                                        alt="{{ logo.alt | default: shop.name | escape }}"
+                                        width="{{ logo_width }}" height="{{ logo_height }}">
                                 {%- elsif section.settings.logo_text != blank -%}
                                     <span class="h2 {{ section.settings.logo_text_transform }}">{{ section.settings.logo_text }}</span>
                                 {%- else -%}
                                     <span class="h2 {{ section.settings.logo_text_transform }}">{{ shop.name }}</span>
                                 {%- endif -%}
                             </a>
-                        {%- if request.page_type == 'index' -%}
-                            </h1>
-                        {%- else -%}
-                            </div>
-                        {%- endif -%}
+                        </{% if request.page_type == 'index' %}h1{% else %}div{% endif %}>
                     </div>
                     <div class="header-top--right header__icons text-right clearfix">
                         <div class="header-top-right-group header-language_currency">
-                            {% if section.settings.display_customer_service and section.settings.customer_service_text != blank %}
+                            {% if section.settings.customer_service_text != blank %}
                               <div class="customer-service-text">
                                 {{ section.settings.customer_service_text }}
                               </div>
@@ -59,7 +53,6 @@
                                 {% if settings.enable_multilang_shopify %}
                                     {% render 'halo-top-language' %}
                                 {% endif %}
-
                                 {% if settings.enable_currencies %}
                                     {% render 'halo-top-currency' %}
                                 {% endif %}
@@ -71,10 +64,9 @@
                                         {%- endif -%}
                                         <details class="search_details">
                                             <summary class="header__search-full" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
-                                                <a href="javascript:void(0)" class="header-search-close" alt="{{ 'general.common.close' | t }}">
+                                                <button type="button" class="header-search-close" aria-label="{{ 'general.common.close' | t }}">
                                                     {% render 'icon-close' %}
-                                                    {{ 'general.common.close' | t }}
-                                                </a>
+                                                </button>
                                                 <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
                                                     <div class="field">
                                                         <input 
@@ -127,7 +119,7 @@
                                 </div>
                             {% endif %}
                         </div>
-                        {% if section.settings.display_free_shipping and section.settings.free_shipping_text != blank %}
+                        {% if section.settings.free_shipping_text != blank %}
                           <div class="free-shipping-text">
                             {{ section.settings.free_shipping_text }}
                           </div>
@@ -135,16 +127,16 @@
                         {% if section.settings.show_cart or section.settings.show_wishlist or section.settings.show_customer %}
                         <div class="header__iconItem header__group">
                             {%- if section.settings.show_cart -%}
-                            <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}"{% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
-                                {% render 'icon-cart-2' %}
-                                <span class="cart-text">{{ 'general.cart.shopping_cart' | t }}</span>
-                                <div class="cart-count-bubble">
-                                    {%- if cart.item_count < 100 -%}
-                                        <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
-                                    {%- endif -%}
-                                    <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
-                                </div>
-                            </a>
+                                <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset cart-icon-bubble" {% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                                    {% render 'icon-cart-02' %}
+                                    <span class="cart-text">{{ 'general.cart.shopping_cart' | t }}</span>
+                                    <div class="cart-count-bubble">
+                                        {%- if cart.item_count < 100 -%}
+                                            <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
+                                        {%- endif -%}
+                                        <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+                                    </div>
+                                </a>
                             {%- endif -%}
                             {%- if settings.show_wishlist and section.settings.show_wishlist -%}
                                 <a href="{{ pages['wish-list'].url }}" class="header__icon header__icon--wishlist link link--text focus-inset">
@@ -164,16 +156,23 @@
                                       <a class="header__link--account" href="{{ routes.account_url }}">
                                         {{ 'customer.account.my_account' | t }}
                                       </a>
-                                  {% else %}  
-                                      <a class="header__link--account" id="customer_login_link" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" data-open-auth-sidebar>
-                                        {{ 'customer.sign_in' | t }}
-                                      </a>
-                                      <span class="or-text">
-                                        {{ 'customer.or' | t }}
-                                      </span>
-                                      <a class="header__link--account" id="customer_register_link" href="{{ routes.account_register_url }}">
-                                        {{ 'customer.create_account' | t }}
-                                      </a>
+                                  {% else %}
+                                        {% if routes.account_login_url contains '/account/login' %}
+                                            {% assign is_contained = true %}
+                                        {% else %}
+                                            {% assign is_contained = false %}
+                                        {% endif %}
+                                        <a class="header__link--account customer_login_link" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" {% if is_contained %}data-open-auth-sidebar{% endif %}>
+                                            {{ 'customer.sign_in' | t }}
+                                        </a>
+                                        {% if is_contained %}
+                                            <span class="or-text">
+                                                {{ 'customer.or' | t }}
+                                            </span>
+                                            <a class="header__link--account customer_register_link" href="{{ routes.account_register_url }}">
+                                                {{ 'customer.create_account' | t }}
+                                            </a>
+                                        {% endif %}
                                   {% endif %}                                   
                                 </div>
                             {%- endif -%}
@@ -184,18 +183,18 @@
             </div>
         </div>
         <div class="header-bottom">
-
             <div class="header__logo header__logo_fixed fixed-left">
                 <div class="header__heading">
                     <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
                         {%- if section.settings.logo_fixed != blank -%}
-                            {%- assign image = section.settings.logo_fixed -%}
-                            {%- assign image_size = section.settings.logo_width_fixed | append: 'x' -%}
-                            <img srcset="{{ image | img_url: image_size }} 1x, {{ image | img_url: image_size, scale: 2 }} 2x"
-                                src="{{ image | img_url: image_size }}"
-                                loading="lazy"
-                                class="header__heading-logo"
-                                alt="{{ image.alt | default: shop.name | escape }}">
+                            {%- assign logo = section.settings.logo_fixed -%}
+                            {%- assign logo_width = section.settings.logo_width_fixed -%}
+                            {%- assign logo_width_img = logo_width | append: 'x' -%}
+                            {%- assign logo_width_retina = logo_width | times: 2 | append: 'x'  -%}
+                            {%- assign logo_height = logo_width | divided_by: logo.aspect_ratio | round -%}
+                            <img srcset="{{ logo | img_url: logo_width_img }}, {{ logo | img_url: logo_width_retina }} 2x"
+                                src="{{ logo | img_url: logo_width_img }}" loading="lazy" class="header__heading-logo" alt="{{ logo.alt | default: shop.name | escape }}"
+                                width="{{ logo_width }}" height="{{ logo_height }}">
                         {%- endif -%}
                     </a>
                 </div>
@@ -229,8 +228,8 @@
                     </details-modal>
                 {% endif %}
                 {% if section.settings.show_cart %}
-                    <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}" {% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
-                        {% render 'icon-cart-2' %}
+                    <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset cart-icon-bubble" {% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                        {% render 'icon-cart-02' %}
                         <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
                         <div class="cart-count-bubble">
                             {%- if cart.item_count < 100 -%} <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
@@ -400,6 +399,36 @@
             "default": "main-menu"
         },
         {
+            "type": "range",
+            "id": "menu_top_spacing",
+            "label": "t:sections.header.settings.header_bottom.mg_top",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 11
+        },
+        {
+            "type": "range",
+            "id": "menu_bottom_spacing",
+            "label": "t:sections.header.settings.header_bottom.mg_bottom",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 12
+        },
+        {
+            "type": "range",
+            "id": "grid_gap_menu",
+            "label": "t:sections.header.settings.header_bottom.spacing_left_right",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 20
+        },
+        {
             "type": "checkbox",
             "id": "show_megamenu",
             "label": "t:sections.header.settings.menu.label__3",
@@ -448,28 +477,16 @@
             "content": "t:sections.header.settings.header__1.content"
         },
         {
-            "type": "checkbox",
-            "id": "display_customer_service",
-            "label": "t:sections.header.settings.header_top.display_customer_service",
-            "default": true
-        },
-        {
-            "type": "textarea",
+            "type": "richtext",
             "id": "customer_service_text",
             "label": "t:sections.header.settings.header_top.customer_service_text",
-            "default": "Customer Service 091 234-ELLA"
+            "default": "<p>Customer Service 091 234-ELLA</p>"
         },
         {
-            "type": "checkbox",
-            "id": "display_free_shipping",
-            "label": "t:sections.header.settings.header_top.display_free_Shipping",
-            "default": true
-        },
-        {
-            "type": "textarea",
+            "type": "richtext",
             "id": "free_shipping_text",
             "label": "t:sections.header.settings.header_top.free_shipping_text",
-            "default": "Free shipping on All Orders. No Minimum Purchase"
+            "default": "<p>Free shipping on All Orders. No Minimum Purchase</p>"
         },
         {
             "type": "color",
@@ -607,7 +624,7 @@
             "type": "range",
             "id": "logo_width",
             "min": 50,
-            "max": 200,
+            "max": 300,
             "step": 5,
             "unit": "t:sections.header.settings.logo_width.unit",
             "label": "t:sections.header.settings.logo_width.label__1",
@@ -617,7 +634,7 @@
             "type": "range",
             "id": "logo_width_mobile",
             "min": 50,
-            "max": 200,
+            "max": 300,
             "step": 5,
             "unit": "t:sections.header.settings.logo_width.unit",
             "label": "t:sections.header.settings.logo_width.label__2",
@@ -627,7 +644,7 @@
             "type": "range",
             "id": "logo_width_fixed",
             "min": 50,
-            "max": 200,
+            "max": 90,
             "step": 5,
             "unit": "t:sections.header.settings.logo_width.unit",
             "label": "t:sections.header.settings.logo_width.label__3",
@@ -946,7 +963,7 @@
         {
             "type": "color",
             "id": "bg_mega_menu",
-            "label": "t:sections.header.settings.header_bottom.bg_top",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color",
             "default": "#fff"
         },
         {
@@ -1367,9 +1384,15 @@
                     "default": 5
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",
@@ -1511,9 +1534,15 @@
                     "default": 3
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",

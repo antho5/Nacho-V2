@@ -51,7 +51,7 @@
                         <div class="halo-row column-{{ block_policies.size }}{% if swipe == 'slider' %} slider slider--tablet{% endif %}{% if swipe == 'scroll' %} scroll-snap-mobile disable-srollbar{% endif %}">      
                             {% for block in block_policies %}
                             <div class="halo-item{% if swipe == 'slider' %} slider__slide{% endif %}{% if block.settings.description != blank %} has-des{% endif %}">
-                                <a href="{{ block.settings.link }}" title="{{block.settings.text}}">
+                                <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} title="{{block.settings.text}}">
                                     {% if block.settings.icon_type == 'image' %}
                                         {% if block.settings.image != blank %}
                                             {%- assign preview_img = block.settings.image -%}
@@ -142,7 +142,7 @@
                                             <ul class="list-unstyled">
                                                 {%- for link in block.settings.menu.links -%}
                                                     <li>
-                                                        <a href="{{ link.url }}" class="link link-underline list-menu__item--link">
+                                                        <a {% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %} class="link link-underline list-menu__item--link">
                                                             <span class="text">{{ link.title }}</span>
                                                         </a>
                                                     </li>
@@ -270,7 +270,7 @@
 
 {% schema %}
 {
-    "name": "t:sections.footer-2.name",
+    "name": "t:sections.footer.settings.footer_layout.label__2",
     "max_blocks": 10,
     "blocks": [
     {
@@ -413,7 +413,7 @@
             {
                 "id": "border_block_color",
                 "type": "color",
-                "label": "t:settings_schema.typography.settings.typography.border_color", 
+                "label": "t:settings_schema.colors.settings.colors_name.border_color", 
                 "default": "#fff"
             },
             {
@@ -717,7 +717,7 @@
     },
     {
         "type": "header",
-        "content": "t:sections.footer-2.settings.policy_block.content"
+        "content": "t:sections.footer.blocks.policy.content"
     },
     {
         "type": "range",

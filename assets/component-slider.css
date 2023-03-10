@@ -38,8 +38,8 @@ slider-component {
 .slider-button {
     padding: 10px;
     cursor: pointer;
-    width: 35px;
-    height: 35px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background-color: transparent;
     border: 1px solid var(--icon);
@@ -50,7 +50,7 @@ slider-component {
     top: 50%;
     transform: translateY(-50%);
     border-color: transparent;
-    padding: 8px;
+    padding: 14px;
 }
 
 .slider-arrows .slider-button.disabled {

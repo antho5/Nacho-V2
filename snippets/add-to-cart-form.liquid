@@ -10,7 +10,7 @@
 
     assign has_popup = false
 
-    if product.options_with_values.size == 1 and product_swatch_option contains option_name
+    if product.options_with_values.size == 1 and product_swatch_option contains option_name and settings.quick_shop_type == '1'
         if settings.show_swatch
             assign has_popup = false
         else
@@ -34,25 +34,37 @@
     {%- else -%}
         {%- if variantCount > 0 and product.variants.first.title != 'Default Title' -%}
            {%- if settings.show_quick_shop -%}
-                {%- if product.options_with_values.size == 1 and product_swatch_option contains option_name -%}
+                {%- if product.options_with_values.size == 1 and product_swatch_option contains option_name and settings.quick_shop_type == '1' -%}
                     <input type="hidden" name="id" value="{{ product.variants[0].id }}" />
                     <input type="hidden" name="quantity" value="1" />
                     <button
-                          class="button button-ATC"
-                          type="submit"
-                          data-form-id="#{{ id }}-{{ product.id }}-{{ sectionId }}"
-                          data-btn-addToCart
+                        class="button button-ATC"
+                        type="submit"
+                        data-form-id="#{{ id }}-{{ product.id }}-{{ sectionId }}"
+                        data-btn-addToCart
                     >
-                          {{ 'products.product.add_to_cart' | t }}
+                        {% unless settings.product_card_layout == '06' %}
+                            {{ 'products.product.add_to_cart' | t }}
+                        {% else %}
+                            {{ 'products.product.select_options_plus' | t }}
+                        {% endunless %}
                     </button>
                 {%- else -%}
                     <a class="button button-ATC" href="{{ product.url }}" data-quickshop-popup data-product-handle="{{ product.handle }}">
-                        {{ 'products.product.quick_shop' | t }}
+                        {% unless settings.product_card_layout == '06' %}
+                            {{ 'products.product.quick_shop' | t }}
+                        {% else %}
+                            {{ 'products.product.select_options_plus' | t }}
+                        {% endunless %}
                     </a>
                   {%- endif -%}
             {%- else -%}
                 <a class="button button-ATC" href="{{ product.url }}">
-                    {{ 'products.product.select_options' | t }}
+                    {% unless settings.product_card_layout == '06' %}
+                        {{ 'products.product.select_options' | t }}
+                    {% else %}
+                        {{ 'products.product.select_options_plus' | t }}
+                    {% endunless %}
                 </a>
             {%- endif -%}
         {%- else -%}
@@ -76,7 +88,11 @@
                                 
                             {{ 'products.product.sub_total' | t : value : subtotal }}
                         {%- else -%}
-                            {{ 'products.product.add_to_cart' | t}}
+                            {% unless settings.product_card_layout == '06' %}
+                                {{ 'products.product.add_to_cart' | t }}
+                            {% else %}
+                                {{ 'products.product.select_options_plus' | t }}
+                            {% endunless %}
                         {%- endif -%}
                     {%- else -%}
                         {{ 'products.product.pre_order' | t }}
@@ -94,7 +110,11 @@
                         {%- assign subtotal = subtotal | strip_html -%}
                         {{ 'products.product.sub_total' | t : value : subtotal }}
                     {%- else -%}
-                        {{ 'products.product.add_to_cart' | t}}
+                        {% unless settings.product_card_layout == '06' %}
+                            {{ 'products.product.add_to_cart' | t}}
+                        {% else %}
+                            {{ 'products.product.select_options_plus' | t }}
+                        {% endunless %}
                     {%- endif -%}
                 </button>
             {%- endif -%}

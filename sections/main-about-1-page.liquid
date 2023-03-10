@@ -70,7 +70,7 @@
 	                            		<div class="item">
 		                            		{%- if image_1 != blank -%}
 			                            		{%- if link_1 != blank -%}
-			                            			<a class="image image-zoom" href="{{ link_1 }}" style="padding-top: {{ 1 | divided_by: image_1.aspect_ratio | times: 100 | append: '%' }}">
+			                            			<a class="image image-zoom"{% if link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_1 }}"{% endif %} style="padding-top: {{ 1 | divided_by: image_1.aspect_ratio | times: 100 | append: '%' }}">
 			                            		{%- else -%}
 			                            			<div class="image image-zoom" style="padding-top: {{ 1 | divided_by: image_1.aspect_ratio | times: 100 | append: '%' }}">
 			                            		{%- endif -%}
@@ -97,7 +97,7 @@
 	                            		<div class="item">
 		                            		{%- if image_2 != blank -%}
 			                            		{%- if link_2 != blank -%}
-			                            			<a class="image image-zoom" href="{{ link_2 }}" style="padding-top: {{ 1 | divided_by: image_2.aspect_ratio | times: 100 | append: '%' }}">
+			                            			<a class="image image-zoom"{% if link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_2 }}"{% endif %} style="padding-top: {{ 1 | divided_by: image_2.aspect_ratio | times: 100 | append: '%' }}">
 			                            		{%- else -%}
 			                            			<div class="image image-zoom" style="padding-top: {{ 1 | divided_by: image_2.aspect_ratio | times: 100 | append: '%' }}">
 			                            		{%- endif -%}
@@ -122,7 +122,7 @@
 			                            <div class="item">
 			                            	{%- if image_3 != blank -%}
 			                            		{%- if link_3 != blank -%}
-			                            			<a class="image image-zoom" href="{{ link_3 }}" style="padding-top: {{ 1 | divided_by: image_3.aspect_ratio | times: 100 | append: '%' }}">
+			                            			<a class="image image-zoom"{% if link_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_3 }}"{% endif %} style="padding-top: {{ 1 | divided_by: image_3.aspect_ratio | times: 100 | append: '%' }}">
 			                            		{%- else -%}
 			                            			<div class="image image-zoom" style="padding-top: {{ 1 | divided_by: image_3.aspect_ratio | times: 100 | append: '%' }}">
 			                            		{%- endif -%}

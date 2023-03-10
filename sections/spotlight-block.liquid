@@ -1,168 +1,185 @@
 {% if section.blocks.size > 0 %}
 {%- assign swipe = section.settings.spotlight_block_swipe_on_mobile -%}
+{%- assign position_horizontal_slick_arrow = section.settings.position_horizontal_slick_arrow -%}
 <link rel="stylesheet" href="{{ 'component-spotlight-block.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'component-spotlight-block.css' | asset_url | stylesheet_tag }}</noscript>
 
-<div class="spotlight-block section-block-{{section.id}}{% if section.settings.block_layout == 'slider' %} enable_slider{% endif %}" id="spotlight-{{section.id}}"
-{% if section.settings.block_layout == 'slider' %}data-loader-script="{{ 'halo.slide-spotlight.js' | asset_url }}"{% endif %}>
-  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770 {% elsif section.settings.container == '1570'%}container-1570 {% elsif section.settings.container == '1470'%}container-1470 {% else %}{% if section.settings.container == '1200' %}layout--special{% endif %} container{% endif %}">
-    {% if section.settings.spotlight_block_title != blank %}
-        <div class="halo-block-header text-{{ section.settings.title_align }}{% if section.settings.view_all != blank %} viewAll--{{ section.settings.view_all_align }}{% endif %}">   
-            <h3 class="title" style="--margin-bottom-title: {{ section.settings.margin_bottom_title | append: 'px' }}">
-                <span class="text">
-                {{ section.settings.spotlight_block_title }}
-                </span>
-            </h3>
-            {% if section.settings.spotlight_block_des != blank %}
-                <div class="rte subtext-spotlight" style="--margin-bottom-des: {{ section.settings.margin_bottom_des | append: 'px' }}">
-                    {{ section.settings.spotlight_block_des }}
-                </div>        
-            {% endif %}
+{% if settings.banner_animation == 'effect_1' %}
+    {{ 'component-spotlight-banner-animation.css' | asset_url | stylesheet_tag }}
+{% endif %}
 
-            {% if section.settings.view_all != blank %}
-                <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}" href="{{ section.settings.link_view_all }}" title="{{section.settings.view_all}}" 
-                    style="--font-weight-view-all-style: {{ section.settings.font_weight_view_all }};
-                    --mg-bottom-view-style: {{ section.settings.mg_bottom_view | append: 'px' }};
-                    --color-view-all-style: {{ section.settings.color_view_all }};
-                    --font-size-view-all-style: {{ section.settings.view_all_fs | append: 'px' }};
-                    ">
-                    {{ section.settings.view_all }}
-                </a>
-            {% endif %}
+{% if settings.banner_animation == 'effect_1' %}<animated-component>{% endif %}
+    <div class="spotlight-block section-block-{{section.id}}{% if section.settings.block_layout == 'slider' %} enable_slider{% endif %}" id="spotlight-{{section.id}}"
+    {% if section.settings.block_layout == 'slider' %}data-loader-script="{{ 'halo.slide-spotlight.js' | asset_url }}"{% endif %}>
+    <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770 {% elsif section.settings.container == '1570'%}container-1570 {% elsif section.settings.container == '1470'%}container-1470 {% else %}{% if section.settings.container == '1200' %}layout--special{% endif %} container{% endif %}">
+        {% if section.settings.spotlight_block_title != blank %}
+            <div class="halo-block-header text-{{ section.settings.title_align }}{% if section.settings.view_all != blank %} viewAll--{{ section.settings.view_all_align }}{% endif %}">   
+                <h3 class="title" style="--margin-bottom-title: {{ section.settings.margin_bottom_title | append: 'px' }}">
+                    <span class="text">
+                    {{ section.settings.spotlight_block_title }}
+                    </span>
+                </h3>
+                {% if section.settings.spotlight_block_des != blank %}
+                    <div class="rte subtext-spotlight" style="--margin-bottom-des: {{ section.settings.margin_bottom_des | append: 'px' }}">
+                        {{ section.settings.spotlight_block_des }}
+                    </div>        
+                {% endif %}
 
-        </div>
-    {% endif %}
-    {%- if swipe == 'slider' and section.settings.block_layout == 'grid' -%}
-    <banner-slider-component>
-    {%- endif -%}
-
-        <div class="halo-row column-{{ section.settings.column }}{% if swipe == 'slider' and section.settings.block_layout == 'grid' %} slider slider--tablet{% endif %}{% if section.settings.item_distance == 0 %} not-distance{% endif %}{% if swipe == 'scroll' and section.settings.block_layout == 'grid' %} scroll-snap-mobile disable-srollbar{% endif %}{% if section.settings.column_mb == '2' %} column-mb-2{% endif %}" 
-        style="--row-distance-style: {{ section.settings.item_distance | prepend: '-' | append: 'px' }};"
-        {% if section.settings.block_layout == 'slider' %}data-spotlight-slider data-rows="{{section.settings.column}}" data-arrows="{{ section.settings.enable_arrows }}" data-rows-mb="{{ section.settings.column_mb }}"{% endif %} data-swipe="{{ swipe }}">
-          {% for block in section.blocks %}
-            <div class="halo-item{% if swipe == 'slider' and section.settings.block_layout == 'grid' %} slider__slide{% endif %} spotlight--{{ block.type }}{% if section.settings.enable_plus_icon %} enable_plus_icon{% endif %}" id="block-{{block.id}}" style="--item-distance-style: {{ section.settings.item_distance | append: 'px' }};">
-                <div class="spotlight-item spotlight-item__{{block.type}}{% if block.settings.enable_absolute and block.settings.enable_image %} content_absolute{% endif %}{% if block.settings.border_color_title != blank and block.settings.border_color_title != 'rgba(0,0,0,0)' %} enable_border_color{% endif %}{% if block.settings.enable_des_hover %} enable_des_hover{% endif %}">
-                    {% if block.settings.enable_image %}
-                        <div class="image-container">
-                            <div class="img-box">
-                                {% if block.settings.image != blank %}
-                                    {%- assign preview_img = block.settings.image -%}
-                                    <a href="{{ block.settings.link }}" class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
-                                        <img {% render 'lazyload',preview_img: preview_img %} />
-                                        {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
-                                    </a>
-                                {% else %}
-                                    <a href="{{ block.settings.link }}" class="image-zoom">
-                                        {% if block.settings.enable_absolute %}
-                                            <div class="not_img" style="--height_not_img: 200px">370 x 200px</div>
-                                        {% else %}
-                                            <div class="not_img" style="--height_not_img: 440px">370 x 440px</div>
-                                        {% endif %}
-                                    </a>
-                                {% endif %}
-                                {% if section.settings.enable_plus_icon %}
-                                    <span class="show-icon-more" style="--color-icon-plus: {{ section.settings.color_plus_icon }}"></span>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endif %}
-                    {%- if block.settings.sub_title != blank or block.settings.title != blank or block.settings.des != blank or block.settings.button != blank -%}
-                        <div class="content spotlight-inner text-{{block.settings.title_align}} align-items--{{block.settings.align_items}}{% if block.settings.title == blank and block.settings.des == blank %} not_title_des{% endif %}{% unless block.settings.enable_image %} not-image{% endunless %}{% if block.settings.border_color_button == 'rgba(0,0,0,0)' and block.settings.bg_color_button == 'rgba(0,0,0,0)' %} enable-transparnet{% endif %}" 
-                         style="--align-items-spacing-top-style: {{ block.settings.align_items_spacing_top | append: 'px' }}; 
-                                --align-items-spacing-bottom-style: {{ block.settings.align_items_spacing_bottom | append: 'px' }}; 
-                                --align-items-spacing-lr-style: {{ block.settings.align_items_spacing_lr | append: 'px' }};
-                                --align-items-postion-content-style: {{ block.settings.align_items_spacing_top_bottom_position | append: 'px' }};
-                                --align-items-postion-content-mb-style: {{ block.settings.align_items_spacing_top_bottom_position_mb | append: 'px' }};
-                                --bg_color_content: {{ block.settings.bg_color_content }}">
-                            {%- if block.settings.sub_title != blank -%}
-                                <p class="sub_title custom-text-style{% if block.settings.border_sub_title %} has-border{% endif %}"
-                                    style="--color-text-style: {{ block.settings.color_sub_title }};
-                                           --fontsize-text-style: {{ block.settings.fontsize_sub_title | append: 'px' }};
-                                           --font-weight-text-style: {{ block.settings.font_weight_sub_title }};
-                                           --mg-bottom-sub-title-style: {{ block.settings.mg_bottom_sub_title | append: 'px' }}">
-                                    <span>{{ block.settings.sub_title }}</span>
-                                </p>
-                            {%- endif -%}
-                            {%- if block.settings.title != blank -%}
-                                <h3 class="title custom-text-style has--{{ block.settings.border_title }}"
-                                    style="--color-text-style: {{ block.settings.color_title }};
-                                           --fontsize-text-style: {{ block.settings.fontsize_title | append: 'px' }};
-                                           --fontsize-mobile-text-style: {{ block.settings.fontsize_title_mb | append: 'px' }};
-                                           --font-text-style: {%- if block.settings.enable_style_italic -%}italic{%- else -%}normal{%- endif -%};
-                                           {%- if block.settings.border_title == 'border_s1' -%}
-                                            padding-bottom: 7px;
-                                            border-bottom: 3px solid {{ block.settings.border_color_title }};
-                                           {%- elsif block.settings.border_title == 'border_hover' or block.settings.border_title == 'border_s2' -%}
-                                            --border-color-title-style: {{ block.settings.border_color_title }};
-                                           {%- elsif block.settings.border_title == 'none' -%}
-                                            --border-color-title-style: transparent;
-                                            {% elsif  block.settings.border_title == 'border_s3' %}
-                                            --border-color-title-style: transparent;
-                                            padding-bottom: 22px;
-                                           {%- endif -%}">
-                                    <a href="{{ block.settings.link }}" 
-                                        class="link_title 
-                                        {% if block.settings.border_title == 'border_s3' %}has_border_s3{% endif %}"
-                                        {% if block.settings.border_title == 'border_s3' %}style="--border-color-title-style-3: {{ block.settings.border_color_title }};"{% endif %}
-                                    >
-                                        <span>{{ block.settings.title }}</span>
-                                    </a>
-                                </h3>
-                            {%- endif -%}
-                            {%- if block.settings.des != blank -%}
-                                <div class="des custom-text-style"
-                                    style="--color-text-style: {{ block.settings.color_des }};
-                                           --fontsize-text-style: {{ block.settings.fontsize_des | append: 'px' }};
-                                           --margin-top-des-style: {{ block.settings.mg_top_des | append: 'px' }}">
-                                  {{ block.settings.des }}
-                                </div>
-                            {%- endif -%}
-                            {%- if block.settings.button != blank -%}
-                                <a href="{{ block.settings.link }}" class="spotlight-button button custom-button-style{% if block.settings.enable_button_custom_border %} enable-button-custom-border{% endif %}{% if block.settings.border_color_button == 'rgba(0,0,0,0)' and block.settings.bg_color_button == 'rgba(0,0,0,0)' %} enable-transparnet{% endif %}" 
-                                    style="--color-button-style: {{ block.settings.color_button }};
-                                           --bg-color-button-style: {% if block.settings.bg_color_button_gradient != blank %}{{ block.settings.bg_color_button_gradient }}{% else %}{{ block.settings.bg_color_button | color_modify: 'alpha', block.settings.bg_opacity_button }}{% endif %};
-                                           --border-color-button-style: {{ block.settings.border_color_button }};
-                                           --color-button-hover-style: {{ block.settings.color_button_hover }};
-                                           --bg-color-button-hover-style: {% if block.settings.bg_color_button_gradient_hover != blank %}{{ block.settings.bg_color_button_gradient_hover }}{% else %}{{ block.settings.bg_color_button_hover }}{% endif %}; 
-                                           --border-color-button-hover-style: {{ block.settings.border_color_button_hover }};
-                                           --text-transform-button-style: {{block.settings.btn_text_transform}};
-                                           --font-size-button-style: {{block.settings.fontsize_btn | append: 'px' }};
-                                           --margin-top-button-style: {{block.settings.mg_top_btn | append: 'px' }};
-                                           --button-width-style: {{block.settings.button_width | append: 'px' }}">
-                                    {%- if block.settings.btn_icon != blank -%}
-                                        {{ block.settings.btn_icon }}
-                                    {%- endif -%}
-                                    <span>{{ block.settings.button }}</span>
-                                </a>
-                            {%- endif -%}
-                        </div>
-                    {%- endif -%}
-                </div>
+                {% if section.settings.view_all != blank %}
+                    <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}"{% if section.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all }}"{% endif %} title="{{section.settings.view_all}}" 
+                        style="--font-weight-view-all-style: {{ section.settings.font_weight_view_all }};
+                        --mg-bottom-view-style: {{ section.settings.mg_bottom_view | append: 'px' }};
+                        --color-view-all-style: {{ section.settings.color_view_all }};
+                        --font-size-view-all-style: {{ section.settings.view_all_fs | append: 'px' }};
+                        ">
+                        {{ section.settings.view_all }}
+                    </a>
+                {% endif %}
             </div>
-          {% endfor %}
-        </div>
-
-        {%- if swipe == 'slider' and section.blocks.size > 1 and section.settings.block_layout == 'grid' -%}
-            <div class="slider-buttons no-js-hidden">
-                <ul class="slider-dots {% if section.blocks.size == 2 %}count_2{% endif %}">
-                    {% for block in section.blocks %}
-                    <li class="dots-item {% if forloop.first %}active{% endif %}">
-                        <button name="dots" data-index="{{ forloop.index0 }}">{{ forloop.index }}</button>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {%- endif -%}
-        {% if section.settings.display_spotlight_button %}
-            <a href="{{ section.settings.spotlight_button_link }}" title="{{ section.settings.spotlight_button_text | split: '|' | first }}" class="btn button">
-                {{ section.settings.spotlight_button_text }}
-            </a>
         {% endif %}
-    {%- if swipe == 'slider' and section.settings.block_layout == 'grid' -%}
-    </banner-slider-component>
-    {%- endif -%}
-  </div>
-</div>
+        {%- if swipe == 'slider' and section.settings.block_layout == 'grid' -%}
+        <banner-slider-component>
+        {%- endif -%}
+
+            <div class="halo-row column-{{ section.settings.column }}{% if swipe == 'slider' and section.settings.block_layout == 'grid' %} slider slider--tablet{% endif %}{% if section.settings.item_distance == 0 %} not-distance{% endif %}{% if swipe == 'scroll' and section.settings.block_layout == 'grid' %} scroll-snap-mobile disable-srollbar{% endif %}{% if section.settings.column_mb == '2' %} column-mb-2{% endif %}{% if section.settings.container == '1320' %} width-1320{% endif %}{% if section.settings.display_spotlight_button %} button-bottom{% endif %}" 
+            style="--row-distance-style: {{ section.settings.item_distance | prepend: '-' | append: 'px' }}; --arrow-side-position: {{ position_horizontal_slick_arrow }};"
+            {% if section.settings.block_layout == 'slider' %}data-spotlight-slider data-rows="{{section.settings.column}}" data-arrows="{{ section.settings.enable_arrows }}" data-arrows-mb="{{ section.settings.enable_arrows_mb }}" data-rows-mb="{{ section.settings.column_mb }}"{% endif %} data-swipe="{{ swipe }}" data-dots="{{ section.settings.enable_dots }}" data-dots-mb="{{ section.settings.enable_dots_mb }}">
+            {% for block in section.blocks %}
+                <div class="halo-item{% if swipe == 'slider' and section.settings.block_layout == 'grid' %} slider__slide{% endif %} spotlight--{{ block.type }}{% if section.settings.enable_plus_icon %} enable_plus_icon{% endif %}" id="block-{{block.id}}" style="--item-distance-style: {{ section.settings.item_distance | append: 'px' }};" data-animate="{{ settings.banner_animation }}">
+                    <div class="spotlight-item spotlight-item__{{block.type}}{% if block.settings.enable_absolute and block.settings.enable_image %} content_absolute{% endif %}{% if block.settings.border_color_title != blank and block.settings.border_color_title != 'rgba(0,0,0,0)' %} enable_border_color{% endif %}{% if block.settings.enable_des_hover %} enable_des_hover{% endif %}">
+                        {% if block.settings.enable_image %}
+                            <div class="image-container">
+                                <div class="img-box">
+                                    {% if block.settings.image != blank %}
+                                        {%- assign preview_img = block.settings.image -%}
+                                        <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%" title="{{ block.settings.title | default: shop.name | escape  }}">
+                                            <img {% render 'lazyload',preview_img: preview_img %} />
+                                            {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
+                                        </a>
+                                    {% else %}
+                                        <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} class="image-zoom" title="{{ block.settings.title | default: shop.name | escape  }}">
+                                            {% if block.settings.enable_absolute %}
+                                                <div class="not_img" style="--height_not_img: 200px">370 x 200px</div>
+                                            {% else %}
+                                                <div class="not_img" style="--height_not_img: 440px">370 x 440px</div>
+                                            {% endif %}
+                                        </a>
+                                    {% endif %}
+                                    {% if section.settings.enable_plus_icon %}
+                                        <span class="show-icon-more" style="--color-icon-plus: {{ section.settings.color_plus_icon }}"></span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        {%- if block.settings.sub_title != blank or block.settings.title != blank or block.settings.des != blank or block.settings.button != blank -%}
+                            <div class="content spotlight-inner text-{{block.settings.title_align}} align-items--{{block.settings.align_items}} {% if section.settings.enable_content_border %}is-bordered{%  endif %} {% if block.settings.title == blank and block.settings.des == blank %} not_title_des{% endif %}{% unless block.settings.enable_image %} not-image{% endunless %}{% if block.settings.border_color_button == 'rgba(0,0,0,0)' and block.settings.bg_color_button == 'rgba(0,0,0,0)' %} enable-transparnet{% endif %}" 
+                            style="--align-items-spacing-top-style: {{ block.settings.align_items_spacing_top | append: 'px' }}; 
+                                    --align-items-spacing-bottom-style: {{ block.settings.align_items_spacing_bottom | append: 'px' }}; 
+                                    --align-items-spacing-lr-style: {{ block.settings.align_items_spacing_lr | append: 'px' }};
+                                    --align-items-postion-content-style: {{ block.settings.align_items_spacing_top_bottom_position | append: 'px' }};
+                                    --align-items-postion-content-mb-style: {{ block.settings.align_items_spacing_top_bottom_position_mb | append: 'px' }};
+                                    --bg_color_content: {{ block.settings.bg_color_content }};
+                                    --content-border-color: {% if section.settings.content_border_color != blank and section.settings.content_border_color != 'rgba(0,0,0,0)' %}{{ section.settings.content_border_color }}{% endif %};"
+                            >
+                                {%- if block.settings.sub_title != blank -%}
+                                    <p class="sub_title custom-text-style{% if block.settings.border_sub_title %} has-border{% endif %}"
+                                        style="--color-text-style: {{ block.settings.color_sub_title }};
+                                            --fontsize-text-style: {{ block.settings.fontsize_sub_title | append: 'px' }};
+                                            --font-weight-text-style: {{ block.settings.font_weight_sub_title }};
+                                            --mg-bottom-sub-title-style: {{ block.settings.mg_bottom_sub_title | append: 'px' }}">
+                                        <span>{{ block.settings.sub_title }}</span>
+                                    </p>
+                                {%- endif -%}
+                                {%- if block.settings.title != blank -%}
+                                    <h3 class="title custom-text-style has--{{ block.settings.border_title }}"
+                                        style="--color-text-style: {{ block.settings.color_title }};
+                                            --fontsize-text-style: {{ block.settings.fontsize_title | append: 'px' }};
+                                            --fontsize-mobile-text-style: {{ block.settings.fontsize_title_mb | append: 'px' }};
+                                            --font-text-style: {%- if block.settings.enable_style_italic -%}italic{%- else -%}normal{%- endif -%};
+                                            {%- if block.settings.border_title == 'border_s1' -%}
+                                                padding-bottom: 7px;
+                                                border-bottom: 3px solid {{ block.settings.border_color_title }};
+                                            {%- elsif block.settings.border_title == 'border_hover' or block.settings.border_title == 'border_s2' -%}
+                                                --border-color-title-style: {{ block.settings.border_color_title }};
+                                            {%- elsif block.settings.border_title == 'none' -%}
+                                                --border-color-title-style: transparent;
+                                                {% elsif  block.settings.border_title == 'border_s3' %}
+                                                --border-color-title-style: transparent;
+                                                padding-bottom: 22px;
+                                            {%- endif -%}">
+                                        <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %}
+                                            class="link_title 
+                                            {% if block.settings.border_title == 'border_s3' %}has_border_s3{% endif %}"
+                                            {% if block.settings.border_title == 'border_s3' %}style="--border-color-title-style-3: {{ block.settings.border_color_title }};"{% endif %}
+                                        >
+                                            <span>{{ block.settings.title }}</span>
+                                        </a>
+                                    </h3>
+                                {%- endif -%}
+                                {%- if block.settings.des != blank -%}
+                                    <div class="des custom-text-style"
+                                        style="--color-text-style: {{ block.settings.color_des }};
+                                            --fontsize-text-style: {{ block.settings.fontsize_des | append: 'px' }};
+                                            --margin-top-des-style: {{ block.settings.mg_top_des | append: 'px' }}">
+                                    {{ block.settings.des }}
+                                    </div>
+                                {%- endif -%}
+                                {%- if block.settings.button != blank -%}
+                                    <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} class="spotlight-button button custom-button-style{% if block.settings.enable_button_custom_border %} enable-button-custom-border{% endif %}{% if block.settings.border_color_button == 'rgba(0,0,0,0)' and block.settings.bg_color_button == 'rgba(0,0,0,0)' %} enable-transparnet{% endif %}" 
+                                        style="--color-button-style: {{ block.settings.color_button }};
+                                            --bg-color-button-style: {% if block.settings.bg_color_button_gradient != blank %}{{ block.settings.bg_color_button_gradient }}{% else %}{{ block.settings.bg_color_button | color_modify: 'alpha', block.settings.bg_opacity_button }}{% endif %};
+                                            --border-color-button-style: {{ block.settings.border_color_button }};
+                                            --color-button-hover-style: {{ block.settings.color_button_hover }};
+                                            --bg-color-button-hover-style: {% if block.settings.bg_color_button_gradient_hover != blank %}{{ block.settings.bg_color_button_gradient_hover }}{% else %}{{ block.settings.bg_color_button_hover }}{% endif %}; 
+                                            --border-color-button-hover-style: {{ block.settings.border_color_button_hover }};
+                                            --text-transform-button-style: {{block.settings.btn_text_transform}};
+                                            --font-size-button-style: {{block.settings.fontsize_btn | append: 'px' }};
+                                            --margin-top-button-style: {{block.settings.mg_top_btn | append: 'px' }};
+                                            --button-width-style: {{block.settings.button_width | append: 'px' }}">
+                                        {%- if block.settings.btn_icon != blank -%}
+                                            {{ block.settings.btn_icon }}
+                                        {%- endif -%}
+                                        <span>{{ block.settings.button }}</span>
+                                    </a>
+                                {%- endif -%}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+
+            {%- if swipe == 'slider' and section.blocks.size > 1 and section.settings.block_layout == 'grid' -%}
+                <div class="slider-buttons no-js-hidden">
+                    <ul class="slider-dots {% if section.blocks.size == 2 %}count_2{% endif %}">
+                        {% for block in section.blocks %}
+                        <li class="dots-item {% if forloop.first %}active{% endif %}">
+                            <button name="dots" data-index="{{ forloop.index0 }}">{{ forloop.index }}</button>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {%- endif -%}
+            {% if section.settings.display_spotlight_button %}
+            <div class="group-btn">
+                {% if section.settings.spotlight_button_text != blank %}
+                <a {% if section.settings.spotlight_button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.spotlight_button_link }}"{% endif %} title="{{ section.settings.spotlight_button_text | split: '|' | first }}" class="btn button">
+                    {{ section.settings.spotlight_button_text }}
+                </a>
+                {% endif %}   
+            {% if section.settings.spotlight_button_text_2 != blank %}
+                <a {% if section.settings.spotlight_button_link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.spotlight_button_link_2 }}"{% endif %} title="{{ section.settings.spotlight_button_text_2 | split: '|' | first }}" class="btn-2 button">
+                    {{ section.settings.spotlight_button_text_2 }}
+                </a>
+                {% endif %} 
+            </div>
+            {% endif %}
+        {%- if swipe == 'slider' and section.settings.block_layout == 'grid' -%}
+        </banner-slider-component>
+        {%- endif -%}
+    </div>
+    </div>
+{% if settings.banner_animation == 'effect_1' %}</animated-component>{% endif %}
 
 <style>
     {%- liquid
@@ -194,6 +211,11 @@
         assign bg_color_button = section.settings.bg_color_button
         assign border_color_button = section.settings.border_color_button
         assign bg_color_gradient_button = section.settings.bg_color_gradient_button
+
+        assign color_button_hover = section.settings.color_button_hover
+        assign bg_color_button_hover = section.settings.bg_color_button_hover
+        assign border_color_button_hover = section.settings.border_color_button_hover
+        assign bg_color_gradient_button_hover = section.settings.bg_color_gradient_button_hover
 
         assign maxwidth_button = section.settings.maxwidth_button
         assign mg_top_button = section.settings.mg_top_button
@@ -270,18 +292,26 @@
     }
 
     {% if section.settings.display_spotlight_button %}
-        .section-block-{{section.id}} a.button {
-            background: {% if bg_color_gradient_button != blank %}{{ bg_color_gradient_button }}{% else %}{{ bg_color_button }}{% endif %};
-            color: {{ color_button }};
-            border: 1px solid {{ border_color_button }};
-            max-width: {{ maxwidth_button | append: 'px' }};
+        .section-block-{{section.id}} .group-btn {
             margin-top: {{ mg_top_button | append: 'px' }};
         }
 
-        .section-block-{{section.id}} a.button:hover {
-            background-color: {{ color_button }};
-            color: {{ bg_color_button }};
-            border: 1px solid {{ border_color_button }};
+        .section-block-{{section.id}} a.button {
+            max-width: {{ maxwidth_button | append: 'px' }};
+        }
+
+        .section-block-{{section.id}} a.btn,
+        .section-block-{{section.id}} a.btn-2:hover {
+            background: {% if bg_color_gradient_button != blank %}{{ bg_color_gradient_button }}{% else %}{{ bg_color_button }}{% endif %};
+            color: {{ color_button }};
+            border: 2px solid {{ border_color_button }};
+        }
+
+        .section-block-{{section.id}} a.btn:hover,
+        .section-block-{{section.id}} a.btn-2{
+            background-color: {% if bg_color_gradient_button_hover != blank %}{{ bg_color_gradient_button_hover }}{% else %}{{ bg_color_button_hover }}{% endif %};
+            color: {{ color_button_hover }};
+            border: 2px solid {{ border_color_button_hover }};
         }
     {% endif %}
     
@@ -383,6 +413,12 @@
         .section-block-{{section.id}} .halo-block-header .title {
             font-size: {{ fontsize_title_mb | append: 'px' }};
         }
+
+        {% if mg_top_button > 40 %}
+            .section-block-{{section.id}} .group-btn {
+                margin-top: 40px;
+            }
+        {% endif %}
     }
 
     @media (max-width: 551px) {
@@ -419,6 +455,10 @@
             {
                 "value": "1200",
                 "label": "t:sections.layout.container.option4"
+            },
+            {
+                "value": "1320",
+                "label": "t:sections.layout.container.option5"
             },
             {
                 "value": "1470",
@@ -541,7 +581,31 @@
     {
         "type": "checkbox",
         "id": "enable_arrows",
-        "label": "t:sections.announcement-bar.blocks.announcement.settings.text.enable_arrows",
+        "label": "t:sections.product_block.settings.slider.product_block_arrows_desk",
+        "default": true
+    },
+    {
+        "type": "checkbox",
+        "id": "enable_arrows_mb",
+        "label": "t:sections.product_block.settings.slider.product_block_arrows_mb",
+        "default": false
+    },  
+    {
+        "type": "text",
+        "id": "position_horizontal_slick_arrow",
+        "label": "t:sections.slide-show.settings.arrows.position_slick_arrow",
+        "default": "0"
+    },
+    {
+        "type": "checkbox",
+        "id": "enable_dots",
+        "label": "t:sections.product_block.settings.slider.product_block_dots_desk",
+        "default": false
+    },
+    {
+        "type": "checkbox",
+        "id": "enable_dots_mb",
+        "label": "t:sections.product_block.settings.slider.product_block_dots_mb",
         "default": true
     },
     {
@@ -553,7 +617,7 @@
     {
         "type" : "color",
         "id" : "border_color",
-        "label" : "t:settings_schema.typography.settings.typography.border_color",
+        "label" : "t:settings_schema.colors.settings.colors_name.border_color",
         "default" : "#e3e3e3"
     },
     {
@@ -891,6 +955,29 @@
         "label": "t:settings_schema.colors.settings.colors_name.background_color_gradient"
     },
     {
+        "type" : "color",
+        "id" : "color_button_hover",
+        "label": "t:settings_schema.colors.settings.colors_name.color_hover",
+        "default" : "#232323"
+    },
+    {
+        "type" : "color",
+        "id" : "border_color_button_hover",
+        "label": "t:settings_schema.colors.settings.colors_name.border_hover",
+        "default" : "#ffffff"
+    },
+    {
+        "type" : "color",
+        "id" : "bg_color_button_hover",
+        "label": "t:settings_schema.colors.settings.colors_name.background_hover",
+        "default" : "#ffffff"
+    },
+    {
+        "type" : "color_background",
+        "id" : "bg_color_gradient_button_hover",
+        "label": "t:settings_schema.colors.settings.colors_name.background_hover_gradient"
+    },
+    {
         "type": "range",
         "id": "maxwidth_button",
         "label": "t:settings_schema.typography.settings.typography.button_width",
@@ -992,6 +1079,18 @@
         "id" : "color_plus_icon",
         "label": "t:sections.image-banner.blocks.image.settings.style.color_plus_icon",
         "default" : "#fff"
+    },
+    {
+        "type": "checkbox",
+        "id": "enable_content_border",
+        "label": "t:sections.spotlight_block.settings.enable_content_border",
+        "default": false
+    },  
+    {
+        "type": "color",
+        "id": "content_border_color",
+        "label": "t:settings_schema.colors.settings.colors_name.border_color",
+        "default": "#e2e2e2"
     }
     ],
     "blocks": [

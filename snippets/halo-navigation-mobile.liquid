@@ -177,7 +177,7 @@
                                                                 {%- if show_banner_1 -%}
                                                                     <div class="menu-drawer__banner-item">    
                                                                         <div class="banner">
-                                                                            <a href="{{ banner_url_1 }}" class="image">
+                                                                            <a {% if banner_url_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ banner_url_1 }}"{% endif %} class="image">
                                                                                 {%- if banner_1 != blank -%}
                                                                                     <img srcset="{{ banner_1 | img_url: 'master' }} 1x, {{ banner_1 | img_url: 'master', scale: 2 }} 2x"
                                                                                     src="{{ banner_1 | img_url: 'master' }}"
@@ -193,7 +193,7 @@
                                                                                         <h4 class="title">{{ banner_title_1 | escape }}</h4>
                                                                                     {%- endif -%}
                                                                                     {%- if banner_text_1 != blank -%}
-                                                                                        <a href="{{ banner_url_1 }}" class="link link-underline">
+                                                                                        <a {% if banner_url_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ banner_url_1 }}"{% endif %} class="link link-underline">
                                                                                             <span class="text">{{ banner_text_1 | escape }}</span>
                                                                                         </a>
                                                                                     {%- endif -%}
@@ -205,7 +205,7 @@
                                                                 {%- if show_banner_2 -%}
                                                                     <div class="menu-drawer__banner-item">    
                                                                         <div class="banner">
-                                                                            <a href="{{ banner_url_2 }}" class="image">
+                                                                            <a {% if banner_url_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ banner_url_2 }}"{% endif %} class="image">
                                                                                 {%- if banner_2 != blank -%}
                                                                                     <img srcset="{{ banner_2 | img_url: 'master' }} 1x, {{ banner_2 | img_url: 'master', scale: 2 }} 2x"
                                                                                     src="{{ banner_2 | img_url: 'master' }}"
@@ -221,7 +221,7 @@
                                                                                         <h4 class="title">{{ banner_title_2 | escape }}</h4>
                                                                                     {%- endif -%}
                                                                                     {%- if banner_text_2 != blank -%}
-                                                                                        <a href="{{ banner_url_2 }}" class="link link-underline">
+                                                                                        <a {% if banner_url_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ banner_url_2 }}"{% endif %} class="link link-underline">
                                                                                             <span class="text">{{ banner_text_2 | escape }}</span>
                                                                                         </a>
                                                                                     {%- endif -%}
@@ -233,7 +233,7 @@
                                                                 {%- if show_banner_3 -%}
                                                                     <div class="menu-drawer__banner-item">    
                                                                         <div class="banner">
-                                                                            <a href="{{ banner_url_3 }}" class="image">
+                                                                            <a {% if banner_url_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ banner_url_3 }}"{% endif %} class="image">
                                                                                 {%- if banner_3 != blank -%}
                                                                                     <img srcset="{{ banner_3 | img_url: 'master' }} 1x, {{ banner_3 | img_url: 'master', scale: 2 }} 2x"
                                                                                     src="{{ banner_3 | img_url: 'master' }}"
@@ -249,7 +249,7 @@
                                                                                         <h4 class="title">{{ banner_title_3 | escape }}</h4>
                                                                                     {%- endif -%}
                                                                                     {%- if banner_text_3 != blank -%}
-                                                                                        <a href="{{ banner_url_3 }}" class="link link-underline">
+                                                                                        <a {% if banner_url_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ banner_url_3 }}"{% endif %} class="link link-underline">
                                                                                             <span class="text">{{ banner_text_3 | escape }}</span>
                                                                                         </a>
                                                                                     {%- endif -%}
@@ -261,7 +261,7 @@
                                                                 {%- if show_banner_4 -%}
                                                                     <div class="menu-drawer__banner-item">    
                                                                         <div class="banner">
-                                                                            <a href="{{ banner_url_4 }}" class="image">
+                                                                            <a {% if banner_url_4 == blank %} role="link" aria-disabled="true"{% else %} href="{{ banner_url_4 }}"{% endif %} class="image">
                                                                                 {%- if banner_4 != blank -%}
                                                                                     <img srcset="{{ banner_4 | img_url: 'master' }} 1x, {{ banner_4 | img_url: 'master', scale: 2 }} 2x"
                                                                                     src="{{ banner_4 | img_url: 'master' }}"
@@ -277,7 +277,7 @@
                                                                                         <h4 class="title">{{ banner_title_4 | escape }}</h4>
                                                                                     {%- endif -%}
                                                                                     {%- if banner_text_4 != blank -%}
-                                                                                        <a href="{{ banner_url_4 }}" class="link link-underline">
+                                                                                        <a {% if banner_url_4 == blank %} role="link" aria-disabled="true"{% else %} href="{{ banner_url_4 }}"{% endif %} class="link link-underline">
                                                                                             <span class="text">{{ banner_text_4 | escape }}</span>
                                                                                         </a>
                                                                                     {%- endif -%}
@@ -326,7 +326,7 @@
                                                                         {%- endfor -%}
                                                                     </ul>
                                                                     {%- if az_brand_link_text -%}
-                                                                        <a href="{{ az_brand_url }}" class="menu-drawer__action link link-underline">
+                                                                        <a {% if az_brand_url == blank %} role="link" aria-disabled="true"{% else %} href="{{ az_brand_url }}"{% endif %} class="menu-drawer__action link link-underline">
                                                                             <span class="text">{{ az_brand_link_text | escape }}</span>
                                                                         </a>
                                                                     {%- endif -%}
@@ -379,7 +379,7 @@
                     <ul class="list list-social list-unstyled" role="list">
                         {%- if settings.social_twitter_link != blank -%}
                             <li class="list-social__item">
-                                <a href="{{ settings.social_twitter_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                                <a {% if settings.social_twitter_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ settings.social_twitter_link }}"{% endif %} class="link link--text list-social__link" aria-describedby="a11y-external-message">
                                     {%- render 'icon-twitter' -%}
                                     <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
                                 </a>
@@ -387,7 +387,7 @@
                         {%- endif -%}
                         {%- if settings.social_facebook_link != blank -%}
                             <li class="list-social__item">
-                                <a href="{{ settings.social_facebook_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                                <a {% if settings.social_facebook_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ settings.social_facebook_link }}"{% endif %} class="link link--text list-social__link" aria-describedby="a11y-external-message">
                                     {%- render 'icon-facebook' -%}
                                     <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
                                 </a>
@@ -395,7 +395,7 @@
                         {%- endif -%}
                         {%- if settings.social_pinterest_link != blank -%}
                             <li class="list-social__item">
-                                <a href="{{ settings.social_pinterest_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                                <a {% if settings.social_pinterest_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ settings.social_pinterest_link }}"{% endif %} class="link link--text list-social__link" aria-describedby="a11y-external-message">
                                     {%- render 'icon-pinterest' -%}
                                     <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
                                 </a>
@@ -403,7 +403,7 @@
                         {%- endif -%}
                         {%- if settings.social_instagram_link != blank -%}
                             <li class="list-social__item">
-                                <a href="{{ settings.social_instagram_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                                <a {% if settings.social_instagram_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ settings.social_instagram_link }}"{% endif %} class="link link--text list-social__link" aria-describedby="a11y-external-message">
                                     {%- render 'icon-instagram' -%}
                                     <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
                                 </a>
@@ -411,7 +411,7 @@
                         {%- endif -%}
                         {%- if settings.social_tumblr_link != blank -%}
                             <li class="list-social__item">
-                                <a href="{{ settings.social_tumblr_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                                <a {% if settings.social_tumblr_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ settings.social_tumblr_link }}"{% endif %} class="link link--text list-social__link" aria-describedby="a11y-external-message">
                                     {%- render 'icon-tumblr' -%}
                                     <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
                                 </a>
@@ -419,7 +419,7 @@
                         {%- endif -%}
                         {%- if settings.social_snapchat_link != blank -%}
                             <li class="list-social__item">
-                                <a href="{{ settings.social_snapchat_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                                <a {% if settings.social_snapchat_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ settings.social_snapchat_link }}"{% endif %} class="link link--text list-social__link" aria-describedby="a11y-external-message">
                                     {%- render 'icon-snapchat' -%}
                                     <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
                                 </a>
@@ -427,7 +427,7 @@
                         {%- endif -%}
                         {%- if settings.social_youtube_link != blank -%}
                             <li class="list-social__item">
-                                <a href="{{ settings.social_youtube_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                                <a {% if settings.social_youtube_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ settings.social_youtube_link }}"{% endif %} class="link link--text list-social__link" aria-describedby="a11y-external-message">
                                     {%- render 'icon-youtube' -%}
                                     <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
                                 </a>
@@ -435,7 +435,7 @@
                         {%- endif -%}
                         {%- if settings.social_vimeo_link != blank -%}
                             <li class="list-social__item">
-                                <a href="{{ settings.social_vimeo_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+                                <a {% if settings.social_vimeo_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ settings.social_vimeo_link }}"{% endif %} class="link link--text list-social__link" aria-describedby="a11y-external-message">
                                     {%- render 'icon-vimeo' -%}
                                     <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
                                 </a>

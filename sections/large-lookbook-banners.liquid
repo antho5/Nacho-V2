@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="{{ 'component-large-lookbook-banner.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'component-large-lookbook-banner.css' | asset_url | stylesheet_tag }}</noscript>
 
+{{ 'lookbook-script.js' | asset_url | script_tag }}
+
 <script>
     window.currencySymbol ="{{ cart.currency.symbol }}";
 </script>
@@ -58,6 +60,7 @@
     assign enable_lookbook_width = section.settings.enable_lookbook_width
     assign lookbook_width = section.settings.lookbook_width | append: 'px'
     assign lookbook_truncate = section.settings.lookbook_truncate
+    assign lookbook_style = section.settings.lookbook_style
 
     assign show_text = section.settings.show_text
     assign hide_text = section.settings.hide_text
@@ -75,6 +78,48 @@
     endfor 
 %}
 
+<style type="text/css">
+    .section-block-{{section.id}} {
+        padding-top: {{ mg_top_desktop }};
+        padding-bottom: {{ mg_bottom_desktop }};
+    }
+
+    {% if container == 'fullwidth' %}
+        .section-block-{{section.id}} .container-full {
+            padding-left: {{ padding_full_width }};
+            padding-right: 0;
+        }
+
+        body.layout_rtl .section-block-{{section.id}} .container-full {
+            padding-right: {{ padding_full_width }};
+            padding-left: 0;
+        }
+    {% endif %}
+
+    {% if section_gradient != blank and section_gradient != 'rgba(0,0,0,0)' %}
+        .section-block-{{section.id}} {
+            background: {{ section_gradient }};
+        }
+    {% elsif section_bg != blank and section_bg != 'rgba(0,0,0,0)' %}
+        .section-block-{{section.id}} {
+            background: {{ section_bg }};
+        }
+    {% endif %}
+
+    @media screen and (max-width: 1024px) {
+        .section-block-{{section.id}} {
+            padding-top: {{ mg_top_tablet }};
+            padding-bottom: {{ mg_bottom_tablet }};
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .section-block-{{section.id}} {
+            padding-top: {{ mg_top_mobile }};
+            padding-bottom: {{ mg_bottom_mobile }};
+        }
+    }
+</style>
 
 {%- if has_fancy_box -%}
     <link rel="stylesheet" href="{{ 'component-fancybox.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -119,7 +164,7 @@
                         <div class="view-all-container text-{{ view_all_pos }}">
                             <a 
                                 class="view-more"
-                                href="{% if view_all_link != blank %}{{ view_all_link }}{% endif %}" 
+                                {% if view_all_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ view_all_link }}"{% endif %}
                                 title="{{ view_more }}"
                                 style="
                                     --view-color: {% if view_all_color != blank %}{{ view_all_color }}{% endif %};
@@ -167,7 +212,7 @@
                                     assign top_4 = block.settings.vertical_pos_4 | append: '%' 
                                     assign lookbook_pos_4 = block.settings.lookbook_pos_4
                                 %}
-                                <div 
+                                <large-lookbook-with-show-all  
                                     class="lookbook-image-item {% if enable_lookbook_width %}width-restricted{% endif %}" 
                                     data-lookbook-item-container
                                     style="
@@ -188,254 +233,105 @@
                                             {% if lookbook_image != blank %}
                                                 <a 
                                                     class="adaptive_height fancybox"
-                                                    {% if lookbook_image_action == 'link' %} href="{{ lookbook_image_link }}"{% else %}class="fancybox" rel="lookbook" href="{{ lookbook_image | img_url: 'master' }}" data-fancybox="images"{% endif %}
+                                                    {% if lookbook_image_action == 'link' %}{% if lookbook_image_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ lookbook_image_link }}"{% endif %}{% else %}class="fancybox" rel="lookbook" href="{{ lookbook_image | img_url: 'master' }}" data-fancybox="images"{% endif %}
                                                     style="padding-top: {{ 1 | divided_by: lookbook_image.aspect_ratio | times: 100 }}%">
                                                         <img {% render 'lazyload',preview_img: lookbook_image %} />
                                                         {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                 </a>
                                             {% else %}
-                                                <a href="#" class="image-zoom">
+                                                <a href="javascript:void(0)" class="image-zoom">
                                                     <div class="not_img" style="--height_not_img: 770px; --width_not_img: {% if forloop.index == 2 %}770px;{% else %}1270px;{% endif %}">1270 x 770px</div>
                                                 </a>
                                             {% endif %}
                                         </div>
-                                        {% if product_1 != blank %}
-                                        <div class="select-icon select-icon-1" data-lookbook-icon data-handle="{{ product_1 }}"
-                                            style="--top-position-1: {{ top_1 }};
-                                            --left-position-1: {{ left_1 }};"
-                                        >
-                                            <span class="glyphicon {% if show_dot_number %}numbered{% endif %} {% if show_dot_number_mobile %}mb-numbered{% endif %}" data-num="1"></span>
-                                            <div class="lookbook-modal to-{{ lookbook_pos_1 }}">
-                                                <span class="pointer-left pointer"></span>
-                                                <span class="pointer-right pointer"></span>
-                                                <span class="pointer-bottom pointer"></span>
-                                                <span class="pointer-top pointer"></span>
-                                                <div class="product-information__wrapper text-left">
-                                                    {%- if settings.show_vendor -%}
-                                                        <div class="product-information__group">
-                                                            {%- if settings.show_vendor -%}
-                                                                <div class="card-vendor">
-                                                                    <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-                                                                </div>
-                                                            {%- endif -%}
-                                                        </div>
-                                                    {%- endif -%}
-                                                    <a href="#" class="product-title link-underline{% if settings.product_title_line_text != 'full' %} custom-title-ellipsis{% endif %}">
-                                                        <span class="text"></span>
-                                                    </a>
-                                                    <div class="product-price price">
-                                                        <div class="regular-price price__regular">
-                                                            <div class='last-price price__last'>
-                                                                <span class="price-item price-item--regular">
-                                                                    <span class="money"></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="sale-price price__sale">
-                                                            <div class="price-at-compare price__compare">
-                                                                <span class="price-item price-item--regular">
-                                                                    <span class="money"></span>
-                                                                </span>
-                                                            </div>
-                                                            <div class='last-price price__last'>
-                                                                <span class="price-item price-item--sale">
-                                                                    <span class="money"></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <a href="#" class="icon-wrapper">
-                                                            {% render 'icon-link-arrow-right' %}
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                        {% if product_2 != blank %}
-                                        <div class="select-icon select-icon-2" data-lookbook-icon data-handle="{{ product_2 }}"
-                                            style="--top-position-2: {{ top_2 }};
-                                            --left-position-2: {{ left_2 }};"
-                                        >
-                                            <span class="glyphicon {% if show_dot_number %}numbered{% endif %} {% if show_dot_number_mobile %}mb-numbered{% endif %}" data-num="2"></span>
-                                            <div class="lookbook-modal to-{{ lookbook_pos_2 }}">
-                                                <span class="pointer-left pointer"></span>
-                                                <span class="pointer-right pointer"></span>
-                                                <span class="pointer-bottom pointer"></span>
-                                                <span class="pointer-top pointer"></span>
-                                                <div class="product-information__wrapper text-left">
-                                                    {%- if settings.show_vendor -%}
-                                                        <div class="product-information__group">
-                                                            {%- if settings.show_vendor -%}
-                                                                <div class="card-vendor">
-                                                                    <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-                                                                </div>
-                                                            {%- endif -%}
-                                                        </div>
-                                                    {%- endif -%}
-                                                    <a href="#" class="product-title link-underline{% if settings.product_title_line_text != 'full' %} custom-title-ellipsis{% endif %}">
-                                                        <span class="text"></span>
-                                                    </a>
-                                                    <div class="product-price price">
-                                                        <div class="regular-price price__regular">
-                                                            <div class='last-price price__last'>
-                                                                <span class="price-item price-item--regular">
-                                                                    <span class="money"></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="sale-price price__sale">
-                                                            <div class="price-at-compare price__compare">
-                                                                <span class="price-item price-item--regular">
-                                                                    <span class="money"></span>
-                                                                </span>
-                                                            </div>
-                                                            <div class='last-price price__last'>
-                                                                <span class="price-item price-item--sale">
-                                                                    <span class="money"></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <a href="#" class="icon-wrapper">
-                                                            {% render 'icon-link-arrow-right' %}
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-                                        {% if product_3 != blank %}
-                                            <div class="select-icon select-icon-3" data-lookbook-icon data-handle="{{ product_3 }}"
-                                                style="--top-position-3: {{ top_3 }};
-                                                --left-position-3: {{ left_3 }};"
-                                            >
-                                                <span class="glyphicon {% if show_dot_number %}numbered{% endif %} {% if show_dot_number_mobile %}mb-numbered{% endif %}" data-num="3"></span>
-                                                <div class="lookbook-modal to-{{ lookbook_pos_3 }}">
-                                                    <span class="pointer-left pointer"></span>
-                                                    <span class="pointer-right pointer"></span>
-                                                    <span class="pointer-bottom pointer"></span>
-                                                    <span class="pointer-top pointer"></span>
-                                                    <div class="product-information__wrapper text-left">
-                                                        {%- if settings.show_vendor -%}
-                                                            <div class="product-information__group">
-                                                                {%- if settings.show_vendor -%}
-                                                                    <div class="card-vendor">
-                                                                        <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-                                                                    </div>
-                                                                {%- endif -%}
-                                                            </div>
-                                                        {%- endif -%}
-                                                        <a href="#" class="product-title link-underline{% if settings.product_title_line_text != 'full' %} custom-title-ellipsis{% endif %}">
-                                                            <span class="text"></span>
-                                                        </a>
-                                                        <div class="product-price price">
-                                                            <div class="regular-price price__regular">
-                                                                <div class='last-price price__last'>
-                                                                    <span class="price-item price-item--regular">
-                                                                        <span class="money"></span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="sale-price price__sale">
-                                                                <div class="price-at-compare price__compare">
-                                                                    <span class="price-item price-item--regular">
-                                                                        <span class="money"></span>
-                                                                    </span>
-                                                                </div>
-                                                                <div class='last-price price__last'>
-                                                                    <span class="price-item price-item--sale">
-                                                                        <span class="money"></span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <a href="#" class="icon-wrapper">
-                                                                {% render 'icon-link-arrow-right' %}
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                        {% if product_4 != blank %}
-                                            <div class="select-icon select-icon-4" data-lookbook-icon data-handle="{{ product_4 }}"
-                                                style="--top-position-4: {{ top_4 }};
-                                                --left-position-4: {{ left_4 }};"
-                                            >
-                                                <span class="glyphicon {% if show_dot_number %}numbered{% endif %} {% if show_dot_number_mobile %}mb-numbered{% endif %}" data-num="4"></span>
-                                                <div class="lookbook-modal to-{{ lookbook_pos_4 }}">
-                                                    <span class="pointer-left pointer"></span>
-                                                    <span class="pointer-right pointer"></span>
-                                                    <span class="pointer-bottom pointer"></span>
-                                                    <span class="pointer-top pointer"></span>
-                                                    <div class="product-information__wrapper text-left">
-                                                        {%- if settings.show_vendor -%}
-                                                            <div class="product-information__group">
-                                                                {%- if settings.show_vendor -%}
-                                                                    <div class="card-vendor">
-                                                                        <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-                                                                    </div>
-                                                                {%- endif -%}
-                                                            </div>
-                                                        {%- endif -%}
-                                                        <a href="#" class="product-title link-underline{% if settings.product_title_line_text != 'full' %} custom-title-ellipsis{% endif %}">
-                                                            <span class="text"></span>
-                                                        </a>
-                                                        <div class="product-price price">
-                                                            <div class="regular-price price__regular">
-                                                                <div class='last-price price__last'>
-                                                                    <span class="price-item price-item--regular">
-                                                                        <span class="money"></span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="sale-price price__sale">
-                                                                <div class="price-at-compare price__compare">
-                                                                    <span class="price-item price-item--regular">
-                                                                        <span class="money"></span>
-                                                                    </span>
-                                                                </div>
-                                                                <div class='last-price price__last'>
-                                                                    <span class="price-item price-item--sale">
-                                                                        <span class="money"></span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <a href="#" class="icon-wrapper">
-                                                                {% render 'icon-link-arrow-right' %}
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endif %}
+                                            
                                         {% if product_1 != blank or product_2 != blank or product_3 != blank or product_4 != blank %}
-                                            <div 
-                                                class="show-all-lookbook" 
-                                                data-show-all-lookbook
-                                                style="
-                                                    --view-all-bg: {% if show_btn_gradient != blank and show_btn_gradient != 'rgba(0,0,0,0)' %}{{ show_btn_gradient }}{% elsif show_btn_bg_color != blank and show_btn_bg_color != 'rgba(0,0,0,0)' %}{{ show_btn_bg_color }}{% endif %};
-                                                    --show-text-color: {% if show_btn_text_color != blank and show_btn_text_color != 'rgba(0,0,0,0)' %}{{ show_btn_text_color }}{% endif %};
-                                                    --button-width: {{ show_btn_width }};
-                                                    --button-height: {{ show_btn_height }};
-                                                    "
-                                            >
-                                                <div class="btns-wrapper">
-                                                    <button class="show-btn-wrapper btn-wrapper">
-                                                        {% render 'icon-plus' %}
-                                                        {% if show_text != blank %}
-                                                            <span class="text">{{ show_text }}</span>
-                                                        {% endif %}
-                                                    </button>
-                                                    <button class="hide-btn-wrapper btn-wrapper">
-                                                        {% render 'icon-close', class: 'icon icon-close' %}
-                                                        {% if hide_text != blank %}
-                                                            <span class="text">{{ hide_text }}</span>
-                                                        {% endif %}
-                                                    </button>
+                                            <lookbook-wrapper>
+                                            {% if product_1 != blank %}
+                                                {% render 'lookbook-modal-wrapper',
+                                                    lookbook_style: lookbook_style,
+                                                    top: top_1,
+                                                    left: left_1,
+                                                    show_dot_number: show_dot_number,
+                                                    show_dot_number_mobile: show_dot_number_mobile,
+                                                    lookbook_pos: lookbook_pos_1,
+                                                    product: product_1,
+                                                    show_plus_icon: show_plus_icon,
+                                                    num: 1,
+                                                %}
+                                            {% endif %}
+                                            {% if product_2 != blank %}
+                                                {% render 'lookbook-modal-wrapper',
+                                                    lookbook_style: lookbook_style,
+                                                    top: top_2,
+                                                    left: left_2,
+                                                    show_dot_number: show_dot_number,
+                                                    show_dot_number_mobile: show_dot_number_mobile,
+                                                    lookbook_pos: lookbook_pos_2,
+                                                    product: product_2,
+                                                    show_plus_icon: show_plus_icon,
+                                                    num: 2,
+                                                %}
+                                            {% endif %}
+                                            {% if product_3 != blank %}
+                                                {% render 'lookbook-modal-wrapper',
+                                                    lookbook_style: lookbook_style,
+                                                    top: top_3,
+                                                    left: left_3,
+                                                    show_dot_number: show_dot_number,
+                                                    show_dot_number_mobile: show_dot_number_mobile,
+                                                    lookbook_pos: lookbook_pos_3,
+                                                    product: product_3,
+                                                    show_plus_icon: show_plus_icon,
+                                                    num: 3
+                                                %}  
+                                            {% endif %}
+                                            {% if product_4 != blank %}
+                                                {% render 'lookbook-modal-wrapper',
+                                                    lookbook_style: lookbook_style,
+                                                    top: top_4,
+                                                    left: left_4,
+                                                    show_dot_number: show_dot_number,
+                                                    show_dot_number_mobile: show_dot_number_mobile,
+                                                    lookbook_pos: lookbook_pos_4,
+                                                    product: product_4,
+                                                    show_plus_icon: show_plus_icon,
+                                                    num: 4
+                                                %}  
+                                            {% endif %}
+                                            </lookbook-wrapper>
+                                        {% endif %}
+                                        {% if lookbook_style == '2' %}
+                                            {% if product_1 != blank or product_2 != blank or product_3 != blank or product_4 != blank %}
+                                                <div 
+                                                    class="show-all-lookbook" 
+                                                    data-show-all-lookbook
+                                                    style="
+                                                        --view-all-bg: {% if show_btn_gradient != blank and show_btn_gradient != 'rgba(0,0,0,0)' %}{{ show_btn_gradient }}{% elsif show_btn_bg_color != blank and show_btn_bg_color != 'rgba(0,0,0,0)' %}{{ show_btn_bg_color }}{% endif %};
+                                                        --show-text-color: {% if show_btn_text_color != blank and show_btn_text_color != 'rgba(0,0,0,0)' %}{{ show_btn_text_color }}{% endif %};
+                                                        --button-width: {{ show_btn_width }};
+                                                        --button-height: {{ show_btn_height }};
+                                                        "
+                                                >
+                                                    <div class="btns-wrapper">
+                                                        <button class="show-btn-wrapper btn-wrapper">
+                                                            {% render 'icon-plus' %}
+                                                            {% if show_text != blank %}
+                                                                <span class="text">{{ show_text }}</span>
+                                                            {% endif %}
+                                                        </button>
+                                                        <button class="hide-btn-wrapper btn-wrapper">
+                                                            {% render 'icon-close', class: 'icon icon-close' %}
+                                                            {% if hide_text != blank %}
+                                                                <span class="text">{{ hide_text }}</span>
+                                                            {% endif %}
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            {% endif %}
                                         {% endif %}
                                     </div>
-                                </div>
+                                </large-lookbook-with-show-all>
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -445,43 +341,28 @@
     </div>
 </div>
 
-<style type="text/css">
-    .section-block-{{section.id}} {
-        padding-top: {{ mg_top_desktop }};
-        padding-bottom: {{ mg_bottom_desktop }};
-    }
-
-    {% if container == 'fullwidth' %}
-        .section-block-{{section.id}} .container-full {
-            padding-left: {{ padding_full_width }};
-            padding-right: 0;
+<script>
+    class LargeLookbookWithShowAll extends HTMLElement {
+        constructor() {
+            super();
         }
-    {% endif %}
 
-    {% if section_gradient != blank and section_gradient != 'rgba(0,0,0,0)' %}
-        .section-block-{{section.id}} {
-            background: {{ section_gradient }};
-        }
-    {% elsif section_bg != blank and section_bg != 'rgba(0,0,0,0)' %}
-        .section-block-{{section.id}} {
-            background: {{ section_bg }};
-        }
-    {% endif %}
+        connectedCallback() {
+            this.showAllBtn = this.querySelector('[data-show-all-lookbook]');
+            this.lookbookImage = this.querySelector('[data-lookbook-image]');
 
-    @media screen and (max-width: 1024px) {
-        .section-block-{{section.id}} {
-            padding-top: {{ mg_top_tablet }};
-            padding-bottom: {{ mg_bottom_tablet }};
+            if (this.showAllBtn) {
+                this.showAllBtn.addEventListener('click', this.toggleShowAll.bind(this));
+            }
+        }
+
+        toggleShowAll() {
+            this.lookbookImage.classList.toggle('show-all');
         }
     }
 
-    @media screen and (max-width: 767px) {
-        .section-block-{{section.id}} {
-            padding-top: {{ mg_top_mobile }};
-            padding-bottom: {{ mg_bottom_mobile }};
-        }
-    }
-</style>
+    customElements.define('large-lookbook-with-show-all', LargeLookbookWithShowAll);
+</script>
 
 {%- if has_fancy_box -%}
     <script src="{{ 'fancybox.js' | asset_url }}" defer="defer"></script>
@@ -825,6 +706,22 @@
         {
             "type": "header",
             "content": "t:sections.collection_lookbook.settings.content_1"
+        },
+        {
+            "type": "select",
+            "id": "lookbook_style",
+            "label": "t:sections.main_lookbook_page.settings.style",
+            "default": "1",
+            "options": [
+                {
+                    "value": "1",
+                    "label": "t:settings_schema.typography.settings.typography.style_1"
+                },
+                {
+                    "value": "2",
+                    "label": "t:settings_schema.typography.settings.typography.style_2"
+                }
+            ]
         },
         {
             "type": "checkbox",

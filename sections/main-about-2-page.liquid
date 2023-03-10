@@ -26,7 +26,7 @@
 -%}
 
 <div data-section-id="{{ section.id }}" data-section-type="about" id="AboutSection-{{ section.id }}" data-section="{{ section.id }}">
-    <div class="{% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%} container-full{% else %}container{% endif %} {% if about_image != blank %}has-bg-image{% endif %}">
+    <div class="{% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%} container-full{% else %}container{% endif %} {% if about_image != blank %}has-bg-image{% endif %} about-2-container">
     	{%- if show_breadcrumb -%}
             {% render 'breadcrumb', alignment: breadcrumb_alignment %}
         {%- endif -%}
@@ -76,7 +76,7 @@
 	                            		<div class="item">
 		                            		{%- if image_1 != blank -%}
 			                            		{%- if link_1 != blank -%}
-			                            			<a class="image image-zoom" href="{{ link_1 }}" style="padding-top: {{ 1 | divided_by: image_1.aspect_ratio | times: 100 | append: '%' }}">
+			                            			<a class="image image-zoom"{% if link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_1 }}"{% endif %} style="padding-top: {{ 1 | divided_by: image_1.aspect_ratio | times: 100 | append: '%' }}">
 			                            		{%- else -%}
 			                            			<div class="image image-zoom" style="padding-top: {{ 1 | divided_by: image_1.aspect_ratio | times: 100 | append: '%' }}">
 			                            		{%- endif -%}
@@ -103,7 +103,7 @@
 	                            		<div class="item">
 		                            		{%- if image_2 != blank -%}
 			                            		{%- if link_2 != blank -%}
-			                            			<a class="image image-zoom" href="{{ link_2 }}" style="padding-top: {{ 1 | divided_by: image_2.aspect_ratio | times: 100 | append: '%' }}">
+			                            			<a class="image image-zoom"{% if link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_2 }}"{% endif %} style="padding-top: {{ 1 | divided_by: image_2.aspect_ratio | times: 100 | append: '%' }}">
 			                            		{%- else -%}
 			                            			<div class="image image-zoom" style="padding-top: {{ 1 | divided_by: image_2.aspect_ratio | times: 100 | append: '%' }}">
 			                            		{%- endif -%}
@@ -128,7 +128,7 @@
 			                            <div class="item">
 			                            	{%- if image_3 != blank -%}
 			                            		{%- if link_3 != blank -%}
-			                            			<a class="image image-zoom" href="{{ link_3 }}" style="padding-top: {{ 1 | divided_by: image_3.aspect_ratio | times: 100 | append: '%' }}">
+			                            			<a class="image image-zoom"{% if link_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_3 }}"{% endif %} style="padding-top: {{ 1 | divided_by: image_3.aspect_ratio | times: 100 | append: '%' }}">
 			                            		{%- else -%}
 			                            			<div class="image image-zoom" style="padding-top: {{ 1 | divided_by: image_3.aspect_ratio | times: 100 | append: '%' }}">
 			                            		{%- endif -%}
@@ -205,7 +205,7 @@
           <ul class="about-page-nav disable-srollbar">
             {% for link in linklists[section.settings.menu].links %}
             <li class="item {% if link.active %}active{% endif %}">
-              <a href="{{ link.url }}">{{ link.title }}</a>
+              <a {% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %}>{{ link.title }}</a>
             </li>
             {% endfor %}
           </ul>
@@ -353,6 +353,14 @@
             padding-left: 10px;
             padding-right: 10px;
         }
+    }
+
+    @media (max-width: 767px) {
+        {% if breadcrumb_color != blank and breadcrumb_color != 'rgba(0,0,0,0)' %} 
+            #AboutSection-{{ section.id }} .breadcrumb .home-link {
+                color: {{ breadcrumb_color }};
+            }
+        {% endif %}
     }
 
     @media (max-width: 550px) {
@@ -505,7 +513,7 @@
             {
                 "type": "image_picker",
                 "id": "about_bg_image",
-                "label": "t:sections.main-about-page.settings.bg_image"
+                "label": "t:settings_schema.colors.settings.colors_name.background_image"
             },
             {
                 "type": "range",

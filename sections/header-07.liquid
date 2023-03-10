@@ -90,8 +90,13 @@
                         {% if section.settings.show_customer %}
                         <div class="header__iconItem header__group">
                             {%- if shop.customer_accounts_enabled and section.settings.show_customer -%}
+                                {% if routes.account_login_url contains '/account/login' %}
+                                    {% assign is_contained = true %}
+                                {% else %}
+                                    {% assign is_contained = false %}
+                                {% endif %}
                                 <div class="header__icon customer-links">
-                                    <a class="header__icon header__icon--account link link--text" data-open-auth-sidebar>
+                                    <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account link link--text"{% if is_contained %} data-open-auth-sidebar{% endif %}>
                                         <span class="text-user">
                                             {%- liquid
                                             if customer
@@ -132,7 +137,7 @@
                     <div class="header-bottom--wrapper">
                         <div class="header-bottom-left">
                             {%- if section.settings.menu != blank -%}
-                                <nav class="header__inline-menu">
+                                <nav class="header__inline-menu" data-navigation>
                                     {% render 'halo-navigation-list',
                                         listClass: 'list-menu list-menu--inline text-left'
                                     %}
@@ -219,7 +224,7 @@
                             {%- endif -%}
 
                             {%- if section.settings.show_cart -%}
-                            <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}"{% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
+                            <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
                                 {% render 'icon-cart' %}
                                 <div class="cart-count-bubble">
                                     {%- if cart.item_count < 100 -%}
@@ -247,8 +252,8 @@
                     </details-modal>
                 {% endif %}
                 {% if section.settings.show_cart %}
-                    <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}" {% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
-                        {% render 'icon-cart-3' %}
+                    <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                        {% render 'icon-cart-03' %}
                         <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
                         <div class="cart-count-bubble">
                             {%- if cart.item_count < 100 -%} <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
@@ -997,7 +1002,7 @@
         {
             "type": "color",
             "id": "bg_mega_menu",
-            "label": "t:sections.header.settings.header_bottom.bg_top",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color",
             "default": "#fff"
         },
         {
@@ -1418,9 +1423,15 @@
                     "default": 5
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",
@@ -1562,9 +1573,15 @@
                     "default": 3
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",

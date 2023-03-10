@@ -37,6 +37,7 @@
                     prevArrow: window.arrows.icon_prev,
 	              	slidesToShow: dataRows,
 	              	slidesToScroll: dataRows,
+	              	rtl: window.rtl_slick,
 	              	responsive: [
 	                {
 	                  	breakpoint: 1200,

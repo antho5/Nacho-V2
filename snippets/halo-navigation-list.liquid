@@ -1,9 +1,9 @@
 <div class="menu-heading-mobile halo-sidebar-header">
     <span class="title">{{ 'general.common.menu' | t }}</span>
-    <a href="#" class="halo-sidebar-close" data-menu-close-sidebar alt="{{ 'general.common.close' | t }}">
+    <button type="button" class="halo-sidebar-close" data-menu-close-sidebar aria-label="{{ 'general.common.close' | t }}">
         {% render 'icon-close' %}
         {{ 'general.common.close' | t }}
-    </a>
+    </button>
 </div>
 
 <ul class="{{ listClass }}" role="list">
@@ -14,6 +14,9 @@
         elsif template.suffix contains 'landing'
             assign hide_menu_load = false
             assign menu = linklists[page.handle].links
+            if menu == blank
+                assign menu = section.settings.menu.links
+            endif
         else
             if section.settings.menu != blank
                 assign menu = section.settings.menu.links
@@ -98,6 +101,7 @@
                         endif
                         
                         assign menu_text_left = menuItem.settings.menu_text_left
+                        assign menu_text_left_sale = menuItem.settings.menu_text_left_sale | split: "," | strip | downcase | handle
                         assign mega_tyle = menuItem.settings.mega_tyle
                         assign product_limit = menuItem.settings.product_limit
 
@@ -152,6 +156,7 @@
                 product_limit: product_limit,
                 product_per_row: product_per_row,
                 menu_text_left: menu_text_left,
+                menu_text_left_sale: menu_text_left_sale,
                 collection_product: product_collection,
                 product_limit: product_limit,
                 mega_tyle: mega_tyle

@@ -12,7 +12,7 @@
                 <div class="halo-row column-{{ section.blocks.size }}{% if swipe == 'slider' %} slider slider--tablet{% endif %}{% unless section.settings.enable_item_distance %} not-distance{% endunless %}{% if swipe == 'scroll' %} scroll-snap-mobile disable-srollbar{% endif %}">      
                     {% for block in section.blocks %}
                     <div class="halo-item{% if swipe == 'slider' %} slider__slide{% endif %}{% if block.settings.description != blank %} has-des{% endif %}">
-                        <a class="alignItems--{{ section.settings.align_items }}" href="{{ block.settings.link }}" title="{{block.settings.text}}" style="--item-radius-style: {{ section.settings.item_radius | append: 'px' }}; --item-padding-top-style: {{ section.settings.item_padding_top | append: 'px' }}; --item-padding-bottom-style: {{ section.settings.item_padding_bottom | append: 'px' }}">
+                        <a class="alignItems--{{ section.settings.align_items }}{% if section.settings.text_align_items == 'left' %} text-left{% elsif section.settings.text_align_items == 'center' %} text-center{% else %} text-right{% endif %}"{% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} title="{{block.settings.text}}" style="--item-radius-style: {{ section.settings.item_radius | append: 'px' }}; --item-padding-top-style: {{ section.settings.item_padding_top | append: 'px' }}; --item-padding-bottom-style: {{ section.settings.item_padding_bottom | append: 'px' }}; --item-padding-left-right: {{  section.settings.item_padding_left_right | append: 'px' }}">
                             {% if block.settings.icon_type == 'image' %}
                                 {% if block.settings.image != blank %}
                                     {%- assign preview_img = block.settings.image -%}
@@ -121,6 +121,15 @@
         {% endif %}
     }
 
+    body.layout_rtl .section-block-{{section.id}} .halo-item + .halo-item {
+        {% if section.settings.border_item == 'style_1' %}
+            border-right: 1px solid {{ item_color_border }};
+            border-left: 0;
+        {% elsif section.settings.border_item == 'style_2' %}
+            position: relative;
+        {% endif %}
+    }
+
     {% if section.settings.border_item == 'style_2' %}
         .section-block-{{section.id}} .halo-item + .halo-item:before {
             content: '';
@@ -132,6 +141,11 @@
             left: -6px;
             transform: translateY(-50%);
             background-color: {{ item_color_border }};
+        }
+        
+        body.layout_rtl .section-block-{{section.id}} .halo-item + .halo-item:before {
+            right: -6px;
+            left: auto;
         }
 
         .section-block-{{section.id}} .halo-item:nth-child(3):before {
@@ -153,6 +167,10 @@
 
     .section-block-{{section.id}} .policies-text {
         color: {{ color_block }};
+    }
+    
+    .section-block-{{section.id}} .slider-button svg {
+        fill: {{ color_block }};
     }
 
     .section-block-{{section.id}} .halo-item a {
@@ -198,6 +216,13 @@
             .section-block-{{section.id}} .container-full {
                 padding-left: {{ padding_full_width | append: 'px' }};
                 padding-right: {{ padding_full_width | append: 'px' }};
+            }
+        {% endif %}
+
+        {% if bg_color_block == 'rgba(0,0,0,0)' or bg_color_block == blank or bg_color_block == settings.colors_bg %}
+            .policies-block .halo-row.not-distance {
+                margin-left: -{{  section.settings.item_padding_left_right | append: 'px' }};
+                margin-right: -{{  section.settings.item_padding_left_right | append: 'px' }};
             }
         {% endif %}
     }
@@ -404,6 +429,25 @@
                 }]
             },
             {
+                "type": "select",
+                "id": "text_align_items",
+                "label": "t:sections.footer.settings.footer_top.footer_top_text_align.option",
+                "default": "center",
+                "options": [
+                {
+                    "value": "left",
+                    "label": "t:sections.footer.settings.footer_top.footer_top_text_align.option1"
+                },
+                {
+                    "value": "center",
+                    "label": "t:sections.footer.settings.footer_top.footer_top_text_align.option2"
+                },
+                {
+                    "value": "right",
+                    "label": "t:sections.footer.settings.footer_top.footer_top_text_align.option3"
+                }]
+            },
+            {
                 "type": "checkbox",
                 "id": "enable_item_distance",
                 "label": "t:sections.policies_block.settings.setting_block.enable_item_distance",
@@ -434,6 +478,16 @@
                 "step": 1,
                 "unit": "t:sections.layout.fontsize.fontsize_title.unit",
                 "default": 13
+            },
+            {
+                "type": "range",
+                "id": "item_padding_left_right",
+                "label": "t:settings_schema.typography.settings.typography.item_padding_left_right",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+                "default": 20
             },
             {
                 "type": "range",
@@ -497,7 +551,7 @@
                         "label" : "t:sections.image-banner.blocks.image.settings.content.label__15"
                     },
                     {
-                        "type": "text",
+                        "type": "textarea",
                         "id" : "icon",
                         "label" : "t:settings_schema.typography.settings.typography.icon",
                         "info" : "Go to this link [Find your Icon](https://fontawesome.com/v5.15/icons?d=gallery&p=2). Find the icon you want, then copy the SVG code and paste it here."

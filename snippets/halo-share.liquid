@@ -7,13 +7,13 @@
             </button>
             <div class="share-button__fallback">
                 <div class="share-header">
-                    <h3 class="share-title">
+                    <h2 class="share-title">
                         <span>{{ 'general.share.share' | t }}</span>
-                    </h3>
-                    <a class="share-button__close" href="javascript:void(0)" title="{{ 'general.common.close' | t }}">
+                    </h2>
+                    <button type="button" class="share-button__close" aria-label="{{ 'general.common.close' | t }}">
                         {% render 'icon-close' %}
                         <span>{{ 'general.common.close' | t }}</span>
-                    </a>
+                    </button>
                 </div>
                 <div class="wrapper-content">
                     <label class="form-label">{{ 'general.share.copy_to_clipboard' | t }}</label>

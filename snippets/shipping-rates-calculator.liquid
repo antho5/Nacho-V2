@@ -100,32 +100,14 @@
 </script>
 
 <script>
-  if (document.documentElement.querySelector('[data-cart]') != null) {
-    const submitButton = '{{ 'general.cart.shipping_calculator_button' | t }}';
-    const submitButtonDisabled = '{{ 'general.cart.shipping_calculator_calculating' | t }}';
-
-    window.addEventListener('load', () => {
-      Shopify.Cart.ShippingCalculator.show({
-        submitButton: submitButton,
-        submitButtonDisabled: submitButtonDisabled,
-        {% if shop.customer_accounts_enabled and customer %}
-        customerIsLoggedIn: true,
-        {% endif %}
-        moneyFormat: {{ shop.money_format | json }}
-      });
-    }) 
-  } else { 
-    const sideSubmitButton = '{{ 'general.cart.shipping_calculator_button' | t }}';
-    const sideSubmitButtonDisabled = '{{ 'general.cart.shipping_calculator_calculating' | t }}';
-    setTimeout(() => {
-      Shopify.Cart.ShippingCalculator.show({
-        submitButton: sideSubmitButton,
-        submitButtonDisabled: sideSubmitButtonDisabled,
-        {% if shop.customer_accounts_enabled and customer %}
-        customerIsLoggedIn: true,
-        {% endif %}
-        moneyFormat: {{ shop.money_format | json }}
-      });
-    }, 500) 
-  }  
+  setTimeout(() => {
+    Shopify.Cart.ShippingCalculator.show({
+      submitButton: `{{ 'general.cart.shipping_calculator_button' | t }}`,
+      submitButtonDisabled: `{{ 'general.cart.shipping_calculator_calculating' | t }}`,
+      {% if shop.customer_accounts_enabled and customer %}
+      customerIsLoggedIn: true,
+      {% endif %}
+      moneyFormat: {{ shop.money_format | json }}
+    });
+  }, 500)
 </script>

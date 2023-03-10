@@ -17,6 +17,7 @@
     assign word_number_short_desc = settings.word_number_short_desc
     assign fontsize_short_desc = settings.fontsize_short_desc
     assign color_short_desc = settings.color_short_desc
+    assign show_quick_view_sold_in = settings.show_quick_view_sold_in
     if show_quick_view_sold_in
         assign quick_view_sold_in_number = settings.quick_view_sold_in_number
         assign quick_view_sold_in_hours = settings.quick_view_sold_in_hours
@@ -69,10 +70,11 @@
         if customization_option_type == 'all'
             assign has_customization_option = true
         elsif customization_option_type == 'tag'
-            assign customization_option_tags = settings.customization_option_tags | split: "," | strip | downcase | handle
+            assign customization_option_tags = settings.customization_option_tags | downcase | strip | split: ","
             for tag in customization_option_tags
-                assign tagtitle = tag | escape | downcase | handle
-                if product.tags contains tagtitle
+                assign tagtitle = tag | strip
+                assign productTag = product.tags | downcase
+                if productTag contains tagtitle
                     assign has_customization_option = true
                 endif
             endfor
@@ -337,7 +339,7 @@
                     </a>
                 </h2>
                 {%- if show_quick_view_review or show_quick_view_sold_in -%}
-                    <div class="productView-meta clearfix">
+                    <div class="productView-meta clearfix" style="--color_short_desc: {{ color_short_desc }}; --fontsize_short_desc: {{ fontsize_short_desc | append: 'px' }}">
                         {%- if show_quick_view_review -%}
                             <div class="productView-rating halo-productReview">
                                 <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
@@ -574,7 +576,7 @@
                                     </script>
                                 </variant-quick-view-radios>
                             {%- else -%}
-                                <variant-edit-selects class="no-js-hidden product-option has-default" data-product="{{ product.id }}" data-url="{{ product.url }}">
+                                <variant-quick-shop-selects class="no-js-hidden product-option has-default" data-product="{{ product.id }}" data-url="{{ product.url }}">
                                     {%- for option in product.options_with_values -%}
                                         <div class="product-form__input product-form__input--dropdown" data-product-attribute="set-select" data-option-index="{{ forloop.index0 }}">
                                             <label class="form__label" for="option-quick-view-{{ forloop.index0 }}">
@@ -600,7 +602,7 @@
                                     <script type="application/json">
                                         {{ product.variants | json }}
                                     </script>
-                                </variant-edit-selects>
+                                </variant-quick-shop-selects>
                             {%- endif -%}
                             {%- if show_hot_stock -%}
                                 <div class="productView-hotStock" data-hot-stock="{{ productMaxStock }}">
@@ -730,12 +732,12 @@
                         {%- endif -%}
                         {%- if show_compare_color and isColor -%}
                             <div class="productView-compareColor style-1">
-                                <a class="link link-underline" href="javascript:void(0)" aria-label="link" data-open-compare-color-popup>
+                                <button type="button" class="link link-underline" aria-label="{{ 'compare_color.general.title' | t }}" data-open-compare-color-popup>
                                     {% render 'icon-compare-color-2' %}
                                     <span class="text">
                                         {{ 'compare_color.general.title' | t }}
                                     </span>
-                                </a>
+                                </button>
                             </div>
                         {%- endif -%}
                         {%- if settings.show_ask_an_expert -%}

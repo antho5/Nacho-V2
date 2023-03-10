@@ -22,7 +22,7 @@
 
     assign has_popup = false
 
-    if product.options_with_values.size == 1 and product_swatch_option contains option_name
+    if product.options_with_values.size == 1 and product_swatch_option contains option_name and settings.quick_shop_type == '1'
         assign has_popup = false
     else
         assign has_popup = true
@@ -75,9 +75,8 @@
                                     </a>
                                 {%- endif -%}
                             {%- else -%}
-                                <script>alert('halo-product-card')</script>
                                 {%- if variantCount > 0 and product.variants.first.title != 'Default Title' -%}
-                                    {%- if product.options_with_values.size == 1 and product_swatch_option contains option_name and settings.show_swatch -%}
+                                    {%- if product.options_with_values.size == 1 and product_swatch_option contains option_name and settings.show_swatch and settings.quick_shop_type == '1' -%}
                                         <input type="hidden" name="id" value="{{ product.variants[0].id }}" />
                                         <input type="hidden" name="quantity" value="1" />
                                         <button

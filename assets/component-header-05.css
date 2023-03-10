@@ -1,7 +1,11 @@
 #shopify-section-header-05{
 	position: relative;
-    z-index: 3;
+    z-index: 6;
     will-change: transform;
+}
+
+.shopify-section-header-sticky {
+	pointer-events: none;
 }
 
 .header-05 .header-top--right .cart-count-bubble{
@@ -105,6 +109,7 @@
 	    opacity: 1;
 	    z-index: 9;
 	    visibility: visible;
+	    pointer-events: auto;
 	}
 
 	.header-language_currency .top-language-currency.show .dropdown-language{

@@ -110,11 +110,11 @@
 
 .content-box--center{
     left: 50%;
-    -moz-transform: translate(-50%,-47%);
-    -o-transform: translate(-50%,-47%);
-    -ms-transform: translate(-50%,-47%);
-    -webkit-transform: translate(-50%,-47%);
-    transform: translate(-50%,-47%);
+    -moz-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
 }
 
 .banner-heading{
@@ -273,6 +273,20 @@
     margin-right: 20px;
     width: 96px;
     height: 96px;
+}
+
+.countdown-block.shape-square .clock-item {
+    border-radius: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border: 1px solid var(--color-countdown-style);
+    border-left: 0;
+    width: 105px;
+    height: 70px;
+}
+
+.countdown-block.shape-square .clock-item:first-of-type {
+    border-left: 1px solid var(--color-countdown-style);
 }
 
 .countdown-block .clock-item:first-child {
@@ -442,7 +456,7 @@
     margin-right: 0;
 }
 
-.flex-box__banner .video-open-popup a {
+.flex-box__banner .video-open-popup .video-button {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -453,6 +467,7 @@
     border-radius: 5px;
     background: var(--bg_color);
     color: var(--color);
+    border: none;
 }
 
 .flex-box__banner .video-open-popup.icon_style_2 a {
@@ -480,90 +495,115 @@
 }
 /* END: Content With Border*/
 
-body:not(.safari).banner-animation-1 .slide-heading,
-body:not(.safari).banner-animation-1 .slide-sub,
-body:not(.safari).banner-animation-1 .slide-text,
-body:not(.safari).banner-animation-1 .slide-button,
-body:not(.safari).banner-animation-1 .banner-sub-title,
-body:not(.safari).banner-animation-1 .banner-heading,
-body:not(.safari).banner-animation-1 .banner-text,
-body:not(.safari).banner-animation-1 .banner-button,
-body:not(.safari).banner-animation-1 .slide-testimonial,
-body:not(.safari).banner-animation-1 .sub-title-icon {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: transform 800ms cubic-bezier(.26,.54,.32,1), opacity 100ms cubic-bezier(.26,.54,.32,1);
-}
+@media screen and (min-width: 1025px) {
+    body:not(.safari).banner-animation-1 .slide-heading,
+    body:not(.safari).banner-animation-1 .slide-sub,
+    body:not(.safari).banner-animation-1 .slide-text,
+    body:not(.safari).banner-animation-1 .slide-button,
+    body:not(.safari).banner-animation-1 .banner-sub-title,
+    body:not(.safari).banner-animation-1 .banner-heading,
+    body:not(.safari).banner-animation-1 .banner-text,
+    body:not(.safari).banner-animation-1 .banner-button,
+    body:not(.safari).banner-animation-1 .slide-testimonial,
+    body:not(.safari).banner-animation-1 .sub-title-icon,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-slide .slide-heading,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-slide .slide-sub,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-slide .slide-text,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-slide .slide-button,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-slide .banner-sub-title,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-slide .banner-heading,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-slide .banner-text,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-slide .banner-button,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-slide .slide-testimonial,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-slide .sub-title-icon {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: transform 800ms cubic-bezier(.26,.54,.32,1), opacity 100ms cubic-bezier(.26,.54,.32,1);
+    }
+    
+    body:not(.safari).banner-animation-1 .shouldShow .slide-heading,
+    body:not(.safari).banner-animation-1 .shouldShow .slide-sub,
+    body:not(.safari).banner-animation-1 .shouldShow .slide-text,
+    body:not(.safari).banner-animation-1 .shouldShow .slide-button,
+    body:not(.safari).banner-animation-1 .shouldShow .banner-sub-title,
+    body:not(.safari).banner-animation-1 .shouldShow .banner-heading,
+    body:not(.safari).banner-animation-1 .shouldShow .banner-text,
+    body:not(.safari).banner-animation-1 .shouldShow .banner-button,
+    body:not(.safari).banner-animation-1 .shouldShow .slide-testimonial,
+    body:not(.safari).banner-animation-1 .shouldShow .sub-title-icon,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-active .slide-heading,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-active .slide-sub,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-active .slide-text,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-active .slide-button,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-active .banner-sub-title,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-active .banner-heading,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-active .banner-text,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-active .banner-button,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-active .slide-testimonial,
+    body:not(.safari).banner-animation-1 .slick-initialized[data-fade="false"] .slick-active .sub-title-icon {
+        opacity: 1;
+        transform: translateY(0);
+        transition: transform 800ms cubic-bezier(.26,.54,.32,1), opacity 600ms cubic-bezier(.26,.54,.32,1);
+    }
+    
+    body:not(.safari).banner-animation-1 .shouldShow .sub-title-icon {
+        transition-property: transform, opacity;
+        transition-delay: 0ms;
+    }
+    
+    body:not(.safari).banner-animation-1 .shouldShow .slide-testimonial {
+        transition-property: transform, opacity;
+        transition-delay: 100ms;
+    }
+    
+    
+    body:not(.safari).banner-animation-1 .shouldShow .slide-heading,
+    body:not(.safari).banner-animation-1 .shouldShow .banner-heading{
+        transition-property: transform, opacity;
+        transition-delay: 250ms;
+    }
+    
+    body:not(.safari).banner-animation-1 .shouldShow .slide-sub,
+    body:not(.safari).banner-animation-1 .shouldShow .banner-sub-title {
+        transition-property: transform, opacity;
+        transition-delay: 375ms;
+    }
+    
+    body:not(.safari).banner-animation-1 .shouldShow .slide-text,
+    body:not(.safari).banner-animation-1 .shouldShow .banner-text {
+        transition-property: transform, opacity;
+        transition-delay: 400ms;
+    }
+    
+    body:not(.safari).banner-animation-1 .shouldShow .slide-button,
+    body:not(.safari).banner-animation-1 .shouldShow .banner-button {
+        transition-delay: 550ms;
+    }
 
-body:not(.safari).banner-animation-1 .shouldShow .slide-heading,
-body:not(.safari).banner-animation-1 .shouldShow .slide-sub,
-body:not(.safari).banner-animation-1 .shouldShow .slide-text,
-body:not(.safari).banner-animation-1 .shouldShow .slide-button,
-body:not(.safari).banner-animation-1 .shouldShow .banner-sub-title,
-body:not(.safari).banner-animation-1 .shouldShow .banner-heading,
-body:not(.safari).banner-animation-1 .shouldShow .banner-text,
-body:not(.safari).banner-animation-1 .shouldShow .banner-button,
-body:not(.safari).banner-animation-1 .shouldShow .slide-testimonial,
-body:not(.safari).banner-animation-1 .shouldShow .sub-title-icon {
-    opacity: 1;
-    transform: translateY(0);
-    transition: transform 800ms cubic-bezier(.26,.54,.32,1), opacity 600ms cubic-bezier(.26,.54,.32,1);
-}
+    body:not(.safari).banner-animation-1 .images-contain,
+    body:not(.safari).banner-animation-1 .banner-item .img-box:not(.is-parallax)  {
+        opacity: 0;
+        transform: scale(1.15);
+        transition: transform 1000ms cubic-bezier(.13,.55,.25,1), opacity 500ms cubic-bezier(.13,.55,.25,1);
+    }
+    
+    body:not(.safari).banner-animation-1 .shouldShow .images-contain,
+    body:not(.safari).banner-animation-1 .shouldShow .banner-item .img-box:not(.is-parallax)  {
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+    body:not(.safari).banner-animation-1 .slideshow .images-contain {
+        opacity: 1;
+    }
 
-body:not(.safari).banner-animation-1 .shouldShow .sub-title-icon {
-    transition-property: transform, opacity;
-    transition-delay: 0ms;
-}
-
-body:not(.safari).banner-animation-1 .shouldShow .slide-testimonial {
-    transition-property: transform, opacity;
-    transition-delay: 100ms;
-}
-
-
-body:not(.safari).banner-animation-1 .shouldShow .slide-heading,
-body:not(.safari).banner-animation-1 .shouldShow .banner-heading{
-    transition-property: transform, opacity;
-    transition-delay: 250ms;
-}
-
-body:not(.safari).banner-animation-1 .shouldShow .slide-sub,
-body:not(.safari).banner-animation-1 .shouldShow .banner-sub-title {
-    transition-property: transform, opacity;
-    transition-delay: 375ms;
-}
-
-body:not(.safari).banner-animation-1 .shouldShow .slide-text,
-body:not(.safari).banner-animation-1 .shouldShow .banner-text {
-    transition-property: transform, opacity;
-    transition-delay: 400ms;
-}
-
-body:not(.safari).banner-animation-1 .shouldShow .slide-button,
-body:not(.safari).banner-animation-1 .shouldShow .banner-button {
-    transition-delay: 550ms;
-    pointer-events: none;
-}
-
-body:not(.safari).banner-animation-1 .images-contain,
-body:not(.safari).banner-animation-1 .banner-item .img-box:not(.is-parallax)  {
-    opacity: 0;
-    transform: scale(1.15);
-    transition: transform 1000ms cubic-bezier(.13,.55,.25,1), opacity 500ms cubic-bezier(.13,.55,.25,1);
-}
-
-body:not(.safari).banner-animation-1 .shouldShow .images-contain,
-body:not(.safari).banner-animation-1 .shouldShow .banner-item .img-box:not(.is-parallax)  {
-    opacity: 1;
-    transform: scale(1);
-}
-
-body:not(.safari).banner-animation-1 .spotlight-block .content {
-    visibility: hidden;
-}
-
-body:not(.safari).banner-animation-1 .spotlight-block .shouldShow .content {
-    visibility: visible;
+    body:not(.safari).banner-animation-1 .spotlight-block .content {
+        visibility: hidden;
+    }
+    
+    body:not(.safari).banner-animation-1 .spotlight-block .shouldShow .content {
+        visibility: visible;
+    }
 }
 
 body:not(.safari).banner-animation-1 .halo-banner-wrapper .content-box {
@@ -588,6 +628,26 @@ body:not(.safari).banner-animation-1 .banner-item {
     overflow: hidden;
 }
 
+body:not(.safari).banner-animation-1 [data-fade="false"] .images-contain {
+    opacity: 1;
+    transform: scale(1);
+}
+
+body:not(.safari).banner-animation-1 [data-fade="false"] .item:first-child .images-contain {
+    animation: zoom-banner 1s ease-out;
+}
+
+@keyframes zoom-banner {
+    0% {
+        opacity: 0;
+        transform: scale(1.15);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 body:not(.safari).banner-animation-1 .shouldShow .slide-button.banner-button-animated,
 body:not(.safari).banner-animation-1 .shouldShow .banner-button.banner-button-animated {
     transition-property: color, background-color, background, border;
@@ -596,6 +656,11 @@ body:not(.safari).banner-animation-1 .shouldShow .banner-button.banner-button-an
     /* transition: all var(--duration-long) var(--button-transition-ease); */
     transition-delay: 0ms !important;
     pointer-events: auto !important;
+}
+
+body:not(.safari).banner-animation-1 .shouldShow .slide-button.banner-button-animated[aria-disabled='true'],
+body:not(.safari).banner-animation-1 .shouldShow .banner-button.banner-button-animated[aria-disabled='true'] {
+    pointer-events: none !important;
 }
 
 @media (max-width: 550px){

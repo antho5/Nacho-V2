@@ -2,7 +2,7 @@
   Format date Publish Blog
   {{- article.published_at | date: "%a, %b %d, %y" -}}
 {% endcomment %}
-<div class="article-card {{limit_content_des}}">
+<div class="article-card">
     <div class="article-card__image-wrapper" style="--margin-bottom: {{ margin_bottom_image | append: 'px' }}">
     {%- if article.image -%}
         {% assign image_alt = article.title | escape %}
@@ -29,23 +29,45 @@
     </div>
 
     <div class="article-card__info text-{{ text_align }}">
-        <h3 class="article-card__title" style="--margin-bottom: {{ margin_bottom_title | append: 'px' }}">
-            <a href="{{ article.url }}">
-                {{ article.title }}
-            </a>
-        </h3>
-        <div class="article-card__author" style="--margin-bottom: {{ margin_bottom_info | append: 'px' }}">               
-            {% if blog_show_author %}
-            <span class="article__author"><span class="text_by">{{ text_by }}</span>{{article.author}}</span>
-            {% endif %}
+        {% if block_item_style == 'style_2' %}
+            <div class="article-wrapper">
+                <div class="article-card__author{% if enable_blog_button %} enable_button{% endif %}" style="--margin-bottom: {{ margin_bottom_info | append: 'px' }}">               
+                    {% if blog_show_author %}
+                    <span class="article__author"><span class="text_by">{{ text_by }}</span>{{article.author}}</span>
+                    {% endif %}
 
-            {% if blog_show_date %}
-            <span class="article__date">
-                <span class="text_on">{{ text_on }}</span>
-                {{- article.published_at | date: "%b %d, %Y" -}}
-            </span>
-            {% endif %}                
-        </div>
+                    {% if blog_show_date %}
+                    <span class="article__date">
+                        <span class="text_on">{{ text_on }}</span>
+                        {{- article.published_at | date: "%b %d, %Y" -}}
+                    </span>
+                    {% endif %}                
+                </div>
+                <h3 class="article-card__title" style="--margin-bottom: {{ margin_bottom_title | append: 'px' }}">
+                    <a href="{{ article.url }}">
+                        {{ article.title }}
+                    </a>
+                </h3>
+            </div>
+        {% else %}
+            <h3 class="article-card__title" style="--margin-bottom: {{ margin_bottom_title | append: 'px' }}">
+                <a href="{{ article.url }}">
+                    {{ article.title }}
+                </a>
+            </h3>
+            <div class="article-card__author{% if enable_blog_button %} enable_button{% endif %}" style="--margin-bottom: {{ margin_bottom_info | append: 'px' }}">               
+                {% if blog_show_author %}
+                <span class="article__author"><span class="text_by">{{ text_by }}</span>{{article.author}}</span>
+                {% endif %}
+
+                {% if blog_show_date %}
+                <span class="article__date">
+                    <span class="text_on">{{ text_on }}</span>
+                    {{- article.published_at | date: "%b %d, %Y" -}}
+                </span>
+                {% endif %}                
+            </div>
+        {% endif %}
         {%- if blog_show_des -%}
         <div class="article-card__des" style="--margin-bottom: {{ margin_bottom_des | append: 'px' }}">
             {{ article.excerpt_or_content | strip_html | truncatewords: limit_content_des }}
@@ -53,9 +75,10 @@
         {%- endif -%}
         {%- if blog_show_more -%}
         <div class="article-card__footer">
-          <a href="{{article.url}}" class="article-card__link">
-            {{ 'blogs.article.read_more' | t }}
-          </a>
+            <a href="{{article.url}}" class="article-card__link{% if enable_blog_button %} button{% endif %}">
+                {{ 'blogs.article.read_more' | t }}{%- if blog_show_more_icon == 'arrow-right' -%}{% render 'icon-arrow-right-2' %}{%- elsif blog_show_more_icon == 'chevron-right' -%}{% render 'icon-arrow-right' %}
+                  {% elsif blog_show_more_icon == 'angles-right' %}{% render 'icon-angles-right' %}{% endif %}
+            </a>
         </div>
         {%- endif -%}
     </div>

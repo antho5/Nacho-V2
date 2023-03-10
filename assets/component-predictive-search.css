@@ -279,6 +279,7 @@
     .header.header-04 .search-modal__form .search-modal.modal__content.quickSearch,
     .header.header-05 .search-modal__form .search-modal.modal__content.quickSearch,
     .header.header-08 .search-modal__form .search-modal.modal__content.quickSearch,
+    .header.header-09 .search-modal__form .search-modal.modal__content.quickSearch,
     body:has(.header.header-02) .search-modal__form .search-modal.modal__content.quickSearch {
       display: none;
     }   

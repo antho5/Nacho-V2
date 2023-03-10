@@ -13,10 +13,10 @@
         </div>
       {%- else -%}
         <div class="site-nav-mobile nav-menu-tab nav-mobile-menu-tab" data-navigation-tab-mobile></div>
-        <a href="#" class="halo-sidebar-close halo-sidebar-close-custom" data-menu-close-sidebar alt="{{ 'general.common.close' | t }}">
+        <button type="button" class="halo-sidebar-close halo-sidebar-close-custom" data-menu-close-sidebar aria-label="{{ 'general.common.close' | t }}">
             {% render 'icon-close' %}
             {{ 'general.common.close' | t }}
-        </a>
+        </button>
         <div class="site-nav-mobile nav menu-custom-mobile" data-navigation-mobile></div>
       {%- endif -%}
       
@@ -36,7 +36,7 @@
                     {{ 'customer.account.my_account' | t }}
                   </a>
                 {% else %}  
-                  <a class="header__link--account" id="customer_login_link" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
+                  <a class="header__link--account customer_login_link" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}">
                     <span class="icon-wrapper">
                       {% render 'icon-account' %}
                     </span>
@@ -44,7 +44,7 @@
                       {{ 'customer.sign_in' | t }}
                     </span>
                   </a>
-                  <a class="header__link--account{% unless settings.show_wishlist %} last-link{% endunless %}" id="customer_register_link" href="{{ routes.account_register_url }}">
+                  <a class="header__link--account{% unless settings.show_wishlist %} last-link{% endunless %} customer_register_link" href="{{ routes.account_register_url }}">
                     <span class="icon-wrapper">
                       {% render 'icon-sign-up' %}
                     </span>

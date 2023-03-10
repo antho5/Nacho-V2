@@ -1,10 +1,10 @@
 <div class="halo-popup halo-notify-popup customPopup-small halo-popup-LeftRight" data-notify-popup id="halo-notify-popup">
     <div class="halo-popup-wrapper">
     	<div class="halo-popup-header customPopup-header">
-		    <a href="#" title="{{ 'general.common.close' | t }}" class="halo-popup-close customPopup-close clearfix" data-close-notify-popup alt="{{ 'general.common.close' | t }}">
+		    <button type="button" class="halo-popup-close customPopup-close clearfix" data-close-notify-popup aria-label="{{ 'general.common.close' | t }}">
 		        {% render 'icon-close' %}
 		        {{ 'general.common.close' | t }}
-		    </a>
+		    </button>
 		    <h5 class="halo-popup-title customPopup-title text-center">
                 {{ settings.notify_form_title | escape }}
             </h5>

@@ -228,14 +228,14 @@ class Toolbar extends HTMLElement {
         this.setActiveViewModeMediaQuery(true);
 
         if(window.compare.show){
-            Shopify.ProductCompare.setLocalStorageProductForCompare({
+            this.setLocalStorageProductForCompare({
                 link: $('a[data-compare-link]'),
                 onComplete: null
             });
         }
 
         if(window.wishlist.show){
-            Shopify.ProductWishlist.setLocalStorageProductForWishlist();
+            this.setLocalStorageProductForWishlist();
         }
 
         if(window.innerWidth < 1025){
@@ -249,10 +249,66 @@ class Toolbar extends HTMLElement {
         document.body.classList.remove('has-halo-loader');
     }
 
+    setLocalStorageProductForCompare($link) {
+        var count = JSON.parse(localStorage.getItem('compareItem')),
+            items = $('[data-product-compare-handle]');
+
+        if(count !== null){ 
+            if(items.length > 0) {
+                items.each((index, element) => {
+                    var item = $(element),
+                        handle = item.data('product-compare-handle');
+
+                    if(count.indexOf(handle) >= 0) {
+                        item.find('.compare-icon').addClass('is-checked');
+                        item.find('.text').text(window.compare.added);
+                        item.find('input').prop('checked', true);
+                    } else {
+                        item.find('.compare-icon').removeClass('is-checked');
+                        item.find('.text').text(window.compare.add);
+                        item.find('input').prop('checked', false);
+                    }
+                });
+            }
+        }
+    }
+  
+    setLocalStorageProductForWishlist() {
+        var wishlistList = localStorage.getItem('wishlistItem') ? JSON.parse(localStorage.getItem('wishlistItem')) : [];
+        localStorage.setItem('wishlistItem', JSON.stringify(wishlistList));
+
+        if (wishlistList.length > 0) {
+            wishlistList = JSON.parse(localStorage.getItem('wishlistItem'));
+            
+            wishlistList.forEach((handle) => {
+                this.setProductForWishlist(handle);
+            });
+        }
+        $('[data-wishlist-count]').text(wishlistList.length);
+    }
+
+    setProductForWishlist(handle){
+        var wishlistList = JSON.parse(localStorage.getItem('wishlistItem')),
+            item = $('[data-wishlist-handle="'+ handle +'"]'),
+            index = wishlistList.indexOf(handle);
+        
+        if(index >= 0) {
+            item
+                .addClass('wishlist-added')
+                .find('.text')
+                .text(window.wishlist.added)
+        } else {
+            item
+                .removeClass('wishlist-added')
+                .find('.text')
+                .text(window.wishlist.add);
+        }
+    }
+  
     setActiveViewModeMediaQuery(ajaxLoading = true){
-        var viewMode = this.mediaView.querySelector('.icon-mode.active'),
-            viewModeMobile = this.mediaViewMobile.querySelector('.icon-mode.active'),
-            column = parseInt(viewMode.dataset.col),
+        var viewMode = this.mediaView?.querySelector('.icon-mode.active'),
+            viewModeMobile = this.mediaViewMobile?.querySelector('.icon-mode.active'),
+            column = parseInt(viewMode?.dataset.col),
             windowWidth = window.innerWidth;
         
         if(column != 1){

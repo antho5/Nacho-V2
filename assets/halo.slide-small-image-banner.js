@@ -13,7 +13,8 @@
                     nextArrow: window.arrows.icon_next,
                     prevArrow: window.arrows.icon_prev,
                     slidesToShow: 1,
-                    slidesToScroll: 1
+                    slidesToScroll: 1,
+                    rtl: window.rtl_slick,
                 });
             });
         }

@@ -140,11 +140,7 @@
 
         <div class="column col-price text-center">
             <div class="card-price">
-                {% render 'price',
-                    product: product,
-                    price_class: '',
-                    hasCountdown: hasCountdown
-                %}
+                {{ variant.price | money }}
             </div>
         </div>
 

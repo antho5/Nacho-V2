@@ -73,7 +73,7 @@
                                         --padding-vertical-mb: {{ padding_vertical_mb }};
                                         --padding-horizontal-mb: {{ padding_hozi_mb }};
                                     " 
-                                    href="{{ url }}">
+                                    {% if url == blank %} role="link" aria-disabled="true"{% else %} href="{{ url }}"{% endif %}>
                                     {{ multi_page_title }}
                                 </a>
                             </li>
@@ -82,6 +82,16 @@
                             {%- endif -%}
                         {%- endfor -%}
                     </ul>
+                    {%- for block in menu_tab -%}
+                        {%- liquid
+                            assign multi_page_handle = pages[block.settings.link].handle
+                        -%}
+                        {%- if request.page_type == 'page' and page_handle == multi_page_handle -%}
+                            <script type="text/javascript">
+                                window.page_active = '{{ page_handle }}';
+                            </script>
+                        {%- endif -%}
+                    {%- endfor -%}
                 {%- endif -%}
             </div>
             {% if section.settings.header_style == 'style_2' %}
@@ -104,8 +114,8 @@
                 <div class="header__iconItem header__group">
                     {% if section.settings.header_style == 'style_2' %}
                         {% if section.settings.show_cart %}
-                            <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}" {% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
-                                {% render 'icon-cart-2' %}
+                            <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                                {% render 'icon-cart-02' %}
                                 <span class="cart-text">{{ 'general.cart.shopping_cart' | t }}</span>
                                 <div class="cart-count-bubble">
                                     {%- if cart.item_count < 100 -%}
@@ -130,6 +140,11 @@
 
                     {% if section.settings.header_style == 'style_2' %}
                         {% if shop.customer_accounts_enabled and section.settings.show_customer %}
+                            {% if routes.account_login_url contains '/account/login' %}
+                                {% assign is_contained = true %}
+                            {% else %}
+                                {% assign is_contained = false %}
+                            {% endif %}
                             <div class="customer-links">
                               {% if customer %}
                                   <a class="header__link--account" id="customer_logout_link" href="{{ routes.account_logout_url }}">
@@ -140,7 +155,7 @@
                                     {{ 'customer.account.my_account' | t }}
                                   </a>
                               {% else %}  
-                                  <a class="header__link--account" id="customer_login_link" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" data-open-auth-sidebar>
+                                  <a class="header__link--account" id="customer_login_link" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"{% if is_contained %} data-open-auth-sidebar{% endif %}>
                                     {{ 'customer.sign_in' | t }}
                                   </a>
                                   <span class="or-text">
@@ -156,7 +171,12 @@
 
                     {% unless section.settings.header_style == 'style_2' %}
                         {%- if shop.customer_accounts_enabled and section.settings.show_customer -%}
-                            <a class="header__icon header__icon--account link link--text" data-open-auth-sidebar>
+                            {% if routes.account_login_url contains '/account/login' %}
+                                {% assign is_contained = true %}
+                            {% else %}
+                                {% assign is_contained = false %}
+                            {% endif %}
+                            <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account link link--text"{% if is_contained %} data-open-auth-sidebar{% endif %}>
                                 {% render 'icon-account-2' %}
                                 <span class="visually-hidden">
                                     {%- liquid
@@ -184,7 +204,7 @@
 
                     {% unless section.settings.header_style == 'style_2' %}
                         {% if section.settings.show_cart %}
-                            <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}" {% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
+                            <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
                                 {% render 'icon-cart' %}
                                 <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
                                 <div class="cart-count-bubble">
@@ -232,7 +252,7 @@
                                         <div class="desc">{{ section.settings.contact_us_desc }}</div>
                                     {% endif %}
                                     {% if section.settings.contact_us_button != blank %}
-                                        <a class="button button-2" href="{{ section.settings.contact_us_link }}" title="{{ section.settings.contact_us_button }}">{{ section.settings.contact_us_button }}</a>
+                                        <a class="button button-2"{% if section.settings.contact_us_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.contact_us_link }}"{% endif %} title="{{ section.settings.contact_us_button }}">{{ section.settings.contact_us_button }}</a>
                                     {% endif %}
                                     </div>
                                 {% endif %}
@@ -298,13 +318,14 @@
                                                 assign url = routes.root_url
                                             endif
                                         -%}
-                                        <a href="{{ url }}" class="{{ class }}"  style="{% if block.settings.logo_text != blank %}
+                                        <a {% if url == blank %} role="link" aria-disabled="true"{% else %} href="{{ url }}"{% endif %} class="{{ class }}" style="{% if block.settings.logo_text != blank %}
                                                                                             --height_logo: {{ section.settings.logo_width | append: 'px' }};
                                                                                             --width_logo: auto;
                                                                                         {% else %}
                                                                                             --width_logo: {{ section.settings.logo_width | append: 'px' }};
                                                                                             --height_logo: auto;
                                                                                         {% endif %}"
+                                                                                        data-load-logo-page="{{ multi_page_handle }}"
                                         >
                                             {%- if block.settings.logo != blank -%}
                                                 {%- assign image = block.settings.logo -%}
@@ -375,10 +396,9 @@
                                 {%- endif -%}
                                 <details class="search_details">
                                     <summary class="header__search-full" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
-                                        <a href="javascript:void(0)" class="header-search-close" alt="{{ 'general.common.close' | t }}">
+                                        <button type="button" class="header-search-close" aria-label="{{ 'general.common.close' | t }}">
                                             {% render 'icon-close' %}
-                                            {{ 'general.common.close' | t }}
-                                        </a>
+                                        </button>
                                         <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
                                             <div class="field">
                                                 <input 
@@ -430,9 +450,9 @@
                             </details-modal>
                         {% endif %}
                         {% if section.settings.show_cart %}
-                            <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}" {% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
+                            <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
                                 {% if section.settings.header_style == 'style_2' %}
-                                    {% render 'icon-cart-2' %}
+                                    {% render 'icon-cart-02' %}
                                 {% else %}
                                     {% render 'icon-cart' %}
                                 {% endif %}
@@ -662,12 +682,32 @@
         },
         {
             "type": "range",
-            "id": "grid_gap_menu",
-            "label": "t:sections.instagram.settings.grid_gap",
-            "min": 5,
+            "id": "menu_top_spacing",
+            "label": "t:sections.header.settings.header_bottom.mg_top",
+            "min": 10,
             "max": 30,
             "step": 1,
-            "unit": "t:sections.layout.mg_desktop.unit",
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 29
+        },
+        {
+            "type": "range",
+            "id": "menu_bottom_spacing",
+            "label": "t:sections.header.settings.header_bottom.mg_bottom",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 29
+        },
+        {
+            "type": "range",
+            "id": "grid_gap_menu",
+            "label": "t:sections.header.settings.header_bottom.spacing_left_right",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
             "default": 20
         },
         {
@@ -812,46 +852,6 @@
             }]
         },
         {
-            "type": "range",
-            "id": "padding_vertical",
-            "min": 0,
-            "max": 30,
-            "step": 1,
-            "unit": "t:sections.header.settings.logo_width.unit",
-            "label": "t:sections.header.settings.header_tab.padding_vertical",
-            "default": 18
-        },
-        {
-            "type": "range",
-            "id": "padding_hozi",
-            "min": 0,
-            "max": 30,
-            "step": 1,
-            "unit": "t:sections.header.settings.logo_width.unit",
-            "label": "t:sections.header.settings.header_tab.padding_hozi",
-            "default": 21
-        },
-        {
-            "type": "range",
-            "id": "padding_vertical_mb",
-            "min": 0,
-            "max": 30,
-            "step": 1,
-            "unit": "t:sections.header.settings.logo_width.unit",
-            "label": "t:sections.header.settings.header_tab.padding_vertical_mb",
-            "default": 13
-        },
-        {
-            "type": "range",
-            "id": "padding_hozi_mb",
-            "min": 0,
-            "max": 30,
-            "step": 1,
-            "unit": "t:sections.header.settings.logo_width.unit",
-            "label": "t:sections.header.settings.header_tab.padding_hozi_mb",
-            "default": 23
-        },
-        {
             "type": "checkbox",
             "id": "enable_separation_tab",
             "label": "t:sections.header.settings.header_tab.enable_separation_tab",
@@ -860,7 +860,7 @@
         {
             "type": "color",
             "id": "color_border_separation",
-            "label": "t:settings_schema.typography.settings.typography.border_color",
+            "label": "t:settings_schema.colors.settings.colors_name.border_color",
             "default": "#4d4d4d"
         },
         {
@@ -1476,7 +1476,7 @@
         {
             "type": "color",
             "id": "bg_mega_menu",
-            "label": "t:sections.header.settings.header_bottom.bg_top",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color",
             "default": "#fff"
         },
         {
@@ -1996,9 +1996,15 @@
                     "default": 5
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",
@@ -2140,9 +2146,15 @@
                     "default": 3
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",

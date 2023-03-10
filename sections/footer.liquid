@@ -37,25 +37,60 @@
 
 <footer class="footer">
     {%- if section.blocks.size > 0 -%}
-        <div class="footer__content-top{% if section.settings.show_footer_top_bg_img %} footer__content-bg{% endif %}">
-            <div class="container">
-                {% if block_newsletter.settings.enable_top %}
-                <div class="footer__content-newsletter 
-                            footer-block__newsletter 
-                            text-center 
-                            newsletter__{{ block_newsletter.settings.newsletter_style }}"
-                            style="--bg_color: {{ block_newsletter.settings.background_color | default: 'transparent' }}">
-                    {%- if block_newsletter.settings.heading != blank -%}
-                        <h2 class="footer-block__heading">
-                            {{- block_newsletter.settings.heading | escape -}}
-                        </h2>
-                    {%- endif -%}
-                    <div class="footer-block__subheading rte">
-                        {{ block_newsletter.settings.subtext }}
+        <div class="footer__content-top{% if section.settings.show_footer_top_bg_img %} footer__content-bg{% endif %}{% if block_newsletter.settings.enable_top and position_social == 7 %} enable_newsletter_social{% endif %}">
+            {% if block_newsletter.settings.enable_top and position_social == 7 %}
+                <div class="wrapper-top-content">
+                    <div class="container">
+                        {%- if section.settings.show_social -%}
+                            <div class="footer-block__list-social{% if section.settings.enable_bg_social %} enable_bg_social{% endif %}" style="--margin-top: {{ section.settings.social_margin_top | append: 'px' }}">
+                                {%- if section.settings.social_heading != blank -%}
+                                    <h2 class="footer-block__heading">
+                                        {{- section.settings.social_heading | escape -}}
+                                    </h2>
+                                {%- endif -%}
+                                <div class="item clearfix">
+                                    {% render 'halo-social-media-icons' %}
+                                </div>
+                            </div>
+                        {%- endif -%}
+                        <div class="footer__content-newsletter 
+                                    footer-block__newsletter 
+                                    text-center 
+                                    newsletter__{{ block_newsletter.settings.newsletter_style }}"
+                                    style="--bg_color: {{ block_newsletter.settings.background_color | default: 'transparent' }}">
+                            {%- if block_newsletter.settings.heading != blank -%}
+                                <h2 class="footer-block__heading">
+                                    {{ block_newsletter.settings.heading | escape }}
+                                </h2>
+                            {%- endif -%}
+                            <div class="footer-block__subheading rte">
+                                {{ block_newsletter.settings.subtext }}
+                            </div>
+                            {% render 'block-newsletter-footer', block: block_newsletter %}
+                        </div>
                     </div>
-                    {% render 'block-newsletter-footer', block: block_newsletter %}
                 </div>
-                {% endif %}
+            {% endif %}
+            <div class="container">
+                {% unless position_social == 7 %}
+                    {% if block_newsletter.settings.enable_top %}
+                        <div class="footer__content-newsletter 
+                                    footer-block__newsletter 
+                                    text-center 
+                                    newsletter__{{ block_newsletter.settings.newsletter_style }}"
+                                    style="--bg_color: {{ block_newsletter.settings.background_color | default: 'transparent' }}">
+                            {%- if block_newsletter.settings.heading != blank -%}
+                                <h2 class="footer-block__heading">
+                                    {{- block_newsletter.settings.heading | escape -}}
+                                </h2>
+                            {%- endif -%}
+                            <div class="footer-block__subheading rte">
+                                {{ block_newsletter.settings.subtext }}
+                            </div>
+                            {% render 'block-newsletter-footer', block: block_newsletter %}
+                        </div>
+                    {% endif %}
+                {% endunless %}
                 <div class="halo-row column-{{column}}">
                     {% for block in section.blocks %}
                         {% if forloop.first and block.type == 'text' %}
@@ -70,7 +105,7 @@
                                      {{ block__text_first }}
                                      {%- if forloop.index == position_trust and forloop.index == payment_position -%}footer-block__full-width{%- endif -%}
                                      " 
-                        style="--block-custom-width: {{block.settings.custom_width}}%;
+                        style="--block-custom-width: {{block.settings.custom_width}}%; --block-margin-bottom: {{block.settings.mg_bottom | append: 'px'}};
                                {%- if block.type == 'text'-%}--border-block-style-2-color: {{block.settings.border_block_style_2_color}};{%- endif -%}
                         ">
                             <div class="{%- if block.type == 'link_list' -%}footer-block__mobile{% elsif forloop.index == position_trust and forloop.index == payment_position %}footer-block__grid{%- endif -%}">
@@ -85,7 +120,7 @@
                                             <ul class="list-unstyled">
                                                 {%- for link in block.settings.menu.links -%}
                                                     <li>
-                                                        <a href="{{ link.url }}" class="link link-underline list-menu__item--link">
+                                                        <a {% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %} class="link link-underline list-menu__item--link">
                                                             <span class="text">{{ link.title }}</span>
                                                         </a>
                                                     </li>
@@ -117,7 +152,7 @@
                                     </div>
                                 {%- endif -%}
                                 {%- if section.settings.show_social and position_social == forloop.index -%}
-                                    <div class="footer-block__list-social" style="--margin-top: {{ section.settings.social_margin_top | append: 'px' }}">
+                                    <div class="footer-block__list-social{% if section.settings.enable_bg_social %} enable_bg_social{% endif %}" style="--margin-top: {{ section.settings.social_margin_top | append: 'px' }}">
                                         {%- if section.settings.social_heading != blank -%}
                                             <h2 class="footer-block__heading">
                                                 {{- section.settings.social_heading | escape -}}
@@ -318,6 +353,16 @@
                 "label": "t:sections.footer.blocks.link_list.settings.menu.label",
                 "info": "t:sections.footer.blocks.link_list.settings.menu.info",
                 "default": "footer"
+            },
+            {
+                "type": "range",
+                "id": "mg_bottom",
+                "label": "t:sections.footer.blocks.newsletter.settings.newsletter_margin_bottom",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+                "default": 0
             }
         ]
     },
@@ -351,7 +396,7 @@
             {
                 "id": "border_block_style_2_color",
                 "type": "color",
-                "label": "t:settings_schema.typography.settings.typography.border_color",
+                "label": "t:settings_schema.colors.settings.colors_name.border_color",
                 "info": "t:sections.footer.blocks.newsletter.settings.info_style2",
                 "default": "#000"
             },
@@ -381,6 +426,16 @@
                 "type": "textarea",
                 "default": "<p>Share store details, promotions, or brand content with your customers.</p>",
                 "label": "t:sections.image-banner.blocks.image.settings.content.label__2"
+            },
+            {
+                "type": "range",
+                "id": "mg_bottom",
+                "label": "t:sections.footer.blocks.newsletter.settings.newsletter_margin_bottom",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+                "default": 0
             }
         ]
     },
@@ -405,7 +460,7 @@
             {
                 "type": "color",
                 "id": "background_color",
-                "label": "t:sections.footer.blocks.newsletter.settings.background_color.label",
+                "label": "t:settings_schema.colors.settings.colors_name.background_color",
                 "info": "t:sections.footer.blocks.newsletter.settings.background_color.info"
             },
             {
@@ -452,7 +507,7 @@
             {
                 "id": "border_block_color",
                 "type": "color",
-                "label": "t:settings_schema.typography.settings.typography.border_color", 
+                "label": "t:settings_schema.colors.settings.colors_name.border_color", 
                 "default": "#fff"
             },
             {
@@ -849,6 +904,12 @@
         "default": true
     },
     {
+        "type": "checkbox",
+        "id": "enable_bg_social",
+        "label": "t:sections.footer.settings.social_media_link.enable_background_social",
+        "default": false
+    },
+    {
         "type": "range",
         "id": "social_margin_top",
         "label": "t:sections.footer.settings.social_media_link.social_margin_top",
@@ -922,11 +983,15 @@
         },
         {
             "value": "5",
-            "label": "5"
+            "label": "t:sections.footer.settings.social_media_link.social_position.option5"
         },
         {
             "value": "6",
-            "label": "6"
+            "label": "t:sections.footer.settings.social_media_link.social_position.option6"
+        },
+        {
+            "value": "7",
+            "label": "t:sections.footer.settings.social_media_link.social_position.option7"
         }]
     },
     {

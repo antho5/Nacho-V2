@@ -18,7 +18,7 @@
                     </div>        
                     {% endif %}
                     {% if section.settings.view_all != blank %}
-                        <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}" href="{{ section.settings.link_view_all }}" title="{{section.settings.view_all}}" 
+                        <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}"{% if section.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all }}"{% endif %} title="{{section.settings.view_all}}" 
                             style="--font-weight-view-all-style: {{ section.settings.font_weight_view_all }};
                             --mg-bottom-view-style: {{ section.settings.mg_bottom_view | append: 'px' }};
                             --color-view-all-style: {{ section.settings.color_view_all }};
@@ -126,10 +126,10 @@
                                 </div>
                             {% endfor %}
                             </div>
-                            <a href="javascript:void(0)" title="{{ section.settings.brand_button_text | split: '|' | first }}" class="btn button {{ class_btn }}{% if results_count <= numer_lg %} hidden-desktop{% endif %}" data-load-more-block data-buttonMore="{{ section.settings.brand_button_text }}" data-buttonLess="{{ section.settings.brand_button_text_less }}" data-rowlg={{numer_lg}} data-results="{{ results_count }}">
+                            <button type="button" aria-label="{% if section.settings.brand_button_text != blank %}{{ section.settings.brand_button_text | split: '|' | first }}{% else %}{{ 'general.button_load_more.default' | t }}{% endif %}" class="btn button {{ class_btn }}{% if results_count <= numer_lg %} hidden-desktop{% endif %}" data-load-more-block data-buttonMore="{{ section.settings.brand_button_text }}" data-buttonLess="{{ section.settings.brand_button_text_less }}" data-rowlg={{numer_lg}} data-results="{{ results_count }}">
                                 {{ section.settings.brand_button_icon }}
                                 <span>{{ section.settings.brand_button_text }}</span>
-                            </a>
+                            </button>
                         </div>
                     {% endfor %}
                 </div>

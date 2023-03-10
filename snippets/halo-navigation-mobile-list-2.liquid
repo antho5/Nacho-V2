@@ -11,14 +11,14 @@
             </span>
         </li>
         {% if show_banner %}
-            <a href="#" class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: banner_lv_2.aspect_ratio | times: 100 }}%;">
+            <a href="javascript:void(0)" class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: banner_lv_2.aspect_ratio | times: 100 }}%;">
                 <img {% render 'lazyload',preview_img: banner_lv_2 %} />
                 {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
             </a>
         {% endif %}
         {% if show_nav_all %}
             <li class="menu-lv-item menu-lv-2 text-left nav-all-mobile">
-                <a href="{{ menu_item_url }}" class="menu-lv-2__action list-menu__item list-menu__item--end link focus-inset">
+                <a {% if menu_item_url == blank %} role="link" aria-disabled="true"{% else %} href="{{ menu_item_url }}"{% endif %} class="menu-lv-2__action list-menu__item list-menu__item--end link focus-inset">
                     <span class="text">
                         {{ 'general.navigation.go_to' | t }} {{ menu_item_heading | escape }}
                     </span>
@@ -40,7 +40,7 @@
 
             {%- if show_item -%}
                 <li class="menu-lv-item menu-lv-2 text-left menu-lv-image">
-                    <a href="{{ item_link }}" class="menu-lv-2__action list-menu__item list-menu__item--end link focus-inset">
+                    <a {% if item_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ item_link }}"{% endif %} class="menu-lv-2__action list-menu__item list-menu__item--end link focus-inset">
                         {%- if item_heading != blank -%}
                             <span class="text">
                                 {{ item_heading | escape }}

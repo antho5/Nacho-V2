@@ -7,11 +7,11 @@
 		.halo-ask-an-expert-banner{
 		    display: block;
 		    position: fixed;
-		    right: 10px;
+		    right: {{ settings.postion_right }};
 		    top: auto;
 		    bottom: 125px;
 		    z-index: 98;
-		    width: 100%;
+		    /*width: 100%;*/
 		    max-width: 40px;
 		}
 
@@ -90,14 +90,14 @@
 			}
 
 			.halo-ask-an-expert-banner img{
-				width: 100%;
+				/*width: 100%;*/
 			}
 		}
 
 		@media (min-width: 1025px){
 			.halo-ask-an-expert-banner{
-			    right: 30px;
-				bottom: 30px;
+				right: {{ settings.postion_right }};
+				bottom: {{ settings.postion_bottom }};
 			}
 
 			.halo-ask-an-expert-banner .link:before{
@@ -121,7 +121,7 @@
 		}
 	</style>
 	<div class="halo-ask-an-expert-banner">
-	    <a href="#" data-open-ask-an-expert {% if settings.ask_an_expert_banner != blank -%} class="link"{% endif %}>
+	    <a href="javascript:void(0)" data-open-ask-an-expert {% if settings.ask_an_expert_banner != blank -%} class="link"{% endif %}>
 		    {%- if settings.ask_an_expert_banner != blank -%}
 		        {% assign image =  settings.ask_an_expert_banner %}
 		        <img srcset="{{ image | img_url: 'master' }} 1x, {{ image | img_url: 'master', scale: 2 }} 2x"
@@ -137,10 +137,10 @@
 <div class="halo-popup halo-ask-an-expert-popup customPopup-medium" data-ask-an-expert-popup id="halo-ask-an-expert-popup">
     <div class="halo-popup-wrapper">
     	<div class="halo-popup-header">
-            <a href="#" class="halo-popup-close clearfix" data-close-ask-an-expert alt="{{ 'general.common.close' | t }}">
+            <button type="button" class="halo-popup-close clearfix" data-close-ask-an-expert aria-label="{{ 'general.common.close' | t }}">
                 {% render 'icon-close' %}
                 {{ 'general.common.close' | t }}
-            </a>
+            </button>
             {%- if settings.ask_an_expert_header != blank -%}
 	            <h5 class="halo-popup-title text-center">
 	                {{ settings.ask_an_expert_header | escape }}

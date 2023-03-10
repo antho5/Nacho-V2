@@ -3,11 +3,6 @@
         <div class="image image-adapt" style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }};">
             <img srcset="{{ image | img_url: '1920x' }} 1x, {{ image | img_url: '1920x', scale: 2 }} 2x" src="{{ image | img_url: '1920x', crop: 'center' }}" alt="{{ image.alt | default: shop.name | escape }}" loading="lazy">
         </div>
-    {%- else -%}
-        <div class="image{% if image == blank %} not-image{% endif %}">
-            {% capture current %}{% cycle 1, 2 %}{% endcapture %}
-            {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}   
-        </div>
     {%- endif -%}
     {%- if image_mobile != blank -%}
         <div class="image image-mobile image-adapt" style="padding-top: {{ 1 | divided_by: image_mobile.aspect_ratio | times: 100 | append: '%' }}">
@@ -17,10 +12,6 @@
         {%- if image != blank -%}
             <div class="image image-mobile image-adapt from-desktop" style="padding-top: 55%">
                 <img srcset="{{ image | img_url: '420x', crop: 'center' }} 1x, {{ image | img_url: '420x', crop: 'center',  scale: 2 }} 2x" src="{{ image | img_url: '420x', crop: 'center' }}" alt="{{ image.alt | default: shop.name | escape }}" loading="lazy">
-            </div>
-        {%- else -%}
-            <div class="image image-mobile">
-                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
             </div>
         {%- endif -%}
     {%- endif -%}

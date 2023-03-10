@@ -42,6 +42,25 @@
     background-color: #e6e6e6;
 }
 
+.cart-total-savings {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e6e6e6;
+    margin-top: 0px!important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.cart-total-savings .cart-total-value {
+    font-size: var(--font-body-size);
+}
+
+.cart-total-savings + .cart-total-grandtotal {
+    padding-top: 22px;
+}
+
 .cart-total-subtotal + .cart-total-grandtotal {
     border-top: 0;
 }
@@ -110,6 +129,15 @@
 
 .cart-total + .cart-total {
     margin-top: 27px;
+}
+
+.cart-coupon-discount {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart [data-discount-code] {
+    font-size: calc(var(--font-body-size) - 2px);
 }
 
 .cart-container #shipping-calculator #wrapper-response {
@@ -189,12 +217,24 @@
     background-color: #e6e6e6;
 }
 
-.cart-container .discount-code-field p {
+.cart-container .discount-code-field p,
+.cart-container .shipTotal .cart-total-value {
     margin-top: 10px;
     margin-bottom: 0;
     color: var(--color-grey);
 }
 
+.cart-container .shipTotal {
+    margin-top: 40px;
+}
+
+.cart-container .shipTotal .cart-total-value {
+    font-weight: 400;
+}
+
+.cart-container .cart-totals:has(li.shipTotal) + .cart-actions {
+    margin-top: 12px;
+}
 
 .cart-checkbox input[type="checkbox"] + label {
     display: inline-block;

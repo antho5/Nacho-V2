@@ -10,9 +10,9 @@
 
 <div class="halo-popup halo-quick-view-popup customPopup-large" data-quick-view-popup id="halo-quick-view-popup">
 	<div class="halo-popup-wrapper">
-		<a href="javascript:void(0)" title="{{ 'general.common.close' | t }}" class="halo-popup-close clearfix" data-close-quick-view-popup>
+		<button type="button" class="halo-popup-close clearfix" data-close-quick-view-popup aria-label="{{ 'general.common.close' | t }}">
 	        {% render 'icon-close' %}
-	    </a>
+	    </button>
 	    <div class="halo-popup-content halo-popup-scroll custom-scrollbar"></div>
 	</div>
 </div>

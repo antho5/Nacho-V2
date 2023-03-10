@@ -39,10 +39,15 @@ body.quickshop-list-view-show .halo-product-list-view-popup {
     transition: unset;
 }
 
-.halo-product-list-view-popup .card-product, 
+.halo-product-list-view-popup .card-product,    
 .halo-product-list-view-popup .card-information .card-information__wrapper,
 .halo-product-list-view-popup .card-information .card-information__wrapper + .card-swatch,
-.halo-product-list-view-popup .card-information .card-information__wrapper + .card-swatch + .card-action {
+.halo-product-list-view-popup .card-information .card-information__wrapper + .card-swatch + .card-action:not(.variants-popup-form):not(.halo-popup-content),
+.halo-product-list-view-popup .card-information .card-information__wrapper + .card-swatch + .text-size  {
+    display: none;
+}
+
+.halo-product-list-view-popup .card-action:not(.variants-popup-form):not(.halo-popup-content) {
     display: none;
 }
 
@@ -92,6 +97,12 @@ body.product-card-layout-05 .halo-product-list-view-popup .product-card__button2
     padding: 0px 10px;
     font-size: calc(var(--font-heading-size) - 2px);
     font-weight: var(--font-weight-semibold);
+}
+
+.halo-product-list-view-popup .mobile-popup-header .close-modal {
+    background: none;
+    border: none;
+    padding: 0;
 }
 
 .halo-product-list-view-popup .mobile-popup-header .close-modal svg {

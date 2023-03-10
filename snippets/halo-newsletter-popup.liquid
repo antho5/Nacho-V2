@@ -4,7 +4,7 @@
             {%- if settings.newsletter_popup_image != blank -%}
                 {% assign image =  settings.newsletter_popup_image %}
                 {% if settings.popup_newsletter_link_image != blank %}
-                    <a href="{{ settings.popup_newsletter_link_image }}" target="_blank">
+                    <a {% if settings.popup_newsletter_link_image == blank %} role="link" aria-disabled="true"{% else %} href="{{ settings.popup_newsletter_link_image }}"{% endif %} target="_blank">
                 {% endif %}
                     <img srcset="{{ image | img_url: 'master' }} 1x, {{ image | img_url: 'master', scale: 2 }} 2x"
                     src="{{ image | img_url: 'master' }}"
@@ -19,15 +19,15 @@
         </div>
     {%- endif -%}
     <div class="halo-popup-wrapper">
-        <a href="javascript:void(0)" title="{{ 'general.common.close' | t }}" class="halo-popup-close clearfix" data-close-newsletter-popup>
+        <button type="button" class="halo-popup-close clearfix" data-close-newsletter-popup aria-label="{{ 'general.common.close' | t }}">
             {% render 'icon-close' %}
-        </a>
+        </button>
         <div class="overflow">
             <div class="halo-popup-header">
                 {%- if settings.newsletter_popup_title != blank -%}
-                    <h5 class="newsletter-popup-title text-center">
+                    <h3 class="newsletter-popup-title text-center">
                         {{ settings.newsletter_popup_title }}
-                    </h5>
+                    </h3>
                 {%- endif -%}
                 {%- if settings.newsletter_popup_desc != blank -%}
                     <span class="halo-popup-desc text-center">
@@ -128,7 +128,7 @@
                                     {{ 'newsletter.button_label' | t }}
                                 </button>
                             {% else %}
-                                <a class="button button--primary newsletter-form__button" href="{{ settings.button_newsletter_link }}" target="_blank">{{ 'newsletter.start_now' | t }}</a>
+                                <a class="button button--primary newsletter-form__button"{% if settings.button_newsletter_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ settings.button_newsletter_link }}"{% endif %} target="_blank">{{ 'newsletter.start_now' | t }}</a>
                             {% endif %}
                         </div>
                     {%- endform -%}
@@ -148,9 +148,9 @@
 </newsletter-popup>
 <newsletter-message-popup class="halo-popup halo-newsletter-message-popup customPopup-small" data-newsletter-message-popup id="halo-newsletter-message-popup">
     <div class="halo-popup-wrapper">
-        <a href="javascript:void(0)" title="{{ 'general.common.close' | t }}" class="halo-popup-close customPopup-close clearfix" data-close-newsletter-message-popup>
+        <button type="button" class="halo-popup-close customPopup-close clearfix" data-close-newsletter-message-popup aria-label="{{ 'general.common.close' | t }}">
             {% render 'icon-close' %}
-        </a>
+        </button>
         <div class="halo-popup-content custom-scrollbar">
             <div class="newsletter-message"></div>
         </div>

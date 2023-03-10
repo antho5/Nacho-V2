@@ -2,7 +2,7 @@
     display: none;
     position: absolute;
     min-width: 100%;
-    width: 20rem;
+    width: 22rem;
     background-color: var(--bg-white);
     box-shadow: 0 1px 4px 0 rgb(0 0 0 / 15%);
     padding: 5px 0 5px 20px;
@@ -13,7 +13,7 @@
 }
 
 .list-menu--disclosure-2{
-    margin-left: calc(100% - 30px);
+    margin-left: calc(100% - 15px);
     z-index: 2;
     top: -5px;
 }

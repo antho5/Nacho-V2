@@ -292,11 +292,10 @@
         fill: {{ lv_1_color }};
     }
 
-    .menu-dropdown__text a[title="Sale"] {
-        color: {{ sale_item_color }};
-    }
-
     {% if sale_item_color != 'rgba(0,0,0,0)' and sale_item_color != blank %}
+        .menu-dropdown__text a.active-sale {
+            color: {{ sale_item_color }};
+        }
         .menu-sale > .menu-lv-1__action,
         .menu-sale > details > .menu--mobile-lv-1__action,
         .menu-sale > .menu-lv-2__action,
@@ -415,8 +414,6 @@
 
 
         .bottom-bar--list .cart-count-bubble {
-            top: 5px !important;
-            right: 8px !important;
             min-width: 20px;
             min-height: 20px;
         }
@@ -506,10 +503,19 @@
             width: var(--width_logo);
             height: var(--height_logo);
         }
-      
+
+        .header-06 .header-bottom--wrapper .list-menu--inline {
+            padding-top: {{ section.settings.menu_top_spacing | append: 'px' }};
+        }
+
         .header-06 .menu-lv-1__action {
             padding-left: {{ section.settings.grid_gap_menu | append: 'px' }};
             padding-right: {{ section.settings.grid_gap_menu | append: 'px' }};
+            padding-bottom: {{ section.settings.menu_bottom_spacing | append: 'px' }};
+        }
+
+        .header-06 .menu-lv-1__action:hover:before {
+            height: {{ section.settings.menu_bottom_spacing | append: 'px' }};
         }
 
         .wrapper-header-bottom .header-bottom-left svg{

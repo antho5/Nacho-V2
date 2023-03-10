@@ -2,7 +2,6 @@
 	display: block;
     z-index: 98;
     width: 100%;
-    background: rgba(20, 20, 20, 0.9);
     text-align: center;
 }
 
@@ -42,42 +41,43 @@
 	margin-left: 5px;
 }
 
-.halo-cookie__action .link.privacy_policy_link{
+.halo-cookie__action .privacy_policy_link{
 	font-weight: 100;
 }
 
-.halo-cookie__action .link.accept_cookies_link{
+.halo-cookie__action .accept_cookies_link{
 	letter-spacing: .05em;
+    background: none;
+    border: none;
 }
 
 .halo-cookie__action .link + .link{
 	margin-left: 16px;
 }
 
-.halo-cookie.custom-width{
+.halo-cookie{
 	padding: 10px 15px;
 }
 
-.halo-cookie.custom-width .halo-cookie__block{
+.halo-cookie .halo-cookie__block{
 	padding-top: 0;
 	padding-bottom: 0;
 }
 
-.halo-cookie.custom-width .halo-cookie__text{
+.halo-cookie .halo-cookie__text{
 	font-size: var(--font-body-size);
 	letter-spacing: 0;
 	font-weight: 100;
 	line-height: 26px;
 }
 
-.halo-cookie.custom-width .halo-cookie__action{
+.halo-cookie .halo-cookie__action{
 	margin-top: 8px;
 }
 
 @media (min-width: 551px){
 	.halo-cookie{
 		text-align: left;
-		background-color: var(--bg-black);
 		margin-top: 15px;
 	}
 
@@ -97,11 +97,11 @@
 		margin-left: 10px;
 	}
 
-	.halo-cookie.custom-width{
+	.halo-cookie{
 		max-width: 368px;
 	}
 
-	.halo-cookie.custom-width .halo-cookie__action{
+	.halo-cookie__action{
 		text-align: right;
 	}
 	

@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="{{ 'component-lookbook-with-collection.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'component-lookbook-with-collection.css' | asset_url | stylesheet_tag }}</noscript>
 
+{{ 'lookbook-script.js' | asset_url | script_tag }}
+
 <script>
     window.currencySymbol ="{{ cart.currency.symbol }}";
 </script>
@@ -58,6 +60,7 @@
     assign enable_lookbook_width = section.settings.enable_lookbook_width
     assign lookbook_width = section.settings.lookbook_width | append: 'px'
     assign lookbook_truncate = section.settings.lookbook_truncate
+    assign lookbook_style = section.settings.lookbook_style
 
     assign show_text = section.settings.show_text
     assign hide_text = section.settings.hide_text
@@ -95,6 +98,44 @@
     <link rel="stylesheet" href="{{ 'component-fancybox.css' | asset_url }}" media="print" onload="this.media='all'">
     <noscript>{{ 'component-fancybox.css' | asset_url | stylesheet_tag }}</noscript>
 {%- endif -%}
+
+<style type="text/css">
+    .section-block-{{section.id}} {
+        padding-top: {{ mg_top_desktop }};
+        padding-bottom: {{ mg_bottom_desktop }};
+    }
+
+    {% if container == 'fullwidth' %}
+        .section-block-{{section.id}} .container-full {
+            padding-left: {{ padding_full_width }};
+            padding-right: {{ padding_full_width }};
+        }
+    {% endif %}
+
+    {% if section_gradient != blank and section_gradient != 'rgba(0,0,0,0)' %}
+        .section-block-{{section.id}} {
+            background: {{ section_gradient }};
+        }
+    {% elsif section_bg != blank and section_bg != 'rgba(0,0,0,0)' %}
+        .section-block-{{section.id}} {
+            background: {{ section_bg }};
+        }
+    {% endif %}
+
+    @media screen and (max-width: 1024px) {
+        .section-block-{{section.id}} {
+            padding-top: {{ mg_top_tablet }};
+            padding-bottom: {{ mg_bottom_tablet }};
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .section-block-{{section.id}} {
+            padding-top: {{ mg_top_mobile }};
+            padding-bottom: {{ mg_bottom_mobile }};
+        }
+    }
+</style>
 
 <div class="collection-lookbook section-block-{{section.id}}" id="collection-lookbook-{{section.id}}"
     style="
@@ -189,7 +230,7 @@
                                 assign text_align = block.settings.text_align
                                 assign link_width = block.settings.link_width 
                             %}
-                            <div 
+                            <lookbook-with-show-all 
                                 class="lookbook-image-item {% if enable_lookbook_width %}width-restricted{% endif %}" 
                                 data-lookbook-item-container
                                 style="
@@ -210,225 +251,74 @@
                                         {% if lookbook_image != blank %}
                                             <a 
                                                 class="adaptive_height fancybox"
-                                                {% if lookbook_image_action == 'link' %} href="{{ lookbook_image_link }}"{% else %}class="fancybox" rel="lookbook" href="{{ lookbook_image | img_url: 'master' }}" data-fancybox="images"{% endif %}
+                                                {% if lookbook_image_action == 'link' %}{% if lookbook_image_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ lookbook_image_link }}"{% endif %}{% else %}class="fancybox" rel="lookbook" href="{{ lookbook_image | img_url: 'master' }}" data-fancybox="images"{% endif %}
                                                 style="padding-top: {{ 1 | divided_by: lookbook_image.aspect_ratio | times: 100 }}%">
                                                     <img {% render 'lazyload',preview_img: lookbook_image %} />
                                                     {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                             </a>
                                         {% else %}
-                                            <a href="#" class="image-zoom">
+                                            <a href="javascript:void(0)" class="image-zoom">
                                                 <div class="not_img" style="--height_not_img: 570px">420 x 570px</div>
                                             </a>
                                         {% endif %}
                                     </div>
-                                    {% if product_1 != blank %}
-                                    <div class="select-icon select-icon-1" data-lookbook-icon data-handle="{{ product_1 }}"
-                                        style="--top-position-1: {{ top_1 }};
-                                        --left-position-1: {{ left_1 }};"
-                                    >
-                                        <span class="glyphicon {% if show_dot_number %}numbered{% endif %} {% if show_dot_number_mobile %}mb-numbered{% endif %}" data-num="1"></span>
-                                        <div class="lookbook-modal to-{{ lookbook_pos_1 }}">
-                                            <span class="pointer-left pointer"></span>
-                                            <span class="pointer-right pointer"></span>
-                                            <span class="pointer-bottom pointer"></span>
-                                            <span class="pointer-top pointer"></span>
-                                            <div class="product-information__wrapper text-left">
-                                                {%- if settings.show_vendor -%}
-                                                    <div class="product-information__group">
-                                                        {%- if settings.show_vendor -%}
-                                                            <div class="card-vendor">
-                                                                <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-                                                            </div>
-                                                        {%- endif -%}
-                                                    </div>
-                                                {%- endif -%}
-                                                <a href="#" class="product-title link-underline{% if settings.product_title_line_text != 'full' %} custom-title-ellipsis{% endif %}">
-                                                    <span class="text"></span>
-                                                </a>
-                                                <div class="product-price price">
-                                                    <div class="regular-price price__regular">
-                                                        <div class='last-price price__last'>
-                                                            <span class="price-item price-item--regular">
-                                                                <span class="money"></span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="sale-price price__sale">
-                                                        <div class="price-at-compare price__compare">
-                                                            <span class="price-item price-item--regular">
-                                                                <span class="money"></span>
-                                                            </span>
-                                                        </div>
-                                                        <div class='last-price price__last'>
-                                                            <span class="price-item price-item--sale">
-                                                                <span class="money"></span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="icon-wrapper">
-                                                        {% render 'icon-link-arrow-right' %}
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {% if product_1 != blank or product_2 != blank or product_3 != blank or product_4 != blank %}
+                                        <lookbook-wrapper>
+                                        {% if product_1 != blank %}
+                                            {% render 'lookbook-modal-wrapper',
+                                                lookbook_style: lookbook_style,
+                                                top: top_1,
+                                                left: left_1,
+                                                show_dot_number: show_dot_number,
+                                                show_dot_number_mobile: show_dot_number_mobile,
+                                                lookbook_pos: lookbook_pos_1,
+                                                product: product_1,
+                                                show_plus_icon: show_plus_icon,
+                                                num: 1,
+                                            %}
+                                        {% endif %}
+                                        {% if product_2 != blank %}
+                                            {% render 'lookbook-modal-wrapper',
+                                                lookbook_style: lookbook_style,
+                                                top: top_2,
+                                                left: left_2,
+                                                show_dot_number: show_dot_number,
+                                                show_dot_number_mobile: show_dot_number_mobile,
+                                                lookbook_pos: lookbook_pos_2,
+                                                product: product_2,
+                                                show_plus_icon: show_plus_icon,
+                                                num: 2,
+                                            %}
+                                        {% endif %}
+                                        {% if product_3 != blank %}
+                                            {% render 'lookbook-modal-wrapper',
+                                                lookbook_style: lookbook_style,
+                                                top: top_3,
+                                                left: left_3,
+                                                show_dot_number: show_dot_number,
+                                                show_dot_number_mobile: show_dot_number_mobile,
+                                                lookbook_pos: lookbook_pos_3,
+                                                product: product_3,
+                                                show_plus_icon: show_plus_icon,
+                                                num: 3
+                                            %}
+                                        {% endif %}
+                                        {% if product_4 != blank %}
+                                            {% render 'lookbook-modal-wrapper',
+                                                lookbook_style: lookbook_style,
+                                                top: top_4,
+                                                left: left_4,
+                                                show_dot_number: show_dot_number,
+                                                show_dot_number_mobile: show_dot_number_mobile,
+                                                lookbook_pos: lookbook_pos_4,
+                                                product: product_4,
+                                                show_plus_icon: show_plus_icon,
+                                                num: 4
+                                            %}
+                                        {% endif %}
+                                        </lookbook-wrapper>
                                     {% endif %}
-                                    {% if product_2 != blank %}
-                                    <div class="select-icon select-icon-2" data-lookbook-icon data-handle="{{ product_2 }}"
-                                        style="--top-position-2: {{ top_2 }};
-                                        --left-position-2: {{ left_2 }};"
-                                    >
-                                        <span class="glyphicon {% if show_dot_number %}numbered{% endif %} {% if show_dot_number_mobile %}mb-numbered{% endif %}" data-num="2"></span>
-                                        <div class="lookbook-modal to-{{ lookbook_pos_2 }}">
-                                            <span class="pointer-left pointer"></span>
-                                            <span class="pointer-right pointer"></span>
-                                            <span class="pointer-bottom pointer"></span>
-                                            <span class="pointer-top pointer"></span>
-                                            <div class="product-information__wrapper text-left">
-                                                {%- if settings.show_vendor -%}
-                                                    <div class="product-information__group">
-                                                        {%- if settings.show_vendor -%}
-                                                            <div class="card-vendor">
-                                                                <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-                                                            </div>
-                                                        {%- endif -%}
-                                                    </div>
-                                                {%- endif -%}
-                                                <a href="#" class="product-title link-underline{% if settings.product_title_line_text != 'full' %} custom-title-ellipsis{% endif %}">
-                                                    <span class="text"></span>
-                                                </a>
-                                                <div class="product-price price">
-                                                    <div class="regular-price price__regular">
-                                                        <div class='last-price price__last'>
-                                                            <span class="price-item price-item--regular">
-                                                                <span class="money"></span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="sale-price price__sale">
-                                                        <div class="price-at-compare price__compare">
-                                                            <span class="price-item price-item--regular">
-                                                                <span class="money"></span>
-                                                            </span>
-                                                        </div>
-                                                        <div class='last-price price__last'>
-                                                            <span class="price-item price-item--sale">
-                                                                <span class="money"></span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="icon-wrapper">
-                                                        {% render 'icon-link-arrow-right' %}
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endif %}
-                                    {% if product_3 != blank %}
-                                        <div class="select-icon select-icon-3" data-lookbook-icon data-handle="{{ product_3 }}"
-                                            style="--top-position-3: {{ top_3 }};
-                                            --left-position-3: {{ left_3 }};"
-                                        >
-                                            <span class="glyphicon {% if show_dot_number %}numbered{% endif %} {% if show_dot_number_mobile %}mb-numbered{% endif %}" data-num="3"></span>
-                                            <div class="lookbook-modal to-{{ lookbook_pos_3 }}">
-                                                <span class="pointer-left pointer"></span>
-                                                <span class="pointer-right pointer"></span>
-                                                <span class="pointer-bottom pointer"></span>
-                                                <span class="pointer-top pointer"></span>
-                                                <div class="product-information__wrapper text-left">
-                                                    {%- if settings.show_vendor -%}
-                                                        <div class="product-information__group">
-                                                            {%- if settings.show_vendor -%}
-                                                                <div class="card-vendor">
-                                                                    <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-                                                                </div>
-                                                            {%- endif -%}
-                                                        </div>
-                                                    {%- endif -%}
-                                                    <a href="#" class="product-title link-underline{% if settings.product_title_line_text != 'full' %} custom-title-ellipsis{% endif %}">
-                                                        <span class="text"></span>
-                                                    </a>
-                                                    <div class="product-price price">
-                                                        <div class="regular-price price__regular">
-                                                            <div class='last-price price__last'>
-                                                                <span class="price-item price-item--regular">
-                                                                    <span class="money"></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="sale-price price__sale">
-                                                            <div class="price-at-compare price__compare">
-                                                                <span class="price-item price-item--regular">
-                                                                    <span class="money"></span>
-                                                                </span>
-                                                            </div>
-                                                            <div class='last-price price__last'>
-                                                                <span class="price-item price-item--sale">
-                                                                    <span class="money"></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <a href="#" class="icon-wrapper">
-                                                            {% render 'icon-link-arrow-right' %}
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                    {% if product_4 != blank %}
-                                        <div class="select-icon select-icon-4" data-lookbook-icon data-handle="{{ product_4 }}"
-                                            style="--top-position-4: {{ top_4 }};
-                                            --left-position-4: {{ left_4 }};"
-                                        >
-                                            <span class="glyphicon {% if show_dot_number %}numbered{% endif %} {% if show_dot_number_mobile %}mb-numbered{% endif %}" data-num="4"></span>
-                                            <div class="lookbook-modal to-{{ lookbook_pos_4 }}">
-                                                <span class="pointer-left pointer"></span>
-                                                <span class="pointer-right pointer"></span>
-                                                <span class="pointer-bottom pointer"></span>
-                                                <span class="pointer-top pointer"></span>
-                                                <div class="product-information__wrapper text-left">
-                                                    {%- if settings.show_vendor -%}
-                                                        <div class="product-information__group">
-                                                            {%- if settings.show_vendor -%}
-                                                                <div class="card-vendor">
-                                                                    <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
-                                                                </div>
-                                                            {%- endif -%}
-                                                        </div>
-                                                    {%- endif -%}
-                                                    <a href="#" class="product-title link-underline{% if settings.product_title_line_text != 'full' %} custom-title-ellipsis{% endif %}">
-                                                        <span class="text"></span>
-                                                    </a>
-                                                    <div class="product-price price">
-                                                        <div class="regular-price price__regular">
-                                                            <div class='last-price price__last'>
-                                                                <span class="price-item price-item--regular">
-                                                                    <span class="money"></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="sale-price price__sale">
-                                                            <div class="price-at-compare price__compare">
-                                                                <span class="price-item price-item--regular">
-                                                                    <span class="money"></span>
-                                                                </span>
-                                                            </div>
-                                                            <div class='last-price price__last'>
-                                                                <span class="price-item price-item--sale">
-                                                                    <span class="money"></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <a href="#" class="icon-wrapper">
-                                                            {% render 'icon-link-arrow-right' %}
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endif %}
+
                                     {% if product_1 != blank or product_2 != blank or product_3 != blank or product_4 != blank %}
                                         <div 
                                             class="show-all-lookbook" 
@@ -441,13 +331,13 @@
                                                 "
                                         >
                                             <div class="btns-wrapper">
-                                                <button class="show-btn-wrapper btn-wrapper">
+                                                <button class="show-btn-wrapper btn-wrapper" data-show-btn>
                                                     {% render 'icon-plus' %}
                                                     {% if show_text != blank %}
                                                         <span class="text">{{ show_text }}</span>
                                                     {% endif %}
                                                 </button>
-                                                <button class="hide-btn-wrapper btn-wrapper">
+                                                <button class="hide-btn-wrapper btn-wrapper" data-hide-btn>
                                                     {% render 'icon-close', class: 'icon icon-close' %}
                                                     {% if hide_text != blank %}
                                                         <span class="text">{{ hide_text }}</span>
@@ -465,12 +355,12 @@
                                             {% if product_1 != blank %}
                                                 <div class="product product-1">
                                                     <div class="product-left">
-                                                        <a href="{{ product_1.url }}" class="item-image">
+                                                        <a {% if product_1.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ product_1.url }}"{% endif %} class="item-image">
                                                             <img src="{{ product_1.featured_image.src | product_img_url: 'compact' }}" alt="{{ product_1.featured_image.alt | escape }}" />
                                                         </a>
                                                     </div>
                                                     <div class="product-right">
-                                                        <a href="{{ product_1.url }}" class="product-title card-title link-underline">
+                                                        <a {% if product_1.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ product_1.url }}"{% endif %} class="product-title card-title link-underline">
                                                             <span class="text">{{ product_1.title }}</span>
                                                         </a>
                                                         {% render 'price',
@@ -483,12 +373,12 @@
                                             {% if product_2 != blank %}
                                                 <div class="product product-2">
                                                     <div class="product-left">
-                                                        <a href="{{ product_2.url }}" class="item-image">
+                                                        <a {% if product_2.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ product_2.url }}"{% endif %} class="item-image">
                                                             <img src="{{ product_2.featured_image.src | product_img_url: 'compact' }}" alt="{{ product_2.featured_image.alt | escape }}" />
                                                         </a>
                                                     </div>
                                                     <div class="product-right">
-                                                        <a href="{{ product_2.url }}" class="product-title card-title link-underline">
+                                                        <a {% if product_2.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ product_2.url }}"{% endif %} class="product-title card-title link-underline">
                                                             <span class="text">{{ product_2.title }}</span>
                                                         </a>
                                                         {% render 'price',
@@ -501,12 +391,12 @@
                                             {% if product_3 != blank %}
                                                 <div class="product product-3">
                                                     <div class="product-left">
-                                                        <a href="{{ product_3.url }}" class="item-image">
+                                                        <a {% if product_3.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ product_3.url }}"{% endif %} class="item-image">
                                                             <img src="{{ product_3.featured_image.src | product_img_url: 'compact' }}" alt="{{ product_3.featured_image.alt | escape }}" />
                                                         </a>
                                                     </div>
                                                     <div class="product-right">
-                                                        <a href="{{ product_3.url }}" class="product-title card-title link-underline">
+                                                        <a {% if product_3.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ product_3.url }}"{% endif %} class="product-title card-title link-underline">
                                                             <span class="text">{{ product_3.title }}</span>
                                                         </a>
                                                         {% render 'price',
@@ -519,12 +409,12 @@
                                             {% if product_4 != blank %}
                                                 <div class="product product-4">
                                                     <div class="product-left">
-                                                        <a href="{{ product_4.url }}" class="item-image">
+                                                        <a {% if product_4.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ product_4.url }}"{% endif %} class="item-image">
                                                             <img src="{{ product_4.featured_image.src | product_img_url: 'compact' }}" alt="{{ product_4.featured_image.alt | escape }}" />
                                                         </a>
                                                     </div>
                                                     <div class="product-right">
-                                                        <a href="{{ product_4.url }}" class="product-title card-title link-underline">
+                                                        <a {% if product_4.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ product_4.url }}"{% endif %} class="product-title card-title link-underline">
                                                             <span class="text">{{ product_4.title }}</span>
                                                         </a>
                                                         {% render 'price',
@@ -537,14 +427,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a  href="{% if link != blank %}{{ link }}{% else %}#{% endif %}"
+                                <a  {% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %}
                                     class="link collection-lookbook-link text-{{ text_align }}"
                                     style="
                                         --link-color: {% if link_color != blank and link_color != 'rgba(0,0,0,0)' %}{{ link_color }}{% endif %};
                                         --link-hover-color: {% if link_color_hover != blank and link_color_hover != 'rgba(0,0,0,0)' %}{{ link_color_hover }}{% endif %};
                                         --link-mg-top: {{ link_margin_top }};
                                         --link-fs: {{ link_fs }};
-                                        --link-fs-mb: {{ link_fs_mb }}
+                                        --link-fs-mb: {{ link_fs_mb }};
                                         --link-max-width: {% if link_width > 0 %}{{ link_width | append: 'px' }}{% else %}unset{% endif %};
                                         {% if link_underline %}
                                             --link-underline-color: {% if link_color_hover != blank %}{{ link_color_hover }}{% endif %};
@@ -553,7 +443,7 @@
                                 > 
                                     {{ link_text }}
                                 </a>
-                            </div>
+                            </lookbook-with-show-all>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -563,7 +453,7 @@
             <div class="view-all-container text-{{ view_all_pos }}">
                 <a 
                     class="view-more"
-                    href="{% if view_all_link != blank %}{{ view_all_link }}{% endif %}" 
+                    {% if view_all_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ view_all_link }}"{% endif %}
                     title="{{ view_more }}"
                     style="
                         --view-color: {% if view_all_color != blank %}{{ view_all_color }}{% endif %};
@@ -582,43 +472,31 @@
     </div>
 </div>
 
-<style type="text/css">
-    .section-block-{{section.id}} {
-        padding-top: {{ mg_top_desktop }};
-        padding-bottom: {{ mg_bottom_desktop }};
-    }
-
-    {% if container == 'fullwidth' %}
-        .section-block-{{section.id}} .container-full {
-            padding-left: {{ padding_full_width }};
-            padding-right: {{ padding_full_width }};
+<script>
+    class LookbookWithShowAll extends HTMLElement {
+        constructor() {
+            super();
         }
-    {% endif %}
+        
+        connectedCallback() {
+            this.showBtn = this.querySelector('[data-show-btn]');
+            this.hideBtn = this.querySelector('[data-hide-btn]');
+            this.lookbookShowAllCloseBtn = this.querySelector('[data-lookbook-show-all-close]');
+            this.lookbookImage = this.querySelector('[data-lookbook-image]');
 
-    {% if section_gradient != blank and section_gradient != 'rgba(0,0,0,0)' %}
-        .section-block-{{section.id}} {
-            background: {{ section_gradient }};
+            this.showBtn?.addEventListener('click', this.toggleShowAll.bind(this));
+            this.lookbookShowAllCloseBtn?.addEventListener('click', this.toggleShowAll.bind(this));
         }
-    {% elsif section_bg != blank and section_bg != 'rgba(0,0,0,0)' %}
-        .section-block-{{section.id}} {
-            background: {{ section_bg }};
-        }
-    {% endif %}
 
-    @media screen and (max-width: 1024px) {
-        .section-block-{{section.id}} {
-            padding-top: {{ mg_top_tablet }};
-            padding-bottom: {{ mg_bottom_tablet }};
+        toggleShowAll(e) {
+            const button = e.currentTarget;
+
+            this.lookbookImage.classList.toggle('show-all-products', button.hasAttribute('data-show-btn'));
         }
     }
 
-    @media screen and (max-width: 767px) {
-        .section-block-{{section.id}} {
-            padding-top: {{ mg_top_mobile }};
-            padding-bottom: {{ mg_bottom_mobile }};
-        }
-    }
-</style>
+    customElements.define('lookbook-with-show-all', LookbookWithShowAll);
+</script>
 
 {%- if has_fancy_box -%}
     <script src="{{ 'fancybox.js' | asset_url }}" defer="defer"></script>
@@ -952,6 +830,22 @@
         {
             "type": "header",
             "content": "t:sections.collection_lookbook.settings.content_1"
+        },
+        {
+            "type": "select",
+            "id": "lookbook_style",
+            "label": "t:sections.main_lookbook_page.settings.style",
+            "default": "1",
+            "options": [
+                {
+                    "value": "1",
+                    "label": "t:settings_schema.typography.settings.typography.style_1"
+                },
+                {
+                    "value": "2",
+                    "label": "t:settings_schema.typography.settings.typography.style_2"
+                }
+            ]
         },
         {
             "type": "checkbox",

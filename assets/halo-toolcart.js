@@ -18,7 +18,7 @@ class CartCancel extends HTMLElement {
   constructor() {
     super();
     
-    this.querySelector('a').addEventListener('click',(event) => {
+    this.querySelector('button').addEventListener('click',(event) => {
       document.querySelector('.popup-toolDown.show').classList.remove('show');
       document.querySelector('.previewCart').classList.remove('active-tool');
     })

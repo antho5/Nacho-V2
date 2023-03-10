@@ -186,6 +186,10 @@
     color: var(--product-price-color);
 }
 
+.productView-stickyCart.style-1 .sticky-price.has-compare-price .money-subtotal {
+    color: var(--product-sale-price-color);
+}
+
 .sticky-options{
     margin: 0 0 20px 0;
 }

@@ -1,6 +1,100 @@
 {%- if section.blocks.size > 0 -%}
     {% assign container = section.settings.container %}
     {% assign headingLineHeight = settings.type_heading_line_height %}
+    
+    <style type="text/css" media="screen">
+        {%- liquid
+            assign mg_top_desktop = section.settings.mg_top_desktop
+            assign mg_top_tablet = section.settings.mg_top_tablet
+            assign mg_top_mobile = section.settings.mg_top_mobile
+    
+            assign mg_bottom_desktop = section.settings.mg_bottom_desktop
+            assign mg_bottom_tablet = section.settings.mg_bottom_tablet
+            assign mg_bottom_mobile = section.settings.mg_bottom_mobile
+    
+            assign padding_full_width = section.settings.padding_full_width
+    
+            assign color_title = section.settings.color_title
+            assign fontsize_title = section.settings.fontsize_title
+            assign fontsize_title_mb = section.settings.fontsize_title_mb
+            assign margin_bottom_title = section.settings.margin_bottom_title
+    
+            assign color_des = section.settings.color_des
+            assign fontsize_des = section.settings.fontsize_des
+
+            assign arrows_position = section.settings.arrows_position
+        -%}
+  
+        #halo-image-banner-{{ section.id }} .is-slide .slick-dots {
+            bottom: -22px;
+        }
+
+        #halo-image-banner-{{ section.id }} .halo-block-header .title:before {
+            background-color: {{ color_title }};
+            {% unless section.settings.enable_border_title %}
+                display: none;
+            {% endunless %}
+        }
+
+        #halo-image-banner-{{ section.id }} .halo-block-header .title {
+            color: {{ color_title }};
+            font-size: {{ fontsize_title | append: 'px' }};
+            margin-top: 2px;
+            margin-bottom: {{ margin_bottom_title | append: 'px' }};
+            {%- if fontsize_title > headingLineHeight -%}
+                line-height: {{ fontsize_title | append: 'px' }};
+            {%- endif -%}
+        }
+
+        #halo-image-banner-{{ section.id }} .halo-block-header .rte {
+            color: {{ color_des }};
+            font-size: {{ fontsize_des | append: 'px' }};
+        }
+
+        {% if arrows_position != blank %}
+            #halo-image-banner-{{ section.id }} .slick-arrow.slick-next {
+                right: {{ arrows_position }} !important;
+            }
+            #halo-image-banner-{{ section.id }} .slick-arrow.slick-prev {
+                left: {{ arrows_position }} !important;
+            }
+        {% endif %}
+
+        @media (min-width: 1200px) {
+            #halo-image-banner-{{ section.id }}{
+                padding-top: {{ mg_top_desktop | append: 'px' }};
+                padding-bottom: {{ mg_bottom_desktop | append: 'px' }};
+            }
+        }
+
+        @media (min-width: 1025px) {
+            {% if container == 'fullwidth' %}
+                #halo-image-banner-{{ section.id }} .container-full {
+                    padding-left: {{ padding_full_width | append: 'px' }};
+                    padding-right: {{ padding_full_width | append: 'px' }};
+                }
+            {% endif %}
+        }
+  
+        @media (min-width: 768px) and (max-width: 1199px) {
+            #halo-image-banner-{{ section.id }}{
+                padding-top: {{ mg_top_tablet | append: 'px' }};
+                padding-bottom: {{ mg_bottom_tablet | append: 'px' }};
+            }
+        }
+  
+        @media (max-width: 767px) {
+            #halo-image-banner-{{ section.id }}{
+                padding-top: {{ mg_top_mobile | append: 'px' }};
+                padding-bottom: {{ mg_bottom_mobile | append: 'px' }};
+            }
+        
+            #halo-image-banner-{{ section.id }} .halo-block-header .title {
+                font-size: {{ fontsize_title_mb | append: 'px' }};
+            }
+        }
+    </style>
+
     <div class="halo-block halo-banner image-banner style_bg--{{ section.settings.style_bg }}" id="halo-image-banner-{{ section.id }}"  
         style="
             {% if section.settings.bg_image != blank %}
@@ -29,7 +123,7 @@
                 </div>
             {% endif %}
             <div class="halo-block-content">
-                <div
+                <{% if settings.banner_animation == 'effect_1' %}animated-component{% else %}div{% endif %}
                     class="halo-banner-wrapper {% if section.settings.display_type == 'slide' %}slideshow is-slide{% endif %}" 
                     {% if section.blocks.size > 1 and section.settings.display_type == 'slide' %}
                         data-image-banner-slide 
@@ -42,6 +136,19 @@
                     {%- for block in section.blocks -%}
                         {% if section.settings.display_type == 'slide' %}<div>{% endif %}
                         {%- liquid
+                            if block.type == 'largeImg'
+                                assign video_link = block.settings.video_link
+                                assign color_icon = block.settings.color_icon
+                                assign bg_color_icon = block.settings.bg_color_icon | color_modify: 'alpha', 0.4
+            
+                                assign adaptive_height_video = block.settings.adaptive_height_video
+                                assign icon_style = block.settings.icon_style
+                                assign enable_custom_video_icon_position = block.settings.enable_custom_video_icon_position
+                                assign video_icon_horizontal_position = block.settings.video_icon_horizontal_position
+                                assign video_icon_vertical_position = block.settings.video_icon_vertical_position
+                                assign video_icon_horizontal_position_mb = block.settings.video_icon_horizontal_position_mb
+                                assign video_icon_vertical_position_mb = block.settings.video_icon_vertical_position_mb
+                            endif
                             assign image = block.settings.image
                             assign image_item_2 = block.settings.image_item_2
                             assign preview_img = block.settings.image
@@ -75,6 +182,8 @@
                             assign color_sub_title_mb = block.settings.color_sub_title_mb
                             assign font_weight_sub_title = block.settings.font_weight_sub_title
                             assign sub_title_position = block.settings.sub_title_position
+                            assign sub_heading_font = block.settings.sub_heading_font
+                            assign sub_heading_font_item_2 = block.settings.sub_heading_font_item_2
 
                             assign sub_title_item_2 = block.settings.sub_title_item_2
                             assign letter_spacing_sub_title_item_2 = block.settings.letter_spacing_sub_title_item_2
@@ -163,6 +272,8 @@
                             assign color_countdown_mb = block.settings.color_countdown_mb
                             assign countdown_margin_bottom = block.settings.countdown_margin_bottom
                             assign hide_countdown_fc = block.settings.hide_countdown_fc
+                            assign countdown_style = block.settings.countdown_style
+                            assign countdown_position = block.settings.countdown_position
     
                             assign enable_parallax_image = block.settings.enable_parallax_image
                             assign enable_scroll_down = block.settings.enable_scroll_down
@@ -244,50 +355,79 @@
                             assign smallImg_btn_center_pos = block.settings.button_pos_from_center
                             assign smallImg_text_center_pos = block.settings.content_pos_from_center
                             assign smallImg_divider_center_pos = block.settings.divider_position_from_center
+                            assign smallImg_justify = block.settings.smallImg_justify
     
                             assign smallImg_image_2 = block.settings.image_2
                             assign smallImg_image_3 = block.settings.image_3
+
+                            assign list_gap = section.settings.list_gap | append: 'px'
                         -%}
   
                         {%- if block.type == 'largeImg' -%}
-                            <div class="item item-{{ block.id }} border--{{ border_title }}">
+                            <div class="item item-{{ block.id }} border--{{ border_title }}" data-animate="{{ settings.banner_animation }}">
                                 <div class="banner-item">
                                     <div class="img-box img-box--mobile{% if enable_parallax_image %} is-parallax{% endif %}">
                                         {%- if enable_parallax_image -%}
-                                            <a class="image--parallax" href="{{ link }}">
+                                            <a class="image--parallax"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %}>
                                                 <div class="parallax-image" style="background-image: url({{ preview_img | img_url: 'master' }});"></div>
                                             </a>
                                         {%- endif -%}
                                         {%- if image != blank -%}
-                                            <a class="image image-adapt adaptive_height" href="{{ link }}" style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}">
+                                            <a class="image image-adapt adaptive_height"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}" title="{{ preview_img.alt | default: shop.name | escape }}">
                                                 <img {% render 'lazyload', preview_img: preview_img %} loading="lazy" />
                                                 {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                             </a>
                                         {%- else -%}
-                                            <a class="image" href="{{ link }}">
+                                            <a class="image"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %}>
                                                 <div class="not_img" style="--height_not_img: 720px">
                                                     1880 x 720px
                                                 </div>  
                                             </a>
                                         {%- endif -%}
                                         {%- if mobile_image != blank -%}
-                                            <a class="image image-mobile image-adapt adaptive_height" href="{{ link }}" style="padding-top: {{ 1 | divided_by: mobile_image.aspect_ratio | times: 100 | append: '%' }}">
+                                            <a class="image image-mobile image-adapt adaptive_height"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} {% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} style="padding-top: {{ 1 | divided_by: mobile_image.aspect_ratio | times: 100 | append: '%' }}" title="{{ mobile_image.alt | default: shop.name | escape }}">
                                                 <img {% if settings.enable_lazyload %}data-{% endif %}srcset="{{ mobile_image | img_url: 'master' }} 1x, {{ mobile_image | img_url: 'master', scale: 2 }} 2x" {% unless settings.enable_lazyload %}src="{{ mobile_image | img_url: 'master' }}"{% endunless %} alt="{{ mobile_image.alt | default: shop.name | escape }}" loading="lazy" 
                                                 {% if settings.enable_lazyload %}class="lazyload"{% endif %}>
                                                 {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                             </a>
                                         {%- else -%}
                                             {%- if image != blank -%}
-                                                <a class="image image-mobile image-adapt adaptive_height" href="{{ link }}" style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}">
+                                                <a class="image image-mobile image-adapt adaptive_height"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}" title="{{ image.alt | default: shop.name | escape }}">
                                                     <img {% if settings.enable_lazyload %}data-{% endif %}srcset="{{ image | image_url: width: 420, crop: 'center' }} 1x, {{ image | image_url: width: 420, crop: 'center',  scale: 2 }} 2x" {% unless settings.enable_lazyload %}src="{{ image | img_url: '420x', crop: 'center' }}"{% endunless %} alt="{{ image.alt | default: shop.name | escape }}" loading="lazy" 
                                                     {% if settings.enable_lazyload %}class="lazyload"{% endif %}>
                                                     {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                 </a>
                                             {%- else -%}
-                                                <a class="image image-mobile" href="{{ link }}">
+                                                <a class="image image-mobile"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %}>
                                                     {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                                                 </a>
                                             {%- endif -%}
+                                        {%- endif -%}
+                                        {%- if video_link != blank -%}
+                                            <div class="video-open-popup{% if icon_style_item_2 == 'style_2' %} icon_style_2{% endif %} {% if enable_custom_video_icon_position %}custom_position{% endif %}" data-video-link="{{ video_link }}"
+                                                {% if enable_custom_video_icon_position %}  
+                                                    style="
+                                                        --left: {{ video_icon_horizontal_position | append: '%' }};
+                                                        --top: {{ video_icon_vertical_position | append: '%' }};
+                                                        --left-mb: {{ video_icon_horizontal_position_mb | append: '%' }};
+                                                        --top-mb: {{ video_icon_vertical_position_mb | append: '%' }};
+                                                        "       
+                                                {% endif %}
+                                            >
+                                                <button type="button" class="video-button" data-type="{{ video_link.type }}" 
+                                                    data-src="{{ video_link.id }}" 
+                                                    aspect_ratio="{{ adaptive_height_video| default: 56 | append: '%' }}" 
+                                                    style="--color: {{ color_icon }};
+                                                        {% if block_banner.settings.bg_color_icon != 'rgba(0,0,0,0)' and block_banner.settings.bg_color_icon != blank %}
+                                                            --bg_color: {{ bg_color_icon }};
+                                                        {% endif %}">
+                                                    {%- if icon_style == 'style_2' -%}
+                                                        <svg viewBox="0 0 200 200"> <circle cx="100" cy="100" r="90" fill="none" stroke-width="8"></circle> <polygon points="70, 50 70, 145 155, 100"></polygon> </svg>
+                                                    {%- else -%}
+                                                        <svg viewBox="0 0 50 50"><path d="M 10 5.25 L 10 44.75 L 11.5 43.875 L 42.09375 25.875 L 43.5625 25 L 42.09375 24.125 L 11.5 6.125 Z M 12 8.75 L 39.59375 25 L 12 41.25 Z"></path></svg>
+                                                    {%- endif -%}    
+                                                </button>
+                                            </div>
                                         {%- endif -%}
                                     </div>
                                     {%- if heading != blank or text != blank or btn_text != blank or btn_text_2 != blank -%}
@@ -314,13 +454,21 @@
                                                     <span>{{ sub_title }}</span>
                                                 </p>
                                             {%- endif -%}
+                                            {% if countdown != blank and countdown_position == 'countdown_above_desc' %}
+                                                <div class="countdown-block countdown-{{ block.id }} hide--{{ hide_countdown_fc }} shape-{{ countdown_style }}" data-countdown data-countdown-value="{{ countdown }}" style="--font-size-countdown-number-style: {{ font_size_countdown_number | append: 'px' }};
+                                                    --font-size-countdown-text-style: {{ font_size_countdown_text | append: 'px' }};
+                                                    --color-countdown-style: {{ color_countdown }};
+                                                    --color-countdown-mb-style: {{ color_countdown_mb }};
+                                                    --countdown-margin-bottom-style: {{ countdown_margin_bottom | append: 'px' }}">
+                                                </div>
+                                            {% endif %}
                                             {%- if text != blank -%}
                                                 <span class="banner-text">
                                                     {{ text }}
                                                 </span>
                                             {%- endif -%}
-                                            {% if countdown != blank %}
-                                                <div class="countdown-block countdown-{{ block.id }} hide--{{ hide_countdown_fc }}" data-countdown data-countdown-value="{{ countdown }}" style="--font-size-countdown-number-style: {{ font_size_countdown_number | append: 'px' }};
+                                            {% if countdown != blank and countdown_position == 'countdown_below_desc' %}
+                                                <div class="countdown-block countdown-{{ block.id }} hide--{{ hide_countdown_fc }} shape-{{ countdown_style }}" data-countdown data-countdown-value="{{ countdown }}" style="--font-size-countdown-number-style: {{ font_size_countdown_number | append: 'px' }};
                                                     --font-size-countdown-text-style: {{ font_size_countdown_text | append: 'px' }};
                                                     --color-countdown-style: {{ color_countdown }};
                                                     --color-countdown-mb-style: {{ color_countdown_mb }};
@@ -330,14 +478,14 @@
                                             {%- if btn_text_2 != blank -%}
                                                 <div class="banner-action">
                                                     {%- if btn_text != blank -%}
-                                                        <a href="{{ link }}" class="banner-button button">
+                                                        <a {% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} class="banner-button button">
                                                             {% if btn_icon != blank %}
                                                                 {{ btn_icon }}
                                                             {% endif %}
                                                             <span>{{ btn_text | escape }}</span>
                                                         </a>
                                                     {%- endif -%}
-                                                    <a href="{{ link_2 }}" class="banner-button button banner-button-2">
+                                                    <a {% if link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_2 }}"{% endif %} class="banner-button button banner-button-2">
                                                         {% if btn_icon_2 != blank %}
                                                             {{ btn_icon_2 }}
                                                         {% endif %}
@@ -346,7 +494,7 @@
                                                 </div>
                                             {%- else -%}
                                                 {%- if btn_text != blank -%}
-                                                    <a href="{{ link }}" class="banner-button button">
+                                                    <a {% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} class="banner-button button">
                                                         {% if btn_icon != blank %}
                                                             {{ btn_icon }}
                                                         {% endif %}
@@ -358,7 +506,7 @@
                                     {%- endif -%}
                                 </div>
                                 {%- if enable_scroll_down -%}
-                                    <a href="#" class="btn-scroll-down" data-scroll-down="" style="color: {{ heading_color }};">
+                                    <a href="javascript:void(0)" class="btn-scroll-down" data-scroll-down="" style="color: {{ heading_color }};">
                                         {% render 'icon-chevron-down' %}
                                     </a>
                                 {% endif %}
@@ -368,7 +516,7 @@
                                 assign enable_content_border = block.settings.enable_content_border
                                 assign content_border_color = block.settings.content_border_color
                             %}
-                            <div class="item item-{{ block.id }} type-item--small{% if block.settings.small_img_block_style == 'style_2' %} style-2{% elsif block.settings.small_img_block_style == 'style_3' %} style-3{% elsif block.settings.small_img_block_style == 'style_4' %} style-4{% endif %}">
+                            <div class="item item-{{ block.id }} type-item--small{% if block.settings.small_img_block_style == 'style_2' %} style-2{% elsif block.settings.small_img_block_style == 'style_3' %} style-3{% elsif block.settings.small_img_block_style == 'style_4' %} style-4{% endif %}" data-animate="{{ settings.banner_animation }}">
                                 <div class="flex-box__banner {% if row_reverse %}row-reverse{% endif %}" style="background-color: {{ smallImg_banner_bg_color }}">
                                     <div class="banner-item"
                                         {% if smallImg_image_2 != blank or smallImg_image_3 != blank %}
@@ -379,23 +527,22 @@
                                     >
                                         <div class="img-box">
                                             {%- if image != blank -%}
-                                                <a class="image image-adapt adaptive_height image-zoom" href="{{ link }}" style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}">
+                                                <a class="image image-adapt adaptive_height image-zoom"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}" title="{{ preview_img.alt | default: shop.name | escape }}">
                                                     <img {% render 'lazyload', preview_img: preview_img %} loading="lazy"/>
                                                     {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                 </a>
                                             {%- else -%}
-                                                <a class="image" href="{{ link }}">
+                                                <a class="image"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %}>
                                                     <div class="not_img" style="--height_not_img: 570px">
                                                         570 x 570px
                                                     </div>  
                                                 </a>
                                             {%- endif -%}
                                             {%- if video_link != blank -%}
-                                            <div class="video-open-popup{% if icon_style == 'style_2' %} icon_style_2{% endif %}" {{ video_link }}>
-                                                <a data-type="{{ video_link.type }}" 
+                                            <div class="video-open-popup{% if icon_style == 'style_2' %} icon_style_2{% endif %}" data-video-link="{{ video_link }}">
+                                                <button type="button" class="video-button" data-type="{{ video_link.type }}" 
                                                     data-src="{{ video_link.id }}" 
-                                                    aspect_ratio="{{ adaptive_height_video | default: 56 | append: '%' }}"
-                                                    href="javascript:void(0)"
+                                                    aspect_ratio="{{ adaptive_height_video | default: 56 | append: '%' }}" 
                                                     style="--color: {{ color_icon }};
                                                         {% if block.settings.bg_color_icon != 'rgba(0,0,0,0)' %}
                                                             --bg_color: {{ bg_color_icon }}
@@ -405,13 +552,13 @@
                                                     {%- else -%}
                                                         <svg viewBox="0 0 50 50"><path d="M 10 5.25 L 10 44.75 L 11.5 43.875 L 42.09375 25.875 L 43.5625 25 L 42.09375 24.125 L 11.5 6.125 Z M 12 8.75 L 39.59375 25 L 12 41.25 Z"></path></svg>
                                                     {%- endif -%}    
-                                                </a>
+                                                </button>
                                             </div>
                                             {%- endif -%}
                                         </div>
                                         {% if smallImg_image_2 != blank %}
                                             <div class="img-box">
-                                                <a class="image image-adapt adaptive_height image-zoom" href="{{ link }}" style="padding-top: {{ 1 | divided_by: smallImg_image_2.aspect_ratio | times: 100 | append: '%' }}">
+                                                <a class="image image-adapt adaptive_height image-zoom"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} style="padding-top: {{ 1 | divided_by: smallImg_image_2.aspect_ratio | times: 100 | append: '%' }}" title="{{ smallImg_image_2.alt | default: shop.name | escape }}">
                                                     <img {% render 'lazyload', preview_img: smallImg_image_2 %} loading="lazy"/>
                                                     {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                 </a>
@@ -419,7 +566,7 @@
                                         {% endif %}
                                         {% if smallImg_image_3 != blank %}
                                             <div class="img-box">
-                                                <a class="image image-adapt adaptive_height image-zoom" href="{{ link }}" style="padding-top: {{ 1 | divided_by: smallImg_image_3.aspect_ratio | times: 100 | append: '%' }}">
+                                                <a class="image image-adapt adaptive_height image-zoom"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} style="padding-top: {{ 1 | divided_by: smallImg_image_3.aspect_ratio | times: 100 | append: '%' }}" title="{{ smallImg_image_3.alt | default: shop.name | escape }}">
                                                     <img {% render 'lazyload', preview_img: smallImg_image_3 %} loading="lazy"/>
                                                     {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                 </a>
@@ -482,7 +629,7 @@
                                                     <div class="banner-action style_4">
                                                 {% endif %}
                                                     {%- if btn_text != blank -%}
-                                                        <a href="{{ link }}" class="banner-button button">
+                                                        <a {% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} class="banner-button button">
                                                             {% if btn_icon != blank %}
                                                                 {{ btn_icon }}
                                                             {% endif %}
@@ -490,7 +637,7 @@
                                                         </a>
                                                         {% if block.settings.small_img_block_style == 'style_2' or block.settings.small_img_block_style == 'style_4' %}
                                                             {% if smallImg_btn_2_text != blank %}
-                                                                <a href="{{ smallImg_btn_2_link }}" class="banner-button button button_2">
+                                                                <a {% if smallImg_btn_2_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ smallImg_btn_2_link }}"{% endif %} class="banner-button button button_2">
                                                                     {% if btn_icon != blank %}
                                                                         {{ btn_icon }}
                                                                     {% endif %}
@@ -512,28 +659,27 @@
                             </div>
                         {% elsif block.type == 'customImg' %}
                             <div class="item-wrapper halo-row column-2">
-                                <div class="item item-{{ block.id }} border--{{ border_title }} halo-item type-item--custom" style="display: block;">
+                                <div class="item item-{{ block.id }} border--{{ border_title }} halo-item type-item--custom" style="display: block;" data-animate="{{ settings.banner_animation }}">
                                     <div class="flex-box__banner {% if row_reverse %}row-reverse{% endif %}">
                                         <div class="banner-item">
                                             <div class="img-box">
                                                 {%- if image != blank -%}
-                                                    <a class="image image-adapt adaptive_height image-zoom" href="{{ link }}" style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}">
+                                                    <a class="image image-adapt adaptive_height image-zoom" {% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}" title="{{ preview_img.alt | default: shop.name | escape }}">
                                                         <img {% render 'lazyload', preview_img: preview_img %} loading="lazy"/>
                                                         {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                     </a>
                                                 {%- else -%}
-                                                    <a class="image" href="{{ link }}">
+                                                    <a class="image"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %}>
                                                         <div class="not_img" style="--height_not_img: 570px">
                                                             420 x 570px
                                                         </div>  
                                                     </a>
                                                 {%- endif -%}
                                                 {%- if video_link != blank -%}
-                                                <div class="video-open-popup{% if icon_style == 'style_2' %} icon_style_2{% endif %}" {{ video_link }}>
-                                                    <a data-type="{{ video_link.type }}" 
+                                                <div class="video-open-popup{% if icon_style == 'style_2' %} icon_style_2{% endif %}" data-video-link="{{ video_link }}">
+                                                    <button type="button" class="video-button" data-type="{{ video_link.type }}" 
                                                         data-src="{{ video_link.id }}" 
-                                                        aspect_ratio="{{ adaptive_height_video | default: 56 | append: '%' }}"
-                                                        href="javascript:void(0)"
+                                                        aspect_ratio="{{ adaptive_height_video | default: 56 | append: '%' }}" 
                                                         style="--color: {{ color_icon }};
                                                             {% if block.settings.bg_color_icon != 'rgba(0,0,0,0)' %}
                                                                 --bg_color: {{ bg_color_icon }}
@@ -543,7 +689,7 @@
                                                         {%- else -%}
                                                             <svg viewBox="0 0 50 50"><path d="M 10 5.25 L 10 44.75 L 11.5 43.875 L 42.09375 25.875 L 43.5625 25 L 42.09375 24.125 L 11.5 6.125 Z M 12 8.75 L 39.59375 25 L 12 41.25 Z"></path></svg>
                                                         {%- endif -%}    
-                                                    </a>
+                                                    </button>
                                                 </div>
                                                 {%- endif -%}
                                             </div>
@@ -572,7 +718,7 @@
                                                         </span>
                                                     {%- endif -%}
                                                     {%- if btn_text != blank -%}
-                                                        <a href="{{ link }}" class="banner-button button">
+                                                        <a {% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} class="banner-button button">
                                                             {% if btn_icon != blank %}
                                                                 {{ btn_icon }}
                                                             {% endif %}
@@ -584,28 +730,27 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item item-{{ block.id }} border--{{ border_title_item_2 }} halo-item type-item--custom-2" style="display: block;">
+                                <div class="item item-{{ block.id }} border--{{ border_title_item_2 }} halo-item type-item--custom-2" style="display: block;" data-animate="{{ settings.banner_animation }}">
                                     <div class="flex-box__banner {% if row_reverse_item_2 %}row-reverse{% endif %}">
                                         <div class="banner-item">
                                             <div class="img-box">
                                                 {%- if image_item_2 != blank -%}
-                                                    <a class="image image-adapt adaptive_height image-zoom" href="{{ link_item_2 }}" style="padding-top: {{ 1 | divided_by: image_item_2.aspect_ratio | times: 100 | append: '%' }}">
+                                                    <a class="image image-adapt adaptive_height image-zoom"{% if link_item_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_item_2 }}"{% endif %} style="padding-top: {{ 1 | divided_by: image_item_2.aspect_ratio | times: 100 | append: '%' }}" title="{{ preview_img_item_2.alt | default: shop.name | escape }}">
                                                         <img {% render 'lazyload', preview_img: preview_img_item_2 %} loading="lazy"/>
                                                         {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                     </a>
                                                 {%- else -%}
-                                                    <a class="image" href="{{ link_item_2 }}">
+                                                    <a class="image"{% if link_item_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_item_2 }}"{% endif %}>
                                                         <div class="not_img" style="--height_not_img: 570px">
                                                             420 x 570px
                                                         </div>  
                                                     </a>
                                                 {%- endif -%}
                                                 {%- if video_link_item_2 != blank -%}
-                                                <div class="video-open-popup{% if icon_style_item_2 == 'style_2' %} icon_style_2{% endif %}" {{ video_link_item_2 }}>
-                                                    <a data-type="{{ video_link_item_2.type }}" 
+                                                <div class="video-open-popup{% if icon_style_item_2 == 'style_2' %} icon_style_2{% endif %}" data-video-link="{{ video_link_item_2 }}">
+                                                    <button type="button" class="video-button" data-type="{{ video_link_item_2.type }}" 
                                                         data-src="{{ video_link_item_2.id }}" 
                                                         aspect_ratio="{{ adaptive_height_video_item_2| default: 56 | append: '%' }}"
-                                                        href="javascript:void(0)"
                                                         style="--color: {{ color_icon_item_2 }};
                                                             {% if block.settings.bg_color_icon_item_2 != 'rgba(0,0,0,0)' %}
                                                                 --bg_color: {{ bg_color_icon_item_2 }}
@@ -615,7 +760,7 @@
                                                         {%- else -%}
                                                             <svg viewBox="0 0 50 50"><path d="M 10 5.25 L 10 44.75 L 11.5 43.875 L 42.09375 25.875 L 43.5625 25 L 42.09375 24.125 L 11.5 6.125 Z M 12 8.75 L 39.59375 25 L 12 41.25 Z"></path></svg>
                                                         {%- endif -%}    
-                                                    </a>
+                                                    </button>
                                                 </div>
                                                 {%- endif -%}
                                             </div>
@@ -644,7 +789,7 @@
                                                         </span>
                                                     {%- endif -%}
                                                     {%- if btn_text_item_2 != blank -%}
-                                                        <a href="{{ link_item_2 }}" class="banner-button button">
+                                                        <a {% if link_item_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_item_2 }}"{% endif %} class="banner-button button">
                                                             {% if btn_icon != blank %}
                                                                 {{ btn_icon }}
                                                             {% endif %}
@@ -658,53 +803,52 @@
                                 </div>
                             </div>
                         {% elsif block.type == 'specialImg' %}
-                            <div class="item item-{{ block.id }} type-item--special">
+                            <div class="item item-{{ block.id }} type-item--special" data-animate="{{ settings.banner_animation }}">
                                 <div class="flex-box__banner {% if row_reverse %}row-reverse{% endif %}">
                                     <div class="banner-item">
                                         <div class="img-box img-box--mobile">
                                             {%- if image != blank -%}
-                                                <a class="image image-adapt adaptive_height image-zoom" href="{{ link }}" style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}">
+                                                <a class="image image-adapt adaptive_height image-zoom"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}" title="{{ preview_img.alt | default: shop.name | escape }}">
                                                     <img {% render 'lazyload',preview_img: preview_img %} />
                                                     {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                 </a>
                                             {%- else -%}
-                                                <a class="image" href="{{ link }}">
+                                                <a class="image"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %}>
                                                     <div class="not_img" style="--height_not_img: 570px">
                                                       570 x 570px
                                                     </div>  
                                                 </a>
                                             {%- endif -%}
                                             {%- if mobile_image != blank -%}
-                                                <a class="image image-mobile image-adapt adaptive_height" href="{{ link }}" style="padding-top: {{ 1 | divided_by: mobile_image.aspect_ratio | times: 100 | append: '%' }}">
+                                                <a class="image image-mobile image-adapt adaptive_height"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} style="padding-top: {{ 1 | divided_by: mobile_image.aspect_ratio | times: 100 | append: '%' }}" title="{{ mobile_image.alt | default: shop.name | escape }}">
                                                     <img {% if settings.enable_lazyload %}data-{% endif %}srcset="{{ mobile_image | img_url: 'master' }} 1x, {{ mobile_image | img_url: 'master', scale: 2 }} 2x" {% unless settings.enable_lazyload %}src="{{ mobile_image | img_url: 'master' }}"{% endunless %} alt="{{ mobile_image.alt | default: shop.name | escape }}" loading="lazy" 
                                                     {% if settings.enable_lazyload %}class="lazyload"{% endif %}>
                                                     {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                 </a>
                                             {%- else -%}
                                                 {%- if image != blank -%}
-                                                    <a class="image image-mobile image-adapt adaptive_height" href="{{ link }}" style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}">
+                                                    <a class="image image-mobile image-adapt adaptive_height"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}" title="{{ image.alt | default: shop.name | escape }}">
                                                         <img {% if settings.enable_lazyload %}data-{% endif %}srcset="{{ image | img_url: '420x', crop: 'center' }} 1x, {{ image | img_url: '420x', crop: 'center',  scale: 2 }} 2x" {% unless settings.enable_lazyload %}src="{{ image | img_url: '420x', crop: 'center' }}"{% endunless %} alt="{{ image.alt | default: shop.name | escape }}" loading="lazy" 
                                                         {% if settings.enable_lazyload %}class="lazyload"{% endif %}>
                                                         {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                     </a>
                                                 {%- else -%}
-                                                    <a class="image image-mobile" href="{{ link }}">
+                                                    <a class="image image-mobile"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %}>
                                                         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                                                     </a>
                                                 {%- endif -%}
                                             {%- endif -%}
                                             {%- if video_link != blank -%}
-                                                <div class="video-open-popup" {{ video_link }}>
-                                                    <a data-type="{{ video_link.type }}" 
+                                                <div class="video-open-popup" data-video-link="{{ video_link }}">
+                                                    <button type="button" class="video-button" data-type="{{ video_link.type }}" 
                                                        data-src="{{ video_link.id }}" 
-                                                       aspect_ratio="{{ adaptive_height_video | default: 56 | append: '%' }}"
-                                                       href="javascript:void(0)"
+                                                       aspect_ratio="{{ adaptive_height_video | default: 56 | append: '%' }}" 
                                                        style="--color: {{ color_icon }};
                                                             {% if block.settings.bg_color_icon != 'rgba(0,0,0,0)' %}
                                                               --bg_color: {{ bg_color_icon }}
                                                             {% endif %}">
                                                         <svg viewBox="0 0 50 50"><path d="M 10 5.25 L 10 44.75 L 11.5 43.875 L 42.09375 25.875 L 43.5625 25 L 42.09375 24.125 L 11.5 6.125 Z M 12 8.75 L 39.59375 25 L 12 41.25 Z"></path></svg>
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             {%- endif -%}
                                             {% if display_countdown %}
@@ -752,7 +896,7 @@
                                                     </span>
                                                 {%- endif -%}
                                                 {%- if btn_text != blank -%}
-                                                    <a href="{{ link }}" class="banner-button button{% if button_style == 'style2' %} button-style2{% endif %}">
+                                                    <a {% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} class="banner-button button{% if button_style == 'style2' %} button-style2{% endif %}">
                                                         {% if btn_icon != blank %}
                                                             {{ btn_icon }}
                                                         {% endif %}
@@ -781,6 +925,22 @@
                                 {% else %}
                                     background: {{ bg_color }};
                                 {% endif %}
+                            }
+
+                            {% if smallImg_justify != blank %}
+                                #halo-image-banner-{{ section.id }} .item-{{ block.id }} .flex-box__banner {
+                                    justify-content: {{ smallImg_justify }};
+                                }
+                                
+                                {% if smallImg_justify == 'center' %}
+                                    #halo-image-banner-{{ section.id }} .item-{{ block.id }} .flex-box__banner div {
+                                        width: 100%;
+                                    }
+                                {% endif %}
+                            {% endif %}
+
+                            #halo-image-banner-{{ section.id }} .item-{{ block.id }} {
+                                margin-bottom: {{ list_gap }};  
                             }
 
                             #halo-image-banner-{{ section.id }} .item-{{ block.id }}.type-item--custom-2 .flex-box__banner .banner-content {
@@ -816,6 +976,11 @@
                                 letter-spacing: {{ letter_spacing_sub_title }};
                                 {% endif %}
                                 margin-bottom: {{ margin_bottom_sub_title | append: 'px' }};
+                                {%- if block.settings.sub_heading_font == 'font_1' -%}
+                                    font-family: var(--font-tab-type-1);
+                                {%- else -%}
+                                    font-family: var(--font-tab-type-2);
+                                {%- endif -%}
                             }
 
                             #halo-image-banner-{{ section.id }} .item-{{ block.id }}.type-item--custom-2 .banner-sub-title {
@@ -827,6 +992,11 @@
                                 letter-spacing: {{ letter_spacing_sub_title_item_2 }};
                                 {% endif %}
                                 margin-bottom: {{ margin_bottom_sub_title_item_2 | append: 'px' }};
+                                {%- if block.settings.sub_heading_font_item_2 == 'font_1' -%}
+                                    font-family: var(--font-tab-type-1);
+                                {%- else -%}
+                                    font-family: var(--font-tab-type-2);
+                                {%- endif -%}
                             }
     
                             #halo-image-banner-{{ section.id }} .item-{{ block.id }} .banner-sub-title.has-border span {
@@ -938,6 +1108,11 @@
                             #halo-image-banner-{{ section.id }} .item-{{ block.id }} .banner-action.style_4 .banner-button.button_2 {
                                 margin-left: {{ smallImg_btn_2_spacing_top | append: "px" }};
                             }
+
+                            body.layout_rtl #halo-image-banner-{{ section.id }} .item-{{ block.id }} .banner-action.style_4 .banner-button.button_2 {
+                                margin-right: {{ smallImg_btn_2_spacing_top | append: "px" }};
+                                margin-left: 0;
+                            }
     
                             #halo-image-banner-{{ section.id }} .item-{{ block.id }} .banner-button svg {
                                 fill: {{ button_color }};
@@ -976,10 +1151,20 @@
                                 max-width: {{ content_width | minus: button_1_width | append: "px" }};
                                 transform: translateY({{ smallImg_text_center_pos | append: 'px' }})
                             }
+
+                            body.layout_rtl #halo-image-banner-{{ section.id }} .item-{{ block.id }} .flex-box__banner .content-box .content-box__col-1 {
+                                margin-left: {{ content_spacing_right | append: 'px' }};
+                                margin-right: auto;
+                            }
     
                             #halo-image-banner-{{ section.id }} .item-{{ block.id }} .flex-box__banner .content-box .content-box__col-2 {
                                 margin-left: {{ button_spacing_left | append: 'px' }};
                                 transform: translateY({{ smallImg_btn_center_pos | append: 'px' }});
+                            }
+
+                            body.layout_rtl #halo-image-banner-{{ section.id }} .item-{{ block.id }} .flex-box__banner .content-box .content-box__col-2 {
+                                margin-right: {{ button_spacing_left | append: 'px' }};
+                                margin-left: auto;
                             }
 
                             #halo-image-banner-{{ section.id }} .item-{{ block.id }} .flex-box__banner .content-box .sub-title-icon img {
@@ -1036,6 +1221,40 @@
                                     margin: 0 auto;
                                 }
                             {% endif %}
+                            
+                            #halo-image-banner-{{ section.id }}  .item-{{ block.id }}  .video-open-popup a {
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                z-index: 2;
+                                line-height: 0;
+                                padding: 10px 20px;
+                                border-radius: 5px;
+                                background: var(--bg_color);
+                                color: var(--color);
+                            }
+                    
+                            #halo-image-banner-{{ section.id }} .item-{{ block.id }} .video-open-popup.custom_position a {
+                                top: var(--top);
+                                left: var(--left);
+                            }
+                    
+                            #halo-image-banner-{{ section.id }} .item-{{ block.id }} .video-open-popup.icon_style_2 a {
+                                padding: 0;
+                            }
+                    
+                            #halo-image-banner-{{ section.id }} .item-{{ block.id }} .video-open-popup svg {
+                                width: 85px;
+                                height: 85px;
+                                fill: currentColor;
+                                stroke: currentColor;
+                            }
+                      
+                            #halo-image-banner-{{ section.id }} .item-{{ block.id }} .video-open-popup.icon_style_2 svg {
+                                width: 96px;
+                                height: 96px;
+                            }
     
                             #halo-image-banner-{{ section.id }} .item-{{ block.id }}.style-3 .flex-box__banner {
                                 position: relative;
@@ -1049,6 +1268,11 @@
                                 width: 57.5%;
                                 height: 116%;
                                 background-color: {{ smallImg_banner_bg_color }};
+                            }
+
+                            body.layout_rtl #halo-image-banner-{{ section.id }} .item-{{ block.id }}.style-3 .flex-box__banner::after {
+                                right: auto;
+                                left: 0;
                             }
     
                             #halo-image-banner-{{ section.id }} .item-{{ block.id }}.style-3 .flex-box__banner.row-reverse::after {
@@ -1147,6 +1371,16 @@
                             }
 
                             @media (max-width: 1024px) {
+                                #halo-image-banner-{{ section.id }} .item-{{ block.id }} .video-open-popup.custom_position a {
+                                    top: var(--top-mb);
+                                    left: var(--left-mb);
+                                }   
+                                  
+                                #halo-image-banner-{{ section.id }} .item-{{ block.id }} .video-open-popup svg {
+                                    width: 44px;
+                                    height: 44px;
+                                }
+
                                 #halo-image-banner-{{ section.id }} .item-{{ block.id }} .flex-box__banner .content-box {
                                     {% if block.settings.small_img_block_style == 'style_2' %}
                                         flex-direction: column;
@@ -1311,6 +1545,10 @@
                                         margin-left: auto;
                                     {% endif %}
                                 }
+
+                                body.layout_rtl #halo-image-banner-{{ section.id }} .item-{{ block.id }} .flex-box__banner .content-box .content-box__col-1 {
+                                    margin-right: 0;
+                                }
     
                                 #halo-image-banner-{{ section.id }} .item-{{ block.id }} .flex-box__banner .content-box .content-box__col-2 {
                                     margin-left: 0px;
@@ -1324,6 +1562,11 @@
                                     {% endif %}
     
                                     transform: translateY(0);
+                                }
+
+                                body.layout_rtl #halo-image-banner-{{ section.id }} .item-{{ block.id }} .flex-box__banner .content-box .content-box__col-2 {
+                                    margin-left: auto;
+                                    margin-right: 12px;
                                 }
     
                                 #halo-image-banner-{{ section.id }} .item-{{ block.id }} .flex-box__banner .content-box .content-box__divider {
@@ -1447,103 +1690,11 @@
                         </style>
                         {% if section.settings.display_type == 'slide' %}</div>{% endif %}
                     {%- endfor -%}
-                </div>
+                </{% if settings.banner_animation == 'effect_1' %}animated-component{% else %}div{% endif %}>
             </div>
         </div>
     </div>
-    <style type="text/css" media="screen">
-        {%- liquid
-            assign mg_top_desktop = section.settings.mg_top_desktop
-            assign mg_top_tablet = section.settings.mg_top_tablet
-            assign mg_top_mobile = section.settings.mg_top_mobile
-    
-            assign mg_bottom_desktop = section.settings.mg_bottom_desktop
-            assign mg_bottom_tablet = section.settings.mg_bottom_tablet
-            assign mg_bottom_mobile = section.settings.mg_bottom_mobile
-    
-            assign padding_full_width = section.settings.padding_full_width
-    
-            assign color_title = section.settings.color_title
-            assign fontsize_title = section.settings.fontsize_title
-            assign fontsize_title_mb = section.settings.fontsize_title_mb
-            assign margin_bottom_title = section.settings.margin_bottom_title
-    
-            assign color_des = section.settings.color_des
-            assign fontsize_des = section.settings.fontsize_des
-
-            assign arrows_position = section.settings.arrows_position
-        -%}
-  
-        #halo-image-banner-{{ section.id }} .is-slide .slick-dots {
-            bottom: -22px;
-        }
-
-        #halo-image-banner-{{ section.id }} .halo-block-header .title:before {
-            background-color: {{ color_title }};
-            {% unless section.settings.enable_border_title %}
-                display: none;
-            {% endunless %}
-        }
-
-        #halo-image-banner-{{ section.id }} .halo-block-header .title {
-            color: {{ color_title }};
-            font-size: {{ fontsize_title | append: 'px' }};
-            margin-top: 2px;
-            margin-bottom: {{ margin_bottom_title | append: 'px' }};
-            {%- if fontsize_title > headingLineHeight -%}
-                line-height: {{ fontsize_title | append: 'px' }};
-            {%- endif -%}
-        }
-
-        #halo-image-banner-{{ section.id }} .halo-block-header .rte {
-            color: {{ color_des }};
-            font-size: {{ fontsize_des | append: 'px' }};
-        }
-
-        {% if arrows_position != blank %}
-            #halo-image-banner-{{ section.id }} .slick-arrow.slick-next {
-                right: {{ arrows_position }} !important;
-            }
-            #halo-image-banner-{{ section.id }} .slick-arrow.slick-prev {
-                left: {{ arrows_position }} !important;
-            }
-        {% endif %}
-
-        @media (min-width: 1200px) {
-            #halo-image-banner-{{ section.id }}{
-                padding-top: {{ mg_top_desktop | append: 'px' }};
-                padding-bottom: {{ mg_bottom_desktop | append: 'px' }};
-            }
-        }
-
-        @media (min-width: 1025px) {
-            {% if container == 'fullwidth' %}
-                #halo-image-banner-{{ section.id }} .container-full {
-                    padding-left: {{ padding_full_width | append: 'px' }};
-                    padding-right: {{ padding_full_width | append: 'px' }};
-                }
-            {% endif %}
-        }
-  
-        @media (min-width: 768px) and (max-width: 1199px) {
-            #halo-image-banner-{{ section.id }}{
-                padding-top: {{ mg_top_tablet | append: 'px' }};
-                padding-bottom: {{ mg_bottom_tablet | append: 'px' }};
-            }
-        }
-  
-        @media (max-width: 767px) {
-            #halo-image-banner-{{ section.id }}{
-                padding-top: {{ mg_top_mobile | append: 'px' }};
-                padding-bottom: {{ mg_bottom_mobile | append: 'px' }};
-            }
-        
-            #halo-image-banner-{{ section.id }} .halo-block-header .title {
-                font-size: {{ fontsize_title_mb | append: 'px' }};
-            }
-        }
-    </style>
-  {%- endif -%}
+{%- endif -%}
 {% schema %}
     {
         "name": "t:sections.image-banner.name",
@@ -1803,6 +1954,16 @@
                 ]
             },
             {
+                "type": "range",
+                "id": "list_gap",
+                "label": "t:sections.image-banner.settings.general.list_grid_gap",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "default": 0,
+                "unit": "px"
+            },
+            {
                 "type": "checkbox",
                 "id": "enable_arrows",
                 "label": "t:sections.image-banner.settings.general.enable_arrows",
@@ -1918,6 +2079,21 @@
                     "step": 1,
                     "unit": "t:sections.footer.settings.footer_bottom.pdtop_footer_bottom.unit",
                     "default": 14
+                },
+                {
+                    "type": "select",
+                    "id": "sub_heading_font",
+                    "label": "t:settings_schema.typography.settings.font_type.label",
+                    "options": [
+                    {
+                        "value": "font_1",
+                        "label": "t:settings_schema.typography.settings.font_family__1.content"
+                    },
+                    {
+                        "value": "font_2",
+                        "label": "t:settings_schema.typography.settings.font_family__2.content"
+                    }],
+                    "default": "font_1"
                 },
                 {
                     "type": "select",
@@ -2139,6 +2315,38 @@
                         "value": "section",
                         "label": "t:sections.image-banner.blocks.image.settings.content.hide_section"
                     }]
+                },
+                {
+                    "type": "select",
+                    "id": "countdown_style",
+                    "label": "t:sections.image-banner.blocks.image.settings.content.countdown_style",
+                    "default": "round",
+                    "options": [
+                        {
+                            "label": "t:sections.image-banner.blocks.image.settings.content.countdown_round",
+                            "value": "round"
+                        },
+                        {
+                            "label": "t:sections.image-banner.blocks.image.settings.content.countdown_square",
+                            "value": "square"
+                        }
+                    ]
+                },
+                {
+                    "type": "select",
+                    "id": "countdown_position",
+                    "label": "t:sections.image-banner.blocks.image.settings.content.countdown_position",
+                    "default": "countdown_below_desc",
+                    "options": [
+                        {
+                            "label": "t:sections.image-banner.blocks.image.settings.content.countdown_below_desc",
+                            "value": "countdown_below_desc"
+                        },
+                        {
+                            "label": "t:sections.image-banner.blocks.image.settings.content.countdown_above_desc",
+                            "value": "countdown_above_desc"
+                        }
+                    ]
                 },
                 {
                     "type": "range",
@@ -2417,8 +2625,83 @@
                     "type" : "color_background",
                     "id" : "button_background_gradient_hover_2",
                     "label" : "t:settings_schema.colors.settings.colors_name.background_hover_gradient"
-                }
-                ]
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.image-banner.blocks.specialImg.settings.video.content"
+                },
+                {
+                    "type": "video_url",
+                    "id": "video_link",
+                    "accept": [
+                        "youtube",
+                        "vimeo"
+                    ],
+                    "label": "t:sections.video.settings.video_url.label",
+                    "info": "t:sections.video.settings.video_url.info"
+                },
+                {
+                    "type": "text",
+                    "id": "adaptive_height_video",
+                    "label": "t:sections.image-banner.blocks.smallImg.settings.video.adaptive_height_video",
+                    "default": "56"
+                },
+                {
+                    "type": "select",
+                    "id": "icon_style",
+                    "label": "t:sections.image-banner.blocks.smallImg.settings.video.icon_video_style",
+                    "default": "style_1",
+                    "options": [
+                    {
+                        "value": "style_1",
+                        "label": "t:sections.image-banner.blocks.smallImg.settings.video.style_1"
+                    },
+                    {
+                        "value": "style_2",
+                        "label": "t:sections.image-banner.blocks.smallImg.settings.video.style_2"
+                    }]
+                },
+                {
+                    "type": "color",
+                    "id": "color_icon",
+                    "label": "t:sections.image-banner.blocks.smallImg.settings.video.color_icon",
+                    "default": "#fff"
+                },
+                {
+                    "type": "color",
+                    "id": "bg_color_icon",
+                    "label": "t:sections.image-banner.blocks.smallImg.settings.video.bg_color_icon",
+                    "default": "#000"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "enable_custom_video_icon_position",
+                    "label" : "t:sections.slide-show.blocks.image.enable_custom_position",
+                    "info": "t:sections.slide-show.blocks.image.info_enable_custom_position",
+                    "default": false    
+                },  
+                {
+                    "type": "text",
+                    "id": "video_icon_horizontal_position",
+                    "label" : "t:sections.slide-show.blocks.image.custom_horizontal",
+                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                },
+                {
+                    "type": "text",
+                    "id": "video_icon_vertical_position",
+                    "label" : "t:sections.slide-show.blocks.image.custom_vertical",
+                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                },  
+                {
+                    "type": "text",
+                    "id": "video_icon_horizontal_position_mb",
+                    "label" : "t:sections.product_block.settings.block_banner.custom_horizontal_mb"
+                },
+                {
+                    "type": "text",
+                    "id": "video_icon_vertical_position_mb",
+                    "label" : "t:sections.product_block.settings.block_banner.custom_vertical_mb"
+                }]
             },
             {
                 "type": "smallImg",
@@ -2465,6 +2748,30 @@
                         {
                             "value": "style_4",
                             "label": "t:sections.image-banner.blocks.smallImg.settings.style.style__4"
+                        }
+                    ]
+                },
+                {
+                    "type": "select",
+                    "id": "smallImg_justify",
+                    "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.label",
+                    "default": "space-between",
+                    "options": [
+                        {
+                            "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.option_1",
+                            "value": "space-between"
+                        },  
+                        {
+                            "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.option_2",
+                            "value": "flex-start"
+                        },
+                        {
+                            "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.option_3",
+                            "value": "flex-end"
+                        },
+                        {
+                            "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.option_4",
+                            "value": "center"
                         }
                     ]
                 },
@@ -2597,6 +2904,21 @@
                     "step": 1,
                     "unit": "t:sections.footer.settings.footer_bottom.pdtop_footer_bottom.unit",
                     "default": 14
+                },
+                {
+                    "type": "select",
+                    "id": "sub_heading_font",
+                    "label": "t:settings_schema.typography.settings.font_type.label",
+                    "options": [
+                    {
+                        "value": "font_1",
+                        "label": "t:settings_schema.typography.settings.font_family__1.content"
+                    },
+                    {
+                        "value": "font_2",
+                        "label": "t:settings_schema.typography.settings.font_family__2.content"
+                    }],
+                    "default": "font_1"
                 },
                 {
                     "type": "select",
@@ -3120,6 +3442,21 @@
                 },
                 {
                     "type": "select",
+                    "id": "sub_heading_font",
+                    "label": "t:settings_schema.typography.settings.font_type.label",
+                    "options": [
+                    {
+                        "value": "font_1",
+                        "label": "t:settings_schema.typography.settings.font_family__1.content"
+                    },
+                    {
+                        "value": "font_2",
+                        "label": "t:settings_schema.typography.settings.font_family__2.content"
+                    }],
+                    "default": "font_1"
+                },
+                {
+                    "type": "select",
                     "id": "font_weight_sub_title",
                     "label": "t:settings_schema.typography.settings.typography.sub_title_font_weight",
                     "default": "700",
@@ -3366,7 +3703,6 @@
                         "youtube",
                         "vimeo"
                     ],
-                    "default": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
                     "label": "t:sections.video.settings.video_url.label",
                     "info": "t:sections.video.settings.video_url.info"
                 },
@@ -3553,6 +3889,21 @@
                     "step": 1,
                     "unit": "t:sections.footer.settings.footer_bottom.pdtop_footer_bottom.unit",
                     "default": 14
+                },
+                {
+                    "type": "select",
+                    "id": "sub_heading_font_item_2",
+                    "label": "t:settings_schema.typography.settings.font_type.label",
+                    "options": [
+                    {
+                        "value": "font_1",
+                        "label": "t:settings_schema.typography.settings.font_family__1.content"
+                    },
+                    {
+                        "value": "font_2",
+                        "label": "t:settings_schema.typography.settings.font_family__2.content"
+                    }],
+                    "default": "font_1"
                 },
                 {
                     "type": "select",
@@ -4277,7 +4628,7 @@
                 {
                     "type": "color",
                     "id": "text_time_color",
-                    "label": "t:sections.image-banner.blocks.specialImg.settings.label__17",
+                    "label": "t:settings_schema.typography.settings.typography.text_color",
                     "default": "#ffffff"
                 },
                 {
@@ -4323,6 +4674,21 @@
                     "step": 1,
                     "unit": "t:sections.footer.settings.footer_bottom.pdtop_footer_bottom.unit",
                     "default": 14
+                },
+                {
+                    "type": "select",
+                    "id": "sub_heading_font",
+                    "label": "t:settings_schema.typography.settings.font_type.label",
+                    "options": [
+                    {
+                        "value": "font_1",
+                        "label": "t:settings_schema.typography.settings.font_family__1.content"
+                    },
+                    {
+                        "value": "font_2",
+                        "label": "t:settings_schema.typography.settings.font_family__2.content"
+                    }],
+                    "default": "font_1"
                 },
                 {
                     "type": "select",

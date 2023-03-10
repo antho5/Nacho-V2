@@ -146,6 +146,7 @@
                             arrows: self.data('arrows'),
                             nextArrow: window.arrows.icon_next,
                             prevArrow: window.arrows.icon_prev,
+                            rtl: window.rtl_slick,
                             speed: self.data('speed') || 500,
                             responsive: [{
                                 breakpoint: 1280,

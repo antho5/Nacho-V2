@@ -11,7 +11,7 @@
             </span>
         </li>
 		{% if show_banner %}
-			<a href="#" class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: banner_lv_2.aspect_ratio | times: 100 }}%;">
+			<a href="javascript:void(0)" class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: banner_lv_2.aspect_ratio | times: 100 }}%;">
 				<img {% render 'lazyload',preview_img: banner_lv_2 %} />
 				{% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
 			</a>
@@ -118,7 +118,7 @@
 	                                </span>
 	                            </li>
 								{% if show_banner %}
-									<a href="#" class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: banner_lv_3.aspect_ratio | times: 100 }}%;">
+									<a href="javascript:void(0)" class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: banner_lv_3.aspect_ratio | times: 100 }}%;">
 										<img {% render 'lazyload',preview_img: banner_lv_3 %} />
 										{% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
 									</a>	

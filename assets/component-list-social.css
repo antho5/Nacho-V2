@@ -92,13 +92,21 @@ li.list-social__item:last-child {
     transition: var(--anchor-transition);
 }
 
-.list-social-2 .list-social__info a{
+.list-social-2 .list-social__info a,
+.list-social-2 .list-social__info button {
     font-size: var(--fontsize-text-social);
     font-weight: var(--font-weight-bold);
     letter-spacing: var(--letter-spacing);
     line-height: 1.2;
     text-transform: uppercase;
     color: var(--color-text2);
+}
+
+.list-social-2 .list-social__info button {
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
 }
 
 .list-social-2 .mail-newsletter .list-social__info{

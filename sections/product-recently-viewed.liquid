@@ -117,6 +117,77 @@
             }
         {%- endif -%}
 
+        /* Start: Scroll Layout */
+        .section-block-{{section.id}} .products-flex {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            user-select: none;
+            padding-bottom: 45px;
+            overflow: auto;
+            overflow-y: clip;
+            gap: 30px;
+            padding-right: 60px;
+        }
+
+        body.layout_rtl .section-block-{{section.id}} .products-flex {
+            padding-left: 60px;
+            padding-right: 0;
+        }
+
+        .section-block-{{section.id}} .products-flex .product {
+            flex-shrink: 0;
+            flex-grow: 0;
+            padding: 0;
+        }
+
+        .section-block-{{section.id}} .halo-block-content.is-scroll {
+            overflow: hidden;
+        }
+
+        .section-block-{{ section.id }} .products-flex::-webkit-scrollbar {
+            height: var(--scrollbar-height, 3px);
+            cursor: pointer;
+        }
+
+        .section-block-{{section.id}} .products-flex::-webkit-scrollbar-track {
+            background: var(--scrollbar-track-color, #dadada);
+        }
+
+        .section-block-{{section.id}} .products-flex::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb-color, #000);
+        }
+
+        .section-block-{{section.id}} .products-flex::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover-color, #333);
+        }
+
+        .section-block-{{ section.id }} .products-flex.active .product {
+            pointer-events: none;
+        }
+
+        /* End: Scroll Layout */
+
+        @media (max-width: 1024px) {
+            .section-block-{{ section.id }} .products-flex {
+                --count: 2!important;
+                gap: 15px;
+            }
+            
+            .section-block-{{ section.id }} .products-flex .product {
+                padding: 0 7px;
+            }
+
+            .section-block-{{section.id}} .products-flex {
+                scroll-snap-type: x mandatory;
+                padding-bottom: 0;
+            }
+        
+            .section-block-{{section.id}} .halo-product-block .products-flex .product {
+                scroll-snap-align: start;
+            }
+        }
+
         @media (max-width: 767px) {
             .section-block-{{section.id}} {
                 padding-top: {{ mg_top_mobile | append: 'px' }};
@@ -125,6 +196,16 @@
 
             .section-block-{{section.id}} .halo-block-header .title {
                 font-size: {{ fontsize_title_mb | append: 'px'  }};
+            }
+
+            .section-block-{{ section.id }} .products-flex .product {
+                {% if show_half %}
+                    flex-basis: calc(100% / calc(var(--count) - 0.3));
+                    width: calc(100% / calc(var(--count) - 0.3));
+                {% else %}
+                    flex-basis: calc(100% / var(--count));
+                    width: calc(100% / var(--count));
+                {% endif %}
             }
         }
 
@@ -162,6 +243,18 @@
             }
         }
 
+        @media (min-width: 768px) {
+            .section-block-{{ section.id }} .products-flex .product  {
+                {% if show_half %}
+                    flex-basis: calc(100% / calc(var(--count) + 0.5));
+                    width: calc(100% / calc(var(--count) + 0.5));
+                {% else %}
+                    flex-basis: calc(100% / var(--count));
+                    width: calc(100% / var(--count));
+                {% endif %}
+            }
+        }
+
         @media (min-width: 1200px) {
             .section-block-{{section.id}} {
                 padding-top: {{ mg_top_desktop | append: 'px' }};
@@ -170,7 +263,7 @@
         }
     </style>
     <{% if swipe %}product-slider-component{% else %}div{% endif %} class="halo-block halo-product-block halo-recently-viewed-block section-block-{{section.id}}" id="halo-recently-viewed-block-{{ section.id }}" data-recently-viewed-block data-limit="{{ limit }}" data-layout="{{ layout }}" sectionId="{{ section.id }}" data-image-ratio="{{ image_ratio }}" data-swipe="{{ swipe }}" style="--grid-gap: {{ grid_gap }}">
-        <div class="{% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%}container-full{% else %}container{% endif %}">
+        <{% if layout == 'scroll' %}product-scroller{% else %}div{% endif %} class="{% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%}container-full{% else %}container{% endif %}">
             {%- if block_title != blank -%}
                 <div class="halo-block-header text-{{ block_title_align }} block-title--{{section.settings.style_block_header}}">
                     <h3 class="title">
@@ -178,7 +271,7 @@
                     </h3>
                 </div>
             {%- endif -%}
-            <div class="halo-block-content">
+            <div class="halo-block-content {% if layout == 'scroll' %}is-scroll{% endif %}" {% if layout == 'scroll' %}data-drag-container{% endif %}>
                 {%- if layout== 'grid' -%}
                     {%- liquid
                         assign product_limit = 0
@@ -192,12 +285,48 @@
                     {%- liquid
                         assign column = section.settings.product_recently_viewed_show
                         assign dots = section.settings.product_recently_viewed_dots
+                        assign dots_mb = section.settings.product_recently_viewed_dots_mb
                         assign arrows = section.settings.product_recently_viewed_arrows
+                        assign arrows_mb = section.settings.product_recently_viewed_arrows_mb
                     -%}
                     <div class="recentlyViewed-row products-carousel column-{{ column }}"
                         data-item-to-show="{{ column }}"
                         data-item-dots="{{ dots }}"
+                        data-item-dots-mb="{{ dots_mb }}"
                         data-item-arrows="{{ arrows }}"
+                        data-item-arrows-mb="{{ arrows_mb }}"
+                        id="recently-viewed-products-list-2"
+                    >
+                {% elsif layout == 'scroll' %}
+                    {% liquid
+                        assign column = section.settings.product_block_per_view 
+                        assign show_half = section.settings.show_half 
+
+                        assign scroll_height = section.settings.scroll_height | append: 'px'
+                        assign scroll_track_bg = section.settings.scroll_track_bg
+                        assign scroll_thumb_color = section.settings.scroll_thumb_color
+                        assign scroll_thumb_hover_color = section.settings.scroll_thumb_hover_color
+                        assign enable_hover_drag_icon = section.settings.enable_hover_drag_icon
+                    %}
+                    <div class="products-cursor handleMouseLeave" data-enable-hover="{{ enable_hover_drag_icon }}"> 
+                        <div class="products-cursor__outer">    
+                            <div class="products-cursor__inner">
+                                <img src="{{ 'bg-cursor.png' | asset_url }}" alt="Cursor" class="products-cursor__image">
+                                <svg viewBox="0 0 448 512" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow products-cursor__icon" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M311.03 131.515l-7.071 7.07c-4.686 4.686-4.686 12.284 0 16.971L387.887 239H12c-6.627 0-12 5.373-12 12v10c0 6.627 5.373 12 12 12h375.887l-83.928 83.444c-4.686 4.686-4.686 12.284 0 16.971l7.071 7.07c4.686 4.686 12.284 4.686 16.97 0l116.485-116c4.686-4.686 4.686-12.284 0-16.971L328 131.515c-4.686-4.687-12.284-4.687-16.97 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>  
+                    <div        
+                        class="recentlyViewed-row products-flex disable-srollbar-mb column-{{ column }}{% if show_half %} show-half{% endif %}{% if swipe %} slider slider--tablet grid{% endif %}" 
+                        data-drag-parent
+                        style="--count: {{ column }};
+                            --scrollbar-height: {{ scroll_height }};
+                            --scrollbar-track-color: {% if scroll_track_bg != blank and scroll_track_bg != 'rgba(0,0,0,0)' %}{{ scroll_track_bg }} {% endif %};
+                            --scrollbar-thumb-color: {% if scroll_thumb_color != blank and scroll_thumb_color != 'rgba(0,0,0,0)' %}{{ scroll_thumb_color }} {% endif %};
+                            --scrollbar-thumb-hover-color: {% if scroll_thumb_hover_color != blank and scroll_thumb_hover_color != 'rgba(0,0,0,0)' %}{{ scroll_thumb_hover_color }} {% endif %};
+                        "
                         id="recently-viewed-products-list-2"
                     >
                 {%- endif -%}
@@ -228,7 +357,7 @@
                     </div>
                 {%- endif -%}
             </div>
-        </div>
+        </{% if layout == 'scroll' %}product-scroller{% else %}div{% endif %}>
     </{% if swipe %}product-slider-component{% else %}div{% endif %}>
     {{ 'recently-viewed-product.js' | asset_url | script_tag }}
     <script type="text/javascript">
@@ -326,7 +455,7 @@
             {
                 "type": "color",
                 "id": "color_border_bottom",
-                "label": "t:sections.layout.container.color_border_bottom",
+                "label": "t:settings_schema.colors.settings.colors_name.border_color",
                 "default": "#e8e8e8"
             },
             {
@@ -419,11 +548,15 @@
                 "options": [
                 {
                     "value": "grid",
-                    "label": "t:sections.product-recently-viewed.settings.general.options__5"
+                    "label": "t:sections.product_block.settings.general.options__5"
                 },
                 {
                     "value": "slider",
-                    "label": "t:sections.product-recently-viewed.settings.general.options__6"
+                    "label": "t:sections.product_block.settings.general.options__6"
+                },
+                {
+                    "value": "scroll",
+                    "label": "t:sections.product_block.settings.product_block_layout.option3"
                 }],
                 "default": "slider"
             },
@@ -528,15 +661,15 @@
                 "options": [
                 {
                     "value": "left",
-                    "label": "t:sections.product-recently-viewed.settings.general.options__7"
+                    "label": "t:sections.product_block.settings.general.options__7"
                 },
                 {
                     "value": "center",
-                    "label": "t:sections.product-recently-viewed.settings.general.options__8"
+                    "label": "t:sections.product_block.settings.general.options__8"
                 },
                 {
                     "value": "right",
-                    "label": "t:sections.product-recently-viewed.settings.general.options__9"
+                    "label": "t:sections.product_block.settings.general.options__9"
                 }],
                 "default": "center"
             },
@@ -556,15 +689,15 @@
                 "options": [
                 {
                     "value": "adapt",
-                    "label": "t:sections.product-recently-viewed.settings.general.options__10"
+                    "label": "t:sections.product_block.settings.general.options__10"
                 },
                 {
                     "value": "portrait",
-                    "label": "t:sections.product-recently-viewed.settings.general.options__11"
+                    "label": "t:sections.product_block.settings.general.options__11"
                 },
                 {
                     "value": "square",
-                    "label": "t:sections.product-recently-viewed.settings.general.options__12"
+                    "label": "t:sections.product_block.settings.general.options__12"
                 }],
                 "default": "adapt"
             },
@@ -614,14 +747,26 @@
             {
                 "type": "checkbox",
                 "id": "product_recently_viewed_dots",
-                "label": "t:sections.product-recently-viewed.settings.slider.label__1",
+                "label": "t:sections.product_block.settings.slider.product_block_dots_desk",
                 "default": false
             },
             {
                 "type": "checkbox",
-                "id": "product_recently_viewed_arrows",
-                "label": "t:sections.product-recently-viewed.settings.slider.label__2",
+                "id": "product_recently_viewed_dots_mb",
+                "label": "t:sections.product_block.settings.slider.product_block_dots_mb",
                 "default": true
+            }, 
+            {
+                "type": "checkbox",
+                "id": "product_recently_viewed_arrows",
+                "label": "t:sections.product_block.settings.slider.product_block_arrows_desk",
+                "default": true
+            },
+            {
+                "type": "checkbox",
+                "id": "product_recently_viewed_arrows_mb",
+                "label": "t:sections.product_block.settings.slider.product_block_arrows_mb",
+                "default": false
             },
             {
                 "type": "select",
@@ -641,6 +786,77 @@
                     "label": "5"
                 }],
                 "default": "5"
+            },
+            {
+                "type": "header",
+                "content": "t:sections.product_block.settings.scroll.content"
+            },
+            {
+                "type": "select",
+                "id": "product_block_per_view",
+                "label": "t:sections.product_block.settings.grid.product_block_per_row",
+                "options": [
+                {
+                    "value": "1",
+                    "label": "1"
+                },
+                {
+                    "value": "2",
+                    "label": "2"
+                },
+                {
+                    "value": "3",
+                    "label": "3"
+                },
+                {
+                    "value": "4",
+                    "label": "4"
+                },
+                {
+                    "value": "5",
+                    "label": "5"
+                }],
+                "default": "4"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_half",
+                "label": "t:sections.product_block.settings.scroll.show_half",
+                "default": true
+            },
+            {
+                "type": "range",
+                "id": "scroll_height",
+                "label": "t:sections.product_block.settings.scroll.scroll_height",
+                "min": 1,
+                "max": 10,
+                "step": 1,
+                "default": 4,
+                "unit": "t:sections.layout.fontsize.fontsize_title.unit"
+            },
+            {
+                "type": "color",
+                "id": "scroll_track_bg",
+                "label": "t:sections.product_block.settings.scroll.scroll_track_bg",
+                "default": "#f1f1f1"
+            },
+            {
+                "type": "color",
+                "id": "scroll_thumb_color",
+                "label": "t:sections.product_block.settings.scroll.scroll_thumb_color",
+                "default": "#000"
+            },
+            {
+                "type": "color",
+                "id": "scroll_thumb_hover_color",
+                "label": "t:sections.product_block.settings.scroll.scroll_thumb_hover_color",
+                "default": "#444"
+            },
+            {
+                "type": "checkbox",
+                "id": "enable_hover_drag_icon",
+                "label": "t:sections.product_block.settings.scroll.enable_hover_drag_icon",
+                "default": true
             },
             {
                 "type": "header",

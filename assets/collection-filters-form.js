@@ -60,7 +60,6 @@ class CollectionFiltersForm extends HTMLElement {
             storedExpandedAndCollapsedHeight.push({ index: block.dataset.index, collapsedHeight: currentHeight, extendedHeight: 0, showingMore: false })
 
             if (blockIndex === sidebarBlocks.length - 1) {
-                // console.log(storedExpandedAndCollapsedHeight)
                 sessionStorage.setItem('heightData', JSON.stringify(storedExpandedAndCollapsedHeight))
             }
         })
@@ -87,7 +86,6 @@ class CollectionFiltersForm extends HTMLElement {
         if (maxItemsNumber > 10 && maxItemsNumber <= 20) maxExpandedHeight = collapsedHeight * 2;
 
         if (maxExpandedHeight > window.innerHeight) maxExpandedHeight = collapsedHeight * 1
-
 
         if (sideBlock.classList.contains('show-more')) {
             sideBlock.classList.remove('show-more');
@@ -372,6 +370,7 @@ class CollectionFiltersForm extends HTMLElement {
             const remainingSidebarBlocks = Array.from(facetDetailsElements).filter(element => element.dataset.typeList && element.dataset.index !== indexTarget)
             CollectionFiltersForm.renderRemainingFilters(remainingSidebarBlocks)
         }
+        
         CollectionFiltersForm.renderPriceFilter(Array.from(facetDetailsElements).find(element => element.dataset.typePrice && element.dataset.index !== indexTarget))
     }
 

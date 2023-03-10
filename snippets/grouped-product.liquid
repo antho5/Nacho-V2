@@ -29,6 +29,7 @@
         --spacing-top: {{ spacing_top }};
         --spacing-bottom: {{ spacing_bottom }};
     "
+    data-combo-discount-rate="{{ combo_discount_rate }}"
 >
     <div class="bundle-product">
         {% assign product_form_combo_id = 'product-form-combo-' | append: product.id -%}
@@ -65,12 +66,12 @@
                             {%- endif -%}
                             {%- if show_compare_color and isColor and compare_layout == '1' -%}
                                 <div class="productView-compareColor style-{{ compare_layout }}">
-                                    <a class="link link-underline" href="javascript:void(0)" aria-label="link" data-open-compare-color-popup>
+                                    <button type="button" class="link link-underline" aria-label="{{ 'compare_color.general.title' | t }}" data-open-compare-color-popup>
                                         {% render 'icon-compare-color-2' %}
                                         <span class="text">
                                             {{ 'compare_color.general.title' | t }}
                                         </span>
-                                    </a>
+                                    </button>
                                 </div>
                             {%- endif -%}
                             {%- if settings.show_ask_an_expert -%}

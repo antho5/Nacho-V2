@@ -15,7 +15,7 @@ class CartItems extends HTMLElement {
 
         this.initToCheckoutButtonDisabling()
         this.initCartCountdown()
-        this.initGiftCardElement()
+        if (this.giftCardElement) this.initGiftCardElement()
         this.initGiftCardManipulation()
         // this.initQuantityUpdateButtons()
   }
@@ -114,7 +114,12 @@ class CartItems extends HTMLElement {
             console.error(`Error: ${error.message}`)
         }
 
-        window.location = '/checkout'  
+        let checkoutHref = this.toCheckoutButton.dataset.href;
+        if (checkoutHref == null) {
+            checkoutHref = `${window.routes?.root ? window.routes.root : ""}/checkout`;
+        }
+        
+        window.location = checkoutHref;
     }
 
     initCartCountdown(){

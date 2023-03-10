@@ -60,6 +60,14 @@
 	font-size: calc(var(--font-body-size) - 2px);
 	text-transform: unset;
 }
+.product-card-layout-04 .card-action-bottom .card-wishlist .wishlist-added {
+	background-color: var(--product-wishlist-bg);
+}
+
+.product-card-layout-04 .card-action-bottom .card-wishlist .wishlist-added .text {
+	color: var(--product-wishlist-color);
+	background-color: var(--product-wishlist-bg);
+}
 
 .product-card-layout-04 .card-compare .compare-label{
 	font-size: calc(var(--font-body-size) - 2px);
@@ -276,10 +284,7 @@ body:not(.quick_shop_option_2) .halo-product-list-view-popup .form-label+.swatch
 		text-align: center;
 	}
 
-	.product-card-layout-04 .card-information__wrapper.text-right .card-information__group-2 .card-vendor {
-		text-align: left;
-	}
-
+    .product-card-layout-04 .card-information__wrapper.text-right .card-information__group-2 .card-vendor, 
 	.product-card-layout-04 .card-information__wrapper.text-right .card-information__group-2 .card-review {
 		text-align: right;
 	}
@@ -295,16 +300,11 @@ body:not(.quick_shop_option_2) .halo-product-list-view-popup .form-label+.swatch
 		padding-left: 10px;
 		padding-right: 10px;
 	}
-
-	.product-card-layout-04 .card-action-bottom .card-wishlist .wishlist-added {
-		background-color: var(--product-wishlist-bg);
-	}
-
-	.product-card-layout-04 .card-action-bottom .card-wishlist .wishlist-added .text {
-		color: var(--product-wishlist-color);
-	    background-color: var(--product-wishlist-bg);
-	}
-
+    .card-product__group.group-left .card-quickview .text {
+      right: auto;
+      left: calc(100% - 30px);
+    }
+	
 	.product-card-layout-04 .product-item.sold-out:not(.has-notify) .card-product__wrapper .card-media,
 	.product-card-layout-04 .product-item.sold-out:not(.has-notify) .card-product__wrapper .card-action form,
 	.product-card-layout-04 .product-item.has-notify .card-product__wrapper .card-media {
@@ -331,9 +331,11 @@ body:not(.quick_shop_option_2) .halo-product-list-view-popup .form-label+.swatch
 
 @media (max-width: 1024px) {
 	.product-card-layout-04 .card-action-bottom {
-		padding: 10px 0;
+		padding: 10px 0 0 0;
 	}
-
+    .product-card-layout-04 .card-quickview .text {
+      display: none;
+    }
 	.product-card-layout-04 .card-action-bottom.has-wishlist .card-compare {
 		display: none;
 	}
@@ -348,12 +350,6 @@ body:not(.quick_shop_option_2) .halo-product-list-view-popup .form-label+.swatch
 	.product-card-layout-04 .card-action-bottom .card-wishlist .wishlist-icon {
 		border-radius: 50%;
 	}
-
-	.product-card-layout-04 .card-action-bottom .card-wishlist .wishlist-icon .icon-wishlist {
-		margin-right: 0;
-		margin-bottom: 0;
-	}
-
 	.product-card-layout-04 .card-action-bottom .card-wishlist .wishlist-icon .text {
 		display: none;
 	}
@@ -361,7 +357,18 @@ body:not(.quick_shop_option_2) .halo-product-list-view-popup .form-label+.swatch
 	.product-card-layout-04 .card-information__group .card-review, .product-card-layout-04 .card-action-bottom.has-wishlist{
 		display: none;
 	}
-
+    .product-card-layout-04 .card-action-bottom.show-mb {
+      display: flex;
+    }
+    .product-card-layout-04 .card-action-bottom.show-mb.text-center {
+      justify-content: center;
+    }
+    .product-card-layout-04 .card-action-bottom.show-mb.text-right {
+      justify-content: flex-end;
+    }
+    .product-card-layout-04 .card-action-bottom.show-mb .card-wishlist .wishlist-icon .text {
+      display: inline-block;
+    }
 	.product-card-layout-04 .card-information .price-item .money{
 		font-size: calc(var(--product-price-font-size) - 2px);
 	}

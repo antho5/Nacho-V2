@@ -8,7 +8,8 @@ class ProductTabs extends HTMLElement {
         this.link = this.querySelectorAll('.toggleLink');
         this.readMore = this.querySelectorAll('[data-show-more-toogle]');
         this.tabClose = this.querySelectorAll('.pdViewTab-close');
-        this.isVerticalPopup = this.dataset.vertical === 'popup'
+        this.isVerticalPopup = this.dataset.vertical === 'sidebar'
+        this.isVerticalSidebarMobile = this.dataset.verticalMobile === 'sidebar-mobile'
 
         for (i = 0; i < this.tab.length; i++) {
             this.tab[i].addEventListener(
@@ -38,7 +39,7 @@ class ProductTabs extends HTMLElement {
             );
         }
 
-        if ( this.isVerticalPopup) {
+        if (this.isVerticalPopup || this.isVerticalSidebarMobile) {
             document.querySelector('.background-overlay').addEventListener('click', this.onBackgroundClick.bind(this));
             document.querySelectorAll('.pdViewTab-close').forEach(closeIcon => {
                 closeIcon.addEventListener('click', this.handleVerticalPopupClose.bind(this))
@@ -102,18 +103,20 @@ class ProductTabs extends HTMLElement {
             }
             else if($this.classList.contains('is-open')){
                 $this.classList.remove('is-open');
-                if (this.isVerticalPopup) {
+                if ((this.isVerticalPopup && window.innerWidth > 550) || ($this.matches('.sidebar-mobile') && window.innerWidth <= 550)) {
                     $thisContent.classList.remove('is-show');
                     document.body.classList.remove('tab-popup-show');
-                } else {
+                }
+                else {
                     $($thisContent).slideUp('slow');
                 }
             } else {
                 $this.classList.add('is-open');
-                if (this.isVerticalPopup) {
+                if ((this.isVerticalPopup && window.innerWidth > 550) || ($this.matches('.sidebar-mobile') && window.innerWidth <= 550)) {
                     $thisContent.classList.add('is-show');
                     document.body.classList.add('tab-popup-show');
-                } else {
+                }
+                else {
                     $($thisContent).slideDown('slow');
                 }
             }
@@ -183,16 +186,15 @@ class ProductTabs extends HTMLElement {
     }
 
     onBackgroundClick(event) {
-        if (window.innerWidth <= 551) return 
-        if (event.target.closest('toggle-content.popup-mobile.is-show') != null) return 
-        document.querySelector('.toggleLink.popup-mobile.is-open').classList.remove('is-open');
-        document.querySelector('.toggle-content.popup-mobile.is-show').classList.remove('is-show');
+        if (event.target.closest('toggle-content.is-show') != null) return 
+        document.querySelector('.toggleLink.is-open')?.classList.remove('is-open');
+        document.querySelector('.toggle-content.is-show')?.classList.remove('is-show');
         document.body.classList.remove('tab-popup-show');
     }
 
     handleVerticalPopupClose(event) {
         const icon = event.target 
-        icon.closest('.toggle-content.popup-mobile').classList.remove('is-show')
+        icon.closest('.toggle-content').classList.remove('is-show')
         icon.closest('.tab-content').querySelector('.toggleLink').classList.remove('is-open')
         document.body.classList.remove('tab-popup-show')
     }

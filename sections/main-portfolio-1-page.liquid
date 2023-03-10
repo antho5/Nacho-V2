@@ -243,6 +243,14 @@
             padding-bottom: {{ padding_bottom_tablet }};
         }
     }
+
+    @media (max-width: 767px) {
+        {% if breadcrumb_color != blank and breadcrumb_color != 'rgba(0,0,0,0)' %} 
+            #PortfolioSection-{{ section.id }} .breadcrumb .home-link {
+                color: {{ breadcrumb_color }};
+            }
+        {% endif %}
+    }
     
     @media (max-width: 550px) {
         #PortfolioSection-{{ section.id }}{
@@ -399,7 +407,7 @@
             {
                 "type": "image_picker",
                 "id": "header_bg_image",
-                "label": "t:sections.general.settings.header_image.name"
+                "label": "t:settings_schema.colors.settings.colors_name.background_image"
             },
             {
                 "type": "range",

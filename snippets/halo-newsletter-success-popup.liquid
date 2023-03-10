@@ -1,8 +1,8 @@
 <div class="halo-popup newsletter-success-modal customPopup-small" data-newsletter-success-modal id="newsletter-success-modal">
     <div class="halo-popup-wrapper">
-        <a class="close close-modal" title="{{ 'cart.ajax_cart.close' | t }}">
+        <button type="button" class="close close-modal" aria-label="{{ 'cart.ajax_cart.close' | t }}">
             {% render 'icon-close' %}
-        </a>
+        </button>
         <div class="halo-modal-body success">
             <p class="form-message form-message--success" tabindex="-1" data-form-status>
                 {% render 'icon-check'%}

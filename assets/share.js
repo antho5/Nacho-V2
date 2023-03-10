@@ -24,12 +24,14 @@ window.shareProduct = function() {
             const url = this.elements.urlInput.getAttribute('data-url');
 
             this.getPosition();
+            this.setProductInfoTop(this.getProductInfoPosition());
 
             this.elements.successMessage.classList.add('hidden');
             this.elements.urlInput.setAttribute('value', url);
             this.elements.urlInput.classList.remove('is-copy');
             this.elements.content.classList.toggle('is-open');
             document.querySelector('body').classList.add('modal-share-open');
+
         }
 
         copyToClipboard(event) {
@@ -48,7 +50,7 @@ window.shareProduct = function() {
                 });
             }
         }
-
+        
         closeDetails(event) {
             event.preventDefault();
             // event.stopPropagation();
@@ -59,17 +61,20 @@ window.shareProduct = function() {
             this.elements.urlInput.classList.remove('is-copy');
             this.elements.content.classList.remove('is-open');
             document.querySelector('body').classList.remove('modal-share-open')
+            this.setProductInfoTop(0);
         }
-        
+
         getPosition() {
             if (window.innerWidth <= 1024 || this.elements.shareButton.closest('[data-quick-view-popup]') != null) return;
 
-            const y = this.elements.shareButton.getBoundingClientRect().top;
-            const x = this.elements.shareButton.getBoundingClientRect().left;
+            const shareButtonRect = this.elements.shareButton.getBoundingClientRect()
 
+            const y = shareButtonRect.top;
+            const x = shareButtonRect.left;
+            
             const width = this.elements.content.getBoundingClientRect().width;
-            const shareHeight = this.elements.shareButton.getBoundingClientRect().height;
-            const shareWidth = this.elements.shareButton.getBoundingClientRect().width;
+            const shareHeight = shareButtonRect.height;
+            const shareWidth = shareButtonRect.width;
 
             const left = x - width + shareWidth;
             const top = y + shareHeight + 10;
@@ -77,6 +82,16 @@ window.shareProduct = function() {
             this.elements.content.style.setProperty('--share-desk-top', top + 'px');
             this.elements.content.style.setProperty('--share-desk-left', left + 'px');
         }
+
+        getProductInfoPosition() {
+            const productDetails = document.querySelector('.productView-details')
+            return productDetails?.offsetTop
+        }   
+
+        setProductInfoTop(top) {
+            const productDetails = document.querySelector('.productView-details')
+            productDetails?.style.setProperty('--sticky-top', top + 'px')
+        } 
     }
 
     customElements.define('share-button', ShareButton);

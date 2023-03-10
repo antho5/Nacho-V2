@@ -1,5 +1,11 @@
 <link rel="stylesheet" href="{{ 'component-review-block.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'component-review-block.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- if settings.banner_animation == 'effect_1' -%}
+    <link rel="stylesheet" href="{{ 'component-review-block-banner-animation.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript>{{ 'component-review-block-banner-animation.css' | asset_url | stylesheet_tag }}</noscript>
+{%- endif -%}
+
 {% if section.blocks.size > 0 %}
     {% assign review_style = section.settings.section_style %}
 <div class="customer-review-block section-block-{{section.id}} {{ review_style }}" id="customer-review-{{section.id}}" {% if section.blocks.size > 1 and review_style == 'style_1'%}data-loader-script="{{ 'halo.slide-customer-review.js' | asset_url }}"{% endif %} data-check="{{ section.settings.show_arrow }}">
@@ -37,17 +43,20 @@
         {% unless review_style == 'style_2' %}
             <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}">
         {% else %}
+            {% if review_style == 'style_2' %}
+                <product-scroller>
+            {% endif %}
             <div 
                 class="customer-review__right" 
                 {% if review_style == 'style_2' %}data-drag-container{% endif %}
             >
         {% endunless %}  
-            <div class="customer-review-slide halo-row column-{{ section.settings.review_rows }} " data-review-slider data-row="{{ section.settings.review_rows }}" {% if review_style == 'style_2'%}data-drag-parent{% endif %}
+            <{% if settings.banner_animation == 'effect_1' %}animated-component{% else %}div{% endif %} class="customer-review-slide halo-row column-{{ section.settings.review_rows }}" data-review-slider data-row="{{ section.settings.review_rows }}" {% if review_style == 'style_2'%}data-drag-parent{% endif %}
                 style="--count: {{ section.settings.review_rows }};"
             >
                 {% for block in section.blocks %}
                     {% if section.settings.block_layout_style == 'layout1' %}
-                    <div class="halo-item customer-review__item" {% if review_style == 'style_2' %}data-drag-item{% endif %}>
+                    <div class="halo-item customer-review__item" {% if review_style == 'style_2' %}data-drag-item{% endif %} data-animate="{{ settings.banner_animation }}">
                         <div class="review_flex">
                             <div class="customer-review__item--left">
                                 {% if block.settings.heading != blank %}
@@ -84,7 +93,7 @@
                         </div>
                     </div>
                     {% else %}
-                    <div class="halo-item customer-review__item {% if review_style == 'style_1' %}text-center{% elsif review_style == 'style_2' %}text-left{% endif %}" {% if review_style == 'style_2' %}data-drag-item{% endif %}>
+                    <div class="halo-item customer-review__item {% if review_style == 'style_1' %}text-center{% elsif review_style == 'style_2' %}text-left{% endif %}" {% if review_style == 'style_2' %}data-drag-item{% endif %} data-animate="{{ settings.banner_animation }}">
                         {% if section.settings.show_avatar %}
                             <div class="review__item-image" style="max-width: {{block.settings.avatar.width}}px; margin: 0 auto;">
                                 {% if block.settings.avatar %}
@@ -139,10 +148,11 @@
                     </div>
                     {% endif %}
                 {% endfor %}
-            </div>
+            </{% if settings.banner_animation == 'effect_1' %}animated-component{% else %}div{% endif %}>
+            {% if review_style == 'style_2' %}
+                </product-scroller>
+            {% endif %}
         </div>
-    
-    
     {% if review_style == 'style_2' %}
         </div>
     {% endif %}
@@ -839,7 +849,7 @@
         {
             "type" : "color",
             "id" : "bg_color_icon",
-            "label": "t:sections.customer_review.settings.layout_block.bg_color_block",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color",
             "default" : "#cbcbcb"
         },
         {

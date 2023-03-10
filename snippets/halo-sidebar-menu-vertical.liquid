@@ -1,8 +1,8 @@
 <div class="halo-sidebar halo-sidebar-left halo-sidebar_menu halo-sidebar_menu_vertical" id="navigation-mobile">
-    <a href="#" class="halo-sidebar-close" data-menu-close-sidebar alt="{{ 'general.common.close' | t }}">
+    <button type="button" class="halo-sidebar-close" data-menu-close-sidebar aria-label="{{ 'general.common.close' | t }}">
       {% render 'icon-close' %}
       {{ 'general.common.close' | t }}
-    </a>
+    </button>
     <div class="halo-sidebar-wrapper custom-scrollbar">
       <div class="nav-tabs-mb">
           <div class="nav-tabs-title nav-main-tabs{% unless settings.enable_tab_categories %} no-tab-categories{% endunless %}">

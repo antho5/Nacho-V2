@@ -124,6 +124,10 @@
     margin-top: 14px;
 }
 
+.login-item .accepts-marketing {
+    margin-top: 15px;
+}
+
 /* Login Page */
 .login-page .login-rowRight {
   background: var(--bg-global);
@@ -970,6 +974,22 @@
 
 .order dd s {
   color: var(--color-foreground-70);
+}
+
+.reset-password .button-2 {
+  margin-top: 25px;
+}
+
+.reset-password .login-text {
+  margin-bottom: 15px;
+}
+
+.reset-password.customer h2.form__message {
+  font-size: var(--font-body-size);
+}
+
+.reset-password.customer .form__message {
+  margin-top: 10px;
 }
 
 @media (min-width: 768px){

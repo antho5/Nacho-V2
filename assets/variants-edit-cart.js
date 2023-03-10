@@ -13,7 +13,9 @@ class VariantEditCartSelects extends HTMLElement {
         if (!this.currentVariant) {
             this.item[0].dataset.inStock = 'false'
         } else {
-            this.item[0].dataset.inStock = this.currentVariant.available ? 'true': 'false'
+            if(this.item[0]) {
+              this.item[0].dataset.inStock = this.currentVariant.available ? 'true': 'false'
+            }
         }
 
         var inventory = this.currentVariant?.inventory_management;
@@ -23,7 +25,6 @@ class VariantEditCartSelects extends HTMLElement {
                 arrayInVarName = 'edit_cart_inven_array_' + productId,
                 inven_array = window[arrayInVarName];
 
-            console.log(inven_array)
             if(inven_array != undefined) {
                 var inven_num = inven_array[this.currentVariant.id],
                     inventoryQuantity = parseInt(inven_num);
@@ -501,7 +502,9 @@ class VariantEditCartSelects extends HTMLElement {
             }
         }
 
-        this.item[0].dataset.inStock = this.currentVariant.available ? 'true' : 'false';
+        if (this.item[0]) {
+          this.item[0].dataset.inStock = this.currentVariant.available ? 'true' : 'false';
+        }
     }
 
     getVariantData() {
@@ -511,6 +514,7 @@ class VariantEditCartSelects extends HTMLElement {
 
     updateAddToCartButton() {
         const editCartWrapper = this.variantSelect.closest('[data-template-cart-edit]');
+        if (!editCartWrapper) return 
         const productItems = [...editCartWrapper.querySelectorAll('.product-edit-item')];
         const updateEditCartButton = this.variantSelect.closest('[data-edit-cart-popup]').querySelector('[data-update-cart-edit]');
         const allValid = productItems.every(productItem => productItem.dataset.inStock == 'true');

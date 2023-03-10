@@ -1,13 +1,12 @@
-
 <link rel="stylesheet" href="{{ 'component-quick-cart.css' | asset_url }}" media="print" onload="this.media='all'">
 
 <noscript>{{ 'component-quick-cart.css' | asset_url | stylesheet_tag }}</noscript>
 
 <div class="halo-sidebar halo-sidebar-right halo-cart-sidebar" id="halo-cart-sidebar">
-    <a href="#" class="halo-sidebar-close" data-close-cart-sidebar alt="{{ 'general.common.close' | t }}">
+    <button type="button" class="halo-sidebar-close" data-close-cart-sidebar aria-label="{{ 'general.common.close' | t }}">
         {% render 'icon-close' %}
         {{ 'general.common.close' | t }}
-    </a>
+    </button>
     <div class="halo-sidebar-header text-left">
 		<span class="title">
 			{{ 'sections.cart.my_cart' | t }}
@@ -19,28 +18,26 @@
 	</div>
     <div class="halo-sidebar-wrapper custom-scrollbar {{cart.items}}">
       	{%- if settings.show_calculator_free_shipping_message -%}
-    		<div class="previewCartMessage">
-    			<div class="haloCalculatorShipping">
-                    <div class="progress{% if cart.item_count == 0 %} progress-hidden{% endif %}" data-text-enabled="{{ settings.calculator_free_shipping_message_show_percent  }}" data-shipping-progress>
-                      <div class="progress_shipping" role="progressbar">
-                            <div class="progress-meter" style="width: 0">
-                            {% if settings.calculator_free_shipping_message_show_percent %}
-                              <span class="text">0%</span>
-                            {% endif %}
-                            {% if settings.calculator_free_shipping_message_show_truck %}
-                              <div class="progress-truck-wrapper">
-                                {% render 'icon-shipping-truck' %}
-                              </div>
-                            {% endif %}
-                          </div>
-                        </div>
-                    </div>
-                    <div class="message" data-shipping-message></div>
-                </div>
-    		</div>
+          <div class="previewCartMessage">
+            {% render 'free-shipping-component' %}
+          </div>
         {%- endif -%}
-      	<div class="previewCart-wrapper"></div>
+		<cart-coupon-discount data-is-sidebar="true">
+			<template data-discount-icon>
+				{% render 'icon-discount' %}
+			</template>
+			<template data-discounted-price-template>
+				<span class="previewCartItem-saving-price">
+				<s class="before-discount-price" data-original-price-display>
+					{{ item.original_price | money }}
+				</s>  
+				<span class="discounted-price" data-current-price-display>
+					{{ item.final_price | money }}
+				</span>
+				</span> 
+			</template>
+			<div class="previewCart-wrapper"></div>
+		</cart-coupon-discount>
   	</div>
 </div>
 <script src="{{ 'halo-toolcart.js' | asset_url }}" defer="defer"></script>
-

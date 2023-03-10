@@ -33,7 +33,7 @@
     height: 100px;
     position: relative;
     overflow: hidden;
-    padding: 11px 0 9px 13px;
+    padding: 10px 0 10px 10px;
 }
 
 .product-suggest .product-image svg{
@@ -59,16 +59,31 @@
 }
 
 .product-suggest .product-info {
+    padding: 14px 35px 9px 19px;
     display: inline-block;
     vertical-align: top;
     width: calc(100% - 75px);
-    padding: 14px 35px 10px 19px;
-    line-height: 1;
 }
 
 .product-suggest .product-info .text{
-    display: inline;
-    padding: 0 0 6px 0;
+    margin-bottom: 6px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    color: var(--color-text2);
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-body-size);
+    line-height: calc(var(--font-body-size) + 8px);
+    letter-spacing: var(--body-letter-spacing);
+}
+
+.product-suggest .product-info .product-name {
+  display: inline; 
+  color: var(--color-text);
+  font-size: var(--font-body-size);
+  line-height: var(--body-line-height);
 }
 
 .product-suggest .product-info .info{
@@ -84,24 +99,9 @@
 
 .product-suggest .product-info .time{
     display: block;
-    font-size: var(--font-body-size);
-    line-height: var(--body-line-height);
     letter-spacing: var(--body-letter-spacing);
     color: var(--color-text2);
-    margin-top: 6px;
-}
-
-.product-suggest .product-info .product-name{
-    font-size: var(--font-body-size);
-    font-weight: var(--font-weight-normal);
-    line-height: var(--body-line-height);
-    letter-spacing: var(--body-letter-spacing);
-    color: var(--color-text);
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    display: inline;
-    -webkit-line-clamp: 2;
-    text-overflow: ellipsis;
+    margin-top: 7px;
 }
 
 .halo-notification-popup.is-active {

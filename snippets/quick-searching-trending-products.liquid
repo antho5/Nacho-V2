@@ -6,10 +6,10 @@
                     {%- if settings.search_trending_title != blank -%}
                         <h3 class="search-block-title text-left">
                             <span class="text">{{ settings.search_trending_title | escape }}</span>
-                            {% unless settings.header_layout == '02' or settings.header_layout == '07' %}
-                                <a href="javascript:void(0)" class="header-search-popup-close" alt="{{ 'general.common.close' | t }}">
+                            {% unless settings.header_layout == '02' or settings.header_layout == '07' or settings.header_layout == '10' %}
+                                <button type="button" class="header-search-popup-close" aria-label="{{ 'general.common.close' | t }}">
                                     {% render 'icon-close' %}
-                                </a>
+                                </button>
                             {% endunless %}
                         </h3>
                     {%- endif -%}
@@ -67,6 +67,20 @@
                                             %}
                                         {% elsif settings.product_card_layout == '05' %}
                                             {% render 'product-card-05',
+                                                product_card_product: product,
+                                                portrait_aspect_ratio: '125',
+                                                serial: forloop.index,
+                                                sectionId: 'list-result'
+                                            %}
+                                        {% elsif settings.product_card_layout == '06' %}
+                                            {% render 'product-card-06',
+                                                product_card_product: product,
+                                                portrait_aspect_ratio: '125',
+                                                serial: forloop.index,
+                                                sectionId: 'list-result'
+                                            %}
+                                        {% elsif settings.product_card_layout == '07' %}
+                                            {% render 'product-card-07',
                                                 product_card_product: product,
                                                 portrait_aspect_ratio: '125',
                                                 serial: forloop.index,

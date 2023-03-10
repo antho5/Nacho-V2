@@ -16,10 +16,10 @@
 				{{ 'customer.login_page.sign_in' | t }}
 			{%- endif -%}
 		</span>
-        <a href="#" class="halo-sidebar-close" data-close-auth-sidebar alt="{{ 'general.common.close' | t }}">
+        <button type="button" class="halo-sidebar-close" data-close-auth-sidebar aria-label="{{ 'general.common.close' | t }}">
             {% render 'icon-close' %}
             {{ 'general.common.close' | t }}
-        </a>
+        </button>
 	</div>
     <div class="halo-sidebar-wrapper custom-scrollbar">
     	{%- if customer -%}

@@ -142,15 +142,15 @@
         {% if settings.quick_shop_type == '2' %}
             <label class="form-label label-quantity-2">{{ 'products.product.quantity.label_1' | t }}</label>
             <quickshop-update-quantity class="previewCartItem-qty quickshop-quantity">
-                <a href="javascript:void(0)" data-minus-quantity-quickshop="" class="minus btn-quantity"></a>
+                <button type="button" name="minus" data-minus-quantity-quickshop class="minus btn-quantity"></button>
                 <input class="form-input quantity {{product}}" name="quantity" id="quickshop-update-{{ product.id }}" data-qtt-id1="quantity{{ product.id }}" value="1" type="number"{% if product.variant.inventory_management != null and product.variant.inventory_quantity > 0 %} data-inventory-quantity="{{ product.variant.inventory_quantity }}"{% endif %} data-product-card-quantity data-product-card-quantity-id="{{ product.id }}"/>
-                <a href="javascript:void(0)" data-plus-quantity-quickshop="" class="plus btn-quantity"></a>
+                <button type="button" name="plus" data-plus-quantity-quickshop class="plus btn-quantity"></button>
             </quickshop-update-quantity>
         {% endif %}
         <div class="product-card__button2">
             <input type="hidden" name="quantity" value="1" />
             <button data-btn-addToCart class="button button2 add-to-cart-btn" type="submit" data-form-id="#swatch-{{formId}}-{{sectionId}}-{{list}}">
-                {{ 'products.product.submit' | t }}
+                {{ 'products.product.add.label__2' | t }}
             </button>
             {% if settings.quick_shop_type == '2' %}
             <button data-cancel-quickshop-popup class="button button2 cancel-btn">

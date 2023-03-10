@@ -19,7 +19,7 @@
                             {{ 'products.product.vendor' | t }}
                         </div>
                     {% endif %}
-                    <a class="card-title link-underline {{ settings.product_title_text_transform }}{% if settings.product_title_line_text != 'full' %} card-title-ellipsis{% endif %} text-{{ settings.product_content_text_align }}" href="">
+                    <a class="card-title link-underline {{ settings.product_title_text_transform }}{% if settings.product_title_line_text != 'full' %} card-title-ellipsis{% endif %} text-{{ settings.product_content_text_align }}" role="link" aria-disabled="true" title="{{ 'onboarding.product_title' | t }}">
                         <span class="text">
                             {{ 'onboarding.product_title' | t }}
                         </span>

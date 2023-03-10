@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="{{ 'component-custom-service-block.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'component-custom-service-block.css' | asset_url | stylesheet_tag }}</noscript>
 
+{%- if settings.banner_animation == 'effect_1' -%}
+    <link rel="stylesheet" href="{{ 'component-custom-service-banner-animation.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript>{{ 'component-custom-service-banner-animation.css' | asset_url | stylesheet_tag }}</noscript>
+{%- endif -%}
+
 <style>
     {%- liquid
         assign policies_bg = section.settings.policies_bg
@@ -91,6 +96,15 @@
         {% endif %}
     }
 
+    body.layout_rtl .section-block-{{section.id}} .halo-item + .halo-item {
+        {% if section.settings.border_item == 'style_1' %}
+            border-left: 0;
+            border-right: 1px solid #d0d0d0;
+        {% elsif section.settings.border_item == 'style_2' %}
+            position: relative;
+        {% endif %}
+    }
+
     {% if section.settings.border_item == 'style_2' %}
         .section-block-{{section.id}} .halo-item + .halo-item:before {
             content: '';
@@ -102,6 +116,11 @@
             left: 0;
             transform: translateY(-50%);
             background-color: #000000;
+        }
+
+        body.layout_rtl .section-block-{{section.id}} .halo-item + .halo-item:before {
+            right: 0;
+            left: auto;
         }
     {% endif %}
 
@@ -290,7 +309,7 @@
                         </div>      
                     {% endif %}
                     {% if section.settings.view_all != blank %}
-                        <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}" href="{{ section.settings.link_view_all }}" title="{{section.settings.view_all}}" 
+                        <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}"{% if section.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all }}"{% endif %} title="{{section.settings.view_all}}" 
                             style="--font-weight-view-all-style: {{ section.settings.font_weight_view_all }};
                                    --mg-top-view-style: {{ section.settings.mg_top_view | append: 'px' }};
                                    --mg-bottom-view-style: {{ section.settings.mg_bottom_view | append: 'px' }};
@@ -322,7 +341,7 @@
                             </div>      
                         {% endif %}
                         {% if section.settings.view_all != blank %}
-                            <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}" href="{{ section.settings.link_view_all }}" title="{{section.settings.view_all}}" 
+                            <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}"{% if section.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all }}"{% endif %} title="{{section.settings.view_all}}" 
                                 style="--font-weight-view-all-style: {{ section.settings.font_weight_view_all }};
                                        --mg-top-view-style: {{ section.settings.mg_top_view | append: 'px' }};
                                        --mg-bottom-view-style: {{ section.settings.mg_bottom_view | append: 'px' }};
@@ -339,107 +358,109 @@
                     </div>
                 {% endif %}
             {% endunless %}
-            {%- if swipe == 'slider' -%}
-            <banner-slider-component>
-                <div class="policies-block-wrapper{% if section.settings.service_block_style == 'style_2' %} service_block_style_2{% endif %}">
-            {%- endif -%}
-                    <div class="halo-row column-{{ section.blocks.size }} items--{{ section.settings.item_width }}{% if swipe == 'slider' %} slider slider--tablet{% endif %}{% unless section.settings.enable_item_distance %} not-distance{% endunless %}{% if swipe == 'scroll' %} scroll-snap-mobile disable-srollbar{% endif %}">      
-                        {% for block in section.blocks %}
-                        <div class="halo-item{% if swipe == 'slider' %} slider__slide{% endif %}{% if block.settings.description != blank %} has-des{% endif %}">
-                            <a href="{{ block.settings.link }}" title="{{block.settings.text}}" style="--item-radius-style: {{ section.settings.item_radius | append: 'px' }}; 
-                                                                                                       --item-padding-top-style: {{ section.settings.item_padding_top | append: 'px' }}; 
-                                                                                                       --item-padding-bottom-style: {{ section.settings.item_padding_bottom | append: 'px' }};
-                                                                                                       --item-padding-left-right-style: {{ section.settings.item_padding_left_right | append: 'px' }};
-                                                                                                       --bg-color-block-style: {{ block.settings.bg_color_block }};
-                                                                                                       --border-block-style: {{ block.settings.border_block }};
-                                                                                                       --width-icon-style: {{ block.settings.width_icon | append: 'px' }};
-                                                                                                       --height-icon-style: {{ block.settings.height_icon | append: 'px' }}">
-                                {% if block.settings.icon_type == 'image' %}
-                                    {% if block.settings.image != blank %}
-                                        <div class="policies-icon image-zoom" style="--mg-bottom-icon-style: {{ block.settings.mg_bottom_icon | append: 'px' }}; --color-icon-style: {{ block.settings.color_icon }}">
-                                            {%- assign preview_img = block.settings.image -%}
-                                            <img {% render 'lazyload',preview_img: preview_img  %} />
-                                            {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
+            {% if settings.banner_animation == 'effect_1' %}<animated-component>{% endif %}
+                {%- if swipe == 'slider' -%}
+                <banner-slider-component>
+                    <div class="policies-block-wrapper{% if section.settings.service_block_style == 'style_2' %} service_block_style_2{% endif %}">
+                {%- endif -%}
+                        <div class="halo-row column-{{ section.blocks.size }} items--{{ section.settings.item_width }}{% if swipe == 'slider' %} slider slider--tablet{% endif %}{% unless section.settings.enable_item_distance %} not-distance{% endunless %}{% if swipe == 'scroll' %} scroll-snap-mobile disable-srollbar{% endif %}">      
+                            {% for block in section.blocks %}
+                            <div class="halo-item{% if swipe == 'slider' %} slider__slide{% endif %}{% if block.settings.description != blank %} has-des{% endif %}" data-animate="{{ settings.banner_animation }}">
+                                <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} title="{{block.settings.text}}" style="--item-radius-style: {{ section.settings.item_radius | append: 'px' }}; 
+                                                                                                        --item-padding-top-style: {{ section.settings.item_padding_top | append: 'px' }}; 
+                                                                                                        --item-padding-bottom-style: {{ section.settings.item_padding_bottom | append: 'px' }};
+                                                                                                        --item-padding-left-right-style: {{ section.settings.item_padding_left_right | append: 'px' }};
+                                                                                                        --bg-color-block-style: {{ block.settings.bg_color_block }};
+                                                                                                        --border-block-style: {{ block.settings.border_block }};
+                                                                                                        --width-icon-style: {{ block.settings.width_icon | append: 'px' }};
+                                                                                                        --height-icon-style: {{ block.settings.height_icon | append: 'px' }}">
+                                    {% if block.settings.icon_type == 'image' %}
+                                        {% if block.settings.image != blank %}
+                                            <div class="policies-icon image-zoom" style="--mg-bottom-icon-style: {{ block.settings.mg_bottom_icon | append: 'px' }}; --color-icon-style: {{ block.settings.color_icon }}">
+                                                {%- assign preview_img = block.settings.image -%}
+                                                <img {% render 'lazyload',preview_img: preview_img  %} />
+                                                {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
+                                            </div>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if block.settings.icon != blank %}
+                                        <div class="policies-icon" style="--mg-bottom-icon-style: {{ block.settings.mg_bottom_icon | append: 'px' }}; --color-icon-style: {{ block.settings.color_icon }}">
+                                        {{ block.settings.icon }}
                                         </div>
+                                        {% endif %}
                                     {% endif %}
-                                {% else %}
-                                    {% if block.settings.icon != blank %}
-                                    <div class="policies-icon" style="--mg-bottom-icon-style: {{ block.settings.mg_bottom_icon | append: 'px' }}; --color-icon-style: {{ block.settings.color_icon }}">
-                                      {{ block.settings.icon }}
+                                    {%- if block.settings.description != blank or block.settings.button -%}
+                                    <div class="policies-content">
+                                        {%- if block.settings.text != blank -%}
+                                            <span class="policies-text type--{{ block.settings.type_tab_font }}" 
+                                                    style="--fontsize-title-style: {{ block.settings.fontsize_title_block | append: 'px' }};
+                                                    --mg-bottom-title-style: {{ block.settings.mg_bottom_title | append: 'px' }};
+                                                    --mg-bottom-title-mb-style: {{ block.settings.mg_bottom_title_mb | append: 'px' }};
+                                                    --fontsize-title-style-mb: {{ block.settings.fontsize_title_block_mb | append: 'px' }};
+                                                    --fontweight-title-style: {{ block.settings.title_block_font_weight}};
+                                                    --color-block-style: {{ block.settings.color_block }}">
+                                                {{block.settings.text}}
+                                            </span>
+                                        {%- endif -%}
+                                        {%- if block.settings.description != blank -%}
+                                            <p class="policies-des" 
+                                                    style="--fontsize-desc-style: {{ block.settings.fontsize_des_block | append: 'px' }};
+                                                        --fontsize-desc-mb-style: {{ block.settings.fontsize_des_block_mb | append: 'px' }};
+                                                        --lineheight-desc-style: {{ block.settings.lineheight_des_block | append: 'px' }};
+                                                        --color-des-block-style: {{ block.settings.color_des_block }};
+                                                        --mg_bottom_des-style: {{ block.settings.mg_bottom_des | append: 'px' }}">
+                                                {{block.settings.description}}
+                                            </p>
+                                        {%- endif -%}
+                                        {%- if block.settings.button != blank -%}
+                                            <p class="policies-button{% if block.settings.button_style == 'style2' %} button{% endif %}" style="--fontsize-button-style: {{ block.settings.fontsize_button | append: 'px' }};
+                                                --color-button-style: {{ block.settings.color_button }};
+                                                --fontweight-button-style: {{ block.settings.fontweight_button }};
+                                                --button-background-style: {% if block.settings.button_background_gradient != blank %}{{ block.settings.button_background_gradient }}{% else %}{{ block.settings.button_background }}{% endif %};
+                                                --button-border-style: {{ block.settings.button_border }};
+                                                --button-color-hover-style: {{ block.settings.button_color_hover }};
+                                                --button-background-hover-style: {% if block.settings.button_background_gradient_hover != blank %}{{ block.settings.button_background_gradient_hover }}{% else %}{{ block.settings.button_background_hover }}{% endif %};
+                                                --button-border-hover-style: {{ block.settings.button_border_hover }};
+                                                --button-width-style: {{ block.settings.button_width | append: 'px' }};
+                                                {% if block.settings.enable_underline_button %}
+                                                    text-decoration: underline;
+                                                    text-underline-offset: 0.2rem;
+                                                    text-decoration-color: #051c424d;
+                                                {% endif %}
+                                                ">{{ block.settings.button }}</p>
+                                        {%- endif -%}
                                     </div>
-                                    {% endif %}
-                                {% endif %}
-                                {%- if block.settings.description != blank or block.settings.button -%}
-                                <div class="policies-content">
-                                    {%- if block.settings.text != blank -%}
-                                        <span class="policies-text type--{{ block.settings.type_tab_font }}" 
-                                                style="--fontsize-title-style: {{ block.settings.fontsize_title_block | append: 'px' }};
-                                                --mg-bottom-title-style: {{ block.settings.mg_bottom_title | append: 'px' }};
-                                                --mg-bottom-title-mb-style: {{ block.settings.mg_bottom_title_mb | append: 'px' }};
-                                                --fontsize-title-style-mb: {{ block.settings.fontsize_title_block_mb | append: 'px' }};
-                                                --fontweight-title-style: {{ block.settings.title_block_font_weight}};
-                                                --color-block-style: {{ block.settings.color_block }}">
+                                    {% else %}
+                                        {%- if block.settings.text != blank -%}
+                                        <span class="policies-text type--{{ block.settings.type_tab_font }}" style="--fontsize-title-style: {{ block.settings.fontsize_title_block | append: 'px' }};
+                                                                        --mg-bottom-title-style: {{ block.settings.mg_bottom_title | append: 'px' }};
+                                                                        --fontsize-title-style-mb: {{ block.settings.fontsize_title_block_mb | append: 'px' }};
+                                                                        --color-block-style: {{ block.settings.color_block }}">
                                             {{block.settings.text}}
                                         </span>
+                                        {%- endif -%}
                                     {%- endif -%}
-                                    {%- if block.settings.description != blank -%}
-                                        <p class="policies-des" 
-                                                style="--fontsize-desc-style: {{ block.settings.fontsize_des_block | append: 'px' }};
-                                                       --fontsize-desc-mb-style: {{ block.settings.fontsize_des_block_mb | append: 'px' }};
-                                                       --lineheight-desc-style: {{ block.settings.lineheight_des_block | append: 'px' }};
-                                                       --color-des-block-style: {{ block.settings.color_des_block }};
-                                                       --mg_bottom_des-style: {{ block.settings.mg_bottom_des | append: 'px' }}">
-                                            {{block.settings.description}}
-                                        </p>
-                                    {%- endif -%}
-                                    {%- if block.settings.button != blank -%}
-                                        <p class="policies-button{% if block.settings.button_style == 'style2' %} button{% endif %}" style="--fontsize-button-style: {{ block.settings.fontsize_button | append: 'px' }};
-                                            --color-button-style: {{ block.settings.color_button }};
-                                            --fontweight-button-style: {{ block.settings.fontweight_button }};
-                                            --button-background-style: {% if block.settings.button_background_gradient != blank %}{{ block.settings.button_background_gradient }}{% else %}{{ block.settings.button_background }}{% endif %};
-                                            --button-border-style: {{ block.settings.button_border }};
-                                            --button-color-hover-style: {{ block.settings.button_color_hover }};
-                                            --button-background-hover-style: {% if block.settings.button_background_gradient_hover != blank %}{{ block.settings.button_background_gradient_hover }}{% else %}{{ block.settings.button_background_hover }}{% endif %};
-                                            --button-border-hover-style: {{ block.settings.button_border_hover }};
-                                            --button-width-style: {{ block.settings.button_width | append: 'px' }};
-                                            {% if block.settings.enable_underline_button %}
-                                                text-decoration: underline;
-                                                text-underline-offset: 0.2rem;
-                                                text-decoration-color: #051c424d;
-                                            {% endif %}
-                                            ">{{ block.settings.button }}</p>
-                                    {%- endif -%}
-                                </div>
-                                {% else %}
-                                    {%- if block.settings.text != blank -%}
-                                    <span class="policies-text type--{{ block.settings.type_tab_font }}" style="--fontsize-title-style: {{ block.settings.fontsize_title_block | append: 'px' }};
-                                                                       --mg-bottom-title-style: {{ block.settings.mg_bottom_title | append: 'px' }};
-                                                                       --fontsize-title-style-mb: {{ block.settings.fontsize_title_block_mb | append: 'px' }};
-                                                                       --color-block-style: {{ block.settings.color_block }}">
-                                        {{block.settings.text}}
-                                    </span>
-                                    {%- endif -%}
-                                {%- endif -%}
-                            </a>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    {%- if swipe == 'slider' and section.blocks.size > 1 -%}
-                        <div class="slider-buttons no-js-hidden slider-arrows">
-                            <div class="slider-action {% if section.blocks.size == 2 %}count_2{% endif %}">
-                                <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'accessibility.previous_slide' | t }}">
-                                    {% render 'icon-caret' %}
-                                </button>
-                                <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'accessibility.next_slide' | t }}">
-                                    {% render 'icon-caret' %}
-                                </button>
+                                </a>
                             </div>
+                            {% endfor %}
                         </div>
-                    {%- endif -%}
-            {%- if swipe == 'slider' -%}
-                </div>
-            </banner-slider-component>
-            {%- endif -%}
+                        {%- if swipe == 'slider' and section.blocks.size > 1 -%}
+                            <div class="slider-buttons no-js-hidden slider-arrows">
+                                <div class="slider-action {% if section.blocks.size == 2 %}count_2{% endif %}">
+                                    <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'accessibility.previous_slide' | t }}">
+                                        {% render 'icon-caret' %}
+                                    </button>
+                                    <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'accessibility.next_slide' | t }}">
+                                        {% render 'icon-caret' %}
+                                    </button>
+                                </div>
+                            </div>
+                        {%- endif -%}
+                {%- if swipe == 'slider' -%}
+                    </div>
+                </banner-slider-component>
+                {%- endif -%}
+            {% if settings.banner_animation == 'effect_1' %}</animated-component>{% endif %}
             {% unless section.settings.service_block_style == 'style_2' %}
                 {% if section.settings.service_block_des != blank and section.settings.service_block_des_pos == 'bottom' %}
                     <div class="rte subtext-spotlight text-{{ section.settings.title_align }}">
@@ -519,7 +540,7 @@
             {
                 "type" : "color",
                 "id" : "border_color",
-                "label" : "t:settings_schema.typography.settings.typography.border_color",
+                "label" : "t:settings_schema.colors.settings.colors_name.border_color",
                 "default" : "#d0d0d0"
             },
             {

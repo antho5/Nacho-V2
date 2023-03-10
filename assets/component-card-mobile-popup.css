@@ -28,6 +28,11 @@
   padding: 8px; 
 }
 
+body.product-card-layout-07 #halo-card-mobile-popup .halo-popup-wrapper {
+  padding: 0;
+  padding-bottom: 15px;
+}
+
 #halo-card-mobile-popup .card-media,
 #halo-card-mobile-popup .card-information,
 #halo-card-mobile-popup .button-ATC,

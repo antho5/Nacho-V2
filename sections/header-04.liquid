@@ -15,9 +15,58 @@
 {% render 'header-04-style' %}
 
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
-
+{% if settings.enable_layout_rtl %}
+  <style type="text/css" media="screen">
+    @media (min-width: 1025px) {
+        .layout_rtl .header--left .header-top--wrapper .header-top--left {padding-left: 0; padding-right: 35px;}
+        .layout_rtl .header:not(.style_3) .header-top--wrapper .header-top--right .header__icon--cart .cart-count-bubble {left: 0; right: auto}
+        .layout_rtl .header-top--right .header__icon--wishlist .wishlist-text {width: auto}
+        .layout_rtl .header-top--right .header__icon svg {margin-right: 0; margin-left: 8px}
+        .layout_rtl .header-top--right .header__icon--account svg {margin-left: 8px;margin-right: 0}
+        .layout_rtl .header-top--right .header__icon+.header__icon {margin-right: 30px;margin-left: 0}
+        .layout_rtl .top-language-currency .halo-top-language+.halo-top-currency {margin-right: 1px;padding-right: 8px;margin-left: 0;padding-left: 0}
+        .layout_rtl .top-language-currency.enable-currency .halo-top-language .disclosure__button .text {margin-left: 0;margin-right: 10px}
+        .layout_rtl .top-language-currency .halo-top-language+.halo-top-currency:before {left: auto;right: -3px}
+        .layout_rtl .top-language-currency .halo-top-language .disclosure__button {padding-left: 0}
+        .layout_rtl .header-language_currency .top-language-currency .dropdown-currency{left: 0;right: auto}
+        .layout_rtl .header-language_currency .top-language-currency.enable-currency .dropdown-language {left: 42px;right: auto}
+        .layout_rtl .header-bottom-vertical .header__menu-vertical .list-menu .menu-lv-item.menu-lv-1 .menu-lv-1__action .icon {right: auto;left: 23px}
+		.layout_rtl .header__menu-vertical .list-menu .menu-lv-item .list-menu--disclosure {left: auto;right: 100%}
+     	.layout_rtl .header-bottom-right .customer-service-text {margin-right: 0;margin-left: 35px}
+		.layout_rtl .header-bottom-vertical+.header-bottom-left {padding-left: 0;padding-right: 30px}
+		.layout_rtl .header-bottom-vertical .categories-title svg {right: auto;left: 25px}
+        .layout_rtl .header-bottom-vertical .categories-title .mobileMenu-toggle {margin-right: 0;margin-left: 16px} 
+        .layout_rtl .header__search .search-modal__form .search__button {border-radius: 5px 0 0 5px}
+        .layout_rtl .header-top--wrapper .quickSearchResultsWrap{left: auto; right: 0}
+        .layout_rtl .style_2 .header-top-custom .info-store .text:first-child {padding-right: 0}
+        .layout_rtl .style_2 .header-top-custom .info-icon {padding-right: 0;padding-left: 5px}
+        .layout_rtl .style_2 .header-top-custom .header-links .link {margin-right: 0;margin-left: 20px}
+        .layout_rtl .style_2 .header-top--right .header__icon--account svg {margin-right: 0;margin-left: 8px}
+        .layout_rtl .style_2 .header-top-custom .top-language-currency.enable-currency .halo-top-language .disclosure__button .text {margin-right: 7px;margin-left: 0}
+        .layout_rtl .style_2 .header-top-custom .top-language-currency .halo-top-language+.halo-top-currency {margin-left: 0;margin-right: 1px;padding-left: 0;padding-right: 5px}
+        .layout_rtl .style_2 .top-language-currency .halo-top-language .disclosure__button {padding-left: 0}
+        .layout_rtl .style_2 .header-top--right .header__icon--cart .cart-count-bubble {right: auto;left: -3px}
+        .layout_rtl .style_2 .header__search .search-modal__form .search__button {border-radius: 5px 0 0 5px}
+        .layout_rtl .style_2 .header-top--right .header__icon+.header__icon.header__icon--account {margin-right: 33px;margin-left: 0}
+        .layout_rtl .quickSearchResultsBlock .productEmpty svg {transform: rotate(180deg)}
+        .layout_rtl .style_2 .header-top--right .header__icon+.header__icon {margin-right: 30px;margin-left: 0}
+    	.layout_rtl .style_2 .header-bottom-vertical+.header-bottom-left {padding-left: 0;padding-right: 20px}
+        .layout_rtl .style_2 .header-top--wrapper .header__search .search-modal__form .search__input,.layout_rtl .style_2 .header-top--right .customer-links{text-align: right}
+      	.layout_rtl .style_3 .header-bottom-vertical .categories-title .title {margin-right: 10px;margin-left: 0}
+        .layout_rtl .style_3 .header-bottom-vertical .categories-title:before,.layout_rtl .style_3 .header-bottom-right .help-item:before {left: 0;right: auto}
+        .layout_rtl .style_3 .header-top--wrapper .header__search .search-modal__form {border-radius: 31px 30px 30px 30px}
+        .layout_rtl .style_3 .header__search .search-modal__form .search__button {border-radius: 30px 0 0 30px}
+    	.layout_rtl .style_3 .header-bottom-vertical .categories-title svg {right: auto;left: 62px;margin-top: 0}
+        .layout_rtl .style_3 .header-top--right .header__icon+.header__icon {margin-right: 40px;margin-left: 0}
+		.layout_rtl .style_3 .header-bottom-vertical .categories-title .mobileMenu-toggle-2 svg {right: 0}
+		.layout_rtl .style_3 .header-bottom-vertical+.header-bottom-left {padding-right: 22px;padding-left: 0}
+        .layout_rtl .style_3 .header-bottom-right .help-item {margin-left: 14px;padding-right: 0;margin-right: 0;padding-left: 20px}
+        .layout_rtl .header--center.style_3 .customer-service-text {padding-left: 0;padding-right: 30px;text-align: right}
+    }
+  </style>
+{% endif %}
 <{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %} class="header-wrapper" data-hide-on-scroll={{ section.settings.hide_scroll }}>
-    <header class="header header-04{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if section.settings.header_layout_style == 'style_2' %} style_2{% elsif section.settings.header_layout_style == 'style_3' %} style_3{% endif %}" style="--icon-mobile-spacing: {{ section.settings.header_icon_mobile_spacing | append: 'px' }};">
+    <header class="header header-04 header--{{ section.settings.logo_position }}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if section.settings.header_layout_style == 'style_2' %} style_2{% elsif section.settings.header_layout_style == 'style_3' %} style_3{% endif %}" style="--icon-mobile-spacing: {{ section.settings.header_icon_mobile_spacing | append: 'px' }};">
         {% if section.settings.header_layout_style == 'style_2' %}
         <div class="header-top-custom">
             <div class="container">
@@ -64,7 +113,7 @@
                             <ul class="header-links">
                                 {% if section.settings.header-link_1_text != blank %}
                                 <li class="link">
-                                    <a href="{{ section.settings.header-link_1 }}">
+                                    <a {% if section.settings.header-link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.header-link_1 }}"{% endif %}>
                                         {{ section.settings.header-link_1_text }}
                                     </a>
                                 </li>
@@ -72,7 +121,7 @@
             
                                 {% if section.settings.header-link_2_text != blank %}
                                 <li class="link">
-                                    <a href="{{ section.settings.header-link_2 }}">
+                                    <a {% if section.settings.header-link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.header-link_2 }}"{% endif %}>
                                         {{ section.settings.header-link_2_text }}
                                     </a>
                                 </li>
@@ -98,6 +147,7 @@
         <div class="header-top">
             <div class="container">
                 <div class="header-top--wrapper">
+                  {% if section.settings.logo_position == 'left' %}
                     <div class="header-top--left header__logo text-left clearfix">
                         {%- if request.page_type == 'index' -%}
                             <h1 class="header__heading">
@@ -108,11 +158,15 @@
                                 {%- if section.settings.logo != blank -%}
                                     {%- assign image = section.settings.logo -%}
                                     {%- assign image_size = section.settings.logo_width | append: 'x' -%}
-                                    <img srcset="{{ image | img_url: image_size }} 1x, {{ image | img_url: image_size, scale: 2 }} 2x"
-                                        src="{{ image | img_url: image_size }}"
-                                        loading="lazy"
-                                        class="header__heading-logo"
-                                        alt="{{ image.alt | default: shop.name | escape }}">
+                                    {%- assign logo_height = section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio -%}
+                                    {{ section.settings.logo | image_url: width: section.settings.width | image_tag:
+                                        class: 'header__heading-logo',
+                                        loading: 'lazy',
+                                        widths: '50, 100, 150, 200, 250, 300, 400, 500',
+                                        height: logo_height,
+                                        width: section.settings.logo_width,
+                                        alt: image.alt | default: shop.name | escape
+                                      }}
                                 {%- elsif section.settings.logo_text != blank -%}
                                     <span class="h2 {{ section.settings.logo_text_transform }}">{{ section.settings.logo_text }}</span>
                                 {%- else -%}
@@ -132,9 +186,9 @@
                               </div>
                             {% endif %}
                         {%- endif -%}
-
                     </div>
-                    <div class="header-top-center header__search text-center clearfix">
+                  {% endif %}
+                    <div class="{% if section.settings.logo_position == 'left' %}header-top-center text-center header__search{% else %}header-top--left text-left header__search{% endif %} clearfix">
                         {% if section.settings.show_search %}
                             <details-modal class="header__iconItem header__search">
                                 {%- if settings.show_quick_search -%}
@@ -142,10 +196,9 @@
                                 {%- endif -%}
                                 <details class="search_details">
                                     <summary class="header__search-full" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
-                                        <a href="javascript:void(0)" class="header-search-close" alt="{{ 'general.common.close' | t }}">
+                                        <button type="button" class="header-search-close" aria-label="{{ 'general.common.close' | t }}">
                                             {% render 'icon-close' %}
-                                            {{ 'general.common.close' | t }}
-                                        </a>
+                                        </button>
                                         <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
                                             <div class="field">
                                                 <input 
@@ -198,14 +251,56 @@
                                 {%- endif -%}
                             </details-modal>
                         {% endif %}
+                        {% if section.settings.logo_position == 'center' %}
+                         {%- if section.settings.header_layout_style == 'style_3' -%}
+                            {% if section.settings.display_customer_service and section.settings.customer_service_text != blank %}
+                              <div class="customer-service-text">
+                                {{ section.settings.customer_service_text }}
+                              </div>
+                            {% endif %}
+                        {%- endif -%}
+                       {% endif %}
                     </div>
+                  {% if section.settings.logo_position == 'center' %}
+                    <div class="header-top-center header__logo text-center clearfix">
+                        {%- if request.page_type == 'index' -%}
+                            <h1 class="header__heading">
+                        {%- else -%}
+                            <div class="header__heading">
+                        {%- endif -%}
+                            <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
+                                {%- if section.settings.logo != blank -%}
+                                    {%- assign image = section.settings.logo -%}
+                                    {%- assign image_size = section.settings.logo_width | append: 'x' -%}
+                                    {%- assign logo_height = section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio -%}
+                                    {{ section.settings.logo | image_url: width: section.settings.width | image_tag:
+                                        class: 'header__heading-logo',
+                                        loading: 'lazy',
+                                        widths: '50, 100, 150, 200, 250, 300, 400, 500',
+                                        height: logo_height,
+                                        width: section.settings.logo_width,
+                                        alt: image.alt | default: shop.name | escape
+                                      }}
+                                {%- elsif section.settings.logo_text != blank -%}
+                                    <span class="h2 {{ section.settings.logo_text_transform }}">{{ section.settings.logo_text }}</span>
+                                {%- else -%}
+                                    <span class="h2 {{ section.settings.logo_text_transform }}">{{ shop.name }}</span>
+                                {%- endif -%}
+                            </a>
+                        {%- if request.page_type == 'index' -%}
+                            </h1>
+                        {%- else -%}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                  {% endif %}
                     <div class="header-top--right header__icons text-right clearfix">
                         {% if section.settings.show_cart or section.settings.show_wishlist or section.settings.show_customer %}
                         <div class="header__iconItem header__group">
                             {% if section.settings.header_layout_style == 'style_2' %}
                                 {%- if section.settings.show_cart -%}
-                                    <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}"{% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
-                                        {% render 'icon-cart-3' %}
+                                    <a href="{{ routes.cart_url }}" class="cart-icon-bubble header__icon header__icon--cart link link--text focus-inset"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                                        {% render 'icon-cart-03' %}
                                         <span class="cart-text">{{ 'general.cart.cart' | t }}</span>
                                         <div class="cart-count-bubble">
                                             {%- if cart.item_count < 100 -%}
@@ -228,7 +323,12 @@
                                 {%- endif -%}
                                 {%- unless section.settings.header_layout_style == 'style_3' -%}
                                     {%- if shop.customer_accounts_enabled and section.settings.show_customer -%}
-                                        <a class="header__icon header__icon--account link link--text" data-open-auth-sidebar>
+                                        {% if routes.account_login_url contains '/account/login' %}
+                                            {% assign is_contained = true %}
+                                        {% else %}
+                                            {% assign is_contained = false %}
+                                        {% endif %}
+                                        <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account link link--text"{% if is_contained %} data-open-auth-sidebar{% endif %}>
                                             {% render 'icon-account-2' %}
                                             <span class="customer-links">
                                                 <span class="hello">{{ 'customer.hello' | t }}</span>
@@ -247,7 +347,7 @@
 
                             {%- if section.settings.header_layout_style == 'style_3' -%}
                                 {%- if section.settings.show_giftcards -%}
-                                    <a href="{{ section.settings.link_giftcards }}" class="header__icon header__icon--giftcards link link--text focus-inset">
+                                    <a {% if section.settings.link_giftcards == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_giftcards }}"{% endif %} class="header__icon header__icon--giftcards link link--text focus-inset">
                                         {% render 'icon-giftcards' %}
                                         <span class="giftcards-text">
                                             {{ section.settings.text_giftcards }}
@@ -269,7 +369,12 @@
 
                             {%- if section.settings.header_layout_style == 'style_3' -%}
                                 {%- if shop.customer_accounts_enabled and section.settings.show_customer -%}
-                                    <a class="header__icon header__icon--account link link--text" data-open-auth-sidebar>
+                                    {% if routes.account_login_url contains '/account/login' %}
+                                        {% assign is_contained = true %}
+                                    {% else %}
+                                        {% assign is_contained = false %}
+                                    {% endif %}
+                                    <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account link link--text"{% if is_contained %} data-open-auth-sidebar{% endif %}>
                                         {% render 'icon-account-2' %}
                                         <span class="customer-links">
                                             {%- liquid
@@ -286,7 +391,12 @@
 
                             {% if section.settings.header_layout_style == 'style_2' %}
                                 {%- if shop.customer_accounts_enabled and section.settings.show_customer -%}
-                                    <a class="header__icon header__icon--account link link--text" data-open-auth-sidebar>
+                                    {% if routes.account_login_url contains '/account/login' %}
+                                        {% assign is_contained = true %}
+                                    {% else %}
+                                        {% assign is_contained = false %}
+                                    {% endif %}
+                                    <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account link link--text"{% if is_contained %} data-open-auth-sidebar{% endif %}>
                                         {% render 'icon-account-2' %}
                                         <div class="customer-links">
 
@@ -299,7 +409,7 @@
                                                     {{ 'customer.account.my_account' | t }}
                                                   </a>
                                             {% else %}  
-                                                  <a class="header__link--account" id="customer_login_link" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" data-open-auth-sidebar>
+                                                  <a class="header__link--account" id="customer_login_link" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"{% if is_contained %} data-open-auth-sidebar{% endif %}>
                                                     {{ 'customer.login_page.title' | t }}
                                                   </a>
                                                   <span class="or-text">
@@ -317,8 +427,8 @@
                                 {%- endif -%}
                             {% else %}
                                 {%- if section.settings.show_cart -%}
-                                    <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}"{% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
-                                        {% render 'icon-cart-3' %}
+                                    <a href="{{ routes.cart_url }}" class="cart-icon-bubble header__icon header__icon--cart link link--text focus-inset"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                                        {% render 'icon-cart-03' %}
                                         <span class="cart-text">{{ 'general.cart.cart' | t }}</span>
                                         <div class="cart-count-bubble">
                                             {%- if cart.item_count < 100 -%}
@@ -360,12 +470,12 @@
                                 <div class="vertical-menu{% unless section.settings.header_layout_style == 'style_3' %}{% if template contains 'index' %} open{% else %} hide{% endif %}{% endunless %}">
                                     <div class="categories-title">
                                         {% unless section.settings.header_layout_style == 'style_3' %}
-                                            <a class="mobileMenu-toggle" href="javascript:void(0)" aria-label="menu">
+                                            <a class="mobileMenu-toggle" href="{{ routes.all_products_collection_url }}" aria-label="menu">
                                                 <span class="mobileMenu-toggle__Icon"></span>
                                             </a>
                                         {% endunless %}
                                         {% if section.settings.header_layout_style == 'style_3' %}
-                                            <a class="mobileMenu-toggle-2" href="javascript:void(0)" aria-label="menu">
+                                            <a class="mobileMenu-toggle-2" href="{{ routes.all_products_collection_url }}" aria-label="menu">
                                                 {% render 'icon-grid' %}
                                             </a>
                                         {% endif %}
@@ -373,7 +483,7 @@
                                            {{ section.settings.title_categories }}                    
                                         </h3>
                                         {% if section.settings.header_layout_style == 'style_2' %}
-                                            <a class="view_all" href="{{ section.settings.link_viewall }}" title="{{ section.settings.viewall_categories }}">
+                                            <a class="view_all"{% if section.settings.link_viewall == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_viewall }}"{% endif %} title="{{ section.settings.viewall_categories }}">
                                                 <span>{{ section.settings.viewall_categories }}</span>
                                             </a>
                                         {% else %}
@@ -409,7 +519,7 @@
 
                                 {%- if section.settings.display_help and section.settings.header_layout_style == 'style_3' -%}
                                     <div class="help-item">
-                                        <a href="{{ section.settings.help_text_link }}">
+                                        <a {% if section.settings.help_text_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.help_text_link }}"{% endif %}>
                                             {% render 'icon-help' %}
                                             <span>{{ section.settings.help_text }}</span>
                                         </a>
@@ -446,8 +556,8 @@
                     </details-modal>
                 {% endif %}
                 {% if section.settings.show_cart %}
-                    <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}" {% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
-                        {% render 'icon-cart-3' %}
+                    <a href="{{ routes.cart_url }}" class="cart-icon-bubble header__icon header__icon--cart link link--text focus-inset"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                        {% render 'icon-cart-03' %}
                         <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
                         <div class="cart-count-bubble">
                             {%- if cart.item_count < 100 -%} <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
@@ -713,6 +823,36 @@
             "default": "main-menu"
         },
         {
+            "type": "range",
+            "id": "menu_top_spacing",
+            "label": "t:sections.header.settings.header_bottom.mg_top",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 14
+        },
+        {
+            "type": "range",
+            "id": "menu_bottom_spacing",
+            "label": "t:sections.header.settings.header_bottom.mg_bottom",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 14
+        },
+        {
+            "type": "range",
+            "id": "grid_gap_menu",
+            "label": "t:sections.header.settings.header_bottom.spacing_left_right",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 12
+        },
+        {
             "type": "checkbox",
             "id": "show_megamenu",
             "label": "t:sections.header.settings.menu.label__3",
@@ -824,7 +964,7 @@
         {
             "type": "color",
             "id": "border_categories",
-            "label": "t:settings_schema.typography.settings.typography.border_color",
+            "label": "t:settings_schema.colors.settings.colors_name.border_color",
             "default": "#e8e8e8"
         },
         {
@@ -1248,6 +1388,22 @@
             "default": 50
         },
         {
+            "type": "select",
+            "id": "logo_position",
+            "label": "t:sections.header.settings.logo.label__3",
+            "default": "left",
+            "options": [
+            {
+                "value": "left",
+                "label": "t:settings_schema.typography.settings.typography.left"
+            },
+            {
+                "value": "center",
+                "label": "t:settings_schema.typography.settings.typography.center"
+            }
+            ]
+        },
+        {
             "type": "range",
             "id": "logo_font_size",
             "label": "t:settings_schema.typography.settings.font_size.label",
@@ -1545,7 +1701,7 @@
         {
             "type": "color",
             "id": "bg_mega_menu",
-            "label": "t:sections.header.settings.header_bottom.bg_top",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color",
             "default": "#fff"
         },
         {
@@ -1966,9 +2122,15 @@
                     "default": 5
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",
@@ -2110,9 +2272,15 @@
                     "default": 3
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",

@@ -124,6 +124,7 @@
 	font-size: var(--font-body-size);
 	text-align: left;
 	min-width: 320px;
+	padding: 0 15px;
 }
 
 .customer-service-text ul{
@@ -162,13 +163,24 @@
 }
 
 .header-08 .header-bottom--wrapper .menu-lv-1__action{
-	padding: 17px 20px;
+	padding-top: 0;
 }
 
-.header-08 .header-bottom--wrapper .dropdown-language .localization-form .disclosure__link .text{
-	color: var(--color-link);
+.menu-lv-1 .menu-lv-1__action > .label {
+    top: -29px;
 }
 
+.header-08 .header-bottom--wrapper .menu-lv-1__action:hover:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background: transparent;
+	width: 100%;
+	z-index: 1;
+}
+
+.header-08 .header-bottom--wrapper .dropdown-language .localization-form .disclosure__link .text,
 .header-08 .header-bottom--wrapper .dropdown-currency .currency-block .dropdown-item .text{
 	color: var(--color-link);
 }
@@ -178,10 +190,6 @@
     height: 18px;
     padding: 0 7px;
     border-radius: 2px;
-}
-
-.header-08 .menu-lv-1 .label:before{
-	display: none;
 }
 
 /* --------------------Language + Currency-------------- */
@@ -301,11 +309,6 @@
 
 .facets__price--slider .facets__price--box .form-field {
     width: 41%;
-}
-
-.bottom-bar--list .cart-count-bubble {
-    top: 3px;
-    right: 9px;
 }
 
 @media (max-width: 1300px){
@@ -447,29 +450,44 @@
 		display: none;
 	}
 
-	.shopify-section-header-sticky .header-wrapper .header-bottom .fixed-center .menu-lv-1__action{
-		padding: 17px 20px 17px 20px;
-	}
-
-	.header-08 .header-top--right{
+	.header-08.header--left .header-top--right{
 		flex: 0 0 calc(23.3333% - 10px);
 	    max-width: calc(23.3333% - 10px);
 	}
 
-	.header-08 .header-top-center{
+	.header-08.header--left .header-top-center{
 		position: relative;
 		flex: 0 0 calc(67.666667% + 20px);
 	    max-width: calc(67.666667% + 20px);
 	}
 
-	.header-08 .header-top--left{
+	.header-08.header--left .header-top--left{
 		flex: 0 0 calc(9% - 10px);
 	    max-width: calc(9% - 10px);
 	}
 
-	.header-08 .list-menu.text-left {
-    	margin-left: -20px;
-	}
+    .header-08.header--center .header-top--left,
+    .header-08.header--center .header-top--right {
+        flex: 0 0 calc(35% - 10px);
+	    max-width: calc(35% - 10px);
+    }
+
+    .header-08.header--center .header-top-center{
+        flex: 0 0 calc(30% + 20px);
+	    max-width: calc(30% + 20px);
+    }
+
+    .header-top-center.header__logo img {
+      	margin:0 auto;
+    }
+
+    .header-top--right .customer-service-text {
+		display: inline-block;
+		vertical-align: middle;
+		text-align: right;
+		margin-top: 1px;
+		margin-right: 25px;
+    }
 
 	.header-top--wrapper .customer-service-text a:hover{
 		 text-decoration: underline;

@@ -5,10 +5,10 @@
 <compare-color class="halo-popup halo-compare-color-popup customPopup-large" data-compare-color-popup id="halo-compare-color-popup">
     <div class="halo-popup-wrapper">
         <div class="halo-popup-header">
-            <a href="#" title="{{ 'general.common.close' | t }}" class="halo-popup-close clearfix" data-close-compare-color-popup alt="{{ 'general.common.close' | t }}">
+            <button type="button" class="halo-popup-close clearfix" data-close-compare-color-popup aria-label="{{ 'general.common.close' | t }}">
                 {% render 'icon-close' %}
                 {{ 'general.common.close' | t }}
-            </a>
+            </button>
             <h5 class="halo-popup-title text-center">
                 {{ 'compare_color.general.title' | t }}
             </h5>

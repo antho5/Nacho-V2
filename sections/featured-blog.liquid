@@ -1,10 +1,17 @@
 <link rel="stylesheet" href="{{ 'component-blog-post.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'component-blog-post.css' | asset_url | stylesheet_tag }}</noscript>
+
+{% if settings.banner_animation == 'effect_1' %}
+    <link rel="stylesheet" href="{{ 'component-blog-post-banner-animation.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript>{{ 'component-blog-post-banner-animation.css' | asset_url | stylesheet_tag }}</noscript>
+{% endif %}
+
 {%- liquid
     assign blog_show_author = section.settings.blog_show_author
     assign blog_show_date = section.settings.blog_show_date
     assign blog_show_des = section.settings.blog_show_des
     assign blog_show_more = section.settings.blog_show_more
+    assign blog_show_more_icon = section.settings.blog_show_more_icon
     assign text_align = section.settings.block_item_align | default: 'left'
     
     assign text_by = section.settings.text_by
@@ -18,111 +25,60 @@
     assign limit_content_des = section.settings.limit_content_des | default: '22'
     assign blog_date_format = section.settings.blog_date_format
 
+    assign enable_blog_button = section.settings.enable_blog_button
+    assign block_item_style = section.settings.block_item_style
+
+    assign blog_bg = section.settings.blog_bg
+    assign blog_bg_gradient = section.settings.blog_bg_gradient
+    assign blog_bg_image = section.settings.blog_bg_image
+
+    assign color_title = section.settings.color_title
+    assign fontsize_title = section.settings.fontsize_title
+    assign fontsize_title_mb = section.settings.fontsize_title_mb
+    assign margin_bottom_heading = section.settings.margin_bottom_heading
+
+    assign color_des = section.settings.color_des
+    assign fontsize_des = section.settings.fontsize_des
+    assign margin_bottom_desheading = section.settings.margin_bottom_desheading
+
+    assign mg_top_desktop = section.settings.mg_top_desktop
+    assign mg_top_tablet = section.settings.mg_top_tablet
+    assign mg_top_mobile = section.settings.mg_top_mobile
+
+    assign mg_bottom_desktop = section.settings.mg_bottom_desktop
+    assign mg_bottom_tablet = section.settings.mg_bottom_tablet
+    assign mg_bottom_mobile = section.settings.mg_bottom_mobile
+
+    assign padding_full_width = section.settings.padding_full_width
+
+    assign enable_border_box = section.settings.enable_border_box
+    assign color_border_box = section.settings.color_border_box
+    assign color_title_item = section.settings.color_title_item
+    assign color_date_item = section.settings.color_date_item
+    assign color_des_item = section.settings.color_des_item
+    assign blog_item_bg = section.settings.blog_item_bg
+    assign border_radius_item = section.settings.border_radius_item
+    assign color_button_item = section.settings.color_button_item
+    assign color_button_item_border = section.settings.color_button_item_border
+    assign color_button_item_bg = section.settings.color_button_item_bg
+    assign color_button_item_hover = section.settings.color_button_item_hover
+    assign color_button_item_border_hover = section.settings.color_button_item_border_hover
+    assign color_button_item_bg_hover = section.settings.color_button_item_bg_hover
+
+    assign custom_width_title = section.settings.custom_width_title
+
+    assign mg_minus_desktop = section.settings.mg_minus_desktop
+
+    if section.settings.content_on_image
+        assign content_on_image = 'content_on_image'
+    endif 
+    assign content_bg = section.settings.content_bg
+    assign content_gradient = section.settings.content_gradient
+    assign button_text_transform = section.settings.block_button_text_transform
+    assign button_text_fw = section.settings.block_button_fw
 -%}
-<div class="featured-blog-block section-block-{{section.id}}" id="featured-blog-{{section.id}}" data-loader-script="{{ 'halo.slide-blog.js' | asset_url }}">
-  <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}">
-    {% if section.settings.featured_blog_title != blank %}
-        <div class="halo-block-header text-{{ section.settings.title_align }} view_all-{{ section.settings.view_all_pos }}">   
-            <h3 class="title">
-                <span class="text">
-                {{ section.settings.featured_blog_title }}
-                </span>
-            </h3>
-            {% if section.settings.featured_blog_des != blank %}
-                <div class="rte subtext-blog">
-                    {{ section.settings.featured_blog_des }}
-                </div>        
-            {% endif %}
-            {% if section.settings.view_all != blank %}
-                <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}" href="{{ section.settings.link_view_all }}" title="{{section.settings.view_all}}" 
-                    style="--font-weight-view-all-style: {{ section.settings.font_weight_view_all }};
-                           --mg-top-view-style: {{ section.settings.mg_top_view | append: 'px' }};
-                           --mg-bottom-view-style: {{ section.settings.mg_bottom_view | append: 'px' }};
-                           --color-view-all-style: {{ section.settings.color_view_all }};
-                           --color-view-all-icon-style: {{ section.settings.color_view_all_icon }}">
-                    {%- if section.settings.icon_view_all -%}
-                    <span class="icon-svg">
-                        {{ section.settings.icon_view_all }}
-                    </span>
-                    {%- endif -%}
-                    {{ section.settings.view_all }}
-                </a>
-            {% endif %}
-        </div>
-    {% endif %}
-    <div class="halo-row column-{{ section.settings.blog_results_per_row }}{% if section.settings.post_limit == 2 %} disable_dots_tablet{% endif %}" data-rows="{{ section.settings.blog_results_per_row }}" data-blogs-slider style="--row-distance-style: {{ section.settings.item_distance | prepend: '-' | append: 'px' }};">
-        {%- assign blog = blogs[section.settings.blog_posts] -%}
-        {% for article in blog.articles limit: section.settings.post_limit %}
-        <div class="halo-item" id="block-{{article.id}}" style="--item-distance-style: {{ section.settings.item_distance | append: 'px' }};">
-            {% render 'article-card-featured', 
-                article: article,
-                blog_show_author: blog_show_author,
-                blog_show_date: blog_show_date,
-                blog_show_des: blog_show_des,
-                blog_show_more: blog_show_more,
-                text_align: text_align,
-                text_by: text_by,
-                text_on: text_on,
-                margin_bottom_image: margin_bottom_image,
-                margin_bottom_title: margin_bottom_title,
-                margin_bottom_info: margin_bottom_info,
-                margin_bottom_des: margin_bottom_des,
-                limit_content_des: limit_content_des,
-                blog_date_format: blog_date_format,
-            %}
-        </div>
-        {% endfor %}
-    </div>
-  </div>
-</div>
 
 <style>
-    {%- liquid
-        assign blog_bg = section.settings.blog_bg
-        assign blog_bg_gradient = section.settings.blog_bg_gradient
-        assign blog_bg_image = section.settings.blog_bg_image
-
-        assign color_title = section.settings.color_title
-        assign fontsize_title = section.settings.fontsize_title
-        assign fontsize_title_mb = section.settings.fontsize_title_mb
-        assign margin_bottom_heading = section.settings.margin_bottom_heading
-
-        assign color_des = section.settings.color_des
-        assign fontsize_des = section.settings.fontsize_des
-        assign margin_bottom_desheading = section.settings.margin_bottom_desheading
-
-        assign mg_top_desktop = section.settings.mg_top_desktop
-        assign mg_top_tablet = section.settings.mg_top_tablet
-        assign mg_top_mobile = section.settings.mg_top_mobile
-
-        assign mg_bottom_desktop = section.settings.mg_bottom_desktop
-        assign mg_bottom_tablet = section.settings.mg_bottom_tablet
-        assign mg_bottom_mobile = section.settings.mg_bottom_mobile
-
-        assign padding_full_width = section.settings.padding_full_width
-
-        assign enable_border_box = section.settings.enable_border_box
-        assign color_border_box = section.settings.color_border_box
-        assign color_title_item = section.settings.color_title_item
-        assign color_date_item = section.settings.color_date_item
-        assign color_des_item = section.settings.color_des_item
-        assign color_button_item = section.settings.color_button_item
-        assign blog_item_bg = section.settings.blog_item_bg
-        assign border_radius_item = section.settings.border_radius_item
-
-        assign custom_width_title = section.settings.custom_width_title
-
-        assign mg_minus_desktop = section.settings.mg_minus_desktop
-
-        if section.settings.content_on_image
-          assign content_on_image = 'content_on_image'
-        endif 
-        assign content_bg = section.settings.content_bg
-        assign content_gradient = section.settings.content_gradient
-        assign button_text_transform = section.settings.block_button_text_transform
-        assign button_text_fw = section.settings.block_button_fw
-    -%}
-
     #shopify-section-{{section.id}} {
         padding-top: {{ mg_minus_desktop | times: 0.5 | append: 'px' }};
     }
@@ -203,6 +159,10 @@
         text-transform: {{ button_text_transform }};
         font-weight: {{ button_text_fw }};
     }
+    
+    .section-block-{{section.id}} .article-card__footer a svg {
+        fill: {{ color_button_item }};      
+    }
 
     .section-block-{{section.id}} .view_all {
         font-weight: var(--font-weight-view-all-style);
@@ -226,6 +186,41 @@
     .section-block-{{section.id}} .view_all .icon-svg svg {
         fill: var(--color-view-all-icon-style);
     }
+
+    {% if enable_blog_button %}
+        .section-block-{{section.id}} .article-card__footer {
+            text-decoration: unset;
+        }
+
+        .section-block-{{section.id}} .article-card__footer a.button {
+            color: {{ color_button_item }};
+            background: {{ color_button_item_bg }};
+            border: 1px solid {{ color_button_item_border }};
+            font-weight: var(--btn-1-font-weight);
+            text-transform: var(--btn-1-text-transform);
+            width: 162px;
+        }
+
+        .section-block-{{section.id}} .article-card__footer a.button:hover {
+            color: {{ color_button_item_hover }};
+            background: {{ color_button_item_bg_hover }};
+            border: 1px solid {{ color_button_item_border_hover }};
+        }
+
+        .section-block-{{section.id}} .article-card__author {
+            display: flex;
+            justify-content: center;
+        }
+
+        .section-block-{{section.id}} .article-card__author .article__date {
+            order: -1;
+            margin-right: 4px;
+        }
+
+        .section-block-{{section.id}} .article-card__info {
+            padding: 22px 45px 28px;
+        } 
+    {% endif %}
 
     @media (min-width: 1200px) {
         .section-block-{{section.id}} {
@@ -301,11 +296,21 @@
             .section-block-{{section.id}}{
                 background-position: center top;
             }
-       {% endif %}
+        {% endif %}
 
-       .section-block-{{ section.id }} .halo-block-header.view_all-right_title .title {
+        .section-block-{{ section.id }} .halo-block-header.view_all-right_title .title {
             margin-bottom: 10px;
         }
+
+        {% if enable_blog_button %}
+            .section-block-{{section.id}} .halo-block-header .title {
+                margin-bottom: {{ margin_bottom_heading | divided_by: 2 | append: 'px' }};
+            }
+
+            .section-block-{{section.id}} .article-card__info {
+                padding: 22px 8px 28px;
+            }
+        {% endif %}
     }
 
     @media (max-width: 767px) {
@@ -319,6 +324,68 @@
         }
     }
 </style>
+
+{% if settings.banner_animation == 'effect_1' %}<animated-component>{% endif %}
+    <div class="featured-blog-block section-block-{{section.id}}" id="featured-blog-{{section.id}}" data-loader-script="{{ 'halo.slide-blog.js' | asset_url }}">
+    <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}">
+        {% if section.settings.featured_blog_title != blank %}
+            <div class="halo-block-header text-{{ section.settings.title_align }} view_all-{{ section.settings.view_all_pos }}">   
+                <h3 class="title">
+                    <span class="text">
+                    {{ section.settings.featured_blog_title }}
+                    </span>
+                </h3>
+                {% if section.settings.featured_blog_des != blank %}
+                    <div class="rte subtext-blog">
+                        {{ section.settings.featured_blog_des }}
+                    </div>        
+                {% endif %}
+                {% if section.settings.view_all != blank %}
+                    <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}"{% if section.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all }}"{% endif %} title="{{section.settings.view_all}}" 
+                        style="--font-weight-view-all-style: {{ section.settings.font_weight_view_all }};
+                            --mg-top-view-style: {{ section.settings.mg_top_view | append: 'px' }};
+                            --mg-bottom-view-style: {{ section.settings.mg_bottom_view | append: 'px' }};
+                            --color-view-all-style: {{ section.settings.color_view_all }};
+                            --color-view-all-icon-style: {{ section.settings.color_view_all_icon }}">
+                        {%- if section.settings.icon_view_all -%}
+                        <span class="icon-svg">
+                            {{ section.settings.icon_view_all }}
+                        </span>
+                        {%- endif -%}
+                        {{ section.settings.view_all }}
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+        <div class="halo-row column-{{ section.settings.blog_results_per_row }}{% if section.settings.post_limit == 2 %} disable_dots_tablet{% endif %}" data-rows="{{ section.settings.blog_results_per_row }}" data-blogs-slider style="--row-distance-style: {{ section.settings.item_distance | prepend: '-' | append: 'px' }};">
+            {%- assign blog = blogs[section.settings.blog_posts] -%}
+            {% for article in blog.articles limit: section.settings.post_limit %}
+            <div class="halo-item" id="block-{{article.id}}" style="--item-distance-style: {{ section.settings.item_distance | append: 'px' }};" data-animate="{{ settings.banner_animation }}">
+                {% render 'article-card-featured', 
+                    article: article,
+                    blog_show_author: blog_show_author,
+                    blog_show_date: blog_show_date,
+                    blog_show_des: blog_show_des,
+                    blog_show_more: blog_show_more,
+                    blog_show_more_icon: blog_show_more_icon,
+                    text_align: text_align,
+                    text_by: text_by,
+                    text_on: text_on,
+                    margin_bottom_image: margin_bottom_image,
+                    margin_bottom_title: margin_bottom_title,
+                    margin_bottom_info: margin_bottom_info,
+                    margin_bottom_des: margin_bottom_des,
+                    limit_content_des: limit_content_des,
+                    blog_date_format: blog_date_format,
+                    enable_blog_button: enable_blog_button,
+                    block_item_style: block_item_style,
+                %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+{% if settings.banner_animation == 'effect_1' %}</animated-component>{% endif %}
 
 {% schema %}
 {
@@ -469,7 +536,7 @@
         "id": "margin_bottom_heading",
         "label": "t:settings_schema.typography.settings.typography.title_margin_bottom",
         "min": 0,
-        "max": 50,
+        "max": 100,
         "step": 1,
         "unit": "t:sections.layout.fontsize.fontsize_title.unit",
         "default": 5
@@ -781,6 +848,29 @@
     },
     {
         "type": "select",
+        "id": "blog_show_more_icon",
+        "label": "t:sections.featured_blog.settings.blog.blog_show_more_icon",
+        "options": [
+            {
+                "value": "none",
+                "label": "t:sections.header.settings.header_top_custom.icon_1"
+            },
+            {
+                "value": "arrow-right",
+                "label": "t:sections.header.settings.header_top_custom.icon_2"
+            },
+            {
+                "value": "chevron-right",
+                "label": "t:sections.header.settings.header_top_custom.icon_3"
+            },
+            {
+                "value": "angles-right",
+                "label": "t:sections.header.settings.header_top_custom.icon_4"
+            }
+        ]
+    },
+    {
+        "type": "select",
         "id": "blog_date_format",
         "label": "t:sections.featured_blog.settings.blog.date_format",
         "options": [
@@ -853,6 +943,21 @@
         "step": 1,
         "unit": "t:sections.layout.mg_desktop.unit",
         "default": 6
+    },
+    {
+        "type": "select",
+        "id": "block_item_style",
+        "label": "t:sections.featured_blog.settings.settings_item.blog_title_style",
+        "options": [
+        {
+            "value": "style_1",
+            "label": "t:sections.featured_blog.settings.settings_item.style_1"
+        },
+        {
+            "value": "style_2",
+            "label": "t:sections.featured_blog.settings.settings_item.style_2"
+        }],
+        "default": "style_1" 
     },
     {
         "type": "select",
@@ -962,6 +1067,42 @@
         "id": "color_button_item",
         "label": "t:sections.featured_blog.settings.settings_item.color_button_item",
         "default": "#3c3c3c"
+    },
+    {
+        "type": "checkbox",
+        "id": "enable_blog_button",
+        "label": "Enable Custom Color Button",
+        "default": false
+    },
+    {
+        "type": "color",
+        "id": "color_button_item_border",
+        "label": "t:sections.featured_blog.settings.settings_item.color_button_item_border",
+        "default": "#1e1e1e"
+    },
+    {
+        "type": "color",
+        "id": "color_button_item_bg",
+        "label": "t:sections.featured_blog.settings.settings_item.color_button_item_bg",
+        "default": "#1e1e1e"
+    },
+    {
+        "type": "color",
+        "id": "color_button_item_hover",
+        "label": "t:sections.featured_blog.settings.settings_item.color_button_item_hover",
+        "default": "#000"
+    },
+    {
+        "type": "color",
+        "id": "color_button_item_border_hover",
+        "label": "t:sections.featured_blog.settings.settings_item.color_button_item_border_hover",
+        "default": "#fff"
+    },
+    {
+        "type": "color",
+        "id": "color_button_item_bg_hover",
+        "label": "t:sections.featured_blog.settings.settings_item.color_button_item_bg_hover",
+        "default": "#fff"
     },
     {
         "type": "checkbox",

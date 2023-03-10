@@ -64,6 +64,7 @@ class ProductCombo extends HTMLElement {
         const discountCode = "COMBO-"+ meta.product.id;
         let data = '';
         let hint = ',';
+        let attributes = {};
 
         Shopify.getCart((cart) => {
             const itemsInCart = cart.items
@@ -81,12 +82,36 @@ class ProductCombo extends HTMLElement {
                 }
                 
                 if (index === bundleItem.length - 1) {
+                    const addProductsToCart = async () => {
+                        await fetch(`/cart/${data}`); 
+                    }
+
+                    const updateComboDiscountData = async () => {
+                        const bundleDiscountRate = parseFloat(this.dataset.comboDiscountRate);
+
+                        const items = [...bundleItem].map(item => parseInt(item.dataset.bundleProductItemId));
+                        
+                        const new_checkout_level_applications = [{ name: discountCode, bundleDiscountRate, items }];
+                        const newAttributes = { ...attributes, checkout_level_applications: new_checkout_level_applications };
+                        const attributesBody = JSON.stringify({ attributes: newAttributes });
+                            
+                        localStorage.setItem('storedDiscount', discountCode);
+
+                        return await fetch(`${routes.cart_update_url}`, {...fetchConfig(), ...{ body: attributesBody }});
+                    }
+
+                    const applyDiscountCodeToServer = async () => {
+                        if (bundleItem.length == this.form.querySelectorAll('.bundle-product-item').length) {
+                            await fetch(`/discount/${discountCode}?redirect=/cart`) 
+                        }
+                    }
+
                     $.post( "/cart", () => {}).done( async () => {
                         try {
-                            await fetch(`/cart/${data}`)
-                            if (bundleItem.length == this.form.querySelectorAll('.bundle-product-item').length) {
-                                await fetch(`/discount/${discountCode}?redirect=/cart`) 
-                            }
+                            await addProductsToCart();
+                            await updateComboDiscountData();
+                            await applyDiscountCodeToServer();
+
                             this.addComboButton.value = window.variantStrings.addedToCart
                             this.addComboButton.disabled = true
                             this.redirectTo(window.routes.cart);

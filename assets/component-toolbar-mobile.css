@@ -21,11 +21,16 @@
     margin: 0;
     align-items: center;
 }
+
 .bottom-bar--list li > a {
     padding: 7px 2px;
     display: block;
     pointer-events: auto;
     text-align: center;
+}
+
+.bottom-bar--list li > a[data-cart-sidebar] {
+    position: relative;
 }
 
 .bottom-bar--list span {
@@ -73,6 +78,7 @@
 .bottom-bar--list .bottom-bar--close {
     right: 0px;
     background: var(--bg-white);
+    border: none;
 }
 .bottom-bar--list .bottom-bar--close svg {
     fill: var(--bg-black);
@@ -80,8 +86,8 @@
 }
 
 .bottom-bar--list .cart-count-bubble{
-    top: 7px;
-    right: 9px;
+    top: 0;
+    right: -7px;
 }
 
 @media (max-width: 1024px){

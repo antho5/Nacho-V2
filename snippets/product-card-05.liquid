@@ -33,6 +33,7 @@
           break
         else 
             assign position = 0
+            assign variant_selected = nil
         endif
     endfor
 
@@ -49,8 +50,10 @@
     assign product_action_group = false
     
     assign show_quick_view = false
-    if settings.show_quick_view and settings.product_quick_view_type == 'icon'
-        assign show_quick_view = true
+    if settings.show_quick_view 
+        if settings.product_quick_view_type == 'icon' or settings.show_quick_view_mb
+            assign show_quick_view = true
+        endif
     endif
 
     assign show_wishlist = false
@@ -73,6 +76,8 @@
     endif
 
     assign has_video = product_card_product.media | where: 'media_type','video'
+
+    assign show_price = settings.show_price
 -%}
 <div class="product-item{% if sold_out %} sold-out{% endif %}{% if sold_out and settings.show_notify_form %} has-notify{% endif %}" data-product-id="{{ product_card_product.id }}" data-json-product='{"id": {{product_card_product.id}},"handle": "{{product_card_product.handle}}","media": {{product.media | json | escape}},"variants": {{ product_card_product.variants | json | escape}}}'>
     <div class="card">
@@ -110,26 +115,15 @@
 
                 {%- if product_action_group -%}
                     <div class="card-product__group group-{{ settings.group_quickview_wishlist }}">
-                        {%- if show_wishlist -%}
-                            <div class="card-product__group-item card-wishlist card-list__hidden">
-                                <a class="wishlist-icon" href="#" data-wishlist data-wishlist-handle="{{ product_card_product.handle }}" data-product-id="{{ product_card_product.id }}">
-                                    <span class="visually-hidden">{{ 'wishlist.general.add' | t }}</span>
-                                    <span class="text">
-                                        {{ 'wishlist.general.add' | t }}
-                                    </span>
-                                    {% render 'icon-heart-2' %}
-                                </a>
-                            </div>
-                        {%- endif -%}
                         {%- if show_quick_view -%}
-                            <div class="card-product__group-item card-quickview card-quickviewIcon">
-                                <a class="quickview-icon" href="javascript:void(0)" data-product-id="{{ product_card_product.id }}" data-open-quick-view-popup data-product-handle="{{ product_card_product.handle }}">
+                            <div class="card-product__group-item card-quickview card-quickviewIcon{% if settings.show_quick_view_mb %} show-mb{% endif %}{% if settings.product_quick_view_type == 'default' %} default{% endif %}">
+                                <button type="button" title="{{ 'products.product.quick_view' | t }}" class="quickview-icon" data-product-id="{{ product_card_product.id }}" data-open-quick-view-popup data-product-handle="{{ product_card_product.handle }}">
                                     <span class="visually-hidden">{{ 'products.product.quick_view' | t }}</span>
                                     <span class="text">
                                         {{ 'products.product.quick_view_2' | t }}
                                     </span>
                                     {% render 'icon-eyes' %}
-                                </a>
+                                </button>
                             </div>
                         {%- endif -%}
                         {%- if show_compare -%}
@@ -148,15 +142,15 @@
 
                 {%- if settings.show_quick_view and settings.product_quick_view_type == 'default' -%}
                     <div class="card-quickview">
-                        <a class="quickview-button button" href="javascript:void(0)" data-product-id="{{ product_card_product.id }}" data-open-quick-view-popup data-product-handle="{{ product_card_product.handle }}">
+                        <button type="button" title="{{ 'products.product.quick_view' | t }}" class="quickview-button button" data-product-id="{{ product_card_product.id }}" data-open-quick-view-popup data-product-handle="{{ product_card_product.handle }}">
                             <span class="visually-hidden">{{ 'products.product.quick_view' | t }}</span>
                             {{ 'products.product.quick_view' | t }}
-                        </a>
+                        </button>
                     </div>
                 {%- endif -%}
 
                 {%- if settings.show_action or settings.show_compare -%}
-                    <div class="card-action{% if settings.show_compare and settings.product_compare_type == 'default' %} has-compare{% endif %}">
+                    <div class="card-action{% if settings.show_compare and settings.product_compare_type == 'default' %} has-compare{% endif %}{% if settings.show_product_marquee %} has-marquee{% endif %}">
                         {%- if settings.show_action -%}
                             {% render 'add-to-cart-form',
                                 product: product_card_product,
@@ -176,9 +170,15 @@
                         </div>
                     </div>
                 {%- endif -%}
+
+                {%- if settings.show_product_marquee -%}
+                    {%- render 'product-card-marquee',
+                        product: product_card_product,
+                    -%}     
+                {%- endif -%}
             </div>
         </div>
-        <div class="card-information">
+        <div class="card-information{% if show_wishlist %} has-wishlist{% endif %}">
             <div class="card-information__wrapper text-{{ settings.product_content_text_align }}">
                 {%- if settings.show_vendor or settings.show_review -%}
                     <div class="card-information__group card-information__group-2{% if show_wishlist %} has-wishlist{% endif %}">
@@ -190,10 +190,10 @@
                         {%- endif -%}
                         {%- if show_wishlist -%}
                             <div class="card-product__group-item card-wishlist">
-                                <a class="wishlist-icon" href="#" data-wishlist data-wishlist-handle="{{ product_card_product.handle }}" data-product-id="{{ product_card_product.id }}">
+                                <button type="button" title="{{ 'wishlist.general.add' | t }}" class="wishlist-icon{% if settings.show_wishlist_card_mb %} show-mb{% endif %}" data-wishlist data-wishlist-handle="{{ product_card_product.handle }}" data-product-id="{{ product_card_product.id }}">
                                     {% render 'icon-heart-2' %}
                                     <span class="visually-hidden">{{ 'wishlist.general.add' | t }}</span>
-                                </a>
+                                </button>
                             </div>
                         {%- endif -%}
                     </div>
@@ -221,12 +221,14 @@
                     </span>
                 </a>
 
-                <div class="card-price">
-                    {% render 'price',
-                        product: product_card_product,
-                        price_class: ''
-                    %}
-                </div>
+                {%- if show_price -%}
+                    <div class="card-price">
+                        {% render 'price',
+                            product: product_card_product,
+                            price_class: ''
+                        %}
+                    </div>
+                {%- endif -%}
 
                 <div class="card-information__group">
                     {%- if settings.show_review -%}

@@ -150,7 +150,6 @@
 .halo-text-format blockquote p{
     display: block;
     width: 100%;
-    max-width: 1170px;
     margin: 0 auto;
     font-size: calc(var(--font-body-size) + 3px);
     font-weight: var(--font-weight-normal);
@@ -379,6 +378,10 @@
 .description-sample-container .articleGallery-slider:not(.slick-initialized) .imgGallery-item {
     width: calc(100% / 3);
     display: inline-block;
+}
+
+.description-sample-container .articleGallery-slider.column-4:not(.slick-initialized) .imgGallery-item {
+    width: calc(100% / 4);
 }
 
 .description-sample-container .articleGallery-block {

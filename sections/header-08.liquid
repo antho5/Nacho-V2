@@ -17,45 +17,41 @@
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
 
 <{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %} class="header-wrapper" data-hide-on-scroll={{ section.settings.hide_scroll }}>
-    <header class="header header-08{% if section.settings.menu != blank %} header--has-menu{% endif %}" style="--icon-mobile-spacing: {{ section.settings.header_icon_mobile_spacing | append: 'px' }};">
+    <header class="header header-08 header--{{ section.settings.logo_position }}{% if section.settings.menu != blank %} header--has-menu{% endif %}" style="--icon-mobile-spacing: {{ section.settings.header_icon_mobile_spacing | append: 'px' }};">
         <div class="header-top">
             <div class="container">
                 <div class="header-top--wrapper">
-                    <div class="header-top--left header__logo text-left clearfix">
-                        {%- if request.page_type == 'index' -%}
-                            <h1 class="header__heading">
-                        {%- else -%}
-                            <div class="header__heading">
-                        {%- endif -%}
-                            <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
-                                {%- if section.settings.logo != blank -%}
-                                    {%- assign image = section.settings.logo -%}
-                                    {%- assign image_size = section.settings.logo_width | append: 'x' -%}
-                                    <img srcset="{{ image | img_url: image_size }} 1x, {{ image | img_url: image_size, scale: 2 }} 2x"
-                                        src="{{ image | img_url: image_size }}"
-                                        loading="lazy"
-                                        class="header__heading-logo"
-                                        alt="{{ image.alt | default: shop.name | escape }}">
-                                {%- elsif section.settings.logo_text != blank -%}
-                                    <span class="h2 {{ section.settings.logo_text_transform }}">{{ section.settings.logo_text }}</span>
-                                {%- else -%}
-                                    <span class="h2 {{ section.settings.logo_text_transform }}">{{ shop.name }}</span>
-                                {%- endif -%}
-                            </a>
-                        {%- if request.page_type == 'index' -%}
-                            </h1>
-                        {%- else -%}
-                            </div>
-                        {%- endif -%}
-                    </div>
+                    {%- if section.settings.logo_position == 'left' -%}
+                        <div class="header-top--left header__logo text-left clearfix">
+                            <{% if request.page_type == 'index' %}h1{% else %}div{% endif %} class="header__heading">
+                                <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
+                                    {%- if section.settings.logo != blank -%}
+                                        {%- assign image = section.settings.logo -%}
+                                        {%- assign image_size = section.settings.logo_width | append: 'x' -%}
+                                        <img srcset="{{ image | img_url: image_size }} 1x, {{ image | img_url: image_size, scale: 2 }} 2x"
+                                            src="{{ image | img_url: image_size }}"
+                                            loading="lazy"
+                                            class="header__heading-logo"
+                                            alt="{{ image.alt | default: shop.name | escape }}">
+                                    {%- elsif section.settings.logo_text != blank -%}
+                                        <span class="h2 {{ section.settings.logo_text_transform }}">{{ section.settings.logo_text }}</span>
+                                    {%- else -%}
+                                        <span class="h2 {{ section.settings.logo_text_transform }}">{{ shop.name }}</span>
+                                    {%- endif -%}
+                                </a>
+                            </{% if request.page_type == 'index' %}h1{% else %}div{% endif %}>
+                        </div>
+                    {%- endif -%}
 
-                    <div class="header-top-center header__search text-center clearfix">
+                    <div class="{% if section.settings.logo_position == 'left' %}header-top-center text-center{% else %}header-top--left text-left{% endif %} header__search clearfix">
                         <div class="header__iconItem header__group">
-                            {% if section.settings.display_customer_service and section.settings.customer_service_text != blank %}
-                              <div class="customer-service-text">
-                                {{ section.settings.customer_service_text }}
-                              </div>
-                            {% endif %}
+                            {%- if section.settings.logo_position == 'left' -%}
+                                {%- if section.settings.display_customer_service and section.settings.customer_service_text != blank -%}
+                                    <div class="customer-service-text">
+                                        {{ section.settings.customer_service_text }}
+                                    </div>
+                                {%- endif -%}
+                            {%- endif -%}
                            {% if section.settings.show_search %}
                                 <details-modal class="header__iconItem header__search">
                                     {%- if settings.show_quick_search -%}
@@ -63,10 +59,9 @@
                                     {%- endif -%}
                                     <details class="search_details">
                                         <summary class="header__search-full" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
-                                            <a href="javascript:void(0)" class="header-search-close" alt="{{ 'general.common.close' | t }}">
+                                            <button type="button" class="header-search-close" aria-label="{{ 'general.common.close' | t }}">
                                                 {% render 'icon-close' %}
-                                                {{ 'general.common.close' | t }}
-                                            </a>    
+                                            </button>
                                             <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
                                                 <div class="field">
                                                     <input 
@@ -121,12 +116,53 @@
                         </div>
                     </div>
 
+                    {% if section.settings.logo_position == 'center' %}
+                        <div class="header-top-center header__logo text-center clearfix">
+                            {%- if request.page_type == 'index' -%}
+                                <h1 class="header__heading">
+                            {%- else -%}
+                                <div class="header__heading">
+                            {%- endif -%}
+                                <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
+                                    {%- if section.settings.logo != blank -%}
+                                        {%- assign image = section.settings.logo -%}
+                                        {%- assign image_size = section.settings.logo_width | append: 'x' -%}
+                                        <img srcset="{{ image | img_url: image_size }} 1x, {{ image | img_url: image_size, scale: 2 }} 2x"
+                                            src="{{ image | img_url: image_size }}"
+                                            loading="lazy"
+                                            class="header__heading-logo"
+                                            alt="{{ image.alt | default: shop.name | escape }}">
+                                    {%- elsif section.settings.logo_text != blank -%}
+                                        <span class="h2 {{ section.settings.logo_text_transform }}">{{ section.settings.logo_text }}</span>
+                                    {%- else -%}
+                                        <span class="h2 {{ section.settings.logo_text_transform }}">{{ shop.name }}</span>
+                                    {%- endif -%}
+                                </a>
+                            {%- if request.page_type == 'index' -%}
+                                </h1>
+                            {%- else -%}
+                                </div>
+                            {%- endif -%}
+                        </div>
+                    {% endif %}
+
                     <div class="header-top--right header__icons text-right clearfix">
-                    
+                        {%- if section.settings.logo_position == 'center' -%}
+                            {%- if section.settings.display_customer_service and section.settings.customer_service_text != blank -%}
+                                <div class="customer-service-text">
+                                    {{ section.settings.customer_service_text }}
+                                </div>
+                            {%- endif -%}
+                        {%- endif -%}
                         {% if section.settings.show_cart or section.settings.show_wishlist or section.settings.show_customer %}
                         <div class="header__iconItem header__group">
                             {%- if shop.customer_accounts_enabled and section.settings.show_customer -%}
-                                <a class="header__icon header__icon--account link link--text" data-open-auth-sidebar>
+                                {% if routes.account_login_url contains '/account/login' %}
+                                    {% assign is_contained = true %}
+                                {% else %}
+                                    {% assign is_contained = false %}
+                                {% endif %}
+                                <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account link link--text"{% if is_contained %} data-open-auth-sidebar{% endif %}>
                                     <svg version="1.1" id="Icons" class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                          viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
                                     <circle class="st0" cx="16" cy="16" r="14"/>
@@ -141,8 +177,8 @@
                                 </a>
                             {%- endif -%}
                             {%- if section.settings.show_cart -%}
-                                <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}"{% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
-                                    {% render 'icon-cart-3' %}
+                                <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                                    {% render 'icon-cart-03' %}
                                     <div class="cart-count-bubble">
                                         {%- if cart.item_count < 100 -%}
                                             <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
@@ -224,8 +260,8 @@
                     </details-modal>
                 {% endif %}
                 {% if section.settings.show_cart %}
-                    <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}" {% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
-                        {% render 'icon-cart-3' %}
+                    <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                        {% render 'icon-cart-03' %}
                         <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
                         <div class="cart-count-bubble">
                             {%- if cart.item_count < 100 -%} <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
@@ -404,6 +440,36 @@
             "id": "menu",
             "label": "t:sections.header.settings.menu.label__1",
             "default": "main-menu"
+        },
+        {
+            "type": "range",
+            "id": "menu_top_spacing",
+            "label": "t:sections.header.settings.header_bottom.mg_top",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 17
+        },
+        {
+            "type": "range",
+            "id": "menu_bottom_spacing",
+            "label": "t:sections.header.settings.header_bottom.mg_bottom",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 17
+        },
+        {
+            "type": "range",
+            "id": "grid_gap_menu",
+            "label": "t:sections.header.settings.header_bottom.spacing_left_right",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 20
         },
         {
             "type": "checkbox",
@@ -650,6 +716,22 @@
             "unit": "t:sections.header.settings.logo_width.unit",
             "label": "t:sections.header.settings.logo_width.label__3",
             "default": 50
+        },
+        {
+            "type": "select",
+            "id": "logo_position",
+            "label": "t:sections.header.settings.logo.label__3",
+            "default": "left",
+            "options": [
+            {
+                "value": "left",
+                "label": "t:settings_schema.typography.settings.typography.left"
+            },
+            {
+                "value": "center",
+                "label": "t:settings_schema.typography.settings.typography.center"
+            }
+            ]
         },
         {
             "type": "range",
@@ -949,7 +1031,7 @@
         {
             "type": "color",
             "id": "bg_mega_menu",
-            "label": "t:sections.header.settings.header_bottom.bg_top",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color",
             "default": "#fff"
         },
         {
@@ -1370,9 +1452,15 @@
                     "default": 5
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",
@@ -1514,9 +1602,15 @@
                     "default": 3
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",

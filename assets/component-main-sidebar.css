@@ -513,7 +513,8 @@
 .page-sidebar .policies-block .halo-item .more_btn {
     color: var(--text-cart);
     text-decoration: underline;     
-    text-underline-offset: 1px;     
+    text-underline-offset: 1px;
+    justify-content: flex-start;
 }  
 
 .product-details .page-sidebar .policies-block .halo-item img {     

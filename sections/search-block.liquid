@@ -41,63 +41,61 @@
 
 <div class="search-block-section" id="search-block-section-{{ section.id }}" data-id="{{ section.id }}" data-title="{{ search_block_title }}">
     <div class="{% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%} container-full{% else %}container{% endif %}">
-        {% if search_block_title != blank or search_block_des != blank %}
-            <div class="search-block align-{{ content_align }}" style="--content-max-width: {{ content_max_width }};
-                                                                        --input-padding-top: {{ padding_top_input }};
-                                                                        --input-padding-bottom: {{ padding_bottom_input }};">
-                <div class="block-header">
-                    {% if search_block_title != blank %}
-                        <h2 class="title search-block-title text-{{ text_align }} {% if enable_border_title %}has_border{% endif %}"
-                            style="--title-color: {{ color_title }};
-                            --title-fs: {{ fontsize_title }};
-                            --title-fs-mb: {{ fontsize_title_mb }};
-                            --title-margin-bottom: {{ margin_bottom_title }};  
-                            --title-transform: {{ title_text_transform }};                      
-                            "
-                        > 
-                            <span>{{ search_block_title | escape }}</span>
-                        </h2>
-                    {% endif %}
-                    {% if search_block_des != blank %}
-                        <p class="desc search-block-des text-{{ text_align }}"
-                            style="--desc-color: {{ color_des }};
-                            --desc-margin-bottom: {{ margin_bottom_des }};
-                            --des-fs: {{ fontsize_des }};
-                            "
-                        >
-                            <span>{{ search_block_des }}</span>
-                        </p>
-                    {% endif %}
-                </div>
-                <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
-                    <input type="hidden" name="type" value="{{ search.terms | escape }}">
-                    <input type="hidden" name="options[prefix]" value="last" />
-                    <div class="form-field form-fieldInline">
-                        <label class="form-label hiddenLabels" for="Search-Block" aria-hidden="true">
-                            {{ search_block_title }}
-                        </label>
-                        <input
-                            class="search__input form-input form-input-placeholder input-align-{{ search_input_align }}"
-                            id="Search-Block"
-                            type="search"
-                            name="q"
-                            value="{{ search.terms | escape }}"
-                            {% if search.performed %}
-                                autofocus
-                            {% endif %}
-                            placeholder="{{ search_block_placeholder }}"
-                            style="--input-color: {% if search_input_color != blank %}{{ search_input_color }}{% endif %};
-                                --input-bg: {% if search_input_gradient != blank %}{{ search_input_gradient}}{% elsif search_input_bg != blank %}{{ search_input_bg }}{% endif %};
-                                --input-border: {% if search_input_border != blank %}{{ search_input_border }}{% endif %};
-                                "
-                        >
-                        <button type="submit" class="search__button field__button button button--primary" aria-label="{{ 'general.search.search' | t }}">
-                            {% render 'icon-search' %}
-                        </button>
-                    </div>
-                </form>
+        <div class="search-block align-{{ content_align }}" style="--content-max-width: {{ content_max_width }};
+                                                                    --input-padding-top: {{ padding_top_input }};
+                                                                    --input-padding-bottom: {{ padding_bottom_input }};">
+            <div class="block-header">
+                {% if search_block_title != blank %}
+                    <h2 class="title search-block-title text-{{ text_align }} {% if enable_border_title %}has_border{% endif %}"
+                        style="--title-color: {{ color_title }};
+                        --title-fs: {{ fontsize_title }};
+                        --title-fs-mb: {{ fontsize_title_mb }};
+                        --title-margin-bottom: {{ margin_bottom_title }};  
+                        --title-transform: {{ title_text_transform }};                      
+                        "
+                    > 
+                        <span>{{ search_block_title | escape }}</span>
+                    </h2>
+                {% endif %}
+                {% if search_block_des != blank %}
+                    <p class="desc search-block-des text-{{ text_align }}"
+                        style="--desc-color: {{ color_des }};
+                        --desc-margin-bottom: {{ margin_bottom_des }};
+                        --des-fs: {{ fontsize_des }};
+                        "
+                    >
+                        <span>{{ search_block_des }}</span>
+                    </p>
+                {% endif %}
             </div>
-        {% endif %}
+            <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+                <input type="hidden" name="type" value="{{ search.terms | escape }}">
+                <input type="hidden" name="options[prefix]" value="last" />
+                <div class="form-field form-fieldInline">
+                    <label class="form-label hiddenLabels" for="Search-Block" aria-hidden="true">
+                        {{ search_block_title }}
+                    </label>
+                    <input
+                        class="search__input form-input form-input-placeholder input-align-{{ search_input_align }}"
+                        id="Search-Block"
+                        type="search"
+                        name="q"
+                        value="{{ search.terms | escape }}"
+                        {% if search.performed %}
+                            autofocus
+                        {% endif %}
+                        placeholder="{{ search_block_placeholder }}"
+                        style="--input-color: {% if search_input_color != blank %}{{ search_input_color }}{% endif %};
+                            --input-bg: {% if search_input_gradient != blank %}{{ search_input_gradient}}{% elsif search_input_bg != blank %}{{ search_input_bg }}{% endif %};
+                            --input-border: {% if search_input_border != blank %}{{ search_input_border }}{% endif %};
+                            "
+                    >
+                    <button type="submit" class="search__button field__button button button--primary" aria-label="{{ 'general.search.search' | t }}">
+                        {% render 'icon-search' %}
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

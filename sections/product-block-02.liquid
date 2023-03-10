@@ -49,7 +49,7 @@
                                     <span class="text">{{ block_title | escape }}</span>
                                 </h3>
                                 {% if section.settings.view_all != blank %}
-                                <a class="view_all" href="{{ section.settings.link_view_all }}" title="{{section.settings.view_all}}">
+                                <a class="view_all"{% if section.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all }}"{% endif %} title="{{section.settings.view_all}}">
                                     {%- if section.settings.icon_view_all -%}
                                     <span class="icon-svg">
                                         {{ section.settings.icon_view_all }}
@@ -74,22 +74,46 @@
                             {%- liquid
                                 assign column = section.settings.product_block_show
                                 assign dots = section.settings.product_block_dots
+                                assign dots_mb = section.settings.product_block_dots_mb
                                 assign arrows = section.settings.product_block_arrows
+                                assign arrows_mb = section.settings.product_block_arrows_mb
                             -%}
                             <div class="products-carousel column-{{ column }}"
                                 data-item-to-show="{{ column }}"
                                 data-item-dots="{{ dots }}"
+                                data-item-dots-mb="{{ dots_mb }}"
                                 data-item-arrows="{{ arrows }}"
+                                data-item-arrows-mb="{{ arrows_mb }}"
                             >
                         {%- endif -%}
-                            {%- for product in collections[collection].products limit: limit -%}
-                                <div class="product{% if swipe %} slider__slide grid__item{% endif %}">
-                                    {% render 'product-card-loading',
-                                        product_card_product: product,
-                                        media_size: image_ratio,
-                                        portrait_aspect_ratio: '133'
-                                    %}
-                                </div>
+                            {%- for tag in current_tags -%}
+                                {%- if tag contains 'limit=' -%}
+                                    {%- assign limit = tag | remove: 'limit=' -%}
+                                {%- elsif tag contains 'sectionId=' -%}
+                                    {%- assign sectionId = tag | remove: 'sectionId=' -%}
+                                {%- elsif tag contains 'imageRatio=' -%}
+                                    {%- assign image_ratio = tag | remove: 'imageRatio=' -%}
+                                {%- elsif tag contains 'swipe=' -%}
+                                    {%- assign swipe = tag | remove: 'swipe=' -%}
+                                {%- elsif tag contains 'hasCountdown=' -%}
+                                    {%- assign hasCountdown = tag | remove: 'hasCountdown=' -%}
+                                {%- endif -%}
+                            {%- endfor -%}
+                                
+                            {%- if collection.products[0] != nil -%}
+                                {%- for product in collection.products limit: limit -%}
+                                    <div class="product{% if swipe == 'true' %} slider__slide grid__item{% endif %}">
+                                        {% render 'product-grid-layout',
+                                            product_card_product: product,
+                                            portrait_aspect_ratio: '125',
+                                            serial: forloop.index,
+                                            sectionId: sectionId,
+                                            media_size: image_ratio,
+                                            hasCountdown: hasCountdown,
+                                            loading: true
+                                        %}
+                                    </div>
+                                {%- endfor -%}
                             {%- else -%}
                                 {%- for product in (1..limit) -%}
                                     <div class="product{% if swipe %} slider__slide grid__item{% endif %}">
@@ -99,7 +123,7 @@
                                         %}
                                     </div>
                                 {%- endfor -%}
-                            {%- endfor -%}
+                            {%- endif -%}
                         </div>
                         {%- if swipe -%}
                             <div class="slider-buttons no-js-hidden{% if products_to_display < 4 %} medium-hide{% endif %}{% if products_to_display < 3 %} small-hide{% endif %}">
@@ -123,14 +147,13 @@
                             {%- assign product_total = collections[collection].all_products_count -%}
                             {%- if product_total > product_limit -%}
                                 <div class="product-infinite-scroll text-center {% if swipe %}hidden-mobile{% endif %}" data-product-infinite>
-                                    <a class="button button--secondary"
+                                    <button type="button" class="button button--secondary"
                                         data-collection="{{ collection.handle }}"
                                         data-limit="{{ product_limit }}"
                                         data-swipe="{{ swipe }}"
                                         data-page="2"
                                         data-total="{{ product_total }}"
                                         data-image-ratio="{{ image_ratio }}"
-                                        href="#"
                                         sectionId="{{ section.id }}"
                                         {% if product_total <= product_limit %}
                                             disabled="disabled"
@@ -138,7 +161,7 @@
                                     >   
                                         {{ section.settings.button_icon }}
                                         <span>{{ section.settings.button_text }}</span>
-                                    </a>
+                                    </button>
                                 </div>
                             {%- endif -%}
                         {%- endif -%}
@@ -156,7 +179,7 @@
                                     <span class="text">{{ block_title_02 | escape }}</span>
                                 </h3>
                                 {% if section.settings.view_all_02 != blank %}
-                                <a class="view_all" href="{{ section.settings.link_view_all_02 }}" title="{{section.settings.view_all_02}}">
+                                <a class="view_all"{% if section.settings.link_view_all_02 == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all_02 }}"{% endif %} title="{{section.settings.view_all_02}}">
                                     {%- if section.settings.icon_view_all -%}
                                     <span class="icon-svg">
                                         {{ section.settings.icon_view_all }}
@@ -181,22 +204,46 @@
                             {%- liquid
                                 assign column = section.settings.product_block_show
                                 assign dots = section.settings.product_block_dots
+                                assign dots_mb = section.settings.product_block_dots_mb
                                 assign arrows = section.settings.product_block_arrows
+                                assign arrows_mb = section.settings.product_block_arrows_mb
                             -%}
                             <div class="products-carousel column-{{ column }}"
                                 data-item-to-show="{{ column }}"
                                 data-item-dots="{{ dots }}"
+                                data-item-dots-mb="{{ dots_mb }}"
                                 data-item-arrows="{{ arrows }}"
+                                data-item-arrows-mb="{{ arrows_mb }}"
                             >
                         {%- endif -%}
-                            {%- for product in collections[collection].products limit: limit -%}
-                                <div class="product{% if swipe %} slider__slide grid__item{% endif %}">
-                                    {% render 'product-card-loading',
-                                        product_card_product: product,
-                                        media_size: image_ratio,
-                                        portrait_aspect_ratio: '133'
-                                    %}
-                                </div>
+                            {%- for tag in current_tags -%}
+                                {%- if tag contains 'limit=' -%}
+                                    {%- assign limit = tag | remove: 'limit=' -%}
+                                {%- elsif tag contains 'sectionId=' -%}
+                                    {%- assign sectionId = tag | remove: 'sectionId=' -%}
+                                {%- elsif tag contains 'imageRatio=' -%}
+                                    {%- assign image_ratio = tag | remove: 'imageRatio=' -%}
+                                {%- elsif tag contains 'swipe=' -%}
+                                    {%- assign swipe = tag | remove: 'swipe=' -%}
+                                {%- elsif tag contains 'hasCountdown=' -%}
+                                    {%- assign hasCountdown = tag | remove: 'hasCountdown=' -%}
+                                {%- endif -%}
+                            {%- endfor -%}
+
+                            {%- if collection_02.products[0] != nil -%}
+                                {%- for product in collection_02.products limit: limit -%}
+                                    <div class="product{% if swipe == 'true' %} slider__slide grid__item{% endif %}">
+                                        {% render 'product-grid-layout',
+                                            product_card_product: product,
+                                            portrait_aspect_ratio: '125',
+                                            serial: forloop.index,
+                                            sectionId: sectionId,
+                                            media_size: image_ratio,
+                                            hasCountdown: hasCountdown,
+                                            loading: true
+                                        %}
+                                    </div>
+                                {%- endfor -%}
                             {%- else -%}
                                 {%- for product in (1..limit) -%}
                                     <div class="product{% if swipe %} slider__slide grid__item{% endif %}">
@@ -206,7 +253,7 @@
                                         %}
                                     </div>
                                 {%- endfor -%}
-                            {%- endfor -%}
+                            {%- endif -%}
                         </div>
                         {%- if swipe -%}
                             <div class="slider-buttons no-js-hidden{% if products_to_display < 4 %} medium-hide{% endif %}{% if products_to_display < 3 %} small-hide{% endif %}">
@@ -230,14 +277,13 @@
                             {%- assign product_total = collections[collection_02].all_products_count -%}
                             {%- if product_total > product_limit -%}
                                 <div class="product-infinite-scroll text-center {% if swipe %}hidden-mobile{% endif %}" data-product-infinite>
-                                    <a class="button button--secondary"
+                                    <button type="button" class="button button--secondary"
                                         data-collection="{{ collection.handle }}"
                                         data-limit="{{ product_limit }}"
                                         data-swipe="{{ swipe }}"
                                         data-page="2"
                                         data-total="{{ product_total }}"
                                         data-image-ratio="{{ image_ratio }}"
-                                        href="#"
                                         sectionId="{{ section.id }}"
                                         {% if product_total <= product_limit %}
                                             disabled="disabled"
@@ -245,7 +291,7 @@
                                     >   
                                         {{ section.settings.button_icon }}
                                         <span>{{ section.settings.button_text }}</span>
-                                    </a>
+                                    </button>
                                 </div>
                             {%- endif -%}
                         {%- endif -%}
@@ -303,14 +349,14 @@
     -%}
 
     {% if infinite_scroll %}
-        .section-block-{{section.id}} .product-infinite-scroll a.button {
+        .section-block-{{section.id}} .product-infinite-scroll .button {
             background-color: {{ bg_color_button }};
             color: {{ color_button }};
             border: 1px solid {{ border_color_button }};
             max-width: {{ maxwidth_button }};
         }
 
-        .section-block-{{section.id}} .product-infinite-scroll a.button svg {
+        .section-block-{{section.id}} .product-infinite-scroll .button svg {
             fill: {{ color_button }};
         }
     {% endif %}
@@ -889,14 +935,26 @@
     {
         "type": "checkbox",
         "id": "product_block_dots",
-        "label": "t:sections.product_block.settings.slider.product_block_dots",
+        "label": "t:sections.product_block.settings.slider.product_block_dots_desk",
         "default": false
     },
     {
         "type": "checkbox",
-        "id": "product_block_arrows",
-        "label": "t:sections.product_block.settings.slider.product_block_arrows",
+        "id": "product_block_dots_mb",
+        "label": "t:sections.product_block.settings.slider.product_block_dots_mb",
         "default": true
+    },  
+    {
+        "type": "checkbox",
+        "id": "product_block_arrows",
+        "label": "t:sections.product_block.settings.slider.product_block_arrows_desk",
+        "default": true
+    },
+    {
+        "type": "checkbox",
+        "id": "product_block_arrows_mb",
+        "label": "t:sections.product_block.settings.slider.product_block_arrows_mb",
+        "default": false
     },
     {
         "type": "select",
@@ -1012,7 +1070,7 @@
     {
         "type": "color",
         "id": "border_color_card",
-        "label": "t:settings_schema.typography.settings.typography.border_color",
+        "label": "t:settings_schema.colors.settings.colors_name.border_color",
         "default": "#f0f1f4"
     }
     ],

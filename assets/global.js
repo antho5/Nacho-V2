@@ -340,19 +340,13 @@ Shopify.addItem = function(variant_id, quantity, callback, input = null) {
             }
         },
         error: function(XMLHttpRequest, textStatus) {
-            // console.log(XMLHttpRequest)
             var message = window.cartStrings.addProductOutQuantity2;
             if (input.length > 0) {
                 var maxValue = parseInt(input.attr('data-inventory-quantity'));
                 message = getInputMessage(maxValue)
                 input.val(maxValue)
             } 
-          
-            const errorDescription = XMLHttpRequest.responseJSON.description.toLowerCase()
-            if (errorDescription.includes(window.cartStrings.soldoutText) || errorDescription.includes(window.cartStrings.alreadyText)) {
-                    message = XMLHttpRequest.responseJSON.description
-            }
-          
+            
             Shopify.onError(XMLHttpRequest, textStatus, message);
             target?.classList.remove('is-loading');
         }
@@ -367,17 +361,9 @@ Shopify.onItemAdded = function(line_item) {
 Shopify.onError = function(XMLHttpRequest, textStatus, message) {
     var data = eval('(' + XMLHttpRequest.responseText + ')');
     if (!!data.message) {
-        // if (window.innerWidth >= 767) {
-        //     showWarning(data.message + '(' + data.status  + '): ' + data.description, warningTime);
-        // } else {
-            showWarning(data.message + ': ' + message, warningTime);
-        // }
+        !!data.description ? showWarning(data.description) : showWarning(data.message + ': ' + message, warningTime);
     } else {
-        // if (window.innerWidth >= 767) {
-        //     showWarning('Error : ' + Shopify.fullMessagesFromErrors(data).join('; ') + '.', warningTime);
-        // } else {
-            showWarning('Error : ' + message, warningTime);
-        // }
+        showWarning('Error : ' + message, warningTime);
     }
 }
 
@@ -534,42 +520,45 @@ class UpdateQuantity extends HTMLElement {
             (button) => button.addEventListener('click', this.onButtonClick.bind(this))
         );
     }
+    
     onButtonClick(event) {
         event.preventDefault();
         let el_input = event.target.parentElement.querySelector('.quantity');
-        const value = Number(el_input.value);     
-        const inStockNumber = el_input.dataset.inventoryQuantity;
-        const atcButton = el_input.closest('.productView-product')?.querySelector('[data-btn-addtocart]');
-        const saleOutStock = atcButton?.dataset.available === 'true' 
-                        || atcButton?.dataset.available === 'no-track-quantity' 
-                        || atcButton?.dataset.available == null
-                        || false
+        const value = Number(el_input.value);
+        const inStockNumber = Number(el_input.dataset.inventoryQuantity);
         if (event.target.classList.contains('plus')) {
             var newVal = value + 1;
         } else {
             var newVal = value - 1;
         }
-  
+
         if (newVal < 0 ) {
             var newVal = 1
         }
 
-        if (newVal > inStockNumber && !saleOutStock) {
-            var arrayInVarName = `cart_selling_array_${this.dataset.product}`,
-            itemInArray = window[arrayInVarName],
-            itemStatus = itemInArray[this.dataset.variant];
-
+        if (newVal <= inStockNumber) {
+            el_input.value = newVal;
+            this.input.dispatchEvent(this.changeEvent);
+        } else if (isNaN(inStockNumber)) {
+            el_input.value = newVal;
+            this.input.dispatchEvent(this.changeEvent);
+        }  else {
+            if (this.quantityCheckedToBeContinue()) {
+              el_input.value = newVal;
+              this.input.dispatchEvent(this.changeEvent);
+              return;
+            }
           
-          if(itemStatus == 'deny') {
-            alert('update quan')
             const message = getInputMessage(inStockNumber);
             showWarning(message, warningTime);
             var newVal = inStockNumber
-          }
+            el_input.value = newVal;
         }
+    }
 
-        el_input.value = newVal;
-        this.input.dispatchEvent(this.changeEvent);
+    quantityCheckedToBeContinue() {
+        const sellingArray = window[`cart_selling_array_${this.dataset.product}`];
+        return sellingArray[this.querySelector('[name="quantity"]').dataset.cartQuantityId] === 'continue';
     }
 }
 
@@ -579,46 +568,140 @@ class UpdateQuantityQuickShop extends HTMLElement {
         this.input = this.querySelector('input');
         this.changeEvent = new Event('change', { bubbles: true })
         this.querySelectorAll('.btn-quantity').forEach(
-            (button) => button.addEventListener('click', this.onButtonClick.bind(this))
+            (button) => button.addEventListener('click', this.onChangeQuantity.bind(this))
         );
+        this.input.addEventListener('change', this.onChangeQuantity.bind(this))
     }
-
-    onButtonClick(event) {
+    
+    onChangeQuantity(event) {
         event.preventDefault();
-        let el_input = event.target.parentElement.querySelector('.quantity');
+        const target = event.target;
+        let el_input = target.parentElement.querySelector('.quantity');
         const value = Number(el_input.value);
-        const inStockNumber = el_input.dataset.inventoryQuantity;
-        const atcButton = el_input.closest('[data-quickshop]').querySelector('[data-btn-addtocart]');
-        
-        if (event.target.classList.contains('plus')) {
-            var newVal = value + 1;
-        } else {
-            var newVal = value - 1;
-        }
+        const inStockNumber = Number(el_input.dataset.inventoryQuantity);
+        const buttonAdd = target.closest('[data-quickshop]').querySelector('[data-btn-addtocart]');
+        let newVal;
 
-        if (newVal <= 0 ) {
-            var newVal = 1
-        }
+        if (target.matches('.plus')) newVal = value + 1;
+        else if (target.matches('.minus')) newVal = value - 1;
+        else newVal = value;
 
-        if (newVal > inStockNumber && (atcButton.dataset.available != 'true' && atcButton.dataset.available != 'no-track-quantity')) {
-            alert('update quick quan')
+        if (newVal <= 0) newVal = 1;
+
+        if (newVal > inStockNumber && !buttonAdd.matches('.button--preorder')) {
             const message = getInputMessage(inStockNumber);
             showWarning(message, warningTime);
-            var newVal = inStockNumber
+            newVal = inStockNumber
         }
-
+        
         el_input.value = newVal;
-        this.input.dispatchEvent(this.changeEvent);
+        if (target.matches('.btn-quantity')) this.input.dispatchEvent(this.changeEvent);
         const quickshop = this.closest('[data-quickshop]');
         const realQuantityInput = quickshop.querySelector('form input[type="hidden"]');
         realQuantityInput.setAttribute('value', newVal);
     }
 }
 
+class ProductScroller extends HTMLElement {
+    constructor() {
+        super();    
+        this.container = this.querySelector('[data-drag-container]');
+        this.dragParent = this.querySelector('[data-drag-parent]');
+
+        this.initDragToScroll();
+    }
+
+    initDragToScroll() {
+        const isOverflowing = (wrapper) => {
+            return wrapper.clientWidth < wrapper.scrollWidth
+        }
+        let containerOverflowing = isOverflowing(this.container)
+
+        if (containerOverflowing) {
+            this.dragToScroll(this.container)
+            return 
+        }
+        this.dragToScroll(this.dragParent)
+    }   
+    
+    dragToScroll(slider) {
+        let mouseDown = false;
+        let start;
+        let scrollLeft;
+        let inactiveTimeout;
+
+        slider.addEventListener('mousedown', (e) => {
+            const target = e.target 
+
+            mouseDown = true;
+            start = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('mouseup', () => {
+            mouseDown = false;
+
+            clearTimeout(inactiveTimeout)
+            inactiveTimeout = setTimeout(() => {
+                slider.classList.remove('active');
+            }, 150)
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if(!mouseDown) return;
+            e.preventDefault();
+
+            if (!slider.classList.contains('active')) {
+                slider.classList.add('active');
+            }
+
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - start) * 1; 
+            slider.scrollLeft = scrollLeft - walk;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            mouseDown = false;
+
+            clearTimeout(inactiveTimeout)
+            inactiveTimeout = setTimeout(() => {
+                slider.classList.remove('active');
+            }, 150)
+        });
+    }
+}
+
+class ImageToFlip extends HTMLElement {
+    constructor() {
+        super() 
+
+        this.imageContainer = this; 
+        this.initObserver();
+    }   
+
+    initObserver() {
+        this.observer = new IntersectionObserver((entries, observer) => {
+            const imageRef = entries[0]
+
+            if (imageRef.isIntersecting) {
+                imageRef.target.classList.add('show')
+                observer.unobserve(imageRef.target)
+            }
+
+        }, 
+        {
+            threshold: 0.4 
+        });
+        
+        this.observer.observe(this.imageContainer);
+    }
+}
 
 window.addEventListener('load', () => {
     customElements.define('cart-update-quantity', UpdateQuantity);
     customElements.define('quickshop-update-quantity', UpdateQuantityQuickShop);
+    customElements.define('product-scroller', ProductScroller);
+    customElements.define('image-to-flip', ImageToFlip);
 })
 
 function showWarning(content, time = null) {
@@ -640,3 +723,34 @@ function getInputMessage(maxValue) {
     var message = window.cartStrings.addProductOutQuantity.replace('[maxQuantity]', maxValue);
     return message
 }
+
+class FadeInComponent extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.initObserver();
+    }
+
+    initObserver() {
+        const handler = (entries, observer) => {
+            if (entries[0].isIntersecting) {
+                this.classList.add('fade-in');
+
+                observer.unobserve(this);
+            }
+        }
+
+        const options = {
+            threshold: 0.7
+        }
+
+        this.observer = new IntersectionObserver(handler, options); 
+        this.observer.observe(this);
+    }
+}
+
+window.addEventListener('load', () => {
+    customElements.define('fade-in-component', FadeInComponent);
+})

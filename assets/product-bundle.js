@@ -52,6 +52,7 @@ class ProductBundle extends HTMLElement {
         const discountCode = "FBT-BUNDLE-"+ meta.product.id;
         let data = '';
         let hint = ',';
+        let attributes = {};
 
         bundleItem.forEach((item, index) => {
             const variantId = item.querySelector('[name=group_id]').value;
@@ -61,19 +62,43 @@ class ProductBundle extends HTMLElement {
             }
         });
 
-        $.post( "/cart", function( data ) {
+        $.post( "/cart", function(data) {
             btnAddTocart.value = waitMessage;
-        }).done(function() {
-            fetch(`/cart/${data}`).then((parsedState) => {
+            attributes = data.attributes;
+        }).done(async function() {
+            const addProductsToCart = async () => {
+                await fetch(`/cart/${data}`);
+            }
+
+            const updateBundleDiscountData = async () => {
+                const bundleDiscountRate = parseFloat($this.querySelector('[data-bundle-discount-rate]').dataset.bundleDiscountRate);
+
+                const items = [...bundleItem].map(item => parseInt(item.dataset.bundleProductItemId));
+
+                const new_checkout_level_applications = [{ name: discountCode, bundleDiscountRate, items }];
+                const newAttributes = { ...attributes, checkout_level_applications: new_checkout_level_applications };
+                const attributesBody = JSON.stringify({ attributes: newAttributes });
+                localStorage.setItem('storedDiscount', discountCode);
+                
+                await fetch(`${routes.cart_update_url}`, {...fetchConfig(), ...{ body: attributesBody }});
+            }
+
+            const applyDiscountCodeToServer = async () => {
+                await fetch(`/discount/${discountCode}?redirect=cart`) 
+            }
+
+            try {
+                await addProductsToCart();
+
+                if (bundleItem.length == $this.form.querySelectorAll('.bundle-product-item').length) {
+                    await updateBundleDiscountData();
+                    await applyDiscountCodeToServer();
+                }
+
                 $this.querySelector('.bundle-product-wrapper').classList.remove('has-halo-block-loader');
                 $this.redirectTo(window.routes.cart);
-            });
-    
-            if (bundleItem.length == $this.form.querySelectorAll('.bundle-product-item').length) {
-                fetch(`/discount/${discountCode}?redirect=/cart`).then((parsedState) => {
-                    $this.querySelector('.bundle-product-wrapper').classList.remove('has-halo-block-loader');
-                    $this.redirectTo(window.routes.cart);
-                });
+            } catch(err) {
+                console.error(err);
             }
         });
     }

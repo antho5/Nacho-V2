@@ -11,37 +11,27 @@
     assign has_sidebar = false
     assign show_sidebar = section.settings.show_sidebar
     assign show_filter = section.settings.show_filter
-    assign filter_type = section.settings.filter_type
     assign sidebar_type = section.settings.sidebar_type
     assign sidebar_position = section.settings.sidebar_position
     assign show_sidebar_collapse = section.settings.show_sidebar_collapse
     assign sidebar_collapse_default = section.settings.sidebar_collapse_default
     if show_sidebar
-        assign filter_by_tags = section.blocks | where: "type", "filter"
-        if sidebar_type == 'vertical'
-            if show_filter
-                if filter_type == 'storefront'
-                    assign has_sidebar = true
-                elsif filter_by_tags.size > 0
-                    assign has_sidebar = true
-                endif
-            elsif section.blocks.size > 0
-                assign has_sidebar = true
-            endif
-        else
-            if show_filter
-                if filter_type == 'storefront'
-                    assign has_sidebar = true
-                elsif filter_by_tags.size > 0
-                    assign has_sidebar = true
-                endif
-            endif
-        endif
         if show_filter
+            assign has_sidebar = true
             assign filter_swatch = section.settings.filter_swatch
             assign filter_swatch_type = section.settings.filter_swatch_type
             assign filter_rectangle = section.settings.filter_rectangle
-        endif 
+        elsif section.blocks.size > 0
+            assign has_sidebar = true
+        endif
+        if has_sidebar
+            assign sidebar_heading_font = section.settings.sidebar_heading_font
+            assign sidebar_heading_font_size = section.settings.sidebar_heading_font_size
+            assign sidebar_heading_font_weight = section.settings.sidebar_heading_font_weight
+            assign sidebar_heading_text_transform = section.settings.sidebar_heading_text_transform
+            assign enable_sticky = section.settings.enable_sticky
+            assign sidebar_layout = section.settings.sidebar_layout
+        endif
     endif
     assign sort_by = collection.sort_by | default: collection.default_sort_by
     assign sort_options = collection.sort_options
@@ -58,15 +48,56 @@
         assign show_view_as = section.settings.show_view_as
     endif
     assign show_infinite_scrolling = section.settings.show_infinite_scrolling
-    if has_sidebar
-        assign sidebar_heading_font = section.settings.sidebar_heading_font
-        assign sidebar_heading_font_size = section.settings.sidebar_heading_font_size
-        assign sidebar_heading_font_weight = section.settings.sidebar_heading_font_weight
-        assign sidebar_heading_text_transform = section.settings.sidebar_heading_text_transform
-        assign enable_sticky = section.settings.enable_sticky
-        assign sidebar_layout = section.settings.sidebar_layout
-    endif
 -%}
+
+<style type="text/css" media="screen">
+    {% if has_sidebar %}
+        :root {
+            {% if sidebar_heading_font == 'font_1' %}
+                --sidebar-heading-font: var(--font-heading-family);
+            {% elsif sidebar_heading_font == 'font_2' %}
+                --sidebar-heading-font: var(--font-body-family);
+            {% endif %}
+            {% if colors_bg != blank or colors_bg_gradient != blank %}
+                --body-bg: {% if colors_bg_gradient != blank %}{{ colors_bg_gradient }}{% else %}{{ colors_bg }}{% endif %};
+            {% endif %}
+        }
+    {% endif %}
+
+    {% if colors_bg != blank or colors_bg_gradient != blank %}
+        body{
+            background: var(--body-bg);
+        }
+    {% endif %}
+
+    #CollectionSection-{{ section.id }}{
+        padding-top: {{ padding_top }};
+        padding-bottom: {{ padding_bottom }};
+    }
+
+    {% if has_sidebar %}
+        #CollectionSection-{{ section.id }} .sidebarBlock-heading{
+            font-family: var(--sidebar-heading-font);
+            font-size: {{ sidebar_heading_font_size | append: 'px' }};
+            font-weight: {{ sidebar_heading_font_weight }};
+            text-transform: {{ sidebar_heading_text_transform }};
+        }
+    {% endif %}
+
+    @media (max-width: 1024px) {
+        #CollectionSection-{{ section.id }}{
+            padding-top: {{ padding_top_tablet }};
+            padding-bottom: {{ padding_bottom_tablet }};
+        }
+    }
+
+    @media (max-width: 550px) {
+        #CollectionSection-{{ section.id }}{
+            padding-top: {{ padding_top_mobile }};
+            padding-bottom: {{ padding_bottom_mobile }};
+        }
+    }
+</style>
 
 <div data-section-id="{{ section.id }}" data-section-type="collection" id="CollectionSection-{{ section.id }}" data-section="{{ section.id }}" class="collection-default">
     {%- if settings.layout != '4' or sidebar_type != 'horizontal' -%}
@@ -92,8 +123,6 @@
                             sort_by: sort_by,
                             sidebar_type: sidebar_type,
                             show_filter: show_filter,
-                            filter_type: filter_type,
-                            filter_by_tags: filter_by_tags,
                             show_sorting: show_sorting,
                             show_collapse: show_sidebar_collapse,
                             sidebar_collapse: sidebar_collapse_default,
@@ -125,41 +154,43 @@
                             assign margin_bottom = block.settings.margin_bottom
                             assign title = block.settings.show_title
                             assign fontsize_title = block.settings.fontsize_title | append: 'px'
+                            assign title_alignment = block.settings.page_title_alignment
+                            assign title_text_transform = block.settings.page_title_text_transform
                             assign margin_top_title = block.settings.margin_top_title | append: 'px'
                             assign title_color = block.settings.title_color
                             assign fontsize_des = block.settings.fontsize_des | append: 'px'
                             assign margin_top_des = block.settings.margin_top_des | append: 'px'
                             assign des_color = block.settings.des_color
+                            assign desc_alignment = block.settings.desc_alignment
                         -%}
                         <div class="articleLookbook-block" style="--lookbook-margin-bottom: {{ margin_bottom | append: 'px' }}";>
                             <div class="articleLookbook-item">
                                 {%- if block.settings.show_image -%}
                                     {%- if image != blank -%}
-                                        <a class="image image-zoom image-adapt adaptive_height" href="{{ link }}" style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}">
+                                        <a class="image image-zoom image-adapt adaptive_height"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}">
                                             <img {% render 'lazyload' ,preview_img: preview_img %} />
                                             {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                         </a>
-                                    {%- else -%}
-                                       <!--  <a class="image" href="{{ link }}">
-                                            <div class="not_img" style="--height_not_img: 520px">
-                                                930 x 520px
-                                            </div>
-                                        </a> -->
                                     {%- endif -%}
                                 {%- endif -%}
                                 {%- if title -%}
-                                    <h3 class="articleLookbook-title" style="--lb-fontsize-title: {{ fontsize_title }};
-                                                                            --lb-margin-top-title: {{ margin_top_title }};
-                                                                            --lb-title-color: {{ title_color }}">
+                                    <h1 class="articleLookbook-title text-{{ title_alignment }}" 
+                                        style="--lb-fontsize-title: {{ fontsize_title }};
+                                                --lb-margin-top-title: {{ margin_top_title }};
+                                                --lb-title-color: {{ title_color }};
+                                                --lb-title-text-transform: {{ title_text_transform }}"
+                                    >
                                         {{ collection.title }}
-                                    </h3>
+                                    </h1>
                                 {%- endif -%}
                                 
                                 {%- if show_description and block.settings.desc_pos == 'top' -%}
-                                    <div class="articleLookbook-des" style="--lb-fontsize-des: {{ fontsize_des }};
-                                                                            --lb-line-height-des: {{ fontsize_des | plus: 10 | append: 'px'}};
-                                                                        --lb-margin-top-des: {{ margin_top_des }};
-                                                                        --lb-title-des: {{ des_color }}">
+                                    <div class="articleLookbook-des text-{{ desc_alignment }}"
+                                        style="--lb-fontsize-des: {{ fontsize_des }};
+                                            --lb-line-height-des: {{ fontsize_des | plus: 10 | append: 'px'}};
+                                            --lb-margin-top-des: {{ margin_top_des }};
+                                            --lb-title-des: {{ des_color }}"
+                                    >
                                         {{ description }}
                                     </div>
                                 {%- endif -%}
@@ -227,22 +258,24 @@
                             assign margin_top_des = block.settings.margin_top_des | append: 'px'
                             assign des_color = block.settings.des_color
                             assign show_description = block.settings.show_collection_description
+                            assign desc_alignment = block.settings.desc_alignment
                         -%}
                       {%- if show_description -%}
                         <div class="articleLookbook-block" style="--lookbook-margin-bottom: {{ margin_bottom | append: 'px' }}";>
                             <div class="articleLookbook-item">
-                                <div class="articleLookbook-des" style="--lb-fontsize-des: {{ fontsize_des }};
-                                                                        --lb-line-height-des: {{ fontsize_des | plus: 10 | append: 'px'}};
-                                                                        --lb-margin-top-des: {{ margin_top_des }};
-                                                                        --lb-title-des: {{ des_color }}">
-                                        {{ description }}
+                                <div class="articleLookbook-des text-{{ desc_alignment }}"
+                                    style="--lb-fontsize-des: {{ fontsize_des }};
+                                        --lb-line-height-des: {{ fontsize_des | plus: 10 | append: 'px'}};
+                                        --lb-margin-top-des: {{ margin_top_des }};
+                                        --lb-title-des: {{ des_color }}"
+                                >
+                                    {{ description }}
                                 </div>
                             </div>
                         </div>
                       {%- endif -%}
                     {%- endif -%}
                 {%- endfor -%}
-                
                 {%- if settings.layout == '4' and sidebar_type == 'horizontal' -%}
                     </div>
                 {%- endif -%}
@@ -260,52 +293,3 @@
         </div>
     </div>
 </div>
-
-<style type="text/css" media="screen">
-    {% if has_sidebar %}
-        :root {
-            {% if sidebar_heading_font == 'font_1' %}
-                --sidebar-heading-font: var(--font-heading-family);
-            {% elsif sidebar_heading_font == 'font_2' %}
-                --sidebar-heading-font: var(--font-body-family);
-            {% endif %}
-            {% if colors_bg != blank or colors_bg_gradient != blank %}
-                --body-bg: {% if colors_bg_gradient != blank %}{{ colors_bg_gradient }}{% else %}{{ colors_bg }}{% endif %};
-            {% endif %}
-        }
-    {% endif %}
-
-    {% if colors_bg != blank or colors_bg_gradient != blank %}
-        body{
-            background: var(--body-bg);
-        }
-    {% endif %}
-
-    #CollectionSection-{{ section.id }}{
-        padding-top: {{ padding_top }};
-        padding-bottom: {{ padding_bottom }};
-    }
-
-    {% if has_sidebar %}
-        #CollectionSection-{{ section.id }} .sidebarBlock-heading{
-            font-family: var(--sidebar-heading-font);
-            font-size: {{ sidebar_heading_font_size | append: 'px' }};
-            font-weight: {{ sidebar_heading_font_weight }};
-            text-transform: {{ sidebar_heading_text_transform }};
-        }
-    {% endif %}
-
-    @media (max-width: 1024px) {
-        #CollectionSection-{{ section.id }}{
-            padding-top: {{ padding_top_tablet }};
-            padding-bottom: {{ padding_bottom_tablet }};
-        }
-    }
-
-    @media (max-width: 550px) {
-        #CollectionSection-{{ section.id }}{
-            padding-top: {{ padding_top_mobile }};
-            padding-bottom: {{ padding_bottom_mobile }};
-        }
-    }
-</style>

@@ -149,7 +149,7 @@
 							-%}
 							<li class="menu-lv-item menu-lv-1 text-left no-megamenu{% if menu_item_menu != blank %} dropdown{% endif %}">
 								{%- if menu_item_menu != blank -%}
-									<a href="{{ menu_item_url }}" class="menu-lv-1__action list-menu__item link focus-inset{% if show_icon %} menu-lv__flex{% endif %} menu_mobile_link" {% if show_custom_style %} style="color: {{ text_color }};"{% endif %}>
+									<a {% if menu_item_url == blank %} role="link" aria-disabled="true"{% else %} href="{{ menu_item_url }}"{% endif %} class="menu-lv-1__action list-menu__item link focus-inset{% if show_icon %} menu-lv__flex{% endif %} menu_mobile_link" {% if show_custom_style %} style="color: {{ text_color }};"{% endif %}>
 										{%- if show_icon -%}
 											{%- if icon_type == 'icon' -%}
 												{%- if menu_item_icon != blank -%}
@@ -191,7 +191,7 @@
                                         image_style_lower: image_style_lower
 									%}
 								{%- else -%}
-									<a href="{{ menu_item_url }}" class="menu-lv-1__action list-menu__item list-menu__item--end link focus-inset {% if show_icon %} menu-lv__flex{% endif %} menu_mobile_link" {% if show_custom_style %} style="color: {{ text_color }};"{% endif %}>
+									<a {% if menu_item_url == blank %} role="link" aria-disabled="true"{% else %} href="{{ menu_item_url }}"{% endif %} class="menu-lv-1__action list-menu__item list-menu__item--end link focus-inset {% if show_icon %} menu-lv__flex{% endif %} menu_mobile_link" {% if show_custom_style %} style="color: {{ text_color }};"{% endif %}>
 										{%- if show_icon -%}
 											{%- if icon_type == 'icon' -%}
 												{%- if menu_item_icon != blank -%}
@@ -223,7 +223,7 @@
 								endif
 							-%}
 							<li class="menu-lv-item menu-lv-1 text-left no-megamenu dropdown">
-								<a href="{{ menu_item_url }}" class="menu-lv-1__action list-menu__item link focus-inset{% if show_icon %} menu-lv__flex{% endif %} menu_mobile_link" {% if show_custom_style %} style="color: {{ text_color }};"{% endif %}>
+								<a {% if menu_item_url == blank %} role="link" aria-disabled="true"{% else %} href="{{ menu_item_url }}"{% endif %} class="menu-lv-1__action list-menu__item link focus-inset{% if show_icon %} menu-lv__flex{% endif %} menu_mobile_link" {% if show_custom_style %} style="color: {{ text_color }};"{% endif %}>
 									{%- if show_icon -%}
 										{%- if icon_type == 'icon' -%}
 											{%- if menu_item_icon != blank -%}

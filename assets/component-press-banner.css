@@ -1,16 +1,16 @@
 .press-banner-block-wrapper {
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: var(--align-items);
 }
 
 .press-banner-block-wrapper .section-block-left {
-    width: 51%;
+    width: var(--left-width);
 }
 
 .press-banner-block-wrapper .section-block-right {
     padding-top: -3px;
-    width: 49%;
+    width: var(--right-width);
 }
 
 .press-banner-block-wrapper .halo-block-header .title::before {
@@ -21,6 +21,7 @@
     max-width: 320px;
     margin-left: auto;
     margin-right: var(--item-gap);
+    max-width: var(--image-width);
 }
 
 .press-banner-block-wrapper .section-block-right .halo-block-content {

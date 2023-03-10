@@ -20,7 +20,7 @@
                         <span class="text">{{ block_title | escape }}</span>
                     </h3>
                     {% if section.settings.view_all != blank %}
-                    <a class="view_all" href="{{ section.settings.link_view_all }}" title="{{section.settings.view_all}}">
+                    <a class="view_all"{% if section.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all }}"{% endif %} title="{{section.settings.view_all}}">
                         {{ section.settings.view_all }}
                     </a>
                     {% endif %}
@@ -37,7 +37,7 @@
                     {% if block.settings.title %}
                         <div class="product__vertical--header">
                             <h4>{{ block.settings.title }}</h4>
-                            <a href="{{ block.settings.link_view_all }}">{{ block.settings.view_all }}</a>
+                            <a {% if block.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_view_all }}"{% endif %}>{{ block.settings.view_all }}</a>
                         </div>
                     {% endif %}
                     <div class="product__list-vertical">
@@ -418,7 +418,7 @@
         {
             "type" : "color",
             "id" : "color_border_block",
-            "label": "t:settings_schema.typography.settings.typography.border_color",
+            "label": "t:settings_schema.colors.settings.colors_name.border_color",
             "default" : "#e6e6e6"
         },
         {

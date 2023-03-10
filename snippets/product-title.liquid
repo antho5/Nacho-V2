@@ -10,9 +10,9 @@
             --fontsize-text: {{ fontsize_text | append: 'px' }};
             --fontsize-mb-text: {{ fontsize_text_mb | append: 'px' }};"
         >
-            <a href="{{ product.url }}">
+            <span>
                 {{ product.title | escape }}
-            </a>
+            </span>
         </h1>
         {% render 'halo-share',
             product: product,
@@ -27,8 +27,8 @@
         --fontsize-text: {{ fontsize_text | append: 'px' }};
         --fontsize-mb-text: {{ fontsize_text_mb | append: 'px' }};"
     >
-        <a href="{{ product.url }}">
+        <span>
             {{ product.title | escape }}
-        </a>
+        </span>
     </h1>
 {%- endif -%}

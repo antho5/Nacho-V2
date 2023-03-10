@@ -14,62 +14,79 @@
 
 {% render 'header-02-style' %}
 
+{%- if settings.enable_layout_rtl -%}
+    <style type="text/css" media="screen">
+        @media (min-width: 1025px) {
+            .layout_rtl .header-bottom-right .header__icon+.header__icon {margin-right: 28px}}
+            .layout_rtl .style_2 .wrapper-header-bottom .header__icon {margin-right: 0}
+            .layout_rtl .style_2 .header-bottom-right .header__icon+.header__icon {margin-right: 21px;margin-left: 0}
+            .layout_rtl .style_2 .header-bottom-right .header__icon--cart {margin-right: 23px;margin-left: 0}
+            .layout_rtl .style_2 .top-language-currency .halo-top-language:before {right: auto;left: -6px}
+            .layout_rtl .style_2 .top-language-currency .dropdown-currency {right: 48px}
+            .layout_rtl .style_2 .top-language-currency.show .dropdown-language {right: 0;left: auto}
+            .layout_rtl .style_2 .top-language-currency.show .dropdown-currency {right: 48px;left: auto}
+            .layout_rtl .style_2 .cart-count-bubble {margin-left: 0;margin-right: 6px}
+        }
+    </style>
+{%- endif -%}
+
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
 
 <{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %} class="header-wrapper" data-hide-on-scroll={{ section.settings.hide_scroll }}>
-    <header class="header header-02{% if section.settings.style_header == 'style_2' %} style_2{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if section.settings.enable_parallax %} enable_parallax{% endif %}" style="--icon-mobile-spacing: {{ section.settings.header_icon_mobile_spacing | append: 'px' }};">
+    <header class="header header-02 header--{{ section.settings.logo_position }}{% if section.settings.style_header == 'style_2' %} style_2{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if section.settings.enable_parallax %} enable_parallax{% endif %}" style="--icon-mobile-spacing: {{ section.settings.header_icon_mobile_spacing | append: 'px' }};">
         <div class="wrapper-header-bottom">
             <div class="container">
                 <div class="header-bottom">
-                    <div class="header-bottom-left">
-                        <div class="header__logo">
-                            {%- if request.page_type == 'index' -%}
-                                <h1 class="header__heading">
-                            {%- else -%}
-                                <div class="header__heading">
-                            {%- endif -%}
-                                <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
-                                    {%- if section.settings.logo != blank -%}
-                                        {%- assign image = section.settings.logo -%}
-                                        {%- assign image_size = section.settings.logo_width | append: 'x' -%}
-                                        <img srcset="{{ image | img_url: image_size }} 1x, {{ image | img_url: image_size, scale: 2 }} 2x"
-                                            src="{{ image | img_url: image_size }}"
-                                            loading="lazy"
-                                            class="header__heading-logo"
-                                            alt="{{ image.alt | default: shop.name | escape }}">
-                                    {%- elsif section.settings.logo_text != blank -%}
-                                        <span class="h2 {{ section.settings.logo_text_transform }}">{{ section.settings.logo_text }}</span>
-                                    {%- else -%}
-                                        <span class="h2 {{ section.settings.logo_text_transform }}">{{ shop.name }}</span>
-                                    {%- endif -%}
-                                </a>
+                    {%- if section.settings.logo_position == 'left' -%}
+                        <div class="header-bottom-left">
+                            <div class="header__logo">
+                                <{% if request.page_type == 'index' %}h1{% else %}div{% endif %} class="header__heading">
+                                    <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
+                                        {%- if section.settings.logo != blank -%}
+                                            {%- assign logo = section.settings.logo -%}
+                                            {%- assign logo_width = section.settings.logo_width -%}
+                                            {%- assign logo_width_img = logo_width | append: 'x' -%}
+                                            {%- assign logo_width_retina = logo_width | times: 2 | append: 'x'  -%}
+                                            {%- assign logo_height = logo_width | divided_by: logo.aspect_ratio | round -%}
+                                            <img srcset="{{ logo | img_url: logo_width_img }} 1x, {{ logo | img_url: logo_width_retina }} 2x"
+                                                src="{{ logo | img_url: logo_width_img }}"
+                                                loading="lazy"
+                                                class="header__heading-logo"
+                                                alt="{{ logo.alt | default: shop.name | escape }}"
+                                                width="{{ logo_width }}" height="{{ logo_height }}">
+                                        {%- elsif section.settings.logo_text != blank -%}
+                                            <span class="h2 {{ section.settings.logo_text_transform }}">{{ section.settings.logo_text }}</span>
+                                        {%- else -%}
+                                            <span class="h2 {{ section.settings.logo_text_transform }}">{{ shop.name }}</span>
+                                        {%- endif -%}
+                                    </a>
 
-                                {%- if section.settings.enable_parallax -%}
-                                <a href="{{ routes.root_url }}" class="header__heading-link focus-inset logo_parallax">
-                                    {%- if section.settings.logo_parallax != blank -%}
-                                        {%- assign image_parallax = section.settings.logo_parallax -%}
-                                        {%- assign image_size = section.settings.logo_width | append: 'x' -%}
-                                        <img srcset="{{ image_parallax | img_url: image_size }} 1x, {{ image_parallax | img_url: image_size, scale: 2 }} 2x"
-                                            src="{{ image_parallax | img_url: image_size }}"
-                                            loading="lazy"
-                                            class="header__heading-logo"
-                                            alt="{{ image.alt | default: shop.name | escape }}">
-                                    {%- elsif section.settings.logo_text != blank -%}
-                                        <span class="h2 {{ section.settings.logo_text_transform }}">{{ section.settings.logo_text }}</span>
-                                    {%- else -%}
-                                        <span class="h2 {{ section.settings.logo_text_transform }}">{{ shop.name }}</span>
+                                    {%- if section.settings.enable_parallax -%}
+                                        <a href="{{ routes.root_url }}" class="header__heading-link focus-inset logo_parallax">
+                                            {%- if section.settings.logo_parallax != blank -%}
+                                                {%- assign logo = section.settings.logo_parallax -%}
+                                                {%- assign logo_width = section.settings.logo_width -%}
+                                                {%- assign logo_width_img = logo_width | append: 'x' -%}
+                                                {%- assign logo_width_retina = logo_width | times: 2 | append: 'x'  -%}
+                                                {%- assign logo_height = logo_width | divided_by: logo.aspect_ratio | round -%}
+                                                <img srcset="{{ logo | img_url: logo_width_img }} 1x, {{ logo | img_url: logo_width_retina }} 2x"
+                                                    src="{{ logo | img_url: logo_width_img }}"
+                                                    loading="lazy"
+                                                    class="header__heading-logo"
+                                                    alt="{{ logo.alt | default: shop.name | escape }}"
+                                                    width="{{ logo_width }}" height="{{ logo_height }}">
+                                            {%- elsif section.settings.logo_text != blank -%}
+                                                <span class="h2 {{ section.settings.logo_text_transform }}">{{ section.settings.logo_text }}</span>
+                                            {%- else -%}
+                                                <span class="h2 {{ section.settings.logo_text_transform }}">{{ shop.name }}</span>
+                                            {%- endif -%}
+                                        </a>
                                     {%- endif -%}
-                                </a>
-                                {%- endif -%}
-
-                            {%- if request.page_type == 'index' -%}
-                                </h1>
-                            {%- else -%}
-                                </div>
-                            {%- endif -%}
+                                </{% if request.page_type == 'index' %}h1{% else %}div{% endif %}>
+                            </div>
                         </div>
-                    </div>
-                    <div class="main-menu header-bottom-center">
+                    {%- endif -%}
+                    <div class="main-menu{% if section.settings.logo_position == 'left' %} header-bottom-center{% else %} header-bottom-left{% endif %}">
                         <div class="header-bottom--wrapper" >
                             {%- if section.settings.menu != blank -%}
                                 <nav class="header__inline-menu" data-navigation role="navigation">
@@ -80,6 +97,56 @@
                             {%- endif -%}
                         </div>
                     </div>
+                    {%- if section.settings.logo_position == 'center' -%}
+                        <div class="header-bottom-center">
+                            <div class="header__logo">
+                                <{% if request.page_type == 'index' %}h1{% else %}div{% endif %} class="header__heading">
+                                    <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
+                                        {%- if section.settings.logo != blank -%}
+                                        {%- assign logo = section.settings.logo -%}
+                                        {%- assign logo_width = section.settings.logo_width -%}
+                                        {%- assign logo_width_img = logo_width | append: 'x' -%}
+                                        {%- assign logo_width_retina = logo_width | times: 2 | append: 'x' -%}
+                                        {%- assign logo_height = logo_width | divided_by: logo.aspect_ratio | round -%}
+                                        <img srcset="{{ logo | img_url: logo_width_img }} 1x, {{ logo | img_url: logo_width_retina }} 2x"
+                                            src="{{ logo | img_url: logo_width_img }}"
+                                            loading="lazy"
+                                            class="header__heading-logo"
+                                            alt="{{ logo.alt | default: shop.name | escape }}"
+                                            width="{{ logo_width }}" height="{{ logo_height }}">
+                                        {%- elsif section.settings.logo_text != blank -%}
+                                            <span class="h2 {{ section.settings.logo_text_transform }}">{{ section.settings.logo_text }}</span>
+                                        {%- else -%}
+                                            <span class="h2 {{ section.settings.logo_text_transform }}">{{ shop.name }}</span>
+                                        {%- endif -%}
+                                    </a>
+
+                                    {%- if section.settings.enable_parallax -%}
+                                    <a href="{{ routes.root_url }}" class="header__heading-link focus-inset logo_parallax">
+                                        {%- if section.settings.logo_parallax != blank -%}
+                                            {%- assign logo = section.settings.logo_parallax -%}
+                                            {%- assign logo_width = section.settings.logo_width -%}
+                                            {%- assign logo_width_img = logo_width | append: 'x' -%}
+                                            {%- assign logo_width_retina = logo_width | times: 2 | append: 'x'  -%}
+                                            {%- assign logo_height = logo_width | divided_by: logo.aspect_ratio | round -%}
+                                        <img srcset="{{ logo | img_url: logo_width_img }} 1x, {{ logo | img_url: logo_width_retina }} 2x"
+                                            src="{{ logo | img_url: logo_width_img }}"
+                                            loading="lazy"
+                                            class="header__heading-logo"
+                                            alt="{{ logo.alt | default: shop.name | escape }}"
+                                            width="{{ logo_width }}" height="{{ logo_height }}">
+                                        {%- elsif section.settings.logo_text != blank -%}
+                                            <span class="h2 {{ section.settings.logo_text_transform }}">{{ section.settings.logo_text }}</span>
+                                        {%- else -%}
+                                            <span class="h2 {{ section.settings.logo_text_transform }}">{{ shop.name }}</span>
+                                        {%- endif -%}
+                                    </a>
+                                    {%- endif -%}
+
+                                </{% if request.page_type == 'index' %}h1{% else %}div{% endif %}>
+                            </div>
+                        </div>
+                    {%- endif -%} 
                     <div class="header-items header-bottom-right">
                         {% if section.settings.style_header == 'style_2' %}
                             <div class="header-top-right-group header-language_currency">
@@ -104,7 +171,12 @@
                         {% endunless %}
 
                         {%- if shop.customer_accounts_enabled and section.settings.show_customer -%}
-                            <a class="header__icon header__icon--account link link--text" data-open-auth-sidebar>
+                            {% if routes.account_login_url contains '/account/login' %}
+                                {% assign is_contained = true %}
+                            {% else %}
+                                {% assign is_contained = false %}
+                            {% endif %}
+                            <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account link link--text"{% if is_contained %} data-open-auth-sidebar{% endif %}>
                                 {% if section.settings.style_header == 'style_2' %}
                                     <span class="customer-links">
                                         {%- liquid
@@ -143,8 +215,8 @@
                         {%- endif -%}
 
                         {% if section.settings.show_cart %}
-                            <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}" {% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
-                                {% render 'icon-cart-3' %}
+                            <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                                {% render 'icon-cart-03' %}
                                 <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
                                 <div class="cart-count-bubble">
                                     {%- if cart.item_count < 100 -%} <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
@@ -156,7 +228,7 @@
 
                         {% unless section.settings.style_header == 'style_2' %}
                             {% if settings.enable_multilang_shopify or settings.enable_currencies %}
-                                <a href="#" class="header__icon icon-hamburger" title="Hamburger Icon" data-open-lang-currency-sidebar>
+                                <a href="javascript:void(0)" class="header__icon icon-hamburger" title="Hamburger Icon" data-open-lang-currency-sidebar>
                                     <span class="icon-line"></span>
                                 </a>
                             {% endif %}
@@ -389,6 +461,36 @@
             "default": "main-menu"
         },
         {
+            "type": "range",
+            "id": "menu_top_spacing",
+            "label": "t:sections.header.settings.header_bottom.mg_top",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 27
+        },
+        {
+            "type": "range",
+            "id": "menu_bottom_spacing",
+            "label": "t:sections.header.settings.header_bottom.mg_bottom",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 27
+        },
+        {
+            "type": "range",
+            "id": "grid_gap_menu",
+            "label": "t:sections.header.settings.header_bottom.spacing_left_right",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "t:sections.header.settings.logo.unit",
+            "default": 20
+        },
+        {
             "type": "checkbox",
             "id": "show_megamenu",
             "label": "t:sections.header.settings.menu.label__3",
@@ -556,7 +658,7 @@
             "type": "range",
             "id": "logo_width",
             "min": 50,
-            "max": 200,
+            "max": 300,
             "step": 5,
             "unit": "t:sections.header.settings.logo_width.unit",
             "label": "t:sections.header.settings.logo_width.label__1",
@@ -566,11 +668,27 @@
             "type": "range",
             "id": "logo_width_mobile",
             "min": 50,
-            "max": 200,
+            "max": 300,
             "step": 5,
             "unit": "t:sections.header.settings.logo_width.unit",
             "label": "t:sections.header.settings.logo_width.label__2",
             "default": 50
+        },
+        {
+            "type": "select",
+            "id": "logo_position",
+            "label": "t:sections.header.settings.logo.label__3",
+            "default": "left",
+            "options": [
+            {
+                "value": "left",
+                "label": "t:settings_schema.typography.settings.typography.left"
+            },
+            {
+                "value": "center",
+                "label": "t:settings_schema.typography.settings.typography.center"
+            }
+            ]
         },
         {
             "type": "range",
@@ -898,7 +1016,7 @@
         {
             "type": "color",
             "id": "bg_mega_menu",
-            "label": "t:sections.header.settings.header_bottom.bg_top",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color",
             "default": "#fff"
         },
         {
@@ -1319,9 +1437,15 @@
                     "default": 5
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",
@@ -1463,9 +1587,15 @@
                     "default": 3
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",

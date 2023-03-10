@@ -31,7 +31,6 @@ class CookieConsent extends HTMLElement {
                 });
             }
 		} else {
-			this.deleteCookie('cookie-consent');
 			this.remove();
 		}
 

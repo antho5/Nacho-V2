@@ -5,7 +5,7 @@
     assign color_border = block.settings.color_border
 -%}
 <div class="productView-options{% if enable_border_top %} has-border-top{% endif %}{% if enable_border_bottom %} has-border-bottom{% endif %}" style="--color-border: {{ color_border }}">
-    {%- if variantCount > 0  and product.has_only_default_variant != true  -%}
+    {%- if variantCount > 0  and product.has_only_default_variant != true -%}
         <div class="productView-variants halo-productOptions" id="product-option-{{ product.id }}"  data-type="{{ picker_type }}">
             {%- if picker_type == 'button' -%}
                 {%- assign product_swatch_option = settings.swatch | downcase -%}
@@ -48,7 +48,7 @@
                                         <label class="product-form__label {% if variant.available %} available{% else %} soldout{% endif %}" name="{{ option.name }}" for="option-{{ product.id }}-{{ option.name }}-{{ forloop.index0 }}" data-variant-id="{{ variant.id }}">
                                             <span class="pattern" 
                                                 style="{% if swatch_type == 'variant_image' and variant.image %}
-                                                        background-image: url({{ variant.image.src | product_img_url: '40x'}});
+                                                        background-image: url({{ variant.image.src | product_img_url: '130x'}});
                                                         {% else %}
                                                         background-color: {{ value | split: ' ' | last | handle }};
                                                         background-image: url({{ value | handle | append: '.' | append: file_extension | file_url }})
@@ -98,7 +98,7 @@
                         </div>
                     {%- endfor -%}
                     <script type="application/json">
-                        {{ product.variants | json | escape }}
+                        {{ product.variants | json }}
                     </script>
                 </variant-selects>
             {%- endif -%}

@@ -261,11 +261,10 @@
         fill: {{ lv_1_color }};
     }
 
-    .menu-dropdown__text a[title="Sale"] {
-        color: {{ sale_item_color }};
-    }
-
     {% if sale_item_color != 'rgba(0,0,0,0)' and sale_item_color != blank %}
+        .menu-dropdown__text a.active-sale {
+            color: {{ sale_item_color }};
+        }
         .menu-sale > .menu-lv-1__action,
         .menu-sale > details > .menu--mobile-lv-1__action,
         .menu-sale > .menu-lv-2__action,

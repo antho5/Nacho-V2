@@ -148,6 +148,7 @@
             "type": "checkbox",
             "id": "main_image_counter_mobile",
             "label": "t:sections.main-product.settings.general.main_image_counter_mobile",
+            "info": "t:sections.main-product.settings.general.info_main_image_counter_mobile",
             "default": true
         },
         {
@@ -155,6 +156,12 @@
             "id": "main_image_enable_parallax_mb",
             "label": "t:sections.main-product.settings.general.main_image_enable_parallax_mb",
             "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "main_image_show_zoom_icon_mb",
+            "label": "t:sections.main-product.settings.general.main_image_show_zoom_icon_mb",
+            "default": true
         },
         {
             "type": "select",
@@ -421,7 +428,7 @@
             "type": "select",
             "id": "product_image_ratio",
             "label": "t:sections.main-product.settings.media.label__1",
-            "default": "portrait",
+            "default": "adapt",
             "options": [
                 {
                     "value": "adapt",
@@ -457,7 +464,7 @@
             "type": "select",
             "id": "media_fit",
             "label": "t:sections.main-product.settings.media.label__5",
-            "default": "contain",
+            "default": "cover",
             "options": [    
                 {
                     "label": "t:sections.main-product.settings.media.options__6",
@@ -606,7 +613,7 @@
                 "label": "t:sections.main-product.settings.tab.options__1"
             },
             {
-                "value": "vertical_popup",
+                "value": "vertical_sidebar",
                 "label": "t:sections.main-product.settings.tab.options__4"
             },
             {
@@ -627,6 +634,10 @@
             {
                 "value": "vertical",
                 "label": "t:sections.main-product.settings.tab.options__1"
+            },
+            {
+                "value": "vertical_sidebar",
+                "label": "t:sections.main-product.settings.tab.options__4"
             },
             {
                 "value": "popup",
@@ -736,7 +747,7 @@
         {
             "type": "color",
             "id": "tab_border_color",
-            "label": "t:sections.layout.container.color_border_bottom",
+            "label": "t:settings_schema.colors.settings.colors_name.border_color",
             "default": "#000000"
         },
         {
@@ -832,7 +843,7 @@
             "type": "text",
             "id": "block_title",
             "label": "t:sections.image-banner.blocks.image.settings.content.label__1",
-            "default": "Frequenly Bought Together"
+            "default": "Frequently Bought Together"
         },
         {
             "type": "select",
@@ -947,7 +958,7 @@
         {
             "type": "color",
             "id": "total_btn_border",
-            "label": "t:settings_schema.typography.settings.typography.border_color",
+            "label": "t:settings_schema.colors.settings.colors_name.border_color",
             "default": "#000000"
         },
         {
@@ -1032,12 +1043,14 @@
                 {
                     "type": "color",
                     "id": "breadcrumb_bg",
-                    "label": "t:settings_schema.colors.settings.colors_name.background_color"
+                    "label": "t:settings_schema.colors.settings.colors_name.background_color",
+                    "info": "t:sections.general.settings.breadcrumb.breacrumb_desktop_bg_info"
                 },
                 {
                     "type": "color_background",
                     "id": "breadcrumb_gradient",
-                    "label": "t:settings_schema.colors.settings.colors_name.background_color_gradient"
+                    "label": "t:settings_schema.colors.settings.colors_name.background_color_gradient",
+                    "info": "t:sections.general.settings.breadcrumb.breacrumb_desktop_bg_info"
                 },
                 { 
                     "type": "color",
@@ -1448,7 +1461,7 @@
                 {
                     "type": "color",
                     "id": "color_border",
-                    "label": "t:sections.layout.container.color_border_bottom",
+                    "label": "t:settings_schema.colors.settings.colors_name.border_color",
                     "default": "#e6e6e6"
                 },
                 {
@@ -1603,7 +1616,7 @@
                 {
                     "type": "color",
                     "id": "color_border",
-                    "label": "t:sections.layout.container.color_border_bottom",
+                    "label": "t:settings_schema.colors.settings.colors_name.border_color",
                     "default": "#e6e6e6"
                 },
                 {
@@ -2709,7 +2722,7 @@
         },
         {
             "type": "policies", 
-            "name": "t:sections.policies_block.name",
+            "name": "t:sections.policies_block.blocks.filter",
             "settings": [
                 {
                     "type": "checkbox",
@@ -3029,6 +3042,126 @@
                     "id": "custom_liquid",
                     "label": "t:sections.custom-liquid.settings.custom_liquid.label",
                     "info": "t:sections.custom-liquid.settings.custom_liquid.info"
+                }
+            ]
+        },
+        {
+            "type": "complementary_products",
+            "name": "t:sections.main-product.settings.complementary.label",
+            "settings": [
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.main-product.settings.complementary.info__3"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "show_complementary_product",
+                    "label": "t:sections.main-product.settings.complementary.label__1",
+                    "default": true
+                },
+                {
+                    "type": "text",
+                    "id": "complementary_product_title",
+                    "label": "t:sections.main-product.settings.complementary.heading",
+                    "default": "Pairs well with"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "complementary_product_arrows",
+                    "label": "t:sections.main-product.settings.complementary.show_arrow",
+                    "default": false
+                },
+                {
+                    "type": "checkbox",
+                    "id": "complementary_product_dots",
+                    "label": "t:sections.main-product.settings.complementary.show_dots",
+                    "default": true
+                },
+                {
+                    "type": "select",
+                    "id": "complementary_product_layout",
+                    "label": "t:sections.main-product.settings.complementary.layout_style",
+                    "options": [
+                        {
+                            "value": "1",
+                            "label": "t:sections.main-product.settings.complementary.default"
+                        },
+                        {
+                            "value": "2",
+                            "label": "t:sections.main-product.settings.complementary.custom"
+                        }
+                    ],
+                    "default": "2"
+                },
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.main-product.settings.complementary.info__1"
+                },
+                {
+                    "type": "range",
+                    "id": "complementary_product_limit_1",
+                    "label": "t:sections.main-product.settings.complementary.product_show",
+                    "min": 1,
+                    "max": 3,
+                    "step": 1,
+                    "default": 2
+                },
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.main-product.settings.complementary.info__2"
+                },
+                {
+                    "type": "range",
+                    "id": "complementary_product_limit_2",
+                    "label": "t:sections.main-product.settings.complementary.product_show",
+                    "min": 1,
+                    "max": 5,
+                    "step": 1,
+                    "default": 3
+                },
+                {
+                    "type": "select",
+                    "id": "complementary_product_object",
+                    "label": "t:sections.main-product.settings.complementary.object_fit",
+                    "default": "cover",
+                    "options": [
+                        {
+                            "value": "none",
+                            "label": "t:sections.main-product.settings.media.options__6"
+                        },
+                        {
+                            "value": "contain",
+                            "label": "t:sections.main-product.settings.media.options__7"
+                        },
+                        {
+                            "value": "cover",
+                            "label": "t:sections.main-product.settings.media.options__8"
+                        }
+                    ]
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.main-product.settings.general.spacing"
+                },
+                {
+                    "type": "range",
+                    "id": "spacing_top",
+                    "label": "t:sections.general.settings.aligmnent.options__5",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:sections.layout.mg_desktop.unit",
+                    "default": 30
+                },
+                {
+                    "type": "range",
+                    "id": "spacing_bottom",
+                    "label": "t:sections.general.settings.aligmnent.options__6",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:sections.layout.mg_desktop.unit",
+                    "default": 0
                 }
             ]
         }

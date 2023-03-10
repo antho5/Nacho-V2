@@ -38,7 +38,7 @@
         assign logo_color = section.settings.logo_color
 
         assign sale_item_color = section.settings.sale_item_color
-
+        assign bg_mega_menu = section.settings.bg_mega_menu
         assign bg_mega_menu_style_4 = section.settings.bg_mega_menu_style_4
         assign az_brand_link_text_color = section.settings.az_brand_link_text_color
 
@@ -252,11 +252,10 @@
         fill: {{ lv_1_color }};
     }
 
-    .menu-dropdown__text a[title="Sale"] {
-        color: {{ sale_item_color }};
-    }
-
     {% if sale_item_color != 'rgba(0,0,0,0)' and sale_item_color != blank %}
+        .menu-dropdown__text a.active-sale {
+            color: {{ sale_item_color }};
+        }
         .menu-sale > .menu-lv-1__action,
         .menu-sale > details > .menu--mobile-lv-1__action,
         .menu-sale > .menu-lv-2__action,
@@ -308,10 +307,6 @@
         .menu-lv-item.menu-lv-1:hover > a > .text,.menu-lv-item.menu-lv-2:hover > a > .text,.menu-lv-item.menu-lv-3:hover > a > .text{
             border-bottom: 0;
         }
-        .bottom-bar .bottom-bar--list .cart-count-bubble {
-            top: 4px;
-            right: 8px;
-        }
     }
 
     @media screen and (min-width: 1025px) {
@@ -346,6 +341,25 @@
                 display: inline-block;
             }
         {% endif %}
+
+        .header-bottom--wrapper .list-menu--inline {
+            padding-top: {{ section.settings.menu_top_spacing | append: 'px' }};
+        }
+
+        .header-bottom--wrapper .list-menu.text-left {
+            margin-left: -{{ section.settings.grid_gap_menu | append: 'px' }};
+        }
+
+        .menu-lv-1__action {
+             padding-top: 0;
+             padding-left: {{ section.settings.grid_gap_menu | append: 'px' }};
+             padding-right: {{ section.settings.grid_gap_menu | append: 'px' }};
+             padding-bottom: {{ section.settings.menu_bottom_spacing | append: 'px' }};
+        }
+        
+        .menu-lv-1 > .menu-lv-1__action > .label {
+          top: -19px;
+        }
 
         .menu-lv-1:hover .menu-lv-1__action{
             color: {{ lv_1_color_hover }};

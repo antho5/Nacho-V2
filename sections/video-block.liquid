@@ -24,7 +24,7 @@
         <div class="video-section__media"
           {% if section.settings.cover_image != blank %} style="padding-bottom: {{ 1 | divided_by: section.settings.cover_image.aspect_ratio | times: 100 }}%;"{% endif %}
         >
-          <a href="{{ section.settings.video_url }}" class="video-section__poster media media--transparent media--landscape{% if section.settings.cover_image == blank %} video-section__placeholder{% endif %}">
+          <a {% if section.settings.video_url == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.video_url }}"{% endif %} class="video-section__poster media media--transparent media--landscape{% if section.settings.cover_image == blank %} video-section__placeholder{% endif %}">
             {%- if section.settings.cover_image != blank -%}
               <img
                 srcset="{%- if section.settings.cover_image.width >= 375 -%}{{ section.settings.cover_image | img_url: '375x' }} 375w,{%- endif -%}

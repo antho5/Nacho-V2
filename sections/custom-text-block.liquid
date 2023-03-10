@@ -20,7 +20,7 @@
             <div class="block__custom--text">
                 {% for link in section.settings.menu.links %}
                 <div class="wrapper-text">
-                    <a title="{{ link.title }}" href="{{ link.url }}">
+                    <a title="{{ link.title }}"{% if link.url == blank %} role="link" aria-disabled="true"{% else %} href="{{ link.url }}"{% endif %}>
                         {{ link.title }}
                     </a>
                 </div>

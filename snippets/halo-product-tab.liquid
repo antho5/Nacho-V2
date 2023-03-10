@@ -7,15 +7,17 @@
 		assign border_color = tab_border_color
 	endif
 
-	if tab_layout == 'vertical_popup' 
-		assign isVerticalSidebar = true
-	endif 
-	
-	if isVerticalSidebar
-		assign tab_layout = 'vertical'
-	endif 
+	assign isVerticalSidebar = false
+	if tab_layout == 'vertical_sidebar'
+		assign isVerticalSidebar = 'sidebar'
+	endif
+
+	assign isVerticalSidebarMobile = false
+	if tab_layout_mobile == 'vertical_sidebar'
+		assign isVerticalSidebarMobile = 'sidebar-mobile'
+	endif
 -%}
-<product-tab class="productView-tab layout-{{ tab_layout }}" data-vertical="{% if isVerticalSidebar %}popup{% else %}false{% endif %}">
+<product-tab class="productView-tab layout-{{ tab_layout }}" data-vertical="{{ isVerticalSidebar }}" data-vertical-mobile="{{ isVerticalSidebarMobile }}">
 	{%- if tab_layout == 'horizontal' or tab_layout == 'popup' -%}
 		<ul class="tabs tabs-horizontal list-unstyled disable-srollbar">
 			{%- for block in section.blocks -%}
@@ -84,7 +86,12 @@
 				else
 					assign has_tab = true
 					if block.type == 'description'
-						assign content = product.description
+                        assign current_variant = product.selected_or_first_available_variant
+                        if current_variant.metafields.c_f.variant_description != blank
+                            assign content = current_variant.metafields.c_f.variant_description
+                        else
+                            assign content = product.description
+                        endif
 					else block.type == 'review'
 						assign content = product.metafields.spr.reviews
 					endif
@@ -97,6 +104,8 @@
 					endif
 					if tab_layout_mobile == 'popup'
 						assign style_mobile = 'popup-mobile'
+					elsif tab_layout_mobile == 'vertical_sidebar'
+						assign style_mobile = 'sidebar-mobile'
 					endif
 				endif
 			-%}
@@ -120,8 +129,8 @@
 		                    {% endif %}
 		                </a>
 		            </div>
-		            <div class="toggle-content{% if style_mobile %} {{ style_mobile }}{% endif %}{% if block.settings.enable_btn_show_more %} toggle-content--height{% endif %}" id="tab-{{ title | escape | handleize }}-mobile"{% if block.settings.enable_btn_show_more %} style="--maximum-des-to-show: {{ block.settings.maximum_des_to_show | append: 'px'}}"{% endif %}>
-						{%- if style_mobile == 'popup-mobile' -%}
+		            <div class="toggle-content{% if style_mobile %} {{ style_mobile }}{% endif %}{% if block.settings.enable_btn_show_more %} toggle-content--height{% endif %}" id="tab-{{ title | escape | handleize }}-mobile"{% if block.settings.enable_btn_show_more %} style="--maximum-des-to-show: {{ block.settings.maximum_des_to_show | append: 'px'}}"{% endif %}{% if block.type == 'description' %} data-product-description-{{ product.id }}{% endif %}>
+						{%- if tab_layout == 'vertical_sidebar' or style_mobile == 'sidebar-mobile' or style_mobile == 'popup-mobile' -%}
 							<div class="tab-popup-header">
 								<h5>
 									<span class="text">{{ title | escape }}</span>
@@ -145,7 +154,7 @@
 							{%- if block.type == 'review' -%}
 								</div>
 							{%- endif -%}
-						{%- if style_mobile == 'popup-mobile' -%}
+						{%- if tab_layout == 'vertical_sidebar' or style_mobile == 'sidebar-mobile' or style_mobile == 'popup-mobile' -%}
 							</div>
 						{%- endif -%}
 		            </div>

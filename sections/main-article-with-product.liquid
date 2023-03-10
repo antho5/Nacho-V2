@@ -4,6 +4,9 @@
 <noscript>{{ 'component-fancybox.css' | asset_url | stylesheet_tag }}</noscript>
 <script src="{{ 'fancybox.js' | asset_url }}" defer="defer"></script>
 
+{{ 'article-gallery-lookbook-style.css' | asset_url | stylesheet_tag }}
+{{ 'lookbook-script.js' | asset_url | script_tag }}
+
 {%- liquid
     assign padding_top = section.settings.mg_top_desktop | append: 'px'
     assign padding_bottom = section.settings.mg_bottom_desktop | append: 'px'
@@ -263,452 +266,149 @@
                           {{ article.content }}
                       </div>
                       {%- for block in section.blocks -%}
-                          {%- if block.type == 'image_gallery' -%}
-                              {%- liquid
-                                  assign swipe = block.settings.image_gallery_swipe_on_mobile
-                                  assign column = block.settings.column
-                                  assign column_mb = block.settings.column_mb
-                                  assign type_image_gallery = block.settings.type_image_gallery
-                                  assign image_gallery_title = block.settings.image_gallery_title
-                                  assign color_title = block.settings.color_title
-                                  assign fontsize_title = block.settings.fontsize_title
-                                  assign fontsize_title_mb = block.settings.fontsize_title_mb
-                                  assign margin_bottom_title = block.settings.margin_bottom_title
-                                  assign item_distance = block.settings.item_distance
-                                  assign image_1 = block.settings.image_1
-                                  assign image_2 = block.settings.image_2
-                                  assign image_3 = block.settings.image_3
-                                  assign image_4 = block.settings.image_4
-                                  assign image_5 = block.settings.image_5
-                                  assign image_6 = block.settings.image_6
-                                  assign image_7 = block.settings.image_7
-                                  assign image_8 = block.settings.image_8
-                                  assign show_image_1 = block.settings.show_image_1
-                                  assign show_image_2 = block.settings.show_image_2
-                                  assign show_image_3 = block.settings.show_image_3
-                                  assign show_image_4 = block.settings.show_image_4
-                                  assign show_image_5 = block.settings.show_image_5
-                                  assign show_image_6 = block.settings.show_image_6
-                                  assign show_image_7 = block.settings.show_image_7
-                                  assign show_image_8 = block.settings.show_image_8
-                                  assign link_1 = block.settings.link_1
-                                  assign link_2 = block.settings.link_2
-                                  assign link_3 = block.settings.link_3
-                                  assign link_4 = block.settings.link_4
-                                  assign link_5 = block.settings.link_5
-                                  assign link_6 = block.settings.link_6
-                                  assign link_7 = block.settings.link_7
-                                  assign link_8 = block.settings.link_8
-                                  assign lb_product1_1 = block.settings.lb_product1_1
-                                  assign lb_product1_2 = block.settings.lb_product1_2
-                                  assign lb_product2_1 = block.settings.lb_product2_1
-                                  assign lb_product2_2 = block.settings.lb_product2_2
-                                  assign lb_product3_1 = block.settings.lb_product3_1
-                                  assign lb_product3_2 = block.settings.lb_product3_2
-                                  assign lb_product4_1 = block.settings.lb_product4_1
-                                  assign lb_product4_2 = block.settings.lb_product4_2
-                                  assign lb_product5_1 = block.settings.lb_product5_1
-                                  assign lb_product5_2 = block.settings.lb_product5_2
-                                  assign lb_product6_1 = block.settings.lb_product6_1
-                                  assign lb_product6_2 = block.settings.lb_product6_2
-                                  assign lb_product7_1 = block.settings.lb_product7_1
-                                  assign lb_product7_2 = block.settings.lb_product7_2
-                                  assign lb_product8_1 = block.settings.lb_product8_1
-                                  assign lb_product8_2 = block.settings.lb_product8_2
-                                  assign dots_color = block.settings.dots_color
-                                  assign dots_bg_color = block.settings.dots_bg_color
-                                  assign dots_shadow_color = block.settings.dots_shadow_color
-                                  assign top_position1_1 = block.settings.top_position1_1
-                                  assign top_position1_2 = block.settings.top_position1_2
-                                  assign left_position1_1 = block.settings.left_position1_1
-                                  assign left_position1_2 = block.settings.left_position1_2
-                                  assign top_position2_1 = block.settings.top_position2_1
-                                  assign top_position2_2 = block.settings.top_position2_2
-                                  assign left_position2_1 = block.settings.left_position2_1
-                                  assign left_position2_2 = block.settings.left_position2_2
-                                  assign top_position3_1 = block.settings.top_position3_1
-                                  assign top_position3_2 = block.settings.top_position3_2
-                                  assign left_position3_1 = block.settings.left_position3_1
-                                  assign left_position3_2 = block.settings.left_position3_2
-                                  assign top_position4_1 = block.settings.top_position4_1
-                                  assign top_position4_2 = block.settings.top_position4_2
-                                  assign left_position4_1 = block.settings.left_position4_1
-                                  assign left_position4_2 = block.settings.left_position4_2
-                                  assign top_position5_1 = block.settings.top_position5_1
-                                  assign top_position5_2 = block.settings.top_position5_2
-                                  assign left_position5_1 = block.settings.left_position5_1
-                                  assign left_position5_2 = block.settings.left_position5_2
-                                  assign top_position6_1 = block.settings.top_position6_1
-                                  assign top_position6_2 = block.settings.top_position6_2
-                                  assign left_position6_1 = block.settings.left_position6_1
-                                  assign left_position6_2 = block.settings.left_position6_2
-                                  assign top_position7_1 = block.settings.top_position7_1
-                                  assign top_position7_2 = block.settings.top_position7_2
-                                  assign left_position7_1 = block.settings.left_position7_1
-                                  assign left_position7_2 = block.settings.left_position7_2
-                                  assign top_position8_1 = block.settings.top_position8_1
-                                  assign top_position8_2 = block.settings.top_position8_2
-                                  assign left_position8_1 = block.settings.left_position8_1
-                                  assign left_position8_2 = block.settings.left_position8_2
-                              -%}
+                        {%- if block.type == 'image_gallery' -%}
+                            {%- liquid
+                                assign swipe = block.settings.image_gallery_swipe_on_mobile
+                                assign column = block.settings.column
+                                assign column_mb = block.settings.column_mb
+                                assign type_image_gallery = block.settings.type_image_gallery
+                                assign image_gallery_title = block.settings.image_gallery_title
+                                assign color_title = block.settings.color_title
+                                assign fontsize_title = block.settings.fontsize_title
+                                assign fontsize_title_mb = block.settings.fontsize_title_mb
+                                assign margin_bottom_title = block.settings.margin_bottom_title
+                                assign item_distance = block.settings.item_distance
 
-                              <div class="articleGallery-block articleGallery-{{section.id}}" id="articleGallery-{{section.id}}">
-                                  {% if image_gallery_title != blank %}
-                                      <div class="halo-block-header text-left" style="
-                                              --margin-bottom-title: {{ margin_bottom_title | append: 'px' }}">   
-                                          <h3 class="title"
-                                              style="--color-title: {{ color_title }};
-                                              --fontsize-title: {{ fontsize_title | append: 'px' }};
-                                              --fontsize_title_mb: {{ fontsize_title_mb | append: 'px' }};"
-                                          >
-                                              <span class="text">
-                                                  {{ image_gallery_title }}
-                                              </span>
-                                          </h3>
-                                      </div>
-                                  {% endif %}
-                                  <div class="halo-row column-{{ column }}
-                                      {% if swipe == 'slider' %} articleGallery-slider{% endif %}
-                                      {% if item_distance == 0 %} not-distance{% endif %}
-                                      {% if swipe == 'scroll' %} scroll-snap-mobile disable-srollbar{% endif %}
-                                      {% if column_mb == '2' %} column-mb-2{% endif %}" 
-                                      data-col="{{ column }}" 
-                                      style="--row-distance-style: {{ item_distance | prepend: '-' | append: 'px' }}; 
-                                      --item-distance-style: {{ item_distance | append: 'px' }};
-                                      --dots-color-style: {{ dots_color }};
-                                      --dots-bg-color-style: {{ dots_bg_color }};
-                                      --dots-shadow-color-style: {{ dots_shadow_color | color_modify: 'alpha', 0.3 }}"
-                                  >
-                                      {%- if show_image_1 -%}
-                                          <div class="halo-item">
-                                              <div class="imgGallery-item">
-                                                  <div class="img-box">
-                                                      {% if image_1 != blank %}
-                                                          {%- assign preview_img = image_1 -%}
-                                                          <a 
-                                                              {% if type_image_gallery == 'link' %}
-                                                                  href="{{ link_1 }}" class="image-zoom adaptive_height"
-                                                              {% else %}
-                                                                  href="{{ preview_img | img_url: 'master' }}" data-fancybox="images" class="image-zoom adaptive_height fancybox"
-                                                              {% endif %}
-                                                              style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
-                                                                  <img {% render 'lazyload',preview_img: preview_img %} />
-                                                                  {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
-                                                          </a>
-                                                      {% else %}
-                                                          <a href="{{ link_1 }}" class="image-zoom">
-                                                              <div class="not_img" style="--height_not_img: 370px">290 x 370px</div>
-                                                          </a>
-                                                      {% endif %}
-                                                  </div>
-                                                  {% if lb_product1_1 != blank %}
-                                                    <div class="select-icon select-icon-1" data-lookbook-icon data-handle="{{ lb_product1_1 }}"
-                                                        style="--top-position-1-style: {{ top_position1_1 | append: '%' }};
-                                                        --left-position-1-style: {{ left_position1_1 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                                  {% if lb_product1_2 != blank %}
-                                                    <div class="select-icon select-icon-2" data-lookbook-icon data-handle="{{ lb_product1_2 }}"
-                                                        style="--top-position-2-style: {{ top_position1_2 | append: '%' }};
-                                                        --left-position-2-style: {{ left_position1_2 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
-                                      {%- endif -%}
-                                      {%- if show_image_2 -%}
-                                          <div class="halo-item">
-                                              <div class="imgGallery-item">
-                                                  <div class="img-box">
-                                                      {% if image_2 != blank %}
-                                                          {%- assign preview_img = image_2 -%}
-                                                          <a 
-                                                              {% if type_image_gallery == 'link' %}
-                                                                  href="{{ link_2 }}" class="image-zoom adaptive_height"
-                                                              {% else %}
-                                                                  href="{{ preview_img | img_url: 'master' }}" data-fancybox="images" class="image-zoom adaptive_height fancybox"
-                                                              {% endif %}
-                                                              style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
-                                                                  <img {% render 'lazyload',preview_img: preview_img %} />
-                                                                  {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
-                                                          </a>
-                                                      {% else %}
-                                                          <a href="{{ link_2 }}" class="image-zoom">
-                                                              <div class="not_img" style="--height_not_img: 370px">290 x 370px</div>
-                                                          </a>
-                                                      {% endif %}
-                                                  </div>
-                                                  {% if lb_product2_1 != blank %}
-                                                    <div class="select-icon select-icon-1" data-lookbook-icon data-handle="{{ lb_product2_1 }}"
-                                                        style="--top-position-1-style: {{ top_position2_1 | append: '%' }};
-                                                        --left-position-1-style: {{ left_position2_1 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                                  {% if lb_product2_2 != blank %}
-                                                    <div class="select-icon select-icon-2" data-lookbook-icon data-handle="{{ lb_product2_2 }}"
-                                                        style="--top-position-2-style: {{ top_position2_2 | append: '%' }};
-                                                        --left-position-2-style: {{ left_position2_2 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
-                                      {%- endif -%}
-                                      {%- if show_image_3 -%}
-                                          <div class="halo-item">
-                                              <div class="imgGallery-item">
-                                                  <div class="img-box">
-                                                      {% if image_3 != blank %}
-                                                          {%- assign preview_img = image_3 -%}
-                                                          <a 
-                                                              {% if type_image_gallery == 'link' %}
-                                                                  href="{{ link_3 }}" class="image-zoom adaptive_height"
-                                                              {% else %}
-                                                                  href="{{ preview_img | img_url: 'master' }}" data-fancybox="images" class="image-zoom adaptive_height fancybox"
-                                                              {% endif %}
-                                                              style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
-                                                                  <img {% render 'lazyload',preview_img: preview_img %} />
-                                                                  {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
-                                                          </a>
-                                                      {% else %}
-                                                          <a href="{{ link_3 }}" class="image-zoom">
-                                                              <div class="not_img" style="--height_not_img: 370px">290 x 370px</div>
-                                                          </a>
-                                                      {% endif %}
-                                                  </div>
-                                                  {% if lb_product3_1 != blank %}
-                                                    <div class="select-icon select-icon-1" data-lookbook-icon data-handle="{{ lb_product3_1 }}"
-                                                        style="--top-position-1-style: {{ top_position3_1 | append: '%' }};
-                                                        --left-position-1-style: {{ left_position3_1 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                                  {% if lb_product3_2 != blank %}
-                                                    <div class="select-icon select-icon-2" data-lookbook-icon data-handle="{{ lb_product3_2 }}"
-                                                        style="--top-position-2-style: {{ top_position3_2 | append: '%' }};
-                                                        --left-position-2-style: {{ left_position3_2 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
-                                      {%- endif -%}
-                                      {%- if show_image_4 -%}
-                                          <div class="halo-item">
-                                              <div class="imgGallery-item">
-                                                  <div class="img-box">
-                                                      {% if image_4 != blank %}
-                                                          {%- assign preview_img = image_4 -%}
-                                                          <a 
-                                                              {% if type_image_gallery == 'link' %}
-                                                                  href="{{ link_4 }}" class="image-zoom adaptive_height"
-                                                              {% else %}
-                                                                  href="{{ preview_img | img_url: 'master' }}" data-fancybox="images" class="image-zoom adaptive_height fancybox"
-                                                              {% endif %}
-                                                              style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
-                                                                  <img {% render 'lazyload',preview_img: preview_img %} />
-                                                                  {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
-                                                          </a>
-                                                      {% else %}
-                                                          <a href="{{ link_4 }}" class="image-zoom">
-                                                              <div class="not_img" style="--height_not_img: 370px">290 x 370px</div>
-                                                          </a>
-                                                      {% endif %}
-                                                  </div>
-                                                  {% if lb_product4_1 != blank %}
-                                                    <div class="select-icon select-icon-1" data-lookbook-icon data-handle="{{ lb_product4_1 }}"
-                                                        style="--top-position-1-style: {{ top_position4_1 | append: '%' }};
-                                                        --left-position-1-style: {{ left_position4_1 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                                  {% if lb_product4_2 != blank %}
-                                                    <div class="select-icon select-icon-2" data-lookbook-icon data-handle="{{ lb_product4_2 }}"
-                                                        style="--top-position-2-style: {{ top_position4_2 | append: '%' }};
-                                                        --left-position-2-style: {{ left_position4_2 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
-                                      {%- endif -%}
-                                      {%- if show_image_5 -%}
-                                          <div class="halo-item">
-                                              <div class="imgGallery-item">
-                                                  <div class="img-box">
-                                                      {% if image_5 != blank %}
-                                                          {%- assign preview_img = image_5 -%}
-                                                          <a 
-                                                              {% if type_image_gallery == 'link' %}
-                                                                  href="{{ link_5 }}" class="image-zoom adaptive_height"
-                                                              {% else %}
-                                                                  href="{{ preview_img | img_url: 'master' }}" data-fancybox="images" class="image-zoom adaptive_height fancybox"
-                                                              {% endif %}
-                                                              style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
-                                                                  <img {% render 'lazyload',preview_img: preview_img %} />
-                                                                  {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
-                                                          </a>
-                                                      {% else %}
-                                                          <a href="{{ link_5 }}" class="image-zoom">
-                                                              <div class="not_img" style="--height_not_img: 370px">290 x 370px</div>
-                                                          </a>
-                                                      {% endif %}
-                                                  </div>
-                                                  {% if lb_product5_1 != blank %}
-                                                    <div class="select-icon select-icon-1" data-lookbook-icon data-handle="{{ lb_product5_1 }}"
-                                                        style="--top-position-1-style: {{ top_position5_1 | append: '%' }};
-                                                        --left-position-1-style: {{ left_position5_1 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                                  {% if lb_product5_2 != blank %}
-                                                    <div class="select-icon select-icon-2" data-lookbook-icon data-handle="{{ lb_product5_2 }}"
-                                                        style="--top-position-2-style: {{ top_position5_2 | append: '%' }};
-                                                        --left-position-2-style: {{ left_position5_2 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
-                                      {%- endif -%}
-                                      {%- if show_image_6 -%}
-                                          <div class="halo-item">
-                                              <div class="imgGallery-item">
-                                                  <div class="img-box">
-                                                      {% if image_6 != blank %}
-                                                          {%- assign preview_img = image_6 -%}
-                                                          <a 
-                                                              {% if type_image_gallery == 'link' %}
-                                                                  href="{{ link_6 }}" class="image-zoom adaptive_height"
-                                                              {% else %}
-                                                                  href="{{ preview_img | img_url: 'master' }}" data-fancybox="images" class="image-zoom adaptive_height fancybox"
-                                                              {% endif %}
-                                                              style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
-                                                                  <img {% render 'lazyload',preview_img: preview_img %} />
-                                                                  {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
-                                                          </a>
-                                                      {% else %}
-                                                          <a href="{{ link_6 }}" class="image-zoom">
-                                                              <div class="not_img" style="--height_not_img: 370px">290 x 370px</div>
-                                                          </a>
-                                                      {% endif %}
-                                                  </div>
-                                                  {% if lb_product6_1 != blank %}
-                                                    <div class="select-icon select-icon-1" data-lookbook-icon data-handle="{{ lb_product6_1 }}"
-                                                        style="--top-position-1-style: {{ top_position6_1 | append: '%' }};
-                                                        --left-position-1-style: {{ left_position6_1 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                                  {% if lb_product6_2 != blank %}
-                                                    <div class="select-icon select-icon-2" data-lookbook-icon data-handle="{{ lb_product6_2 }}"
-                                                        style="--top-position-2-style: {{ top_position6_2 | append: '%' }};
-                                                        --left-position-2-style: {{ left_position6_2 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
-                                      {%- endif -%}
-                                      {%- if show_image_7 -%}
-                                          <div class="halo-item">
-                                              <div class="imgGallery-item">
-                                                  <div class="img-box">
-                                                      {% if image_7 != blank %}
-                                                          {%- assign preview_img = image_7 -%}
-                                                          <a 
-                                                              {% if type_image_gallery == 'link' %}
-                                                                  href="{{ link_7 }}" class="image-zoom adaptive_height"
-                                                              {% else %}
-                                                                  href="{{ preview_img | img_url: 'master' }}" data-fancybox="images" class="image-zoom adaptive_height fancybox"
-                                                              {% endif %}
-                                                              style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
-                                                                  <img {% render 'lazyload',preview_img: preview_img %} />
-                                                                  {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
-                                                          </a>
-                                                      {% else %}
-                                                          <a href="{{ link_7 }}" class="image-zoom">
-                                                              <div class="not_img" style="--height_not_img: 370px">290 x 370px</div>
-                                                          </a>
-                                                      {% endif %}
-                                                  </div>
-                                                  {% if lb_product7_1 != blank %}
-                                                    <div class="select-icon select-icon-1" data-lookbook-icon data-handle="{{ lb_product7_1 }}"
-                                                        style="--top-position-1-style: {{ top_position7_1 | append: '%' }};
-                                                        --left-position-1-style: {{ left_position7_1 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                                  {% if lb_product7_2 != blank %}
-                                                    <div class="select-icon select-icon-2" data-lookbook-icon data-handle="{{ lb_product7_2 }}"
-                                                        style="--top-position-2-style: {{ top_position7_2 | append: '%' }};
-                                                        --left-position-2-style: {{ left_position7_2 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
-                                      {%- endif -%}
-                                      {%- if show_image_8 -%}
-                                          <div class="halo-item">
-                                              <div class="imgGallery-item">
-                                                  <div class="img-box">
-                                                      {% if image_8 != blank %}
-                                                          {%- assign preview_img = image_8 -%}
-                                                          <a 
-                                                              {% if type_image_gallery == 'link' %}
-                                                                  href="{{ link_8 }}" class="image-zoom adaptive_height"
-                                                              {% else %}
-                                                                  href="{{ preview_img | img_url: 'master' }}" data-fancybox="images" class="image-zoom adaptive_height fancybox"
-                                                              {% endif %}
-                                                              style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
-                                                                  <img {% render 'lazyload',preview_img: preview_img %} />
-                                                                  {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
-                                                          </a>
-                                                      {% else %}
-                                                          <a href="{{ link_8 }}" class="image-zoom">
-                                                              <div class="not_img" style="--height_not_img: 370px">290 x 370px</div>
-                                                          </a>
-                                                      {% endif %}
-                                                  </div>
-                                                  {% if lb_product8_1 != blank %}
-                                                    <div class="select-icon select-icon-1" data-lookbook-icon data-handle="{{ lb_product8_1 }}"
-                                                        style="--top-position-1-style: {{ top_position8_1 | append: '%' }};
-                                                        --left-position-1-style: {{ left_position8_1 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                                  {% if lb_product8_2 != blank %}
-                                                    <div class="select-icon select-icon-2" data-lookbook-icon data-handle="{{ lb_product8_2 }}"
-                                                        style="--top-position-2-style: {{ top_position8_2 | append: '%' }};
-                                                        --left-position-2-style: {{ left_position8_2 | append: '%' }};"
-                                                    >
-                                                        <span class="glyphicon"></span>
-                                                    </div>
-                                                  {% endif %}
-                                              </div>
-                                          </div>
-                                      {%- endif -%}
-                                  </div>
-                              </div>
+                                assign lookbook_style = block.settings.lookbook_style
+                                assign dot_desktop_size = block.settings.dot_desktop_size | append: 'px'
+                                assign dot_mobile_size = block.settings.dot_mobile_size | append: 'px'
+                                assign dot_shadow_color = block.settings.dot_shadow_color | color_modify: 'alpha', 0.5
+                                assign dot_outer_color = block.settings.dot_outer_color
+                                assign show_dot_number = block.settings.show_dot_number
+                                assign show_dot_number_mobile = block.settings.show_dot_number_mobile
+                                assign dot_inner_color = block.settings.dot_inner_color
+                                assign number_desktop_size = block.settings.number_desktop_size | append: 'px'
+                                assign number_mobile_size = block.settings.number_mobile_size | append: 'px'
+                                assign enable_lookbook_width = block.settings.enable_lookbook_width
+                                assign lookbook_width = block.settings.lookbook_width | append: 'px'
+                                assign lookbook_truncate = block.settings.lookbook_truncate
+                                assign show_plus_icon = block.settings.show_plus_icon
+                                assign item_distance = block.settings.item_distance
+                            -%}
+
+                            <div class="articleGallery-block articleGallery-{{section.id}}" id="articleGallery-{{section.id}}">
+                                {% if image_gallery_title != blank %}
+                                    <div class="halo-block-header text-left" style="
+                                            --margin-bottom-title: {{ margin_bottom_title | append: 'px' }}">   
+                                        <h3 class="title"
+                                            style="--color-title: {{ color_title }};
+                                            --fontsize-title: {{ fontsize_title | append: 'px' }};
+                                            --fontsize_title_mb: {{ fontsize_title_mb | append: 'px' }};"
+                                        >
+                                            <span class="text">
+                                                {{ image_gallery_title }}
+                                            </span>
+                                        </h3>
+                                    </div>
+                                {% endif %}
+                                <div class="halo-row column-{{ column }}
+                                    {% if swipe == 'slider' %} articleGallery-slider{% endif %}
+                                    {% if item_distance == 0 %} not-distance{% endif %}
+                                    {% if swipe == 'scroll' %} scroll-snap-mobile disable-srollbar{% endif %}
+                                    {% if column_mb == '2' %} column-mb-2{% endif %}" 
+                                    data-col="{{ column }}" 
+                                    data-show-lookbook-container
+                                    style="--row-distance-style: {{ item_distance | prepend: '-' | append: 'px' }}; 
+                                    --item-distance-style: {{ item_distance | append: 'px' }};"
+                                >
+                                    {% for i in (1..8) %}
+                                        {% capture image %}image_{{ i }}{% endcapture %}
+                                        {% capture show_image %}show_image_{{ i }}{% endcapture %}
+                                        {% capture link %}link_{{ i }}{% endcapture %}
+
+                                        {% capture product_1 %}lb_product_{{ i }}_1{% endcapture %}
+                                        {% capture left_1 %}horizontal_pos_{{ i }}_1{% endcapture %}
+                                        {% capture top_1 %}vertical_pos_{{ i }}_1{% endcapture %}
+                                        {% capture lookbook_pos_1 %}lookbook_pos_{{ i }}_1{% endcapture %}
+
+                                        {% capture product_2 %}lb_product_{{ i }}_2{% endcapture %}
+                                        {% capture left_2 %}horizontal_pos_{{ i }}_2{% endcapture %}
+                                        {% capture top_2 %}vertical_pos_{{ i }}_2{% endcapture %}
+                                        {% capture lookbook_pos_2 %}lookbook_pos_{{ i }}_2{% endcapture %}
+
+                                        {%- if block.settings[show_image] -%}
+                                            <div class="halo-item">
+                                                <div class="imgGallery-item lookbook-image-item {% if enable_lookbook_width %}width-restricted{% endif %}" data-lookbook-item-container
+                                                    style="
+                                                        --dot-desktop-size: {{ dot_desktop_size }};
+                                                        --dot-mobile-size: {{ dot_mobile_size }};
+                                                        --dot-shadow-color: {{ dot_shadow_color }};
+                                                        --dot-outer-color: {{ dot_outer_color }};
+                                                        --dot-inner-color: {{ dot_inner_color }};
+                                                        --dot-number-desktop-size: {{ number_desktop_size }};
+                                                        --dot-number-mobile-size: {{ number_mobile_size }};
+                                                        --max-width: {{ lookbook_width }};
+                                                        --des-max-width: {% if des_width > 0 %}{{ des_width | append: 'px' }}{% else %}unset{% endif %};
+                                                        --truncate-line: {{ lookbook_truncate }};
+                                                    "
+                                                >   
+                                                <div class="img-box">
+                                                    {% if block.settings[image] != blank %}
+                                                        {%- assign preview_img = block.settings[image] -%}
+                                                        <a 
+                                                            {% if type_image_gallery == 'link' %}
+                                                                {% if block.settings[link] == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings[link] }}"{% endif %} class="image-zoom adaptive_height"
+                                                            {% else %}
+                                                                href="{{ preview_img | img_url: 'master' }}" data-fancybox="images" class="image-zoom adaptive_height fancybox"
+                                                            {% endif %}
+                                                            style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
+                                                                <img {% render 'lazyload',preview_img: preview_img %} />
+                                                                {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
+                                                        </a>
+                                                    {% else %}
+                                                        <a {% if block.settings[link] == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings[link] }}"{% endif %} class="image-zoom">
+                                                            <div class="not_img" style="--height_not_img: 370px">290 x 370px</div>
+                                                        </a>
+                                                    {% endif %}
+                                                </div>
+                                                {% if block.settings[product_1] != blank %}
+                                                    {% assign top = block.settings[top_1] | append: '%' %}
+                                                    {% assign left = block.settings[left_1] | append: '%' %}
+
+                                                    {% render 'lookbook-modal-wrapper',
+                                                        lookbook_style: lookbook_style,
+                                                        top: top,
+                                                        left: left,
+                                                        show_dot_number: show_dot_number,
+                                                        show_dot_number_mobile: show_dot_number_mobile,
+                                                        lookbook_pos: block.settings[lookbook_pos_1],
+                                                        product: block.settings[product_1],
+                                                        show_plus_icon: show_plus_icon,
+                                                        num: 1,
+                                                    %}  
+                                                {% endif %}
+                                                {% if block.settings[product_2] != blank %}
+                                                    {% assign top = block.settings[top_2] | append: '%' %}
+                                                    {% assign left = block.settings[left_2] | append: '%' %}
+
+                                                    {% render 'lookbook-modal-wrapper',
+                                                        lookbook_style: lookbook_style,
+                                                        top: top,
+                                                        left: left,
+                                                        show_dot_number: show_dot_number,
+                                                        show_dot_number_mobile: show_dot_number_mobile,
+                                                        lookbook_pos: block.settings[lookbook_pos_2],
+                                                        product: block.settings[product_2],
+                                                        show_plus_icon: show_plus_icon,
+                                                        num: 2,
+                                                    %}  
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {%- endif -%}
+                                    {% endfor %}
+                                </div>
+                            </div>
                           {%- elsif block.type == 'lookbook' -%}
                               {%- liquid
                                   assign image = block.settings.image
@@ -721,12 +421,12 @@
                               >
                                   <div class="articleLookbook-item">
                                       {%- if image != blank -%}
-                                          <a class="image image-zoom1 image-adapt adaptive_height" href="{{ link }}" style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}">
+                                          <a class="image image-zoom1 image-adapt adaptive_height"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} style="padding-top: {{ 1 | divided_by: image.aspect_ratio | times: 100 | append: '%' }}">
                                               <img {% render 'lazyload',preview_img: preview_img %} />
                                               {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                           </a>
                                       {%- else -%}
-                                          <a class="image" href="{{ link }}">
+                                          <a class="image"{% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %}>
                                               <div class="not_img" style="--height_not_img: 520px">
                                                 930 x 520px
                                               </div>  
@@ -2053,6 +1753,143 @@
                     "default": 15
                 },
                 {
+                    "type": "header",
+                    "content": "t:sections.main_lookbook_page.settings.header__2"
+                },
+                {
+                    "type": "select",
+                    "id": "lookbook_style",
+                    "label": "t:sections.main_lookbook_page.settings.style",
+                    "default": "1",
+                    "options": [
+                        {
+                            "value": "1",
+                            "label": "t:settings_schema.typography.settings.typography.style_1"
+                        },
+                        {
+                            "value": "2",
+                            "label": "t:settings_schema.typography.settings.typography.style_2"
+                        }
+                    ]
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.collection_lookbook.settings.content_1"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "enable_lookbook_width",
+                    "label": "t:sections.collection_lookbook.settings.label_13",
+                    "default": false
+                },
+                {
+                    "type": "range",
+                    "id": "lookbook_width",
+                    "label": "t:sections.collection_lookbook.settings.label_14",
+                    "min": 200,
+                    "max": 500,
+                    "step": 5,
+                    "default": 250,
+                    "unit": "t:sections.layout.fontsize.fontsize_title.unit"
+                },
+                {
+                    "type": "range",
+                    "id": "dot_desktop_size",
+                    "label": "t:sections.collection_lookbook.settings.label_1",
+                    "min": 10,
+                    "max": 50,
+                    "step": 1,
+                    "default": 24,
+                    "unit": "t:sections.layout.fontsize.fontsize_title.unit"
+                },
+                {
+                    "type": "range",
+                    "id": "dot_mobile_size",
+                    "label": "t:sections.collection_lookbook.settings.label_2",
+                    "min": 10,
+                    "max": 50,
+                    "step": 1,
+                    "default": 16,
+                    "unit": "t:sections.layout.fontsize.fontsize_title.unit"
+                },
+                {
+                    "type": "color",
+                    "id": "dot_shadow_color",
+                    "label": "t:sections.collection_lookbook.settings.label_3",
+                    "default": "rgba(255, 255, 255, 0.5)"
+                },
+                {
+                    "type": "color",
+                    "id": "dot_outer_color",
+                    "label": "t:sections.collection_lookbook.settings.label_4",
+                    "default": "#fff"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "show_dot_number",
+                    "label": "t:sections.collection_lookbook.settings.label_5",
+                    "default": false
+                },
+                {
+                    "type": "checkbox",
+                    "id": "show_dot_number_mobile",
+                    "label": "t:sections.collection_lookbook.settings.label_6",
+                    "default": false
+                },
+                {
+                    "type": "checkbox",
+                    "id": "show_plus_icon",
+                    "label": "Show Plus Icon",
+                    "info": "Not compatible with dot number on both desktop and mobile",
+                    "default": false
+                },
+                {
+                    "type": "color",
+                    "id": "dot_inner_color",
+                    "label": "t:sections.collection_lookbook.settings.label_7",
+                    "default": "#000"
+                },
+                {
+                    "type": "range",
+                    "id": "number_desktop_size",
+                    "label": "t:sections.collection_lookbook.settings.label_8",
+                    "min": 10,
+                    "max": 50,
+                    "step": 1,
+                    "default": 24,
+                    "unit": "t:sections.layout.fontsize.fontsize_title.unit"
+                },
+                {
+                    "type": "range",
+                    "id": "number_mobile_size",
+                    "label": "t:sections.collection_lookbook.settings.label_9",
+                    "min": 10,
+                    "max": 50,
+                    "step": 1,
+                    "default": 16,
+                    "unit": "t:sections.layout.fontsize.fontsize_title.unit"
+                },
+                {
+                    "type": "select",
+                    "id": "lookbook_truncate",
+                    "label": "t:sections.collection_lookbook.settings.label_16",
+                    "default": "1",
+                    "options": [
+                        {
+                            "value": "1",
+                            "label": "1"
+                        },
+                        {
+                            "value": "2",
+                            "label": "2"
+                        }
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.main_lookbook_page.settings.header__5"
+                },
+                {
                     "type": "checkbox",
                     "id": "show_image_1",
                     "label": "t:sections.main-sidebar.blocks.image_gallery.settings.general.show_image_1",
@@ -2070,42 +1907,102 @@
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product1_1",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_1_1",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position1_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "24",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_1_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position1_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "69",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "vertical_pos_1_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },
+                {
+                    "type": "select",
+                    "id": "lookbook_pos_1_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product1_2",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_1_2",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position1_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "65",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_1_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },  
+                {
+                    "type": "range",
+                    "id": "vertical_pos_1_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position1_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "27",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
-                },
+                    "type": "select",
+                    "id": "lookbook_pos_1_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
+                },      
                 {
                     "type": "checkbox",
                     "id": "show_image_2",
@@ -2124,42 +2021,102 @@
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product2_1",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_2_1",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position2_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "32",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_2_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position2_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "19",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "vertical_pos_2_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },
+                {
+                    "type": "select",
+                    "id": "lookbook_pos_2_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product2_2",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_2_2",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position2_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "56",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_2_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },  
+                {
+                    "type": "range",
+                    "id": "vertical_pos_2_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position2_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "60",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
-                },
+                    "type": "select",
+                    "id": "lookbook_pos_2_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
+                },  
                 {
                     "type": "checkbox",
                     "id": "show_image_3",
@@ -2178,42 +2135,102 @@
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product3_1",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_3_1",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position3_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "27",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_3_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position3_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "53",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "vertical_pos_3_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },
+                {
+                    "type": "select",
+                    "id": "lookbook_pos_3_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product3_2",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_3_2",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position3_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "67",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_3_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },  
+                {
+                    "type": "range",
+                    "id": "vertical_pos_3_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position3_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "53",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
-                },
+                    "type": "select",
+                    "id": "lookbook_pos_3_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
+                },  
                 {
                     "type": "checkbox",
                     "id": "show_image_4",
@@ -2232,42 +2249,102 @@
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product4_1",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_4_1",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position4_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "24",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_4_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position4_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "69",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "vertical_pos_4_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },
+                {
+                    "type": "select",
+                    "id": "lookbook_pos_4_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product4_2",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_4_2",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position4_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "65",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_4_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },  
+                {
+                    "type": "range",
+                    "id": "vertical_pos_4_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position4_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "27",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
-                },
+                    "type": "select",
+                    "id": "lookbook_pos_4_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
+                },  
                 {
                     "type": "checkbox",
                     "id": "show_image_5",
@@ -2286,42 +2363,102 @@
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product5_1",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_5_1",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position5_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "32",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_5_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position5_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "19",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "vertical_pos_5_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },
+                {
+                    "type": "select",
+                    "id": "lookbook_pos_5_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product5_2",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_5_2",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position5_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "56",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_5_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },  
+                {
+                    "type": "range",
+                    "id": "vertical_pos_5_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position5_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "60",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
-                },
+                    "type": "select",
+                    "id": "lookbook_pos_5_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
+                },  
                 {
                     "type": "checkbox",
                     "id": "show_image_6",
@@ -2340,42 +2477,102 @@
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product6_1",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_6_1",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position6_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "27",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_6_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position6_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "53",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "vertical_pos_6_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },
+                {
+                    "type": "select",
+                    "id": "lookbook_pos_6_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product6_2",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_6_2",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position6_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "67",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_6_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },  
+                {
+                    "type": "range",
+                    "id": "vertical_pos_6_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position6_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "53",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
-                },
+                    "type": "select",
+                    "id": "lookbook_pos_6_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
+                },  
                 {
                     "type": "checkbox",
                     "id": "show_image_7",
@@ -2394,42 +2591,102 @@
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product7_1",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_7_1",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position7_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "24",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_7_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position7_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "69",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "vertical_pos_7_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },
+                {
+                    "type": "select",
+                    "id": "lookbook_pos_7_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product7_2",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_7_2",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position7_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "65",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_7_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },  
+                {
+                    "type": "range",
+                    "id": "vertical_pos_7_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position7_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "27",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
-                },
+                    "type": "select",
+                    "id": "lookbook_pos_7_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
+                },  
                 {
                     "type": "checkbox",
                     "id": "show_image_8",
@@ -2448,59 +2705,101 @@
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product8_1",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_8_1",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position8_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "32",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_8_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position8_1",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "19",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "vertical_pos_8_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },
+                {
+                    "type": "select",
+                    "id": "lookbook_pos_8_1",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
                 },
                 {
                     "type" : "product",
-                    "id" : "lb_product8_2",
-                    "label" : "t:sections.main-sidebar.blocks.image_gallery.settings.general.lb_product"
+                    "id" : "lb_product_8_2",
+                    "label" : "t:sections.slide-show.blocks.image.slider_look.lb_product"
                 },
                 {
-                    "type" : "text",
-                    "id" : "top_position8_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.top_position",
-                    "default" : "56",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                    "type": "range",
+                    "id": "horizontal_pos_8_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_2",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
+                },  
+                {
+                    "type": "range",
+                    "id": "vertical_pos_8_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_3",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "unit": "t:settings_schema.typography.settings.typography.unit_2",
+                    "default": 0
                 },
                 {
-                    "type" : "text",
-                    "id" : "left_position8_2",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.left_position",
-                    "default" : "60",
-                    "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
-                },
-                {
-                    "type" : "color",
-                    "id" : "dots_color",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.dots_color",
-                    "default" : "#fff"
-                },
-                {
-                    "type" : "color",
-                    "id" : "dots_bg_color",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.dots_bg_color",
-                    "default" : "#323232"
-                },
-                {
-                    "type" : "color",
-                    "id" : "dots_shadow_color",
-                    "label" : "t:sections.slide-show.blocks.image.slider_look.dots_shadow_color",
-                    "default" : "#323232"
+                    "type": "select",
+                    "id": "lookbook_pos_8_2",
+                    "label": "t:sections.collection_lookbook.blocks.lookbook.settings.label_4",
+                    "default": "right",
+                    "options": [
+                        {   
+                            "value": "right",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_1"
+                        },
+                        {
+                            "value": "left",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_2"
+                        },
+                        {
+                            "value": "top",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_3"
+                        },
+                        {
+                            "value": "bottom",
+                            "label": "t:sections.collection_lookbook.blocks.lookbook.settings.option_4"
+                        }
+                    ]
                 }
             ]
         },

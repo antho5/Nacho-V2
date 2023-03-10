@@ -98,9 +98,9 @@
 
             {% if count > 4 %}
                 <li class="item-swatch-more item">
-                    <a href="javascript:void(0)" class="number-showmore" title="More Color">
+                    <button type="button" class="number-showmore" title="More Color">
                         <span>+</span> <span class="text-number">{{ count | minus : 4 }}</span>
-                    </a>
+                    </button>
                 </li>
             {% endif %}
 

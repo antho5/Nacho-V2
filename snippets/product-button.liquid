@@ -157,9 +157,9 @@
                                             {{ settings.global_checkbox_text }}
                                         </label>
                                         {%- if settings.global_checkbox_link_text != blank -%}
-                                            <a href="javascript:void(0)" data-term-condition>
+                                            <button type="button" data-term-condition>
                                                 {{ settings.global_checkbox_link_text | escape }}
-                                            </a>
+                                            </button>
                                         {%- endif -%}
                                     </div>
                                 {%- endif -%}

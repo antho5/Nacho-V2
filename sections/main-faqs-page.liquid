@@ -174,7 +174,7 @@
         {% if contact_text != blank %}
             <div class="contact-support-button-wrapper">
                 <span class="contact-support-text">{{ contact_content_text }}</span>
-                <a href="{{ contact_link }}" class="contact-support-btn" style="--button-color-style: {{ contact_color }};
+                <a {% if contact_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ contact_link }}"{% endif %} class="contact-support-btn" style="--button-color-style: {{ contact_color }};
                                                                                 --button-border-color-style: {{ contact_color_border }};
                                                                                 --button-bg-color-style: {% if contact_color_bg_gradient != blank %}{{ contact_color_bg_gradient }}{% else %}{{ contact_color_bg }}{% endif %};
                                                                                 --button-color-hover-style: {{ contact_color_hover }};

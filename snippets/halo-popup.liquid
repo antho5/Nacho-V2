@@ -38,7 +38,7 @@
 	{% render 'halo-newsletter-popup' %}
 {%- endif -%}
 
-{%- if settings.show_recently_viewed_popup -%}
+{%- if settings.show_recently_viewed_popup or settings.show_recently_viewed_share or settings.show_recently_viewed_top -%}
 	{% render 'halo-recently-viewed-popup' %}
 {%- endif -%}
 
@@ -75,5 +75,9 @@
 {% elsif  settings.quick_shop_type == '3' %}
     {% render 'halo-quickshop-popup' %}
 {% endif %}
+
+{% if settings.enable_sticky_notification or settings.enable_sticky_notification_mb %}
+    {% render 'sticky-notification' %}
+{% endif %} 
 
 {% render 'halo-popup-warning' %}

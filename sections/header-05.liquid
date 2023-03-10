@@ -95,10 +95,9 @@
                                 {%- endif -%}
                                 <details class="search_details">
                                     <summary class="header__search-full" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
-                                        <a href="javascript:void(0)" class="header-search-close" alt="{{ 'general.common.close' | t }}">
+                                        <button type="button" class="header-search-close" aria-label="{{ 'general.common.close' | t }}">
                                             {% render 'icon-close' %}
-                                            {{ 'general.common.close' | t }}
-                                        </a>
+                                        </button>
                                         <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
                                             <div class="field">
                                                 <input 
@@ -155,8 +154,13 @@
                         {% if section.settings.show_cart or section.settings.show_wishlist or section.settings.show_customer %}
                         <div class="header__iconItem header__group">
                             {%- if shop.customer_accounts_enabled and section.settings.show_customer -%}
+                                {% if routes.account_login_url contains '/account/login' %}
+                                    {% assign is_contained = true %}
+                                {% else %}
+                                    {% assign is_contained = false %}
+                                {% endif %}
                                 <div class="header__icon customer-links">
-                                    <a class="header__icon header__icon--account link link--text" data-open-auth-sidebar>
+                                    <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account link link--text"{% if is_contained %} data-open-auth-sidebar{% endif %}>
                                         {% render 'icon-account-2' %}
                                         <span class="visually-hidden">
                                             {%- liquid
@@ -176,8 +180,8 @@
                                 </a>
                             {%- endif -%}
                             {%- if section.settings.show_cart -%}
-                            <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}"{% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
-                                {% render 'icon-cart-3' %}
+                            <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                                {% render 'icon-cart-03' %}
                                 <div class="cart-count-bubble">
                                     {%- if cart.item_count < 100 -%}
                                         <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
@@ -238,8 +242,8 @@
                     </details-modal>
                 {% endif %}
                 {% if section.settings.show_cart %}
-                    <a {% if settings.show_quick_cart %}data-cart-sidebar href="javascript:void(0)"{% else %}href="{{ routes.cart_url }}" {% endif %} class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
-                        {% render 'icon-cart-3' %}
+                    <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                        {% render 'icon-cart-03' %}
                         <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
                         <div class="cart-count-bubble">
                             {%- if cart.item_count < 100 -%} <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
@@ -992,7 +996,7 @@
         {
             "type": "color",
             "id": "bg_mega_menu",
-            "label": "t:sections.header.settings.header_bottom.bg_top",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color",
             "default": "#fff"
         },
         {
@@ -1413,9 +1417,15 @@
                     "default": 5
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",
@@ -1557,9 +1567,15 @@
                     "default": 3
                 },
                 {
-                    "type": "richtext",
+                    "type": "link_list",
                     "id": "menu_text_left",
                     "label": "t:sections.header.settings.mega_menu.list_menu"
+                },
+                {
+                    "type": "textarea",
+                    "id": "menu_text_left_sale",
+                    "label": "t:sections.header.settings.mega_menu.list_menu_sale",
+                    "info": "t:sections.header.settings.mega_menu.list_menu_info"
                 },
                 {
                     "type": "header",

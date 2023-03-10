@@ -16,7 +16,6 @@
     width: 100%;
 } */
 
-
 .quickSearchResultsBlock .productEmpty{
     font-size: var(--font-body-size);
     font-weight: var(--font-weight-normal);
@@ -255,6 +254,12 @@ details[open] .search-modal .quickSearchResultsWrap {
     animation: appear-down var(--duration-default) ease;
 }
 
+.header-search-popup-close {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
 /* Remove extra spacing for search inputs in Safari */
 input::-webkit-search-decoration {
     -webkit-appearance: none;
@@ -358,6 +363,12 @@ input::-webkit-search-decoration {
         margin-bottom: 0;
     }
 
+    .open_search_desktop [data-search-close-popup] {
+        background: none;
+        border: none;
+        padding: 0;
+    }
+
     .open_search_desktop [data-search-close-popup] svg {
         width: 20px;
         height: 20px;
@@ -401,6 +412,26 @@ input::-webkit-search-decoration {
 /* END: Search popup */
 
 @media (max-width: 1024px){
+    .quickSearchResultsWrap[data-quick-trending-products] {
+        display: block !important;
+    }
+
+    predictive-search[open] .quickSearchResultsWrap[data-quick-trending-products] {
+        display: none !important;
+    }
+
+    #predictive-search-results-list .products-grid {
+        font-size: 0;
+        display: block;
+        overflow: auto;
+        white-space: nowrap;
+    }
+    
+    #predictive-search-results-list .products-grid .product {
+        width: 250px;
+        margin: 0;
+    }
+
     .quickSearchResultsWrap{
         padding: 15px 0 0 0;
         box-shadow: none;

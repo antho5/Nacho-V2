@@ -70,7 +70,7 @@
                     {%- if show_item_1 -%}
             		<div class="halo-item{% if description_1 != blank %} has-des{% endif %}">
             			{%- if button_1 == blank and link_1 != blank -%}
-            			<a href="{{ link_1 }}" title="{{text_1}}">
+            			<a {% if link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_1 }}"{% endif %} title="{{text_1}}">
             			{%- endif -%}
             				{% if icon_type == 'image' %}
                                 {% if image_1 != blank %}
@@ -99,7 +99,7 @@
 	                                </p>
                                 {%- endif -%}
                                 {%- if button_1 != blank -%}
-                                    <a class="more_btn" href="{{ link_1 }}" title="{{button_1}}">
+                                    <a class="more_btn"{% if link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_1 }}"{% endif %} title="{{button_1}}">
                                         {{button_1}}
                                     </a>    
                                 {%- endif -%}
@@ -115,7 +115,7 @@
                     {%- if show_item_2 -%}
                     <div class="halo-item{% if description_2 != blank %} has-des{% endif %}">
                         {%- if button_2 == blank and link_2 != blank -%}
-                        <a href="{{ link_2 }}" title="{{text_2}}">
+                        <a {% if link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_2 }}"{% endif %} title="{{text_2}}">
                         {%- endif -%}
                             {% if icon_type == 'image' %}
                                 {% if image_2 != blank %}
@@ -144,7 +144,7 @@
                                     </p>
                                 {%- endif -%}
                                 {%- if button_2 != blank -%}
-                                    <a class="more_btn" href="{{ link_2 }}" title="{{button_2}}">
+                                    <a class="more_btn"{% if link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_2 }}"{% endif %} title="{{button_2}}">
                                         {{button_2}}
                                     </a>    
                                 {%- endif -%}
@@ -160,7 +160,7 @@
                     {%- if show_item_3 -%}
                         <div class="halo-item{% if description_3 != blank %} has-des{% endif %}">
                             {%- if button_3 == blank and link_3 != blank -%}
-                            <a href="{{ link_3 }}" title="{{ text_3 }}">
+                            <a {% if link_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_3 }}"{% endif %} title="{{ text_3 }}">
                             {%- endif -%}
                                 {% if icon_type == 'image' %}
                                     {% if image_3 != blank %}
@@ -189,7 +189,7 @@
                                         </p>
                                     {%- endif -%}
                                     {%- if button_3 != blank -%}
-                                        <a class="more_btn" href="{{ link_3 }}" title="{{button_3}}">
+                                        <a class="more_btn"{% if link_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ link_3 }}"{% endif %} title="{{button_3}}">
                                             {{button_3}}
                                         </a>    
                                     {%- endif -%}

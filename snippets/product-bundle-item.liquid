@@ -202,10 +202,10 @@
             <div class="bundle-product-options halo-popup customPopup-small halo-popup-LeftRight isChecked" data-product-option-id="{{ product.id }}">
                 <div class="halo-popup-wrapper">
                     <div class="halo-popup-header customPopup-header">
-                        <a href="javascript:void(0)" class="bundle-option-close halo-popup-close clearfix" role="button">
+                        <button type="button" class="bundle-option-close halo-popup-close clearfix" aria-label="{{ 'general.common.close' | t }}">
                             <span class="visually-hidden">{{ 'general.common.close' | t }}</span>
                             {% render 'icon-close' %}
-                        </a>
+                        </button>
                         <h5 class="bundle-option-title halo-popup-title customPopup-title text-center">
                             {{ 'products.product.select_options' | t }}
                         </h5>

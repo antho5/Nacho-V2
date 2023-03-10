@@ -8,32 +8,31 @@
 		assign gdpr_cookie_consent_color = settings.gdpr_cookie_consent_color
 		assign gdpr_cookie_consent_color_privacy = settings.gdpr_cookie_consent_color_privacy
 		assign gdpr_cookie_consent_bg = settings.gdpr_cookie_consent_bg
+		assign gdpr_cookie_consent_bg_gradient = settings.gdpr_cookie_consent_bg_gradient
 	-%}
 
-	{% if gdpr_cookie_consent_bg != 'rgba(0,0,0,0)' and gdpr_cookie_consent_bg != blank %}
-		.halo-cookie,
-		.halo-cookie.custom-width{
-			background: {{ gdpr_cookie_consent_bg | color_modify: 'alpha', 0.9 }};
-		}
-
-		@media (min-width: 551px){
-			.halo-cookie{
+	{%- if gdpr_cookie_consent_bg_gradient != blank -%}
+        .halo-cookie {
+            background: {{ gdpr_cookie_consent_bg_gradient }};
+        }
+	{%- else -%}
+		{%- if gdpr_cookie_consent_bg != 'rgba(0,0,0,0)' and gdpr_cookie_consent_bg != blank -%}
+			.halo-cookie {
+				background: {{ gdpr_cookie_consent_bg | color_modify: 'alpha', 0.9 }};
+			}
+		{%- else -%}
+			.halo-cookie {
 				background: {{ gdpr_cookie_consent_bg }};
 			}
-		}
-    {% else %}
-        .halo-cookie,
-		.halo-cookie.custom-width{
-			background: {{ gdpr_cookie_consent_bg }};
-		}
-	{% endif %}
+		{%- endif -%}
+	{%- endif -%}
   
     .halo-cookie__title,
 	.halo-cookie__text,.halo-cookie__action .link {
 		color: {{ gdpr_cookie_consent_color }};
 	}
   
-    .halo-cookie__action .link.privacy_policy_link {
+    .halo-cookie__action .privacy_policy_link {
 		color: {{ gdpr_cookie_consent_color_privacy }};
 	}
   
@@ -63,15 +62,15 @@
                 {%- if btn_1_text != blank or btn_2_text != blank -%}
                     <div class="halo-cookie__action clearfix">
                         {%- if btn_1_text != blank -%}
-                            <a target="_blank" href="{{ btn_1_link }}" class="link link-underline privacy_policy_link">
+                            <a target="_blank"{% if btn_1_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ btn_1_link }}"{% endif %} class="link link-underline privacy_policy_link">
                                 <span class="text">{{ btn_1_text }}</span>
                             </a>
                         {%- endif -%}
                         {%- if btn_2_text != blank -%}
-                            <a href="#" class="link link-underline accept_cookies_link" data-accept-cookie>
+							<button type="button" title="{{ btn_2_text }}" class="link link-underline accept_cookies_link" data-accept-cookie>
                                 <span class="text">{{ btn_2_text }}</span>
                                 <span class="icon">✔</span>
-                            </a>
+                            </button>
                         {%- endif -%}
                     </div>
                 {%- endif -%}

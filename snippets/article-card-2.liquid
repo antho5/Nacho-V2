@@ -33,14 +33,14 @@
         </div>
     {%- elsif show_placeholder -%}
         <div class="blog-image img-box">
-            <a href="{{ link }}" class="image">
+            <a {% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} class="image">
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
             </a>
         </div>
     {%- endif -%}
     <div class="blog-content text-{{ blog_text_align }}">
         <h3 class="blog-title" id="Article-{{ article.id }}">
-            <a href="{{ link }}">
+            <a {% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %}>
                 {{ title | escape }}
             </a>
         </h3>
@@ -63,7 +63,7 @@
             </div>
         {%- endif -%}
         {%- if show_read_more -%}
-            <a href="{{ link }}" class="button button-2 blog-btn link">
+            <a {% if link == blank %} role="link" aria-disabled="true"{% else %} href="{{ link }}"{% endif %} class="button button-2 blog-btn link">
                 <span class="text">
                     {{ 'blogs.article.read_more' | t }}
                 </span>

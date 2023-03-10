@@ -13,6 +13,11 @@
     assign padding_full_width = section.settings.padding_full_width | append: 'px' 
 
     assign press_image = section.settings.press_image
+    
+    assign press_image_width_ratio = section.settings.press_image_width_ratio
+    assign press_image_width = section.settings.press_image_width | append: 'px'
+    assign align_items = section.settings.align_items
+
     assign sub_title = section.settings.sub_title
     assign font_size_sub_title = section.settings.font_size_sub_title | append: 'px' 
     assign font_size_sub_title_mb = section.settings.font_size_sub_title_mb | append: 'px' 
@@ -58,14 +63,18 @@
 %}
 
 <div class="custom-image-banner-block section-block-{{section.id}}" id="custom-image-banner-{{section.id}}" data-bg="{{ bg_color_button }}">
-  <div class="{% if container == 'fullwidth' %}container-full{% elsif container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% else %}container{% endif %}">
-    <div class="press-banner-block-wrapper" style="--item-gap: {{ item_spacing }}">
-        <div class="section-block-left">
+  <div class="{% if container == 'fullwidth' %}container-full{% elsif container == '1170' %}container-1170{% elsif container == '1320' %}container-1320{% elsif container == '1770' %}container-1770{% else %}container{% endif %}">
+    <div class="press-banner-block-wrapper" style="--item-gap: {{ item_spacing }}; --align-items: {{ align_items }};">
+        <div class="section-block-left"
+            style="
+                --left-width: {{ press_image_width_ratio | append: '%' }};
+            "
+        >
             <div class="section-block-banner-image">
                 <div class="img-box">
                     {% if press_image != blank %}
-                        <a href="javascript:void(0)" class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: press_image.aspect_ratio | times: 100 }}%;">
-                            <img {% render 'lazyload',preview_img: press_image %} />
+                        <a {% if button_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ button_link }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: press_image.aspect_ratio | times: 100 }}%; --image-width: {{ press_image_width }}">
+                            <img {% render 'lazyload',preview_img: press_image %} />    
                             {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                         </a>
                     {% else %}
@@ -76,7 +85,11 @@
                 </div>
             </div>
         </div>
-        <div class="section-block-right">
+        <div class="section-block-right"    
+            style="
+                --right-width: {{ 100 | minus: press_image_width_ratio | append: '%' }};
+            "
+        >
             {% if sub_title != blank or title != blank or des != blank or button_text != blank %}
                 <div class="halo-block-content text-{{ title_align }}" style="--max-width: {{ content_max_width }}">   
                     {% if sub_title != blank and sub_title_position == 'sub_title_above' %}
@@ -139,7 +152,7 @@
                     {% endif %}
                     {% if  button_text != blank %}
                         <div class="press-actions">
-                            <a class="button" href="{% if button_link != blank %}{{ button_link }}{% else %}javascript:void(0){% endif %}"
+                            <a class="button" {% if button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ button_link }}"{% endif %}
                                 style="
                                     --button-text-transform: {{ btn_text_transform }};
                                     --button-fs: {{ fontsize_btn }};
@@ -224,6 +237,10 @@
             {
                 "value": "1170",
                 "label": "t:sections.layout.container.option4"
+            },
+            {
+                "value": "1320",
+                "label": "t:sections.layout.container.option7"
             },
             {
                 "value": "1770",
@@ -316,13 +333,53 @@
     },
     {
         "type": "header",
-        "content": "t:sections.custom_press_banner.settings.label_1"
+        "content": "t:settings_schema.general.settings.gdpr_cookie_consent.label__4"
+    },
+    {
+        "type": "select",
+        "label": "t:sections.custom_press_banner.settings.align_items",
+        "id": "align_items",
+        "default": "start",
+        "options": [    
+            {
+                "label": "t:sections.general.settings.aligmnent.options__5",
+                "value": "start"
+            },
+            {
+                "label": "t:sections.general.settings.aligmnent.options__2",
+                "value": "center"
+            },  
+            {
+                "label": "t:sections.general.settings.aligmnent.options__6",
+                "value": "end"
+            }
+        ]
     },
     {
         "type": "image_picker",
         "id": "press_image",
         "label": "t:sections.custom_press_banner.settings.label_1"
     },
+    {
+        "type": "range",
+        "id": "press_image_width_ratio",
+        "label": "t:sections.custom_press_banner.settings.label_4",
+        "min": 1,
+        "max": 99,
+        "step": 1,
+        "unit": "%",
+        "default": 51
+    },
+    {
+        "type": "range",
+        "id": "press_image_width",
+        "label": "t:sections.custom_press_banner.settings.label_5",
+        "min": 0,
+        "max": 1000,
+        "step": 10,
+        "unit": "px",
+        "default": 320
+    },  
     {
         "type": "header",
         "content": "t:sections.image-banner.blocks.image.settings.header__2.content"
