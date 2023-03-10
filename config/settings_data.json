@@ -23,7 +23,7 @@
     "product_name_text_transform": "capitalize",
     "product_name_font_weight": "400",
     "product_title_line_text": "2",
-    "product_vendor_font_size": "14px",
+    "product_vendor_font_size": "14",
     "product_vendor_text_transform": "uppercase",
     "enable_hover_image": true,
     "use_color_swatch": true,
