@@ -154,7 +154,7 @@
     "settings": [
         {
             "type": "header",
-            "content": "t:sections.layout.content"
+            "content": "t:settings_schema.general.name"
         },
         { 
             "type": "select",
@@ -435,6 +435,9 @@
     "presets": [
     {
         "name": "t:sections.blog_posts_list.name"
-    }]
+    }],
+    "disabled_on": {
+        "groups": ["header"]
+    }
 }
 {% endschema %}

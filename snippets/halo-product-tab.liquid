@@ -129,13 +129,13 @@
 		                    {% endif %}
 		                </a>
 		            </div>
-		            <div class="toggle-content{% if style_mobile %} {{ style_mobile }}{% endif %}{% if block.settings.enable_btn_show_more %} toggle-content--height{% endif %}" id="tab-{{ title | escape | handleize }}-mobile"{% if block.settings.enable_btn_show_more %} style="--maximum-des-to-show: {{ block.settings.maximum_des_to_show | append: 'px'}}"{% endif %}{% if block.type == 'description' %} data-product-description-{{ product.id }}{% endif %}>
+		            <div class="toggle-content{% if style_mobile %} {{ style_mobile }}{% endif %}{% if block.settings.enable_btn_show_more %} toggle-content--height{% endif %}" id="tab-{{ title | escape | handleize }}-mobile"{% if block.settings.enable_btn_show_more %} style="--maximum-des-to-show: {{ block.settings.maximum_des_to_show | append: 'px'}}"{% endif %}{% if block.type == 'description' %} product-description-tab data-product-description-{{ product.id }}{% endif %}>
 						{%- if tab_layout == 'vertical_sidebar' or style_mobile == 'sidebar-mobile' or style_mobile == 'popup-mobile' -%}
 							<div class="tab-popup-header">
 								<h5>
 									<span class="text">{{ title | escape }}</span>
 								</h5>
-								<a class="pdViewTab-close pdViewTab-close-mobile" href="javascript:void(0)">x</a>
+								<a class="pdViewTab-close pdViewTab-close-mobile" role="link" aria-disabled="true">x</a>
 							</div>
 							<div class="tab-popup-content">
 						{%- endif -%}

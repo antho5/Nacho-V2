@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+.policies-block banner-slider-component {
+    position: relative;
+}
+
 .policies-block .halo-item a {
     display: flex;
     align-items: center;

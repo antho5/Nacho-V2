@@ -431,8 +431,8 @@
                                         {%- endif -%}
                                     </div>
                                     {%- if heading != blank or text != blank or btn_text != blank or btn_text_2 != blank -%}
-                                        <div class="content-box content-box--absolute content-box--{{ position }} text-{{ align }} align-items--{{align_items}}{% if block.settings.enable_custom_position %} custom_position{% endif %}"
-                                        {% if block.settings.enable_custom_position %}style="
+                                        <div class="content-box content-box--absolute content-box--{{ position }} text-{{ align }} align-items--{{align_items}}{% if block.settings.position == 'custom' %} custom_position{% elsif block.settings.position == 'half' %} half_position{% endif %}"
+                                        {% if block.settings.position == 'custom' %}style="
                                             --horizontal_position: {{ block.settings.custom_horizontal }}%;
                                             --vertical_position: {{ block.settings.custom_vertical }}%;
                                             --minus_horizontal_position: -{{ block.settings.custom_horizontal }}%;
@@ -1130,6 +1130,16 @@
     
                             #halo-image-banner-{{ section.id }} .item-{{ block.id }} .content-box--absolute {
                                 width: {{ content_width | append: 'px' }};
+                                {% if block.settings.position == 'half' %}
+                                    position: relative;
+                                    top: 0 !important;
+                                    left: 0 !important;
+                                    right: 0 !important;
+                                    bottom: 0 !important;
+                                    z-index: 2;
+                                    transform: translate(0) !important;
+                                    padding: 25px 25px 30px;
+                                {% endif %}
                             }
     
                             #halo-image-banner-{{ section.id }} .item-{{ block.id }} .flex-box__banner .content-box {
@@ -1138,6 +1148,9 @@
                                     display: flex;
                                     align-items: center;
                                     justify-content: center;
+                                {% endif %}
+                                {% if block.type == 'specialImg' %}
+                                    width: 100%;
                                 {% endif %}
                             }
 
@@ -1212,6 +1225,23 @@
     
                                 #halo-image-banner-{{ section.id }} .item-{{ block.id }} .banner-button:hover:after{
                                     border: 1px solid {{ button_border_hover }};
+                                }
+                            {%  elsif block.settings.button_style == 'style2'  %}
+                                #halo-image-banner-{{ section.id }} .item-{{ block.id }} .banner-button{
+                                    padding-left: 0;
+                                    padding-right: 0;
+                                }
+
+                                #halo-image-banner-{{ section.id }} .item-{{ block.id }} .text-left .banner-button {
+                                    text-align: left;
+                                }
+
+                                #halo-image-banner-{{ section.id }} .item-{{ block.id }} .text-center .banner-button {
+                                    text-align: center;
+                                }
+
+                                #halo-image-banner-{{ section.id }} .item-{{ block.id }} .text-right .banner-button {
+                                    text-align: right;
                                 }
                             {% endif %}
     
@@ -1425,6 +1455,24 @@
                                 #halo-image-banner-{{ section.id }} .item-{{ block.id }}.style-4 .banner-action .banner-button {
                                     min-width: 140px;
                                 }
+
+                                {% if block.settings.position == 'half' %}
+                                    #halo-image-banner-{{ section.id }} .item-{{ block.id }} .banner-sub-title{
+                                        color: {{ color_sub_title_mb }};
+                                    }
+        
+                                    #halo-image-banner-{{ section.id }} .item-{{ block.id }} .banner-sub-title.has-border span {
+                                        border-bottom: 1px solid {{ color_sub_title_mb }};
+                                    }
+        
+                                    #halo-image-banner-{{ section.id }} .item-{{ block.id }} .banner-heading{
+                                        color: {{ heading_color_mb }};
+                                    }
+        
+                                    #halo-image-banner-{{ section.id }} .item-{{ block.id }} .banner-text{
+                                        color: {{ des_color_mb }};
+                                    }
+                                {% endif %}
                             }
 
                             @media (max-width: 768px){
@@ -1662,6 +1710,17 @@
                                     width: calc(100% - {{ width_banner }} - 15px);
                                     border:  1px solid {{ border_color }};
                                 }
+                                
+                                {% if block.settings.position == 'half' %}
+                                    #halo-image-banner-{{ section.id }} .item-{{ block.id }} .content-box--absolute {
+                                        margin-left: 135px;
+                                        margin-top: -210px;
+                                    }
+
+                                    #halo-image-banner-{{ section.id }} .item-{{ block.id }} .banner-heading {
+                                        margin-bottom: 115px;
+                                    }
+                                {% endif %}
                             }
     
                             @media (min-width: 767px) and (max-width: 930px){
@@ -1702,7 +1761,7 @@
         "settings": [
             {
                 "type": "header",
-                "content": "t:sections.image-banner.settings.header__1.content"
+                "content": "t:settings_schema.general.name"
             },
             {
                 "type": "select",
@@ -2402,25 +2461,6 @@
                 },
                 {
                     "type": "select",
-                    "id": "position",
-                    "label": "t:sections.image-banner.blocks.image.settings.content.label__6",
-                    "default": "left",
-                    "options": [
-                    {
-                        "value": "left",
-                        "label": "t:sections.image-banner.blocks.image.settings.content.options__6"
-                    },
-                    {
-                        "value": "center",
-                        "label": "t:sections.image-banner.blocks.image.settings.content.options__7"
-                    },
-                    {
-                        "value": "right",
-                        "label": "t:sections.image-banner.blocks.image.settings.content.options__8"
-                    }]
-                },
-                {
-                    "type": "select",
                     "id": "align",
                     "label": "t:sections.image-banner.blocks.image.settings.content.label__7",
                     "default": "center",
@@ -2458,10 +2498,35 @@
                     }]
                 },
                 {
-                    "type": "checkbox",
-                    "id": "enable_custom_position",
-                    "label" : "t:sections.slide-show.blocks.image.enable_custom_position",
-                    "info": "t:sections.slide-show.blocks.image.info_enable_custom_position"
+                    "type": "select",
+                    "id": "position",
+                    "label": "t:sections.image-banner.blocks.image.settings.content.label__6",
+                    "default": "left",
+                    "options": [
+                    {
+                        "value": "left",
+                        "label": "t:sections.image-banner.blocks.image.settings.content.options__6"
+                    },
+                    {
+                        "value": "center",
+                        "label": "t:sections.image-banner.blocks.image.settings.content.options__7"
+                    },
+                    {
+                        "value": "right",
+                        "label": "t:sections.image-banner.blocks.image.settings.content.options__8"
+                    },
+                    {
+                        "value": "custom",
+                        "label": "t:sections.slide-show.blocks.image.enable_custom_position"
+                    },
+                    {
+                        "value": "half",
+                        "label": "Half above the banner"
+                    }]
+                },
+                {
+                    "type": "paragraph",
+                    "content": "t:sections.slide-show.blocks.image.enable_custom_position"
                 },
                 {
                     "type": "text",

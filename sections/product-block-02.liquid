@@ -278,7 +278,7 @@
                             {%- if product_total > product_limit -%}
                                 <div class="product-infinite-scroll text-center {% if swipe %}hidden-mobile{% endif %}" data-product-infinite>
                                     <button type="button" class="button button--secondary"
-                                        data-collection="{{ collection.handle }}"
+                                        data-collection="{{ collection_02.handle }}"
                                         data-limit="{{ product_limit }}"
                                         data-swipe="{{ swipe }}"
                                         data-page="2"
@@ -515,7 +515,7 @@
     "settings": [
     {
         "type": "header",
-        "content": "t:sections.layout.content"
+        "content": "t:settings_schema.general.name"
     },
     {
         "type": "select",

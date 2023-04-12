@@ -17,7 +17,7 @@ if (typeof complementaryProductsComponent === 'undefined')
                 let text = await res.text();
                     
                 const html = document.createElement('div');
-                text = text.replaceAll('variant-selects', 'div').replaceAll('variant-radios', 'div');
+                text = text.replaceAll('variant-selects', 'div').replaceAll('variant-radios', 'div').replaceAll('product-tab', 'div');
                 html.innerHTML = text;
                 
                 const recommendations = html.querySelector('[data-complementary-product]');
@@ -47,8 +47,6 @@ if (typeof complementaryProductsComponent === 'undefined')
                 $(productCarousel).on('init', () => {
                     this.calculateCard06Padding();
                 });
-
-                console.log(complementaryStyle);
 
                 if(!productCarousel.classList.contains('slick-slider')) {
                     $(productCarousel).slick({

@@ -162,7 +162,9 @@
 
 @media (max-width: 551px) {
   .rich-text__blocks .message {
-      display: block;
+    display: flex;
+    row-gap: 5px;
+    flex-wrap: wrap;
   }
 
   .rich-text__blocks .message .text-message {

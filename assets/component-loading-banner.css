@@ -610,7 +610,7 @@ body:not(.safari).banner-animation-1 .halo-banner-wrapper .content-box {
     overflow-y: hidden;
 }
 
-body:not(.safari).banner-animation-1 #tab-description .banner-item .img-box {
+body:not(.safari).banner-animation-1 [product-description-tab] .banner-item .img-box {
     opacity: 1;
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
@@ -618,7 +618,7 @@ body:not(.safari).banner-animation-1 #tab-description .banner-item .img-box {
     transform: scale(1);
 }
 
-body:not(.safari).banner-animation-1 #tab-description .banner-content * {
+body:not(.safari).banner-animation-1 [product-description-tab] .banner-content * {
     opacity: 1;
     transform: translateY(0);
 }

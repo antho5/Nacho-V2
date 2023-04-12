@@ -309,7 +309,7 @@
 
             calculateNotificationBottomPosition() {
                 const toolbar = document.getElementById('shopify-section-halo-toolbar-mobile');
-                if (!toolbar) return;
+                if (!toolbar || !toolbar.querySelector('.halo-sticky-toolbar-mobile')) return;
 
                 const totalToolbarHeight = toolbar.querySelector('.halo-sticky-toolbar-mobile').getBoundingClientRect().height + 'px';
                 this.style.setProperty('--bottom-position', totalToolbarHeight)
@@ -333,7 +333,6 @@
 
             setCookie(cname, cvalue, exMinutes) {
                 const d = new Date();
-                console.log(exMinutes)
                 d.setTime(d.getTime() + (exMinutes * 60 * 1000));
                 const expires = 'expires=' + d.toUTCString();
                 document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';

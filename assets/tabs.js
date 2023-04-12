@@ -11,39 +11,35 @@ class ProductTabs extends HTMLElement {
         this.isVerticalPopup = this.dataset.vertical === 'sidebar'
         this.isVerticalSidebarMobile = this.dataset.verticalMobile === 'sidebar-mobile'
 
-        for (i = 0; i < this.tab.length; i++) {
+        for (let i = 0; i < this.tab.length; i++) {
             this.tab[i].addEventListener(
                 'click',
                 this.tabActive.bind(this)
             );
         }
             
-        for (i = 0; i < this.link.length; i++) {
+        for (let i = 0; i < this.link.length; i++) {
             this.link[i].addEventListener(
                 'click',
                 this.tabToggle.bind(this)
             );
         }
 
-        for (i = 0; i < this.readMore.length; i++) {
-            this.readMore[i].addEventListener(
-                'click',
-                this.readMoreReadLess.bind(this)
-            );
-        }
+        document.addEventListener('click', e => {
+            if (e.target.matches('[data-show-more-toogle]') || e.target.closest('[data-show-more-toogle]')) {
+                this.readMoreReadLess(e)
+            }
+            else if (e.target.matches('.pdViewTab-close') || e.target.closest('.pdViewTab-close')) {
+                this.productTabClose(e)
 
-        for (i = 0; i < this.tabClose.length; i++) {
-            this.tabClose[i].addEventListener(
-                'click',
-                this.productTabClose.bind(this)
-            );
-        }
+                if (this.isVerticalPopup || this.isVerticalSidebarMobile) {
+                    this.handleVerticalPopupClose(e)
+                }
+            }
+        });
 
         if (this.isVerticalPopup || this.isVerticalSidebarMobile) {
             document.querySelector('.background-overlay').addEventListener('click', this.onBackgroundClick.bind(this));
-            document.querySelectorAll('.pdViewTab-close').forEach(closeIcon => {
-                closeIcon.addEventListener('click', this.handleVerticalPopupClose.bind(this))
-            })
         }
     }
 
@@ -127,7 +123,7 @@ class ProductTabs extends HTMLElement {
         event.preventDefault();
         event.stopPropagation();
 
-        var $this = event.target,
+        var $this = event.target || event.target.closest('[data-show-more-toogle]'),
             id = $this.getAttribute('href').replace('#', ''),
             textShowMore = $this.getAttribute('data-show-more-text'),
             textShowLess = $this.getAttribute('data-show-less-text'),

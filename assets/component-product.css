@@ -1878,6 +1878,10 @@
     display: none;
 }
 
+.shopify-payment-button__button svg {
+    stroke: none;
+}
+
 .productView-groupItem + .productView-groupItem{
     margin-top: 11px;
 }

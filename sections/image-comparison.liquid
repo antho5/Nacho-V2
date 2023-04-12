@@ -357,7 +357,7 @@
     "settings": [
         {
             "type": "header",
-            "content": "t:sections.layout.content"
+            "content": "t:settings_schema.general.name"
         },
         { 
             "type": "select",
@@ -1076,6 +1076,9 @@
     "presets": [    
     {
         "name": "t:sections.image_comparison.name"
-    }]
+    }],
+    "disabled_on": {
+        "groups": ["header"]
+    }
 }
 {% endschema %}

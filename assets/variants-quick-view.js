@@ -45,7 +45,6 @@ class VariantQuickViewSelects extends HTMLElement {
 
         if (variants) {
             if (type == 'button') {
-                // console.log(options[0].querySelector('[data-header-option]'));
                 if (options[0]) {
                     selectedOption1 = Array.from(options[0].querySelectorAll('input')).find((radio) => radio.checked).value;
                     options[0].querySelector('[data-header-option]').textContent = selectedOption1;

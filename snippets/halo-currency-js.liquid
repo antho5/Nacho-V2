@@ -30,14 +30,13 @@
     
     <script>
         var shopCurrency = '{{ shop.currency }}';
-        var currencySwitcher = $('#currencies'),
-            currencyItem = currencySwitcher.find('[data-currency]');
+        var currencyItem = $('.dropdown-item[data-currency]');
             
         currencyItem.on('click', function(e) {
             e.preventDefault();
   
             var $target = $(event.currentTarget),
-                label = $('#currencies').parents('.halo-top-currency').find('[data-currency-label]');
+                label = $('[data-currency-label]');
                 cur = $(this).attr('data-currency');
   
             
@@ -46,7 +45,7 @@
             }
   
             currencyItem.removeClass('active');
-            $(this).addClass('active');
+            $(`[data-currency="${cur}"]`).addClass('active');
 
             if (label.length && label.is(':visible')){
                 var item = $(this).html();
@@ -96,8 +95,8 @@
                 });
 
                 // Select all your currencies buttons.
-                var currencySwitcher = $('#currencies'),
-                    currencyItem = currencySwitcher.find('[data-currency]');
+                var currencySwitcher = $('.currency-menu'),
+                    currencyItem = $('.dropdown-item[data-currency]');
 
                 // When the page loads.
                 if (cookieCurrency == null || cookieCurrency == shopCurrency) {
@@ -135,7 +134,7 @@
                     }
 
                     currencyItem.removeClass('active');
-                    $target.addClass('active');
+                    $(`[data-currency="${cur}"]`).addClass('active');
 
                     if (label.length && label.is(':visible')){
                         var item = $target.html();
@@ -180,8 +179,8 @@
                 });
 
                 // Select all your currencies buttons.
-                var currencySwitcher = $('#currencies'),
-                    currencyItem = currencySwitcher.find('[data-currency]');
+                var currencySwitcher = $('.currency-menu'),
+                    currencyItem = $('.dropdown-item[data-currency]');
 
                 if (cookieCurrency == null) {
                     $.getScript('https://ssl.geoplugin.net/javascript.gp?k=9247556ec91c71e9', function() {
@@ -200,7 +199,7 @@
                             }
 
                             currencyItem.removeClass('active');
-                            $target.addClass('active');
+                            $(`[data-currency="${cur}"]`).addClass('active');
 
                             if (label.length && label.is(':visible')){
                                 var item = $target.html();

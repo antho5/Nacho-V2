@@ -112,8 +112,8 @@ class VariantSelects extends HTMLElement {
     }
 
     scrollToBlock(block) {
-        const headerHeight = document.querySelector('[id^="shopify-section-header"]').getBoundingClientRect().height 
-        const announcementBarHeight = document.getElementById('shopify-section-announcement-bar').getBoundingClientRect().height 
+        const headerHeight = document.querySelectorAll('.section-header-navigation')[0]?.getBoundingClientRect().height 
+        const announcementBarHeight = document.querySelectorAll('.announcement-bar')[0]?.getBoundingClientRect().height 
         const positionTop = block.getBoundingClientRect().top - headerHeight - announcementBarHeight 
 
         window.scrollTo({
@@ -722,7 +722,8 @@ class VariantSelects extends HTMLElement {
                     subTotal = 0,
                     price = this.currentVariant?.price;
 
-                const stickyPrice = $('[data-sticky-add-to-cart] .sticky-price .money');
+                const stickyPrice = $('[data-sticky-add-to-cart] .money-subtotal .money');
+                const stickyComparePrice = $('[data-sticky-add-to-cart] .money-compare-price .money');
 
                 if(window.subtotal.show) {
                     let qty = quantityInput.val();
@@ -777,6 +778,15 @@ class VariantSelects extends HTMLElement {
 
                 if (subTotal != 0 && stickyPrice.length) {
                     stickyPrice.text(subTotal);
+                }
+
+                if (subTotal != 0 && stickyComparePrice.length && window.subtotal.show) {
+                    let comparePrice = $('[data-sticky-add-to-cart] .money-compare-price').data('compare-price'),
+                        qty = quantityInput.val();
+                    comparePrice = qty * comparePrice;
+                    comparePrice = Shopify.formatMoney(comparePrice, window.money_format);
+                    comparePrice = extractContent(comparePrice);
+                    stickyComparePrice.text(comparePrice);
                 }
 
                 if(notifyMe.length > 0){
@@ -968,10 +978,19 @@ class QuantityInput extends HTMLElement {
                 addButton.textContent = text;  
             }
 
-            const stickyPrice = $('[data-sticky-add-to-cart] .sticky-price .money');
+            const stickyPrice = $('[data-sticky-add-to-cart] .money-subtotal .money');
+            const stickyComparePrice = $('[data-sticky-add-to-cart] .money-compare-price .money');
 
             if (stickyPrice.length) {
                 stickyPrice.text(subTotal);
+            }
+
+            if (stickyComparePrice.length && window.subtotal.show) {
+                let comparePrice = $('[data-sticky-add-to-cart] .money-compare-price').data('compare-price');
+                comparePrice = inputValue * comparePrice;
+                comparePrice = Shopify.formatMoney(comparePrice, window.money_format);
+                comparePrice = extractContent(comparePrice);
+                stickyComparePrice.text(comparePrice);
             }
         }
 

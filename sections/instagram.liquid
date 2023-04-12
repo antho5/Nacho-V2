@@ -1,11 +1,6 @@
 <link rel="stylesheet" href="{{ 'component-instagram.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'component-instagram.css' | asset_url | stylesheet_tag }}</noscript>
 
-{%- if settings.banner_animation == 'effect_1' -%}
-    <link rel="stylesheet" href="{{ 'component-instagram-banner-animation.css' | asset_url }}" media="print" onload="this.media='all'">
-    <noscript>{{ 'component-instagram-banner-animation.css' | asset_url | stylesheet_tag }}</noscript>
-{%- endif -%}
-
 {%- if section.settings.type_instagram_by_gallery == 'popup_image' -%}
     <link rel="stylesheet" href="{{ 'component-fancybox.css' | asset_url }}" media="print" onload="this.media='all'">
     <noscript>{{ 'component-fancybox.css' | asset_url | stylesheet_tag }}</noscript>
@@ -48,41 +43,41 @@
     endif
 -%}
 
-{% if settings.banner_animation == 'effect_1' %}<animated-component>{% endif %}
-    <div class="instagram-slide section-block-{{section.id}} {% if as_grid_gap == 30 %}padding-15{% endif %}{% if section.settings.enable_underline_button %} enable_underline_button{% endif %}" id="new-instagram-{{section.id}}" {% if section.settings.block_layout == 'slider' %}data-loader-script="{{ 'halo.slide-instagram.js' | asset_url }}"{% endif %} style="--grid-gap: {{ grid_gap }}">
-        <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}">
-            {% if section.settings.instagram_title != blank %}
-                <div class="halo-block-header text-{{ section.settings.title_align }}{% if section.settings.view_all != blank %} viewAll--{{ section.settings.view_all_align }}{% endif %}">
-                    <h3 class="title" style="--margin-bottom-title: {{ section.settings.mg_bottom_title | append: 'px' }}">
-                        <span class="text">
-                        {{ section.settings.instagram_title }}
-                        </span>
-                    </h3>
-                    {% if section.settings.instagram_des != blank %}
-                        <div class="subtext-instagram" style="--margin-bottom-des: {{ section.settings.margin_bottom_des | append: 'px' }}">
-                            {{ section.settings.instagram_des }}
-                        </div>        
-                    {% endif %}
-                    {% if section.settings.view_all != blank %}
-                        <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}"{% if section.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all }}"{% endif %} title="{{section.settings.view_all}}" 
-                            style="--font-weight-view-all-style: {{ section.settings.font_weight_view_all }};
-                            --mg-bottom-view-style: {{ section.settings.mg_bottom_view | append: 'px' }};
-                            --color-view-all-style: {{ section.settings.color_view_all }};
-                            --font-size-view-all-style: {{ section.settings.view_all_fs | append: 'px' }};
-                            ">
-                            {{ section.settings.view_all }}
-                        </a>
-                    {% endif %}
-                </div>
-            {% endif %}
-        </div>
-        <{% if check_load %}instagram-block-load{% else %}div{% endif %} class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}">
-            {% if section.settings.type_instagram == 'app' %}
-                <div class="caption-instagram">
-                {{ section.settings.embed_code }}
-                </div>
-            {% else %}
-            <div id="instafeed" class="halo-row column-{{ section.settings.images_per_row }} {% if section.settings.block_layout == 'slider' %}halo-slider{% endif %} sm-column-2 md-column-3 {{ enable_hide_portion }}" data-instagram-feed data-slide-rows="1" data-rows="{{ section.settings.images_per_row }}" data-arrow="{{ section.settings.display_arrow }}" data-mode="{% if section.settings.slide_ins == 'centermode' %}true{% endif %}">
+<div class="instagram-slide section-block-{{section.id}} {% if as_grid_gap == 30 %}padding-15{% endif %}{% if section.settings.enable_underline_button %} enable_underline_button{% endif %}" id="new-instagram-{{section.id}}" {% if section.settings.block_layout == 'slider' %}data-loader-script="{{ 'halo.slide-instagram.js' | asset_url }}"{% endif %} style="--grid-gap: {{ grid_gap }}">
+    <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}">
+        {% if section.settings.instagram_title != blank %}
+            <div class="halo-block-header text-{{ section.settings.title_align }}{% if section.settings.view_all != blank %} viewAll--{{ section.settings.view_all_align }}{% endif %}">
+                <h3 class="title" style="--margin-bottom-title: {{ section.settings.mg_bottom_title | append: 'px' }}">
+                    <span class="text">
+                    {{ section.settings.instagram_title }}
+                    </span>
+                </h3>
+                {% if section.settings.instagram_des != blank %}
+                    <div class="subtext-instagram" style="--margin-bottom-des: {{ section.settings.margin_bottom_des | append: 'px' }}">
+                        {{ section.settings.instagram_des }}
+                    </div>        
+                {% endif %}
+                {% if section.settings.view_all != blank %}
+                    <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}"{% if section.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all }}"{% endif %} title="{{section.settings.view_all}}" 
+                        style="--font-weight-view-all-style: {{ section.settings.font_weight_view_all }};
+                        --mg-bottom-view-style: {{ section.settings.mg_bottom_view | append: 'px' }};
+                        --color-view-all-style: {{ section.settings.color_view_all }};
+                        --font-size-view-all-style: {{ section.settings.view_all_fs | append: 'px' }};
+                        ">
+                        {{ section.settings.view_all }}
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+    <{% if check_load %}instagram-block-load{% else %}div{% endif %} class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}">
+        {% if section.settings.type_instagram == 'app' %}
+            <div class="caption-instagram">
+            {{ section.settings.embed_code }}
+            </div>
+        {% else %}
+        {%- if section.settings.block_layout == 'scroll' -%}<product-scroller>{%- endif -%}
+            <div id="instafeed" class="halo-row column-{{ section.settings.images_per_row }} instagram-layout--{{ section.settings.block_layout }} {% if section.settings.block_layout == 'slider' %}halo-slider{% endif %} sm-column-2 md-column-3 {{ enable_hide_portion }}" data-instagram-feed data-slide-rows="1" data-rows="{{ section.settings.images_per_row }}" data-arrow="{{ section.settings.display_arrow }}" data-mode="{% if section.settings.slide_ins == 'centermode' %}true{% endif %}" data-column="{{ section.settings.images_per_row }}"{%- if section.settings.block_layout == 'scroll' -%} data-drag-container{%- endif -%}>
                 {% for block in section.blocks %}
                     {%- liquid
                         assign class_hidden = ''
@@ -104,7 +99,7 @@
                                 {% if settings.enable_lazyload %}class="lazyload"{% endif %}>
                                 {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                 {%- if icon_for_image != blank -%}
-                                    <span class="icon-show-more ">
+                                    <span class="icon-show-more icon-show-more--{{ section.settings.icon_style }}">
                                         {{ icon_for_image }}
                                     </span>
                                 {%- endif -%}
@@ -117,30 +112,29 @@
                     {% endif %}
                 {% endfor %}
             </div>
-            {% endif %}
-            {% if section.settings.display_instagram_button %}
-                {% if section.settings.type_button_more == 'link' %}
-                    <a {% if section.settings.instagram_button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.instagram_button_link }}"{% endif %} title="{{ section.settings.instagram_button_text | split: '|' | first }}" class="btn button" style="--margin-top: {{ section.settings.mg_top_button | append: 'px' }}">
-                        {{ section.settings.instagram_button_text }}
-                    </a>
-                {% else %}
-                    {% if section.blocks.size > number_show %}
-                    <button type="button" aria-label="{% if section.settings.instagram_button_text != blank %}{{ section.settings.instagram_button_text | split: '|' | first }}{% else %}{{ 'general.button_load_more.default' | t }}{% endif %}" class="btn {% if section.settings.instagram_button_text == blank %}show-icon{% else %}button{% endif %} {{ class_btn }}" style="--margin-top: {{ section.settings.mg_top_button | append: 'px' }}" data-load-more-block data-rowlg={{numer_lg}}>
-                        {{ section.settings.instagram_button_text }}
-                    </button>
-                    {% endif %}
+        {%- if section.settings.block_layout == 'scroll' -%}</product-scroller>{%- endif -%}
+        {% endif %}
+        {% if section.settings.display_instagram_button %}
+            {% if section.settings.type_button_more == 'link' %}
+                <a {% if section.settings.instagram_button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.instagram_button_link }}"{% endif %} title="{{ section.settings.instagram_button_text | split: '|' | first }}" class="btn button" style="--margin-top: {{ section.settings.mg_top_button | append: 'px' }}">
+                    {{ section.settings.instagram_button_text }}
+                </a>
+            {% else %}
+                {% if section.blocks.size > number_show %}
+                <button type="button" aria-label="{% if section.settings.instagram_button_text != blank %}{{ section.settings.instagram_button_text | split: '|' | first }}{% else %}{{ 'general.button_load_more.default' | t }}{% endif %}" class="btn {% if section.settings.instagram_button_text == blank %}show-icon{% else %}button{% endif %} {{ class_btn }}" style="--margin-top: {{ section.settings.mg_top_button | append: 'px' }}" data-load-more-block data-rowlg={{numer_lg}}>
+                    {{ section.settings.instagram_button_text }}
+                </button>
                 {% endif %}
             {% endif %}
-        </{% if check_load %}instagram-block-load{% else %}div{% endif %}>
-    </div>
-{% if settings.banner_animation == 'effect_1' %}</animated-component>{% endif %}
+        {% endif %}
+    </{% if check_load %}instagram-block-load{% else %}div{% endif %}>
+</div>
 
 {%- if section.settings.type_instagram_by_gallery == 'popup_image' -%}
     <script src="{{ 'fancybox.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
 <style>
-
     {%- liquid
         assign instagram_bg = section.settings.instagram_bg
         assign instagram_bg_gradient = section.settings.instagram_bg_gradient
@@ -373,7 +367,7 @@
                 }
 
                 .section-block-{{section.id}} .halo-block-header .subtext-instagram {
-                    max-width: 380px;
+                    max-width: {{ section.settings.content_width }}px;
                 }
 
                 {% if section.settings.slide_ins == 'centermode' %}
@@ -479,7 +473,7 @@
     "settings": [   
         {
             "type": "header",
-            "content": "t:sections.layout.content"
+            "content": "t:settings_schema.general.name"
         },
         {
             "type": "select",
@@ -550,6 +544,10 @@
             {
                 "value": "slider",
                 "label": "t:sections.instagram.settings.type_instagram.slider"
+            },
+            {
+                "value": "scroll",
+                "label": "t:sections.product_block.settings.product_block_layout.option3"
             }],
             "default": "grid"
         },    
@@ -734,6 +732,16 @@
             "step": 1,
             "unit": "t:sections.footer.settings.footer_bottom.pdtop_footer_bottom.unit",
             "default": 35
+        },
+        {
+            "type": "range",
+            "id": "content_width",
+            "label": "t:sections.image-banner.blocks.image.settings.content.label__8",
+            "min": 0,
+            "max": 2000,
+            "step": 25,
+            "unit": "t:sections.layout.mg_desktop.unit",
+            "default": 375
         },
         {
             "type": "select",
@@ -1074,6 +1082,22 @@
             "label": "t:settings_schema.typography.settings.typography.icon"
         },
         {
+            "type": "select",
+            "id": "icon_style",
+            "label": "t:sections.mobile_menu.settings.general.label__9",
+            "default": "style_1",
+            "options": [
+                {
+                    "value": "style_1",
+                    "label": "t:settings_schema.typography.settings.typography.style_1"
+                },
+                {
+                    "value": "style_2",
+                    "label": "t:settings_schema.typography.settings.typography.style_2"
+                }
+            ]
+        },
+        {
             "type": "paragraph",
             "content": "t:sections.instagram.settings.effects_image"
         },
@@ -1120,6 +1144,9 @@
         {
           "name": "t:sections.instagram.presets.name"
         }
-    ]
+    ],
+    "disabled_on": {
+        "groups": ["header"]
+    }
   }
 {% endschema %}

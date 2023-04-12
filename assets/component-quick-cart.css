@@ -194,6 +194,8 @@
     position: absolute;
     right: 0;
     bottom: 36px;
+    background: none;
+    border: none;
 }
 
 .previewCartItem-remove svg {

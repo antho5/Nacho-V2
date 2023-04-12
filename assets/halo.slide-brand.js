@@ -7,6 +7,7 @@
 	            var self = $(this),
 	            	dataArrows = self.data('arrows'),
 	            	dataDots = self.data('dots'),
+					dataCenterMode = self.data('center-mode');
 					itemsToShow = parseInt(self.data('rows')),
 					itemTotal = self.find('.halo-item').length
 
@@ -15,7 +16,9 @@
 	                    slidesToShow: itemsToShow,
 	                    slidesToScroll: 1,
 	                    dots: dataDots && itemTotal > itemsToShow,
-	                    infinite: false,
+						infinite: dataCenterMode,
+						centerMode: dataCenterMode,
+						centerPadding: "10%",
 	                    speed: 800,
 	                    nextArrow: window.arrows.icon_next,
                         prevArrow: window.arrows.icon_prev,
@@ -23,6 +26,8 @@
 	                    responsive: [{
 	                            breakpoint: 1200,
 	                            settings: {
+									infinite: false,
+									centerMode: false,
 	                                slidesToShow: 4,
 	                                slidesToScroll: 4,
 	                                arrows: dataArrows,

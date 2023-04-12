@@ -90,13 +90,13 @@ class RecentlyViewed extends HTMLElement {
             }, 700)
         });
         
-        for (i = 0; i < this.icon.length; i++) {
+        for (let i = 0; i < this.icon.length; i++) {
             this.icon[i].addEventListener('click', this.popup.iconClick.bind(this));
         }
 
         document.body.addEventListener('click', this.onBodyClickEvent.bind(this));
         
-        for (i = 0; i < this.iconClose.length; i++) {
+        for (let i = 0; i < this.iconClose.length; i++) {
             this.iconClose[i].addEventListener('click', this.popup.closeDetails.bind(this));
         }
     }
@@ -201,11 +201,11 @@ class RecentlyViewed extends HTMLElement {
     
 
     closeTab(){
-        for (i = 0; i < this.icon.length; i++) {
+        for (let i = 0; i < this.icon.length; i++) {
             this.icon[i].classList.remove('is-open');
         }
 
-        for (i = 0; i < this.tab.length; i++) {
+        for (let i = 0; i < this.tab.length; i++) {
             this.tab[i].classList.remove('is-visible');
         }
     }

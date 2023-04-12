@@ -145,6 +145,7 @@
 
     assign enable_minus_mg_top = section.settings.enable_minus_mg_top
     assign minus_spacing_top = section.settings.minus_spacing_top | append: 'px'
+    assign show_half = section.settings.show_half
 -%}
 
 <style>
@@ -801,7 +802,7 @@
         }
 
         {%- if enable_minus_mg_top -%}
-            .section-block-{{section.id}} .halo-block-content  {
+            .section-block-{{section.id}} {
                 margin-top: {{ minus_spacing_top }};
             }
         {%- endif -%}
@@ -1086,8 +1087,7 @@
                                 >
                             {% elsif layout == 'scroll' %}
                                 {% liquid
-                                    assign column = section.settings.product_block_per_view 
-                                    assign show_half = section.settings.show_half 
+                                    assign column = section.settings.product_block_per_view
 
                                     assign scroll_height = section.settings.scroll_height | append: 'px'
                                     assign scroll_track_bg = section.settings.scroll_track_bg
@@ -1255,7 +1255,7 @@
     "settings": [
     {
         "type": "header",
-        "content": "t:sections.layout.content"
+        "content": "t:settings_schema.general.name"
     },
     {
         "type": "select",

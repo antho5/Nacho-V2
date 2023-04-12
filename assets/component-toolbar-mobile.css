@@ -88,6 +88,11 @@
 .bottom-bar--list .cart-count-bubble{
     top: 0;
     right: -7px;
+    background-color: var(--bg-bubble);
+}
+
+.bottom-bar--list .cart-count-bubble .text{
+    color: var(--color-bubble);
 }
 
 @media (max-width: 1024px){

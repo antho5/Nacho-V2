@@ -37,7 +37,7 @@
                             <span class="icon">{{icon}}</span>
                             <span class="text">{{text}}</span>
                             {% if action_icon == 'cart' %}
-                                <div class="cart-count-bubble">
+                                <div class="cart-count-bubble" style="--color-bubble: {{ section.settings.bg_color }}; --bg-bubble: {{ section.settings.color_icon }}">
                                     {%- if cart.item_count < 100 -%}
                                         <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
                                     {%- endif -%}
@@ -174,7 +174,7 @@
     },
     {
         "type": "header",
-        "content": "t:sections.layout.content"
+        "content": "t:settings_schema.general.name"
     },
     {
         "type" : "color",

@@ -698,7 +698,8 @@ class VariantStickyAddToCart extends HTMLElement {
 
         var quantityInput = $('[data-sticky-add-to-cart] .quantity__input'),
             notifyMe = this.item.find('.productView-notifyMe'),
-            stickyPrice = $('[data-sticky-add-to-cart] .sticky-price .money');
+            stickyPrice = $('[data-sticky-add-to-cart] .money-subtotal .money'),
+            stickyComparePrice = $('[data-sticky-add-to-cart] .money-compare-price .money');
         
         var maxValue = parseInt(quantityInput.attr('data-inventory-quantity'));
 
@@ -738,7 +739,6 @@ class VariantStickyAddToCart extends HTMLElement {
                     const pdView_subTotal = document.querySelector('.productView-subtotal .money') || document.querySelector('.productView-subtotal .money-subtotal');
 
                     pdView_subTotal.textContent = subTotal;
-                    // console.log(maxValue);
                     if (this.currentVariant.available && maxValue <= 0) {
                         text = window.variantStrings.preOrder;
                     } else {
@@ -768,6 +768,15 @@ class VariantStickyAddToCart extends HTMLElement {
 
             if (subTotal != 0 && stickyPrice.length) {
                 stickyPrice.text(subTotal);
+            }
+
+            if (subTotal != 0 && stickyComparePrice.length && window.subtotal.show) {
+                let comparePrice = $('[data-sticky-add-to-cart] .money-compare-price').data('compare-price'),
+                    qty = quantityInput.val();
+                comparePrice = qty * comparePrice;
+                comparePrice = Shopify.formatMoney(comparePrice, window.money_format);
+                comparePrice = extractContent(comparePrice);
+                stickyComparePrice.text(comparePrice);
             }
 
             if(notifyMe.length > 0){

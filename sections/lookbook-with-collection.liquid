@@ -508,7 +508,7 @@
     "settings": [   
         {
             "type": "header",
-            "content": "t:sections.layout.content"
+            "content": "t:settings_schema.general.name"
         },
         {
             "type": "select",
@@ -1470,6 +1470,9 @@
         {
           "name": "t:sections.collection_lookbook.name"
         }
-    ]
+    ],
+    "disabled_on": {
+        "groups": ["header"]
+    }
   }
 {% endschema %}

@@ -549,7 +549,7 @@
     "settings": [
     {
         "type": "header",
-        "content": "t:sections.layout.content"
+        "content": "t:settings_schema.general.name"
     },
     {
         "type": "select",
@@ -798,7 +798,7 @@
         "settings": [
         {
             "type": "header",
-            "content": "t:sections.custom_image_banner_block.settings.general"
+            "content": "t:settings_schema.general.name"
         },
         {
             "type": "text",
@@ -1907,6 +1907,9 @@
         {
             "type": "largeImg"
         }]
-    }]
+    }],
+    "disabled_on": {
+        "groups": ["header"]
+    }
 }
 {% endschema %}

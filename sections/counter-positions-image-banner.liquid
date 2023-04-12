@@ -316,7 +316,7 @@
     "settings": [
     {
         "type": "header",
-        "content": "t:sections.layout.content"
+        "content": "t:settings_schema.general.name"
     },
     { 
         "type": "select",
@@ -1225,6 +1225,9 @@
     "presets": [
     {
         "name": "t:sections.counter_positions_image_banner.name"
-    }]
+    }],
+    "disabled_on": {
+        "groups": ["header"]
+    }
 }
 {% endschema %}

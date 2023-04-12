@@ -577,7 +577,6 @@ class QuantityEditCartInput extends HTMLElement {
                 itemInArray = window[arrayInVarName],
                 itemStatus = itemInArray[currentId];
 
-            console.log(itemStatus)
             if(itemStatus == 'deny') {
                 newVal = maxValue
                 this.input.value =  newVal;

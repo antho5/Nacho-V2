@@ -41,28 +41,12 @@
         <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
 
         {%- liquid
-            if settings.layout_header == 'full'
-                assign layout_header = 'header-full-width'
-            elsif settings.layout_header == 'boxed'
-                assign layout_header = 'header-boxed'
-            elsif settings.layout_header == 'custom_width'
-                assign layout_header = 'header-custom-width'
-            endif
-        
             if settings.layout_body == 'full'
                 assign layout_body = 'body-full-width'
             elsif settings.layout_body == 'boxed'
                 assign layout_body = 'body-boxed'
             elsif settings.layout_body == 'custom_width'
                 assign layout_body = 'body-custom-width'
-            endif
-        
-            if settings.layout_footer == 'full'
-                assign layout_footer = 'footer-full-width'
-            elsif settings.layout_footer == 'boxed'
-                assign layout_footer = 'footer-boxed'
-            elsif settings.layout_footer == 'custom_width'
-                assign layout_footer = 'footer-custom-width'
             endif
         
             if settings.style_dots == '02'
@@ -107,16 +91,15 @@
         -%}
     </head>
 
-    <body class="template-{{ request.page_type }} {{layout_header}} {{layout_body}} {{layout_footer}} {{style_dots}} {{style_text_size_varriant}} {{style_arrows}} {{product_card_layout}} {{ banner_animation }}{% if settings.enable_button_disable_arrows %} enable_button_disable_arrows{% endif %}{% if settings.display_text_color_title %} enable_text_color_title{% endif %}{% if settings.style_text_color_varriant == '02' %} style_2_text_color_varriant{% endif %}{% if settings.hide_compare_homepage %} hide_compare_homepage{% endif %} {{ quick_shop_type }}{% if settings.show_image_loading %} show_image_loading{% endif %}{% if settings.show_effect_close %} show_effect_close{% endif %}{% if settings.enable_layout_rtl and enable_iso_rtl %} layout_rtl{% endif %}">
+    <body class="template-{{ request.page_type }} {{layout_body}} {{style_dots}} {{style_text_size_varriant}} {{style_arrows}} {{product_card_layout}} {{ banner_animation }}{% if settings.enable_button_disable_arrows %} enable_button_disable_arrows{% endif %}{% if settings.display_text_color_title %} enable_text_color_title{% endif %}{% if settings.style_text_color_varriant == '02' %} style_2_text_color_varriant{% endif %}{% if settings.hide_compare_homepage %} hide_compare_homepage{% endif %} {{ quick_shop_type }}{% if settings.show_image_loading %} show_image_loading{% endif %}{% if settings.show_effect_close %} show_effect_close{% endif %}{% if settings.enable_layout_rtl and enable_iso_rtl %} layout_rtl{% endif %}">
         <div class="body-content-wrapper">
-            <a class="skip-to-content-link button visually-hidden" href="#MainContent">
-                {{ "accessibility.skip_to_text" | t }}
-            </a>
+            <a class="skip-to-content-link button visually-hidden" href="#MainContent">{{ "accessibility.skip_to_text" | t }}</a>
 
+            {% sections 'header-group' %}
             {% render 'wrapper-header' %}
             
             {% if settings.layout_body == 'boxed' %}
-            <div class="wrapper-hasbanner-adv">
+                <div class="wrapper-hasbanner-adv">
             {% endif %}
                 {% render 'halo-banner-adv-left' %}
                 {% render 'halo-banner-adv-right' %}
@@ -124,18 +107,14 @@
                     {{ content_for_layout }}
                 </main>
             {% if settings.layout_body == 'boxed' %}        
-            </div>
+                </div>
             {% endif %}
             
-            <div class="wrapper-footer">
-                {% render 'wrapper-footer' %}
-            </div>
+            <div class="wrapper-footer">{% sections 'footer-group' %}</div>
 
             {% section 'halo-toolbar-mobile' %}
 
-            <ul hidden>
-                <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
-            </ul>
+            <ul hidden><li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li></ul>
             
             {% render 'global-script-2' %}
         </div>

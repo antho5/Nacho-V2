@@ -108,7 +108,7 @@ class FreeShippingMeter extends HTMLElement {
 
             this.messageElement.innerHTML = text;
 
-            if ((window.show_multiple_currencies && Currency.currentCurrency != shopCurrency) || window.show_auto_currency) {
+            if ((window.show_multiple_currencies && typeof Currency != 'undefined' && Currency.currentCurrency != shopCurrency) || window.show_auto_currency) {
                 Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
             }
         }, 400)

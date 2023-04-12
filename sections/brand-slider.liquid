@@ -41,7 +41,7 @@
                         {% endif %}
                     </div>
                 {% endif %}
-                <{% if settings.banner_animation == 'effect_1' %}animated-component{% else %}div{% endif %} class="halo-row column-{{ section.settings.brand_rows }} brands-slider halo-slider{% if section.settings.brand_rows_mb == '2' %} sm-column-2{% else %} sm-column-1{% endif %} md-column-3" {% if section.settings.brand_layout == 'slider' %}data-brands-slider{% endif %} data-rows="{{ section.settings.brand_rows }}" data-arrows="{{ section.settings.enable_arrows }}" data-dots="{{ section.settings.enable_dots }}" data-rows-mobile="{{ section.settings.brand_rows_mb }}" style="--row-distance-style: {{ section.settings.item_distance | prepend: '-' | append: 'px' }};">
+                <{% if settings.banner_animation == 'effect_1' %}animated-component{% else %}div{% endif %} class="halo-row column-{{ section.settings.brand_rows }} brands-slider halo-slider{% if section.settings.brand_rows_mb == '2' %} sm-column-2{% else %} sm-column-1{% endif %} md-column-3" {% if section.settings.brand_layout == 'slider' %}data-brands-slider{% endif %} data-rows="{{ section.settings.brand_rows }}" data-arrows="{{ section.settings.enable_arrows }}" data-dots="{{ section.settings.enable_dots }}" data-center-mode="{{ section.settings.enable_center_mode }}" data-rows-mobile="{{ section.settings.brand_rows_mb }}" style="--row-distance-style: {{ section.settings.item_distance | prepend: '-' | append: 'px' }};">
                     {% for block in section.blocks %}
                         <div class="halo-item item--{{ block.settings.box_shadow }} block-{{block.id}}" id="block-{{block.id}}" style="--item-distance-style: {{ section.settings.item_distance | append: 'px' }};" data-animate="{{ settings.banner_animation }}">
                             {% if section.settings.brands_block_style == 'style_2' %}
@@ -356,17 +356,6 @@
         fill: {{ color_arrow }};
     }
 
-    .banner-animation-1 .section-block-{{section.id}} .halo-item .wrapper-image a {
-        transform: scale(1.15);
-        opacity: 0;
-        transition: transform var(--duration-long) 100ms cubic-bezier(.13,.55,.25,1), opacity var(--duration-long) 100ms cubic-bezier(.13,.55,.25,1);
-    }
-
-    .banner-animation-1 .section-block-{{section.id}} .halo-item.shouldShow .wrapper-image a {
-        transform: scale(1);
-        opacity: 1;
-    }
-
     {% unless section.settings.enable_border_title %}
         .section-block-{{section.id}} .halo-block-header .title .text {
             width: auto;
@@ -578,7 +567,7 @@
     "settings": [
     {
         "type": "header",
-        "content": "t:sections.layout.content"
+        "content": "t:settings_schema.general.name"
     },
     {
         "type": "select",
@@ -1051,6 +1040,12 @@
         "type": "checkbox",
         "id": "enable_dots",
         "label": "t:settings_schema.typography.settings.typography.dots_enable",
+        "default": false
+    },
+    {
+        "type": "checkbox",
+        "id": "enable_center_mode",
+        "label": "t:settings_schema.typography.settings.typography.center_mode_enable",
         "default": false
     },
     {

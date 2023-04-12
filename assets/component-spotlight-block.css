@@ -11,14 +11,7 @@
 }
 
 .spotlight-inner {
-    padding: 0 10px;
-}
-
-.spotlight-inner.text-left {
     padding-left: var(--align-items-spacing-lr-style);
-}
-
-.spotlight-inner.text-right {
     padding-right: var(--align-items-spacing-lr-style);
 }
 
@@ -36,8 +29,9 @@
 
 .spotlight-inner .title {
     display: block;
-    margin-top: 32px;
+    margin-top: 22px;
     margin-bottom: 10px;
+    font-weight: var(--title-font-weight)
 }
 
 .spotlight-inner.not-image .title {
@@ -220,6 +214,9 @@
 
 .spotlight-inner h3:hover span {
     border-bottom: 2px solid var(--border-color-title-style);
+}
+.spotlight-inner--border-light h3:hover span {
+    border-bottom-width: 1px;
 }
 
 /* START: Title Border Style 3 */

@@ -117,7 +117,7 @@
                  cache: false,
                  data: {
                      view: 'ajax_recently_viewed',
-                     constraint: `limit=${productHandleQueue.length}+layout=${config.layout}+imageRatio=${config.media}+swipe=${config.swipe}+sectionId=recently-viewed+list_handle=` + trips
+                     constraint: `limit=${config.howManyToShow}+layout=${config.layout}+imageRatio=${config.media}+swipe=${config.swipe}+sectionId=recently-viewed+list_handle=` + trips
                  },
                  beforeSend: function () {},
                  success: function (data) {

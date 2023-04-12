@@ -32,7 +32,7 @@
                                 {% assign subtotal = current_variant.price | money %}
                                 <div class="sticky-price{% if compare_price != blank %} has-compare-price{% endif %}">
                                     {% if compare_price != blank %}
-                                    <s class="money-compare-price">{{ compare_price }}</s>
+                                        <s class="money-compare-price" data-compare-price="{{ current_variant.compare_at_price }}">{{ compare_price }}</s>
                                     {% endif %}
                                     <span class="money-subtotal">{{ subtotal }}</span>
                                 </div>
@@ -244,7 +244,7 @@
                         {% assign subtotal = current_variant.price | money %}
                         <div class="sticky-price{% if compare_price != blank %} has-compare-price{% endif %}">
                             {% if compare_price != blank %}
-                              <s class="money-compare-price">{{ compare_price }}</s>
+                                <s class="money-compare-price" data-compare-price="{{ current_variant.compare_at_price }}">{{ compare_price }}</s>
                             {% endif %}
                             <span class="money-subtotal">{{ subtotal }}</span>
                         </div>
