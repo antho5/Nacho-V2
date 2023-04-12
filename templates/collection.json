@@ -7,8 +7,8 @@
           "type": "image",
           "settings": {
             "show_image_parallax": false,
-            "show_bg_overlay": false,
-            "type": "custom",
+            "show_bg_overlay": true,
+            "type": "full",
             "bg_overlay": "#000000"
           }
         },
