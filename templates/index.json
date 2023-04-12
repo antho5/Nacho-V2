@@ -835,57 +835,24 @@
         "border_color_card": "#f0f1f4"
       }
     },
-    "a7f621ae-554e-48f5-ac3d-c5d9f0b72ef6": {
-      "type": "blog-posts-list",
-      "settings": {
-        "container": "container",
-        "padding_full_width": 15,
-        "mg_top_desktop": 0,
-        "mg_top_tablet": 0,
-        "mg_top_mobile": 0,
-        "mg_bottom_desktop": 0,
-        "mg_bottom_tablet": 0,
-        "mg_bottom_mobile": 0,
-        "featured_blog_title": "Featured Builds",
-        "blog_posts": "featured-builds-letzroll-gladiator",
-        "item_distance": 10,
-        "post_limit": 2,
-        "limit_content_des": 22,
-        "margin_bottom_title": 0,
-        "margin_bottom_info": 13,
-        "margin_bottom_des": 6,
-        "show_more_button_text_color": "#3c3c3c",
-        "show_more_button_border_color": "#1e1e1e",
-        "show_more_button_background_color": "#1e1e1e",
-        "show_more_button_text_color_hover": "#000",
-        "show_more_button_border_color_hover": "#fff",
-        "show_more_button_background_color_hover": "#fff",
-        "view_all": "",
-        "font_weight_view_all": "400",
-        "mg_top_view": 0,
-        "enable_border_view_all": true,
-        "link_view_all": "shopify:\/\/blogs\/featured-builds-letzroll-gladiator",
-        "color_view_all": "#3c3c3c"
-      }
-    },
     "a6b6bdc7-b33e-448b-a276-094a8fbc620d": {
       "type": "featured-blog",
       "settings": {
         "container": "container",
         "padding_full_width": 0,
         "mg_minus_desktop": 0,
-        "mg_top_desktop": 50,
-        "mg_top_tablet": 50,
-        "mg_top_mobile": 50,
-        "mg_bottom_desktop": 50,
-        "mg_bottom_tablet": 50,
-        "mg_bottom_mobile": 50,
+        "mg_top_desktop": 15,
+        "mg_top_tablet": 15,
+        "mg_top_mobile": 15,
+        "mg_bottom_desktop": 15,
+        "mg_bottom_tablet": 15,
+        "mg_bottom_mobile": 15,
         "blog_bg": "#fff",
         "blog_bg_gradient": "",
         "featured_blog_title": "Featured Builds",
         "margin_bottom_heading": 5,
         "enable_border_title": true,
-        "custom_width_title": 420,
+        "custom_width_title": 450,
         "border_color_title": "#232323",
         "color_title": "#232323",
         "fontsize_title": 16,
@@ -909,13 +876,13 @@
         "blog_posts": "featured-builds-letzroll-gladiator",
         "blog_results_per_row": "2",
         "item_distance": 15,
-        "post_limit": 3,
-        "limit_content_des": 22,
+        "post_limit": 2,
+        "limit_content_des": 20,
         "text_by": "",
         "text_on": "",
-        "blog_show_author": true,
-        "blog_show_date": true,
-        "blog_show_des": true,
+        "blog_show_author": false,
+        "blog_show_date": false,
+        "blog_show_des": false,
         "blog_show_more": true,
         "blog_show_more_icon": "none",
         "blog_date_format": "short_month",
@@ -923,11 +890,11 @@
         "border_radius_item": 0,
         "margin_bottom_image": 0,
         "margin_bottom_title": 0,
-        "margin_bottom_info": 13,
-        "margin_bottom_des": 6,
+        "margin_bottom_info": 10,
+        "margin_bottom_des": 5,
         "block_item_style": "style_1",
-        "block_item_align": "left",
-        "block_button_text_transform": "none",
+        "block_item_align": "center",
+        "block_button_text_transform": "uppercase",
         "block_button_fw": "400",
         "enable_border_box": true,
         "color_border_box": "#dbdbdb",
@@ -945,13 +912,19 @@
         "content_bg": "",
         "content_gradient": ""
       }
+    },
+    "a7045ff9-aed6-4174-97c7-72e0bc60e154": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": ""
+      }
     }
   },
   "order": [
     "16321237356a896dad",
     "8ca832d8-6669-441d-b6d9-9db74f475d94",
     "163247026462da6862",
-    "a7f621ae-554e-48f5-ac3d-c5d9f0b72ef6",
-    "a6b6bdc7-b33e-448b-a276-094a8fbc620d"
+    "a6b6bdc7-b33e-448b-a276-094a8fbc620d",
+    "a7045ff9-aed6-4174-97c7-72e0bc60e154"
   ]
 }
