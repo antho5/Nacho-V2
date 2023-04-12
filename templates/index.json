@@ -789,7 +789,7 @@
         "border_color_button_hover": "#232323",
         "bg_color_button_hover": "#ffffff",
         "bg_color_gradient_button_hover": "",
-        "product_block_collection": "collection-home-1-1",
+        "product_block_collection": "lights",
         "product_block_limit": 8,
         "grid_gap": 30,
         "pb_style": "style1",
@@ -799,7 +799,7 @@
         "color_countdown": "#f42b23",
         "countdown_margin_left": 15,
         "product_block_per_row": "4",
-        "product_block_infinite_scroll": true,
+        "product_block_infinite_scroll": false,
         "product_block_swipe_on_mobile": false,
         "enable_product_card_pd_bottom": false,
         "product_card_pd_bottom": 40,
@@ -916,7 +916,7 @@
     "a7045ff9-aed6-4174-97c7-72e0bc60e154": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": ""
+        "custom_liquid": "<div class=\"powr-social-feed\" id=\"0db6845a_1650904810\"><\/div><script src=\"https:\/\/www.powr.io\/powr.js?platform=shopify\"><\/script>"
       }
     }
   },
