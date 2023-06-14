@@ -935,13 +935,25 @@
             "date": "Wednesday, Jan 26, 2019",
             "body": "Nam tempus turpis at metus scelerisque placerat nulla deumantos delo sollicitudin delos felis. Pellentesque diam dolor an elementum et lobortis at mollis ut risus. Curabitur semper sagittis mi condimentum..."
           }
+        },
+        "b6af7ef0-6dc8-49b8-b74b-441f9d626b54": {
+          "type": "review",
+          "settings": {
+            "heading": "Awesome...",
+            "sub_heading": "",
+            "rating": "star5",
+            "name": "",
+            "date": "Wednesday, Jan 26, 2019",
+            "body": "Nam tempus turpis at metus scelerisque placerat nulla deumantos delo sollicitudin delos felis. Pellentesque diam dolor an elementum et lobortis at mollis ut risus. Curabitur semper sagittis mi condimentum..."
+          }
         }
       },
       "block_order": [
         "593a5596-61e9-4e93-9f2d-e59a104b1694",
         "7b46cd31-e2ca-4c03-b5f5-3c453ad27094",
         "d31099b0-674e-4187-bdde-8e25ab1c333e",
-        "74b7dee2-6d93-4009-89b2-beea48bc64f8"
+        "74b7dee2-6d93-4009-89b2-beea48bc64f8",
+        "b6af7ef0-6dc8-49b8-b74b-441f9d626b54"
       ],
       "settings": {
         "container": "1770",
@@ -965,8 +977,8 @@
         "margin_bottom_des": 35,
         "fontsize_des": 16,
         "title_align": "center",
-        "block_layout_style": "layout1",
-        "review_rows": "1",
+        "block_layout_style": "layout2",
+        "review_rows": "3",
         "show_arrow": true,
         "avatar_margin_bottom": 10,
         "color_heading": "#202020",
@@ -988,7 +1000,7 @@
         "star_margin_bottom": 0,
         "show_avatar": true,
         "start_position": "below_title",
-        "star_color": "",
+        "star_color": "#eac806",
         "scroll_height": 4,
         "scroll_track_bg": "#f1f1f1",
         "scroll_thumb_color": "#000",
