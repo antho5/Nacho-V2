@@ -906,6 +906,7 @@
         "7b46cd31-e2ca-4c03-b5f5-3c453ad27094": {
           "type": "review",
           "settings": {
+            "avatar": "shopify:\/\/shop_images\/Bronco_Fog.jpg",
             "heading": "Awesome...",
             "sub_heading": "",
             "rating": "star5",
