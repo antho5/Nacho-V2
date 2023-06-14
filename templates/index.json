@@ -524,7 +524,7 @@
         "mg_bottom_title_mb": 12,
         "border_color_title": "#232323",
         "color_title": "#232323",
-        "view_all": "View All",
+        "view_all": "",
         "view_all_align": "center",
         "font_weight_view_all": "400",
         "mg_bottom_view": 20,
