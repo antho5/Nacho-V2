@@ -50,7 +50,7 @@
             "sub_collection_color_hover": "#232323",
             "sub_collection_background_hover": "#ffffff",
             "sub_collection_background_gradient_hover": "",
-            "sub_collection_border_hover": "#232323",
+            "sub_collection_border_hover": "rgba(0,0,0,0)",
             "sub_collection_mg_top": 10
           }
         }
