@@ -658,7 +658,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify:\/\/shop_images\/Whats_New_Center.jpg",
+            "image": "shopify:\/\/shop_images\/Automotive.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
