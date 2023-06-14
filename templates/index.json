@@ -606,7 +606,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify:\/\/shop_images\/Whats_New_Left_a6101324-1c13-434f-98c2-7119e2a9df89.jpg",
+            "image": "shopify:\/\/shop_images\/Powersports.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
@@ -710,7 +710,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify:\/\/shop_images\/HB.jpg",
+            "image": "shopify:\/\/shop_images\/HB_81df3e3d-063b-441a-ac20-2ebba11a79e1.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
