@@ -496,7 +496,7 @@
       "type": "product-block",
       "settings": {
         "container": "container",
-        "padding_full_width": 0,
+        "padding_full_width": 20,
         "disable_padding_content": false,
         "enable_border_top": false,
         "enable_border_bottom": false,
@@ -819,7 +819,7 @@
       ],
       "settings": {
         "container": "fullwidth",
-        "padding_full_width": 0,
+        "padding_full_width": 20,
         "disable_padding_content": false,
         "mg_minus_desktop": 0,
         "block_layout": "grid",
@@ -948,7 +948,7 @@
       ],
       "settings": {
         "container": "fullwidth",
-        "padding_full_width": 0,
+        "padding_full_width": 20,
         "section_style": "style_1",
         "mg_top_desktop": 50,
         "mg_top_tablet": 50,
