@@ -956,7 +956,7 @@
         "mg_bottom_desktop": 50,
         "mg_bottom_tablet": 50,
         "mg_bottom_mobile": 50,
-        "review_bg": "#fafafa",
+        "review_bg": "#ffffff",
         "review_bg_gradient": "",
         "review_title": "Top Reviews",
         "color_title": "#232323",
