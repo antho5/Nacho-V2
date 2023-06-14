@@ -818,7 +818,7 @@
         "609134ee-6609-4741-b5a8-4b400dee8339"
       ],
       "settings": {
-        "container": "container",
+        "container": "fullwidth",
         "padding_full_width": 0,
         "disable_padding_content": false,
         "mg_minus_desktop": 0,
@@ -947,7 +947,7 @@
         "74b7dee2-6d93-4009-89b2-beea48bc64f8"
       ],
       "settings": {
-        "container": "1770",
+        "container": "fullwidth",
         "padding_full_width": 0,
         "section_style": "style_1",
         "mg_top_desktop": 50,
