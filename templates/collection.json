@@ -183,11 +183,18 @@
         "border_width_card": 5,
         "border_color_card": "#f0f1f4"
       }
+    },
+    "ce8304c4-11df-4f42-9ada-39c767cb5951": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"powr-social-feed\" id=\"0db6845a_1650904810\"><\/div><script src=\"https:\/\/www.powr.io\/powr.js?platform=shopify\"><\/script>"
+      }
     }
   },
   "order": [
     "banner",
     "product-grid",
-    "product-recently-viewed"
+    "product-recently-viewed",
+    "ce8304c4-11df-4f42-9ada-39c767cb5951"
   ]
 }
