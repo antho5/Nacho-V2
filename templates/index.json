@@ -930,6 +930,7 @@
         "74b7dee2-6d93-4009-89b2-beea48bc64f8": {
           "type": "review",
           "settings": {
+            "avatar": "shopify:\/\/shop_images\/Flood.jpg",
             "heading": "Awesome...",
             "sub_heading": "",
             "rating": "star5",
