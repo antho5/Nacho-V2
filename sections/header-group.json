@@ -86,7 +86,7 @@
           "settings": {
             "color": "#232323",
             "cart_bg_item": "#ff9800",
-            "cart_color_item": "#fff",
+            "cart_color_item": "#ffffff",
             "cart_item_font_size": 14
           }
         }
@@ -100,7 +100,7 @@
         "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-5"
       ],
       "settings": {
-        "container": "full",
+        "container": "1770",
         "padding_full_width": 0,
         "header_bg": "#e6e6e6",
         "header_bg_gradient": "",
