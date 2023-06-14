@@ -817,6 +817,9 @@
         "template--15963530461354__8ca832d8-6669-441d-b6d9-9db74f475d94-1681322157c759736b-0",
         "609134ee-6609-4741-b5a8-4b400dee8339"
       ],
+      "custom_css": [
+        ".link_title {text-transform: uppercase;}"
+      ],
       "settings": {
         "container": "fullwidth",
         "padding_full_width": 20,
