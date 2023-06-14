@@ -918,6 +918,7 @@
         "d31099b0-674e-4187-bdde-8e25ab1c333e": {
           "type": "review",
           "settings": {
+            "avatar": "shopify:\/\/shop_images\/TM5_Combo.jpg",
             "heading": "Awesome...",
             "sub_heading": "",
             "rating": "star5",
