@@ -515,7 +515,7 @@
         "product_bg_gradient": "",
         "style_block_header": "style1",
         "pd_top_title": 30,
-        "product_block_title": "New Arrivals",
+        "product_block_title": "Top Sellers",
         "enable_border_title": true,
         "enable_border_title_style2": true,
         "fontsize_title": 20,
@@ -795,11 +795,11 @@
             "link": "shopify:\/\/collections\/apparel",
             "fontsize_btn": 16,
             "button_width": 190,
-            "color_button": "#fff",
+            "color_button": "#ffffff",
             "border_color_button": "#232323",
             "bg_color_button": "#232323",
             "bg_color_button_gradient": "",
-            "color_button_hover": "#fff",
+            "color_button_hover": "#ffffff",
             "border_color_button_hover": "#232323",
             "bg_color_button_hover": "#232323",
             "bg_color_button_gradient_hover": "",
@@ -995,7 +995,7 @@
         "color_body": "#202020",
         "fontsize_body": 16,
         "body_margin_bottom": 24,
-        "color_icon": "#fff",
+        "color_icon": "#ffffff",
         "bg_color_icon": "#cbcbcb",
         "star_margin_bottom": 0,
         "show_avatar": true,
@@ -1003,8 +1003,8 @@
         "star_color": "#eac806",
         "scroll_height": 4,
         "scroll_track_bg": "#f1f1f1",
-        "scroll_thumb_color": "#000",
-        "scroll_thumb_hover_color": "#444"
+        "scroll_thumb_color": "#000000",
+        "scroll_thumb_hover_color": "#444444"
       }
     },
     "a7045ff9-aed6-4174-97c7-72e0bc60e154": {
