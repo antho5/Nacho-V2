@@ -63,7 +63,7 @@
     endif
 -%}
 
-{%- if settings.banner_animation == 'effect_1' -%}<animated-component>{%- endif -%}
+{% if settings.banner_animation == 'effect_1' %}<animated-component>{% endif %}
     <div data-section-id="{{ section.id }}" data-section-type="contact" id="ContactSection-{{ section.id }}" data-section="{{ section.id }}">
         <div class="contact-container {% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%} container-full{% else %}container{% endif %}" data-animate="{{ settings.banner_animation }}">
             {% if bg_image != blank %}
@@ -206,7 +206,7 @@
             </div>
         </div>
     </div>
-{%- if settings.banner_animation == 'effect_1' -%}</animated-component>{%- endif -%}
+{% if settings.banner_animation == 'effect_1' %}</animated-component>{% endif %}
 
 <style type="text/css" media="screen">
     #ContactSection-{{ section.id }}{
