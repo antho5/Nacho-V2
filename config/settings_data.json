@@ -1,7 +1,7 @@
 {
   "current": {
     "layout_body": "default",
-    "mobile_menu": "default",
+    "mobile_menu": "custom",
     "type_font_1": "google_fonts",
     "type_font_1_name": "Poppins",
     "type_font_1_font": "mono",
