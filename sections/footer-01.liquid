@@ -1,6 +1,7 @@
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-list-payment.css' | asset_url }}" media="all" onload="this.media='all'">
 <noscript>{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}</noscript>
+
 {%- liquid
   assign text_align = section.settings.footer_top_text_align
   assign social_block = section.blocks | where: 'type', 'social_media' | first
@@ -15,32 +16,54 @@
     assign column = column | minus: 1
   endif
 -%}
+
 {% render 'footer-style', block_newsletter: block_newsletter %}
+
 <footer class="footer footer-1" style="--spacing-l-r: {{ section.settings.padding_full_width }}px">
   {%- if section.blocks.size > 0 -%}
     <div class="footer__content-top{% if section.settings.show_footer_top_bg_img %} footer__content-bg{% endif %}{% if block_newsletter.settings.enable_top and position_social == 7 %} enable_newsletter_social{% endif %}">
       <div class="container container-{{ section.settings.container }}">
         <div class="halo-row column-{{column}}">
-          {%- for block in section.blocks -%}
-            {%- if forloop.first and block.type == 'text' -%}
-              {%- assign block__text_first = 'block__text_first' -%}
-            {%- endif -%}
-            {%- if block.type == 'text' -%}
-              {% render 'footer-text-column', block: block, block__text_first: block__text_first, text_align: text_align, icon_color: section.settings.footer_top_title_color %}
-            {%- elsif block.type == 'link_list' -%}
-              {% render 'footer-links-column', block: block, block__text_first: block__text_first, text_align: text_align %}
-            {%- elsif block.type == 'newsletter_with_social' -%}
-              {% render 'footer-newsletter-column', block: block, text_align: text_align, block__text_first: block__text_first, subtext_before_heading: false %}
-            {%- endif -%}
-          {%- endfor -%}
+          {% for block in section.blocks %}
+            {% if forloop.first and block.type == 'text' %}
+              {% assign block__text_first = 'block__text_first' %}
+            {% endif %}
+            {% if block.type == 'text' %}
+              {% render 'footer-text-column',
+                block: block,
+                block__text_first: block__text_first,
+                text_align: text_align,
+                icon_color: section.settings.footer_top_title_color
+              %}
+            {% elsif block.type == 'link_list' %}
+              {% render 'footer-links-column',
+                block: block,
+                block__text_first: block__text_first,
+                text_align: text_align
+              %}
+            {% elsif block.type == 'newsletter_with_social' %}
+              {% render 'footer-newsletter-column',
+                block: block,
+                text_align: text_align,
+                block__text_first: block__text_first,
+                subtext_before_heading: false
+              %}
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>
-    {%- if footer_bottom_block != null or footer_bottom_block != blank -%}
-      {% render 'footer-bottom', block: footer_bottom_block, type_footer_link_font_size: section.settings.type_footer_link_font_size, footer_top_color_link: section.settings.footer_top_color_link, container: section.settings.container %}
-    {%- endif -%}
+    {% if footer_bottom_block != null or footer_bottom_block != blank %}
+      {% render 'footer-bottom',
+        block: footer_bottom_block,
+        type_footer_link_font_size: section.settings.type_footer_link_font_size,
+        footer_top_color_link: section.settings.footer_top_color_link,
+        container: section.settings.container
+      %}
+    {% endif %}
   {%- endif -%}
 </footer>
+
 <script type="text/javascript">
   function initDropdownColumnsFooter() {
     var footerColumnTitle = document.querySelectorAll('.footer-1 [data-toggle-column-footer]');
@@ -61,6 +84,7 @@
   }
   initDropdownColumnsFooter();
 </script>
+
 {% schema %}
 {
   "name": "Footer 01",
