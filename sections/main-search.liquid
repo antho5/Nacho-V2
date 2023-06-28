@@ -177,6 +177,7 @@
                                     </div>
                                 </div>
                             {% endif %}
+                            <div class="collection">
                             <div class="collection resultListing">
                                 <ul class="productListing{% if section.settings.collection_results_per_row == 1 %} productList{% else %} productGrid column-{{ layout }} {% endif %} list-{{ layout }} list-unstyled" id="main-collection-product-grid" data-id="{{ section.id }}">
                                     {%- for item in search.results -%}

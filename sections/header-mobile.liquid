@@ -9,13 +9,18 @@
                     {%- case block.type -%}
                         {%-  when 'menu' -%}
                             <div class="header-mobile--icon item__mobile--hamburger" style="--i-color: {{ block.settings.color }}">
-                                <button type="button" class="mobileMenu-toggle" data-mobile-menu aria-label="menu"><span class="mobileMenu-toggle__Icon"></span></button>
+                                <button type="button" class="mobileMenu-toggle" data-mobile-menu aria-label="menu">
+                                    <span class="mobileMenu-toggle__Icon"></span>
+                                </button>
                             </div>
                         {%-  when 'search' -%}
                             <details-modal class="header__iconItem header__search" style="--i-color: {{ block.settings.color }}">
                                 <details>
                                     <summary class="header__icon header__icon--search header__icon--summary link link--text focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}" data-search-mobile>
-                                        <span>{% render 'icon-search', class: 'modal__toggle-open icon icon-search w-24 h-24' %}{% render 'icon-close', class: 'modal__toggle-close icon icon-close w-24 h-24' %}</span>
+                                        <span>
+                                            {% render 'icon-search', class: 'modal__toggle-open icon icon-search w-24 h-24' %}
+                                            {% render 'icon-close', class: 'modal__toggle-close icon icon-close w-24 h-24' %}
+                                        </span>
                                     </summary>
                                 </details>
                             </details-modal>
@@ -97,7 +102,7 @@
                                 {% else %}
                                     {% assign is_contained = false %}
                                 {% endif %}
-                                <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account{% if  block.settings.icon == '2' %} header__icon--account-2{% endif %} link link--text focus-inset"{% if is_contained %} data-open-auth-sidebar{% endif %}>
+                                <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account link link--text focus-inset"{% if is_contained %} data-open-auth-sidebar{% endif %}>
                                     {%- case block.settings.icon -%}
                                         {%-  when '1' -%}
                                             {% render 'icon-account' %}
@@ -118,7 +123,7 @@
                             </div>
                         {%-  when 'cart' -%}
                             <div class="header-mobile--icon" style="--i-color: {{ block.settings.color }}; --color-bubble: {{ block.settings.color_bubble }}; --bg-bubble: {{ block.settings.bg_bubble }}">
-                                <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset cart-icon-bubble" {% if settings.show_quick_cart %}data-cart-sidebar{% endif %}>
+                                <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
                                     {%- case block.settings.icon -%}
                                         {%-  when '1' -%}
                                             {% render 'icon-cart' %}

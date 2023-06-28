@@ -56,7 +56,6 @@
     window.mobile_menu = '{{ settings.mobile_menu }}';
     window.money_format = '{{ shop.money_format }}';
     window.shop_currency = '{{ shop.currency }}';
-    window.currencySymbol ="{{ cart.currency.symbol }}";
     window.show_multiple_currencies = {{ enable_multiple_currencies }};
     window.routes = {
         root: '{{  routes.cart_url | split: "/cart" | first }}',
@@ -78,7 +77,6 @@
         type: '{{ settings.after_add_to_cart }}',
         message: `{{ 'products.product.add_to_cart_success_message' | t : name : '[name]' }}`
     };
-    window.variant_image_group_quick_view = {{ settings.show_quick_view_variant_image_group }};
     window.quick_shop = {
         show: {{ settings.show_quick_shop }},
         see_details: `{{ 'products.product.see_details' | t }}`,
@@ -107,9 +105,7 @@
         addToCart_message: `{{ 'products.product.add_to_cart_message' | t }}`,
         select: `{{ 'products.product.select_variant' | t }}`,
         preOrder: `{{ 'products.product.pre_order' | t }}`,
-        add: `{{ 'products.product.add.label__2' | t }}`,
-        unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
-        hide_variants_unavailable: {{ settings.hide_variants_unavailable }}
+        add: `{{ 'products.product.add.label__2' | t }}`
     };
     window.inventory_text = {
         hotStock: `{{ 'products.product.hot_stock' | t : inventory: '[inventory]' }}`,
@@ -195,7 +191,7 @@
         show_quick_view: {{ settings.show_quick_view_review }}
     };
     window.countdown = {
-        text: `{{ settings.countdown_text }}`,
+        text: `{{ 'countdown.general.text' | t }}`,
         day: `{{ 'countdown.general.day' | t }}`,
         hour: `{{ 'countdown.general.hour' | t }}`,
         min: `{{ 'countdown.general.min' | t }}`,

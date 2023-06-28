@@ -7,7 +7,8 @@
 <div class="footer-block__list-payment footer__column-item footer__payment" style="--margin-top: {{ payment_margin_top  }}">
   {%- if heading_payment != blank -%}
     <h2 class="footer-block__heading">{{- heading_payment | escape -}}</h2>
-  {%- endif -%} <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+  {%- endif -%}
+  <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
   <ul class="list list-payment clearfix" role="list">
     {%- if payment_type == 'default' -%}
       {%- for type in shop.enabled_payment_types -%}
@@ -15,12 +16,12 @@
       {%- endfor -%}
     {%- else -%}
       {% assign payment_string = 'visa,master,maestro,american_express,apple_pay,bitcoin,dankort,diners_club,discover,paypal,dogecoin,dwolla,forbrugsforeningen,jcb,litecoin,afterpay,google_pay,ideal,klarna,klarna-pay-later,shopify_pay,sofort' %}
-      {%- assign methods = payment_string | split: ',' -%}
+      {% assign methods = payment_string | split: ',' %}
       {%- for method in methods -%}
         {%- assign show_current_method = method | prepend: 'show_payment_' -%}
-        {%- if block.settings[show_current_method] -%}
+        {% if block.settings[show_current_method] %}
           <li class="list-payment__item {{method}}">{{ method | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
-        {%- endif -%}
+        {% endif %}
       {%- endfor -%}
     {%- endif -%}
   </ul>

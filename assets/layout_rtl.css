@@ -776,7 +776,7 @@
 		text-align: right;
 	}
 
-	body.layout_rtl.style_2_text_color_varriant .card-title span[data-change-title] {
+	body.layout_rtl.style_2_text_color_varriant .card-title .text span[data-change-title] {
 		left: 0;
 		right: auto;
 	}
@@ -2031,10 +2031,7 @@
 	.layout_rtl.password-template {
         direction: rtl;
     }
-    .layout_rtl .password-template .password-form {
-    	right: auto;
-    	left: 20px;
-    }
+
     .layout_rtl.password-template .password-body .checkbox-group {
         direction: ltr;
     }

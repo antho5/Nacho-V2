@@ -35,9 +35,15 @@
       {%- endif -%}
       .footer-block__newsletter .newsletter-form__field-wrapper {flex-wrap: wrap}
   }
-  @media (max-width: 1024px) {.footer-block__newsletter .newsletter-form__field-wrapper {flex-wrap: nowrap}}
-  @media (max-width: 767px) {.footer-block__text{margin-bottom:30px}.footer-block__text:not(.block__text_first){margin-top:25px}}
-  @media (min-width: 768px) and (max-width: 1200px) {.column-5 .footer-block__item.footer-block__text{width:100%}.column-5 .footer-block__item.footer-block__text.block__text_first{width:34%}}
+  @media (max-width: 1024px) {
+      .footer-block__newsletter .newsletter-form__field-wrapper {flex-wrap: nowrap}
+  }
+  @media (max-width: 767px) {
+      .footer-block__text{margin-bottom:30px}.footer-block__text:not(.block__text_first){margin-top:25px}
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+      .column-5 .footer-block__item.footer-block__text{width:100%}.column-5 .footer-block__item.footer-block__text.block__text_first{width:34%}
+  }
 </style>
 <div class="footer-block__item footer-block__column footer-block__{{ block.type }}{% if block.type == 'text' %} block_text--{{ layout_style }}{% endif %} {{ block__text_first }}" style="--block-custom-width: {{custom_width}};--block-margin-bottom: {{ mg_bottom }}">
   <div class="{% if block.settings.enable_side_border %}side-bordered{% endif %}">
@@ -47,8 +53,7 @@
     <div class="footer-block__details {% if block.settings.phone_text != blank or block.settings.address_text != blank or block.settings.email_text != blank %}has-content-piece{% endif %}" style="--icon-color: {{ final_icon_color }}; --icon-size: {{ block.settings.icon_size | append: 'px' }}; --content-spacing: {{ block.settings.content_spacing | append: 'px' }}">
       {%- if logo != blank -%}
         <div class="image_logo" style="--margin-bottom: {{ logo_margin_bottom }}">
-          {%- assign logo_height = logo.width | divided_by: logo.aspect_ratio | round -%}
-          <img data-srcset="{{ logo | img_url: '200x' }}" class="lazyload" alt="{{ logo.alt | default: shop.name | escape }}" width="{{ logo.width }}" height="{{ logo_height }}">
+          <img data-srcset="{{ logo | img_url: '200x' }}" class="lazyload" alt="{{ logo.alt | default: shop.name | escape }}">
         </div>
       {%- endif -%}
       <div class="rte">
@@ -64,7 +69,9 @@
                 {%- endif -%}
               </span>
             {%- endif -%}
-            <div>{{ block.settings.address_text | default: ' ' }}</div>
+            <div>
+              {{ block.settings.address_text | default: ' ' }}
+            </div>
           </div>
         {%- endif -%}
         {%- if block.settings.phone_text != blank -%}
@@ -78,7 +85,9 @@
                 {%- endif -%}
               </span>
             {%- endif -%}
-            <div>{{ block.settings.phone_text | default: ' ' }}</div>
+            <div>
+              {{ block.settings.phone_text | default: ' ' }}
+            </div>
           </div>
         {%- endif -%}
         {%- if block.settings.email_text != blank -%}
@@ -92,7 +101,9 @@
                 {%- endif -%}
               </span>
             {%- endif -%}
-            <div>{{ block.settings.email_text | default: ' ' }}</div>
+            <div>
+              {{ block.settings.email_text | default: ' ' }}
+            </div>
           </div>
         {%- endif -%}
         {%- if block.settings.address_text != blank and address_last == true -%}

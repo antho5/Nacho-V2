@@ -13,10 +13,20 @@
   assign section_text_align = section.settings.section_text_align
 -%}
 <style>
-  @media (min-width: 1200px) {.section-block-{{section.id}} {padding-top: {{ mg_top_desktop }};padding-bottom: {{ mg_bottom_desktop }}}}
-  @media (min-width: 1025px) { {%- if section.settings.container == 'fullwidth' -%}.section-block-{{section.id}} .container-full {padding-left: {{ padding_full_width }};padding-right: {{ padding_full_width }}}{%- endif -%}}
-  @media (min-width: 768px) and (max-width: 1199px) {.section-block-{{ section.id }} {padding-top: {{ mg_top_tablet }};padding-bottom: {{ mg_bottom_tablet }}}}
-  @media (max-width: 767px) {.section-block-{{ section.id }} {padding-top: {{ mg_top_mobile }};padding-bottom: {{ mg_bottom_mobile }}}}
+  @media (min-width: 1200px) {
+    .section-block-{{section.id}} {padding-top: {{ mg_top_desktop }};padding-bottom: {{ mg_bottom_desktop }}}
+  }
+  @media (min-width: 1025px) {
+    {%- if section.settings.container == 'fullwidth' -%}
+        .section-block-{{section.id}} .container-full {padding-left: {{ padding_full_width }};padding-right: {{ padding_full_width }}}
+    {%- endif -%}
+  }
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .section-block-{{ section.id }} {padding-top: {{ mg_top_tablet }};padding-bottom: {{ mg_bottom_tablet }}}
+  }
+  @media (max-width: 767px) {
+    .section-block-{{ section.id }} {padding-top: {{ mg_top_mobile }};padding-bottom: {{ mg_bottom_mobile }}}
+  }
 </style>
 <div class="newsletter-section section-block-{{section.id}}" id="newsletter-section-{{section.id}}" style="--footer-top-bg: {% if section.settings.background_gradient != blank %}{{ section.settings.background_gradient }}{% elsif section.settings.background != blank %}{{ section.settings.background }}{% endif %}">
   <div class="{% if container == 'fullwidth' %}container-full{% elsif container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% else %}container{% endif %}">
@@ -56,12 +66,12 @@
             assign form_gap = block.settings.form_gap | append: 'px'
             assign show_input_field = block.settings.show_input_field
           %}
-          <div class="section-content {% unless show_input_field %}no-input{% endunless %} text-{{ section_text_align }} flex-direction-{{ block.settings.newsletter_content_direction }}" style="--newsletter_form_justify_content: {{block.settings.newsletter_form_justify_content}}">
+          <div class="section-content {% unless show_input_field %}no-input{% endunless %} text-{{ section_text_align }} flex-direction-{{ block.settings.newsletter_content_direction }}">
             {%- if section_title != blank -%}
               <h3 class="title text-{{ section_text_align }}" style="--title-font-size: {{ section_title_font_size }};--title-font-size-mb: {{ section_title_font_size_mb }};--title-font-weight: {{ section_title_font_weight }};--title-color: {% if section_title_color != blank %}{{ section_title_color }}{% endif %};--title-margin-bottom: {{ block.settings.mg_bottom_title | append: 'px' }};--title-margin-bottom-mb: {{ block.settings.mg_bottom_title_mb | append: 'px' }};--title-text-transform: {{ block.settings.section_title_text_transform }};--title-font-style: {{ block.settings.section_title_font_style }}"><span class="text">{{ section_title }}</span></h3>
             {%- endif -%}
             {%- if section_description != blank -%}
-              <div class="description text-{{ section_text_align }}" style="--description-font-size: {{ section_description_font_size }};--description-font-size-mb: {{ section_description_font_size_mb }};--description-color: {% if section_description_color != blank %}{{ section_description_color }}{% endif %};--description-font-weight: {{ section_description_font_weight }};--description-margin-bottom: {{ block.settings.margin_bottom_des | append: 'px' }};--description-line-height: {{ block.settings.des_line_height | append: 'px' }}">{{ section_description }}</div>
+              <p class="description text-{{ section_text_align }}" style="--description-font-size: {{ section_description_font_size }};--description-font-size-mb: {{ section_description_font_size_mb }};--description-color: {% if section_description_color != blank %}{{ section_description_color }}{% endif %};--description-font-weight: {{ section_description_font_weight }};--description-margin-bottom: {{ block.settings.margin_bottom_des | append: 'px' }};--description-line-height: {{ block.settings.des_line_height | append: 'px' }}">{{ section_description }}</p>
             {%- endif -%}
             <div class="section-form-wrapper text-{{ section_text_align }} width-behavior-{{ block.settings.input_width_behavior }}">
               <newsletter-form class="newsletter-section-form newsletter-section-block">
@@ -74,7 +84,8 @@
                         <input id="NewsletterForm--{{ section.id }}" type="email" name="contact[email]" class="field__input form-input-placeholder" value="{{ form.email }}" aria-required="true" autocorrect="off" autocapitalize="off" autocomplete="email"{% if form.errors %} autofocus aria-invalid="true" aria-describedby="ContactFooter-error"{% elsif form.posted_successfully? %} aria-describedby="ContactFooter-success" {% endif %} placeholder="{{ input_placeholder }}">
                       </div>
                     {%- endif -%}
-                    <button {% unless show_input_field %}data-open-newsletter-popup{% endunless %} type="{% if show_input_field %}submit{% else %}button{% endif %}" class="button newsletter-form__button" name="commit" id="Subscribe-{{ section.id }}" aria-label="{{ 'newsletter.button_label' | t }}" style="--button-width: {{ button_width }};--button-font-size: {{ button_font_size }};--button-text-color: {% if button_text_color != blank %}{{ button_text_color }}{% endif %};--button-border-color: {% if button_border_color != blank %}{{ button_border_color }}{% endif %};--button-background: {% if button_gradient_color != blank %}{{ button_gradient_color }}{% elsif button_background_color != blank %}{{ button_background_color }}{% endif %};--button-text-color-hover: {% if button_text_color_hover != blank %}{{ button_text_color_hover }}{% endif %};--button-border-color-hover: {% if button_border_color_hover != blank %}{{ button_border_color_hover }}{% endif %};--button-background-hover: {% if button_gradient_color_hover != blank %}{{ button_gradient_color_hover }}{% elsif button_background_color_hover != blank %}{{ button_background_color_hover }}{% endif %};--button-text-transform: {{ button_text_transform }};--button-font-weight: {{ button_font_weight }}">{{ button_text }}</button>
+                    <button {% unless show_input_field %}data-open-newsletter-popup{% endunless %} type="{% if show_input_field %}submit{% else %}button{% endif %}" class="button newsletter-form__button"
+                      name="commit" id="Subscribe-{{ section.id }}" aria-label="{{ 'newsletter.button_label' | t }}"style="--button-width: {{ button_width }};--button-font-size: {{ button_font_size }};--button-text-color: {% if button_text_color != blank %}{{ button_text_color }}{% endif %};--button-border-color: {% if button_border_color != blank %}{{ button_border_color }}{% endif %};--button-background: {% if button_gradient_color != blank %}{{ button_gradient_color }}{% elsif button_background_color != blank %}{{ button_background_color }}{% endif %};--button-text-color-hover: {% if button_text_color_hover != blank %}{{ button_text_color_hover }}{% endif %};--button-border-color-hover: {% if button_border_color_hover != blank %}{{ button_border_color_hover }}{% endif %};--button-background-hover: {% if button_gradient_color_hover != blank %}{{ button_gradient_color_hover }}{% elsif button_background_color_hover != blank %}{{ button_background_color_hover }}{% endif %};--button-text-transform: {{ button_text_transform }};--button-font-weight: {{ button_font_weight }}">{{ button_text }}</button>
                   </div>
                   {%- if form.errors -%}
                     <div class="newsletter-form__message newsletter-form__message--error form__message" id="ContactFooter-error">
@@ -157,10 +168,12 @@
     </div>
   </div>
 </div>
+
 <script>
   document.querySelectorAll('[data-open-newsletter-popup]').forEach(button => {
     button.addEventListener('click', (e) => {
       e.preventDefault();
+
       document.body.classList.add("newsletter-show");
       setTimeout(() => {
         document.body.classList.add("show-newsletter-image");
@@ -168,6 +181,7 @@
     })
   })
 </script>
+
 {% schema %}
 {
   "name": "t:sections.newsletter.name",

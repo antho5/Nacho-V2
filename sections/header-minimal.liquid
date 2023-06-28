@@ -1,4 +1,5 @@
 {{ 'component-header-minimal.css' | asset_url | stylesheet_tag }}
+
 <header class="header header-minimal" style="--spacing-l-r: {{ section.settings.padding_full_width }}px; --bg-color: {% if section.settings.header_bg_gradient != blank %}{{ section.settings.header_bg_gradient }}{% else %}{{ section.settings.header_bg }}{% endif %}; --p-top: {{ section.settings.padding_top }}px; --p-bottom: {{ section.settings.padding_bottom }}px">
     <div class="container container-{{ section.settings.container }}">
         <div class="header-minimal__content header-minimal__content-size--{{ section.blocks.size }}">
@@ -6,7 +7,9 @@
                 <div class="header-minimal__item">
                     {%- case block.type -%}
                         {%-  when 'group_1' -%}
-                            <div class="header__social-media" style="--color: {{ block.settings.color }}">{% render 'halo-social-media-icons' %}</div>
+                            <div class="header__social-media" style="--color: {{ block.settings.color }}">
+                                {% render 'halo-social-media-icons' %}
+                            </div>
                         {%-  when 'group_2' -%}
                             <div class="header__icons text-right clearfix" style="--language-currency-color: {{ block.settings.language_currency_color }}; --language-currency-bg: {{ block.settings.language_currency_bg }}; --cart-color-item: {{ block.settings.cart_color_item }}; --cart-bg-item: {{ block.settings.cart_bg_item }}; --cart-item-font-size: {{ block.settings.cart_item_font_size }}px">
                                 {%- if block.settings.show_language_currency -%}

@@ -22,13 +22,18 @@
             <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
         {%- endif -%}
         <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-        <title>{{ page_title }} {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%} {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%} {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}</title>
-
-        {%- if page_description -%}
+        <title>
+            {{ page_title }}
+            {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+            {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+            {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+        </title>
+        {% if page_description %}
             <meta name="description" content="{{ page_description | escape }}">
-        {%- endif -%}
+        {% endif %}
         {% render 'meta-tags' %}
         {{ content_for_header }}
+
         {% render 'variable' %}
         {% render 'global-style' %}
         {% render 'global-script' %}
@@ -86,24 +91,24 @@
         -%}
     </head>
 
-    <body class="template-{{ request.page_type }} {{layout_body}} {{style_dots}} {{style_text_size_varriant}} {{style_arrows}} {{product_card_layout}} {{ banner_animation }}{% if settings.enable_button_disable_arrows %} enable_button_disable_arrows{% endif %}{% if settings.display_text_color_title %} enable_text_color_title{% endif %}{% if settings.style_text_color_varriant == '02' %} style_2_text_color_varriant{% endif %}{% if settings.hide_compare_homepage %} hide_compare_homepage{% endif %} {{ quick_shop_type }}{% if settings.show_image_loading %} show_image_loading{% endif %}{% if settings.show_effect_close %} show_effect_close{% endif %}{% if settings.enable_layout_rtl and enable_iso_rtl %} layout_rtl{% endif %}{% if request.design_mode %} shopify-design-mode{% endif %}">
+    <body class="template-{{ request.page_type }} {{layout_body}} {{style_dots}} {{style_text_size_varriant}} {{style_arrows}} {{product_card_layout}} {{ banner_animation }}{% if settings.enable_button_disable_arrows %} enable_button_disable_arrows{% endif %}{% if settings.display_text_color_title %} enable_text_color_title{% endif %}{% if settings.style_text_color_varriant == '02' %} style_2_text_color_varriant{% endif %}{% if settings.hide_compare_homepage %} hide_compare_homepage{% endif %} {{ quick_shop_type }}{% if settings.show_image_loading %} show_image_loading{% endif %}{% if settings.show_effect_close %} show_effect_close{% endif %}{% if settings.enable_layout_rtl and enable_iso_rtl %} layout_rtl{% endif %}">
         <div class="body-content-wrapper">
             <a class="skip-to-content-link button visually-hidden" href="#MainContent">{{ "accessibility.skip_to_text" | t }}</a>
 
             {% sections 'header-group' %}
             {% render 'wrapper-header' %}
             
-            {%- if settings.layout_body == 'boxed' -%}
+            {% if settings.layout_body == 'boxed' %}
                 <div class="wrapper-hasbanner-adv">
-            {%- endif -%}
+            {% endif %}
                 {% render 'halo-banner-adv-left' %}
                 {% render 'halo-banner-adv-right' %}
                 <main id="MainContent" class="wrapper-body content-for-layout focus-none" role="main" tabindex="-1">
                     {{ content_for_layout }}
                 </main>
-            {%- if settings.layout_body == 'boxed' -%}        
+            {% if settings.layout_body == 'boxed' %}        
                 </div>
-            {%- endif -%}
+            {% endif %}
             
             <div class="wrapper-footer">{% sections 'footer-group' %}</div>
 
@@ -119,19 +124,24 @@
             {% render 'theme-editor-notification' %}
         {%- endif -%}
 
+        {% render 'theme-demo-notification' %}
+
         {%- if settings.use_custom_js -%}
             {{ 'custom.js' | asset_url | script_tag }}
         {%- endif -%}
         
         <div class="background-overlay">
-            {%- if settings.show_effect_close -%}
+            {% if settings.show_effect_close %}
             <div class="background-cursor-wrapper">
                 <div class="background-cursor-wrapper_outer">
-                    <div class="background-cursor-wrapper_inner"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"><g class="nc-icon-wrapper" fill="#ffffff" transform="translate(0.5, 0.5)"><line fill="none" stroke-width="6" x1="46" y1="2" x2="2" y2="46"/> <line fill="none" stroke-width="6" x1="46" y1="46" x2="2" y2="2"/></g></svg></div>
+                    <div class="background-cursor-wrapper_inner">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20"><g class="nc-icon-wrapper" fill="#ffffff" transform="translate(0.5, 0.5)"><line fill="none" stroke-width="6" x1="46" y1="2" x2="2" y2="46"/> <line fill="none" stroke-width="6" x1="46" y1="46" x2="2" y2="2"/></g></svg>
+                    </div>
                 </div>
             </div>
-            {%- endif -%}
+            {% endif %}
         </div>
+        
         {% render 'halo-sidebar' %}
     </body>
 </html>

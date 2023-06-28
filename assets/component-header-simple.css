@@ -282,7 +282,6 @@
     .header-simple .container-full {
         padding-left: var(--spacing-l-r);
         padding-right: var(--spacing-l-r);
-		overflow: initial;
     }
 
     .header-simple__item .header__logo {

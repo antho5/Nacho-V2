@@ -43,7 +43,7 @@
     .layout_rtl .header-nav-multi-site .header__list .item--border:not(.is-active):before {right: auto;left: 0}.layout_rtl .header-nav-multi-site .header__icon+.header__icon, .layout_rtl .header-nav-multi-site .header__iconItem+.header__iconItem, .layout_rtl .header-nav-multi-site .header__languageCurrency {margin-left: 0;margin-right: 20px}.layout_rtl .header-nav-multi-site .header__group .cart-count-bubble {margin-right: 0}.layout_rtl .header-nav-multi-site .halo-top-currency .dropdown-toggle .text {margin-left: 5px;margin-right: 5px}.layout_rtl .header-nav-multi-site .live_help,.layout_rtl .header-nav-multi-site .customer-links {margin-left: 0;margin-right: 20px}
     {%- endif -%}
     @media screen and (max-width: 1024px) {
-        .header-nav-multi-site .header-top--wrapper .header__list a {padding: var(--padding_vertical_mb) var(--padding_hozi_mb);font-size: {{ tab_font_size_mb }};font-weight: {{ tab_font_weight_mb }}}.header-nav-multi-site .menu-lv-item.menu-lv-1:hover > a > .text, .header-nav-multi-site .menu-lv-item.menu-lv-2:hover > a > .text, .header-nav-multi-site .menu-lv-item.menu-lv-3:hover > a > .text{border-bottom: 0}.bottom-bar--list .cart-count-bubble {min-width: 20px;min-height: 20px}.bottom-bar--list .cart-count-bubble .text {border-radius: 50%;line-height: 20px;font-size: var(--font-size)}.header-nav-multi-site .cart-text, .header-nav-multi-site .customer-links, .header-nav-multi-site .wishlist-text, .header-nav-multi-site .customer-links a{color: #232323 !important}.halo-sidebar_menu .header__inline-menu{display: none} .halo-sidebar_menu .header__inline-menu.is-active{display: block}
+        .header-nav-multi-site .header-top--wrapper .header__list a {padding: var(--padding_vertical_mb) var(--padding_hozi_mb);font-size: {{ tab_font_size_mb }};font-weight: {{ tab_font_weight_mb }}}.header-nav-multi-site .menu-lv-item.menu-lv-1:hover > a > .text, .header-nav-multi-site .menu-lv-item.menu-lv-2:hover > a > .text, .header-nav-multi-site .menu-lv-item.menu-lv-3:hover > a > .text{border-bottom: 0}.bottom-bar--list .cart-count-bubble {min-width: 20px;min-height: 20px}.bottom-bar--list .cart-count-bubble .text {border-radius: 50%;line-height: 20px;font-size: var(--font-size)}.header-nav-multi-site .cart-text, .header-nav-multi-site .customer-links, .header-nav-multi-site .wishlist-text, .header-nav-multi-site .customer-links a{color: #232323 !important}
     }
     @media (max-width: 992px) {
         {%- if section.settings.header_style == 'style_2' -%}
@@ -63,11 +63,11 @@
                  font-size: calc(var(--font-body-size))
             {%- endif -%}
         }
-        .header-nav-multi-site .header__inline-menu{display: none}.header-nav-multi-site .header__inline-menu.is-active{display: block}
-    
     }
 </style>
+
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+
 {%- liquid
     assign menu_tab = section.blocks | where: "type", "tab"
     assign page_handle = page.handle
@@ -211,7 +211,7 @@
                         {%- if settings.show_wishlist and section.settings.show_wishlist -%}
                             <a href="{{ pages['wish-list'].url }}" class="header__icon header__icon--wishlist link link--text focus-inset">
                                 {% render 'icon-heart-2' %}
-                                <div class="wishlist-count-bubble"><span class="text" aria-hidden="true" data-wishlist-count></span><span class="visually-hidden">{{ 'wishlist.general.wishlist' | t }}</span></div>
+                                <div class="wishlist-count-bubble"><span class="text" aria-hidden="true" data-wishlist-count></span></div>
                             </a>
                         {%- endif -%}
                     {%- endunless -%}
@@ -245,7 +245,7 @@
                                         <div class="desc">{{ section.settings.ask_an_expert_desc }}</div>
                                     {%- endif -%}
                                     {%- if section.settings.ask_an_expert_button != blank -%}
-                                        <button type="button" class="button button-2" title="{{ 'ask_an_expert.general.text' | t}}" data-open-ask-an-expert>{{ section.settings.ask_an_expert_button }}</button>
+                                        <a class="button button-2" href="javascript:void(0)" title="Ask An Expert" data-open-ask-an-expert>{{ section.settings.ask_an_expert_button }}</a>
                                     {%- endif -%}
                                     {%- if section.settings.ask_an_expert_text != blank -%}
                                         <span class="text">{{ section.settings.ask_an_expert_text }}</span>
@@ -300,7 +300,11 @@
                         <div class="header__logo">
                             {%- if menu_tab.size > 0 -%}
                                 {% assign page_handle = page.handle %}
-                                <div class="header__heading header__heading--item">
+                                {%- if request.page_type == 'index' -%}
+                                    <h1 class="header__heading header__heading--item">
+                                {%- else -%}
+                                    <div class="header__heading header__heading--item">
+                                {%- endif -%}
                                     {%- for block in menu_tab -%}
                                         {%- liquid
                                             assign multi_page_handle = pages[block.settings.link].handle
@@ -327,9 +331,7 @@
                                             {%- if block.settings.logo != blank -%}
                                                 {%- assign image = block.settings.logo -%}
                                                 {%- assign image_size = section.settings.logo_width | append: 'x' -%}
-                                                {%- assign logo_width = section.settings.logo_width -%}
-                                                {%- assign logo_height = logo_width | divided_by: image.aspect_ratio | round -%}
-                                                <img srcset="{{ image | img_url: image_size }} 1x, {{ image | img_url: image_size, scale: 2 }} 2x" src="{{ image | img_url: image_size }}" loading="lazy" class="header__heading-logo" alt="{{ image.alt | default: shop.name | escape }}" width="{{ logo_width }}" height="{{ logo_height }}">
+                                                <img srcset="{{ image | img_url: image_size }} 1x, {{ image | img_url: image_size, scale: 2 }} 2x" src="{{ image | img_url: image_size }}" loading="lazy" class="header__heading-logo" alt="{{ image.alt | default: shop.name | escape }}">
                                             {%- elsif block.settings.logo_text != blank -%}
                                                 <span class="h2 {{ section.settings.logo_text_transform }}">{{ block.settings.logo_text }}</span>
                                             {%- else -%}
@@ -337,9 +339,17 @@
                                             {%- endif -%}
                                         </a>
                                     {%- endfor -%}
-                                </div>
+                                {%- if request.page_type == 'index' -%}
+                                    </h1>
+                                {%- else -%}
+                                    </div>
+                                {%- endif -%}
                             {%- else -%}
-                                <div class="header__heading">
+                                {%- if request.page_type == 'index' -%}
+                                    <h1 class="header__heading">
+                                {%- else -%}
+                                    <div class="header__heading">
+                                {%- endif -%}
                                     <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
                                         {%- if section.settings.logo != blank -%}
                                             {%- assign image = section.settings.logo -%}
@@ -351,46 +361,25 @@
                                             <span class="h2 {{ section.settings.logo_text_transform }}">{{ shop.name }}</span>
                                         {%- endif -%}
                                     </a>
-                                </div>
+                                {%- if request.page_type == 'index' -%}
+                                    </h1>
+                                {%- else -%}
+                                    </div>
+                                {%- endif -%}
                             {%- endif -%}
                         </div>
                     </div>
                     <div class="main-menu header-bottom-center{% if section.settings.label_position == 'none' %} label-none{% elsif section.settings.label_position == 'main_menu' %} label-main-menu{% if block.settings.new_label_1 != blank or block.settings.sale_label_1 != blank or block.settings.hot_label_1 != blank%} main-menu-hasLabel{% endif %}{% else %}{% endif %}">
                         <div class="header-bottom--wrapper main-menu--wrapper" id="HeaderNavigation">
-                            {%- if menu_tab.size > 0 -%}
-                                {% assign page_handle = page.handle %}
-                                {%- for block in menu_tab -%}
-                                        {%- liquid
-                                            assign multi_page_handle = pages[block.settings.link].handle
-                                            assign multi_page_url = pages[block.settings.link].url
-                                            assign class = 'header__inline-menu'
-
-                                            if template.suffix contains 'landing'
-                                                if page_handle == multi_page_handle
-                                                    assign class = 'header__inline-menu is-active'
-                                                endif
-                                            else
-                                                if forloop.first
-                                                    assign class = 'header__inline-menu is-active'
-                                                endif
-                                            endif
-
-                                            if multi_page_url != blank
-                                                assign url = multi_page_url
-                                            else
-                                                assign url = routes.root_url
-                                            endif
-                                        -%}
-
-                                    <nav class="{{class}}" data-navigation role="navigation" data-load-menu-page="{{ multi_page_handle }}" style="--menu_bottom_spacing: {{section.settings.menu_bottom_spacing | append: 'px'}};--menu_top_spacing: {{section.settings.menu_top_spacing | append: 'px'}};--menu_top_spacing_sticky: -{{section.settings.menu_top_spacing | plus: 1 | append: 'px'}};--grid_gap_menu_item: {{section.settings.grid_gap_menu_item | append: 'px'}};--lv_1_color: {{ section.settings.lv_1_color }};--lv_1_color_hover: {{ section.settings.lv_1_color_hover }};--lv_2_color: {{ section.settings.lv_2_color }}; --lv_2_color_hover: {{ section.settings.lv_2_color_hover }};--lv_3_color: {{ section.settings.lv_3_color }};--lv_3_color_hover: {{ section.settings.lv_3_color_hover }};--bg_mega_menu: {% if section.settings.bg_mega_menu_gradient != blank %}{{ section.settings.bg_mega_menu_gradient }}{% else %}{{ section.settings.bg_mega_menu }}{% endif %};--sale_item_color: {{section.settings.sale_item_color}};--new_label_color: {{ section.settings.new_label_color }};--new_label_border: {{ section.settings.new_label_bg }};--new_label_bg: {% if section.settings.new_label_bg_gradient != blank %}{{ section.settings.new_label_bg_gradient }}{% else %}{{ section.settings.new_label_bg }}{% endif %};--sale_label_color: {{ section.settings.sale_label_color }};--sale_label_border: {{ section.settings.sale_label_bg }};--sale_label_bg: {% if section.settings.sale_label_bg_gradient != blank %}{{ section.settings.sale_label_bg_gradient }}{% else %}{{ section.settings.sale_label_bg }}{% endif %};--hot_label_color: {{ section.settings.hot_label_color }};--hot_label_border: {{ section.settings.hot_label_bg }};--hot_label_bg: {% if section.settings.hot_label_bg_gradient != blank %}{{ section.settings.hot_label_bg_gradient }}{% else %}{{ section.settings.hot_label_bg }}{% endif %}">
-                                        {% render 'halo-navigation-list-multi',listClass: 'list-menu list-menu--inline text-left', menu_handle: multi_page_handle%}
-                                    </nav>
-                                {%- endfor -%}
-                            {%- endif -%}    
+                            {%- if section.settings.menu != blank -%}
+                                <nav class="header__inline-menu" data-navigation role="navigation" style="--menu_bottom_spacing: {{section.settings.menu_bottom_spacing | append: 'px'}};--menu_top_spacing: {{section.settings.menu_top_spacing | append: 'px'}};--menu_top_spacing_sticky: -{{section.settings.menu_top_spacing | plus: 1 | append: 'px'}};--grid_gap_menu_item: {{section.settings.grid_gap_menu_item | append: 'px'}};--lv_1_color: {{ section.settings.block.settings.lv_1_color }};--lv_1_color_hover: {{ section.settings.lv_1_color_hover }};--lv_2_color: {{ section.settings.lv_2_color }}; --lv_2_color_hover: {{ section.settings.lv_2_color_hover }};--lv_3_color: {{ section.settings.lv_3_color }};--lv_3_color_hover: {{ section.settings.lv_3_color_hover }};--bg_mega_menu: {% if section.settings.bg_mega_menu_gradient != blank %}{{ section.settings.bg_mega_menu_gradient }}{% else %}{{ section.settings.bg_mega_menu }}{% endif %};--sale_item_color: {{section.settings.sale_item_color}};--new_label_color: {{ section.settings.new_label_color }};--new_label_border: {{ section.settings.new_label_bg }};--new_label_bg: {% if section.settings.new_label_bg_gradient != blank %}{{ section.settings.new_label_bg_gradient }}{% else %}{{ section.settings.new_label_bg }}{% endif %};--sale_label_color: {{ section.settings.sale_label_color }};--sale_label_border: {{ section.settings.sale_label_bg }};--sale_label_bg: {% if section.settings.sale_label_bg_gradient != blank %}{{ section.settings.sale_label_bg_gradient }}{% else %}{{ section.settings.sale_label_bg }}{% endif %};--hot_label_color: {{ section.settings.hot_label_color }};--hot_label_border: {{ section.settings.hot_label_bg }};--hot_label_bg: {% if section.settings.hot_label_bg_gradient != blank %}{{ section.settings.hot_label_bg_gradient }}{% else %}{{ section.settings.hot_label_bg }}{% endif %}">
+                                    {% render 'halo-navigation-list-multi',listClass: 'list-menu list-menu--inline text-left'%}
+                                </nav>
+                            {%- endif -%}
                         </div>
                     </div>
                     <div class="header-items header-bottom-right">
-                        {%- if section.settings.show_search -%}
+                        {% if section.settings.show_search %}
                             <details-modal class="header__iconItem header__search layout_search--{{ section.settings.style_search }}">
                                 {%- if settings.show_quick_search -%}
                                     <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}" data-product-to-show="{{ settings.quick_search_to_show }}">
@@ -400,20 +389,20 @@
                                         <button type="button" class="header-search-close" aria-label="{{ 'general.common.close' | t }}">{% render 'icon-close' %}</button>
                                         <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
                                             <div class="field">
-                                                <input class="search__input field__input form-input-placeholder" id="Search-In-Modal-Menu-Multi" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search_the_store' | t }}" autocomplete="off" 
+                                                <input class="search__input field__input form-input-placeholder" id="Search-In-Modal" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search_the_store' | t }}" autocomplete="off" 
                                                     {%- if settings.show_quick_search -%}
                                                         role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false"
                                                     {%- endif -%}
                                                     />
                                                 <input type="hidden" name="options[prefix]" value="last" />
-                                                <label class="field__label hiddenLabels" for="Search-In-Modal-Menu-Multi">{{ 'general.search.search_the_store' | t }}</label>
+                                                <label class="field__label hiddenLabels" for="Search-In-Modal">{{ 'general.search.search_the_store' | t }}</label>
                                                 <button class="button search__button field__button focus-inset" aria-label="{{ 'general.search.search' | t }}">{% render 'icon-search-02' %}</button>
                                             </div>
                                         </form>
+                                        {%- if settings.show_search_trending or settings.show_search_product -%}
+                                            {%- render 'quick-searching-trending-products' -%}
+                                        {%- endif -%}
                                         {%- if settings.show_quick_search -%}
-                                            {%- if settings.show_search_trending or settings.show_search_product -%}
-                                                {%- render 'quick-searching-trending-products' -%}
-                                            {%- endif -%}
                                             {%- render 'predictive-search-results' -%}
                                         {%- endif -%}
                                     </summary>
@@ -427,8 +416,8 @@
                                     </predictive-search>
                                 {%- endif -%}
                             </details-modal>
-                        {%- endif -%}
-                        {%- if section.settings.show_cart -%}
+                        {% endif %}
+                        {% if section.settings.show_cart %}
                             <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
                                 {%- if section.settings.header_style == 'style_2' -%}
                                     {% render 'icon-cart-02' %}
@@ -443,7 +432,7 @@
                                     <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
                                 </div>
                             </a>
-                        {%- endif -%}
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -607,9 +596,10 @@
         "@context": "http://schema.org",
         "@type": "Organization",
         "name": {{ shop.name | json }},
-        {% if section.settings.logo %}
-            "logo": {{ section.settings.logo | image_url: width: 500 | prepend: "https:" | json }},
-        {% endif %}
+        {%- if section.settings.logo -%}
+            {% assign image_size = section.settings.logo.width | append:'x' %}
+            "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+        {%- endif -%}
         "sameAs": [
             {{ settings.social_twitter_link | json }},
             {{ settings.social_facebook_link | json }},
@@ -620,9 +610,26 @@
             {{ settings.social_youtube_link | json }},
             {{ settings.social_vimeo_link | json }}
         ],
-        "url": {{ request.origin | append: page.url | json }}
+        "url": {{ shop.url | append: page.url | json }}
     }
 </script>
+
+{%- if request.page_type == 'index' -%}
+    {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            "name": {{ shop.name | json }},
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {{ potential_action_target | json }},
+                "query-input": "required name=search_term_string"
+            },
+            "url": {{ shop.url | append: page.url | json }}
+        }
+    </script>
+{%- endif -%}
 
 {% schema %}
 {

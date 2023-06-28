@@ -192,7 +192,7 @@
 @media (max-width: 1024px) {
 
     /* General */
-    .section-header-navigation:not(.section-header-nav-multi-site) {
+    .header-navigation {
         display: none;
     }
 
@@ -512,9 +512,6 @@
         color: var(--cart_count_bubble_color);
         font-size: var(--cart_count_bubble_font_size);
     }
-    .header-navigation .header__icon--cart:hover .cart-count-bubble .text {
-        color: var(--cart_count_bubble_color);
-    }
     .header-navigation .header-language_currency {
         vertical-align: middle
     }
@@ -615,7 +612,7 @@
     /* Sticky Menu */   
     .section-header-navigation {
         position: sticky;
-        z-index: 20;
+        z-index: 3;
     }
     .shopify-section-header-sticky {
         position: sticky;

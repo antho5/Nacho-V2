@@ -26,15 +26,12 @@
 
 {%- if enable_shopify_payments_currencies -%}
     {{ "//cdn.shopify.com/s/javascripts/currencies.js" | script_tag }}
-    {%- if settings.currency_format_enable -%}
-        {{ "jquery.currencies-format.min.js" | asset_url | script_tag }}
-    {%- else -%}
-        {{ "jquery.currencies.min.js" | asset_url | script_tag }}
-    {%- endif -%}
+    {{ "jquery.currencies.min.js" | asset_url | script_tag }}
     
     <script>
         var shopCurrency = '{{ shop.currency }}';
         var currencyItem = $('.dropdown-item[data-currency]');
+            
         currencyItem.on('click', function(e) {
             e.preventDefault();
   
@@ -66,21 +63,20 @@
 {%- else -%}
     {%- if enable_multiple_currencies -%}
         {{ "//cdn.shopify.com/s/javascripts/currencies.js" | script_tag }}
-        {%- if settings.currency_format_enable -%}
-            {{ "jquery.currencies-format.min.js" | asset_url | script_tag }}
-        {%- else -%}
-            {{ "jquery.currencies.min.js" | asset_url | script_tag }}
-        {%- endif -%}
+        {{ "jquery.currencies.min.js" | asset_url | script_tag }}
 
         {%- if enable_auto_currency == false -%}
             <script>
                 // Pick your format here:  
                 // Can be 'money_format' or 'money_with_currency_format'
                 Currency.format = 'money_format';
+
                 var shopCurrency = '{{ shop.currency }}';
+
                 if (shopCurrency != '{{cart.currency.iso_code}}') {
                     window.location = window.location.href + '?currency=' + shopCurrency;
                 }
+
                 /* Sometimes merchants change their shop currency, let's tell our JavaScript file */
                 Currency.moneyFormats[shopCurrency].money_with_currency_format = {{ shop.money_with_currency_format | strip_html | json }};
                 Currency.moneyFormats[shopCurrency].money_format = {{ shop.money_format | strip_html | json }};
@@ -158,7 +154,9 @@
                 // Pick your format here:  
                 // Can be 'money_format' or 'money_with_currency_format'
                     Currency.format = 'money_format';
+
                 var shopCurrency = '{{ shop.currency }}';
+
                 if (shopCurrency != '{{cart.currency.iso_code}}') {
                     window.location = window.location.href + '?currency=' + shopCurrency;
                 }
@@ -245,6 +243,7 @@
 
                 currencyItem.on('click', (event) => {
                     event.preventDefault();
+
                     var $target = $(event.currentTarget),
                         label = $('[data-currency-label]'),
                         cur = $target.attr('data-currency');
@@ -261,6 +260,7 @@
 
                         label.html(item);
                     }
+
                     cur != Currency.currentCurrency && Currency.convertAll(Currency.currentCurrency, cur);
                 });
 
@@ -282,6 +282,7 @@
 
                 function adsBlocked(callback) {
                     var testURL = 'https://ssl.geoplugin.net/javascript.gp?k=9247556ec91c71e9'
+
                     var myInit = {
                         method: 'HEAD',
                         mode: 'no-cors'
@@ -302,18 +303,19 @@
     {%- else -%}
         {%- if enable_auto_currency -%}
             <div id="currencies" style="display: none;">
-                <a class="dropdown-item active " href="#" data-currency="{{ shop.currency }}"><span class="text">{{ shop.currency }}</span></a>
+                <a class="dropdown-item active " href="#" data-currency="{{ shop.currency }}">
+                    <span class="text">{{ shop.currency }}</span>
+                </a>
             </div>
+
             {{ "//cdn.shopify.com/s/javascripts/currencies.js" | script_tag }}
-            {%- if settings.currency_format_enable -%}
-                {{ "jquery.currencies-format.min.js" | asset_url | script_tag }}
-            {%- else -%}
-                {{ "jquery.currencies.min.js" | asset_url | script_tag }}
-            {%- endif -%}
+            {{ "jquery.currencies.min.js" | asset_url | script_tag }}
+
             <script>
                 // Pick your format here:  
                 // Can be 'money_format' or 'money_with_currency_format'
                 Currency.format = 'money_format';
+
                 var shopCurrency = '{{ shop.currency }}';
 
                 if (shopCurrency != '{{cart.currency.iso_code}}') {

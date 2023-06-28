@@ -373,31 +373,19 @@
             var limit = {{ limit }},
                 expireDay = {{ settings.recently_viewed_expire }};
 
-            const handler = (entries, observer) => {
-                if (!entries[0].isIntersecting || entries[0].target.matches('.ajax-loaded')) return;
-                entries[0].target.classList.add('ajax-loaded');
-                Shopify.Products.showRecentlyViewed({
-                    howManyToShow: limit,
-                    wrapperId: 'recently-viewed-products-list-2', 
-                    templateId: 'recently-viewed-product-block',
-                    layout: '{{ layout }}',
-                    swipe: {{ swipe }},
-                    media: '{{ image_ratio }}',
-                    onComplete: function() {
-                        if (window.location.pathname.indexOf('/products/') !== -1) {
-                            $.cookie('shopify_recently_viewed', cookieValue, { expires: expireDay, path: "/", domain: window.location.hostname });
-                        }
+            Shopify.Products.showRecentlyViewed({
+                howManyToShow: limit,
+                wrapperId: 'recently-viewed-products-list-2', 
+                templateId: 'recently-viewed-product-block',
+                layout: '{{ layout }}',
+                swipe: {{ swipe }},
+                media: '{{ image_ratio }}',
+                onComplete: function() {
+                    if (window.location.pathname.indexOf('/products/') !== -1) {
+                        $.cookie('shopify_recently_viewed', cookieValue, { expires: expireDay, path: "/", domain: window.location.hostname });
                     }
-                });
-            }
-
-            this.recentlyViewedBlock = document.querySelector('[data-recently-viewed-block]');
-
-            const config = {
-                threshold: 0.25,
-            }
-
-            new IntersectionObserver(handler.bind(this.recentlyViewedBlock), ({}, config)).observe(this.recentlyViewedBlock);
+                }
+            });
         }
     </script>
 {%- endif -%}

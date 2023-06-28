@@ -36,9 +36,9 @@
                                     -%}
                                     <input class="product-form__radio mobile" type="radio" id="option-{{ product.id }}-{{ option.name }}-{{ forloop.index0 }}-mobile"
                                         name="{{ option.name }}-mobile"
-                                        value="{{ value | escape }}"
+                                        value="{{ value | replace: '"', 'Special_Double_Quote' | replace: '/', 'Special_Slash' | escape }}"
                                         {% if option.selected_value == value %}checked{% endif %}
-                                        data-variant-id="{{ variant.id }}"
+                                         data-variant-id="{{ variant.id }}"
                                     >
                                     {%- if is_swatch -%}
                                         <label class="product-form__label mobile{% if variant.available %} available{% else %} soldout{% endif %}" name="{{ option.name }}-mobile" for="option-{{ product.id }}-{{ option.name }}-{{ forloop.index0 }}-mobile" data-variant-id="{{ variant.id }}">
@@ -85,7 +85,7 @@
                                     name="options[{{ option.name | escape }}]"
                                 >
                                     {%- for value in option.values -%}
-                                        <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                                        <option value="{{ value | replace: '"', 'Special_Double_Quote' | replace: '/', 'Special_Slash' | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
                                             {{ value }}
                                         </option>
                                     {%- endfor -%}

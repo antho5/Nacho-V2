@@ -1,4 +1,5 @@
 {{ 'component-header-single-line.css' | asset_url | stylesheet_tag }}
+
 {%- if settings.enable_layout_rtl -%}
     {% style %}
         @media (min-width: 1025px) {
@@ -16,6 +17,7 @@
             .layout_rtl .header-language_currency .top-language-currency .dropdown-currency,
             .layout_rtl .header-language_currency .top-language-currency.show .dropdown-currency{right: auto;left: 0}
         }
+
         @media (min-width: 1441px) {
             .layout_rtl .header-top--wrapper .customer-service-text {margin-left: 50px}
         }
@@ -30,7 +32,7 @@
                     {%- case block.type -%}
                         {%-  when 'logo' -%}
                             <div class="header__logo text-left clearfix">
-                                <div class="header__heading">
+                                <{% if request.page_type == 'index' %}h1{% else %}div{% endif %} class="header__heading">
                                     <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
                                         {%- if block.settings.logo != blank -%}
                                             {%- liquid 
@@ -39,6 +41,7 @@
                                                 assign logo_height = logo_width | divided_by: logo.aspect_ratio | round
                                                 assign logo_alt = logo.alt | default: shop.name | escape
                                             -%}
+                                            
                                             {{ logo | image_url: width: 300 | image_tag:
                                                 class: 'header__heading-logo motion-reduce',
                                                 widths: '50, 100, 150, 200, 250, 300, 400, 500',
@@ -50,7 +53,7 @@
                                             <span class="h2 {{ block.settings.logo_text_transform }}">{% if block.settings.logo_text != blank %}{{ block.settings.logo_text }}{% else %}{{ shop.name }}{% endif %}</span>
                                         {%- endif -%}
                                     </a>
-                                </div>
+                                </{% if request.page_type == 'index' %}h1{% else %}div{% endif %}>
                             </div>
                         {%-  when 'search' -%}
                             <div class="header__search clearfix{% if block.settings.show_box_shadow %} show-box-shadow{% endif %}" style="--bg-search-color: {{ block.settings.bg_search_color }}; --search-color: {{ block.settings.search_color }}; --search-icon-color: {{ block.settings.search_icon_color }}; --search-border-radius: {{ block.settings.search_border_radius }}px">
@@ -60,19 +63,45 @@
                                     {%- endif -%}
                                     <details class="search_details">
                                         <summary class="header__search-full" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
-                                            <button type="button" class="header-search-close" aria-label="{{ 'general.common.close' | t }}">{% render 'icon-close' %}</button>
+                                            <button type="button" class="header-search-close" aria-label="{{ 'general.common.close' | t }}">
+                                                {% render 'icon-close' %}
+                                            </button>
                                             <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
                                                 <div class="field">
-                                                    <input class="search__input field__input form-input-placeholder" id="Search-In-Modal-Single" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search_the_store' | t }}" autocomplete="off" {%- if settings.show_quick_search -%}role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" {%- endif -%}>
+                                                    <input 
+                                                        class="search__input field__input form-input-placeholder" 
+                                                        id="Search-In-Modal" 
+                                                        type="search" 
+                                                        name="q" 
+                                                        value="{{ search.terms | escape }}" 
+                                                        placeholder="{{ 'general.search.search_the_store' | t }}" 
+                                                        autocomplete="off"
+                                                        {%- if settings.show_quick_search -%}
+                                                            role="combobox"
+                                                            aria-expanded="false"
+                                                            aria-owns="predictive-search-results-list"
+                                                            aria-controls="predictive-search-results-list"
+                                                            aria-haspopup="listbox"
+                                                            aria-autocomplete="list"
+                                                            autocorrect="off"
+                                                            autocomplete="off"
+                                                            autocapitalize="off"
+                                                            spellcheck="false"
+                                                        {%- endif -%}
+                                                    >
                                                     <input type="hidden" name="options[prefix]" value="last">
                                                     <input type="hidden" name="type" value="product">
-                                                    <label class="field__label hiddenLabels" for="Search-In-Modal-Single">{{ 'general.search.search_the_store' | t }}</label>
-                                                    <button class="button search__button field__button focus-inset" aria-label="{{ 'general.search.search' | t }}">{% render 'icon-search-02' %}</button>
+                                                    <label class="field__label hiddenLabels" for="Search-In-Modal">
+                                                        {{ 'general.search.search_the_store' | t }}
+                                                    </label>
+                                                    <button class="button search__button field__button focus-inset" aria-label="{{ 'general.search.search' | t }}">
+                                                        {% render 'icon-search-02' %}
+                                                    </button>
                                                 </div>
+                                                {%- if settings.show_search_trending or settings.show_search_product -%}
+                                                    {%- render 'quick-searching-trending-products' -%}
+                                                {%- endif -%}
                                                 {%- if settings.show_quick_search -%}
-                                                    {%- if settings.show_search_trending or settings.show_search_product -%}
-                                                        {%- render 'quick-searching-trending-products' -%}
-                                                    {%- endif -%}
                                                     {%- render 'predictive-search-results' -%}
                                                 {%- endif -%}
                                             </form>
@@ -91,18 +120,30 @@
                         {%-  when 'text' -%}
                             {% if block.settings.customer_service_text != blank %}
                                 <div class="header__iconItem header__group text-right">
-                                    <div class="customer-service-text" style="--text-size: {{ block.settings.text_size }}px; --text-color: {{ block.settings.color }}">{{ block.settings.customer_service_text }}</div>
+                                    <div class="customer-service-text" style="--text-size: {{ block.settings.text_size }}px; --text-color: {{ block.settings.color }}">
+                                        {{ block.settings.customer_service_text }}
+                                    </div>
                                 </div>
                             {% endif %}
                         {%-  when 'wishlist' -%}
                             {%- if settings.show_wishlist -%}
                                 <div class="header__iconItem header__group" style="--color: {{ block.settings.color }}">
-                                    <a href="{{ pages['wish-list'].url }}" class="header__icon header__icon--wishlist link link--text focus-inset">{% render 'icon-heart-2' %}<span class="wishlist-text">{{ 'wishlist.general.wishlist' | t }}</span></a>
+                                    <a href="{{ pages['wish-list'].url }}" class="header__icon header__icon--wishlist link link--text focus-inset">
+                                        {% render 'icon-heart-2' %}
+                                        <span class="wishlist-text">
+                                            {{ 'wishlist.general.wishlist' | t }}
+                                        </span>
+                                    </a>
                                 </div>
                             {%- endif -%}
                         {%-  when 'gift_cards' -%}
                             <div class="header__iconItem header__group" style="--color: {{ block.settings.color }}">
-                                <a {% if block.settings.link_giftcards == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_giftcards }}"{% endif %} class="header__icon header__icon--giftcards link link--text focus-inset">{% render 'icon-giftcards' %}<span class="giftcards-text">{{ block.settings.text_giftcards }}</span></a>
+                                <a {% if block.settings.link_giftcards == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_giftcards }}"{% endif %} class="header__icon header__icon--giftcards link link--text focus-inset">
+                                    {% render 'icon-giftcards' %}
+                                    <span class="giftcards-text">
+                                        {{ block.settings.text_giftcards }}
+                                    </span>
+                                </a>
                             </div>
                         {%-  when 'customer' -%}
                             <div class="header__iconItem header__group" style="--color: {{ block.settings.color }}">
@@ -128,7 +169,9 @@
                             </div>
                         {%-  when 'cart' -%}
                             <div class="header__iconItem header__group" style="--color: {{ block.settings.color }}; --cart-bg-item: {{ block.settings.cart_bg_item }}; --cart-color-item: {{ block.settings.cart_color_item }}; --cart-item-font-size: {{ block.settings.cart_item_font_size }}px">
-                                <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>{% render 'icon-cart-03' %} <span class="cart-text">{{ 'general.cart.cart' | t }}</span>
+                                <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                                    {% render 'icon-cart-03' %}
+                                    <span class="cart-text">{{ 'general.cart.cart' | t }}</span>
                                     <div class="cart-count-bubble">
                                         {%- if cart.item_count < 100 -%}
                                             <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
@@ -143,6 +186,46 @@
         </div>
     </div>
 </header>
+
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": {{ shop.name | json }},
+        {% if section.settings.logo %}
+            {% assign image_size = section.settings.logo.width | append:'x' %}
+            "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+        {% endif %}
+        "sameAs": [
+            {{ settings.social_twitter_link | json }},
+            {{ settings.social_facebook_link | json }},
+            {{ settings.social_pinterest_link | json }},
+            {{ settings.social_instagram_link | json }},
+            {{ settings.social_tumblr_link | json }},
+            {{ settings.social_snapchat_link | json }},
+            {{ settings.social_youtube_link | json }},
+            {{ settings.social_vimeo_link | json }}
+        ],
+        "url": {{ shop.url | append: page.url | json }}
+    }
+</script>
+
+{%- if request.page_type == 'index' -%}
+    {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            "name": {{ shop.name | json }},
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {{ potential_action_target | json }},
+                "query-input": "required name=search_term_string"
+            },
+            "url": {{ shop.url | append: page.url | json }}
+        }
+    </script>
+{%- endif -%}
 
 {% schema %}
 {

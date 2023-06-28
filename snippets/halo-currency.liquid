@@ -19,11 +19,13 @@
         assign enable_auto_currency = false 
     endif
 %}
-{%- if enable_multiple_currencies or enable_shopify_payments_currencies -%}
+
+{% if enable_multiple_currencies or enable_shopify_payments_currencies %}
 <div class="halo-currency">
 	<link rel="stylesheet" href="{{ 'currency.css' | asset_url }}" media="all" onload="this.media='all'">
 	<noscript>{{ 'currency.css' | asset_url | stylesheet_tag }}</noscript>
-	{%- if enable_shopify_payments_currencies -%}
+
+	{% if enable_shopify_payments_currencies %}
 		{% form 'currency' %}
 		<select name="currency" style="display:none;">
 		    {%- for currency in shop.enabled_currencies -%}
@@ -41,13 +43,15 @@
 		        <div class="dropdown-menu currency-menu custom-scrollbar d-flex flex-align-center flex-wrap" id="currencies">
 		            {%- for currency in shop.enabled_currencies -%}
 		            <a class="dropdown-item{% if currency == cart.currency %} active {% endif %}" href="#" data-currency="{{currency.iso_code}}" role="button">
-		                {% assign currency_iso = currency.iso_code %} {% render 'icon_currency', currency_iso: currency_iso %} <span class="text">{{currency.iso_code}}</span>
+		                {% assign currency_iso = currency.iso_code %}
+		                {% render 'icon_currency', currency_iso: currency_iso %}
+		                <span class="text">{{currency.iso_code}}</span>
 		            </a>
 		            {%- endfor -%}
 		        </div>
 		    </div>
 		</div>
-	{%- else -%}
+	{% else %}
 	{%- if enable_multiple_currencies -%}
 		<div class="currency-block">
 		    <div class="btn-group currency-dropdown">
@@ -60,7 +64,8 @@
 		            {%- capture currency_icon %}i-currency-{{ i }}{% endcapture -%}
 			            {%- if currency_length > 0 -%}
 				            <a class="dropdown-item{% if shop.currency == settings[currency_unit] %} active {% endif %}" href="#" data-currency="{{settings[currency_unit]}}">
-				                <span class="icon">{{ settings[currency_icon] }}</span> <span class="text">{{ settings[currency_unit]}}</span>
+				                <span class="icon">{{ settings[currency_icon] }}</span>
+				                <span class="text">{{ settings[currency_unit]}}</span>
 				                {%- if icon == 'sort' -%}
 						            {% render 'icon-sort-down' %}
 						        {%- else -%}
@@ -68,11 +73,11 @@
 						        {%- endif -%}
 				            </a>
 			            {%- endif -%}
-		            {%- endfor -%}
+		            {% endfor %}
 		        </div>
 		    </div>
 		</div>
-	{%- endif -%}
+	{% endif %}
 </div>
-{%- endif -%}
-{% render 'halo-currency-js' %}
+{% endif %}
+{% render 'halo-currency-js' %}	

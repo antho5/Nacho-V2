@@ -163,7 +163,6 @@
 	.header-minimal .container-full {
         padding-left: var(--spacing-l-r);
         padding-right: var(--spacing-l-r);
-		overflow: initial;
     }
 
 	.header-minimal .list-social {

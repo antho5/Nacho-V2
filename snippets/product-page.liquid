@@ -1,8 +1,4 @@
 {%- liquid
-    assign gift_card_recipient_feature_active = false
-    if block.settings.show_gift_card_recipient and product.gift_card?
-        assign gift_card_recipient_feature_active = true
-    endif
     assign container = section.settings.container
     assign padding_full_width = section.settings.padding_full_width
     assign show_sticky_info = section.settings.show_sticky_info
@@ -525,17 +521,17 @@
                                                             {% if product_image_popup == 'fancybox' %} data-fancybox="images" href="{{ media.preview_image | img_url: 'master' }}" {% endif %}
                                                         >
                                                             <img id="product-featured-image-{{ media.id }}"
-                                                                {% if settings.enable_lazyload and forloop.first == false %}data-{% endif %}srcset="{{ media.preview_image | img_url: 'master' }}"
-                                                                {% unless settings.enable_lazyload and forloop.first == false %}src="{{ media | img_url: 'master' }}"{% endunless %}
+                                                                srcset="{{ media.preview_image | img_url: 'master' }}"
+                                                                src="{{ media | img_url: 'master' }}"
                                                                 alt="{{ media.preview_image.alt | escape }}"
+                                                                title="{{ media.preview_image.alt | escape }}"
                                                                 sizes="auto"
+                                                                loading="lazy"
                                                                 data-sizes="auto"
                                                                 data-main-image
                                                                 data-index="{{ forloop.index }}"
                                                                 data-cursor-image
-                                                                {% if settings.enable_lazyload and forloop.first == false %}class="lazyload" loading="lazy"{% endif %}
                                                             />
-                                                            {%- if settings.enable_lazyload and forloop.first == false -%}<span class="data-lazy-loading"></span>{%- endif -%}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -559,6 +555,7 @@
                                                                         srcset="https://i.ytimg.com/vi/{{ media.external_id }}/maxresdefault.jpg"
                                                                         src="https://i.ytimg.com/vi/{{ media.external_id }}/maxresdefault.jpg"
                                                                         alt="{{ media.alt | escape }}"
+                                                                        title="{{ media.alt | escape }}"
                                                                         sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
                                                                         loading="lazy"
                                                                         data-sizes="auto"
@@ -573,6 +570,7 @@
                                                                         srcset="{{ media | img_url: 'master' }}"
                                                                         src="{{ media | img_url: 'master' }}"
                                                                         alt="{{ media.alt | escape }}"
+                                                                        title="{{ media.alt | escape }}"
                                                                         sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
                                                                         loading="lazy"
                                                                         data-sizes="auto"
@@ -604,6 +602,7 @@
                                                                     srcset="{{ media | img_url: 'master' }}"
                                                                     src="{{ media | img_url: 'master' }}"
                                                                     alt="{{ media.alt | escape }}"
+                                                                    title="{{ media.alt | escape }}"
                                                                     sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
                                                                     loading="lazy"
                                                                     data-sizes="auto"
@@ -726,16 +725,15 @@
                                             {%- case media.media_type -%}
                                                 {%- when 'image' -%}
                                                     <div class="productView-thumbnail{% if show_variant_image_group %} filter-{{ media.alt | handle }}{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}">
-                                                        <div class="productView-thumbnail-link" data-image="{{ media | img_url: 'large' }}">
-                                                            <img {% if settings.enable_lazyload and forloop.index > 4 %}data-{% endif %}srcset="{%- if thumnail_layout == '3' -%}{{ media | img_url: 'medium' }}{% else %}{{ media | img_url: 'compact' }}{% endif %}" {% unless settings.enable_lazyload and forloop.index > 4 %}src="{%- if thumnail_layout == '3' -%}{{ media | img_url: 'medium' }}{% else %}{{ media | img_url: 'compact' }}{% endif %}"{% endunless %} alt="{{ media.alt | escape }}" {% if settings.enable_lazyload and forloop.index > 4 %}class="lazyload" loading="lazy"{% endif %} />
-                                                            {%- if settings.enable_lazyload and forloop.index > 4 -%}<span class="data-lazy-loading"></span>{%- endif -%}
+                                                        <div class="productView-thumbnail-link animated-loading" data-image="{{ media | img_url: 'large' }}">
+                                                            <img src="{%- if thumnail_layout == '3' -%}{{ media | img_url: 'large' }}{% else %}{{ media | img_url: 'medium' }}{% endif %}" alt="{{ media.alt | escape }}" title="{{ media.alt | escape }}" loading="lazy" />
                                                         </div>
                                                     </div>
                                                 {%- when 'external_video' -%}
                                                     {%- if video_layout == 'thumbnail' -%}
                                                         <div class="productView-thumbnail" data-media-id="{{ section.id }}-{{ media.id }}">
                                                             <div class="productView-thumbnail-link animated-loading">
-                                                                <img src="{%- if thumnail_layout == '3' -%}{{ media | img_url: 'large' }}{% else %}{{ media | img_url: 'medium' }}{% endif %}" alt="{{ media.alt | escape }}" loading="lazy" />
+                                                                <img src="{%- if thumnail_layout == '3' -%}{{ media | img_url: 'large' }}{% else %}{{ media | img_url: 'medium' }}{% endif %}" alt="{{ media.alt | escape }}" title="{{ media.alt | escape }}" loading="lazy" />
                                                             </div>
                                                             <div class="productView-thumbnail-icon">
                                                                 {% render 'icon-video' %}
@@ -746,7 +744,7 @@
                                                     {%- if video_layout == 'thumbnail' -%}
                                                         <div class="productView-thumbnail" data-media-id="{{ section.id }}-{{ media.id }}">
                                                             <div class="productView-thumbnail-link animated-loading">
-                                                                <img src="{{ media | media_tag | split: 'src="' | last | split: '">' | first }}" alt="{{ media.alt | escape }}" loading="lazy" />
+                                                                <img src="{{ media | media_tag | split: 'src="' | last | split: '">' | first }}" alt="{{ media.alt | escape }}" title="{{ media.alt | escape }}" loading="lazy" />
                                                             </div>
                                                             <div class="productView-thumbnail-icon">
                                                                 {% render 'icon-video' %}
@@ -756,7 +754,7 @@
                                                 {%- when 'model' -%}
                                                     <div class="productView-thumbnail" data-media-id="{{ section.id }}-{{ media.id }}">
                                                         <div class="productView-thumbnail-link animated-loading">
-                                                            <img src="{{ media | media_tag | split: 'poster="' | last | split: '">' | first }}" alt="{{ media.alt | escape }}" loading="lazy" />
+                                                            <img src="{{ media | media_tag | split: 'poster="' | last | split: '">' | first }}" alt="{{ media.alt | escape }}" title="{{ media.alt | escape }}" loading="lazy" />
                                                         </div>
                                                         <div class="productView-thumbnail-icon">
                                                             {% render 'icon-3d-model' %}
@@ -1242,8 +1240,6 @@
                                             </complementary-products>
                                             <script src="{{ "build-complementary-products.js" | asset_url }}" defer></script>
                                         </div>
-                                    {%- when '@app' -%}
-                                        {% render block %}
                                 {%- endcase -%}
                             {%- endfor -%}
                             {%- if show_tab -%}

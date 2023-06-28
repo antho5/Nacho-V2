@@ -167,12 +167,15 @@ body:not(.quick_shop_option_2) .halo-product-list-view-popup .form-label + .swat
 /* Quickshop Option 2 */
 .quick_shop_option_2 .halo-product-list-view-popup .card-action .variants-popup {
     transform: none;
-    visibility: visible;
 }
 
 .quick_shop_option_2 .halo-product-list-view-popup .card-action .variants-popup-content .variants {
     min-height: unset !important;
     max-height: unset !important;
+}
+
+.quick_shop_option_2 .halo-product-list-view-popup .card-action .selector-wrapper .swatch-element {
+    
 }
 
 .quick_shop_option_2 .halo-product-list-view-popup .card-action .selector-wrapper.option-color .single-label {

@@ -73,8 +73,8 @@
             <div class="section-block-banner-image">
                 <div class="img-box">
                     {% if press_image != blank %}
-                        <a {% if button_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ button_link }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {% unless press_image.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: press_image.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: press_image.aspect_ratio | times: 100 }}%;{% endunless %} --image-width: {{ press_image_width }}">
-                            <img {% render 'lazyload',preview_img: press_image %}{% unless press_image.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ press_image.presentation.focal_point }}"{% endunless %} />    
+                        <a {% if button_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ button_link }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: press_image.aspect_ratio | times: 100 }}%; --image-width: {{ press_image_width }}">
+                            <img {% render 'lazyload',preview_img: press_image %} />    
                             {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                         </a>
                     {% else %}

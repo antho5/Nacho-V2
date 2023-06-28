@@ -22,16 +22,8 @@
     assign bin_bg_color_hover = block.settings.bin_bg_color_hover
     assign bin_bg_color_hover_gradient = block.settings.bin_bg_color_hover_gradient
 
-    assign gift_card_recipient_feature_active = false
-      if block.settings.show_gift_card_recipient and product.gift_card?
-        assign gift_card_recipient_feature_active = true
-      endif
 -%}
 <div class="productView-buttons">
-    {%- if gift_card_recipient_feature_active -%}
-      {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
-    {%- endif -%}
-    
     {%- assign product_form_installment_id = 'product-form-installment-' | append: product.id -%}
     {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
         <input type="hidden" name="id" value="{{ current_variant.id }}">
@@ -62,7 +54,7 @@
                             qty_style: qty_style,
                             quantity_stt: 1
                         %}
-                    {%- endif -%}                    
+                    {%- endif -%}
                     <div class="productView-groupTop">
                         <div class="productView-action{% unless settings.show_wishlist %} productView-action-2{% endunless %}"
                             style="--atc-color: {{ atc_color }};

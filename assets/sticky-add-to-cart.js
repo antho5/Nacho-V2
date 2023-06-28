@@ -739,7 +739,7 @@ class VariantStickyAddToCart extends HTMLElement {
                     const pdView_subTotal = document.querySelector('.productView-subtotal .money') || document.querySelector('.productView-subtotal .money-subtotal');
 
                     pdView_subTotal.textContent = subTotal;
-                    if (this.currentVariant.available && maxValue <= 0 && this.currentVariant.inventory_management == "shopify") {
+                    if (this.currentVariant.available && maxValue <= 0) {
                         text = window.variantStrings.preOrder;
                     } else {
                         text = window.variantStrings.addToCart;
@@ -751,7 +751,7 @@ class VariantStickyAddToCart extends HTMLElement {
             } else {
                 subTotal = Shopify.formatMoney(price, window.money_format);
                 if (window.currencyFormatted) subTotal = $(subTotal).text();
-                if (this.currentVariant.available && maxValue <= 0 && this.currentVariant.inventory_management == "shopify") {
+                if (this.currentVariant.available && maxValue <= 0) {
                     text = window.variantStrings.preOrder;
                 } else {
                     text = window.variantStrings.addToCart;

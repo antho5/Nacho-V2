@@ -41,8 +41,8 @@
                                         <div class="img-box">
                                             {% if block.settings.image_1 != blank %}
                                                 {%- assign preview_img_1 = block.settings.image_1 -%}
-                                                <a {% if block.settings.link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_1 }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {% unless preview_img_1.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img_1.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img_1.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                                    <img {% render 'lazyload',preview_img: preview_img_1 %}{% unless preview_img_1.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img_1.presentation.focal_point }}"{% endunless %} />
+                                                <a {% if block.settings.link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_1 }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: preview_img_1.aspect_ratio | times: 100 }}%; --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
+                                                    <img {% render 'lazyload',preview_img: preview_img_1 %} />
                                                     {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                 </a>
                                             {% else %}
@@ -113,8 +113,8 @@
                                         <div class="img-box">
                                             {% if block.settings.image_2 != blank %}
                                                 {%- assign preview_img_2 = block.settings.image_2 -%}
-                                                <a {% if block.settings.link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_2 }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {% unless preview_img_2.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img_2.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img_2.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                                    <img {% render 'lazyload',preview_img: preview_img_2 %}{% unless preview_img_2.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img_2.presentation.focal_point }}"{% endunless %} />
+                                                <a {% if block.settings.link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_2 }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: preview_img_2.aspect_ratio | times: 100 }}%; --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
+                                                    <img {% render 'lazyload',preview_img: preview_img_2 %} />
                                                     {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                 </a>
                                             {% else %}
@@ -183,8 +183,8 @@
                                         <div class="img-box">
                                             {% if block.settings.image_3 != blank %}
                                                 {%- assign preview_img_3 = block.settings.image_3 -%}
-                                                <a {% if block.settings.link_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_3 }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {% unless preview_img_3.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img_3.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img_3.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                                    <img {% render 'lazyload',preview_img: preview_img_3 %}{% unless preview_img_3.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img_3.presentation.focal_point }}"{% endunless %} />
+                                                <a {% if block.settings.link_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_3 }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: preview_img_3.aspect_ratio | times: 100 }}%; --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
+                                                    <img {% render 'lazyload',preview_img: preview_img_3 %} />
                                                     {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                 </a>
                                             {% else %}
@@ -253,8 +253,8 @@
                                         <div class="img-box">
                                             {% if block.settings.image_4 != blank %}
                                                 {%- assign preview_img_4 = block.settings.image_4 -%}
-                                                <a {% if block.settings.link_4 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_4 }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {% unless preview_img_4.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img_4.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img_4.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                                    <img {% render 'lazyload',preview_img: preview_img_4 %}{% unless preview_img_4.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img_4.presentation.focal_point }}"{% endunless %} />
+                                                <a {% if block.settings.link_4 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_4 }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: preview_img_4.aspect_ratio | times: 100 }}%; --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
+                                                    <img {% render 'lazyload',preview_img: preview_img_4 %} />
                                                     {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                                 </a>
                                             {% else %}
@@ -326,8 +326,8 @@
                             <div class="img-box">
                                 {% if block.settings.image != blank %}
                                     {%- assign preview_img = block.settings.image -%}
-                                    <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {% unless preview_img.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                        <img {% render 'lazyload',preview_img: preview_img %}{% unless preview_img.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img.presentation.focal_point }}"{% endunless %} />
+                                    <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} class="image-zoom adaptive_height" style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%; --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
+                                        <img {% render 'lazyload',preview_img: preview_img %} />
                                         {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                     </a>
                                 {% else %}

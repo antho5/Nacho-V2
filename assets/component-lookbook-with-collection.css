@@ -88,9 +88,6 @@
     height: 13px;
     cursor: pointer;
     z-index: 1;
-    background: none;
-    border: none;
-    padding: 0;
 }
 
 .collection-lookbook .halo-block-content .collection-wrapper .lookbook-show-all-close svg {
@@ -406,10 +403,6 @@
 .collection-lookbook .halo-block-content .collection-wrapper .collection .product-left {
     width: 70px;
     flex-shrink: 0;
-}
-.collection-lookbook .product-left img{
-    width: 100%;
-    height: 100%;
 }
 
 .collection-lookbook .halo-block-content .collection-wrapper .collection .product-right .product-title {
