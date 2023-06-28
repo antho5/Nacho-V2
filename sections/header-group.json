@@ -212,7 +212,7 @@
     "header-mobile": {
       "type": "header-mobile",
       "blocks": {
-        "7de2266e-0cd4-4fda-9f09-06f75a17f944": {
+        "13dd6938-3a12-407d-98a3-6de97c7c72f5": {
           "type": "menu",
           "settings": {
             "color": "#232323"
@@ -254,7 +254,7 @@
         }
       },
       "block_order": [
-        "7de2266e-0cd4-4fda-9f09-06f75a17f944",
+        "13dd6938-3a12-407d-98a3-6de97c7c72f5",
         "163e2cb5-14f2-4af6-9ac3-77193c082f53",
         "550fbd21-75fb-4051-9dee-77d91b5239f0",
         "20dae707-64c0-4ea3-a05e-561cae9836d8",
