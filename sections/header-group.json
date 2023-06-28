@@ -19,6 +19,9 @@
       "block_order": [
         "announcement-bar-0"
       ],
+      "custom_css": [
+        ".message {text-transform: uppercase;}"
+      ],
       "settings": {
         "enable_announcement": true,
         "layout": "slider",
