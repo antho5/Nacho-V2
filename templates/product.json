@@ -218,7 +218,7 @@
         "mg_bottom_desktop": 0,
         "mg_bottom_tablet": 0,
         "mg_bottom_mobile": 0,
-        "main_image_arrows_desktop": false,
+        "main_image_arrows_desktop": true,
         "main_image_arrows_mobile": true,
         "main_image_counter_mobile": true,
         "main_image_enable_parallax_mb": false,
