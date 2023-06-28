@@ -449,9 +449,9 @@
             "type": "menu-1",
             "settings": {
               "show_banner": true,
-              "heading": "Home",
+              "heading": "Lights",
               "url": "#",
-              "menu": "",
+              "menu": "main-menu",
               "label": "",
               "icon": "",
               "show_custom_style": false,
@@ -611,60 +611,8 @@
       },
       "halo-navigation-mobile-2": {
         "type": "halo-navigation-mobile-2",
-        "blocks": {
-          "ecf7e6cc-4e95-4d03-9abf-b3cef53d7423": {
-            "type": "menu-1",
-            "settings": {
-              "show_banner": false,
-              "heading": "Home Page",
-              "url": "",
-              "menu": "",
-              "label": "",
-              "icon": "",
-              "show_custom_style": false,
-              "text_color": "#000000",
-              "label_bg_color": "#000000",
-              "label_text_color": "#ffffff"
-            }
-          },
-          "af1b388e-5d4a-4c6c-a185-be3a8f29d54d": {
-            "type": "menu-1",
-            "settings": {
-              "show_banner": false,
-              "heading": "Product",
-              "url": "shopify:\/\/collections\/all",
-              "menu": "",
-              "label": "",
-              "icon": "",
-              "show_custom_style": false,
-              "text_color": "#000000",
-              "label_bg_color": "#000000",
-              "label_text_color": "#ffffff"
-            }
-          },
-          "1f4cbfd6-f77f-422e-8d6d-c098ff0f74ad": {
-            "type": "menu-1",
-            "settings": {
-              "show_banner": false,
-              "heading": "Collections",
-              "url": "",
-              "menu": "",
-              "label": "",
-              "icon": "",
-              "show_custom_style": false,
-              "text_color": "#000000",
-              "label_bg_color": "#000000",
-              "label_text_color": "#ffffff"
-            }
-          }
-        },
-        "block_order": [
-          "ecf7e6cc-4e95-4d03-9abf-b3cef53d7423",
-          "af1b388e-5d4a-4c6c-a185-be3a8f29d54d",
-          "1f4cbfd6-f77f-422e-8d6d-c098ff0f74ad"
-        ],
         "settings": {
-          "heading": "Demo",
+          "heading": "",
           "text_color": "#808080",
           "bg_color": "#000000",
           "bg_color_gradient": "",
@@ -673,7 +621,7 @@
           "bg_color_gradient_active": "",
           "image_type": "jpg",
           "image_style": "circle",
-          "show_icon": true,
+          "show_icon": false,
           "icon_type": "image",
           "icon_width": 35,
           "icon_height": 35,
