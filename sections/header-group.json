@@ -22,7 +22,7 @@
       "settings": {
         "enable_announcement": true,
         "layout": "slider",
-        "enable_close": true,
+        "enable_close": false,
         "color_text": "#ffffff",
         "bg_color_text": "#232323",
         "bg_color_text_gradient": "",
