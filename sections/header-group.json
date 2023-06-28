@@ -8,7 +8,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "<p>Free shipping on orders over $99!<\/p>",
+            "text": "<p class=\"message\">Free shipping on orders over $99!<\/p>",
             "btn_color": "#cc0e14",
             "btn_border_color": "#2da116",
             "btn_bg_color": "#232323",
