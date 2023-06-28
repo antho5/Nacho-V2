@@ -4,15 +4,14 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "disabled": true,
       "blocks": {
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "<div class=\"message\">\n  MID-SEASON SALE UP TO 70% OFF. <a href=\"\/collections\/all\" alt=\"Shop Now\">SHOP NOW<\/a>\n<\/div>",
+            "text": "<p>Free shipping on orders over $99!<\/p>",
             "btn_color": "#cc0e14",
             "btn_border_color": "#2da116",
-            "btn_bg_color": "#727272",
+            "btn_bg_color": "#232323",
             "btn_bg_color_gradient": "linear-gradient(46deg, rgba(52, 133, 236, 1) 13%, rgba(170, 248, 219, 1) 86%)"
           }
         }
@@ -24,8 +23,8 @@
         "enable_announcement": true,
         "layout": "slider",
         "enable_close": true,
-        "color_text": "#b05d5d",
-        "bg_color_text": "#ffe8e8",
+        "color_text": "#ffffff",
+        "bg_color_text": "#232323",
         "bg_color_text_gradient": "",
         "font_size_text": 12,
         "font_style_text": "normal",
