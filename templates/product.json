@@ -148,7 +148,7 @@
             "enable_btn_show_more": false,
             "maximum_des_to_show": 300,
             "product_custom_source": "dynamic",
-            "product_tab_key_metafield": ""
+            "product_tab_key_metafield": "{{ product.metafields.custom.video_id.value }}"
           }
         },
         "19ab1d9f-74b2-4c76-bf2e-1bc749e5c2a3": {
