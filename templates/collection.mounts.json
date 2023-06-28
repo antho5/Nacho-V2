@@ -42,7 +42,7 @@
             "show_sub_collection_image": true,
             "sub_collection_padding_top": 10,
             "sub_collection_padding_bottom": 10,
-            "sub_collection_grid_gap": 5,
+            "sub_collection_grid_gap": 15,
             "color_sub_collection": "#232323",
             "sub_collection_background": "rgba(0,0,0,0)",
             "sub_collection_background_gradient": "",
@@ -50,8 +50,8 @@
             "sub_collection_color_hover": "#232323",
             "sub_collection_background_hover": "#ffffff",
             "sub_collection_background_gradient_hover": "",
-            "sub_collection_border_hover": "rgba(0,0,0,0)",
-            "sub_collection_mg_top": 10
+            "sub_collection_border_hover": "#232323",
+            "sub_collection_mg_top": 0
           }
         }
       },
@@ -183,18 +183,11 @@
         "border_width_card": 5,
         "border_color_card": "#f0f1f4"
       }
-    },
-    "ce8304c4-11df-4f42-9ada-39c767cb5951": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<div class=\"powr-social-feed\" id=\"0db6845a_1650904810\"><\/div><script src=\"https:\/\/www.powr.io\/powr.js?platform=shopify\"><\/script>"
-      }
     }
   },
   "order": [
     "banner",
     "product-grid",
-    "product-recently-viewed",
-    "ce8304c4-11df-4f42-9ada-39c767cb5951"
+    "product-recently-viewed"
   ]
 }
