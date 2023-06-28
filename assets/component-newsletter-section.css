@@ -10,11 +10,10 @@
 }  
 
 .newsletter-section .section-content {
-    --gap: 0px;
+    --gap: 50px;
     display: flex;
     align-items: center;
-    justify-content: var(--newsletter-flex-direction);
-
+    justify-content: var(--newsletter_form_justify_content);
     gap: var(--gap);
 }
 
@@ -56,7 +55,6 @@
 
 .newsletter-section .section-content .title {
     max-width: 25%; 
-
     font-size: var(--title-font-size); 
     color: var(--title-color); 
     font-weight: var(--title-font-weight);
@@ -64,11 +62,11 @@
     margin-bottom: var(--title-margin-bottom);
     text-transform: var(--title-text-transform);
     font-style: var(--title-font-style);
+    line-height: 1.2
 }
     
 .newsletter-section .section-content .description {
     max-width: 24%;
-    
     font-size: var(--description-font-size);  
     color: var(--description-color);  
     font-weight: var(--description-font-weight);
@@ -76,13 +74,11 @@
     margin-bottom: var(--description-margin-bottom);
     line-height: var(--description-line-height);
 } 
-
-.newsletter-section .section-content.no-input .description {
-    max-width: 50%;
+.newsletter-section .section-content .description a {
+    color: var(--description-color);
 }
-
-.newsletter-section .section-form-wrapper {
-    /* flex-grow: 1; */
+.newsletter-section .section-content.no-input .description {
+    max-width: 100%;
 }
 
 .newsletter-section .newsletter-form__field-wrapper {
@@ -113,7 +109,6 @@
     font-size: var(--button-font-size);
     font-weight: var(--button-font-weight);     
     text-transform: var(--button-text-transform);
-
     color: var(--button-text-color);
     border: 1px solid var(--button-border-color);
     background: var(--button-background);
@@ -157,7 +152,6 @@
 
     .newsletter-section .section-content {
         --gap: 20px;
-
         flex-wrap: wrap;
     }
     
@@ -185,8 +179,7 @@
                             
 @media screen and (max-width: 767px) {
     .newsletter-section .section-content {
-        --gap: 5px;     
-        /* --gap: 15px; */
+        --gap: 5px;
         flex-direction: column;
     }
 

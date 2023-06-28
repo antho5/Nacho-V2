@@ -180,6 +180,8 @@ class RecentlyViewed extends HTMLElement {
                                 ]
                             });
                         }
+
+                        if (productGrid.length == 0) recentlyGrid.addClass('not-product');
                         recentlyGrid.prepend('<div class="product-info"></div>');
                     }
                 }

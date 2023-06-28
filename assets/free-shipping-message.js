@@ -79,7 +79,7 @@ class FreeShippingMeter extends HTMLElement {
             classLabel = FreeShippingMeter.classLabel1;
         } else  if (freeShipBar <= 60) {
             classLabel = FreeShippingMeter.classLabel2;
-        } else if (freeShipBar <= 100) {
+        } else if (freeShipBar < 100) {
             classLabel = FreeShippingMeter.classLabel3;
         } else {
             classLabel = 'progress-free'

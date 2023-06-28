@@ -5,20 +5,25 @@
             assign menu = linklists[search.terms].links
         elsif template.suffix contains 'landing'
             assign hide_menu_load = false
-            assign menu = linklists[page.handle].links
+
+            assign menu = linklists[menu_handle].links
             if menu == blank
                 assign menu = section.settings.menu.links
             endif
         else
-            if section.settings.menu != blank
+            if menu_handle != blank
+                assign menu = linklists[menu_handle].links
+            else
                 assign menu = section.settings.menu.links
             endif
+
             if template contains 'index' or search.terms == '' or search.terms == blank
                 assign hide_menu_load = false
             else
                 assign hide_menu_load = true
             endif
         endif
+
     -%}
     {%- for link in menu -%}
         {%- liquid

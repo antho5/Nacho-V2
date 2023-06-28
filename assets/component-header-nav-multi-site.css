@@ -475,8 +475,10 @@
 
     .header-nav-multi-site .quickSearchResultsWrap {
         top: calc(100% + 12px);
+        left: auto;
         right: 0;
         width: 620px;
+        box-shadow: 0 1px 4px #00000026;
     }
 
     .header-nav-multi-site .wrapper-header-bottom .header__icon {

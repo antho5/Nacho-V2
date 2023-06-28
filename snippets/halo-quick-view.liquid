@@ -438,7 +438,7 @@
                     {%- if countdown_type == 'all_product' -%}
                         <div class="productView-countDown countdown_{{ product.id }} style-{{ countdown_style }} clearfix" data-countdown-id="{{ product.id }}" data-countdown="{{ countdown_time }}">
                             <span class="text animated-loading">
-                                <span>{{ 'countdown.general.text' | t }}</span>
+                                <span>{{ settings.countdown_text }}</span>
                             </span>
                             <span class="num animated-loading">
                                 <span>151<span>D</span></span>
@@ -468,7 +468,7 @@
                         {%- if hasCountdown -%}
                             <div class="productView-countDown countdown_{{ product.id }} clearfix" data-countdown-id="{{ product.id }}" data-countdown="{{ countdown_time }}">
                                 <span class="text animated-loading">
-                                    <span>{{ 'countdown.general.text' | t }}</span>
+                                    <span>{{ settings.countdown_text }}</span>
                                 </span>
                                 <span class="num animated-loading">
                                     <span>151<span>D</span></span>
@@ -489,7 +489,7 @@
                             {% assign countdown_type = product.metafields.c_f.countdown %}
                             <div class="productView-countDown countdown_{{ product.id }} clearfix" data-countdown-id="{{ product.id }}" data-countdown="{{ countdown_type }}">
                                 <span class="text animated-loading">
-                                    <span>{{ 'countdown.general.text' | t }}</span>
+                                    <span>{{ settings.countdown_text }}</span>
                                 </span>
                                 <span class="num animated-loading">
                                     <span>151<span>D</span></span>
@@ -537,6 +537,12 @@
                                                 </span>
                                             </legend>
                                             {%- assign values = '' -%}
+                                            {%- liquid
+                                                assign variants_available_arr = product.variants | map: 'available'
+                                                assign variants_option1_arr = product.variants | map: 'option1'
+                                                assign variants_option2_arr = product.variants | map: 'option2'
+                                                assign variants_option3_arr = product.variants | map: 'option3'
+                                            -%}
                                             {%- for variant in product.variants -%}
                                                 {%- assign value = variant.options[option_index] -%}
                                                 {%- unless values contains value -%}
@@ -544,6 +550,24 @@
                                                         assign values = values | join: ';'
                                                         assign values = values | append: ';' | append: value
                                                         assign values = values | split: ';'
+                                                        assign option_stock = 'soldout'
+                
+                                                        for option1_name in variants_option1_arr
+                                                            case option.position
+                                                                when 1
+                                                                    if variants_option1_arr[forloop.index0] == value and variants_available_arr[forloop.index0]
+                                                                        assign option_stock = 'available'
+                                                                    endif
+                                                                when 2
+                                                                    if option1_name == product.selected_or_first_available_variant.option1 and variants_option2_arr[forloop.index0] == value and variants_available_arr[forloop.index0]
+                                                                        assign option_stock = 'available'
+                                                                    endif
+                                                                when 3
+                                                                    if option1_name == product.selected_or_first_available_variant.option1 and variants_option2_arr[forloop.index0] == product.selected_or_first_available_variant.option2 and variants_option3_arr[forloop.index0] == value and variants_available_arr[forloop.index0]
+                                                                        assign option_stock = 'available'
+                                                                    endif
+                                                            endcase
+                                                        endfor
                                                     -%}
                                                     <input class="product-form__radio" type="radio" id="option-quick-view-{{ product.id }}-{{ option.name }}-{{ forloop.index0 }}"
                                                         name="{{ option.name }}"
@@ -552,7 +576,7 @@
                                                         {% if settings.show_quick_view_variant_image_group %}data-filter=".filter-{{ value | handle }}"{% endif %}
                                                     >
                                                     {%- if is_swatch -%}
-                                                        <label class="product-form__label {% if variant.available %} available{% else %} soldout{% endif %}" for="option-quick-view-{{ product.id }}-{{ option.name }}-{{ forloop.index0 }}">
+                                                        <label class="product-form__label {{ option_stock }}" for="option-quick-view-{{ product.id }}-{{ option.name }}-{{ forloop.index0 }}">
                                                             <span class="pattern" 
                                                                 style="{%- if swatch_type == 'variant_image' and variant.image %}
                                                                         background-image: url({{ variant.image.src | product_img_url: '40x'}});
@@ -563,7 +587,7 @@
                                                             </span>
                                                         </label>
                                                     {%- else -%}   
-                                                        <label class="product-form__label{% if variant.available %} available{% else %} soldout{% endif %}" for="option-quick-view-{{ product.id }}-{{ option.name }}-{{ forloop.index0 }}">
+                                                        <label class="product-form__label {{ option_stock }}" for="option-quick-view-{{ product.id }}-{{ option.name }}-{{ forloop.index0 }}">
                                                             <span class="text">{{ value }}</span>
                                                         </label>
                                                     {%- endif -%}
@@ -576,7 +600,7 @@
                                     </script>
                                 </variant-quick-view-radios>
                             {%- else -%}
-                                <variant-quick-shop-selects class="no-js-hidden product-option has-default" data-product="{{ product.id }}" data-url="{{ product.url }}">
+                                <variant-quick-view-selects class="no-js-hidden product-option has-default" data-product="{{ product.id }}" data-url="{{ product.url }}" data-json='{{ product.variants | json | escape }}'>
                                     {%- for option in product.options_with_values -%}
                                         <div class="product-form__input product-form__input--dropdown" data-product-attribute="set-select" data-option-index="{{ forloop.index0 }}">
                                             <label class="form__label" for="option-quick-view-{{ forloop.index0 }}">
@@ -602,7 +626,7 @@
                                     <script type="application/json">
                                         {{ product.variants | json }}
                                     </script>
-                                </variant-quick-shop-selects>
+                                </variant-quick-view-selects>
                             {%- endif -%}
                             {%- if show_hot_stock -%}
                                 <div class="productView-hotStock" data-hot-stock="{{ productMaxStock }}">

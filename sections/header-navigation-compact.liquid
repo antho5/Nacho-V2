@@ -39,7 +39,7 @@
         {%- case block.type -%}
             {%- when 'logo' -%}
                 <div class="header-logo header-item header-item--side fs-0 fg-0{% if block.settings.logo_position == 'main_menu'%} show-main-menu{% elsif block.settings.logo_position == 'sticky_menu'%} hide-main-menu{% else %}{% endif %}" style="--logo_font_size: {{block.settings.logo_font_size | append: 'px'}};--logo_font_weight: {{block.settings.logo_font_weight}};--logo_text_transform: {{block.settings.logo_text_transform}};--logo_text_color: {{block.settings.logo_color}};--logo_width: {{block.settings.logo_width | append: 'px'}};--logo_width_sticky: {{block.settings.logo_width_fixed | append: '%'}}">
-                    <{% if request.page_type == 'index' %}h1{% else %}div{% endif %} class="header__heading">
+                    <div class="header__heading">
                         <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
                             {%- if block.settings.logo != blank -%}
                                 {%- assign logo = block.settings.logo -%}
@@ -54,7 +54,7 @@
                                 <span class="header__heading-text {{ block.settings.logo_text_transform }} d-block">{{ shop.name }}</span>
                             {%- endif -%}
                         </a>
-                    </{% if request.page_type == 'index' %}h1{% else %}div{% endif %}>
+                    </div>
                 </div>
             {%- when 'main_menu' -%}
             <div class="main-menu p-static w-100 header-item{% if block.settings.label_position == 'none' %} label-none{% elsif block.settings.label_position == 'main_menu' %} label-main-menu{% if block.settings.new_label_1 != blank or block.settings.sale_label_1 != blank or block.settings.hot_label_1 != blank%} main-menu-hasLabel{% endif %}{% else %}{% endif %}{% if block.settings.menu_top_spacing <= 16 %} label-small{% endif %}">
@@ -97,15 +97,15 @@
                                         {%- endif -%}
                                         <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form d-flex p-relative zi-6 w-100 b-zero">
                                             <div class="field m-lr-auto">
-                                                <input class="search__input field__input form-input-placeholder" id="Search-In-Modal-Menu" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}" autocomplete="off" {%- if settings.show_quick_search -%}role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false"{%- endif -%}>
+                                                <input class="search__input field__input form-input-placeholder" id="Search-In-Modal-Menu-Compact" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}" autocomplete="off" {%- if settings.show_quick_search -%}role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false"{%- endif -%}>
                                                 <input type="hidden" name="options[prefix]" value="last">
                                                 <input type="hidden" name="type" value="product">
-                                                <label class="field__label hiddenLabels" for="Search-In-Modal-Menu">{{ 'general.search.search' | t }}</label>
+                                                <label class="field__label hiddenLabels" for="Search-In-Modal-Menu-Compact">{{ 'general.search.search' | t }}</label>
                                                 <button class="button search__button field__button focus-inset icon-effect" aria-label="{{ 'general.search.search' | t }}">{% render 'icon-search' %}</button>
                                             </div>
-                                            {%- if settings.show_search_trending or settings.show_search_product -%}{%- render 'quick-searching-trending-products' -%}{%- endif -%}
                                             {%- if settings.show_quick_search -%}
-                                                {%- if settings.show_search_trending or settings.show_search_product -%}{%- render 'predictive-search-results' -%}{%- endif -%}
+                                                {%- if settings.show_search_trending or settings.show_search_product -%}{%- render 'quick-searching-trending-products' -%}{%- endif -%}
+                                                {%- render 'predictive-search-results' -%}
                                             {%- endif -%}
                                         </form>
                                         {%- if settings.show_quick_search -%}
@@ -285,48 +285,28 @@
   customElements.define('sticky-header', StickyHeader);
 {% endjavascript %}
 
-{%- if logo_position == 'main_menu' or logo_position == 'always' -%}
-    {%- if logo != blank -%}
-        <script type="application/ld+json">
-            {
-                "@context": "http://schema.org",
-                "@type": "Organization",
-                "name": {{ shop.name | json }},
-                {% if logo != blank %}
-                    "logo": {{ logo | img_url: logo_width_img | prepend: "https:" | json }},
-                {% endif %}
-                "sameAs": [
-                    {{ settings.social_twitter_link | json }},
-                    {{ settings.social_facebook_link | json }},
-                    {{ settings.social_pinterest_link | json }},
-                    {{ settings.social_instagram_link | json }},
-                    {{ settings.social_tumblr_link | json }},
-                    {{ settings.social_snapchat_link | json }},
-                    {{ settings.social_youtube_link | json }},
-                    {{ settings.social_vimeo_link | json }}
-                ],
-                "url": {{ shop.url | append: page.url | json }}
-            }
-        </script>
 
-        {%- if request.page_type == 'index' -%}
-            {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
-            <script type="application/ld+json">
-                {
-                    "@context": "http://schema.org",
-                    "@type": "WebSite",
-                    "name": {{ shop.name | json }},
-                    "potentialAction": {
-                        "@type": "SearchAction",
-                        "target": {{ potential_action_target | json }},
-                        "query-input": "required name=search_term_string"
-                    },
-                    "url": {{ shop.url | append: page.url | json }}
-                }
-            </script>
-        {%- endif -%}
-    {%- endif -%}
-{%- endif -%}
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": {{ shop.name | json }},
+        {% if logo %}
+            "logo": {{ logo | image_url: width: 500 | prepend: "https:" | json }},
+        {% endif %}
+        "sameAs": [
+            {{ settings.social_twitter_link | json }},
+            {{ settings.social_facebook_link | json }},
+            {{ settings.social_pinterest_link | json }},
+            {{ settings.social_instagram_link | json }},
+            {{ settings.social_tumblr_link | json }},
+            {{ settings.social_snapchat_link | json }},
+            {{ settings.social_youtube_link | json }},
+            {{ settings.social_vimeo_link | json }}
+        ],
+        "url": {{ request.origin | append: page.url | json }}
+    }
+</script>
 
 {% schema %}
 {

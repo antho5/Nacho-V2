@@ -117,7 +117,10 @@
 .card-review .spr-badge-caption {
     display: none !important;
 }
-
+.card__heading {
+    font-size: var(--product-title-font-size);
+    margin: 0;
+}
 .card-title {
     font-family: var(--product-title-font);
     font-size: var(--product-title-font-size);
@@ -130,15 +133,11 @@
     margin: 0 0 var(--product-title-margin-bottom) 0;
 }
 
-.card-title .text {
-    font-size: var(--product-title-font-size);
-}
-
-.card-title .text span[data-change-title] {
+.card-title span[data-change-title] {
     display: none;
 }
 
-.enable_text_color_title .card-title .text span[data-change-title] {
+.enable_text_color_title .card-title span[data-change-title] {
     display: inline-block;
 }
 
@@ -1013,10 +1012,11 @@
     text-align: center;
 }
 
-.product-tab-block .list-product-tabs li a {
+.product-tab-block .list-product-tabs li .tab-links {
     padding: 6px 15px;
     display: block;
     transition: none;
+    width: 100%;
 }
 
 .product-tab-block .product-tabs-content .tab-content {
@@ -1031,7 +1031,7 @@
     font-size: var(--font-body-size);
 }
 
-.product-tab-block .list-product-tabs.list-tab__style_2 li a {
+.product-tab-block .list-product-tabs.list-tab__style_2 li .tab-links {
     background: transparent;
     position: relative;
     border-radius: 0;
@@ -1039,7 +1039,7 @@
     padding-right: 0;
 }
 
-.product-tab-block .list-product-tabs.list-tab__style_2 li a.active:before {
+.product-tab-block .list-product-tabs.list-tab__style_2 li .tab-links.active:before {
     content: '';
     width: 0;
     height: 0;
@@ -1401,7 +1401,7 @@
     padding-right: 90px;
 }
 
-.style_2_text_color_varriant .card-title .text span[data-change-title] {
+.style_2_text_color_varriant .card-title span[data-change-title] {
     top: 0;
     right: 0;
     max-width: 90px;
@@ -1744,7 +1744,7 @@ quickshop-update-quantity.disabled {
         padding-right: 0px;
     }
 
-    .style_2_text_color_varriant .card-title .text span[data-change-title] {
+    .style_2_text_color_varriant .card-title span[data-change-title] {
         display: none;
     }
 
@@ -2449,6 +2449,8 @@ quickshop-update-quantity.disabled {
 
     .card-title:hover {
         color: var(--product-title-color-hover);
+        text-decoration: underline;
+        text-underline-offset: 3px;
     }
 
     .card-information:hover .link-underline .text{

@@ -1,8 +1,6 @@
-<link rel="stylesheet" href="{{ 'component-compare-color.css' | asset_url }}" media="print" onload="this.media='all'">
-
 <noscript>{{ 'component-compare-color.css' | asset_url | stylesheet_tag }}</noscript>
 
-<compare-color class="halo-popup halo-compare-color-popup customPopup-large" data-compare-color-popup id="halo-compare-color-popup">
+<compare-color class="halo-popup halo-compare-color-popup customPopup-large" data-compare-color-popup id="halo-compare-color-popup" data-url-style-compare-color="{{ 'component-compare-color.css' | asset_url }}" data-url-script-compare-color="{% if show_compare_color_drop_drap %}https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js{% endif %}">
     <div class="halo-popup-wrapper">
         <div class="halo-popup-header">
             <button type="button" class="halo-popup-close clearfix" data-close-compare-color-popup aria-label="{{ 'general.common.close' | t }}">
@@ -73,7 +71,5 @@
         </div>
     </div>
 </compare-color>
-{% if show_compare_color_drop_drap %}
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-{% endif %}
+
 <script src="{{ 'halo-compare-color.js' | asset_url }}" defer="defer"></script>

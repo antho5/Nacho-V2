@@ -37,7 +37,7 @@
         {%- case block.type -%}
             {%- when 'logo' -%}
                 <div class="header-logo header-item header-item--side header-item fs-0 fg-0{% if block.settings.logo_position == 'main_menu'%} show-main-menu{% elsif block.settings.logo_position == 'sticky_menu'%} hide-main-menu{% else %}{% endif %}" style="--logo_font_size: {{block.settings.logo_font_size | append: 'px'}};--logo_font_weight: {{block.settings.logo_font_weight}};--logo_text_transform: {{block.settings.logo_text_transform}};--logo_text_color: {{block.settings.logo_color}};--logo_width: {{block.settings.logo_width | append: 'px'}};--logo_width_sticky: {{block.settings.logo_width_fixed | append: '%'}}">
-                    <{% if request.page_type == 'index' %}h1{% else %}div{% endif %} class="header__heading">
+                    <div class="header__heading">
                         <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
                             {%- if block.settings.logo != blank -%}
                                 {%- assign logo = block.settings.logo -%}
@@ -52,50 +52,43 @@
                                 <span class="header__heading-text {{ block.settings.logo_text_transform }} d-block">{{ shop.name }}</span>
                             {%- endif -%}
                         </a>
-                    </{% if request.page_type == 'index' %}h1{% else %}div{% endif %}>
+                    </div>
                 </div>
             {%- when 'main_menu' -%}
-            <div class="main-menu header-item p-static{% if block.settings.label_position == 'none' %} label-none{% elsif block.settings.label_position == 'main_menu' %} {% if block.settings.new_label_1 != blank or block.settings.sale_label_1 != blank or block.settings.hot_label_1 != blank%} main-menu-hasLabel{% endif %}{% else %}{% if block.settings.menu_top_spacing <= 16 %} label-small{% endif %}{% endif %}">
+            <div class="main-menu d-flex w-100 header-item p-static{% if block.settings.label_position == 'none' %} label-none{% elsif block.settings.label_position == 'main_menu' %} {% if block.settings.new_label_1 != blank or block.settings.sale_label_1 != blank or block.settings.hot_label_1 != blank%} main-menu-hasLabel{% endif %}{% else %}{% if block.settings.menu_top_spacing <= 16 %} label-small{% endif %}{% endif %}">
                 <div class="p-static container container-{{ section.settings.container }} o-unset">
                     <div class="main-menu--wrapper d-flex flex-align-center {% if block.settings.alignment == 'center' %} flex-jc-center{% elsif block.settings.alignment == 'right'%} flex-jc-end{% else %} flex-jc-start{% endif %} gap-30" id="HeaderNavigation" style="--lv_1_color: {{ block.settings.lv_1_color }};--lv_1_color_hover: {{ block.settings.lv_1_color_hover }};--lv_2_color: {{ block.settings.lv_2_color }};--lv_2_color_hover: {{ block.settings.lv_2_color_hover }};--lv_3_color: {{ block.settings.lv_3_color }};--lv_3_color_hover: {{ block.settings.lv_3_color_hover }};--menu_margin_left: -{{block.settings.grid_gap_menu_item | append: 'px'}};--menu_top_spacing: {{block.settings.menu_top_spacing | append: 'px'}};--menu_top_spacing_sticky: -{{block.settings.menu_top_spacing | plus: 1 | append: 'px'}};--menu_bottom_spacing: {{block.settings.menu_bottom_spacing | append: 'px'}};--grid_gap_menu_item: {{block.settings.grid_gap_menu_item | append: 'px'}};--bg_mega_menu: {% if block.settings.bg_mega_menu_gradient != blank %}{{ block.settings.bg_mega_menu_gradient }}{% else %}{{ block.settings.bg_mega_menu }}{% endif %};--sale_item_color: {{block.settings.sale_item_color}};--new_label_color: {{ block.settings.new_label_color }};--new_label_border: {{ block.settings.new_label_bg }};--new_label_bg: {% if block.settings.new_label_bg_gradient != blank %}{{ block.settings.new_label_bg_gradient }}{% else %}{{ block.settings.new_label_bg }}{% endif %};--sale_label_color: {{ block.settings.sale_label_color }};
                        --sale_label_border: {{ block.settings.sale_label_bg }};--sale_label_bg: {% if block.settings.sale_label_bg_gradient != blank %}{{ block.settings.sale_label_bg_gradient }}{% else %}{{ block.settings.sale_label_bg }}{% endif %};--hot_label_color: {{ block.settings.hot_label_color }};--hot_label_border: {{ block.settings.hot_label_bg }};--hot_label_bg: {% if block.settings.hot_label_bg_gradient != blank %}{{ block.settings.hot_label_bg_gradient }}{% else %}{{ block.settings.hot_label_bg }}{% endif %}">
-                        {% if block.settings.vertical_menu_layout != 'none' %}
+                        {%- if block.settings.vertical_menu_layout != 'none' -%}
                             <div class="vertical-menu p-relative sticky_effect vertical-menu__{{ block.settings.vertical_menu_layout }} zi-1{% unless block.settings.vertical_menu_layout == 'style_3'%}{% if template contains 'index' %} vertical-menu__open{% else %} vertical-menu__hide{% endif %}{% endunless %}">
                                 <div class="categories-title d-flex flex-wrap flex-jc-between categories-title__{{ block.settings.vertical_menu_layout }} w-100" style="--title_categories_color: {{block.settings.title_categories_color}};--icon_title_categories_color: {{block.settings.icon_title_categories_color}};--title_categories_bg: {% if block.settings.title_categories_bg_gradient != blank %}{{block.settings.title_categories_bg_gradient}}{% else %}{{block.settings.title_categories_bg}}{% endif %};--title_categories_font_size: {{block.settings.title_categories_font_size | append: 'px'}};--title_categories_line_height:{{block.settings.title_categories_font_size |plus: 8 | append: 'px'}};--view_all_font_size: {{block.settings.view_all_font_size | append: 'px'}};--view_all_link_color: {{block.settings.view_all_link_color}};--title_categories_border_color: {{block.settings.title_categories_border_color}}">
                                     <div class="categories-title__button p-relative pr-5">
-                                        {% if block.settings.vertical_menu_layout == 'style_1' %}
+                                        {%- if block.settings.vertical_menu_layout == 'style_1'-%}
                                                 <span class="icon-hamburger d-inline-block"></span>
-                                        {% elsif block.settings.vertical_menu_layout == 'style_3' %}
+                                        {%- elsif block.settings.vertical_menu_layout == 'style_3' -%}
                                             <span class="icon-grid d-inline-block">{% render 'icon-grid', class: 'w-h-17' %}</span>
-                                        {% else %}{% endif %}
-                                        {% if block.settings.title_categories != blank %}
+                                        {%- else -%}{%- endif -%}
+                                        {%- if block.settings.title_categories != blank -%}
                                             <h3 class="title d-inline-block m-zero">{{ block.settings.title_categories }}</h3>
-                                        {% endif %}
-                                        {% if block.settings.vertical_menu_layout != 'style_2' %}
+                                        {%- endif -%}
+                                        {%- if block.settings.vertical_menu_layout != 'style_2' -%}
                                             <span class="icon icon--dropdown d-inline-block p-relative"></span>
-                                        {% endif %}
+                                        {%- endif -%}
                                     </div>
-                                    {% if block.settings.vertical_menu_layout == 'style_2' %}
-                                        {% if block.settings.view_all != blank %}
+                                    {%- if block.settings.vertical_menu_layout == 'style_2' -%}
+                                        {%- if block.settings.view_all != blank -%}
                                             <a class="view_all"{% if block.settings.view_all_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.view_all_link }}"{% endif %} title="{{ block.settings.view_all }}"><span>{{ block.settings.view_all }}</span></a>
                                         {% endif %}
-                                    {% endif %}
+                                    {%- endif -%}
                                 </div>
                                 <nav class="header__menu-vertical p-absolute left-0 right-0 top-100 opacity-1" role="navigation" style="--vertical_menu_bg: {% if block.settings.vertical_menu_bg_gradient != blank %}{{ block.settings.vertical_menu_bg_gradient }}{% else %}{{ block.settings.vertical_menu_bg }}{% endif %};--vertical_menu_lv1_color:{{ block.settings.vertical_menu_lv1_color }};--vertical_menu_lv1_color_hover:{{ block.settings.vertical_menu_lv1_hover_color }};--vertical_menu_lv1_hover_bg:{% if block.settings.vertical_menu_lv1_hover_bg_gradient != blank %}{{ block.settings.vertical_menu_lv1_hover_bg_gradient }}{% else %}{{ block.settings.vertical_menu_lv1_hover_bg}}{% endif %}">
-                                    {% render 'halo-navigation-list-vertical',
-                                        listClass: 'list-menu p-relative',
-                                        block: block
-                                    %}
+                                    {% render 'halo-navigation-list-vertical', listClass: 'list-menu p-relative', block: block %}
                                 </nav>    
                             </div>
-                        {% endif %}
+                        {%- endif -%}
                         {%- if block.settings.menu != blank -%}
                             <nav class="header__inline-menu{% if block.settings.vertical_menu_layout != 'none' %} header__inline-menu-ver{% endif %}" data-navigation role="navigation">
-                                {% render 'halo-navigation-list',
-                                    listClass: 'list-menu list-menu--inline'
-                                    alignment: block.settings.alignment,
-                                    block: block
-                                %}
+                                {% render 'halo-navigation-list', listClass: 'list-menu list-menu--inline', alignment: block.settings.alignment, block: block %}
                             </nav>
                         {%- endif -%}
                     </div>
@@ -142,15 +135,15 @@
                                             {%- endif -%}
                                             <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form w-100">
                                                 <div class="field">
-                                                    <input class="search__input field__input form-input-placeholder" id="Search-In-Modal-Menu" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}" autocomplete="off" {%- if settings.show_quick_search -%}role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false"{%- endif -%}> 
+                                                    <input class="search__input field__input form-input-placeholder" id="Search-In-Modal-Menu-Vertical" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}" autocomplete="off" {%- if settings.show_quick_search -%}role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false"{%- endif -%}> 
                                                     <input type="hidden" name="options[prefix]" value="last">
                                                     <input type="hidden" name="type" value="product">
-                                                    <label class="field__label hiddenLabels" for="Search-In-Modal-Menu">{{ 'general.search.search' | t }}</label>
+                                                    <label class="field__label hiddenLabels" for="Search-In-Modal-Menu-Vertical">{{ 'general.search.search' | t }}</label>
                                                     <button class="button search__button field__button focus-inset" aria-label="{{ 'general.search.search' | t }}">{% render 'icon-search' %}</button>
                                                 </div>
-                                                {%- if settings.show_search_trending or settings.show_search_product -%}{%- render 'quick-searching-trending-products' -%}{%- endif -%}
                                                 {%- if settings.show_quick_search -%}
-                                                    {%- if settings.show_search_trending or settings.show_search_product -%}{%- render 'predictive-search-results' -%}{%- endif -%}
+                                                    {%- if settings.show_search_trending or settings.show_search_product -%}{%- render 'quick-searching-trending-products' -%}{%- endif -%}
+                                                    {%- render 'predictive-search-results' -%}
                                                 {%- endif -%}
                                             </form>
                                             {%- if settings.show_quick_search -%}
@@ -195,15 +188,14 @@
                             {% render 'icon-cart-03', class: 'w-h-26 stroke-w-10' %}
                             <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
                             <div class="cart-count-bubble">
-                                {%- if cart.item_count < 100 -%} <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
-                                    {%- endif -%}
-                                    <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+                                {%- if cart.item_count < 100 -%}
+                                <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
+                                {%- endif -%}
+                                <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
                             </div>
                         </a>
                     {%- endif -%}
                 </div>
-                
-
             </div>
         {%- endcase -%}
     {%- endfor -%}
@@ -342,48 +334,28 @@
   customElements.define('sticky-header', StickyHeader);
 {% endjavascript %}
   
-{%- if logo_position == 'main_menu' or logo_position == 'always' -%}
-    {%- if logo != blank -%}
-        <script type="application/ld+json">
-            {
-                "@context": "http://schema.org",
-                "@type": "Organization",
-                "name": {{ shop.name | json }},
-                {% if logo != blank %}
-                    "logo": {{ logo | img_url: logo_width_img | prepend: "https:" | json }},
-                {% endif %}
-                "sameAs": [
-                    {{ settings.social_twitter_link | json }},
-                    {{ settings.social_facebook_link | json }},
-                    {{ settings.social_pinterest_link | json }},
-                    {{ settings.social_instagram_link | json }},
-                    {{ settings.social_tumblr_link | json }},
-                    {{ settings.social_snapchat_link | json }},
-                    {{ settings.social_youtube_link | json }},
-                    {{ settings.social_vimeo_link | json }}
-                ],
-                "url": {{ shop.url | append: page.url | json }}
-            }
-        </script>
 
-        {%- if request.page_type == 'index' -%}
-            {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
-            <script type="application/ld+json">
-                {
-                    "@context": "http://schema.org",
-                    "@type": "WebSite",
-                    "name": {{ shop.name | json }},
-                    "potentialAction": {
-                        "@type": "SearchAction",
-                        "target": {{ potential_action_target | json }},
-                        "query-input": "required name=search_term_string"
-                    },
-                    "url": {{ shop.url | append: page.url | json }}
-                }
-            </script>
-        {%- endif -%}
-    {%- endif -%}
-{%- endif -%}
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": {{ shop.name | json }},
+        {% if logo %}
+            "logo": {{ logo | image_url: width: 500 | prepend: "https:" | json }},
+        {% endif %}
+        "sameAs": [
+            {{ settings.social_twitter_link | json }},
+            {{ settings.social_facebook_link | json }},
+            {{ settings.social_pinterest_link | json }},
+            {{ settings.social_instagram_link | json }},
+            {{ settings.social_tumblr_link | json }},
+            {{ settings.social_snapchat_link | json }},
+            {{ settings.social_youtube_link | json }},
+            {{ settings.social_vimeo_link | json }}
+        ],
+        "url": {{ request.origin | append: page.url | json }}
+    }
+</script>
 
 <script>
     var clickMenuVertical = function() {
@@ -499,7 +471,7 @@
         {
             "type": "select",
             "id": "sticky_header_type",
-            "label": "t:sections.header.settings.enable_sticky_header.name",
+            "label": "t:settings_schema.general.settings.swatch.label__2",
             "default": "on_scroll",
             "options": [
                 {

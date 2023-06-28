@@ -1241,6 +1241,8 @@
                                             </complementary-products>
                                             <script src="{{ "build-complementary-products.js" | asset_url }}" defer></script>
                                         </div>
+                                    {%- when '@app' -%}
+                                        {% render block %}
                                 {%- endcase -%}
                             {%- endfor -%}
                             {%- if show_tab -%}

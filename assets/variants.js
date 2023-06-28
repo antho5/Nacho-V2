@@ -20,12 +20,14 @@ class VariantSelects extends HTMLElement {
         } else {
             this.updateAttribute(false, !this.currentVariant.available);
         }
+        this.updateVariantStatuses();
     }
     
     onVariantChange(event) {
         this.updateOptions();
         this.updateMasterId();
         this.updatePickupAvailability();
+        this.updateVariantStatuses();
       
         if (!this.currentVariant) {
             this.updateAttribute(true);
@@ -188,443 +190,6 @@ class VariantSelects extends HTMLElement {
     }
 
     renderProductInfo() {
-        var variantList = this.getVariantData().filter((variant) => {
-            return variant.available
-        });
-        
-        var selectedOption1 = this.currentVariant?.option1,
-            selectedOption2 = this.currentVariant?.option2,
-            selectedOption3 = this.currentVariant?.option3,
-            options = this.item.find('.product-form__input'),
-            optionsLength = options.length,
-            pvOptionsLength = this.item.find('.productView-details .product-form__input').length,
-            checkStickyVariant = false;
-
-        // let parsedSelectedOption1 = selectedOption1 ? parseDoubleQuote(selectedOption1) : null,
-        //     parsedSelectedOption2 = selectedOption2 ? parseDoubleQuote(selectedOption2) : null,
-        //     parsedSelectedOption3 = selectedOption3 ? parseDoubleQuote(selectedOption3) : null;
-      
-        optionsLength > pvOptionsLength ? checkStickyVariant = true : '';
-      
-        $.each(options, (index, element) => {
-            var position = $(element).data('option-index'),
-                type = $(element).data('product-attribute');
-
-            switch (position) {
-                case 0:
-                    $(element).find('[data-header-option]').text(selectedOption1);
-
-                    if(type == 'set-select') {
-                        var selectList = $(element).find('.select__select option');
-
-                        selectList.each((idx, elt) => {
-                            if(elt.value == selectedOption1){
-                                $(elt).attr('selected', 'selected');
-                            } else {
-                                $(elt).removeAttr('selected');
-                            }
-                        });
-                    } else {
-                        $(element).find('.product-form__radio').prop('checked', false);
-                        $(element).find(`.product-form__radio[value="${this.encodeOption(selectedOption1)}"]`).prop('checked', true);
-                    }
-
-                    var option1List = variantList.filter((variant) => {
-                        return variant.option1 === selectedOption1;
-                    });
-
-                    if(selectedOption2){
-                        var inputList = $(options[1]),
-                            input = inputList.find('.product-form__radio'),
-                            selectOption = inputList.find('.select__select option');
-                        
-                        if (checkStickyVariant) {
-                            var inputListSticky = $(options[1+pvOptionsLength]),
-                                inputSticky = inputListSticky.find('.product-form__radio'),
-                                selectOptionSticky = inputListSticky.find('.select__select option');
-                        }
-
-                        if(type == 'set-rectangle'){
-                            input.each((idx, elt) => {
-                                var $input = $(elt),
-                                    $label = $input.next(),
-                                    optionValue = this.decodeOption($(elt).val());
-
-                                var optionSoldout = option1List.find((variant) => {
-                                    return variant.option2 == optionValue
-                                });
-
-                                if(optionSoldout == undefined){
-                                    $label.removeClass('available').addClass('soldout');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).next().removeClass('available').addClass('soldout');
-                                    }
-                                } else {
-                                    $label.removeClass('soldout').addClass('available');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).next().removeClass('soldout').addClass('available');
-                                    }
-                                }
-                            });
-                        } else {
-                            selectOption.each((idx, elt) => {
-                                var $option = $(elt),
-                                    optionValue = this.decodeOption($(elt).val());
-
-                                var optionSoldout = option1List.find((variant) => {
-                                    return variant.option2 == optionValue
-                                });
-
-                                if(optionSoldout == undefined){
-                                    $option.attr('disabled', true);
-                                    if (checkStickyVariant) {
-                                        $(selectOptionSticky[idx]).attr('disabled', true);
-                                    }
-                                } else {
-                                    $option.removeAttr('disabled');
-                                    if (checkStickyVariant) {
-                                        $(selectOptionSticky[idx]).removeAttr('disabled');
-                                    }
-                                }
-                            });
-                        }
-                    }
-
-                    if(selectedOption3){
-                        var inputList = $(options[2]),
-                            input = inputList.find('.product-form__radio'),
-                            selectOption = inputList.find('.select__select option');
-
-                        if (checkStickyVariant) {
-                            var inputListSticky = $(options[2+pvOptionsLength]),
-                                inputSticky = inputListSticky.find('.product-form__radio'),
-                                selectOptionSticky = inputListSticky.find('.select__select option');
-                        }
-
-                        if(type == 'set-rectangle'){
-                            input.each((idx, elt) => {
-                                var $input = $(elt),
-                                    $label = $input.next(),
-                                    optionValue = this.decodeOption($(elt).val());
-
-                                var optionSoldout = option1List.find((variant) => {
-                                    return variant.option3 == optionValue
-                                });
-
-                                if(optionSoldout == undefined){
-                                    $label.removeClass('available').addClass('soldout');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).next().removeClass('available').addClass('soldout');
-                                    }
-                                } else {
-                                    $label.removeClass('soldout').addClass('available');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).next().removeClass('soldout').addClass('available');
-                                    }
-                                }
-                            });
-                        } else {
-                            selectOption.each((idx, elt) => {
-                                var $option = $(elt),
-                                    optionValue = this.decodeOption($(elt).val());
-
-                                var optionSoldout = option1List.find((variant) => {
-                                    return variant.option3 == optionValue
-                                });
-
-                                if(optionSoldout == undefined){
-                                    $option.attr('disabled', true);
-                                    if (checkStickyVariant) {
-                                        $(selectOptionSticky[idx]).attr('disabled', true);
-                                    }
-                                } else {
-                                    $option.removeAttr('disabled');
-                                    if (checkStickyVariant) {
-                                        $(selectOptionSticky[idx]).removeAttr('disabled');
-                                    }
-                                }
-                            });
-                        }
-                    }
-
-                    break;
-                case 1:
-                    $(element).find('[data-header-option]').text(selectedOption2);
-
-                    if(type == 'set-select') {
-                        var selectList = $(element).find('.select__select option');
-
-                        selectList.each((idx, elt) => {
-                            if(elt.value == selectedOption2){
-                                $(elt).attr('selected', 'selected');
-                            } else {
-                                $(elt).removeAttr('selected');
-                            }
-                        });
-                    } else {
-                        $(element).find('.product-form__radio').prop('checked', false);
-                        $(element).find(`.product-form__radio[value="${this.encodeOption(selectedOption2)}"]`).prop('checked', true);
-                    }
-
-                    var option2List = variantList.filter((variant) => {
-                        return variant.option2 === selectedOption2;
-                    });
-
-                    if(selectedOption1){
-                        var inputList = $(options[0]),
-                            input = inputList.find('.product-form__radio'),
-                            selectOption = inputList.find('.select__select option');
-
-                        if (checkStickyVariant) {
-                            var inputListSticky = $(options[pvOptionsLength]),
-                                inputSticky = inputListSticky.find('.product-form__radio'),
-                                selectOptionSticky = inputListSticky.find('.select__select option');
-                        }
-
-                        if(type == 'set-rectangle'){
-                            input.each((idx, elt) => {
-                                var $input = $(elt),
-                                    $label = $input.next(),
-                                    optionValue = this.decodeOption($(elt).val());
-
-                                var optionSoldout = option2List.find((variant) => {
-                                    return variant.option1 == optionValue
-                                });
-
-                                if(optionSoldout == undefined){
-                                    $label.removeClass('available').addClass('soldout');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).next().removeClass('available').addClass('soldout');
-                                    }
-                                } else {
-                                    $label.removeClass('soldout').addClass('available');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).next().removeClass('soldout').addClass('available');
-                                    }
-                                }
-                            });
-                        } else {
-                            selectOption.each((idx, elt) => {
-                                var $option = $(elt),
-                                    optionValue = this.decodeOption($(elt).val());
-
-                                var optionSoldout = option2List.find((variant) => {
-                                    return variant.option1 == optionValue
-                                });
-
-                                if(optionSoldout == undefined){
-                                    $option.attr('disabled', true);
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).attr('disabled', true);
-                                    }
-                                } else {
-                                    $option.removeAttr('disabled');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).removeAttr('disabled');
-                                    }
-                                }
-                            });
-                        }
-                    }
-
-                    if(selectedOption3){
-                        var inputList = $(options[2]),
-                            input = inputList.find('.product-form__radio'),
-                            selectOption = inputList.find('.select__select option');
-
-                        if (checkStickyVariant) {
-                            var inputListSticky = $(options[2+pvOptionsLength]),
-                                inputSticky = inputListSticky.find('.product-form__radio'),
-                                selectOptionSticky = inputListSticky.find('.select__select option');
-                        }
-
-                        if(type == 'set-rectangle'){
-                            input.each((idx, elt) => {
-                                var $input = $(elt),
-                                    $label = $input.next(),
-                                    optionValue = this.decodeOption($(elt).val());
-
-                                var optionSoldout = option2List.find((variant) => {
-                                    return variant.option3 == optionValue
-                                });
-
-                                if(optionSoldout == undefined){
-                                    $label.removeClass('available').addClass('soldout');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).next().removeClass('available').addClass('soldout');
-                                    }
-                                } else {
-                                    $label.removeClass('soldout').addClass('available');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).next().removeClass('soldout').addClass('available');
-                                    }
-                                }
-                            });
-                        } else {
-                            selectOption.each((idx, elt) => {
-                                var $option = $(elt),
-                                    optionValue =this.decodeOption($(elt).val());
-
-                                var optionSoldout = option2List.find((variant) => {
-                                    return variant.option3 == optionValue
-                                });
-
-                                if(optionSoldout == undefined){
-                                    $option.attr('disabled', true);
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).attr('disabled', true);
-                                    }
-                                } else {
-                                    $option.removeAttr('disabled');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).removeAttr('disabled');
-                                    }
-                                }
-                            });
-                        }
-                    }
-
-                    break;
-                case 2:
-                    $(element).find('[data-header-option]').text(selectedOption3);
-
-                    if(type == 'set-select') {
-                        var selectList = $(element).find('.select__select option');
-
-                        selectList.each((idx, elt) => {
-                            if(elt.value == selectedOption3){
-                                $(elt).attr('selected', 'selected');
-                            } else {
-                                $(elt).removeAttr('selected');
-                            }
-                        });
-                    } else {
-                        $(element).find('.product-form__radio').prop('checked', false);
-                        $(element).find(`.product-form__radio[value="${this.encodeOption(selectedOption3)}"]`).prop('checked', true);
-                    }
-
-                    var option3List = variantList.filter((variant) => {
-                        return variant.option3 === selectedOption3;
-                    });
-
-                    if(selectedOption1){
-                        var inputList = $(options[0]),
-                            input = inputList.find('.product-form__radio'),
-                            selectOption = inputList.find('.select__select option');
-
-                        if (checkStickyVariant) {
-                            var inputListSticky = $(options[pvOptionsLength]),
-                                inputSticky = inputListSticky.find('.product-form__radio'),
-                                selectOptionSticky = inputListSticky.find('.select__select option');
-                        }
-
-                        if(type == 'set-rectangle'){
-                            input.each((idx, elt) => {
-                                var $input = $(elt),
-                                    $label = $input.next(),
-                                    optionValue = this.decodeOption($(elt).val());
-
-                                var optionSoldout = option3List.find((variant) => {
-                                    return variant.option1 == optionValue
-                                });
-
-                                if(optionSoldout == undefined){
-                                    $label.removeClass('available').addClass('soldout');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).next().removeClass('available').addClass('soldout');
-                                    }
-                                } else {
-                                    $label.removeClass('soldout').addClass('available');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).next().removeClass('soldout').addClass('available');
-                                    }
-                                }
-                            });
-                        } else {
-                            selectOption.each((idx, elt) => {
-                                var $option = $(elt),
-                                    optionValue = this.decodeOption($(elt).val());
-
-                                var optionSoldout = option3List.find((variant) => {
-                                    return variant.option1 == optionValue
-                                });
-
-                                if(optionSoldout == undefined){
-                                    $option.attr('disabled', true);
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).attr('disabled', true);
-                                    }
-                                } else {
-                                    $option.removeAttr('disabled');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).removeAttr('disabled');
-                                    }
-                                }
-                            });
-                        }
-                    }
-
-                    if(selectedOption2){
-                        var inputList = $(options[1]),
-                            input = inputList.find('.product-form__radio'),
-                            selectOption = inputList.find('.select__select option');
-
-                        if (checkStickyVariant) {
-                            var inputListSticky = $(options[1+pvOptionsLength]),
-                                inputSticky = inputListSticky.find('.product-form__radio'),
-                                selectOptionSticky = inputListSticky.find('.select__select option');
-                        }
-
-                        if(type == 'set-rectangle'){
-                            input.each((idx, elt) => {
-                                var $input = $(elt),
-                                    $label = $input.next(),
-                                    optionValue = this.decodeOption($(elt).val());
-
-                                var optionSoldout = option3List.find((variant) => {
-                                    return variant.option2 == optionValue
-                                });
-
-                                if(optionSoldout == undefined){
-                                    $label.removeClass('available').addClass('soldout');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).next().removeClass('available').addClass('soldout');
-                                    }
-                                } else {
-                                    $label.removeClass('soldout').addClass('available');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).next().removeClass('soldout').addClass('available');
-                                    }
-                                }
-                            });
-                        } else {
-                            selectOption.each((idx, elt) => {
-                                var $option = $(elt),
-                                    optionValue = this.decodeOption($(elt).val());
-
-                                var optionSoldout = option3List.find((variant) => {
-                                    return variant.option2 == optionValue
-                                });
-
-                                if(optionSoldout == undefined){
-                                    $option.attr('disabled', true);
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).attr('disabled', true);
-                                    }
-                                } else {
-                                    $option.removeAttr('disabled');
-                                    if (checkStickyVariant) {
-                                        $(inputSticky[idx]).removeAttr('disabled');
-                                    }
-                                }
-                            });
-                        }
-                    }
-
-                    break;
-            }
-        });
-
         if(this.item.find('[data-sku]').length > 0){
             this.item.find('[data-sku] .productView-info-value').text(this.currentVariant.sku);
         }
@@ -751,7 +316,7 @@ class VariantSelects extends HTMLElement {
                          pdView_subTotal.textContent = subTotal;
                        }
                       
-                        if (this.currentVariant.available && maxValue <= 0) {
+                        if (this.currentVariant.available && maxValue <= 0 && this.currentVariant.inventory_management == "shopify") {
                             text = window.variantStrings.preOrder;
                         } else {
                             text = window.variantStrings.addToCart;
@@ -763,7 +328,7 @@ class VariantSelects extends HTMLElement {
                 } else {
                     subTotal = Shopify.formatMoney(price, window.money_format);
                     subTotal = extractContent(subTotal);
-                    if (this.currentVariant.available && maxValue <= 0) {
+                    if (this.currentVariant.available && maxValue <= 0 && this.currentVariant.inventory_management == "shopify") {
                         text = window.variantStrings.preOrder;
                     } else {
                         text = window.variantStrings.addToCart;
@@ -832,7 +397,7 @@ class VariantSelects extends HTMLElement {
                     button.setAttribute('disabled', true);
                     button.textContent = text;
                 } else {
-                    if (this.currentVariant.available && maxValue <= 0) {
+                    if (this.currentVariant.available && maxValue <= 0 && this.currentVariant.inventory_management == "shopify") {
                         text = window.variantStrings.preOrder;
                     } else {
                         text = window.variantStrings.addToCart;
@@ -854,7 +419,12 @@ class VariantSelects extends HTMLElement {
     }
 
     checkNeedToConvertCurrency() {
-        return (window.show_multiple_currencies && Currency.currentCurrency != shopCurrency) || window.show_auto_currency;
+        var currencyItem = $('.dropdown-item[data-currency]');
+        if (currencyItem.length) {
+            return (window.show_multiple_currencies && Currency.currentCurrency != shopCurrency) || window.show_auto_currency;
+        } else {
+            return;
+        }
     }
 
     checkQuantityWhenVariantChange() {
@@ -878,6 +448,40 @@ class VariantSelects extends HTMLElement {
       
         document.getElementById('product-add-to-cart').dataset.available = this.currentVariant.available && maxValue <= 0
     }
+
+    updateVariantStatuses() {
+        // const options = this.item.find('.productView-details .product-form__input'),
+        //     optionsLength = options.length,
+        //     pvOptionsLength = PVoptions.length,
+        //     checkStickyVariant = false;
+      
+        // optionsLength > pvOptionsLength ? checkStickyVariant = true : '';
+
+        const selectedOptionOneVariants = this.variantData.filter(variant => this.querySelector(':checked').value === variant.option1);
+        const inputWrappers = [...this.querySelectorAll('.product-form__input')];
+        const inputLength = inputWrappers.length;
+        inputWrappers.forEach((option, index) => {
+            option.querySelector('[data-header-option]').innerText = option.querySelector(':checked').value;
+            if (index === 0 && inputLength > 1) return;
+            const optionInputs = [...option.querySelectorAll('input[type="radio"], option')]
+            const previousOptionSelected = inputLength > 1 ? inputWrappers[index - 1].querySelector(':checked').value : inputWrappers[index].querySelector(':checked').value;
+            const optionInputsValue = inputLength > 1 ? selectedOptionOneVariants.filter(variant => variant[`option${ index }`] === previousOptionSelected).map(variantOption => variantOption[`option${ index + 1 }`]) : this.variantData.map(variantOption => variantOption[`option${ index + 1 }`]);
+            const availableOptionInputsValue = inputLength > 1 ? selectedOptionOneVariants.filter(variant => variant.available && variant[`option${ index }`] === previousOptionSelected).map(variantOption => variantOption[`option${ index + 1 }`]) : this.variantData.filter(variant => variant.available).map(variantOption => variantOption[`option${ index + 1 }`]);
+            this.setInputAvailability(optionInputs, optionInputsValue, availableOptionInputsValue)
+        });
+    }
+
+    setInputAvailability(optionInputs, optionInputsValue, availableOptionInputsValue) {
+        optionInputs.forEach(input => {
+            if (availableOptionInputsValue.includes(input.getAttribute('value'))) {
+                input.classList.remove('soldout');
+                input.innerText = input.getAttribute('value');
+            } else {
+                input.classList.add('soldout');
+                optionInputsValue.includes(input.getAttribute('value')) ? input.innerText = input.getAttribute('value') + ' (Sold out)' : input.innerText = window.variantStrings.unavailable_with_option.replace('[value]', input.getAttribute('value'))
+            }
+        });
+    }
 }
 
 customElements.define('variant-selects', VariantSelects);
@@ -885,6 +489,27 @@ customElements.define('variant-selects', VariantSelects);
 class VariantRadios extends VariantSelects {
     constructor() {
         super();
+    }
+
+    setInputAvailability(optionInputs, optionInputsValue, availableOptionInputsValue) {
+        optionInputs.forEach(input => {
+            if (availableOptionInputsValue.includes(input.getAttribute('value'))) {
+                input.nextSibling.classList.remove('soldout', 'unavailable');
+                input.nextSibling.classList.add('available');
+            } else {
+                input.nextSibling.classList.remove('available', 'unavailable');
+                input.nextSibling.classList.add('soldout');
+
+                if (window.variantStrings.hide_variants_unavailable && !optionInputsValue.includes(input.getAttribute('value'))) {
+                    input.nextSibling.classList.add('unavailable')
+                    if (!input.checked) return;
+                    let inputsValue;
+                    availableOptionInputsValue.length > 0 ? inputsValue = availableOptionInputsValue : inputsValue = optionInputsValue;
+                    input.closest('.product-form__input').querySelector(`input[value="${inputsValue[0]}"]`).checked = true;
+                    this.dispatchEvent(new Event('change'))
+                }
+            }
+        });
     }
         
     updateOptions() {

@@ -136,7 +136,7 @@
     font-size: calc(var(--font-body-size) + 1px);
 }
 
-.recently-viewed-content .products-grid:hover .product-info{
+.recently-viewed-content .products-grid:not(.not-product):hover .product-info{
     visibility: visible;
     opacity: 1;
 }

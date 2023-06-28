@@ -229,7 +229,7 @@ class Toolbar extends HTMLElement {
 
         if(window.compare.show){
             this.setLocalStorageProductForCompare({
-                link: $('a[data-compare-link]'),
+                link: $('[data-compare-link]'),
                 onComplete: null
             });
         }

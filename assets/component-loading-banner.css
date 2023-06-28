@@ -396,6 +396,7 @@
     bottom: 30px;
     transform: translateX(-50%);
     line-height: 1;
+    z-index: 1;
 }
 
 .btn-scroll-down svg {
@@ -741,6 +742,11 @@ body:not(.safari).banner-animation-1 .shouldShow .banner-button.banner-button-an
 @media (max-width: 767px) {
     .countdown-block {
         color: var(--color-countdown-mb-style);
+    }
+    .countdown-block .clock-item,
+    .countdown-block.shape-square .clock-item,
+    .countdown-block.shape-square .clock-item:first-of-type {
+         border-color: var(--color-countdown-mb-style);
     }
     .border--border_s2 .banner-heading:before{
         height: 12px;

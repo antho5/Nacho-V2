@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="{{ 'component-blog-post.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'component-blog-post.css' | asset_url | stylesheet_tag }}</noscript>
 
-{% if settings.banner_animation == 'effect_1' %}
+{%- if settings.banner_animation == 'effect_1' -%}
     <link rel="stylesheet" href="{{ 'component-blog-post-banner-animation.css' | asset_url }}" media="print" onload="this.media='all'">
     <noscript>{{ 'component-blog-post-banner-animation.css' | asset_url | stylesheet_tag }}</noscript>
-{% endif %}
+{%- endif -%}
 
 {%- liquid
     assign blog_show_author = section.settings.blog_show_author
@@ -79,287 +79,113 @@
 -%}
 
 <style>
-    #shopify-section-{{section.id}} {
-        padding-top: {{ mg_minus_desktop | times: 0.5 | append: 'px' }};
-    }
+    #shopify-section-{{section.id}} {padding-top: {{ mg_minus_desktop | times: 0.5 | append: 'px' }}}
+    .section-block-{{section.id}} .halo-block-header {margin-top: -{{ mg_minus_desktop | append: 'px' }}}
 
-    .section-block-{{section.id}} .halo-block-header {
-        margin-top: -{{ mg_minus_desktop | append: 'px' }};
-    }
-
-    {% if blog_bg_image != blank %}
-        .section-block-{{section.id}}{
-            background: url({{ blog_bg_image | img_url: '1920x' }});
-            background-repeat: repeat-x;
-            background-size: cover;
-        }
-        .section-block-{{section.id}} .halo-block-header .title .text {
-            background-color: transparent;
-        }
-    {% else %}
+    {%- if blog_bg_image != blank -%}
+        .section-block-{{section.id}}{background: url({{ blog_bg_image | img_url: '1920x' }});background-repeat: repeat-x;background-size: cover}
+        .section-block-{{section.id}} .halo-block-header .title .text {background-color: transparent}
+    {%- else -%}
         .section-block-{{section.id}},
-        .section-block-{{section.id}} .halo-block-header .title .text {
-            background: {% if blog_bg_gradient != blank %}{{ blog_bg_gradient }}{% else %}{{ blog_bg }}{% endif %};
-        }
-    {% endif %}
+        .section-block-{{section.id}} .halo-block-header .title .text {background: {% if blog_bg_gradient != blank %}{{ blog_bg_gradient }}{% else %}{{ blog_bg }}{% endif %}}
+    {%- endif -%}
 
-    {% unless section.settings.enable_border_title %}
-        .section-block-{{section.id}} .halo-block-header .title .text {
-            background-color: transparent;
-        }
-    {% endunless %}
+    {%- unless section.settings.enable_border_title -%}
+        .section-block-{{section.id}} .halo-block-header .title .text {background-color: transparent}
+    {%- endunless -%}
 
-    .section-block-{{section.id}} .halo-block-header .title:before {
-        background-color: {{ section.settings.border_color_title }};
-        {% unless section.settings.enable_border_title %}
+    .section-block-{{section.id}} .halo-block-header .title:before {background-color: {{ section.settings.border_color_title }};
+        {%- unless section.settings.enable_border_title -%}
             display: none;
-        {% endunless %}
+        {%- endunless -%}
     }
+    .section-block-{{section.id}} .halo-block-header .title {color: {{ color_title }};font-size: {{ fontsize_title | append: 'px'  }};margin-bottom: {{ margin_bottom_heading | append: 'px' }}}
+    .section-block-{{section.id}} .halo-block-header .rte {color: {{ color_des }};font-size: {{ fontsize_des | append: 'px'  }};margin-bottom: {{ margin_bottom_desheading | append: 'px' }}}
+    .section-block-{{section.id}} .article-card {border-radius: {{ border_radius_item | append: 'px' }};overflow: hidden;background-color: {{ blog_item_bg }}}
 
-    .section-block-{{section.id}} .halo-block-header .title {
-        color: {{ color_title }};
-        font-size: {{ fontsize_title | append: 'px'  }};
-        margin-bottom: {{ margin_bottom_heading | append: 'px' }};
-    }
+    {%- if enable_border_box -%}
+    .section-block-{{section.id}} .article-card__info {border: 1px solid {{ color_border_box  }};border-top: 0;padding: 16px 27px 28px}
+    {%- endif -%}
 
-    .section-block-{{section.id}} .halo-block-header .rte {
-        color: {{ color_des }};
-        font-size: {{ fontsize_des | append: 'px'  }};
-        margin-bottom: {{ margin_bottom_desheading | append: 'px' }}
-    }
+    .section-block-{{section.id}} .article-card__title a {color: {{ color_title_item }}}
+    .section-block-{{section.id}} .article-card__author {color: {{ color_date_item }}}
+    .section-block-{{section.id}} .article-card__des {color: {{ color_des_item }}}
+    .section-block-{{section.id}} .article-card__footer a {color: {{ color_button_item }};text-transform: {{ button_text_transform }};font-weight: {{ button_text_fw }}}
+    .section-block-{{section.id}} .article-card__footer a svg {fill: {{ color_button_item }}}
+    .section-block-{{section.id}} .view_all {font-weight: var(--font-weight-view-all-style);margin-top: var(--mg-top-view-style);margin-bottom: var(--mg-bottom-view-style);color: var(--color-view-all-style)}
+    .section-block-{{section.id}} .view_all:not(.has-border) {border-bottom: none}
+    .section-block-{{section.id}} .view_all.has-border {border-bottom: 1px solid}
+    .section-block-{{section.id}} .view_all .icon-svg {color: var(--color-view-all-icon-style)}
+    .section-block-{{section.id}} .view_all .icon-svg svg {fill: var(--color-view-all-icon-style)}
 
-    .section-block-{{section.id}} .article-card {
-        border-radius: {{ border_radius_item | append: 'px' }};
-        overflow: hidden;
-        background-color: {{ blog_item_bg }};
-    }
-    
-    .section-block-{{section.id}} .article-card__info {
-        {%- if enable_border_box -%}
-        border: 1px solid {{ color_border_box  }};
-        border-top: 0;
-        padding: 16px 27px 28px;
-        {%- endif -%}
-    }
-
-    .section-block-{{section.id}} .article-card__title a {
-        color: {{ color_title_item }};
-    }
-
-    .section-block-{{section.id}} .article-card__author {
-        color: {{ color_date_item }};
-    }
-
-    .section-block-{{section.id}} .article-card__des {
-        color: {{ color_des_item }};
-    }
-
-    .section-block-{{section.id}} .article-card__footer a {
-        color: {{ color_button_item }};
-        text-transform: {{ button_text_transform }};
-        font-weight: {{ button_text_fw }};
-    }
-    
-    .section-block-{{section.id}} .article-card__footer a svg {
-        fill: {{ color_button_item }};      
-    }
-
-    .section-block-{{section.id}} .view_all {
-        font-weight: var(--font-weight-view-all-style);
-        margin-top: var(--mg-top-view-style);
-        margin-bottom: var(--mg-bottom-view-style);
-        color: var(--color-view-all-style);
-    }
-    
-    .section-block-{{section.id}} .view_all:not(.has-border) {
-        border-bottom: none;
-    }
-    
-    .section-block-{{section.id}} .view_all.has-border {
-        border-bottom: 1px solid;
-    }
-    
-    .section-block-{{section.id}} .view_all .icon-svg {
-        color: var(--color-view-all-icon-style);
-    }
-    
-    .section-block-{{section.id}} .view_all .icon-svg svg {
-        fill: var(--color-view-all-icon-style);
-    }
-
-    {% if enable_blog_button %}
-        .section-block-{{section.id}} .article-card__footer {
-            text-decoration: unset;
-        }
-
-        .section-block-{{section.id}} .article-card__footer a.button {
-            color: {{ color_button_item }};
-            background: {{ color_button_item_bg }};
-            border: 1px solid {{ color_button_item_border }};
-            font-weight: var(--btn-1-font-weight);
-            text-transform: var(--btn-1-text-transform);
-            width: 162px;
-        }
-
-        .section-block-{{section.id}} .article-card__footer a.button:hover {
-            color: {{ color_button_item_hover }};
-            background: {{ color_button_item_bg_hover }};
-            border: 1px solid {{ color_button_item_border_hover }};
-        }
-
-        .section-block-{{section.id}} .article-card__author {
-            display: flex;
-            justify-content: center;
-        }
-
-        .section-block-{{section.id}} .article-card__author .article__date {
-            order: -1;
-            margin-right: 4px;
-        }
-
-        .section-block-{{section.id}} .article-card__info {
-            padding: 22px 45px 28px;
-        } 
-    {% endif %}
+    {%- if enable_blog_button -%}
+        .section-block-{{section.id}} .article-card__footer {text-decoration: unset}
+        .section-block-{{section.id}} .article-card__footer a.button {color: {{ color_button_item }};background: {{ color_button_item_bg }};border: 1px solid {{ color_button_item_border }};font-weight: var(--btn-1-font-weight);text-transform: var(--btn-1-text-transform);width: 162px}
+        .section-block-{{section.id}} .article-card__footer a.button:hover {color: {{ color_button_item_hover }};background: {{ color_button_item_bg_hover }};border: 1px solid {{ color_button_item_border_hover }}}
+        .section-block-{{section.id}} .article-card__author {display: flex;justify-content: center}
+        .section-block-{{section.id}} .article-card__author .article__date {order: -1;margin-right: 4px}
+        .section-block-{{section.id}} .article-card__info {padding: 22px 45px 28px} 
+    {%- endif -%}
 
     @media (min-width: 1200px) {
-        .section-block-{{section.id}} {
-            padding-top: {{ mg_top_desktop | append: 'px' }};
-            padding-bottom: {{ mg_bottom_desktop | append: 'px' }};
-        }
-        
-        .section-block-{{section.id}} .article-card__title a:hover {
-            text-decoration: underline;
-            text-underline-offset: 0.1em;
-        }
+        .section-block-{{section.id}} {padding-top: {{ mg_top_desktop | append: 'px' }};padding-bottom: {{ mg_bottom_desktop | append: 'px' }}}
+        .section-block-{{section.id}} .article-card__title a:hover {text-decoration: underline;text-underline-offset: 0.1em}
 
-        {% if content_on_image == 'content_on_image' %} 
-            .section-block-{{ section.id }} .article-card {
-                position: relative;
-            }
-
-            .section-block-{{ section.id }} .article-card .article-card__info {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: calc(100% - 30px * 2);
-                margin: 30px;
-                background: {% if content_gradient != blank %}{{ content_gradient }}{% elsif content_bg != blank %}{{ content_bg }}{% else %}#fff{% endif %};
-                padding-top: 25px;
-                padding-bottom: 23px;
-            }
-        {% endif %}
+        {%- if content_on_image == 'content_on_image' -%} 
+            .section-block-{{ section.id }} .article-card {position: relative}
+            .section-block-{{ section.id }} .article-card .article-card__info {position: absolute;bottom: 0;left: 0;width: calc(100% - 30px * 2);margin: 30px;background: {% if content_gradient != blank %}{{ content_gradient }}{% elsif content_bg != blank %}{{ content_bg }}{% else %}#fff{% endif %};padding-top: 25px;padding-bottom: 23px}
+        {%- endif -%}
     }
-
     @media (min-width: 1025px) {
-        {% if section.settings.container == 'fullwidth' %}
-            .section-block-{{section.id}} .container-full {
-                padding-left: {{ padding_full_width | append: 'px' }};
-                padding-right: {{ padding_full_width | append: 'px' }};
-            }
-        {% endif %}
-        .section-block-{{section.id}} .halo-block-header .title .text {
-            width: {{ custom_width_title | append: 'px' }};
-        }
-
-        .section-block-{{ section.id }} .halo-block-header.view_all-right_title {
-            position: relative;
-        }
-    
-        .section-block-{{ section.id }} .halo-block-header.view_all-right_title .view_all {
-            position: absolute;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-        }
-
-        .section-block-{{section.id}} .halo-row {
-            margin-left: var(--row-distance-style);
-            margin-right: var(--row-distance-style);
-        }
-
-        .section-block-{{section.id}} .halo-row .halo-item{
-            padding-left: var(--item-distance-style);
-            padding-right: var(--item-distance-style);
-        }
+        {%- if section.settings.container == 'fullwidth' -%}
+            .section-block-{{section.id}} .container-full {padding-left: {{ padding_full_width | append: 'px' }};padding-right: {{ padding_full_width | append: 'px' }}}
+        {%- endif -%}
+        .section-block-{{section.id}} .halo-block-header .title .text {width: {{ custom_width_title | append: 'px' }}}
+        .section-block-{{ section.id }} .halo-block-header.view_all-right_title {position: relative}
+        .section-block-{{ section.id }} .halo-block-header.view_all-right_title .view_all {position: absolute;top: 50%;right: 0;transform: translateY(-50%)}
+        .section-block-{{section.id}} .halo-row {margin-left: var(--row-distance-style);margin-right: var(--row-distance-style)}
+        .section-block-{{section.id}} .halo-row .halo-item{padding-left: var(--item-distance-style);padding-right: var(--item-distance-style)}
     }
-
-    @media (min-width: 768px) and (max-width: 1199px) {
-        .section-block-{{section.id}} {
-            padding-top: {{ mg_top_tablet | append: 'px' }};
-            padding-bottom: {{ mg_bottom_tablet | append: 'px' }};
-        }
-    }
-
+    @media (min-width: 768px) and (max-width: 1199px) {.section-block-{{section.id}} {padding-top: {{ mg_top_tablet | append: 'px' }};padding-bottom: {{ mg_bottom_tablet | append: 'px' }}}}
     @media (max-width: 1024px) {
-        {% if blog_bg_image != blank %}
-            .section-block-{{section.id}}{
-                background-position: center top;
-            }
-        {% endif %}
+        {%- if blog_bg_image != blank -%}
+            .section-block-{{section.id}}{background-position: center top}
+        {%- endif -%}
 
-        .section-block-{{ section.id }} .halo-block-header.view_all-right_title .title {
-            margin-bottom: 10px;
-        }
+        .section-block-{{ section.id }} .halo-block-header.view_all-right_title .title {margin-bottom: 10px}
 
-        {% if enable_blog_button %}
-            .section-block-{{section.id}} .halo-block-header .title {
-                margin-bottom: {{ margin_bottom_heading | divided_by: 2 | append: 'px' }};
-            }
-
-            .section-block-{{section.id}} .article-card__info {
-                padding: 22px 8px 28px;
-            }
-        {% endif %}
+        {%- if enable_blog_button -%}
+            .section-block-{{section.id}} .halo-block-header .title {margin-bottom: {{ margin_bottom_heading | divided_by: 2 | append: 'px' }}}
+            .section-block-{{section.id}} .article-card__info {padding: 22px 8px 28px}
+        {%- endif -%}
     }
-
     @media (max-width: 767px) {
-        .section-block-{{section.id}} {
-            padding-top: {{ mg_top_mobile | append: 'px' }};
-            padding-bottom: {{ mg_bottom_mobile | append: 'px' }};
-        }
-
-        .section-block-{{section.id}} .halo-block-header .title {
-            font-size: {{ fontsize_title_mb | append: 'px'  }};
-        }
+        .section-block-{{section.id}} {padding-top: {{ mg_top_mobile | append: 'px' }};padding-bottom: {{ mg_bottom_mobile | append: 'px' }}}
+        .section-block-{{section.id}} .halo-block-header .title {font-size: {{ fontsize_title_mb | append: 'px' }}}
     }
 </style>
-
 {% if settings.banner_animation == 'effect_1' %}<animated-component>{% endif %}
     <div class="featured-blog-block section-block-{{section.id}}" id="featured-blog-{{section.id}}" data-loader-script="{{ 'halo.slide-blog.js' | asset_url }}">
     <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}">
-        {% if section.settings.featured_blog_title != blank %}
+        {%- if section.settings.featured_blog_title != blank -%}
             <div class="halo-block-header text-{{ section.settings.title_align }} view_all-{{ section.settings.view_all_pos }}">   
-                <h3 class="title">
-                    <span class="text">
-                    {{ section.settings.featured_blog_title }}
-                    </span>
-                </h3>
-                {% if section.settings.featured_blog_des != blank %}
-                    <div class="rte subtext-blog">
-                        {{ section.settings.featured_blog_des }}
-                    </div>        
-                {% endif %}
-                {% if section.settings.view_all != blank %}
-                    <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}"{% if section.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all }}"{% endif %} title="{{section.settings.view_all}}" 
-                        style="--font-weight-view-all-style: {{ section.settings.font_weight_view_all }};
-                            --mg-top-view-style: {{ section.settings.mg_top_view | append: 'px' }};
-                            --mg-bottom-view-style: {{ section.settings.mg_bottom_view | append: 'px' }};
-                            --color-view-all-style: {{ section.settings.color_view_all }};
-                            --color-view-all-icon-style: {{ section.settings.color_view_all_icon }}">
+                <h3 class="title"><span class="text">{{ section.settings.featured_blog_title }}</span></h3>
+                {%- if section.settings.featured_blog_des != blank -%}
+                    <div class="rte subtext-blog">{{ section.settings.featured_blog_des }}</div>        
+                {%- endif -%}
+                {%- if section.settings.view_all != blank -%}
+                    <a class="view_all{% if section.settings.enable_border_view_all %} has-border{% endif %}"{% if section.settings.link_view_all == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.link_view_all }}"{% endif %} title="{{section.settings.view_all}}" style="--font-weight-view-all-style: {{ section.settings.font_weight_view_all }};--mg-top-view-style: {{ section.settings.mg_top_view | append: 'px' }};--mg-bottom-view-style: {{ section.settings.mg_bottom_view | append: 'px' }};--color-view-all-style: {{ section.settings.color_view_all }};--color-view-all-icon-style: {{ section.settings.color_view_all_icon }}">
                         {%- if section.settings.icon_view_all -%}
-                        <span class="icon-svg">
-                            {{ section.settings.icon_view_all }}
-                        </span>
+                        <span class="icon-svg">{{ section.settings.icon_view_all }}</span>
                         {%- endif -%}
                         {{ section.settings.view_all }}
                     </a>
-                {% endif %}
+                {%- endif -%}
             </div>
-        {% endif %}
+        {%- endif -%}
         <div class="halo-row column-{{ section.settings.blog_results_per_row }}{% if section.settings.post_limit == 2 %} disable_dots_tablet{% endif %}" data-rows="{{ section.settings.blog_results_per_row }}" data-blogs-slider style="--row-distance-style: {{ section.settings.item_distance | prepend: '-' | append: 'px' }};">
             {%- assign blog = blogs[section.settings.blog_posts] -%}
-            {% for article in blog.articles limit: section.settings.post_limit %}
+            {%- for article in blog.articles limit: section.settings.post_limit -%}
             <div class="halo-item" id="block-{{article.id}}" style="--item-distance-style: {{ section.settings.item_distance | append: 'px' }};" data-animate="{{ settings.banner_animation }}">
                 {% render 'article-card-featured', 
                     article: article,
@@ -381,12 +207,11 @@
                     block_item_style: block_item_style,
                 %}
             </div>
-            {% endfor %}
+            {%- endfor -%}
         </div>
     </div>
     </div>
 {% if settings.banner_animation == 'effect_1' %}</animated-component>{% endif %}
-
 {% schema %}
 {
     "name": "t:sections.featured_blog.name",

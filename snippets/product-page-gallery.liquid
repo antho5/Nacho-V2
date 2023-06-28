@@ -523,17 +523,18 @@
                                                             {% if product_image_popup == 'fancybox' %} data-fancybox="images" href="{{ media.preview_image | img_url: 'master' }}" {% endif %}
                                                         >
                                                             <img id="product-featured-image-{{ media.id }}"
-                                                                srcset="{{ media.preview_image | img_url: 'master' }}"
-                                                                src="{{ media | img_url: 'master' }}"
+                                                                {% if settings.enable_lazyload and forloop.index > 4 %}data-{% endif %}srcset="{{ media.preview_image | img_url: 'master' }}"
+                                                                {% unless settings.enable_lazyload and forloop.index > 4 %}src="{{ media | img_url: 'master' }}"{% endunless %}
                                                                 alt="{{ media.preview_image.alt | escape }}"
-                                                                title="{{ media.preview_image.alt | escape }}"
                                                                 sizes="auto"
                                                                 loading="lazy"
                                                                 data-sizes="auto"
                                                                 data-main-image
                                                                 data-index="{{ forloop.index }}"
                                                                 data-cursor-image
+                                                                {% if settings.enable_lazyload and forloop.index > 4 %}class="lazyload"{% endif %}
                                                             />
+                                                            {%- if settings.enable_lazyload and forloop.index > 4 -%}<span class="data-lazy-loading"></span>{%- endif -%}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -557,7 +558,6 @@
                                                                         srcset="https://i.ytimg.com/vi/{{ media.external_id }}/maxresdefault.jpg"
                                                                         src="https://i.ytimg.com/vi/{{ media.external_id }}/maxresdefault.jpg"
                                                                         alt="{{ media.alt | escape }}"
-                                                                        title="{{ media.alt | escape }}"
                                                                         sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
                                                                         loading="lazy"
                                                                         data-sizes="auto"
@@ -572,7 +572,6 @@
                                                                         srcset="{{ media | img_url: 'master' }}"
                                                                         src="{{ media | img_url: 'master' }}"
                                                                         alt="{{ media.alt | escape }}"
-                                                                        title="{{ media.alt | escape }}"
                                                                         sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
                                                                         loading="lazy"
                                                                         data-sizes="auto"
@@ -604,7 +603,6 @@
                                                                     srcset="{{ media | img_url: 'master' }}"
                                                                     src="{{ media | img_url: 'master' }}"
                                                                     alt="{{ media.alt | escape }}"
-                                                                    title="{{ media.alt | escape }}"
                                                                     sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
                                                                     loading="lazy"
                                                                     data-sizes="auto"
@@ -1242,6 +1240,8 @@
                                             </complementary-products>
                                             <script src="{{ "build-complementary-products.js" | asset_url }}" defer></script>
                                         </div>
+                                    {%- when '@app' -%}
+                                        {% render block %}
                                 {%- endcase -%}
                             {%- endfor -%}
                             {%- if show_tab -%}

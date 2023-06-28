@@ -10,7 +10,7 @@
       <div class="img-box{% if layout == 'collections_01_grid' or layout == 'collections_4' %} animate-hvr{% endif %}">
         {%- liquid
           if type == 'all'
-            assign image = collection.image
+            assign image = collection.featured_image
             assign link = collection.url
           else
             if block.settings.image != blank

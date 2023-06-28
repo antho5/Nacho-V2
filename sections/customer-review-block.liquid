@@ -6,160 +6,128 @@
     <noscript>{{ 'component-review-block-banner-animation.css' | asset_url | stylesheet_tag }}</noscript>
 {%- endif -%}
 
-{% if section.blocks.size > 0 %}
-    {% assign review_style = section.settings.section_style %}
-<div class="customer-review-block section-block-{{section.id}} {{ review_style }}" id="customer-review-{{section.id}}" {% if section.blocks.size > 1 and review_style == 'style_1'%}data-loader-script="{{ 'halo.slide-customer-review.js' | asset_url }}"{% endif %} data-check="{{ section.settings.show_arrow }}">
-    {% if review_style == 'style_2' %}
-        <div 
-            class="customer-review-block-wrapper {% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}"
-            style="
-                    --scrollbar-width: {{ section.settings.scroll_height | append: 'px' }};
-                    --scrollbar-track-color: {% if section.settings.scroll_track_bg != blank and section.settings.scroll_track_bg != 'rgba(0,0,0,0)' %}{{ section.settings.scroll_track_bg }}{% endif %};
-                    --scrollbar-thumb-color: {% if section.settings.scroll_thumb_color != blank and section.settings.scroll_thumb_color != 'rgba(0,0,0,0)' %}{{ section.settings.scroll_thumb_color }}{% endif %};
-                    --scrollbar-thumb-hover-color: {% if section.settings.scroll_thumb_hover_color != blank and section.settings.scroll_thumb_hover_color != 'rgba(0,0,0,0)' %}{{ section.settings.scroll_thumb_hover_color }}{% endif %};
-                "
-        >
-    {% endif %}   
-        {% unless review_style == 'style_2' %}
-            <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}">
-        {% else %}
-            <div class="customer-review__left">
-        {% endunless %}    
-            {% if section.settings.review_title != blank %}
-                <div class="halo-block-header text-{{ section.settings.title_align }}">
-                    <h3 class="title" style="--margin-bottom-title: {{ section.settings.mg_bottom_title | append: 'px' }}">
-                        <span class="text">
-                        {{ section.settings.review_title }}
-                        </span>
-                    </h3>
-                    {% if section.settings.review_des != blank %}
-                        <div class="subtext-review" style="--margin-bottom-des: {{ section.settings.margin_bottom_des | append: 'px' }}">
-                            {{ section.settings.review_des }}
-                        </div>        
-                    {% endif %}
-                </div>
-            {% endif %}
-        </div> 
-        {% unless review_style == 'style_2' %}
-            <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}">
-        {% else %}
-            {% if review_style == 'style_2' %}
-                <product-scroller>
-            {% endif %}
-            <div 
-                class="customer-review__right" 
-                {% if review_style == 'style_2' %}data-drag-container{% endif %}
-            >
-        {% endunless %}  
-            <{% if settings.banner_animation == 'effect_1' %}animated-component{% else %}div{% endif %} class="customer-review-slide halo-row column-{{ section.settings.review_rows }}" data-review-slider data-row="{{ section.settings.review_rows }}" {% if review_style == 'style_2'%}data-drag-parent{% endif %}
-                style="--count: {{ section.settings.review_rows }};"
-            >
-                {% for block in section.blocks %}
-                    {% if section.settings.block_layout_style == 'layout1' %}
+{%- if section.blocks.size > 0 -%}
+    {%- assign review_style = section.settings.section_style -%}
+    <div class="customer-review-block section-block-{{section.id}} {{ review_style }}" id="customer-review-{{section.id}}" {% if section.blocks.size > 1 and review_style == 'style_1'%}data-loader-script="{{ 'halo.slide-customer-review.js' | asset_url }}"{% endif %} data-check="{{ section.settings.show_arrow }}">
+    {%- if review_style == 'style_2' -%}
+        <div class="customer-review-block-wrapper {% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}" style="--scrollbar-width: {{ section.settings.scroll_height | append: 'px' }};--scrollbar-track-color: {% if section.settings.scroll_track_bg != blank and section.settings.scroll_track_bg != 'rgba(0,0,0,0)' %}{{ section.settings.scroll_track_bg }}{% endif %};--scrollbar-thumb-color: {% if section.settings.scroll_thumb_color != blank and section.settings.scroll_thumb_color != 'rgba(0,0,0,0)' %}{{ section.settings.scroll_thumb_color }}{% endif %};--scrollbar-thumb-hover-color: {% if section.settings.scroll_thumb_hover_color != blank and section.settings.scroll_thumb_hover_color != 'rgba(0,0,0,0)' %}{{ section.settings.scroll_thumb_hover_color }}{% endif %}">
+    {%- endif -%}   
+    {%- unless review_style == 'style_2' -%}
+        <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}">
+    {%- else -%}
+        <div class="customer-review__left">
+    {%- endunless -%}    
+        {%- if section.settings.review_title != blank -%}
+            <div class="halo-block-header text-{{ section.settings.title_align }}">
+                <h3 class="title" style="--margin-bottom-title: {{ section.settings.mg_bottom_title | append: 'px' }}"><span class="text">{{ section.settings.review_title }}</span></h3>
+                {%- if section.settings.review_des != blank -%}
+                    <div class="subtext-review" style="--margin-bottom-des: {{ section.settings.margin_bottom_des | append: 'px' }}">{{ section.settings.review_des }}</div>        
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+    </div> 
+    {%- unless review_style == 'style_2' -%}
+        <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1170' %}container-1170{% elsif section.settings.container == '1770' %}container-1770{% else %}container{% endif %}">
+    {%- else -%}
+        {%- if review_style == 'style_2' -%}
+            <product-scroller>
+        {%- endif -%}
+        <div class="customer-review__right"{% if review_style == 'style_2' %} data-drag-container{% endif %}>
+    {%- endunless -%}  
+    <{% if settings.banner_animation == 'effect_1' %}animated-component{% else %}div{% endif %} class="customer-review-slide halo-row column-{{ section.settings.review_rows }}" data-review-slider data-row="{{ section.settings.review_rows }}"{% if review_style == 'style_2'%} data-drag-parent{% endif %} style="--count: {{ section.settings.review_rows }}">
+                {%- for block in section.blocks -%}
+                    {%- if section.settings.block_layout_style == 'layout1' -%}
                     <div class="halo-item customer-review__item" {% if review_style == 'style_2' %}data-drag-item{% endif %} data-animate="{{ settings.banner_animation }}">
                         <div class="review_flex">
                             <div class="customer-review__item--left">
-                                {% if block.settings.heading != blank %}
+                                {%- if block.settings.heading != blank -%}
                                     <span class="heading">{{ block.settings.heading }}</span>
-                                {% endif %}
-                                {% if block.settings.sub_heading != blank %}
+                                {%- endif -%}
+                                {%- if block.settings.sub_heading != blank -%}
                                     <div class="sub_heading">{{ block.settings.sub_heading }}</div>
-                                {% endif %}
-                                {% if block.settings.name != blank or block.settings.date != blank %}
+                                {%- endif -%}
+                                {%- if block.settings.name != blank or block.settings.date != blank -%}
                                     <div class="customer-review__info">
-                                        <span class="customer-review__icon">
-                                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-edit" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-user-edit fa-w-20 fa-2x"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h274.9c-2.4-6.8-3.4-14-2.6-21.3l6.8-60.9 1.2-11.1 7.9-7.9 77.3-77.3c-24.5-27.7-60-45.5-99.9-45.5zm45.3 145.3l-6.8 61c-1.1 10.2 7.5 18.8 17.6 17.6l60.9-6.8 137.9-137.9-71.7-71.7-137.9 137.8zM633 268.9L595.1 231c-9.3-9.3-24.5-9.3-33.8 0l-37.8 37.8-4.1 4.1 71.8 71.7 41.8-41.8c9.3-9.4 9.3-24.5 0-33.9z" class=""></path></svg>
-                                        </span>
-                                        <span class="customer-review__name">
-                                            <span class="name">{{ block.settings.name }}</span>
-                                            <span class="date">{{ block.settings.date }}</span>
-                                        </span>
+                                        <span class="customer-review__icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-edit" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-user-edit fa-w-20 fa-2x"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h274.9c-2.4-6.8-3.4-14-2.6-21.3l6.8-60.9 1.2-11.1 7.9-7.9 77.3-77.3c-24.5-27.7-60-45.5-99.9-45.5zm45.3 145.3l-6.8 61c-1.1 10.2 7.5 18.8 17.6 17.6l60.9-6.8 137.9-137.9-71.7-71.7-137.9 137.8zM633 268.9L595.1 231c-9.3-9.3-24.5-9.3-33.8 0l-37.8 37.8-4.1 4.1 71.8 71.7 41.8-41.8c9.3-9.4 9.3-24.5 0-33.9z" class=""></path></svg></span>
+                                        <span class="customer-review__name"><span class="name">{{ block.settings.name }}</span><span class="date">{{ block.settings.date }}</span></span>
                                     </div>
                                 {% endif %}
                             </div>
                             <div class="customer-review__item--right">
-                                {% if block.settings.body != blank %}
-                                <div class="customer-review__content">
-                                    {{ block.settings.body }}
-                                </div>
-                                {% endif %}
+                                {%- if block.settings.body != blank -%}
+                                <div class="customer-review__content">{{ block.settings.body }}</div>
+                                {%- endif -%}
                                 <div class="star-reviews">
                                     {%- assign star_number = block.settings.rating | remove: 'star' | plus: 0 -%}
-                                    {% for i in (1..5) %}
+                                    {%- for i in (1..5) -%}
                                     <span class="star--icon {% if i > star_number %}star-empty{% endif %}"></span>
-                                    {% endfor %}
+                                    {%- endfor -%}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {% else %}
+                    {%- else -%}
                     <div class="halo-item customer-review__item {% if review_style == 'style_1' %}text-center{% elsif review_style == 'style_2' %}text-left{% endif %}" {% if review_style == 'style_2' %}data-drag-item{% endif %} data-animate="{{ settings.banner_animation }}">
-                        {% if section.settings.show_avatar %}
+                        {%- if section.settings.show_avatar -%}
                             <div class="review__item-image" style="max-width: {{block.settings.avatar.width}}px; margin: 0 auto;">
-                                {% if block.settings.avatar %}
-                                    {% assign img_size = '250x' %}
-                                    {% assign preview_img = block.settings.avatar %}
+                                {%- if block.settings.avatar -%}
+                                    {%- assign img_size = '250x' -%}
+                                    {%- assign preview_img = block.settings.avatar -%}
                                     <div class="adaptive_height image-zoom" style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%;">
                                         <img {% render 'lazyload',preview_img: preview_img %} />
-                                        {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
+                                        {%- if settings.enable_lazyload -%}<span class="data-lazy-loading"></span>{%- endif -%}
                                     </div>
-                                {% else %}
-                                    <div class="not_img" style="--height_not_img: 250x">
-                                        250 x 250px
-                                    </div>
-                                {% endif %}
+                                {%- else -%}
+                                    <div class="not_img" style="--height_not_img: 250x">250 x 250px</div>
+                                {%- endif -%}
                             </div>
-                        {% endif %}
+                        {%- endif -%}
                         <div class="review__item-content">
-                            {% if block.settings.sub_heading != blank %}
+                            {%- if block.settings.sub_heading != blank -%}
                                 <div class="sub_heading">{{ block.settings.sub_heading }}</div>
-                            {% endif %}
-                            {% if section.settings.start_position == 'above_title' %}
+                            {%- endif -%}
+                            {%- if section.settings.start_position == 'above_title' -%}
                                 <div class="star-reviews">
                                     {%- assign star_number = block.settings.rating | remove: 'star' | plus: 0 -%}
-                                    {% for i in (1..5) %}
+                                    {%- for i in (1..5) -%}
                                     <span class="star--icon {% if i > star_number %}star-empty{% endif %}"></span>
-                                    {% endfor %}
+                                    {%- endfor -%}
                                 </div>
-                            {% endif %}
-                            {% if block.settings.heading != blank %}
+                            {%- endif -%}
+                            {%- if block.settings.heading != blank -%}
                                 <span class="heading">{{ block.settings.heading }}</span>
-                            {% endif %}
-                            {% if section.settings.start_position == 'below_title' %}
+                            {%- endif -%}
+                            {%- if section.settings.start_position == 'below_title' -%}
                                 <div class="star-reviews">
                                     {%- assign star_number = block.settings.rating | remove: 'star' | plus: 0 -%}
-                                    {% for i in (1..5) %}
+                                    {%- for i in (1..5) -%}
                                     <span class="star--icon {% if i > star_number %}star-empty{% endif %}"></span>
-                                    {% endfor %}
+                                    {%- endfor -%}
                                 </div>
-                            {% endif %}
-                            {% if block.settings.body != blank %}
-                                <div class="customer-review__content">
-                                    {{ block.settings.body }}
-                                </div>
-                            {% endif %}
-                            {% if block.settings.name != blank %}
+                            {%- endif -%}
+                            {%- if block.settings.body != blank -%}
+                                <div class="customer-review__content">{{ block.settings.body }}</div>
+                            {%- endif -%}
+                            {%- if block.settings.name != blank -%}
                                 <div class="name">{{ block.settings.name }}</div>
-                            {% endif %}
-                            {% if block.settings.date != blank %}
+                            {%- endif -%}
+                            {%- if block.settings.date != blank -%}
                                 <div class="date">{{ block.settings.date }}</div>
-                            {% endif %}
+                            {%- endif -%}
                         </div>
                     </div>
-                    {% endif %}
-                {% endfor %}
+                    {%- endif -%}
+                {%- endfor -%}
             </{% if settings.banner_animation == 'effect_1' %}animated-component{% else %}div{% endif %}>
-            {% if review_style == 'style_2' %}
+            {%- if review_style == 'style_2' -%}
                 </product-scroller>
-            {% endif %}
+            {%- endif -%}
         </div>
-    {% if review_style == 'style_2' %}
+    {%- if review_style == 'style_2' -%}
         </div>
-    {% endif %}
+    {%- endif -%}
 </div>
-
 <style>
- 
     {%- liquid
         assign review_bg = section.settings.review_bg
         assign review_bg_gradient = section.settings.review_bg_gradient
@@ -212,175 +180,67 @@
         assign show_arrow = section.settings.show_arrow
     -%}
         
-    .section-block-{{section.id}} .heading {
-        color: {{ color_heading }};
-        font-size: {{ fontsize_heading | append: 'px' }};
-        line-height: {{ fontsize_heading | plus: 8 | append: 'px' }};
-        margin-bottom: {{ heading_margin_bottom | append: 'px' }};
-        font-weight: {{ heading_font_weight }};
-        display: block;
-    }
-
-    .section-block-{{section.id}} .sub_heading {
-        color: {{ color_sub_heading }};
-        font-size: {{ fontsize_sub_heading | append: 'px' }};
-        line-height: {{ fontsize_heading | plus: 11 | append: 'px' }};
-        margin-bottom: {{ sub_heading_margin_bottom | append: 'px' }};
-    }
-
-    .section-block-{{section.id}} .name {
-        color: {{ color_name }};
-        font-size: {{ fontsize_name | append: 'px' }};
-    }
-
-    .section-block-{{section.id}} .date {
-        color: {{ color_date }};
-        font-size: {{ fontsize_date | append: 'px' }};
-    }
-
-    .section-block-{{section.id}} .customer-review__content {
-        color: {{ color_body }};
-        {% if section.settings.block_layout_style == 'layout1' %}
+    .section-block-{{section.id}} .heading {color: {{ color_heading }};font-size: {{ fontsize_heading | append: 'px' }};line-height: {{ fontsize_heading | plus: 8 | append: 'px' }};margin-bottom: {{ heading_margin_bottom | append: 'px' }};font-weight: {{ heading_font_weight }};display: block}
+    .section-block-{{section.id}} .sub_heading {color: {{ color_sub_heading }};font-size: {{ fontsize_sub_heading | append: 'px' }};line-height: {{ fontsize_heading | plus: 11 | append: 'px' }};margin-bottom: {{ sub_heading_margin_bottom | append: 'px' }}}
+    .section-block-{{section.id}} .name {color: {{ color_name }};font-size: {{ fontsize_name | append: 'px' }}}
+    .section-block-{{section.id}} .date {color: {{ color_date }};font-size: {{ fontsize_date | append: 'px' }}}
+    .section-block-{{section.id}} .customer-review__content {color: {{ color_body }};
+        {%- if section.settings.block_layout_style == 'layout1' -%}
         line-height: {{ fontsize_body | plus: 8 | append: 'px' }};
-        {% endif %}
-        font-size: {{ fontsize_body | append: 'px' }};
-        margin-bottom: {{ body_margin_bottom | append: 'px' }};
-    }
+        {%- endif -%}
+        font-size: {{ fontsize_body | append: 'px' }};margin-bottom: {{ body_margin_bottom | append: 'px' }}}
+    .section-block-{{section.id}} .review__item-image {margin-bottom: {{ avatar_margin_bottom | append: 'px' }} !important}
+    .section-block-{{section.id}} .star-reviews {margin-bottom: {{ star_margin_bottom | append: 'px' }}}
+    .section-block-{{section.id}} .customer-review__icon {color: {{ color_icon }};background-color: {{ bg_color_icon }}}
+    .section-block-{{section.id}} .customer-review__icon svg {color: {{ color_icon }}}
+    .section-block-{{ section.id }} .halo-block-header .title .text {width: 500px}
 
-    .section-block-{{section.id}} .review__item-image {
-        margin-bottom: {{ avatar_margin_bottom | append: 'px' }} !important;        
-    }
+    {%- if section.settings.block_layout_style == 'layout2' -%}
+        .customer-review__item .star-reviews .star--icon{font-size: 30px}
+        .customer-review-block .customer-review-slide {padding-bottom: 22px}
+        {%- unless show_arrow -%}
+            .section-block-{{ section.id }} .customer-review-slide .slick-arrow {display: none !important}
+        {%- endunless -%} 
+    {%- endif -%}
 
-    .section-block-{{section.id}} .star-reviews {
-        margin-bottom: {{ star_margin_bottom | append: 'px' }};        
-    }
-
-    .section-block-{{section.id}} .customer-review__icon {
-        color: {{ color_icon }};
-        background-color: {{ bg_color_icon }};
-    }
-
-    .section-block-{{section.id}} .customer-review__icon svg {
-        color: {{ color_icon }};
-    }
-
-    .section-block-{{ section.id }} .halo-block-header .title .text {
-        width: 500px;
-    }
-
-    {% if section.settings.block_layout_style == 'layout2' %}
-        .customer-review__item .star-reviews .star--icon{
-            font-size: 30px;
-        }
-
-        .customer-review-block .customer-review-slide {
-            padding-bottom: 22px;
-        }
-
-        {% unless show_arrow %}
-            .section-block-{{ section.id }} .customer-review-slide .slick-arrow {
-                display: none !important;
-            }
-        {% endunless %} 
-    {% endif %}
-
-    .section-block-{{section.id}} .customer-review__item .star-reviews .star--icon::before {
-        color: {% if star_color != blank and star_color != 'rgba(0,0,0,0)' %}{{ star_color }}{% endif %};
-    } 
-
-    .section-block-{{section.id}} .slick-dots {
-        bottom: -4px;
-    }
-
-    .banner-animation-1 .section-block-{{section.id}} .slick-dots {
-        transform: none;
-    }
-
-    @media (min-width: 1200px) {
-        .section-block-{{section.id}} {
-            padding-top: {{ mg_top_desktop | append: 'px' }};
-            padding-bottom: {{ mg_bottom_desktop | append: 'px' }};
-        }
-    }
-
+    .section-block-{{section.id}} .customer-review__item .star-reviews .star--icon::before {color: {% if star_color != blank and star_color != 'rgba(0,0,0,0)' %}{{ star_color }}{% endif %}} 
+    .section-block-{{section.id}} .slick-dots {bottom: -4px}
+    .banner-animation-1 .section-block-{{section.id}} .slick-dots {transform: none}
+    @media (min-width: 1200px) {.section-block-{{section.id}} {padding-top: {{ mg_top_desktop | append: 'px' }};padding-bottom: {{ mg_bottom_desktop | append: 'px' }}}}
     @media (min-width: 1025px) {
-        {% if section.settings.container == 'fullwidth' %}
-            .section-block-{{section.id}} .container-full {
-                padding-left: {{ padding_full_width | append: 'px' }};
-                padding-right: {{ padding_full_width | append: 'px' }};
-            }
-        {% endif %}
+        {%- if section.settings.container == 'fullwidth' -%}
+            .section-block-{{section.id}} .container-full {padding-left: {{ padding_full_width | append: 'px' }};padding-right: {{ padding_full_width | append: 'px' }}}
+        {%- endif -%}
 
-        {% if section.settings.block_layout_style == 'layout2' %}
-            .customer-review-block .slick-arrow{
-                top: calc(50% - 105px);
-            }
-        {% endif %}
+        {%- if section.settings.block_layout_style == 'layout2' -%}
+            .customer-review-block .slick-arrow{top: calc(50% - 105px)}
+        {%- endif -%}
     }
-
-    @media (min-width: 768px) and (max-width: 1199px) {
-        .section-block-{{section.id}} {
-            padding-top: {{ mg_top_tablet | append: 'px' }};
-            padding-bottom: {{ mg_bottom_tablet | append: 'px' }};
-        }
-    }
-
-    @media (max-width: 1024px) {
-        {% if review_bg_image != blank %}
-            .section-block-{{section.id}}{
-                background-position: center top;
-            }
-       {% endif %}
-    }
+    @media (min-width: 768px) and (max-width: 1199px) {.section-block-{{section.id}} {padding-top: {{ mg_top_tablet | append: 'px' }};padding-bottom: {{ mg_bottom_tablet | append: 'px' }}}}
+    
+    {%- if review_bg_image != blank -%}
+    @media (max-width: 1024px) {.section-block-{{section.id}}{background-position: center top}}
+    {%- endif -%}
 
     @media (max-width: 767px) {
-        .section-block-{{section.id}} {
-            padding-top: {{ mg_top_mobile | append: 'px' }};
-            padding-bottom: {{ mg_bottom_mobile | append: 'px' }};
-        }
-
-        .section-block-{{section.id}} .halo-block-header .title {
-            font-size: {{ fontsize_title_mb | append: 'px'  }} !important;
-        }
+        .section-block-{{section.id}} {padding-top: {{ mg_top_mobile | append: 'px' }};padding-bottom: {{ mg_bottom_mobile | append: 'px' }}}
+        .section-block-{{section.id}} .halo-block-header .title {font-size: {{ fontsize_title_mb | append: 'px'  }} !important}
     }
     
-    {% if review_bg_image != blank %}
-        .section-block-{{section.id}}{
-            background: url({{ review_bg_image | img_url: '1920x' }});
-            background-repeat: repeat-x;
-            background-size: cover;
-        }
-        .section-block-{{section.id}} .halo-block-header .title .text {
-            background-color: transparent;
-        }
-    {% else %}
+    {%- if review_bg_image != blank -%}
+        .section-block-{{section.id}}{background: url({{ review_bg_image | img_url: '1920x' }});background-repeat: repeat-x;background-size: cover}
+        .section-block-{{section.id}} .halo-block-header .title .text {background-color: transparent}
+    {%- else -%}
         .section-block-{{section.id}},
-        .section-block-{{section.id}} .halo-block-header .title .text {
-            background: {% if review_bg_gradient != blank %}{{ review_bg_gradient }}{% else %}{{ review_bg }}{% endif %};
-        }
-    {% endif %}
+        .section-block-{{section.id}} .halo-block-header .title .text {background: {% if review_bg_gradient != blank %}{{ review_bg_gradient }}{% else %}{{ review_bg }}{% endif %}}
+    {%- endif -%}
 
-    .section-block-{{section.id}} .halo-block-header .title {
-        color: {{ color_title }};
-        font-size: {{ fontsize_title | append: 'px'  }};
-    }
-
-    .section-block-{{section.id}} .halo-block-header .title .text {
-        padding: 0;
-    }
-
-    .section-block-{{section.id}} .halo-block-header .title:before {
-        display: none;
-    }
-
-    .section-block-{{section.id}} .halo-block-header .subtext-review {
-        color: {{ color_des }};
-        font-size: {{ fontsize_des | append: 'px'  }};
-    }
-   
+    .section-block-{{section.id}} .halo-block-header .title {color: {{ color_title }};font-size: {{ fontsize_title | append: 'px'  }}}
+    .section-block-{{section.id}} .halo-block-header .title .text {padding: 0}
+    .section-block-{{section.id}} .halo-block-header .title:before {display: none}
+    .section-block-{{section.id}} .halo-block-header .subtext-review {color: {{ color_des }};font-size: {{ fontsize_des | append: 'px'  }}}
 </style>
-{% endif %}
-
+{%- endif -%}
 {% schema %}
   {
     "name": "t:sections.customer_review.name",

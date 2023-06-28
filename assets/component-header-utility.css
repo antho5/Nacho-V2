@@ -239,6 +239,7 @@
     left: 0;
     width: 670px;
     border-radius: 5px;
+	box-shadow: 0 1px 4px #00000026;
 }
 
 /* --------------------Language + Currency-------------- */
@@ -468,6 +469,7 @@
     .header-utility .container-full {
         padding-left: var(--spacing-l-r);
         padding-right: var(--spacing-l-r);
+		overflow: initial;
     }
 
 	.header-utility__item--function_group {

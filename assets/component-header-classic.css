@@ -146,7 +146,7 @@
 }
 
 @media (max-width: 1024px) {
-    .header-classic {
+    .section-header-classic {
         display: none;
     }
 }
@@ -155,6 +155,7 @@
     .header-classic .container-full {
         padding-left: var(--spacing-l-r);
         padding-right: var(--spacing-l-r);
+		overflow: initial;
     }
 
     .header-classic__item .header__heading-link {
@@ -186,5 +187,12 @@
 
     .header-classic__item .quickSearchResults .card-swatch .number-showmore span.text-number {
         top: 0px;
+    }
+
+    .header-classic .quickSearchResultsWrap {
+        width: 570px;
+        left: auto;
+        right: 0;
+        box-shadow: 0 1px 4px #00000026;
     }
 }

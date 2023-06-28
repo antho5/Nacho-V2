@@ -558,7 +558,7 @@ class UpdateQuantity extends HTMLElement {
 
     quantityCheckedToBeContinue() {
         const sellingArray = window[`cart_selling_array_${this.dataset.product}`];
-        return sellingArray[this.querySelector('[name="quantity"]').dataset.cartQuantityId] === 'continue';
+        return sellingArray == undefined ? false : sellingArray[this.querySelector('[name="quantity"]').dataset.cartQuantityId] === 'continue'
     }
 }
 
@@ -588,7 +588,7 @@ class UpdateQuantityQuickShop extends HTMLElement {
 
         if (newVal <= 0) newVal = 1;
 
-        if (newVal > inStockNumber && !buttonAdd.matches('.button--preorder')) {
+        if (newVal > inStockNumber && !buttonAdd.matches('.button--pre-untrack')) {
             const message = getInputMessage(inStockNumber);
             showWarning(message, warningTime);
             newVal = inStockNumber
