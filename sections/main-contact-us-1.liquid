@@ -41,74 +41,76 @@
     endif
 -%}
 
-<div data-section-id="{{ section.id }}" data-section-type="contact" id="ContactSection-{{ section.id }}" data-section="{{ section.id }}">
-    <div class="contact-container {% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%} container-full{% else %}container{% endif %}">
-        {%- if show_breadcrumb -%}
-            {% render 'breadcrumb', alignment: breadcrumb_alignment %}
-        {%- endif -%}
-        {%- if show_page_title -%}
-            <h1 class="page-header text-{{ page_title_alignment }}">
-                {{ page.title | escape }}
-            </h1>
-        {%- endif -%}
-        <div class="page-content contact-content">
-            <div class="contact contact-1">
-                <div class="contact-item {% if show_contact_info %}{% if has_contact_info %}contact-itemLeft{% endif %}{% endif %}">
-                    {%- if contact_form_title != blank -%}
-                        <h2 class="page-subheader contact-title">
-                            {{ contact_form_title | escape }}
-                        </h2>
-                    {%- endif %}
-                    {%- if contact_form_text != blank -%}
-                        <div class="contact-text">
-                            {{ contact_form_text }}
-                        </div>
-                    {%- endif %}
-                    {% render 'contact-form',
-                        section: section
-                    %}
+{%- if settings.banner_animation == 'effect_1' -%}<animated-component>{%- endif -%}
+    <div data-section-id="{{ section.id }}" data-section-type="contact" id="ContactSection-{{ section.id }}" data-section="{{ section.id }}">
+        <div class="contact-container {% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%} container-full{% else %}container{% endif %}" data-animate="{{ settings.banner_animation }}">
+            {%- if show_breadcrumb -%}
+                {% render 'breadcrumb', alignment: breadcrumb_alignment %}
+            {%- endif -%}
+            {%- if show_page_title -%}
+                <h1 class="page-header text-{{ page_title_alignment }}">
+                    {{ page.title | escape }}
+                </h1>
+            {%- endif -%}
+            <div class="page-content contact-content">
+                <div class="contact contact-1">
+                    <div class="contact-item {% if show_contact_info %}{% if has_contact_info %}contact-itemLeft{% endif %}{% endif %}">
+                        {%- if contact_form_title != blank -%}
+                            <h2 class="page-subheader contact-title">
+                                {{ contact_form_title | escape }}
+                            </h2>
+                        {%- endif %}
+                        {%- if contact_form_text != blank -%}
+                            <div class="contact-text">
+                                {{ contact_form_text }}
+                            </div>
+                        {%- endif %}
+                        {% render 'contact-form',
+                            section: section
+                        %}
+                    </div>
+                    {%- if show_contact_info -%}
+                        {%- if has_contact_info -%}
+                            <div class="contact-item contact-itemRight">
+                                {%- if contact_info_title != blank -%}
+                                    <h2 class="page-subheader contact-title">
+                                        {{ contact_info_title | escape }}
+                                    </h2>
+                                {%- endif %}
+                                {%- if contact_info_text != blank -%}
+                                    <div class="contact-text">
+                                        {{ contact_info_text | escape }}
+                                    </div>
+                                {%- endif %}
+                                {%- if contact_info_address != blank or contact_info_content_1 != blank or contact_info_content_2 != blank -%}
+                                    <div class="contact-info">
+                                        {%- if contact_info_content_1 != blank -%}
+                                            <div class="contact-store">
+                                                {{ contact_info_content_1 }}
+                                            </div>
+                                        {%- endif -%}
+                                        {%- if contact_info_address != blank -%}
+                                            <div class="contact-address">
+                                                <address>
+                                                    {{ contact_info_address }}
+                                                </address>
+                                            </div>
+                                        {%- endif -%}
+                                        {%- if contact_info_content_2 != blank -%}
+                                            <div class="contact-store">
+                                                {{ contact_info_content_2 }}
+                                            </div>
+                                        {%- endif -%}
+                                    </div>
+                                {%- endif %}
+                            </div>
+                        {%- endif %}
+                    {%- endif -%}
                 </div>
-                {%- if show_contact_info -%}
-                    {%- if has_contact_info -%}
-                        <div class="contact-item contact-itemRight">
-                            {%- if contact_info_title != blank -%}
-                                <h2 class="page-subheader contact-title">
-                                    {{ contact_info_title | escape }}
-                                </h2>
-                            {%- endif %}
-                            {%- if contact_info_text != blank -%}
-                                <div class="contact-text">
-                                    {{ contact_info_text | escape }}
-                                </div>
-                            {%- endif %}
-                            {%- if contact_info_address != blank or contact_info_content_1 != blank or contact_info_content_2 != blank -%}
-                                <div class="contact-info">
-                                    {%- if contact_info_content_1 != blank -%}
-                                        <div class="contact-store">
-                                            {{ contact_info_content_1 }}
-                                        </div>
-                                    {%- endif -%}
-                                    {%- if contact_info_address != blank -%}
-                                        <div class="contact-address">
-                                            <address>
-                                                {{ contact_info_address }}
-                                            </address>
-                                        </div>
-                                    {%- endif -%}
-                                    {%- if contact_info_content_2 != blank -%}
-                                        <div class="contact-store">
-                                            {{ contact_info_content_2 }}
-                                        </div>
-                                    {%- endif -%}
-                                </div>
-                            {%- endif %}
-                        </div>
-                    {%- endif %}
-                {%- endif -%}
             </div>
         </div>
     </div>
-</div>
+{%- if settings.banner_animation == 'effect_1' -%}</animated-component>{%- endif -%}
 
 <style type="text/css" media="screen">
     #ContactSection-{{ section.id }}{
