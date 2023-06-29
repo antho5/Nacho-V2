@@ -3,12 +3,12 @@
     "banner": {
       "type": "main-collection-banner",
       "blocks": {
-        "f25e3781-c9d5-4b1a-acee-98401b392349": {
+        "2f29af17-8482-46cf-8d9c-05b734e165f7": {
           "type": "image",
           "settings": {
             "show_image_parallax": false,
             "show_bg_overlay": true,
-            "type": "full",
+            "type": "custom",
             "image": "shopify:\/\/shop_images\/unnamed.jpg",
             "bg_overlay": "#000000"
           }
@@ -56,7 +56,7 @@
         }
       },
       "block_order": [
-        "f25e3781-c9d5-4b1a-acee-98401b392349",
+        "2f29af17-8482-46cf-8d9c-05b734e165f7",
         "9147d182-d0c6-4b47-ad9e-97ad5cd6ae5a"
       ],
       "settings": {
