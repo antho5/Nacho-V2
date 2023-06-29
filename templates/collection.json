@@ -3,7 +3,7 @@
     "banner": {
       "type": "main-collection-banner",
       "blocks": {
-        "9f9a1a80-3370-40db-9cd2-836840e2073b": {
+        "f25e3781-c9d5-4b1a-acee-98401b392349": {
           "type": "image",
           "settings": {
             "show_image_parallax": false,
@@ -56,7 +56,7 @@
         }
       },
       "block_order": [
-        "9f9a1a80-3370-40db-9cd2-836840e2073b",
+        "f25e3781-c9d5-4b1a-acee-98401b392349",
         "9147d182-d0c6-4b47-ad9e-97ad5cd6ae5a"
       ],
       "settings": {
@@ -70,7 +70,7 @@
         "breadcrumb_gradient_mb": "",
         "show_page_title": true,
         "page_title_alignment": "left",
-        "container": "default",
+        "container": "1770",
         "mg_top_desktop": 0,
         "mg_top_tablet": 0,
         "mg_top_mobile": 0,
