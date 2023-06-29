@@ -9,7 +9,7 @@
             "show_image_parallax": false,
             "show_bg_overlay": true,
             "type": "full",
-            "image": "{{ collection.image }}",
+            "image": "shopify:\/\/shop_images\/unnamed.jpg",
             "bg_overlay": "#000000"
           }
         },
