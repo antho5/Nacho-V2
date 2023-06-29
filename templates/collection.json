@@ -16,7 +16,7 @@
         "9147d182-d0c6-4b47-ad9e-97ad5cd6ae5a": {
           "type": "description",
           "settings": {
-            "show_collection_description": true,
+            "show_collection_description": false,
             "show_read_more_read_less": false,
             "collection_description_position": "relative",
             "collection_description_align_tb": "center",
@@ -27,7 +27,7 @@
             "collection_description_bg_gradient": "",
             "show_sub_collection": true,
             "sub_collection_layout": "slider",
-            "maxheight_sub_collection": 300,
+            "maxheight_sub_collection": 150,
             "sub_collection_description_position": "relative",
             "sub_collection_type": "all",
             "colors_bg": "#ffffff",
