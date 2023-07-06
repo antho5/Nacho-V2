@@ -313,7 +313,6 @@
         "color_des": "#3c3c3c",
         "fontsize_des": 16,
         "title_align": "center",
-        "cover_image": "shopify:\/\/shop_images\/VIDEO_THUMBNAIL.jpg",
         "autoplay": false,
         "video_height": "55",
         "style_video": "mp4",
