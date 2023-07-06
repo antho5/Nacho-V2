@@ -8,7 +8,7 @@
           "settings": {
             "show_image_parallax": false,
             "show_bg_overlay": true,
-            "type": "custom",
+            "type": "full",
             "image": "shopify:\/\/shop_images\/unnamed.jpg",
             "bg_overlay": "#000000"
           }
@@ -27,8 +27,8 @@
             "collection_description_bg_gradient": "",
             "show_sub_collection": true,
             "sub_collection_layout": "slider",
-            "maxheight_sub_collection": 150,
-            "sub_collection_description_position": "relative",
+            "maxheight_sub_collection": 50,
+            "sub_collection_description_position": "absolute",
             "sub_collection_type": "all",
             "colors_bg": "#ffffff",
             "colors_bg_gradient": "",
@@ -74,9 +74,9 @@
         "mg_top_desktop": 0,
         "mg_top_tablet": 0,
         "mg_top_mobile": 0,
-        "mg_bottom_desktop": 50,
-        "mg_bottom_tablet": 20,
-        "mg_bottom_mobile": 20,
+        "mg_bottom_desktop": 15,
+        "mg_bottom_tablet": 15,
+        "mg_bottom_mobile": 15,
         "layout": "1"
       }
     },
