@@ -67,7 +67,7 @@
         "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-2": {
           "type": "text",
           "settings": {
-            "customer_service_text": "<p>Customer Service | 888.611.9299<\/p>",
+            "customer_service_text": "<p><a href=\"\/pages\/dealer-locator\" title=\"Dealer Locator\">Dealer Locator<\/a><\/p>",
             "text_size": 16,
             "color": "#232323"
           }
