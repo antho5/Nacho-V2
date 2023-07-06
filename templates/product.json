@@ -295,7 +295,7 @@
     "e620334d-fc94-4442-a9c0-37d2b662f431": {
       "type": "video-block",
       "settings": {
-        "container": "container",
+        "container": "fullwidth",
         "mg_top_desktop": 15,
         "mg_top_tablet": 15,
         "mg_top_mobile": 15,
