@@ -292,6 +292,37 @@
         "total_btn_bg_gradient_hover": ""
       }
     },
+    "e620334d-fc94-4442-a9c0-37d2b662f431": {
+      "type": "video-block",
+      "settings": {
+        "container": "container",
+        "mg_top_desktop": 15,
+        "mg_top_tablet": 15,
+        "mg_top_mobile": 15,
+        "mg_bottom_desktop": 15,
+        "mg_bottom_tablet": 15,
+        "mg_bottom_mobile": 15,
+        "spotlight_bg": "rgba(0,0,0,0)",
+        "spotlight_bg_gradient": "",
+        "video_block_title": "Video",
+        "color_title": "#232323",
+        "fontsize_title": 16,
+        "fontsize_title_mb": 22,
+        "margin_bottom_title": 45,
+        "video_block_des": "",
+        "color_des": "#3c3c3c",
+        "fontsize_des": 16,
+        "title_align": "center",
+        "cover_image": "shopify:\/\/shop_images\/VIDEO_THUMBNAIL.jpg",
+        "autoplay": true,
+        "video_height": "54",
+        "style_video": "mp4",
+        "video_url": "",
+        "url_mp4": "",
+        "description": "{{ product.title }} Video",
+        "full_width": true
+      }
+    },
     "product-recommendations": {
       "type": "product-recommendations",
       "settings": {
@@ -302,12 +333,12 @@
         "enable_border_bottom": false,
         "color_border_bottom": "#e8e8e8",
         "border_style": "container",
-        "mg_top_desktop": 40,
-        "mg_top_tablet": 35,
-        "mg_top_mobile": 35,
-        "mg_bottom_desktop": 0,
-        "mg_bottom_tablet": 0,
-        "mg_bottom_mobile": 0,
+        "mg_top_desktop": 10,
+        "mg_top_tablet": 10,
+        "mg_top_mobile": 10,
+        "mg_bottom_desktop": 10,
+        "mg_bottom_tablet": 10,
+        "mg_bottom_mobile": 10,
         "product_block_layout": "slider",
         "product_bg": "#ffffff",
         "style_block_header": "style1",
@@ -403,6 +434,7 @@
   },
   "order": [
     "main",
+    "e620334d-fc94-4442-a9c0-37d2b662f431",
     "product-recommendations",
     "product-recently-viewed"
   ]
