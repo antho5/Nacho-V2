@@ -144,7 +144,7 @@
             "open_tab_mobile": false,
             "title": "Video",
             "type": "metafield",
-            "content": "<table>\n    <tbody>\n        <tr>\n            <td class=\"tb-title\">Drostique<\/td>\n            <td>Nam tempus turpis at metus scelerisque placerat nulla deumantos<\/td>\n        <\/tr>\n        <tr>\n            <td class=\"tb-title\">Pharetro Lorem<\/td>\n            <td>Pellentesque diam dolor elementum etos lobortis des mollis<\/td>\n        <\/tr>\n        <tr>\n            <td class=\"tb-title\">Milancelos<\/td>\n            <td>Donec pretium egestas sapien et mollis<\/td>\n        <\/tr>\n        <tr>\n            <td class=\"tb-title\">Pellentesque<\/td>\n            <td>Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras<\/td>\n        <\/tr>\n        <tr>\n            <td class=\"tb-title\">Proin Molestie<\/td>\n            <td>Pellentesque diam dolor elementum etos lobortis des mollis<\/td>\n        <\/tr>\n        <tr>\n            <td class=\"tb-title\">Cosmopolis<\/td>\n            <td>Donec pretium egestas sapien et mollis<\/td>\n        <\/tr>\n    <\/tbody>\n<\/table>",
+            "content": "",
             "enable_btn_show_more": false,
             "maximum_des_to_show": 300,
             "product_custom_source": "dynamic",
