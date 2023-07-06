@@ -32,16 +32,16 @@
             "sub_collection_type": "all",
             "colors_bg": "#ffffff",
             "colors_bg_gradient": "",
-            "all_sub_collection_padding_top": 10,
-            "all_sub_collection_padding_bottom": 10,
+            "all_sub_collection_padding_top": 0,
+            "all_sub_collection_padding_bottom": 0,
             "sub_collection_title": "",
             "sub_collection_title_color": "#232323",
-            "fontsize_sub_collection": 18,
+            "fontsize_sub_collection": 16,
             "fontweight_sub_collection": "500",
             "sub_collection_text_transform": "uppercase",
             "show_sub_collection_image": true,
-            "sub_collection_padding_top": 10,
-            "sub_collection_padding_bottom": 10,
+            "sub_collection_padding_top": 0,
+            "sub_collection_padding_bottom": 0,
             "sub_collection_grid_gap": 5,
             "color_sub_collection": "#232323",
             "sub_collection_background": "rgba(0,0,0,0)",
@@ -51,7 +51,7 @@
             "sub_collection_background_hover": "#ffffff",
             "sub_collection_background_gradient_hover": "",
             "sub_collection_border_hover": "rgba(0,0,0,0)",
-            "sub_collection_mg_top": 10
+            "sub_collection_mg_top": 0
           }
         }
       },
