@@ -113,7 +113,7 @@
         "show_toolbar": true,
         "show_sorting": true,
         "show_item_per_page": true,
-        "show_view_as": true,
+        "show_view_as": false,
         "products_per_page": "20",
         "layout": "4",
         "show_infinite_scrolling": "show_more",
