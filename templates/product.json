@@ -278,7 +278,7 @@
         "total_btn_bg_gradient_hover": ""
       }
     },
-    "e620334d-fc94-4442-a9c0-37d2b662f431": {
+    "cc7b7e6d-f459-4ec4-9e87-bd99150b2407": {
       "type": "video-block",
       "settings": {
         "container": "container",
@@ -309,7 +309,7 @@
         "full_width": false
       }
     },
-    "cc7b7e6d-f459-4ec4-9e87-bd99150b2407": {
+    "fa6b49c0-a981-49e0-a090-103be2440682": {
       "type": "video-block",
       "settings": {
         "container": "container",
@@ -513,8 +513,8 @@
   },
   "order": [
     "main",
-    "e620334d-fc94-4442-a9c0-37d2b662f431",
     "cc7b7e6d-f459-4ec4-9e87-bd99150b2407",
+    "fa6b49c0-a981-49e0-a090-103be2440682",
     "b60fca5b-1ced-4c72-9c52-f91112ef6192",
     "4d74c408-1b7b-4c82-ba8c-ff91b2231b4b",
     "product-recommendations",
