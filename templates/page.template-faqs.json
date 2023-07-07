@@ -33,6 +33,9 @@
       "block_order": [
         "15d9d2f4-1bdd-49c8-9a99-58246020f05c"
       ],
+      "custom_css": [
+        ".faqs .faqs-title:after {background-color: #ff8b21;}"
+      ],
       "settings": {
         "show_breadcrumb": false,
         "breadcrumb_alignment": "left",
