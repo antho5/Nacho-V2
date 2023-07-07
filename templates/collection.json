@@ -7,7 +7,7 @@
           "type": "image",
           "settings": {
             "show_image_parallax": false,
-            "show_bg_overlay": true,
+            "show_bg_overlay": false,
             "type": "full",
             "image": "shopify:\/\/shop_images\/unnamed.jpg",
             "bg_overlay": "#000000"
