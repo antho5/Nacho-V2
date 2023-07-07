@@ -335,7 +335,7 @@
         "video_height": "55",
         "style_video": "mp4",
         "video_url": "",
-        "url_mp4": "{{ product.metafields.custom.video_url.value }}",
+        "url_mp4": "",
         "description": "{{ product.title }} Video",
         "full_width": false
       }
