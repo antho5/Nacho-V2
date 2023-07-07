@@ -41,7 +41,7 @@
             "subtext": "",
             "address_icon": "point_icon",
             "show_address_icon": true,
-            "address_text": "<p>4641 E Ivy St.Mesa, AZ 85202<\/p>",
+            "address_text": "<p><a href=\"https:\/\/goo.gl\/maps\/K12aY59TPMYXq4Yx5\" target=\"_blank\" title=\"https:\/\/goo.gl\/maps\/K12aY59TPMYXq4Yx5\">4641 E Ivy St.Mesa, AZ 85202<\/a><\/p>",
             "phone_icon": "phone_icon",
             "show_phone_icon": true,
             "phone_text": "<p><a href=\"tel:888.611.9299\" target=\"_blank\" title=\"tel:888.611.9299\">888.611.9299<\/a><\/p>",
