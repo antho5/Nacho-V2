@@ -32,7 +32,7 @@
     "main": {
       "type": "main-contact-us-1",
       "settings": {
-        "show_breadcrumb": true,
+        "show_breadcrumb": false,
         "breadcrumb_alignment": "left",
         "breadcrumb_bg": "",
         "breadcrumb_gradient": "",
