@@ -122,6 +122,7 @@
     "product_block_image_fit": "cover",
     "show_image_swap": false,
     "show_image_loading": true,
+    "image_loading_text": "NACHO",
     "show_review": false,
     "show_compare": false,
     "hide_compare_homepage": false,
