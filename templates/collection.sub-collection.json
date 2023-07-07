@@ -140,7 +140,7 @@
         "mg_bottom_desktop": 15,
         "mg_bottom_tablet": 15,
         "mg_bottom_mobile": 15,
-        "spotlight_bg": "#fff",
+        "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "video_block_title": "",
         "color_title": "#232323",
@@ -155,7 +155,7 @@
         "video_height": "54",
         "style_video": "mp4",
         "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
-        "url_mp4": "",
+        "url_mp4": "{{ collection.metafields.custom.collection_video_1.value }}",
         "description": "",
         "full_width": false
       }
@@ -170,7 +170,7 @@
         "mg_bottom_desktop": 15,
         "mg_bottom_tablet": 15,
         "mg_bottom_mobile": 15,
-        "spotlight_bg": "#fff",
+        "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "video_block_title": "",
         "color_title": "#232323",
@@ -185,7 +185,7 @@
         "video_height": "54",
         "style_video": "mp4",
         "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
-        "url_mp4": "",
+        "url_mp4": "{{ collection.metafields.custom.collection_video_2.value }}",
         "description": "",
         "full_width": false
       }
