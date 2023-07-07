@@ -132,6 +132,7 @@
     },
     "845f01b2-9e77-4755-b5cb-b807ca8596f4": {
       "type": "video-block",
+      "disabled": true,
       "settings": {
         "container": "1170",
         "mg_top_desktop": 10,
@@ -162,6 +163,7 @@
     },
     "e73876c9-65a3-452a-a0d5-004394ac2c85": {
       "type": "video-block",
+      "disabled": true,
       "settings": {
         "container": "1170",
         "mg_top_desktop": 10,
