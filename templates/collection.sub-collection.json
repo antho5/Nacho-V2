@@ -114,7 +114,7 @@
         "show_toolbar": true,
         "show_sorting": true,
         "show_item_per_page": true,
-        "show_view_as": true,
+        "show_view_as": false,
         "products_per_page": "20",
         "layout": "4",
         "show_infinite_scrolling": "show_more",
@@ -128,6 +128,36 @@
         "show_banner_3": true,
         "banner_position_3": "12",
         "link_banner_3": ""
+      }
+    },
+    "845f01b2-9e77-4755-b5cb-b807ca8596f4": {
+      "type": "video-block",
+      "settings": {
+        "container": "1170",
+        "mg_top_desktop": 10,
+        "mg_top_tablet": 10,
+        "mg_top_mobile": 10,
+        "mg_bottom_desktop": 15,
+        "mg_bottom_tablet": 15,
+        "mg_bottom_mobile": 15,
+        "spotlight_bg": "#fff",
+        "spotlight_bg_gradient": "",
+        "video_block_title": "Video",
+        "color_title": "#232323",
+        "fontsize_title": 16,
+        "fontsize_title_mb": 22,
+        "margin_bottom_title": 45,
+        "video_block_des": "",
+        "color_des": "#3c3c3c",
+        "fontsize_des": 16,
+        "title_align": "center",
+        "autoplay": false,
+        "video_height": "54",
+        "style_video": "mp4",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "url_mp4": "",
+        "description": "",
+        "full_width": false
       }
     },
     "product-recently-viewed": {
@@ -195,6 +225,7 @@
   "order": [
     "banner",
     "product-grid",
+    "845f01b2-9e77-4755-b5cb-b807ca8596f4",
     "product-recently-viewed",
     "ce8304c4-11df-4f42-9ada-39c767cb5951"
   ]
