@@ -190,7 +190,7 @@
             "header_icons_border_color": "rgba(0,0,0,0)",
             "header_icons_border_sticky_color": "#232323",
             "cart_count_bubble_color": "#323232",
-            "cart_count_bubble_bg": "#ff9800",
+            "cart_count_bubble_bg": "#ff7a01",
             "cart_count_bubble_bg_gradient": ""
           }
         }
@@ -245,7 +245,7 @@
             "icon": "3",
             "color": "#232323",
             "color_bubble": "#ffffff",
-            "bg_bubble": "#ff9800"
+            "bg_bubble": "#ff7a01"
           }
         },
         "32939aaa-c15b-410f-9ef8-278fd39fc35f": {
