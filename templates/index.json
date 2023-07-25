@@ -99,8 +99,8 @@
         "16321237356a896dad-0": {
           "type": "image",
           "settings": {
-            "image_slide": "shopify:\/\/shop_images\/King_of_the_Hammers_HP_Banner.jpg",
-            "image_slide_mb": "shopify:\/\/shop_images\/KOH_Mobile_Banner.jpg",
+            "image_slide": "shopify:\/\/shop_images\/Andrew_Qualifying_HP_Banner.jpg",
+            "image_slide_mb": "shopify:\/\/shop_images\/Andrew_Qualifying_Mobile_Banner.jpg",
             "alignment": "left",
             "enable_custom_position": false,
             "custom_horizontal": "40",
