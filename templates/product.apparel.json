@@ -36,16 +36,6 @@
             "spacing_bottom": 16
           }
         },
-        "b87b5d94-d9c5-4d66-a99b-da56e65d25e9": {
-          "type": "short_description",
-          "settings": {
-            "word_number": "17",
-            "fontsize_text": 12,
-            "color_text": "#3c3c3c",
-            "spacing_top": 0,
-            "spacing_bottom": 21
-          }
-        },
         "d98e243b-3682-495a-965a-1c7f7d460880": {
           "type": "variant_picker",
           "settings": {
@@ -92,41 +82,9 @@
             "maximum_des_to_show": 300
           }
         },
-        "3d9ea84d-5527-4bce-abe6-5debef3ec955": {
-          "type": "custom",
-          "settings": {
-            "open_tab_mobile": false,
-            "title": "Shipping & Return",
-            "type": "all",
-            "content": "<h3>Returns Policy<\/h3>\n<p>You may return most new, unopened items within 30 days of delivery for a full refund. We'll also pay the return shipping costs if the return is a result of our error (you received an incorrect or defective item, etc.).<\/p>\n<p>You should expect to receive your refund within four weeks of giving your package to the return shipper, however, in many cases you will receive a refund more quickly. This time period includes the transit time for us to receive your return from the shipper (5 to 10 business days), the time it takes us to process your return once we receive it (3 to 5 business days), and the time it takes your bank to process our refund request (5 to 10 business days).<\/p>\n<p>If you need to return an item, simply login to your account, view the order using the \"Complete Orders\" link under the My Account menu and click the Return Item(s) button. We'll notify you via e-mail of your refund once we've received and processed the returned item.<\/p>\n<h3>Shipping<\/h3>\n<p>We can ship to virtually any address in the world. Note that there are restrictions on some products, and some products cannot be shipped to international destinations.<\/p>\n<p>When you place an order, we will estimate shipping and delivery dates for you based on the availability of your items and the shipping options you choose. Depending on the shipping provider you choose, shipping date estimates may appear on the shipping quotes page.<\/p>\n<p>Please also note that the shipping rates for many items we sell are weight-based. The weight of any such item can be found on its detail page. To reflect the policies of the shipping companies we use, all weights will be rounded up to the next full pound.<\/p>",
-            "enable_btn_show_more": false,
-            "maximum_des_to_show": 300,
-            "product_custom_source": "dynamic",
-            "product_tab_key_metafield": ""
-          }
-        },
-        "b9d6eb19-10f4-41f8-bfdc-ea10e8b3182a": {
-          "type": "custom",
-          "settings": {
-            "open_tab_mobile": false,
-            "title": "Custom Tab",
-            "type": "all",
-            "content": "<table>\n    <tbody>\n        <tr>\n            <td class=\"tb-title\">Drostique<\/td>\n            <td>Nam tempus turpis at metus scelerisque placerat nulla deumantos<\/td>\n        <\/tr>\n        <tr>\n            <td class=\"tb-title\">Pharetro Lorem<\/td>\n            <td>Pellentesque diam dolor elementum etos lobortis des mollis<\/td>\n        <\/tr>\n        <tr>\n            <td class=\"tb-title\">Milancelos<\/td>\n            <td>Donec pretium egestas sapien et mollis<\/td>\n        <\/tr>\n        <tr>\n            <td class=\"tb-title\">Pellentesque<\/td>\n            <td>Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras<\/td>\n        <\/tr>\n        <tr>\n            <td class=\"tb-title\">Proin Molestie<\/td>\n            <td>Pellentesque diam dolor elementum etos lobortis des mollis<\/td>\n        <\/tr>\n        <tr>\n            <td class=\"tb-title\">Cosmopolis<\/td>\n            <td>Donec pretium egestas sapien et mollis<\/td>\n        <\/tr>\n    <\/tbody>\n<\/table>",
-            "enable_btn_show_more": false,
-            "maximum_des_to_show": 300,
-            "product_custom_source": "dynamic",
-            "product_tab_key_metafield": ""
-          }
-        },
-        "faebbc78-6094-4bc0-a917-80dbfbf5ef3c": {
-          "type": "review",
-          "settings": {
-            "open_tab_mobile": false,
-            "title": "Review"
-          }
-        },
         "8d491270-946a-4115-9867-b4900418a5ed": {
           "type": "perks",
+          "disabled": true,
           "settings": {
             "spacing_top": 0,
             "spacing_bottom": 22,
@@ -146,52 +104,17 @@
             "spacing_top": 0,
             "spacing_bottom": 0
           }
-        },
-        "88674516-bea5-4f69-8139-37826c137306": {
-          "type": "grouped_product",
-          "settings": {
-            "spacing_top": 0,
-            "spacing_bottom": 0,
-            "atc_color": "#ffffff",
-            "atc_border_color": "#232323",
-            "atc_bg_color": "#232323",
-            "atc_color_hover": "#232323",
-            "atc_border_color_hover": "#232323",
-            "atc_bg_color_hover": "#ffffff"
-          }
-        },
-        "ecdbb404-9b4e-41d2-ab03-f37f8fea1711": {
-          "type": "product_text",
-          "settings": {
-            "text": "OUR PERFECT FIT PROMISE",
-            "text_icon": "",
-            "text_description": "We stand behind our products. If you don’t love it, exchanges<br>\nand returns are free for 60 days.",
-            "fontsize_text": 12,
-            "content_spacing": 25,
-            "custom_block_align": "center",
-            "color_title": "#232323",
-            "background_color_block": "#f7f8fa",
-            "background_gradient_color_block": "",
-            "spacing_top": 30,
-            "spacing_bottom": 15
-          }
         }
       },
       "block_order": [
         "2e8c7c14-a0ad-4930-a1d8-3def05310426",
         "b0ea69b7-8a54-4a3c-9abd-0fcceeabaaa0",
         "4f95b592-8369-4ab0-b30d-24e463fb6890",
-        "b87b5d94-d9c5-4d66-a99b-da56e65d25e9",
         "d98e243b-3682-495a-965a-1c7f7d460880",
         "f1b31d90-1e43-4948-9fe3-97ba43f6fb34",
         "bd066b80-c8e3-4f3e-8280-b27fbf6e9423",
-        "3d9ea84d-5527-4bce-abe6-5debef3ec955",
-        "b9d6eb19-10f4-41f8-bfdc-ea10e8b3182a",
-        "faebbc78-6094-4bc0-a917-80dbfbf5ef3c",
         "8d491270-946a-4115-9867-b4900418a5ed",
-        "3a434369-4091-4df4-b9e8-a0ddca29ce49",
-        "88674516-bea5-4f69-8139-37826c137306",
-        "ecdbb404-9b4e-41d2-ab03-f37f8fea1711"
+        "3a434369-4091-4df4-b9e8-a0ddca29ce49"
       ],
       "settings": {
         "container": "fullwidth",
@@ -317,8 +240,8 @@
         "show_half": true,
         "scroll_height": 4,
         "scroll_track_bg": "#f1f1f1",
-        "scroll_thumb_color": "#000",
-        "scroll_thumb_hover_color": "#444",
+        "scroll_thumb_color": "#000000",
+        "scroll_thumb_hover_color": "#444444",
         "enable_hover_drag_icon": true,
         "enable_layout_special": false,
         "bg_card": "#ffffff",
@@ -372,8 +295,8 @@
         "show_half": true,
         "scroll_height": 4,
         "scroll_track_bg": "#f1f1f1",
-        "scroll_thumb_color": "#000",
-        "scroll_thumb_hover_color": "#444",
+        "scroll_thumb_color": "#000000",
+        "scroll_thumb_hover_color": "#444444",
         "enable_hover_drag_icon": true,
         "enable_layout_special": false,
         "bg_card": "#ffffff",

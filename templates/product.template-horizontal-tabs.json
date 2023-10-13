@@ -46,6 +46,18 @@
             "spacing_bottom": 21
           }
         },
+        "d98e243b-3682-495a-965a-1c7f7d460880": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "show_variant_image_group": false,
+            "enable_border_top": false,
+            "enable_border_bottom": true,
+            "color_border": "#e6e6e6",
+            "spacing_top": 0,
+            "spacing_bottom": 0
+          }
+        },
         "f1b31d90-1e43-4948-9fe3-97ba43f6fb34": {
           "type": "buy_buttons",
           "settings": {
@@ -113,18 +125,6 @@
             "title": "Review"
           }
         },
-        "d98e243b-3682-495a-965a-1c7f7d460880": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "show_variant_image_group": false,
-            "enable_border_top": false,
-            "enable_border_bottom": true,
-            "color_border": "#e6e6e6",
-            "spacing_top": 0,
-            "spacing_bottom": 0
-          }
-        },
         "8d491270-946a-4115-9867-b4900418a5ed": {
           "type": "perks",
           "settings": {
@@ -182,12 +182,12 @@
         "b0ea69b7-8a54-4a3c-9abd-0fcceeabaaa0",
         "4f95b592-8369-4ab0-b30d-24e463fb6890",
         "b87b5d94-d9c5-4d66-a99b-da56e65d25e9",
+        "d98e243b-3682-495a-965a-1c7f7d460880",
         "f1b31d90-1e43-4948-9fe3-97ba43f6fb34",
         "bd066b80-c8e3-4f3e-8280-b27fbf6e9423",
         "3d9ea84d-5527-4bce-abe6-5debef3ec955",
         "b9d6eb19-10f4-41f8-bfdc-ea10e8b3182a",
         "faebbc78-6094-4bc0-a917-80dbfbf5ef3c",
-        "d98e243b-3682-495a-965a-1c7f7d460880",
         "8d491270-946a-4115-9867-b4900418a5ed",
         "3a434369-4091-4df4-b9e8-a0ddca29ce49",
         "88674516-bea5-4f69-8139-37826c137306",
