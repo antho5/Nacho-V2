@@ -5,6 +5,7 @@
       "blocks": {
         "2e8c7c14-a0ad-4930-a1d8-3def05310426": {
           "type": "breadcrumb",
+          "disabled": true,
           "settings": {
             "breadcrumb_layout": "content",
             "breadcrumb_alignment": "left",
@@ -24,7 +25,7 @@
             "fontsize_text": 20,
             "fontsize_text_mb": 18,
             "color_title": "#232323",
-            "spacing_top": 0,
+            "spacing_top": 25,
             "spacing_bottom": 10
           }
         },
