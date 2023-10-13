@@ -3,21 +3,6 @@
     "main": {
       "type": "main-product-horizontal-tabs-no-sidebar",
       "blocks": {
-        "2e8c7c14-a0ad-4930-a1d8-3def05310426": {
-          "type": "breadcrumb",
-          "settings": {
-            "breadcrumb_layout": "full",
-            "breadcrumb_alignment": "center",
-            "breadcrumb_bg": "",
-            "breadcrumb_gradient": "",
-            "breadcrumb_bg_mb": "#f6f6f6",
-            "breadcrumb_gradient_mb": "",
-            "breadcrumb_mg_top_desktop": 10,
-            "breadcrumb_mg_top_mobile": 0,
-            "breadcrumb_mg_bottom_desktop": 0,
-            "breadcrumb_mg_bottom_mobile": 0
-          }
-        },
         "b0ea69b7-8a54-4a3c-9abd-0fcceeabaaa0": {
           "type": "title",
           "settings": {
@@ -26,6 +11,21 @@
             "color_title": "#232323",
             "spacing_top": 16,
             "spacing_bottom": 10
+          }
+        },
+        "13bb8e3e-88ac-4cae-adb6-33d2f55155de": {
+          "type": "info",
+          "settings": {
+            "show_vendor": true,
+            "show_sku": true,
+            "show_availability": true,
+            "show_product_type": true,
+            "stock_level_display": "none",
+            "enable_border_top": false,
+            "enable_border_bottom": false,
+            "color_border": "#e6e6e6",
+            "spacing_top": 0,
+            "spacing_bottom": 18
           }
         },
         "4f95b592-8369-4ab0-b30d-24e463fb6890": {
@@ -82,6 +82,36 @@
             "maximum_des_to_show": 300
           }
         },
+        "3a434369-4091-4df4-b9e8-a0ddca29ce49": {
+          "type": "share",
+          "settings": {
+            "show_share": true,
+            "share_layout": "2",
+            "spacing_top": 0,
+            "spacing_bottom": 0
+          }
+        },
+        "6d8cdabd-3527-47a4-afea-d10ae9a01f54": {
+          "type": "meta",
+          "settings": {
+            "spacing_top": 0,
+            "spacing_bottom": 13,
+            "show_review": true,
+            "show_sold_in": true,
+            "sold_in_number": "3,5,6,7,8,10,12,15",
+            "sold_in_hours": "10,15,16,17,18,20,25,35",
+            "color_text_sold_in": "#e95144"
+          }
+        },
+        "0ce7a4e0-72b3-4d1a-9006-18d5680237a4": {
+          "type": "quantity_selector",
+          "settings": {
+            "qty_style": "1",
+            "qty_layout": "1",
+            "spacing_top": 0,
+            "spacing_bottom": 10
+          }
+        },
         "8d491270-946a-4115-9867-b4900418a5ed": {
           "type": "perks",
           "disabled": true,
@@ -95,34 +125,27 @@
             "show_compare_color_drop_drap": true,
             "compare_layout": "1"
           }
-        },
-        "3a434369-4091-4df4-b9e8-a0ddca29ce49": {
-          "type": "share",
-          "settings": {
-            "show_share": true,
-            "share_layout": "2",
-            "spacing_top": 0,
-            "spacing_bottom": 0
-          }
         }
       },
       "block_order": [
-        "2e8c7c14-a0ad-4930-a1d8-3def05310426",
         "b0ea69b7-8a54-4a3c-9abd-0fcceeabaaa0",
+        "13bb8e3e-88ac-4cae-adb6-33d2f55155de",
         "4f95b592-8369-4ab0-b30d-24e463fb6890",
         "d98e243b-3682-495a-965a-1c7f7d460880",
         "f1b31d90-1e43-4948-9fe3-97ba43f6fb34",
         "bd066b80-c8e3-4f3e-8280-b27fbf6e9423",
-        "8d491270-946a-4115-9867-b4900418a5ed",
-        "3a434369-4091-4df4-b9e8-a0ddca29ce49"
+        "3a434369-4091-4df4-b9e8-a0ddca29ce49",
+        "6d8cdabd-3527-47a4-afea-d10ae9a01f54",
+        "0ce7a4e0-72b3-4d1a-9006-18d5680237a4",
+        "8d491270-946a-4115-9867-b4900418a5ed"
       ],
       "settings": {
-        "container": "fullwidth",
+        "container": "1770",
         "padding_full_width": 0,
         "show_sticky_info": true,
-        "mg_top_desktop": 0,
-        "mg_top_tablet": 0,
-        "mg_top_mobile": 0,
+        "mg_top_desktop": 20,
+        "mg_top_tablet": 20,
+        "mg_top_mobile": 20,
         "mg_bottom_desktop": 0,
         "mg_bottom_tablet": 0,
         "mg_bottom_mobile": 0,
