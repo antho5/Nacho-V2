@@ -192,8 +192,8 @@
         "16321237356a896dad-0": {
           "type": "image",
           "settings": {
-            "image_slide": "shopify:\/\/shop_images\/Andrew_Qualifying_HP_Banner.jpg",
-            "image_slide_mb": "shopify:\/\/shop_images\/Andrew_Qualifying_Mobile_Banner.jpg",
+            "image_slide": "shopify:\/\/shop_images\/quatro_banner_2_web.jpg",
+            "image_slide_mb": "shopify:\/\/shop_images\/Quatro_Banner_2_Mobile.jpg",
             "alignment": "left",
             "enable_custom_position": false,
             "custom_horizontal": "40",
@@ -285,8 +285,8 @@
         "eb881620-018e-4971-95e9-7e0a015dcd16": {
           "type": "image",
           "settings": {
-            "image_slide": "shopify:\/\/shop_images\/Quatro_Raptor.jpg",
-            "image_slide_mb": "shopify:\/\/shop_images\/Quatro_Raptor_Mobile.jpg",
+            "image_slide": "shopify:\/\/shop_images\/Andrew_Qualifying_HP_Banner.jpg",
+            "image_slide_mb": "shopify:\/\/shop_images\/Andrew_Qualifying_Mobile_Banner.jpg",
             "alignment": "left",
             "enable_custom_position": false,
             "custom_horizontal": "10",
