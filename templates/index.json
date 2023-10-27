@@ -753,7 +753,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify:\/\/shop_images\/Automotive.jpg",
+            "image": "shopify:\/\/shop_images\/automotive_banner.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
@@ -805,7 +805,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify:\/\/shop_images\/HB_81df3e3d-063b-441a-ac20-2ebba11a79e1.jpg",
+            "image": "shopify:\/\/shop_images\/Industrial_Banner.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
