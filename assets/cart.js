@@ -114,12 +114,12 @@ class CartItems extends HTMLElement {
             console.error(`Error: ${error.message}`)
         }
 
-        let checkoutHref = this.toCheckoutButton.dataset.href;
-        if (checkoutHref == null) {
-            checkoutHref = `${window.routes?.root ? window.routes.root : ""}/checkout`;
-        }
+        // let checkoutHref = this.toCheckoutButton.dataset.href;
+        // if (checkoutHref == null) {
+        //     checkoutHref = `${window.routes?.root ? window.routes.root : ""}/checkout`;
+        // }
         
-        window.location = checkoutHref;
+        // window.location = checkoutHref;
     }
 
     initCartCountdown(){
