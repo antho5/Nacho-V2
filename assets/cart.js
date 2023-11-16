@@ -52,7 +52,7 @@ class CartItems extends HTMLElement {
 
     onAddGiftCardClick(e) {
         e.preventDefault()
-        // e.stopPropagation()
+        e.stopPropagation()
         this.giftCardButton.dataset.isChecked = 'true'
     }
 
