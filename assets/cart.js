@@ -116,7 +116,7 @@ class CartItems extends HTMLElement {
 
         let checkoutHref = this.toCheckoutButton.dataset.href;
         if (checkoutHref == null) {
-            checkoutHref = `${window.routes?.root ? window.routes.root : ""}/checkout`;
+            // checkoutHref = `${window.routes?.root ? window.routes.root : ""}/checkout`;
         }
         
         window.location = checkoutHref;
