@@ -857,7 +857,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify:\/\/shop_images\/Apparel.jpg",
+            "image": "shopify:\/\/shop_images\/apparel_catagory.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
