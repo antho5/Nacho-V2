@@ -93,33 +93,33 @@ class CartItems extends HTMLElement {
     async handleToCheckoutPage(e) {
         //e.preventDefault()
 
-        try {
-            // saving coupon
-            const couponCode = this.couponCodeInput?.value 
-            if (couponCode) {
-                localStorage.setItem('storedDiscount', couponCode)
-                const couponRes =  await fetch(`/discount/${couponCode}`)
-                const text1 = await couponRes.text()
-            }
+        // try {
+        //     // saving coupon
+        //     const couponCode = this.couponCodeInput?.value 
+        //     if (couponCode) {
+        //         localStorage.setItem('storedDiscount', couponCode)
+        //         const couponRes =  await fetch(`/discount/${couponCode}`)
+        //         const text1 = await couponRes.text()
+        //     }
             
-            // saving cart note
-            const cartNote = this.cartNoteInput?.value
-            if (cartNote) {
-                const cartNoteBody = JSON.stringify({ note: cartNote })
-                const cartNoteRes = await fetch(`${routes.cart_update_url}`, {...fetchConfig(), ...{ body: cartNoteBody }})
-                const text2 = await cartNoteRes.text()
-            }
+        //     // saving cart note
+        //     const cartNote = this.cartNoteInput?.value
+        //     if (cartNote) {
+        //         const cartNoteBody = JSON.stringify({ note: cartNote })
+        //         const cartNoteRes = await fetch(`${routes.cart_update_url}`, {...fetchConfig(), ...{ body: cartNoteBody }})
+        //         const text2 = await cartNoteRes.text()
+        //     }
 
-        } catch(error) {
-            console.error(`Error: ${error.message}`)
-        }
+        // } catch(error) {
+        //     console.error(`Error: ${error.message}`)
+        // }
 
-        let checkoutHref = this.toCheckoutButton.dataset.href;
-        if (checkoutHref == null) {
-            checkoutHref = `${window.routes?.root ? window.routes.root : ""}/checkout`;
-        }
+        // let checkoutHref = this.toCheckoutButton.dataset.href;
+        // if (checkoutHref == null) {
+        //     checkoutHref = `${window.routes?.root ? window.routes.root : ""}/checkout`;
+        // }
         
-        window.location = checkoutHref;
+        // window.location = checkoutHref;
     }
 
     initCartCountdown(){
