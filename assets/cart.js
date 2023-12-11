@@ -91,7 +91,7 @@ class CartItems extends HTMLElement {
     // }
 
     async handleToCheckoutPage(e) {
-        e.preventDefault()
+        //e.preventDefault()
 
         try {
             // saving coupon
