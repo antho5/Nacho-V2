@@ -686,6 +686,12 @@
           "button_vertical_position": "lowest",
           "greeting_message": "👋 Hi, message us with any questions. We're happy to help!"
         }
+      },
+      "7267007828674315154": {
+        "type": "shopify:\/\/apps\/wholesale-pricing-now-wod\/blocks\/wholesale_now_embed\/66e7e71e-5250-4f57-93d4-292a1c14afc8",
+        "disabled": false,
+        "settings": {
+        }
       }
     }
   }
