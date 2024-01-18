@@ -323,6 +323,9 @@
     "notification_intro_text_mobile": "",
     "notification_link_text_desktop": "",
     "notification_link_text_mobile": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/Logomark_Full_Color.png",
+    "checkout_accent_color": "#ff8b21",
+    "checkout_button_color": "#ff8b21",
     "layout_header": "default",
     "layout_footer": "default",
     "footer_custom_width_size": 1600,
@@ -554,7 +557,7 @@
               "show_custom_style": false,
               "text_color": "#000000",
               "label_bg_color": "#000000",
-              "label_text_color": "#FFFFFF"
+              "label_text_color": "#ffffff"
             }
           },
           "2763f325-7d56-4247-b496-4d9b64828fc9": {
