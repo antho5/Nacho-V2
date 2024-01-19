@@ -23,9 +23,13 @@
                window.location=url;
             }
           }
-          window.runCartFixer = (time) => {
+          window.runCartFixer = (time, isQuickviewbutton) => {
               let id = setInterval(() => {
-                BSS_B2B.cart.fixer(JSON.parse($('#bss-b2b-store-data').html()), false, false)
+                if(isQuickviewbutton) {
+                  BSS_B2B.changeProductPriceWithInterval()
+                } else {
+                  BSS_B2B.cart.fixer(JSON.parse($('#bss-b2b-store-data').html()), false, false)
+                }
               }, 500);
               setTimeout(() => {
                 clearInterval(id);
