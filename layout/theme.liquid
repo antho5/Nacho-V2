@@ -20,13 +20,13 @@
         <script>
           window.handleCheckout = (time) => {
             let id = setInterval(() => {
+                          console.log("fsdfsdf")
               const originalButton = document.getElementById('cart-checkout');
               const clonedButton = originalButton.cloneNode(true);
               originalButton.parentNode.replaceChild(clonedButton, originalButton);
               BSS_B2B.handleCartCheckoutBtn(JSON.parse($('#bss-b2b-store-data').html()))
             }, 500); 
             setTimeout(() => 
-              console.log("fsdfsdf")
               clearInterval(id);
             }, time)
           }
