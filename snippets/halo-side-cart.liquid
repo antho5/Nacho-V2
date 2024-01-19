@@ -87,7 +87,7 @@
                                 endif 
                             -%}  
                             <div class="previewCartItem-price" data-price="{{ price_to_display }}" data-original-price="{{ item.original_price }}">
-                                <span class="price">
+                                <span class="price" bss-b2b-cart-item-key="{{ item.key }}" bss-b2b-item-original-price>
                                     {%- assign current_variant = item.variant -%}
                                     {% if item.original_price != item.final_price %}
                                         <span class="previewCartItem-saving-price">
