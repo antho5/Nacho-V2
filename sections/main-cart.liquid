@@ -256,8 +256,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="cart-item-block cart-item-price" bss-b2b-cart-item-key="{{ item.key }}" bss-b2b-item-original-price>
-                                                <div class="cart-item__price-wrapper" >
+                                            <div class="cart-item-block cart-item-price" >
+                                                <div class="cart-item__price-wrapper" bss-b2b-cart-item-key="{{ item.key }}" bss-b2b-item-original-price>
                                                     {%- assign current_variant = item.variant -%}
                                                     {%- if item.original_price != item.final_price -%}
                                                         <dl class="cart-item__discounted-prices">
