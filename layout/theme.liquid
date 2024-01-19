@@ -18,6 +18,11 @@
         <meta name="theme-color" content="">
         <link rel="canonical" href="{{ canonical_url }}">
         <script>
+          window.handleCheckoutevent = (url) => {
+            if(!BSS_B2B.cpRules && !BSS_B2B.cpRules.length > 0) {
+               window.location=url;
+            }
+          }
           window.handleCheckout = (time) => {
             let id = setInterval(() => {
               const originalButton = document.getElementById('cart-checkout');
