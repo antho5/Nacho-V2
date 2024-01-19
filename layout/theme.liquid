@@ -24,7 +24,7 @@
               const originalButton = document.getElementById('cart-checkout');
               const clonedButton = originalButton.cloneNode(true);
               originalButton.parentNode.replaceChild(clonedButton, originalButton);
-              BSS_B2B.handleCartCheckoutBtn(JSON.parse($('#bss-b2b-store-data').html()))
+              BSS_B2B.handleCartCheckoutBtn(JSON.parse($('#bss-b2b-store-data').html())
             }, 500); 
             setTimeout(() => 
               clearInterval(id);
