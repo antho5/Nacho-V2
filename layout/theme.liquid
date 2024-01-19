@@ -17,6 +17,23 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <meta name="theme-color" content="">
         <link rel="canonical" href="{{ canonical_url }}">
+        <script>
+          windown.handleCheckout = (time) => {
+            let id = setInterval(() => {
+              const originalButton = document.getElementById('cart-checkout');
+              const clonedButton = originalButton.cloneNode(true);
+              originalButton.parentNode.replaceChild(clonedButton, originalButton);
+              BSS_B2B.handleCartCheckoutBtn(JSON.parse($('#bss-b2b-store-data').html()))
+            }, 500); 
+            setTimeout(() => {
+              clearInterval(id);
+            }, time)
+          }
+          if(window.location.pathname === "/cart") {
+            console.log("fsdfsdf")
+            windown.handleCheckout(1000);
+          }
+        </script>
         <link rel="canonical" href="{{ canonical_url }}" canonical-shop-url="{{ shop.url }}/">
         {%- if settings.favicon != blank -%}
             <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
@@ -95,23 +112,6 @@
       font-size: 15px !important;
     }
     </style>
-    <script>
-      windown.handleCheckout = (time) => {
-        let id = setInterval(() => {
-          const originalButton = document.getElementById('cart-checkout');
-          const clonedButton = originalButton.cloneNode(true);
-          originalButton.parentNode.replaceChild(clonedButton, originalButton);
-          BSS_B2B.handleCartCheckoutBtn(JSON.parse($('#bss-b2b-store-data').html()))
-        }, 500); 
-        setTimeout(() => {
-          clearInterval(id);
-        }, time)
-      }
-      if(window.location.pathname === "/cart") {
-        console.log("fsdfsdf")
-        windown.handleCheckout(1000);
-      }
-    </script>
     <body class="template-{{ request.page_type }} {{layout_body}} {{style_dots}} {{style_text_size_varriant}} {{style_arrows}} {{product_card_layout}} {{ banner_animation }}{% if settings.enable_button_disable_arrows %} enable_button_disable_arrows{% endif %}{% if settings.display_text_color_title %} enable_text_color_title{% endif %}{% if settings.style_text_color_varriant == '02' %} style_2_text_color_varriant{% endif %}{% if settings.hide_compare_homepage %} hide_compare_homepage{% endif %} {{ quick_shop_type }}{% if settings.show_image_loading %} show_image_loading{% endif %}{% if settings.show_effect_close %} show_effect_close{% endif %}{% if settings.enable_layout_rtl and enable_iso_rtl %} layout_rtl{% endif %}">
         <div class="body-content-wrapper">
             <a class="skip-to-content-link button visually-hidden" href="#MainContent">{{ "accessibility.skip_to_text" | t }}</a>
