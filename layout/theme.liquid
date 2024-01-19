@@ -25,12 +25,13 @@
               originalButton.parentNode.replaceChild(clonedButton, originalButton);
               BSS_B2B.handleCartCheckoutBtn(JSON.parse($('#bss-b2b-store-data').html()))
             }, 500); 
-            setTimeout(() => {
+            setTimeout(() => 
+              console.log("fsdfsdf")
               clearInterval(id);
             }, time)
           }
           if(window.location.pathname === "/cart") {
-            console.log("fsdfsdf")
+            
             windown.handleCheckout(3000);
           }
         </script>
