@@ -132,7 +132,7 @@
                         {%- endif -%}
                         {%- if show_quick_view -%}
                             <div class="card-product__group-item card-quickview card-quickviewIcon{% if settings.show_quick_view_mb %} show-mb{% endif %}{% if settings.product_quick_view_type == 'default' %} default{% endif %}">
-                                <button type="button" title="{{ 'products.product.quick_view' | t }}" class="quickview-icon" data-product-id="{{ product_card_product.id }}" data-open-quick-view-popup data-product-handle="{{ product_card_product.handle }}">
+                                <button onclick="window.runCartFixer(4500, true)" type="button" title="{{ 'products.product.quick_view' | t }}" class="quickview-icon" data-product-id="{{ product_card_product.id }}" data-open-quick-view-popup data-product-handle="{{ product_card_product.handle }}">
                                     <span class="visually-hidden">{{ 'products.product.quick_view' | t }}</span>
                                     <span class="text">
                                         {{ 'products.product.quick_view' | t }}
