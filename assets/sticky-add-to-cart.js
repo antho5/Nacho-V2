@@ -698,8 +698,7 @@ class VariantStickyAddToCart extends HTMLElement {
 
         var quantityInput = $('[data-sticky-add-to-cart] .quantity__input'),
             notifyMe = this.item.find('.productView-notifyMe'),
-            stickyPrice = $('[data-sticky-add-to-cart] .money-subtotal .money'),
-            stickyComparePrice = $('[data-sticky-add-to-cart] .money-compare-price .money');
+            stickyPrice = $('[data-sticky-add-to-cart] .money-subtotal .money');
         
         var maxValue = parseInt(quantityInput.attr('data-inventory-quantity'));
 
@@ -719,7 +718,7 @@ class VariantStickyAddToCart extends HTMLElement {
             stickyButton.textContent = text;
 
             if(notifyMe.length > 0){
-                notifyMe.find('input[name="halo-notify-product-variant"]').val(this.currentVariant.title);
+                notifyMe.find('.halo-notify-product-variant').val(this.currentVariant.title);
                 notifyMe.find('.notifyMe-text').empty();
                 notifyMe.slideDown('slow');
             }
@@ -739,7 +738,7 @@ class VariantStickyAddToCart extends HTMLElement {
                     const pdView_subTotal = document.querySelector('.productView-subtotal .money') || document.querySelector('.productView-subtotal .money-subtotal');
 
                     pdView_subTotal.textContent = subTotal;
-                    if (this.currentVariant.available && maxValue <= 0) {
+                    if (this.currentVariant.available && maxValue <= 0 && this.currentVariant.inventory_management == "shopify") {
                         text = window.variantStrings.preOrder;
                     } else {
                         text = window.variantStrings.addToCart;
@@ -751,7 +750,7 @@ class VariantStickyAddToCart extends HTMLElement {
             } else {
                 subTotal = Shopify.formatMoney(price, window.money_format);
                 if (window.currencyFormatted) subTotal = $(subTotal).text();
-                if (this.currentVariant.available && maxValue <= 0) {
+                if (this.currentVariant.available && maxValue <= 0 && this.currentVariant.inventory_management == "shopify") {
                     text = window.variantStrings.preOrder;
                 } else {
                     text = window.variantStrings.addToCart;
@@ -770,6 +769,23 @@ class VariantStickyAddToCart extends HTMLElement {
                 stickyPrice.text(subTotal);
             }
 
+            const thisStickyPrice = $('[data-sticky-add-to-cart] .sticky-price');
+            const thisComparePrice = $('[data-sticky-add-to-cart] .money-compare-price');
+            const compare_at_price = this.currentVariant?.compare_at_price;
+            if (compare_at_price) {
+                thisStickyPrice.addClass('has-compare-price');
+                if (thisComparePrice.length) {
+                    thisComparePrice.attr('data-compare-price', compare_at_price);
+                } else {
+                    thisStickyPrice.prepend(`<s class="money-compare-price" data-compare-price="${compare_at_price}"><span class="money"></span></s>`);
+                }
+            } else {
+                thisStickyPrice.removeClass('has-compare-price');
+                thisComparePrice.remove();
+            }
+
+            
+            const stickyComparePrice = $('[data-sticky-add-to-cart] .money-compare-price .money');
             if (subTotal != 0 && stickyComparePrice.length && window.subtotal.show) {
                 let comparePrice = $('[data-sticky-add-to-cart] .money-compare-price').data('compare-price'),
                     qty = quantityInput.val();

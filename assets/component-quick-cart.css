@@ -162,6 +162,8 @@
     position: absolute;
     left: 0;
     top: 0;
+    background: none;
+    border: none;
 }
 
 .previewCartItem-qty .btn-quantity:before {
@@ -664,7 +666,9 @@ body.cart-sidebar-show .halo-cart-sidebar{
 .previewCart .previewCartProduct .product .card-product {
     flex: 0 0 33%;
 }
-
+.product-card-layout-02 .previewCart .previewCartProduct .card-information__wrapper {
+    padding-top: 10px;
+}
 .previewCart .previewCartProduct .product .card-information .card-action__group {
     display: block !important;
 }

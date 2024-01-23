@@ -9,7 +9,7 @@
         {% assign logoActive = settings[i-lang_unit] %}
         {% endif %}
         {% endfor %}
-        <button type="button" class="disclosure__button dropdown-toggle dropdown-label localization-form__select localization-selector link link--text caption-large" aria-controls="HeaderLanguageList" aria-describedby="HeaderLanguageLabel">
+        <button type="button" class="disclosure__button dropdown-toggle dropdown-label localization-form__select localization-selector link link--text caption-large" aria-controls="HeaderLanguageList" aria-describedby="HeaderLanguageLabel" aria-label="{{ localization.language.iso_code }}">
             <span class="icon">{{ logoActive }}</span> <span class="text text-language">{{ localization.language.iso_code }}</span>
             {%- if localization.available_languages.size > 1 -%}
                 {%- if icon == 'sort' -%}

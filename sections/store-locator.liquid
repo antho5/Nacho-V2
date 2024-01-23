@@ -52,12 +52,12 @@
 %}
 
 <div data-section-id="{{ section.id }}" data-section-type="store-locator" id="StoreLocatorSection-{{ section.id }}" data-section="{{ section.id }}">
-    <div class="store-locator-container {% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%} container-full{% else %}container{% endif %}">
+    <div class="store-locator-container {% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%} container-full{% else %}container{% endif %}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
         {%- if show_breadcrumb -%}
             {% render 'breadcrumb', alignment: breadcrumb_alignment %}
         {%- endif -%}
         {%- if show_page_title -%}
-            <h1 class="page-header text-{{ page_title_alignment }}">
+            <h1 class="page-header text-{{ page_title_alignment }}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
                 {{ page.title | escape }}
             </h1>
         {%- endif -%}
@@ -77,14 +77,14 @@
             "
         >
             {% if section.blocks.size > 0 %}
-                <div class="page-content find-a-store">
+                <div class="page-content find-a-store{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
                     <div class="bottom-content-find">
-                        <div class="HL-ColLeft" data-listings-wrapper>
+                        <div class="HL-ColLeft{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" data-listings-wrapper>
                             <div class="InfoFind">              
                                 <div class="InfoFindInner ENV_maps_list listings" id="listings"></div>
                             </div>
                         </div>
-                        <div class="HL-ColRight">
+                        <div class="HL-ColRight{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
                             <div 
                                 class="map" 
                                 id='map' 
@@ -99,7 +99,7 @@
                     </div>
                 </div>
             {% else %}
-                <div class="page-content find-a-store no-store text-center">
+                <div class="page-content find-a-store no-store text-center{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
                     <h3>
                         {{ 'find_a_store.no_stores' | t}}
                     </h3>   

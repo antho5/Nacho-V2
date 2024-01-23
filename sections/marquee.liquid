@@ -8,7 +8,7 @@
         assign limitItems = 12 | divided_by: section.blocks.size
     -%}
 
-    <div class="marquee marque-border--{{ section.settings.border }}" data-limitItems="{{ limitItems }}" style="--padding-top: {{ padding_top }}px; --padding-bottom: {{ padding_bottom }}px; --padding-top-tablet: {{ padding_top | times: 0.75 | round: 0 }}px; --padding-bottom-tablet: {{ padding_bottom | times: 0.75 | round: 0 }}px; --padding-top-mobile: {{ padding_top | times: 0.5 | round: 0 }}px; --padding-bottom-mobile: {{ padding_bottom | times: 0.5 | round: 0 }}px; --minus-spacing-top: {{ section.settings.minus_spacing_top }}px; --background: {% if section.settings.mq_gradient != blank %}{{ section.settings.mq_gradient }}{% else %}{{ section.settings.mq_background }}{% endif %}; --text-size: {{ section.settings.text_size }}px; --text-size-mb: {{ section.settings.text_size_mb }}px; --gap-blocks: {{ section.settings.gap_blocks | times: 0.5 }}px; --border-color: {{ section.settings.border_color }}; --border-color-mb: {{ section.settings.border_color_mb }}; --icon-color: {{ section.settings.icon_color }}; --icon-color-mb: {{ section.settings.icon_color_mb }}; --time-scroll: {{ 5 | times: section.blocks.size }}s">
+    <div class="marquee marque-border--{{ section.settings.border }}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--fade-in{% endif %}" data-limitItems="{{ limitItems }}" style="--padding-top: {{ padding_top }}px; --padding-bottom: {{ padding_bottom }}px; --padding-top-tablet: {{ padding_top | times: 0.75 | round: 0 }}px; --padding-bottom-tablet: {{ padding_bottom | times: 0.75 | round: 0 }}px; --padding-top-mobile: {{ padding_top | times: 0.5 | round: 0 }}px; --padding-bottom-mobile: {{ padding_bottom | times: 0.5 | round: 0 }}px; --minus-spacing-top: {{ section.settings.minus_spacing_top }}px; --background: {% if section.settings.mq_gradient != blank %}{{ section.settings.mq_gradient }}{% else %}{{ section.settings.mq_background }}{% endif %}; --text-size: {{ section.settings.text_size }}px; --text-size-mb: {{ section.settings.text_size_mb }}px; --gap-blocks: {{ section.settings.gap_blocks | times: 0.5 }}px; --border-color: {{ section.settings.border_color }}; --border-color-mb: {{ section.settings.border_color_mb }}; --icon-color: {{ section.settings.icon_color }}; --icon-color-mb: {{ section.settings.icon_color_mb }}; --time-scroll: {{ 5 | times: section.blocks.size }}s">
         {%- for i in (1..limitItems) -%}
             <div class="marquee__list">
                 {%- for block in section.blocks -%}
@@ -28,6 +28,22 @@
             </div>
         {%- endfor -%}
     </div>
+    <script>
+        const elementToAnimateMarquee = document.querySelector('.marquee');
+        function toggleActiveClass() {
+          const viewportHeight = window.innerHeight;
+          const elementRect = elementToAnimateMarquee.getBoundingClientRect();
+
+          if (elementRect.top < viewportHeight && elementRect.bottom >= 0) {
+            elementToAnimateMarquee.classList.add('active-screen');
+          } else {
+            elementToAnimateMarquee.classList.remove('active-screen');
+          }
+        }
+
+        window.addEventListener('scroll', toggleActiveClass);
+        toggleActiveClass();
+    </script>
 {%- endif -%}
 
 {% schema %}
@@ -193,7 +209,7 @@
                     {
                         "type": "richtext",
                         "id": "text",
-                        "label": "t:settings_schema.general.settings.global_checkbox.label__2",
+                        "label": "t:sections.image-banner.blocks.image.settings.content.label__16",
                         "default": "<p>Welcome to our store</p>"
                     },
                     {

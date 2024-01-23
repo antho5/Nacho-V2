@@ -39,12 +39,15 @@ class FreeShippingMeter extends HTMLElement {
 
     calculateProgress(cart) {
         const cartTotalPrice = parseInt(cart.total_price) / 100;
-        let freeShipBar = Math.round((cartTotalPrice * 100) / FreeShippingMeter.freeshipPrice);
+        const cartTotalPriceFormatted = cartTotalPrice.toFixed(2);
+        const cartTotalPriceRounded = parseFloat(cartTotalPriceFormatted);
+
+        let freeShipBar = Math.abs((cartTotalPriceRounded * 100) / FreeShippingMeter.freeshipPrice);
         if (freeShipBar >= 100) {
             freeShipBar = 100;
         }
         
-        const text = this.getText(cartTotalPrice, freeShipBar);
+        const text = this.getText(cartTotalPriceFormatted, freeShipBar);
         const classLabel = this.getClassLabel(freeShipBar);
 
         this.setProgressWidthAndText(freeShipBar, text, classLabel);
@@ -62,7 +65,7 @@ class FreeShippingMeter extends HTMLElement {
             text = FreeShippingMeter.freeShippingText1;
         } else {
             this.progressBar.classList.remove('progress-hidden');
-            const remainingPrice = parseInt(FreeShippingMeter.freeshipPrice - cartTotalPrice);
+            const remainingPrice = Math.abs(FreeShippingMeter.freeshipPrice - cartTotalPrice);
             text = '<span>' + FreeShippingMeter.freeShippingText2 + ' </span>' + Shopify.formatMoney(remainingPrice * 100, window.money_format) + '<span> ' +  FreeShippingMeter.freeShippingText3 + ' </span><span class="text">' + FreeShippingMeter.freeShippingText4 + '</span>';
             this.shipVal = window.free_shipping_text.free_shipping_2;
         }
@@ -79,7 +82,7 @@ class FreeShippingMeter extends HTMLElement {
             classLabel = FreeShippingMeter.classLabel1;
         } else  if (freeShipBar <= 60) {
             classLabel = FreeShippingMeter.classLabel2;
-        } else if (freeShipBar <= 100) {
+        } else if (freeShipBar < 100) {
             classLabel = FreeShippingMeter.classLabel3;
         } else {
             classLabel = 'progress-free'

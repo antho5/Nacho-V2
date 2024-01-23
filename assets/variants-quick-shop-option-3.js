@@ -9,6 +9,7 @@ class VariantQuickShopSelects extends HTMLElement {
             this.updateMedia(500);
             this.renderProductAjaxInfo();
             this.renderProductInfo();
+            setTimeout(() => {this.checkQuantityWhenVariantChange()}, 20);
         }
 
         this.addEventListener('change', this.onVariantChange.bind(this));
@@ -460,7 +461,7 @@ class VariantQuickShopSelects extends HTMLElement {
                 quantityInput.closest('quantity-quick-shop-input').addClass('disabled');
 
                 if(notifyMe.length > 0){
-                    notifyMe.find('input[name="halo-notify-product-variant"]').val(this.currentVariant.title);
+                    notifyMe.find('.halo-notify-product-variant').val(this.currentVariant.title);
                     notifyMe.find('.notifyMe-text').empty();
                     notifyMe.slideDown('slow');
                 }

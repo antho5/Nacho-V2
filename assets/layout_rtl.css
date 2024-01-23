@@ -776,7 +776,7 @@
 		text-align: right;
 	}
 
-	body.layout_rtl.style_2_text_color_varriant .card-title .text span[data-change-title] {
+	body.layout_rtl.style_2_text_color_varriant .card-title span[data-change-title] {
 		left: 0;
 		right: auto;
 	}
@@ -1160,6 +1160,12 @@
 		text-align: right;
 	}
 /* END: Section Policies Block */
+
+/* START: Section Special Banner */
+	body.layout_rtl .special-banner__rotatingText .rotatingText {
+		direction: ltr;
+	}
+/* END: Section Special Banner */
 
 /* START: Section Spotlight Block */
 	body.layout_rtl .spotlight-inner.enable-transparnet.text-left .spotlight-button {
@@ -2031,7 +2037,10 @@
 	.layout_rtl.password-template {
         direction: rtl;
     }
-
+    .layout_rtl .password-template .password-form {
+    	right: auto;
+    	left: 20px;
+    }
     .layout_rtl.password-template .password-body .checkbox-group {
         direction: ltr;
     }
@@ -2655,6 +2664,10 @@
 		body.layout_rtl #halo-cart-sidebar .halo-sidebar-header,
 		body.layout_rtl #halo-auth-sidebar .halo-sidebar-header {
 			transform: translate(calc(var(--sidebar-content-distance) * 0));
+		}
+
+		.layout_rtl .shopify-section-group-header-group .halo-sidebar.halo-sidebar-right {
+			left: unset;
 		}
 	/* END: Body */
 

@@ -1,5 +1,4 @@
 {{ 'component-header-simple.css' | asset_url | stylesheet_tag }}
-
 <header class="header header-simple" style="--spacing-l-r: {{ section.settings.padding_full_width }}px">
     <div class="header-simple__content">
         {%- for block in section.blocks -%}
@@ -12,34 +11,26 @@
                                     {%- if block.settings.show_language_currency -%}
                                         {% if settings.enable_multilang_shopify or settings.enable_currencies %}
                                             <div class="header__languageCurrency header-language_currency">
-                                                <button type="button" class="icon-languageCurrency header__icon" aria-label="Language Currency" data-lang-currency>
-                                                    {% render 'icon-globe' %}
-                                                    {% render 'icon-sort-down' %}
-                                                </button>
+                                                <button type="button" class="icon-languageCurrency header__icon" aria-label="Language Currency" data-lang-currency>{% render 'icon-globe' %}{% render 'icon-sort-down' %}</button>
                                                 <div class="top-language-currency">
-                                                    {% if settings.enable_multilang_shopify %}
+                                                    {%- if settings.enable_multilang_shopify -%}
                                                         {% render 'halo-top-language', icon: 'sort' %}
-                                                    {% endif %}
-
-                                                    {% if settings.enable_currencies %}
+                                                    {%- endif -%}
+                                                    {%- if settings.enable_currencies -%}
                                                         {% render 'halo-top-currency', icon: 'sort' %}
-                                                    {% endif %}
+                                                    {%- endif -%}
                                                 </div>
                                             </div>
                                         {% endif %}
                                     {%- endif -%}
-                                    <div class="custom-text-01" style="--color: {{ block.settings.customer_text_01_color }}">
-                                        {{ block.settings.customer_text_01 }}
-                                    </div>
+                                    <div class="custom-text-01" style="--color: {{ block.settings.customer_text_01_color }}">{{ block.settings.customer_text_01 }}</div>
                                 </div>
                                 <div class="header__icons text-right clearfix">
-                                    <div class="custom-text-02" style="--color: {{ block.settings.customer_text_02_color_1 }}; --color-2: {{ block.settings.customer_text_02_color_2 }}">
-                                        {{ block.settings.customer_text_02 }}
-                                    </div>
+                                    <div class="custom-text-02" style="--color: {{ block.settings.customer_text_02_color_1 }}; --color-2: {{ block.settings.customer_text_02_color_2 }}">{{ block.settings.customer_text_02 }}</div>
                                 </div>
                             {%-  when 'group_2' -%}
                                 <div class="header__logo text-left clearfix" style="--logo-width: {% if block.settings.logo == blank %}auto; --logo-svg-width: {% endif %}{{ block.settings.logo_width }}px; --font-size: {{ block.settings.logo_font_size }}px; --font-weight: {{ block.settings.logo_font_weight }}; --color: {{ block.settings.logo_color }}">
-                                    <{% if request.page_type == 'index' %}h1{% else %}div{% endif %} class="header__heading">
+                                    <div class="header__heading">
                                         <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
                                             {%- if block.settings.logo != blank -%}
                                                 {%- liquid 
@@ -48,7 +39,6 @@
                                                     assign logo_height = logo_width | divided_by: logo.aspect_ratio | round
                                                     assign logo_alt = logo.alt | default: shop.name | escape
                                                 -%}
-                                                
                                                 {{ logo | image_url: width: 300 | image_tag:
                                                     class: 'header__heading-logo motion-reduce',
                                                     widths: '50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300',
@@ -60,13 +50,11 @@
                                                 <span class="h2 {{ block.settings.logo_text_transform }}">{% if block.settings.logo_text != blank %}{{ block.settings.logo_text }}{% else %}{{ shop.name }}{% endif %}</span>
                                             {%- endif -%}
                                         </a>
-                                    </{% if request.page_type == 'index' %}h1{% else %}div{% endif %}>
+                                    </div>
                                 </div>
                                 <div class="header__icons text-right clearfix">
                                     {%- if block.settings.customer_text_03 != blank -%}
-                                        <div class="custom-text-03" style="--color: {{ block.settings.customer_text_03_color }}; --border-color: {{ block.settings.customer_text_03_border_color }}">
-                                            {{  block.settings.customer_text_03 }}
-                                        </div>
+                                        <div class="custom-text-03" style="--color: {{ block.settings.customer_text_03_color }}; --border-color: {{ block.settings.customer_text_03_border_color }}">{{  block.settings.customer_text_03 }}</div>
                                     {%- endif -%}
                                     {% if block.settings.show_customer %}
                                         <div class="header__iconItem header__group">
@@ -102,8 +90,6 @@
     </div>
 </header>
 
-<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
-
 <script defer>
     if (window.innerWidth < 1025) {
         let addCustomTextMenuMobile = () => {
@@ -121,46 +107,6 @@
         })
     }
 </script>
-
-<script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "Organization",
-        "name": {{ shop.name | json }},
-        {% if section.settings.logo %}
-            {% assign image_size = section.settings.logo.width | append:'x' %}
-            "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
-        {% endif %}
-        "sameAs": [
-            {{ settings.social_twitter_link | json }},
-            {{ settings.social_facebook_link | json }},
-            {{ settings.social_pinterest_link | json }},
-            {{ settings.social_instagram_link | json }},
-            {{ settings.social_tumblr_link | json }},
-            {{ settings.social_snapchat_link | json }},
-            {{ settings.social_youtube_link | json }},
-            {{ settings.social_vimeo_link | json }}
-        ],
-        "url": {{ shop.url | append: page.url | json }}
-    }
-</script>
-
-{%- if request.page_type == 'index' -%}
-    {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
-    <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "WebSite",
-            "name": {{ shop.name | json }},
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": {{ potential_action_target | json }},
-                "query-input": "required name=search_term_string"
-            },
-            "url": {{ shop.url | append: page.url | json }}
-        }
-    </script>
-{%- endif -%}
 
 {% schema %}
 {
@@ -272,7 +218,7 @@
                 {
                     "type": "richtext",
                     "id": "customer_text_01",
-                    "label": "t:settings_schema.general.settings.global_checkbox.label__2",
+                    "label": "t:sections.image-banner.blocks.image.settings.content.label__16",
                     "default": "<p>Available 24/7 at <a href=\"tel:(018)%20900-6690/\">(018) 900-6690</a></p>"
                 },
                 {
@@ -288,7 +234,7 @@
                 {
                     "type": "richtext",
                     "id": "customer_text_02",
-                    "label": "t:settings_schema.general.settings.global_checkbox.label__2",
+                    "label": "t:sections.image-banner.blocks.image.settings.content.label__16",
                     "default": "<p><strong>First purchase offer: take 30% off shopwide.</strong> Code applied at checkout. Exclusion apply*</p>"
                 },
                 {
@@ -466,7 +412,7 @@
                 {
                     "type": "richtext",
                     "id": "customer_text_03",
-                    "label": "t:settings_schema.general.settings.global_checkbox.label__2",
+                    "label": "t:sections.image-banner.blocks.image.settings.content.label__16",
                     "default": "<p><a href=\"https:\/\/1.envato.market\/dokaB20\/\" target=\"_blank\" title=\"Buy Ella Theme\"><strong>GET ELLA<\/strong><\/a><\/p><p><a href=\"https:\/\/1.envato.market\/dokaB20\/\" target=\"_blank\" title=\"Buy Ella Theme\">Only $89<\/a><\/p>"
                 },
                 {

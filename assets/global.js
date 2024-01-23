@@ -94,6 +94,18 @@ const serializeForm = form => {
     return JSON.stringify(obj);
 };
 
+function throttle(fn, delay) {
+  let lastCall = 0;
+  return function (...args) {
+    const now = new Date().getTime();
+    if (now - lastCall < delay) {
+      return;
+    }
+    lastCall = now;
+    return fn(...args);
+  };
+}
+
 function fetchConfig(type = 'json') {
     return {
         method: 'POST',
@@ -296,7 +308,24 @@ Shopify.changeItem = function(variant_id, quantity, callback) {
             }
         },
         error: function(XMLHttpRequest, textStatus) {
-            Shopify.onError(XMLHttpRequest, textStatus);
+            // console.log(XMLHttpRequest.responseJSON.message);
+            if (XMLHttpRequest.responseJSON.message == 'nu există un id valid sau parametru de linie' || XMLHttpRequest.responseJSON.message == 'Required parameter missing or invalid: line or id param is required' || XMLHttpRequest.responseJSON.message == 'Parameter Missing or Invalid' || XMLHttpRequest.responseJSON.message == 'no valid id or line parameter') {
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/change.js',
+                    data:  'quantity='+quantity+'&id='+variant_id.split(':')[0],
+                    dataType: 'json',
+                    success: function(cart) {
+                        if ((typeof callback) === 'function') {
+                            callback(cart);
+                        } else {
+                            Shopify.onCartUpdate(cart);
+                        }
+                    }
+                })
+            } else {
+                Shopify.onError(XMLHttpRequest, textStatus);
+            }
         }
     };
 
@@ -317,20 +346,44 @@ Shopify.removeItem = function(variant_id, callback) {
             }
         },
         error: function(XMLHttpRequest, textStatus) {
-            Shopify.onError(XMLHttpRequest, textStatus);
+            // console.log(XMLHttpRequest.responseJSON.message);
+            if (XMLHttpRequest.responseJSON.message == 'nu există un id valid sau parametru de linie' || XMLHttpRequest.responseJSON.message == 'Required parameter missing or invalid: line or id param is required' || XMLHttpRequest.responseJSON.message == 'Parameter Missing or Invalid' || XMLHttpRequest.responseJSON.message == 'no valid id or line parameter') {
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart/change.js',
+                    data:  'quantity=0&id='+variant_id.split(':')[0],
+                    dataType: 'json',
+                    success: function(cart) {
+                        if ((typeof callback) === 'function') {
+                            callback(cart);
+                        } else {
+                            Shopify.onCartUpdate(cart);
+                        }
+                    }
+                })
+            } else {
+                Shopify.onError(XMLHttpRequest, textStatus);
+            }
         }
     };
 
     $.ajax(params);
 }
 
-Shopify.addItem = function(variant_id, quantity, callback, input = null) {
+Shopify.addItem = function(variant_id, quantity, $target, callback, input = null) {
     var quantity = quantity || 1;
-    var target = document.querySelector('[data-quickshop] .is-loading') || document.querySelector('[data-btn-addtocart].is-loading');
+    let dataForm = 'quantity=' + quantity + '&id=' + variant_id;
+
+    if ($target.closest('form')) {
+        const $thisForm = $target.closest('form');
+        const $properties = $thisForm.find('[name^="properties"]');
+        if ($properties.length) $properties.each((index, element) => {dataForm = `${dataForm}&${$(element).attr('name')}=${$(element).val()}`})
+    }
+
     var params = {
         type: 'POST',
         url: '/cart/add.js',
-        data: 'quantity=' + quantity + '&id=' + variant_id,
+        data: dataForm,
         dataType: 'json',
         success: function(line_item) {
             if ((typeof callback) === 'function') {
@@ -515,6 +568,7 @@ class UpdateQuantity extends HTMLElement {
     constructor() {
         super();
         this.input = this.querySelector('input');
+        this.changeCart = false;
         this.changeEvent = new Event('change', { bubbles: true })
         this.querySelectorAll('.btn-quantity').forEach(
             (button) => button.addEventListener('click', this.onButtonClick.bind(this))
@@ -523,42 +577,40 @@ class UpdateQuantity extends HTMLElement {
     
     onButtonClick(event) {
         event.preventDefault();
-        let el_input = event.target.parentElement.querySelector('.quantity');
+        const $target = event.target
+        let el_input = $target.parentElement.querySelector('.quantity');
         const value = Number(el_input.value);
         const inStockNumber = Number(el_input.dataset.inventoryQuantity);
-        if (event.target.classList.contains('plus')) {
-            var newVal = value + 1;
-        } else {
-            var newVal = value - 1;
-        }
+        const buttonAdd = $target.closest('.product-form')?.querySelector('[data-btn-addtocart]');
+        let newVal, checkAvailabel = false;
 
-        if (newVal < 0 ) {
-            var newVal = 1
-        }
+        const policyArray = document.body.matches('.quickshop-popup-show') ? window[`quick_shop_policy_array_${this.input.dataset.product}`] : window[`cart_selling_array_${this.dataset.product}`],
+            currentId = document.body.matches('.quickshop-popup-show') ? this.closest('.productView-options').querySelector('[name="id"]').value : this.input.dataset.cartQuantityId,
+            thisVariantStatus = policyArray[currentId];
 
-        if (newVal <= inStockNumber) {
-            el_input.value = newVal;
-            this.input.dispatchEvent(this.changeEvent);
-        } else if (isNaN(inStockNumber)) {
-            el_input.value = newVal;
-            this.input.dispatchEvent(this.changeEvent);
-        }  else {
-            if (this.quantityCheckedToBeContinue()) {
-              el_input.value = newVal;
-              this.input.dispatchEvent(this.changeEvent);
-              return;
-            }
-          
+        buttonAdd?.dataset.available == 'false' || buttonAdd?.dataset.available == undefined ? checkAvailabel = true : checkAvailabel = false;
+
+        if ($target.matches('.plus')) newVal = value + 1;
+        else if ($target.matches('.minus')) newVal = value - 1;
+        else newVal = value;
+
+        if (newVal < 0 ) newVal = 1;
+
+        if (newVal > inStockNumber && checkAvailabel && thisVariantStatus == 'deny') {
             const message = getInputMessage(inStockNumber);
             showWarning(message, warningTime);
-            var newVal = inStockNumber
-            el_input.value = newVal;
+            newVal = inStockNumber
         }
+
+        el_input.value = newVal;
+
+        if (typeof this.changeCart  == 'number') {clearTimeout(this.changeCart)};
+        this.changeCart = setTimeout(() => {if ($target.matches('.btn-quantity')) this.input.dispatchEvent(this.changeEvent)}, 350);
     }
 
     quantityCheckedToBeContinue() {
         const sellingArray = window[`cart_selling_array_${this.dataset.product}`];
-        return sellingArray[this.querySelector('[name="quantity"]').dataset.cartQuantityId] === 'continue';
+        return sellingArray == undefined ? false : sellingArray[this.querySelector('[name="quantity"]').dataset.cartQuantityId] === 'continue'
     }
 }
 
@@ -588,7 +640,7 @@ class UpdateQuantityQuickShop extends HTMLElement {
 
         if (newVal <= 0) newVal = 1;
 
-        if (newVal > inStockNumber && !buttonAdd.matches('.button--preorder')) {
+        if (newVal > inStockNumber && !buttonAdd.matches('.button--pre-untrack')) {
             const message = getInputMessage(inStockNumber);
             showWarning(message, warningTime);
             newVal = inStockNumber
@@ -701,7 +753,7 @@ window.addEventListener('load', () => {
     customElements.define('cart-update-quantity', UpdateQuantity);
     customElements.define('quickshop-update-quantity', UpdateQuantityQuickShop);
     customElements.define('product-scroller', ProductScroller);
-    customElements.define('image-to-flip', ImageToFlip);
+    // customElements.define('image-to-flip', ImageToFlip);
 })
 
 function showWarning(content, time = null) {
@@ -753,16 +805,118 @@ class FadeInComponent extends HTMLElement {
 
 window.addEventListener('load', () => {
     customElements.define('fade-in-component', FadeInComponent);
+    this.loadScrolling();
 })
-// bss fix
-let first = true;
-document.addEventListener("bss_b2b_doneCheckCp", (function() {
-  if (first) {
-    first = false;
-    $(".quickview-icon").on("click", () => {
-      setTimeout(() => {
-        BSS_B2B.cp.changeProductPrice(JSON.parse($('#bss-b2b-store-data').html()), "[bss-b2b-variant-id]", false, false);
-      }, 1200)
-    })
-  }
-}))
+
+window.onscroll = () => {this.loadScrolling()};
+
+function loadScrolling() {
+    document.querySelectorAll('[data-scrolling]').forEach(element => {element.dataset.scrolling == 'vertical' ? this.scrollVertical(element) : this.scrollHorizontal(element)})
+}
+
+function scrollVertical(element) {
+    const $thisItem = element.closest('.special-banner__item') || element,
+        top = $thisItem.getBoundingClientRect().top,
+        height = $thisItem.getBoundingClientRect().height,
+        wdHeight = window.innerHeight,
+        coefficient = element.scrollHeight/height,
+        redundant = height >= wdHeight ? 0 : (wdHeight - height)/2;
+
+    if (top - redundant < 0 && top > height*-1) this.scrollTop(element, (top*-1 + redundant)*coefficient)
+    else if (top - redundant >= 0) this.scrollTop(element, 0)
+    else this.scrollTop(element, element.scrollHeight)
+}
+
+function scrollTop(element, scope) {
+    element.scrollTo({top: scope, behavior: "smooth"})
+}
+
+function scrollHorizontal(element) {
+    const $thisFirst = element.querySelector('.scrolling-text__list--1'),
+        $thisSecond = element.querySelector('.scrolling-text__list--2');
+
+    if (!$thisFirst) return;
+  
+    const top = element.getBoundingClientRect().top,
+        height = element.getBoundingClientRect().height,
+        wdHeight = window.innerHeight,
+        scrollWidth = $thisFirst.scrollWidth > window.innerWidth ? $thisFirst.scrollWidth - window.innerWidth : 0,
+        contentHeight = $thisFirst.getBoundingClientRect().height*2,
+        redundant = height >= wdHeight ? 0 : (wdHeight - height)/2,
+        coefficient = scrollWidth/(height/2 + redundant - contentHeight);
+    
+    let scope = (top*-1 + redundant)*coefficient,
+        scope2 = (height/2 - contentHeight + redundant)*coefficient - scope;
+    
+    if (top - redundant < 0 && top - contentHeight > height*-1/2) {scope = scope*-1; scope2 = scope2*-1}
+    else if (top - redundant >= 0) {scope = 0; scope2 = scrollWidth*-1}
+    else {scope = scrollWidth*-1; scope2 = 0}
+    $thisFirst.scrollWidth <= window.innerWidth ? $thisSecond.style.justifyContent = 'flex-end' : this.translateX($thisFirst, $thisSecond, scope, scope2);
+}
+
+function translateX($thisFirst, $thisSecond, scope, scope2) {
+    $thisFirst.style.transform = `translateX(${scope}px)`;
+    $thisSecond.style.transform = `translateX(${(scope2)}px)`;
+}
+
+class SmoothScrollMenu {
+    constructor(selector) {
+        this.menuItems = document.querySelectorAll(selector);
+        this.attachEvents();
+        this.hideMenuItemsWithoutSection();
+    }
+
+    attachEvents() {
+        this.menuItems.forEach(item => {
+            const anchor = item.querySelector('a');
+            if (anchor && anchor.getAttribute('href') && anchor.getAttribute('href') !== "#") {
+                anchor.addEventListener('click', event => this.handleMenuItemClick(event, anchor));
+            }
+        });
+    }
+
+    handleMenuItemClick(event, anchor) {
+        event.preventDefault();
+
+        var targetHref = anchor.getAttribute('href');
+        var shouldScroll = true;
+        const location = window.location.pathname + window.location.hash;
+
+        if (targetHref.includes('/') && location !== targetHref) {
+            window.location.href = targetHref;
+            shouldScroll = false;
+        }
+
+        if (shouldScroll) {
+            var targetElement = document.getElementById(anchor.getAttribute('href').split('#')[1]);
+            if (targetElement) {
+                this.scrollToSection(targetElement);
+            }
+        }
+    }
+
+    scrollToSection(element) {
+        this.smoothScrollTo(element);
+    }
+
+    smoothScrollTo(element) {
+        window.scrollTo({
+            behavior: 'smooth',
+            top: element.offsetTop
+        });
+    }
+
+    hideMenuItemsWithoutSection() {
+        this.menuItems.forEach(item => {
+            const anchor = item.querySelector('a');
+            const hash = anchor.getAttribute('href').split('#')[1];
+            if (hash !== undefined && hash !== '' && !document.getElementById(hash)) {
+                item.style.display = 'none';
+            }
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    new SmoothScrollMenu('.header__inline-menu .menu-lv-1');
+});

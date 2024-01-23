@@ -2,7 +2,6 @@
   {%- liquid
       assign footer_top_bg = section.settings.footer_top_bg
       assign footer_top_bg_gradient = section.settings.footer_top_bg_gradient
-
       assign footer_top_bg = section.settings.footer_top_bg
       assign footer_top_color = section.settings.footer_top_color_link
       assign footer_top_color_hover = section.settings.footer_top_color_link_hover
@@ -13,35 +12,27 @@
       assign footer_top_bg_repeat =  section.settings.footer_top_bg_repeat
       assign footer_top_bg_attachment =  section.settings.footer_top_bg_attachment
       assign footer_top_bg_size =  section.settings.footer_top_bg_size
-
+      assign footer_border_item =  section.settings.footer_border_item
       assign footer_bottom_bg = section.settings.footer_bottom_bg
       assign footer_bottom_bg_gradient = section.settings.footer_bottom_bg_gradient
       assign footer_bottom_color = section.settings.footer_bottom_color
-
       assign pdtop_footerTop = section.settings.pdtop_footer_top
       assign pdbottom_footerTop = section.settings.pdbottom_footer_top
       assign pdtop_footerBottom = section.settings.pdtop_footer_bottom
       assign pdbottom_footerBottom = section.settings.pdbottom_footer_bottom
-
       assign column_reverse = section.settings.column_reverse
-
       assign payment_position = section.settings.payment_position | plus: 0
-
-
       assign bg_color_promotion = section.settings.bg_color_promotion
       assign color_content_text = section.settings.color_content_text
-
       assign button_color_register = section.settings.button_color_register
       assign button_color_border_register = section.settings.button_color_border_register
       assign button_color_bg_register = section.settings.button_color_bg_register
       assign button_color_bg_gradient_register = section.settings.button_color_bg_gradient_register
-
       assign button_color_hover_register = section.settings.button_color_hover_register
       assign button_color_border_hover_register = section.settings.button_color_border_hover_register
       assign button_color_bg_hover_register = section.settings.button_color_bg_hover_register
       assign button_color_bg_gradient_hover_register = section.settings.button_color_bg_gradient_hover_register
   -%}
-
   .footer {
       {%- if section.settings.type_footer_heading == 'font_1' -%}
           --footer-heading-font-family: var(--font-family-1);
@@ -53,7 +44,7 @@
           --footer-link-font-family: var(--font-family-1);
       {%- else -%}
           --footer-link-font-family: var(--font-family-2);
-      {%- endif -%}--footer-link-font-size : {{ section.settings.type_footer_link_font_size | append: 'px' }};--footer-link-font-weight : {{ section.settings.type_footer_link_font_weight }};--footer-link-line-height : {{ section.settings.type_footer_link_line_height | append: 'px' }};--footer-link-letter-spacing : {{ section.settings.type_footer_link_letter_spacing }};--footer-link-text-transform : {{ section.settings.type_footer_link_text_transform }}}
+      {%- endif -%}--footer-link-font-size : {{ section.settings.type_footer_link_font_size | append: 'px' }};--footer-link-font-weight : {{ section.settings.type_footer_link_font_weight }};--footer-link-line-height : {{ section.settings.type_footer_link_line_height | append: 'px' }};--footer-link-letter-spacing : {{ section.settings.type_footer_link_letter_spacing }};--footer-link-text-transform : {{ section.settings.type_footer_link_text_transform }};--footer-heading-font-style:{{ section.settings.type_footer_heading_font_style }}}
   .footer-block__item {margin-bottom: var(--block-margin-bottom)}
   .footer__content-top {padding-top: {{ pdtop_footerTop | append: 'px' }};padding-bottom: {{ pdbottom_footerTop | append: 'px' }};{%- if section.settings.enable_border_footer_top -%}border-top: 1px solid {{ section.settings.border_footer_top_color }}{%- endif -%}}
   .footer-1 .list-social__item {margin-bottom: 15px}
@@ -76,6 +67,9 @@
   {%- if footer_top_bg_img != blank and section.settings.show_footer_top_bg_img -%}
   .footer__content-top.footer__content-bg{background: url({{ footer_top_bg_img }});background-position: {{ footer_top_bg_position_x }} {{ footer_top_bg_position_y }};background-repeat: {{ footer_top_bg_repeat }};background-attachment: unset;background-size: {{ footer_top_bg_size }}}
   {%- endif -%}
+  {%- if footer_layout == 1 -%}
+    .footer-block__newsletter .newsletter-form__button {box-shadow: none;}
+  {%- endif-%}
   {%- if footer_layout == 2 -%}
     {%- if block_newsletter.settings.enable_border_bottom -%}
         .footer-2 .footer-block__newsletter {
@@ -138,6 +132,10 @@
         .footer-block__mobile .footer-block__heading:before,.footer-block__mobile .footer-block__heading:after{background-color: {{ footer_top_title_color }}}
       {%- endif -%}
     {%- endif -%}
+
+    .footer-1 .footer__content-top {
+      padding-bottom: {% if pdbottom_footerTop > 50 %}{{ pdbottom_footerTop | minus: 20 | append: 'px' }}{% else %}{{ pdbottom_footerTop | append: 'px'}}{% endif %}
+    }
   }
   @media (max-width: 550px){
       {%- if footer_top_bg != 'rgba(0,0,0,0)' and footer_top_bg != blank -%}
@@ -168,6 +166,7 @@
           background-color: {{ button_color_bg_hover_register }};
       {%- endif -%}
     }
+    .footer__content-top.enable_border_column .footer-block__item:after {background: {{ footer_border_item }}}
   }
   @media (min-width: 1800px){
       {%- if social_position == 5 -%}

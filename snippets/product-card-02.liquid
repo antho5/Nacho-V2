@@ -59,6 +59,8 @@
     assign show_wishlist = false
     if settings.show_wishlist_card and settings.show_wishlist
         assign show_wishlist = true
+    elsif template.suffix == 'ajax_wishlist_card'
+        assign show_wishlist = true
     endif
 
     assign show_compare = false
@@ -223,7 +225,8 @@
                 {%- endunless -%}
                     {% render 'product-swatch',
                         product: product_card_product,
-                        index: index
+                        index: index,
+                        variant_selected: variant_selected
                     %}
                 {%- unless settings.show_swatch -%}
                 </div>

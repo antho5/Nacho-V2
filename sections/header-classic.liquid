@@ -1,5 +1,4 @@
 {{ 'component-header-classic.css' | asset_url | stylesheet_tag }}
-
 <header class="header header-classic" style="--spacing-l-r: {{ section.settings.padding_full_width }}px; --bg-color: {% if section.settings.gradient != blank %}{{ section.settings.gradient }}{% else %}{{ section.settings.background }}{% endif %}; --p-top: {{ section.settings.padding_top }}px; --p-bottom: {{ section.settings.padding_bottom }}px">
     <div class="container container-{{ section.settings.container }}">
         <div class="header-classic__content header-classic__content--size-{{ section.blocks.size }}">
@@ -8,7 +7,7 @@
                     {%- case block.type -%}
                         {%- when 'logo' -%}
                             <div class="header__logo" style="--logo-width: {% if block.settings.logo == blank %}auto; --logo-svg-width: {% endif %}{{ block.settings.logo_width }}px; --font-size: {{ block.settings.logo_font_size }}px; --font-weight: {{ block.settings.logo_font_weight }}; --color: {{ block.settings.logo_color }}">
-                                <{% if request.page_type == 'index' %}h1{% else %}div{% endif %} class="header__heading">
+                                <div class="header__heading">
                                     <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
                                         {%- if block.settings.logo != blank -%}
                                             {%- liquid 
@@ -17,7 +16,6 @@
                                                 assign logo_height = logo_width | divided_by: logo.aspect_ratio | round
                                                 assign logo_alt = logo.alt | default: shop.name | escape
                                             -%}
-                                            
                                             {{ logo | image_url: width: 300 | image_tag:
                                                 class: 'header__heading-logo motion-reduce',
                                                 widths: '50, 100, 150, 200, 250, 300, 400, 500',
@@ -29,23 +27,21 @@
                                             <span class="h2 {{ block.settings.logo_text_transform }}">{% if block.settings.logo_text != blank %}{{ block.settings.logo_text }}{% else %}{{ shop.name }}{% endif %}</span>
                                         {%- endif -%}
                                     </a>
-                                </{% if request.page_type == 'index' %}h1{% else %}div{% endif %}>
+                                </div>
                             </div>
                         {%- when 'service' -%}
                             <div class="header-top-right-group header-language_currency" style="--text-color: {{ block.settings.text_color }}">
-                                {% if block.settings.customer_service_text != blank %}
-                                    <div class="customer-service-text">
-                                        {{ block.settings.customer_service_text }}
-                                    </div>
-                                {% endif %}
+                                {%- if block.settings.customer_service_text != blank -%}
+                                    <div class="customer-service-text">{{ block.settings.customer_service_text }}</div>
+                                {%- endif -%}
                                 {%- if block.settings.show_language_currency -%}
                                     <div class="top-language-currency" style="--text-color: {{ block.settings.language_currency_color }}">
-                                        {% if settings.enable_multilang_shopify %}
+                                        {%- if settings.enable_multilang_shopify -%}
                                             {% render 'halo-top-language', icon: 'default' %}
-                                        {% endif %}
-                                        {% if settings.enable_currencies %}
+                                        {%- endif -%}
+                                        {%- if settings.enable_currencies -%}
                                             {% render 'halo-top-currency', icon: 'default' %}
-                                        {% endif %}
+                                        {%- endif -%}
                                     </div>
                                 {%- endif -%}
                                 {% if block.settings.show_search %}
@@ -55,45 +51,19 @@
                                             {%- endif -%}
                                             <details class="search_details">
                                                 <summary class="header__search-full" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
-                                                    <button type="button" class="header-search-close" aria-label="{{ 'general.common.close' | t }}">
-                                                        {% render 'icon-close' %}
-                                                    </button>
+                                                    <button type="button" class="header-search-close" aria-label="{{ 'general.common.close' | t }}">{% render 'icon-close' %}</button>
                                                     <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
                                                         <div class="field">
-                                                            <input 
-                                                                class="search__input field__input form-input-placeholder" 
-                                                                id="Search-In-Modal" 
-                                                                type="search" 
-                                                                name="q" 
-                                                                value="{{ search.terms | escape }}" 
-                                                                placeholder="{{ 'general.search.search' | t }}" 
-                                                                autocomplete="off"
-                                                                {%- if settings.show_quick_search -%}
-                                                                    role="combobox"
-                                                                    aria-expanded="false"
-                                                                    aria-owns="predictive-search-results-list"
-                                                                    aria-controls="predictive-search-results-list"
-                                                                    aria-haspopup="listbox"
-                                                                    aria-autocomplete="list"
-                                                                    autocorrect="off"
-                                                                    autocomplete="off"
-                                                                    autocapitalize="off"
-                                                                    spellcheck="false"
-                                                                {%- endif -%}
-                                                            >   
+                                                            <input class="search__input field__input form-input-placeholder" id="Search-In-Modal-Classic" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}" autocomplete="off" {%- if settings.show_quick_search -%}role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false"{%- endif -%}>   
                                                             <input type="hidden" name="options[prefix]" value="last">
                                                             <input type="hidden" name="type" value="product">
-                                                            <label class="field__label hiddenLabels" for="Search-In-Modal">
-                                                                {{ 'general.search.search' | t }}
-                                                            </label>
-                                                            <button class="button search__button field__button focus-inset" aria-label="{{ 'general.search.search' | t }}">
-                                                                {% render 'icon-search' %}
-                                                            </button>
+                                                            <label class="field__label hiddenLabels" for="Search-In-Modal-Classic">{{ 'general.search.search' | t }}</label>
+                                                            <button class="button search__button field__button focus-inset" aria-label="{{ 'general.search.search' | t }}">{% render 'icon-search' %}</button>
                                                         </div>
-                                                        {%- if settings.show_search_trending or settings.show_search_product -%}
-                                                            {%- render 'quick-searching-trending-products' -%}
-                                                        {%- endif -%}
                                                         {%- if settings.show_quick_search -%}
+                                                            {%- if settings.show_search_trending or settings.show_search_product -%}
+                                                                {%- render 'quick-searching-trending-products' -%}
+                                                            {%- endif -%}
                                                             {%- render 'predictive-search-results' -%}
                                                         {%- endif -%}
                                                     </form>
@@ -111,18 +81,15 @@
                                 {% endif %}
                             </div>
                         {%- when 'text' -%}
-                            {% if block.settings.free_shipping_text != blank %}
-                                <div class="free-shipping-text" style="--text-color: {{ block.settings.text_color }}">
-                                    {{ block.settings.free_shipping_text }}
-                                </div>
-                            {% endif %}
+                            {%- if block.settings.free_shipping_text != blank -%}
+                                <div class="free-shipping-text" style="--text-color: {{ block.settings.text_color }}">{{ block.settings.free_shipping_text }}</div>
+                            {%- endif -%}
                         {%- when 'group' -%}
-                            {% if block.settings.show_cart or block.settings.show_wishlist or block.settings.show_customer %}
+                            {%- if block.settings.show_cart or block.settings.show_wishlist or block.settings.show_customer -%}
                                 <div class="header__iconItem header__group">
                                     {%- if block.settings.show_cart -%}
                                         <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset cart-icon-bubble" {% if settings.show_quick_cart %} data-cart-sidebar{% endif %} style="--text-color: {{ block.settings.cart_color }}; --item-color: {{ block.settings.cart_color_item }}; --bg-item-color: {{ block.settings.cart_bg_item }}">
-                                            {% render 'icon-cart-02' %}
-                                            <span class="cart-text">{{ 'general.cart.shopping_cart' | t }}</span>
+                                            {% render 'icon-cart-02' %} <span class="cart-text">{{ 'general.cart.shopping_cart' | t }}</span>
                                             <div class="cart-count-bubble">
                                                 {%- if cart.item_count < 100 -%}
                                                     <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
@@ -132,91 +99,36 @@
                                         </a>
                                     {%- endif -%}
                                     {%- if settings.show_wishlist and block.settings.show_wishlist -%}
-                                        <a href="{{ pages['wish-list'].url }}" class="header__icon header__icon--wishlist link link--text focus-inset" style="--text-color: {{ block.settings.wishlist_color }}">
-                                            {% render 'icon-heart-2' %}
-                                            <span class="wishlist-text">
-                                                {{ 'wishlist.general.title' | t }}
-                                            </span>
-                                        </a>
+                                        <a href="{{ pages['wish-list'].url }}" class="header__icon header__icon--wishlist link link--text focus-inset" style="--text-color: {{ block.settings.wishlist_color }}">{% render 'icon-heart-2' %} <span class="wishlist-text">{{ 'wishlist.general.title' | t }}</span></a>
                                     {%- endif -%}
                                     {%- if shop.customer_accounts_enabled and block.settings.show_customer -%}
                                         <div class="customer-links" style="--text-color: {{ block.settings.customer_color }}">
-                                            {% if customer %}
-                                                <a class="header__link--account" id="customer_logout_link" href="{{ routes.account_logout_url }}">
-                                                    {{ 'customer.log_out' | t }}
-                                                </a>
+                                            {%- if customer -%}
+                                                <a class="header__link--account" id="customer_logout_link" href="{{ routes.account_logout_url }}">{{ 'customer.log_out' | t }}</a>
                                                 <span> / </span>
-                                                <a class="header__link--account" href="{{ routes.account_url }}">
-                                                    {{ 'customer.account.my_account' | t }}
-                                                </a>
-                                            {% else %}
+                                                <a class="header__link--account" href="{{ routes.account_url }}">{{ 'customer.account.my_account' | t }}</a>
+                                            {%- else -%}
                                                 {% if routes.account_login_url contains '/account/login' %}
                                                     {% assign is_contained = true %}
                                                 {% else %}
                                                     {% assign is_contained = false %}
                                                 {% endif %}
-                                                <a class="header__link--account customer_login_link" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" {% if is_contained %}data-open-auth-sidebar{% endif %}>
-                                                    {{ 'customer.sign_in' | t }}
-                                                </a>
-                                                {% if is_contained %}
-                                                    <span class="or-text">
-                                                        {{ 'customer.or' | t }}
-                                                    </span>
-                                                    <a class="header__link--account customer_register_link" href="{{ routes.account_register_url }}">
-                                                        {{ 'customer.create_account' | t }}
-                                                    </a>
-                                                {% endif %}
-                                            {% endif %}
+                                                <a class="header__link--account customer_login_link" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" {% if is_contained %}data-open-auth-sidebar{% endif %}>{{ 'customer.sign_in' | t }}</a>
+                                                {%- if is_contained -%}
+                                                    <span class="or-text"> {{ 'customer.or' | t }}</span>
+                                                    <a class="header__link--account customer_register_link" href="{{ routes.account_register_url }}">{{ 'customer.create_account' | t }}</a>
+                                                {%- endif -%}
+                                            {%- endif -%}
                                         </div>
                                     {%- endif -%}
                                 </div>
-                            {% endif %}
+                            {%- endif -%}
                     {%- endcase -%}
                 </div>
             {%- endfor -%}
         </div>
     </div>
 </header>
-
-<script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "Organization",
-        "name": {{ shop.name | json }},
-        {% if section.settings.logo %}
-            {% assign image_size = section.settings.logo.width | append:'x' %}
-            "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
-        {% endif %}
-        "sameAs": [
-            {{ settings.social_twitter_link | json }},
-            {{ settings.social_facebook_link | json }},
-            {{ settings.social_pinterest_link | json }},
-            {{ settings.social_instagram_link | json }},
-            {{ settings.social_tumblr_link | json }},
-            {{ settings.social_snapchat_link | json }},
-            {{ settings.social_youtube_link | json }},
-            {{ settings.social_vimeo_link | json }}
-        ],
-        "url": {{ shop.url | append: page.url | json }}
-    }
-</script>
-
-{%- if request.page_type == 'index' -%}
-    {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
-    <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "WebSite",
-            "name": {{ shop.name | json }},
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": {{ potential_action_target | json }},
-                "query-input": "required name=search_term_string"
-            },
-            "url": {{ shop.url | append: page.url | json }}
-        }
-    </script>
-{%- endif -%}
 
 {% schema %}
 {
@@ -508,7 +420,7 @@
         },
         {
             "type": "text",
-            "name": "t:settings_schema.general.settings.global_checkbox.label__2",
+            "name": "t:sections.image-banner.blocks.image.settings.content.label__16",
             "limit": 1,
             "settings": [
                 {

@@ -7,6 +7,4 @@
     assign word_number = 44
     endif
 -%}
-<div class="card-summary {{ class }}">
-    {{ desc | truncatewords: word_number }}
-</div>
+<div class="card-summary {{ class }}">{{ desc | truncatewords: word_number }}</div>

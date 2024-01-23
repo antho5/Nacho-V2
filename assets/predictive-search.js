@@ -10,8 +10,12 @@ class PredictiveSearch extends HTMLElement {
     this.searchDetails = this.querySelector('.search_details');
     this.predictiveSearch = this.querySelector('predictive-search')
     this.isOpen = false;
+    this.quickSearchTrending = this.querySelectorAll('.quickSearchTrending .link');
 
     this.setupEventListeners();
+    this.quickSearchTrending.forEach(element => {
+      element.addEventListener('click', this.quickSearchTrendingClick.bind(this));
+    });
   }
   
   setupEventListeners() {
@@ -256,6 +260,7 @@ class PredictiveSearch extends HTMLElement {
     document.querySelector('body').classList.remove('sticky-search-open');
     document.querySelector('body').classList.remove('sticky-search-menu-open');
     this.closest('[class*="section-header-"]')?.classList.remove('sticky-search-menu-open')
+    this.closest('[class*="section-header-"]')?.classList.remove('sticky-search-menu-custom-open')
   }
 
   updateViewAllLink(searchTerm) {
@@ -289,6 +294,10 @@ class PredictiveSearch extends HTMLElement {
         this.close();
         throw error;
       });
+  }
+
+  quickSearchTrendingClick(event) {
+    window.location = event.currentTarget.getAttribute('href');
   }
 }
 

@@ -9,18 +9,13 @@
                     {%- case block.type -%}
                         {%-  when 'menu' -%}
                             <div class="header-mobile--icon item__mobile--hamburger" style="--i-color: {{ block.settings.color }}">
-                                <button type="button" class="mobileMenu-toggle" data-mobile-menu aria-label="menu">
-                                    <span class="mobileMenu-toggle__Icon"></span>
-                                </button>
+                                <button type="button" class="mobileMenu-toggle" data-mobile-menu aria-label="menu"><span class="mobileMenu-toggle__Icon"></span></button>
                             </div>
                         {%-  when 'search' -%}
                             <details-modal class="header__iconItem header__search" style="--i-color: {{ block.settings.color }}">
                                 <details>
                                     <summary class="header__icon header__icon--search header__icon--summary link link--text focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}" data-search-mobile>
-                                        <span>
-                                            {% render 'icon-search', class: 'modal__toggle-open icon icon-search w-24 h-24' %}
-                                            {% render 'icon-close', class: 'modal__toggle-close icon icon-close w-24 h-24' %}
-                                        </span>
+                                        <span>{% render 'icon-search', class: 'modal__toggle-open icon icon-search w-24 h-24' %}{% render 'icon-close', class: 'modal__toggle-close icon icon-close w-24 h-24' %}</span>
                                     </summary>
                                 </details>
                             </details-modal>
@@ -52,7 +47,7 @@
                                                 endif
                                             -%}
             
-                                            <a href="{{ url }}" class="{{ class }} header__heading-logo 1">
+                                            <a href="{{ url }}" class="{{ class }} header__heading-logo 1" style="--width-logo-mb: {{ block.settings.logo_width_mobile | append: 'px'}};">
                                                 {%- if block.settings.logo != blank -%}
                                                     {%- assign logo = block.settings.logo -%}
                                                     {%- assign logo_mb = block.settings.logo_mobile -%}
@@ -61,10 +56,10 @@
                                                     {%- assign logo_width_retina = logo_width | times: 2 | append: 'x'  -%}
                                                     {%- assign logo_height = block.settings.logo_width | divided_by: logo.aspect_ratio | round -%}
                                                     <img {% if logo_mb != blank %}class="logo-m-none"{% endif %} srcset="{{ logo | img_url: logo_width_img }}, {{ logo | img_url: logo_width_retina }} 2x"
-                                                        src="{{ logo | img_url: logo_width_img }}" loading="lazy" width="{{ logo_width }}" height="{{ logo_height }}" alt="{{ logo.alt | default: shop.name | escape }}" class="header__heading-logo" style="--width-logo-mb: {{ block.settings.logo_width_mobile | append: 'px'}};">     
+                                                        src="{{ logo | img_url: logo_width_img }}" loading="lazy" width="{{ logo_width }}" height="{{ logo_height }}" alt="{{ logo.alt | default: shop.name | escape }}" class="header__heading-logo">     
                                                     {% if logo_mb != blank %}
                                                     <img class="logo-d-none" srcset="{{ logo_mb | img_url: logo_width_img }}, {{ logo | img_url: logo_width_retina }} 2x"
-                                                            src="{{ image_mb | img_url: logo_width_img }}" loading="lazy" width="{{ logo_width }}" height="{{ logo_height }}" alt="{{ logo_mb.alt | default: shop.name | escape }}" class="header__heading-logo" style="--width-logo-mb: {{ block.settings.logo_width_mobile | append: 'px'}};">
+                                                            src="{{ image_mb | img_url: logo_width_img }}" loading="lazy" width="{{ logo_width }}" height="{{ logo_height }}" alt="{{ logo_mb.alt | default: shop.name | escape }}" class="header__heading-logo">
                                                     {% endif %}
                                                 {%- else -%}
                                                     <span class="h2 {{ block.settings.logo_text_transform }}">{% if block.settings.logo_text != blank %}{{ block.settings.logo_text }}{% else %}{{ shop.name }}{% endif %}</span>
@@ -73,21 +68,21 @@
                                         {%- endfor -%}
                                     </div>
                                 {% else %}
-                                    <a href="{{ routes.root_url }}" class="header__heading-link focus-inset 2">
+                                    <a href="{{ routes.root_url }}" class="header__heading-link focus-inset 2" data-logo-width="{{ block.settings.logo_width_mobile }}" style="--width-logo-mb: {{ block.settings.logo_width_mobile | append: 'px'}};">
                                         {%- if block.settings.logo_mobile != blank -%}
                                             {%- assign logo = block.settings.logo_mobile -%}
                                             {%- assign logo_width = block.settings.logo_width_mobile -%}
                                             {%- assign logo_width_img = logo_width | append: 'x' -%}
                                             {%- assign logo_width_retina = logo_width | times: 2 | append: 'x'  -%}
                                             {%- assign logo_height = block.settings.logo_width_mobile | divided_by: logo.aspect_ratio | round -%}
-                                            <img srcset="{{ logo | img_url: logo_width_img }}, {{ logo | img_url: logo_width_retina }} 2x" src="{{ logo | img_url: logo_width_img }}" loading="lazy" width="{{ logo_width }}" height="{{ logo_height }}" class="header__heading-logo" alt="{{ logo.alt | default: shop.name | escape }}" style="--width-logo-mb: {{ block.settings.logo_width_mobile | append: 'px'}};">
+                                            <img srcset="{{ logo | img_url: logo_width_img }}, {{ logo | img_url: logo_width_retina }} 2x" src="{{ logo | img_url: logo_width_img }}" loading="lazy" width="{{ logo_width }}" height="{{ logo_height }}" class="header__heading-logo" alt="{{ logo.alt | default: shop.name | escape }}">
                                         {%- elsif block.settings.logo != blank -%}
                                             {%- assign logo = block.settings.logo -%}
                                             {%- assign logo_width = block.settings.logo_width_mobile -%}
                                             {%- assign logo_width_img = logo_width | append: 'x' -%}
                                             {%- assign logo_width_retina = logo_width | times: 2 | append: 'x' -%}
                                             {%- assign logo_height = block.settings.logo_width_mobile | divided_by: logo.aspect_ratio | round -%}
-                                            <img srcset="{{ logo | img_url: logo_width_img }}, {{ logo | img_url: logo_width_retina }} 2x" src="{{ logo | img_url: logo_width_img }}" loading="lazy" width="{{ logo_width }}" height="{{ logo_height }}" class="header__heading-logo" alt="{{ logo.alt | default: shop.name | escape }}" style="--width-logo-mb: {{ block.settings.logo_width_mobile | append: 'px'}};">
+                                            <img srcset="{{ logo | img_url: logo_width_img }}, {{ logo | img_url: logo_width_retina }} 2x" src="{{ logo | img_url: logo_width_img }}" loading="lazy" width="{{ logo_width }}" height="{{ logo_height }}" class="header__heading-logo" alt="{{ logo.alt | default: shop.name | escape }}">
                                         {%- else -%}
                                             <span class="h2 {{ block.settings.logo_text_transform }}">{% if block.settings.logo_text != blank %}{{ block.settings.logo_text }}{% else %}{{ shop.name }}{% endif %}</span>
                                         {%- endif -%}
@@ -102,12 +97,14 @@
                                 {% else %}
                                     {% assign is_contained = false %}
                                 {% endif %}
-                                <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account link link--text focus-inset"{% if is_contained %} data-open-auth-sidebar{% endif %}>
+                                <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account{% if  block.settings.icon == '2' %} header__icon--account-2{% endif %} link link--text focus-inset"{% if is_contained %} data-open-auth-sidebar{% endif %}>
                                     {%- case block.settings.icon -%}
                                         {%-  when '1' -%}
-                                            {% render 'icon-account' %}
-                                        {%-  when '2' -%}
                                             {% render 'icon-account-2' %}
+                                        {%-  when '2' -%}
+                                            {% render 'icon-account-3' %}
+                                        {%-  when '3' -%}
+                                            {% render 'icon-account', class: 'user-circle' %}
                                     {%- endcase -%}
                                     <span class="visually-hidden">
                                         {%- liquid
@@ -123,16 +120,20 @@
                             </div>
                         {%-  when 'cart' -%}
                             <div class="header-mobile--icon" style="--i-color: {{ block.settings.color }}; --color-bubble: {{ block.settings.color_bubble }}; --bg-bubble: {{ block.settings.bg_bubble }}">
-                                <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>
+                                <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset cart-icon-bubble" {% if settings.show_quick_cart %}data-cart-sidebar{% endif %}>
                                     {%- case block.settings.icon -%}
                                         {%-  when '1' -%}
-                                            {% render 'icon-cart' %}
+                                            {% render 'icon-cart-05' %}
                                         {%-  when '2' -%}
                                             {% render 'icon-cart-02' %}
                                         {%-  when '3' -%}
-                                            {% render 'icon-cart-03' %}
+                                            {% render 'icon-cart-06' %}
                                         {%-  when '4' -%}
                                             {% render 'icon-cart-04' %}
+                                        {%-  when '5' -%}
+                                            {% render 'icon-cart-03' %}
+                                        {%-  when '6' -%}
+                                            {% render 'icon-cart-07', class: 'shopping-basket' %}
                                     {%- endcase -%}
                                     <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
                                     <div class="cart-count-bubble">
@@ -246,6 +247,10 @@
     }
   
     customElements.define('sticky-header-mobile', StickyHeaderMobile);
+
+    document.querySelector('[data-mobile-menu]').addEventListener('click', () => {
+        document.body.classList.toggle('menu_open');
+    })
 {% endjavascript %}
 
 {% schema %}
@@ -440,22 +445,26 @@
         },
         {
             "type": "customer",
-            "name": "Customer",
+            "name": "t:sections.header.settings.header_icons.customer",
             "limit": 1,
             "settings": [
                 {
                     "type": "select",
                     "id": "icon",
-                    "label": "Icon",
+                    "label": "t:settings_schema.typography.settings.typography.icon",
                     "default": "1",
                     "options": [
                         {
                             "value": "1",
-                            "label": "Circle user"
+                            "label": "t:sections.header.settings.header_icons.customer_2"
                         },
                         {
                             "value": "2",
-                            "label": "User"
+                            "label": "t:sections.header.settings.header_icons.customer_3"
+                        },
+                        {
+                            "value": "3",
+                            "label": "t:sections.header.settings.header_icons.customer_4"
                         }
                     ]
                 },
@@ -469,30 +478,38 @@
         },
         {
             "type": "cart",
-            "name": "Cart",
+            "name": "t:sections.header.settings.header_top.cart",
             "limit": 1,
             "settings": [
                 {
                     "type": "select",
                     "id": "icon",
-                    "label": "Icon",
-                    "default": "2",
+                    "label": "t:settings_schema.typography.settings.typography.icon",
+                    "default": "3",
                     "options": [
                         {
                             "value": "1",
-                            "label": "Bag Shopping - Curved"
+                            "label": "t:sections.header.settings.header_icons.cart_1"
                         },
                         {
                             "value": "2",
-                            "label": "Bag Shopping - Classic"
+                            "label": "t:sections.header.settings.header_icons.cart_3"
                         },
                         {
                             "value": "3",
-                            "label": "Cart Shopping - Curved"
+                            "label": "t:sections.header.settings.header_icons.cart_4"
                         },
                         {
                             "value": "4",
-                            "label": "Cart Shopping - Classic"
+                            "label": "t:sections.header.settings.header_icons.cart_5"
+                        },
+                        {
+                            "value": "5",
+                            "label": "t:sections.header.settings.header_icons.cart_6"
+                        },
+                        {
+                            "value": "6",
+                            "label": "t:sections.header.settings.header_icons.cart_7"
                         }
                     ]
                 },

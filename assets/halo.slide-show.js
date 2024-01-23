@@ -124,11 +124,11 @@
                             $('.slick-current .fluid-width-video-wrapper .video').css('display', 'block');
                             slick = $(slick.$slider);
                             playPauseVideo(slick,"play");
-                            if( $("video").prop('muted') ) {
-                                $("video").prop('muted', true);
-                            } else {
-                                $("video").prop('muted', true);
-                            }
+                            // if( $("video").prop('muted') ) {
+                            //     $("video").prop('muted', true);
+                            // } else {
+                            //     $("video").prop('muted', true);
+                            // }
                         });
                     };
 

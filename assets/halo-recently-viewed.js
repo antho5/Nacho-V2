@@ -180,6 +180,8 @@ class RecentlyViewed extends HTMLElement {
                                 ]
                             });
                         }
+
+                        if (productGrid.length == 0) recentlyGrid.addClass('not-product');
                         recentlyGrid.prepend('<div class="product-info"></div>');
                     }
                 }
@@ -195,6 +197,9 @@ class RecentlyViewed extends HTMLElement {
         event.preventDefault();
         event.stopPropagation();
 
+        if (document.body.classList.contains('ask-an-expert-show')){
+           document.querySelector('body').classList.remove('ask-an-expert-show');
+        }
         document.querySelector('body').classList.remove('recently-popup-mb-show');
         this.closeTab();
     }

@@ -30,11 +30,13 @@
                             {% if sticky_atc_layout == '1' %}
                                 {% assign compare_price = current_variant.compare_at_price | money %}
                                 {% assign subtotal = current_variant.price | money %}
-                                <div class="sticky-price{% if compare_price != blank %} has-compare-price{% endif %}">
-                                    {% if compare_price != blank %}
-                                        <s class="money-compare-price" data-compare-price="{{ current_variant.compare_at_price }}">{{ compare_price }}</s>
-                                    {% endif %}
-                                    <span class="money-subtotal" bss-b2b-product-id="{{ product.id }}" bss-b2b-product-price bss-b2b-variant-id="{{ product.selected_or_first_available_variant.id }}" bss-b2b-variant-price bss-b2b-featured-product="true">{{ subtotal }}</span>
+                                <div class="sticky-price{% unless compare_price == subtotal %}{% if compare_price != blank %} has-compare-price{% endif %}{% endunless %}">
+                                    {% unless compare_price == subtotal %}
+                                        {% if compare_price != blank %}
+                                            <s class="money-compare-price" data-compare-price="{{ current_variant.compare_at_price }}">{{ compare_price }}</s>
+                                        {% endif %}
+                                    {% endunless %}
+                                    <span class="money-subtotal">{{ subtotal }}</span>
                                 </div>
                             {% endif %}
                         </div>
@@ -242,11 +244,13 @@
                     {%- if sticky_atc_layout == '1' -%}
                         {% assign compare_price = current_variant.compare_at_price | money %}
                         {% assign subtotal = current_variant.price | money %}
-                        <div class="sticky-price{% if compare_price != blank %} has-compare-price{% endif %}">
-                            {% if compare_price != blank %}
-                                <s class="money-compare-price" data-compare-price="{{ current_variant.compare_at_price }}">{{ compare_price }}</s>
-                            {% endif %}
-                            <span class="money-subtotal" bss-b2b-product-id="{{ product.id }}" bss-b2b-product-price bss-b2b-variant-id="{{ product.selected_or_first_available_variant.id }}" bss-b2b-variant-price bss-b2b-featured-product="true">{{ subtotal }}</span>
+                        <div class="sticky-price{% unless compare_price == subtotal %}{% if compare_price != blank %} has-compare-price{% endif %}{% endunless %}">
+                            {% unless compare_price == subtotal %}
+                                {% if compare_price != blank %}
+                                    <s class="money-compare-price" data-compare-price="{{ current_variant.compare_at_price }}">{{ compare_price }}</s>
+                                {% endif %}
+                            {% endunless %}
+                            <span class="money-subtotal">{{ subtotal }}</span>
                         </div>
                     {%- endif -%}
                 </div>

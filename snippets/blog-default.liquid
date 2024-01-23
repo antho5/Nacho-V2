@@ -73,7 +73,7 @@
             </div>
         {%- endif -%}
         {%- if show_sidebar -%}
-            <div class="header-with-sidebar">
+            <div class="header-with-sidebar{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
         {% endif %}
             {%- if show_page_title -%}
                 <h1 class="page-header text-{{ page_title_alignment }}">
@@ -94,7 +94,7 @@
             </div>
         {%- endif -%}
         
-        <div class="halo-blog-content halo-grid-content">
+        <div class="halo-blog-content halo-grid-content{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
             {%- if show_sidebar and section.blocks.size > 0 -%}
                 {{ 'component-main-sidebar.css' | asset_url | stylesheet_tag }}
                 <div class="page-sidebar page-sidebar-{{ sidebar_position }} page-sidebar--vertical sidebar--{{ section.settings.sidebar_layout }}{% if enable_sticky %} has-sticky{% endif %}" id="halo-sidebar">
@@ -130,7 +130,7 @@
                             {% else %}
                                 {%- assign first = false -%}
                             {% endif %}
-                            <div class="item{% if forloop.first == true %} item--first{% endif %}" style="--color-summary-style: {{ text_color }}">
+                            <div class="item{% if forloop.first == true %} item--first{% endif %}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: {{ forloop.index }};{% endif %}--color-summary-style: {{ text_color }}">
                                 {% render 'article-card-3',
                                     article: article,
                                     media_size: media_size,

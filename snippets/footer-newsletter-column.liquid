@@ -1,4 +1,5 @@
 {%- liquid
+  assign show_newsletter = block.settings.show_newsletter
   assign swap_social_position = block.settings.swap_social_position
   assign newsletter_form_width = block.settings.newsletter_form_width | append: 'px'
   assign newsletter_form_radius = block.settings.newsletter_form_radius | append: 'px'
@@ -8,15 +9,14 @@
   assign mg_top_des = block.settings.mg_top_des | append: 'px'
   assign mg_bottom_des = block.settings.mg_bottom_des | append: 'px'
   assign spacing_input = block.settings.spacing_input | append: 'px'
-
   assign custom_width = block.settings.custom_width | append: '%'
   assign mg_bottom = block.settings.mg_bottom | append: 'px'
-
   assign heading = block.settings.heading
   assign subtext = block.settings.subtext
   assign show_social = block.settings.show_social
   assign newsletter = block.settings.enable_border_bottom
   assign button_width = block.settings.button_width | append: 'px'
+  assign show_app_store = block.settings.show_app_store
 -%}
 <style>
    .footer-block__newsletter .footer-block__newsletter-form {max-width: {{ newsletter_form_width }}}
@@ -46,9 +46,7 @@
     .footer-block__newsletter-content{text-align:left}
     .footer-block__newsletter-form{margin-top:0}
    }
-   @media (min-width: 1025px) {
-    .footer-block__top .footer-block__newsletter{width:74%}.footer-block__newsletter-form{padding-right:0}.footer-7 .footer-block__item.footer-block__newsletter{text-align:right}
-   }
+   @media (min-width: 1025px) {.footer-block__top .footer-block__newsletter{width:74%}.footer-block__newsletter-form{padding-right:0}.footer-7 .footer-block__item.footer-block__newsletter{text-align:right}}
    @media (min-width: 1200px){
     .footer-6 .footer-block__bottom .footer-block__newsletter{display:flex;justify-content:center;align-items:center}
     .footer-6 .footer-block__bottom .footer-block__newsletter h2{margin-right:20px!important}
@@ -56,53 +54,45 @@
     .footer-6 .footer-block__bottom .footer-block__newsletter .footer-block__newsletter-form .field{width:245px}
     .footer-6 .footer-block__bottom .footer-block__newsletter .footer-block__newsletter-form .newsletter-form__button{width:120px}
    }
-   @media (min-width: 1200px) and (max-width: 1399px){
-    .column-5 .footer-block__newsletter .newsletter-form__field-wrapper{display:block}.column-5 .footer-block__newsletter .footer-block__newsletter-form .newsletter-form__button{width:100%;margin-top:15px}.footer-7 .column-5 .footer-block__newsletter .newsletter-form__field-wrapper{display:flex}.footer-7 .column-5 .footer-block__newsletter .footer-block__newsletter-form .newsletter-form__button{width:40px;margin-top:0}
-   }
-   @media (min-width: 768px) and (max-width: 1200px) {
-    .footer-7 .footer-block__item.footer-block__newsletter{text-align:left}.column-5 .footer-block__item.footer-block__newsletter{width:100%;margin-top:40px}
-   }
-   @media (min-width: 1920px){
-    .footer-block__top .footer-block__newsletter{width: calc(100% - 460px)}
-   }
-   @media (max-width: 1199px) and (min-width: 992px) {
-    .column-6 .footer-block__newsletter{width:100%;text-align:center;margin-bottom:40px;margin-top:20px}
-   }
+   @media (min-width: 1200px) and (max-width: 1399px){.column-5 .footer-block__newsletter .newsletter-form__field-wrapper{display:block}.column-5 .footer-block__newsletter .footer-block__newsletter-form .newsletter-form__button{width:100%;margin-top:15px}.footer-7 .column-5 .footer-block__newsletter .newsletter-form__field-wrapper{display:flex}.footer-7 .column-5 .footer-block__newsletter .footer-block__newsletter-form .newsletter-form__button{width:40px;margin-top:0}}
+   @media (min-width: 768px) and (max-width: 1200px) {.footer-7 .footer-block__item.footer-block__newsletter{text-align:left}.column-5 .footer-block__item.footer-block__newsletter{width:100%;margin-top:40px}}
+   @media (min-width: 1920px){.footer-block__top .footer-block__newsletter{width: calc(100% - 460px)}}
+   @media (max-width: 1199px) and (min-width: 992px) {.column-6 .footer-block__newsletter{width:100%;text-align:center;margin-bottom:40px;margin-top:20px}}
    @media (max-width: 1600px) {
     .footer-block__newsletter .footer-block__subheading {line-height: calc(var(--footer-link-line-height) - 10px)}
    }
-   @media (max-width: 991px){
-    .footer-block__newsletter.newsletter__style2{border-right:0}.footer-block__item.footer-block__newsletter{width:100%;margin-top:20px}.column-6 .footer-block__item.footer-block__newsletter{margin-top:7px}
-   }
-   @media (max-width: 767px) {
-    .footer-block__item.footer-block__newsletter{width:100%}.footer-block__newsletter .footer-block__subheading{margin-bottom:7px!important}.footer-6 .footer-block__bottom .footer-block__newsletter .footer-block__newsletter-form{margin:15px auto 10px}
-   }
+   @media (max-width: 991px){.footer-block__newsletter.newsletter__style2{border-right:0}.footer-block__item.footer-block__newsletter{width:100%;margin-top:20px}.column-6 .footer-block__item.footer-block__newsletter{margin-top:7px}}
+   @media (max-width: 767px) {.footer-block__item.footer-block__newsletter{width:100%}.footer-block__newsletter .footer-block__subheading{margin-bottom:7px!important}.footer-6 .footer-block__bottom .footer-block__newsletter .footer-block__newsletter-form{margin:15px auto 10px}}
 </style>
-<div class="footer-block__item footer-block__column footer-block__newsletter newsletter__{{ block.settings.newsletter_style }} text-{{ text_align }}  {{ block__text_first }}" style="--block-custom-width: {{ custom_width }};--block-margin-bottom: {{ mg_bottom }}">
+<div class="footer-block__item footer-block__column footer-block__newsletter newsletter__{{ block.settings.newsletter_style }} text-{{ text_align }}  {{ block__text_first }}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="--block-custom-width: {{ custom_width }};--block-margin-bottom: {{ mg_bottom }}">
   {%- if show_social and swap_social_position == true -%}
     {% render 'footer-social', block: block, social_is_nested: true %}
   {%- endif -%}
-  <div{% if show_social and swap_social_position %} style="margin-top: 32px"{% endif %}>
-    {%- if subtext_before_heading -%}
-      <div class="footer-block__subheading rte">
-        {{ block.settings.subtext | default: ' ' }}
-        {% if block.settings.enable_arrow %}
-          {% render 'icon-chevron-right' %}
-        {% endif %}
-      </div>
-    {%- endif -%}
+  {%- if show_newsletter -%}
+    <div{% if show_social and swap_social_position %} style="margin-top: 32px"{% endif %}>
+      {%- if subtext_before_heading -%}
+        <div class="footer-block__subheading rte">{{ block.settings.subtext | default: ' ' }}
+          {%- if block.settings.enable_arrow -%}
+            {% render 'icon-chevron-right' %}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
 
-    {%- if heading != blank -%}
-      <h2 class="footer-block__heading" data-toggle-column-footer>{{- heading | escape -}}</h2>
-    {%- endif -%}
-    <div class="item clearfix">
-      {% unless subtext_before_heading %}
-        <div class="footer-block__subheading rte">{{ subtext | default: ' ' }}</div>
-      {% endunless %}
-      {% render 'block-newsletter-footer', block: block %}
+      {%- if heading != blank -%}
+        <h2 class="footer-block__heading" data-toggle-column-footer>{{- heading | escape -}}</h2>
+      {%- endif -%}
+      <div class="item clearfix">
+        {%- unless subtext_before_heading -%}
+          <div class="footer-block__subheading rte">{{ subtext | default: ' ' }}</div>
+        {%- endunless -%}
+        {% render 'block-newsletter-footer', block: block %}
+      </div>
     </div>
-  </div>
+  {%- endif -%}  
   {%- if show_social and swap_social_position != true -%}
     {% render 'footer-social', block: block, social_is_nested: true %}
+  {%- endif -%}
+  {%- if show_app_store -%}
+    {% render 'footer-app-store', block: block %}
   {%- endif -%}
 </div>

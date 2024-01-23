@@ -23,7 +23,7 @@
 
 {% render 'footer-style', block_newsletter: block_newsletter %}
 
-<footer class="footer footer-4" style="--spacing-l-r: {{ section.settings.padding_full_width }}px">
+<footer class="footer footer-4{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="--spacing-l-r: {{ section.settings.padding_full_width }}px"{% if settings.banner_animation == 'effect_fade_up' %} data-cascade{% endif %}>
   {%- if section.blocks.size > 0 -%}
     <div class="footer__content-top{% if section.settings.show_footer_top_bg_img %} footer__content-bg{% endif %}{% if block_newsletter.settings.enable_top and position_social == 7 %} enable_newsletter_social{% endif %}">
       <div class="container container-{{ section.settings.container }}">
@@ -113,7 +113,7 @@
         {
           "id": "heading",
           "type": "text",
-          "label": "t:sections.footer.blocks.link_list.settings.heading.label",
+          "label": "t:sections.image-banner.blocks.image.settings.content.label__19",
           "info": "t:sections.footer.blocks.link_list.settings.heading.info",
           "default": "Quick links"
         },
@@ -138,7 +138,7 @@
     },
     {
       "type": "text",
-      "name": "t:sections.footer.blocks.text.name",
+      "name": "t:sections.image-banner.blocks.image.settings.content.label__16",
       "limit": 1,
       "settings": [
         {
@@ -314,6 +314,12 @@
           "default": "40"
         },
         {
+          "type": "checkbox",
+          "id": "show_newsletter",
+          "label": "t:sections.main-password.settings.newsletter.label__1",
+          "default": true
+        },
+        {
           "type": "range",
           "id": "newsletter_margin_bottom",
           "label": "t:sections.footer.blocks.newsletter.settings.newsletter_margin_bottom",
@@ -426,7 +432,7 @@
         {
           "type": "text",
           "id": "button_text",
-          "label": "t:sections.general.settings.content.label__2",
+          "label": "t:sections.image-banner.blocks.image.settings.content.label__16",
           "default": "Submit"
         },
         {
@@ -542,7 +548,7 @@
         {
           "id": "social_heading",
           "type": "text",
-          "label": "t:sections.footer.blocks.link_list.settings.heading.label",
+          "label": "t:sections.image-banner.blocks.image.settings.content.label__19",
           "info": "t:sections.footer.blocks.link_list.settings.heading.info"
         },
         {
@@ -768,7 +774,7 @@
         {
           "id": "heading_payment",
           "type": "text",
-          "label": "t:sections.footer.settings.payment.heading_payment"
+          "label": "t:sections.image-banner.blocks.image.settings.content.label__19"
         },
         {
           "type": "select",
@@ -1343,7 +1349,7 @@
     {
       "id": "footer_top_color_link",
       "type": "color",
-      "label": "t:sections.footer.settings.footer_top.footer_top_color_link",
+      "label": "t:settings_schema.colors.settings.colors_link.label__1",
       "default": "#FFFFFF"
     },
     {

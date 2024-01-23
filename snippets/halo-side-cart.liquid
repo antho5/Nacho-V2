@@ -25,9 +25,9 @@
                         -%}
                         <script type="text/javascript">
                             window.cart_selling_array_{{ thisProduct.id }} = {
-                                {% for variantProduct in thisProduct.variants %}
+                                {%- for variantProduct in thisProduct.variants -%}
                                     '{{ variantProduct.id }}': '{{ variantProduct.inventory_policy }}',
-                                {%endfor%}
+                                {%- endfor -%}
                             };
                         </script>
                     	<a class="previewCartItem-name link-underline" href="{{ item.url }}">
@@ -70,10 +70,10 @@
                         </dl>
                         {%- if item.discounts.size > 0 -%}
                             <ul class="cart-discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
-                                {%- for discount in item.discounts -%}
+                                {%- for discount in item.line_level_discount_allocations -%}
                                     <li class="discounts__discount" data-auto-discount="{{ discount.total_savings }}">
                                         {%- render 'icon-discount' -%}
-                                        {{ discount.title }}
+                                        {{ discount.discount_application.title }}
                                     </li>
                                 {%- endfor -%}
                             </ul>
@@ -91,10 +91,10 @@
                                     {%- assign current_variant = item.variant -%}
                                     {% if item.original_price != item.final_price %}
                                         <span class="previewCartItem-saving-price">
-                                            <s class="before-discount-price" data-item-original-price-display bss-b2b-cart-item-key="{{ item.key }}" bss-b2b-item-original-price>
+                                            <s class="before-discount-price" data-item-original-price-display>
                                                 {{ item.original_price | money }}
                                             </s>
-                                            <span class="discounted-price" data-item-final-price-display bss-b2b-cart-item-key="{{ item.key }}" bss-b2b-item-final-price>
+                                            <span class="discounted-price" data-item-final-price-display>
                                                 {{ item.final_price | money }}
                                             </span>
                                         </span>
@@ -108,7 +108,7 @@
                                             </span>
                                         </span>
                                     {% else %}  
-                                        <span data-item-final-price-display bss-b2b-cart-item-key="{{ item.key }}" bss-b2b-item-final-price>
+                                        <span data-item-final-price-display>
                                             {{ item.price | money }}
                                         </span>
                                     {% endif %}
@@ -270,9 +270,9 @@
         <ul class="previewCartTotalsPrice list-unstyled">
         	<li class="previewCartTotals subTotal clearfix">
         		<div class="previewCartTotals-label">
-                    {{ 'sections.cart.subtotal' | t }}
+                    {{ 'sections.cart.subtotal' | t }}:
                 </div>
-                <div class="previewCartTotals-value" data-cart-subtotal bss-b2b-cart-total-price>
+                <div class="previewCartTotals-value" data-cart-subtotal>
                 	{{ cart.original_total_price | money }}
                 </div>  
         	</li>       
@@ -288,7 +288,7 @@
         		<div class="previewCartTotals-label">
                     {{ 'general.cart.total' | t }}
                 </div>  
-                <div class="previewCartTotals-value" data-cart-total-value="{{ cart.total_price }}" bss-b2b-cart-total-price>
+                <div class="previewCartTotals-value" data-cart-total-value="{{ cart.total_price }}">
                 	{{ cart.total_price | money }}
                 </div>
         	</li>
@@ -315,9 +315,8 @@
                 </div>
             {%- endif -%}
             <div class="previewCartGroup">
-            	<button class="button button-1 button-checkout" onclick="handleCheckout()" {% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="cart-sidebar-checkout">
-                <!-- <button class="button button-1 button-checkout" {% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="cart-sidebar-checkout"> -->
-                  {{ 'sections.cart.checkout' | t }}
+            	<button class="button button-1 button-checkout" onclick="window.location='{{ routes.cart_url | split: '/cart' | first }}/checkout'"{% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="cart-sidebar-checkout">
+                    {{ 'sections.cart.checkout' | t }}
                 </button>
                 <a class="button button-2 button-view-cart" href="{{ routes.cart_url }}">
                     {{ 'sections.cart.view_cart' | t }}
@@ -349,8 +348,3 @@
         </div>
     </div>
 {% endunless%}
-<script>
-  const handleCheckout = () => {
-    if (typeof BSS_B2B !== 'object') window.location='{{ routes.cart_url | split: '/cart' | first }}/checkout';
-  }
-</script>

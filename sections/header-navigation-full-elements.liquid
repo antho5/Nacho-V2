@@ -33,7 +33,7 @@
         {%- case block.type -%}
             {%- when 'logo' -%}
                 <div class="header-logo header-item w-100 maw-300 pt-10 pb-10 d-flex flex-align-center{% if block.settings.logo_position == 'main_menu'%} show-main-menu{% elsif block.settings.logo_position == 'sticky_menu'%} hide-main-menu{% else %}{% endif %}" style="--logo_font_size: {{block.settings.logo_font_size | append: 'px'}};--logo_font_weight: {{block.settings.logo_font_weight}};--logo_text_transform: {{block.settings.logo_text_transform}};--logo_text_color: {{block.settings.logo_color}};--logo_width: {{block.settings.logo_width | append: 'px'}};--logo_width_sticky: {{block.settings.logo_width_fixed | append: '%'}};">
-                    <{% if request.page_type == 'index' %}h1{% else %}div{% endif %} class="header__heading">
+                    <div class="header__heading">
                         <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
                             {%- if block.settings.logo != blank -%}
                                 {%- assign logo = block.settings.logo -%}
@@ -41,7 +41,6 @@
                                 {%- assign logo_width_img = logo_width | append: 'x' -%}
                                 {%- assign logo_width_retina = logo_width | times: 2 | append: 'x'  -%}
                                 {%- assign logo_height = logo_width | divided_by: logo.aspect_ratio | round -%}
-                                {%- assign logo_transparent = block.settings.logo_transparent -%}
                                 <img srcset="{{ logo | img_url: logo_width_img }}, {{ logo | img_url: logo_width_retina }} 2x" src="{{ logo | img_url: logo_width_img }}" loading="lazy" class="header__heading-logo logo__main w-100 h-auto ver-alg-mid d-inline-block" alt="{{ logo.alt | default: shop.name | escape }}" width="{{ logo_width }}" height="{{ logo_height }}">
                             {%- elsif block.settings.logo_text != blank -%}
                                 <span class="header__heading-text {{ block.settings.logo_text_transform }} d-block">{{ block.settings.logo_text }}</span>
@@ -49,11 +48,11 @@
                                 <span class="header__heading-text {{ block.settings.logo_text_transform }} d-block">{{ shop.name }}</span>
                             {%- endif -%}
                         </a>
-                    </{% if request.page_type == 'index' %}h1{% else %}div{% endif %}>
+                    </div>
                 </div>
             {%- when 'main_menu' -%}
             <div class="main-menu header-item header-item--side p-static{% if block.settings.label_position == 'none' %} label-none{% elsif block.settings.label_position == 'main_menu' %} label-main-menu{% if block.settings.new_label_1 != blank or block.settings.sale_label_1 != blank or block.settings.hot_label_1 != blank%} main-menu-hasLabel{% endif %}{% else %}{% if block.settings.menu_top_spacing <= 16 %} label-small{% endif %}{% endif %}">
-                <div class="p-static container container-{{ section.settings.container }}">
+                <div class="p-static container container-{{ section.settings.container }} o-unset">
                     <div class="main-menu--wrapper" id="HeaderNavigation">
                         {%- if block.settings.menu != blank -%}
                             <nav class="header__inline-menu" data-navigation role="navigation" style="--lv_1_color: {{ block.settings.lv_1_color }};--lv_1_color_hover: {{ block.settings.lv_1_color_hover }};--lv_2_color: {{ block.settings.lv_2_color }}; --lv_2_color_hover: {{ block.settings.lv_2_color_hover }};--lv_3_color: {{ block.settings.lv_3_color }};--lv_3_color_hover: {{ block.settings.lv_3_color_hover }};--menu_margin_left: -{{block.settings.grid_gap_menu_item | append: 'px'}};--menu_top_spacing: {{block.settings.menu_top_spacing | append: 'px'}};--menu_top_spacing_sticky: -{{block.settings.menu_top_spacing | plus: 1 | append: 'px'}};--menu_bottom_spacing: {{block.settings.menu_bottom_spacing | append: 'px'}};--grid_gap_menu_item: {{block.settings.grid_gap_menu_item | append: 'px'}};--bg_mega_menu: {% if block.settings.bg_mega_menu_gradient != blank %}{{ block.settings.bg_mega_menu_gradient }}{% else %}{{ block.settings.bg_mega_menu }}{% endif %};--sale_item_color: {{block.settings.sale_item_color}};--new_label_color: {{ block.settings.new_label_color }};--new_label_border: {{ block.settings.new_label_bg }};--new_label_bg: {% if block.settings.new_label_bg_gradient != blank %}{{ block.settings.new_label_bg_gradient }}{% else %}{{ block.settings.new_label_bg }}{% endif %};--sale_label_color: {{ block.settings.sale_label_color }};--sale_label_border: {{ block.settings.sale_label_bg }};--sale_label_bg: {% if block.settings.sale_label_bg_gradient != blank %}{{ block.settings.sale_label_bg_gradient }}{% else %}{{ block.settings.sale_label_bg }}{% endif %};--hot_label_color: {{ block.settings.hot_label_color }};--hot_label_border: {{ block.settings.hot_label_bg }};--hot_label_bg: {% if block.settings.hot_label_bg_gradient != blank %}{{ block.settings.hot_label_bg_gradient }}{% else %}{{ block.settings.hot_label_bg }}{% endif %}">
@@ -104,15 +103,15 @@
                                             {%- endif -%}
                                                 <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form w-100 maw-100 m-lr-auto">
                                                     <div class="field">
-                                                        <input class="search__input field__input form-input-placeholder" id="Search-In-Modal-Menu" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}" autocomplete="off" {%- if settings.show_quick_search -%}role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false"{%- endif -%}>
+                                                        <input class="search__input field__input form-input-placeholder" id="Search-In-Modal-Menu-Full" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search' | t }}" autocomplete="off" {%- if settings.show_quick_search -%}role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false"{%- endif -%}>
                                                         <input type="hidden" name="options[prefix]" value="last">
                                                         <input type="hidden" name="type" value="product">
-                                                        <label class="field__label hiddenLabels" for="Search-In-Modal-Menu">{{ 'general.search.search' | t }}</label>
+                                                        <label class="field__label hiddenLabels" for="Search-In-Modal-Menu-Full">{{ 'general.search.search' | t }}</label>
                                                         <button class="button search__button field__button focus-inset pr-0 text-right" aria-label="{{ 'general.search.search' | t }}">{% render 'icon-search' %}</button>
                                                     </div>
-                                                    {%- if settings.show_search_trending or settings.show_search_product -%}{%- render 'quick-searching-trending-products' -%}{%- endif -%}
                                                     {%- if settings.show_quick_search -%}
-                                                        {%- if settings.show_search_trending or settings.show_search_product -%}{%- render 'predictive-search-results' -%}{%- endif -%}
+                                                        {%- if settings.show_search_trending or settings.show_search_product -%}{%- render 'quick-searching-trending-products', sectionId: 'nav-full-elements-list-result' -%}{%- endif -%}
+                                                        {%- render 'predictive-search-results' -%}
                                                     {%- endif -%}
                                                 </form>
                                             {%- if settings.show_quick_search -%}
@@ -161,7 +160,11 @@
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
 
 {% javascript %}
-  class StickyHeader extends HTMLElement {
+var sticky = document.getElementsByTagName('sticky-header')[0].querySelector('.header-nav-full-elements');
+if (sticky != undefined || sticky != null) {
+    console.log("sticky full: " + sticky)
+
+    class StickyHeader extends HTMLElement {
     constructor() {
       super();
     }
@@ -282,50 +285,31 @@
   }
 
   customElements.define('sticky-header', StickyHeader);
+}
 {% endjavascript %}
 
-{%- if logo_position == 'main_menu' or logo_position == 'always' -%}
-    {%- if logo != blank -%}
-        <script type="application/ld+json">
-            {
-                "@context": "http://schema.org",
-                "@type": "Organization",
-                "name": {{ shop.name | json }},
-                {% if logo != blank %}
-                    "logo": {{ logo | img_url: logo_width_img | prepend: "https:" | json }},
-                {% endif %}
-                "sameAs": [
-                    {{ settings.social_twitter_link | json }},
-                    {{ settings.social_facebook_link | json }},
-                    {{ settings.social_pinterest_link | json }},
-                    {{ settings.social_instagram_link | json }},
-                    {{ settings.social_tumblr_link | json }},
-                    {{ settings.social_snapchat_link | json }},
-                    {{ settings.social_youtube_link | json }},
-                    {{ settings.social_vimeo_link | json }}
-                ],
-                "url": {{ shop.url | append: page.url | json }}
-            }
-        </script>
 
-        {%- if request.page_type == 'index' -%}
-            {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
-            <script type="application/ld+json">
-                {
-                    "@context": "http://schema.org",
-                    "@type": "WebSite",
-                    "name": {{ shop.name | json }},
-                    "potentialAction": {
-                        "@type": "SearchAction",
-                        "target": {{ potential_action_target | json }},
-                        "query-input": "required name=search_term_string"
-                    },
-                    "url": {{ shop.url | append: page.url | json }}
-                }
-            </script>
-        {%- endif -%}
-    {%- endif -%}
-{%- endif -%}
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": {{ shop.name | json }},
+        {% if logo %}
+            "logo": {{ logo | image_url: width: 500 | prepend: "https:" | json }},
+        {% endif %}
+        "sameAs": [
+            {{ settings.social_twitter_link | json }},
+            {{ settings.social_facebook_link | json }},
+            {{ settings.social_pinterest_link | json }},
+            {{ settings.social_instagram_link | json }},
+            {{ settings.social_tumblr_link | json }},
+            {{ settings.social_snapchat_link | json }},
+            {{ settings.social_youtube_link | json }},
+            {{ settings.social_vimeo_link | json }}
+        ],
+        "url": {{ request.origin | append: page.url | json }}
+    }
+</script>
 
 {% schema %}
 {
@@ -398,7 +382,7 @@
         {
             "type": "select",
             "id": "sticky_header_type",
-            "label": "t:sections.header.settings.enable_sticky_header.name",
+            "label": "t:settings_schema.general.settings.swatch.label__2",
             "default": "on_scroll",
             "options": [
                 {

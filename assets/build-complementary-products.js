@@ -17,7 +17,7 @@ if (typeof complementaryProductsComponent === 'undefined')
                 let text = await res.text();
                     
                 const html = document.createElement('div');
-                text = text.replaceAll('variant-selects', 'div').replaceAll('variant-radios', 'div').replaceAll('product-tab', 'div');
+                text = text.replaceAll('variant-selects', 'div').replaceAll('variant-radios', 'div').replaceAll('product-tab', 'div').replaceAll('compare-color', 'div');
                 html.innerHTML = text;
                 
                 const recommendations = html.querySelector('[data-complementary-product]');
@@ -56,7 +56,7 @@ if (typeof complementaryProductsComponent === 'undefined')
                         rows: !complementaryStyle ? itemRows : 1,
                         slidesToScroll: 1,
                         slidesPerRow: 1,
-                        infinite: false,
+                        infinite: true,
                         rtl: window.rtl_slick,
                         nextArrow: window.arrows.icon_next,
                         prevArrow: window.arrows.icon_prev,
@@ -66,11 +66,11 @@ if (typeof complementaryProductsComponent === 'undefined')
                                 settings: {
                                     get slidesToShow() {
                                         if (complementaryStyle) {
-                                            return this.slidesToShow = 2;
+                                            slidesToShow: 2
                                         }
                                         if (!complementaryStyle) {
-                                            return this.slidesToShow = 1;
-                                        } 
+                                            slidesToShow: 1
+                                        }
                                     }
                                 }
                             },
@@ -79,11 +79,11 @@ if (typeof complementaryProductsComponent === 'undefined')
                                 settings: {
                                     get slidesToShow() {
                                         if (complementaryStyle) {
-                                            return this.slidesToShow = 2;
+                                            slidesToShow: 2
                                         }
                                         if (!complementaryStyle) {
-                                            return this.slidesToShow = 1;
-                                        } 
+                                            slidesToShow: 1
+                                        }
                                     }
                                 }
                             },
@@ -92,11 +92,11 @@ if (typeof complementaryProductsComponent === 'undefined')
                                 settings: {
                                     get slidesToShow() {
                                         if (complementaryStyle) {
-                                            return this.slidesToShow = 2;
+                                            slidesToShow: 2
                                         }
                                         if (!complementaryStyle) {
-                                            return this.slidesToShow = 1;
-                                        } 
+                                            slidesToShow: 1
+                                        }
                                     }
                                 }
                             },

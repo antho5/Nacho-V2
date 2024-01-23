@@ -27,13 +27,14 @@ class SliderComponent extends HTMLElement {
         if (this.sliderItems.length === 0) return;
         this.slidesPerPage = Math.floor(this.slider.clientWidth / this.sliderItems[0].clientWidth);
         this.totalPages = this.sliderItems.length - this.slidesPerPage + 1;
+        if (this.pageCount) this.pageCount.innerText = this.slidesPerPage;
     }   
 
     update() {
         this.currentPage = Math.round(this.slider.scrollLeft / this.sliderItems[0].clientWidth * this.rtl_num);
         this.querySelector('.dots-item.active')?.classList.remove('active');
         this.querySelectorAll('.dots-item')[this.currentPage]?.classList.add('active');
-        if (this.pageCount) this.pageCount.innerText = this.currentPage + 1;
+        if (this.pageCount) this.pageCount.innerText = this.slidesPerPage + this.currentPage;
     }
 
     onButtonClick(event) {

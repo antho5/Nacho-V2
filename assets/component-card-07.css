@@ -194,4 +194,8 @@
     .product-card-layout-07 .card:hover .card-product__group:not(.wrapper-item-size) {
         transform: translateY(var(--translate-y-height));
     }
+
+    .product-card-layout-07 .card:hover .card-product__group.group-right:not(.wrapper-item-size) {
+        transform: translateY(-70px);
+    }
 }

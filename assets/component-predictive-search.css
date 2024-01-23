@@ -323,10 +323,10 @@ input::-webkit-search-decoration {
     margin: 0px;
 }
 
-.halo-sidebar_search .quickSearchResultsBlock .list-item {
+/*.halo-sidebar_search .quickSearchResultsBlock .list-item {
     max-height: 100px;
     overflow: auto;
-}
+}*/
 
 .halo-sidebar_search .search-modal__content .search-modal__close-button {
     display: none;
@@ -449,9 +449,9 @@ input::-webkit-search-decoration {
         margin: 0;
     }
 
-    .halo-sidebar_search .quickSearchResultsBlock .list-item {
+    /*.halo-sidebar_search .quickSearchResultsBlock .list-item {
         max-height: 82px;
-    }
+    }*/
 
     .halo-sidebar_search .quickSearchResultsWrap {
         width: 100%;

@@ -84,7 +84,7 @@ class VariantEditCartSelects extends HTMLElement {
     }
 
     updateVariantInput() {
-        const productForm = document.querySelector(`#product-form-edit-${this.dataset.product}`);
+        const productForm = this.closest('.product-edit-itemRight').querySelector('form') || document.querySelector(`#product-form-edit-${this.dataset.product}`);
 
         if (!productForm) return;
 
@@ -486,7 +486,7 @@ class VariantEditCartSelects extends HTMLElement {
                 this.item.find('.quantity__message').empty().hide();
 
                 if(notifyMe.length > 0){
-                    notifyMe.find('input[name="halo-notify-product-variant"]').val(this.currentVariant.title);
+                    notifyMe.find('.halo-notify-product-variant').val(this.currentVariant.title);
                     notifyMe.find('.notifyMe-text').empty();
                     notifyMe.slideDown('slow');
                 }

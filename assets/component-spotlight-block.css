@@ -175,6 +175,7 @@
     overflow-y: auto;
     line-height: 1;
     font-size: 0;
+    z-index: 1;
 }
 
 .content_absolute .content::-webkit-scrollbar {
@@ -267,6 +268,7 @@
     -webkit-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
     padding-bottom: var(--align-items-spacing-style);
+    overflow-y: hidden;
 }
 
 .spotlight-block .content_absolute .content.align-items--bottom.enable-transparnet {
@@ -372,6 +374,10 @@
 
 .spotlight-block .slider{
     overflow-y: hidden;
+}
+
+.animate--hover-vertical-lift .spotlight-block .slider{
+    overflow-y: initial;
 }
 
 .spotlight-block .slick-prev {
@@ -514,6 +520,10 @@
         width: 100%;    
         min-width: 0;   
         max-width: var(--button-width-style);   
+    }
+
+    .animate--hover-vertical-lift .spotlight-block .slider.slider--tablet {
+        overflow-y: hidden;
     }
 }
 

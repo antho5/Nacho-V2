@@ -52,7 +52,7 @@ class CartItems extends HTMLElement {
 
     onAddGiftCardClick(e) {
         e.preventDefault()
-        // e.stopPropagation()
+        e.stopPropagation()
         this.giftCardButton.dataset.isChecked = 'true'
     }
 
@@ -92,7 +92,7 @@ class CartItems extends HTMLElement {
 
     async handleToCheckoutPage(e) {
         e.preventDefault()
-        if (typeof BSS_B2B === 'object') return;
+
         try {
             // saving coupon
             const couponCode = this.couponCodeInput?.value 
