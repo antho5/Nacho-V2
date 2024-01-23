@@ -754,11 +754,15 @@ class FadeInComponent extends HTMLElement {
 window.addEventListener('load', () => {
     customElements.define('fade-in-component', FadeInComponent);
 })
+let first = true;
 document.addEventListener("bss_b2b_doneCheckCP", (function() {
-  console.log($(".quickview-icon"))
-  $(".quickview-icon").on("click", () => {
-    setTimeout(() => {
-      BSS_B2B.cp.changeProductPrice(JSON.parse($('#bss-b2b-store-data').html()), "[bss-b2b-variant-id]", false, false);
-    }, 1000)
-  })
+  if (first) {
+    first = false;
+    console.log($(".quickview-icon"))
+    $(".quickview-icon").on("click", () => {
+      setTimeout(() => {
+        BSS_B2B.cp.changeProductPrice(JSON.parse($('#bss-b2b-store-data').html()), "[bss-b2b-variant-id]", false, false);
+      }, 1000)
+    })
+  }
 }))
