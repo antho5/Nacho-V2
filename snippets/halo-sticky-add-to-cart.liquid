@@ -246,7 +246,7 @@
                             {% if compare_price != blank %}
                                 <s class="money-compare-price" data-compare-price="{{ current_variant.compare_at_price }}">{{ compare_price }}</s>
                             {% endif %}
-                            <span class="money-subtotal">{{ subtotal }}</span>
+                            <span class="money-subtotal" bss-b2b-product-id="{{ product.id }}" bss-b2b-product-price bss-b2b-variant-id="{{ product.selected_or_first_available_variant.id }}" bss-b2b-variant-price bss-b2b-featured-product="true">{{ subtotal }}</span>
                         </div>
                     {%- endif -%}
                 </div>
