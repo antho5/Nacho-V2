@@ -1096,10 +1096,21 @@
         "scroll_thumb_hover_color": "#444444"
       }
     },
-    "a7045ff9-aed6-4174-97c7-72e0bc60e154": {
-      "type": "custom-liquid",
+    "17060332145bef553f": {
+      "type": "apps",
+      "blocks": {
+        "powr_instagram_feed_app_block_fqwd6D": {
+          "type": "shopify:\/\/apps\/powr-instagram-feed\/blocks\/app-block\/0ef0f2d8-4861-4613-a8e4-82a7151be72e",
+          "settings": {
+            "app_id": "0db6845a_1650904810"
+          }
+        }
+      },
+      "block_order": [
+        "powr_instagram_feed_app_block_fqwd6D"
+      ],
       "settings": {
-        "custom_liquid": "<div class=\"powr-social-feed\" id=\"0db6845a_1650904810\"><\/div><script src=\"https:\/\/www.powr.io\/powr.js?platform=shopify\"><\/script>"
+        "include_margins": false
       }
     }
   },
@@ -1108,6 +1119,6 @@
     "163247026462da6862",
     "8ca832d8-6669-441d-b6d9-9db74f475d94",
     "f28eb02f-72f2-4cd6-b11f-64dd2dcd067c",
-    "a7045ff9-aed6-4174-97c7-72e0bc60e154"
+    "17060332145bef553f"
   ]
 }
