@@ -383,7 +383,7 @@
                                             <span class="text">{{ 'general.cart.subtotal' | t }}</span>
                                         </div>
                                         <div class="cart-total-value">
-                                            <span class="text">{{ cart.original_total_price | money }}</span>
+                                            <span class="text" bss-b2b-cart-total-price>{{ cart.original_total_price | money }}</span>
                                         </div>
                                     </li>
                                     {%- if show_shipping_rate_calculator -%}
@@ -421,7 +421,7 @@
                                             <span class="text">{{ 'general.cart.total' | t }}</span>
                                         </div>  
                                         <div class="cart-total-value" data-cart-total-value="{{ cart.total_price }}">
-                                            <span class="text">{{ cart.total_price | money }}</span>
+                                            <span class="text" bss-b2b-cart-total-price>{{ cart.total_price | money }}</span>
                                         </div>  
                                     </li>
                                     {% if settings.show_shipping_note %}
