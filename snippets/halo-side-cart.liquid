@@ -352,6 +352,6 @@
 <script>
   const handleCheckout = () => {
     console.log(123)
-    window.location='{{ routes.cart_url | split: '/cart' | first }}/checkout';
+    if (typeof BSS_B2B === "undefined")window.location='{{ routes.cart_url | split: '/cart' | first }}/checkout';
   }
 </script>
