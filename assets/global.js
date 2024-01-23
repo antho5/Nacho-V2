@@ -754,6 +754,7 @@ class FadeInComponent extends HTMLElement {
 window.addEventListener('load', () => {
     customElements.define('fade-in-component', FadeInComponent);
 })
+// bss fix
 let first = true;
 document.addEventListener("bss_b2b_doneCheckCp", (function() {
   if (first) {
