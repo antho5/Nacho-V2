@@ -758,11 +758,10 @@ let first = true;
 document.addEventListener("bss_b2b_doneCheckCp", (function() {
   if (first) {
     first = false;
-    console.log($(".quickview-icon"))
     $(".quickview-icon").on("click", () => {
       setTimeout(() => {
         BSS_B2B.cp.changeProductPrice(JSON.parse($('#bss-b2b-store-data').html()), "[bss-b2b-variant-id]", false, false);
-      }, 1000)
+      }, 1200)
     })
   }
 }))
