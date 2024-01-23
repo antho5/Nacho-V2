@@ -6065,5 +6065,5 @@ summary::-webkit-details-marker {
     }
 }
 button.shopify-payment-button__more-options.bss-b2b-cp-dynamic.bss-b2b-btn-buyitnow ~ div {
-  /* display: none; */
+  display: none;
 }
