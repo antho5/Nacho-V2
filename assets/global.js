@@ -755,7 +755,7 @@ window.addEventListener('load', () => {
     customElements.define('fade-in-component', FadeInComponent);
 })
 let first = true;
-document.addEventListener("bss_b2b_doneCheckCP", (function() {
+document.addEventListener("bss_b2b_doneCheckCp", (function() {
   if (first) {
     first = false;
     console.log($(".quickview-icon"))
