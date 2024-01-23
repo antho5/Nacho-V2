@@ -330,7 +330,7 @@
                                                 endif 
                                             -%} 
                                             <div class="cart-item-block cart-item-total" data-price="{{ price_to_display }}" data-original-price="{{ item.original_price }}">
-                                                <span class="cart-item-value" data-item-price-with-quantity-display>{{ price_to_display | times: item.quantity | money }}</span>
+                                                <span class="cart-item-value" data-item-price-with-quantity-display bss-b2b-cart-item-key="{{ item.key }}" bss-b2b-final-line-price>{{ price_to_display | times: item.quantity | money }}</span>
                                             </div>
                                             <div class="cart-item-block cart-item-remove">
                                                 <a class="cart-remove" href="javascript:void(0)" data-cart-remove data-cart-remove-id="{{ item.id }}" data-line="{{ item.key }}" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}">
