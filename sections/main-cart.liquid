@@ -447,7 +447,7 @@
                                         </div>
                                     {%- endif -%}
                                     <div class="action-group">
-                                        <button class="button button-1 button-checkout" {% if settings.show_global_checkbox %} disabled="disabled" {% endif %} id="cart-checkout" data-href="handleCheckout">
+                                        <button class="button button-1 button-checkout" {% if settings.show_global_checkbox %} disabled="disabled" {% endif %} id="cart-checkout" data-href="{{ routes.cart_url | split: '/cart' | first }}/checkout">
                                             {{ 'sections.cart.proceed_to_checkout' | t }}
                                         </button>
                                         {% if continue_button_action == "1" %}
@@ -532,11 +532,6 @@
 </style>
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
-<script>
-  const handleCheckout = () => {
-    return "{{ routes.cart_url | split: '/cart' | first }}/checkout"
-  }
-</script>
 
 {% schema %}
 {
