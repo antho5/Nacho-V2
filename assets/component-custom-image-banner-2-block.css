@@ -42,10 +42,6 @@
 	max-width: var(--button-width-style);
 }
 
-.btn_1_br_outside .customImageBanner-item .content .button:after {
-	border: 1px solid var(--border-color-button-style);
-}
-
 .customImageBanner-item .img-box-content {
 	position: relative;
 	margin-bottom: 104px;
@@ -174,10 +170,6 @@
 		background: var(--bg-color-button-hover-style);
 		border-color: var(--border-color-button-hover-style);
 		background-origin: border-box;
-	}
-
-	.btn_1_br_outside .customImageBanner-item .content .button:hover:after {
-		border: 1px solid var(--border-color-button-hover-style);
 	}
 
 	.customImageBanner-item .content .title a:hover {

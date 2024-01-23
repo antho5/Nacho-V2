@@ -20,22 +20,23 @@ class StickyAddToCart extends HTMLElement {
         this.closeModal = this.closeStickyModal.bind(this);
     }
 
-    connectedCallback() {
+    connectedCallback(){
         this.onScrollHandler = this.onScroll.bind(this);
         window.addEventListener('scroll', this.onScrollHandler, false);
 
-        this.openStickyButton?.addEventListener('click', this.openStickyModal.bind(this));
+        this.openStickyButton.addEventListener('click', this.openStickyModal.bind(this));
         document.addEventListener('click', (e) => {
             if (e.target.matches('.background-overlay') || e.target.closest('[data-close-sticky-mobile]') != null || e.target.matches('[data-close-sticky-mobile]')) {
                 this.closeModal();
             }
         })
+
+        const height = this.closest('[data-sticky-add-to-cart]').clientHeight;
+        this.sticky.querySelector('.sticky-product-mobile').style.bottom = height + 'px';
     }
 
     openStickyModal() {
         document.body.classList.add('show-mobile-options');
-        const height = this.closest('[data-sticky-add-to-cart]').clientHeight;
-        this.sticky.querySelector('.sticky-product-mobile').style.bottom = height + 'px';
     }
 
     closeStickyModal() {
@@ -283,7 +284,6 @@ class VariantStickyAddToCart extends HTMLElement {
                         } else {
                             $(element).find('.product-form__radio').prop('checked', false);
                             $(element).find(`.product-form__radio[value="${this.encodeOption(selectedOption1)}"]`).prop('checked', true);
-                            $(element).find(`.product-form__radio[value="${this.encodeOption(selectedOption1)}"]`).trigger('change');
                         }
     
                         var option1List = variantList.filter((variant) => {
@@ -411,7 +411,6 @@ class VariantStickyAddToCart extends HTMLElement {
                         } else {
                             $(element).find('.product-form__radio').prop('checked', false);
                             $(element).find(`.product-form__radio[value="${this.encodeOption(selectedOption2)}"]`).prop('checked', true);
-                            $(element).find(`.product-form__radio[value="${this.encodeOption(selectedOption2)}"]`).trigger('change');
                         }
     
                         var option2List = variantList.filter((variant) => {
@@ -539,7 +538,6 @@ class VariantStickyAddToCart extends HTMLElement {
                         } else {
                             $(element).find('.product-form__radio').prop('checked', false);
                             $(element).find(`.product-form__radio[value="${this.encodeOption(selectedOption3)}"]`).prop('checked', true);
-                            $(element).find(`.product-form__radio[value="${this.encodeOption(selectedOption3)}"]`).trigger('change');
                         }
     
                         var option3List = variantList.filter((variant) => {
@@ -659,10 +657,6 @@ class VariantStickyAddToCart extends HTMLElement {
             this.item.find('[data-sku] .productView-info-value').text(this.currentVariant.sku);
         }
 
-        if(this.item.find('[data-barcode]').length > 0){
-            this.item.find('[data-barcode] .productView-info-value').text(this.currentVariant.barcode);
-        }
-
         var inventory = this.currentVariant?.inventory_management;
 
         if(inventory != null) {
@@ -671,16 +665,9 @@ class VariantStickyAddToCart extends HTMLElement {
 
             if(inven_array != undefined) {
                 var inven_num = inven_array[this.currentVariant.id],
-                    inputQuantity = this.item.find('input[name="quantity"]'),
-                    buttonSubmit = this.item.find('button#product-sticky-add-to-cart'),
                     inventoryQuantity = parseInt(inven_num);
-
-                    if(inputQuantity.length > 0) {
-                        inputQuantity.attr('data-inventory-quantity', inventoryQuantity);
-                    } else {
-                        buttonSubmit.attr('data-inventory-quantity', inventoryQuantity);
-                    }
-                //  this.item.find('input[name="quantity"]').attr('data-inventory-quantity', inventoryQuantity);
+              
+                 this.item.find('input[name="quantity"]').attr('data-inventory-quantity', inventoryQuantity);
 
                 if(this.item.find('[data-inventory]').length > 0){
                     if(inventoryQuantity > 0){
@@ -710,16 +697,10 @@ class VariantStickyAddToCart extends HTMLElement {
         const stickyButton = document.getElementById(`product-form-sticky-${this.dataset.product}`)?.querySelector('[name="add"]');
 
         var quantityInput = $('[data-sticky-add-to-cart] .quantity__input'),
-            submitBtn = $('[data-sticky-add-to-cart] .product-form__submit'),
             notifyMe = this.item.find('.productView-notifyMe'),
             stickyPrice = $('[data-sticky-add-to-cart] .money-subtotal .money');
-        var maxValue;
-
-        if (quantityInput.length > 0) {
-            maxValue = parseInt(quantityInput.attr('data-inventory-quantity'));
-        } else {
-            maxValue = parseInt(submitBtn.attr('data-inventory-quantity'));
-        }
+        
+        var maxValue = parseInt(quantityInput.attr('data-inventory-quantity'));
 
         if (stickyPrice.length === 0) {
            stickyPrice = $('[data-sticky-add-to-cart] .sticky-price .money-subtotal')
@@ -747,7 +728,7 @@ class VariantStickyAddToCart extends HTMLElement {
                 price = this.currentVariant?.price;
 
             if(window.subtotal.show) {
-                let qty = quantityInput.val() || 1;
+                let qty = quantityInput.val();
               
                 subTotal = qty * price;
                 subTotal = Shopify.formatMoney(subTotal, window.money_format);
@@ -755,16 +736,8 @@ class VariantStickyAddToCart extends HTMLElement {
                
                 if (window.subtotal.style == '1') {
                     const pdView_subTotal = document.querySelector('.productView-subtotal .money') || document.querySelector('.productView-subtotal .money-subtotal');
-                    
-                    if(pdView_subTotal != null){
-                        if($('body').hasClass('disable_currencies')) {
-                            const pdView_subTotal = document.querySelector('.productView-subtotal .money-subtotal');
-                            pdView_subTotal.innerHTML = subTotal;
-                        } else {
-                            pdView_subTotal.textContent = subTotal;
-                        }
-                    }
 
+                    pdView_subTotal.textContent = subTotal;
                     if (this.currentVariant.available && maxValue <= 0 && this.currentVariant.inventory_management == "shopify") {
                         text = window.variantStrings.preOrder;
                     } else {
@@ -772,16 +745,7 @@ class VariantStickyAddToCart extends HTMLElement {
                     }
                 }
                 else if (window.subtotal.style == '2') {
-                    if (this.currentVariant.available && maxValue <= 0 && this.currentVariant.inventory_management == "shopify") {
-                        text = window.variantStrings.preOrder;
-                    } else {
-                        if($('body').hasClass('disable_currencies')) {
-                            subTotal = $(subTotal).text();
-                            text = window.subtotal.text.replace('[value]', subTotal);
-                        } else {
-                            text = window.subtotal.text.replace('[value]', subTotal);
-                        }
-                    }
+                    text = window.subtotal.text.replace('[value]', subTotal);
                 }
             } else {
                 subTotal = Shopify.formatMoney(price, window.money_format);
@@ -802,12 +766,7 @@ class VariantStickyAddToCart extends HTMLElement {
             stickyButton.textContent = text;
 
             if (subTotal != 0 && stickyPrice.length) {
-                if($('body').hasClass('disable_currencies')) {
-                    stickyPrice = $('[data-sticky-add-to-cart] .sticky-price .money-subtotal');
-                    stickyPrice.html(subTotal);
-                } else {
-                    stickyPrice.text(subTotal);
-                }
+                stickyPrice.text(subTotal);
             }
 
             const thisStickyPrice = $('[data-sticky-add-to-cart] .sticky-price');
@@ -829,7 +788,7 @@ class VariantStickyAddToCart extends HTMLElement {
             const stickyComparePrice = $('[data-sticky-add-to-cart] .money-compare-price .money');
             if (subTotal != 0 && stickyComparePrice.length && window.subtotal.show) {
                 let comparePrice = $('[data-sticky-add-to-cart] .money-compare-price').data('compare-price'),
-                    qty = quantityInput.val() || 1;
+                    qty = quantityInput.val();
                 comparePrice = qty * comparePrice;
                 comparePrice = Shopify.formatMoney(comparePrice, window.money_format);
                 comparePrice = extractContent(comparePrice);

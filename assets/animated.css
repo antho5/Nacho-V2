@@ -252,7 +252,7 @@
     }
 }
 
-@keyframes spin-icon {
+@keyframes spin {
     0% {
         transform: translateY(-50%) rotate(0)
     }
@@ -691,14 +691,5 @@
     }
     100% {
         transform: translateY(50px);
-    }
-}
-
-@keyframes zoom-icon {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
     }
 }

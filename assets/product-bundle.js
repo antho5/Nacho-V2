@@ -46,14 +46,13 @@ class ProductBundle extends HTMLElement {
         const addToCart = () => {
             const $this = this,
                 btnAddTocart = $this.querySelector('[data-bundle-addtocart]');
-            const productId = typeof meta == 'object' ? meta.product.id : this.form.querySelector('[name="product-id"]').value;
     
             var waitMessage = window.variantStrings.addingToCart;
     
             this.querySelector('.bundle-product-wrapper').classList.add('has-halo-block-loader');
     
             const bundleItem = this.querySelectorAll('.bundle-product-item.isChecked');
-            const discountCode = "FBT-BUNDLE-"+ productId;
+            const discountCode = "FBT-BUNDLE-"+ meta.product.id;
             let data = '';
             let hint = ',';
             let attributes = {};
@@ -83,11 +82,10 @@ class ProductBundle extends HTMLElement {
                 attributes = data.attributes;
             }).done(async function() {
                 const addProductsToCart = async () => {
-                    await fetch(`/cart/${data}`, {mode: 'no-cors'});
+                    await fetch(`/cart/${data}`);
                 }
     
                 const updateBundleDiscountData = async () => {
-                    if (!$this.querySelector('[data-bundle-discount-rate]')) return;
                     const bundleDiscountRate = parseFloat($this.querySelector('[data-bundle-discount-rate]').dataset.bundleDiscountRate);
     
                     const items = [...bundleItem].map(item => parseInt(item.dataset.bundleProductItemId));
@@ -498,7 +496,7 @@ class ProductBundle extends HTMLElement {
     }
 
     redirectTo(url){
-        if (this.isRunningInIframe() && !window.iframeSdk && !Shopify.designMode) {
+        if (this.isRunningInIframe() && !window.iframeSdk) {
             window.top.location = url;
         } else {
             window.location = url;

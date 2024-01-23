@@ -187,7 +187,7 @@
         {% if show_sidebar %}
             </div>
         {% endif %}
-        <div class="halo-article-block">
+        <div class="halo-article-block{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
             {%- if show_sidebar and section.blocks.size > 0 -%}
                 {{ 'component-main-sidebar.css' | asset_url | stylesheet_tag }}
                 <div class="page-sidebar page-sidebar-{{ sidebar_position }} page-sidebar--vertical sidebar--{{ section.settings.sidebar_layout }}{% if enable_sticky %} has-sticky{% endif %}" id="halo-sidebar">
