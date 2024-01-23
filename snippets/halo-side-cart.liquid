@@ -315,7 +315,7 @@
                 </div>
             {%- endif -%}
             <div class="previewCartGroup">
-            	<button class="button button-1 button-checkout" onclick="window.location='{{ routes.cart_url | split: '/cart' | first }}/checkout'"{% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="cart-sidebar-checkout">
+            	<button class="button button-1 button-checkout" onclick="handleCheckout" {% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="cart-sidebar-checkout">
                 <!-- <button class="button button-1 button-checkout" {% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="cart-sidebar-checkout"> -->
                   {{ 'sections.cart.checkout' | t }}
                 </button>
@@ -349,3 +349,9 @@
         </div>
     </div>
 {% endunless%}
+<script>
+  const handleCheckout = () => {
+    console.log(123)
+    window.location='{{ routes.cart_url | split: '/cart' | first }}/checkout';
+  }
+</script>
