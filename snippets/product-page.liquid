@@ -1038,7 +1038,7 @@
                                                     {%- if show_subtotal and subtotal_style == '1' -%}
                                                         <div class="productView-subtotal">
                                                             <span class="text">{{ 'sections.cart.subtotal' | t | append: ': ' }}</span>
-                                                            <span class="money-subtotal">{{ subtotal }}</span>
+                                                            <span class="money-subtotal" bss-b2b-product-id="{{ product.id }}" bss-b2b-product-price bss-b2b-variant-id="{{ product.selected_or_first_available_variant.id }}" bss-b2b-variant-price bss-b2b-featured-product="true">{{ subtotal }}</span>
                                                         </div>
                                                     {%- endif -%}
                                                 </div>
