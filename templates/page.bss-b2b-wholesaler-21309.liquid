@@ -1,0 +1,34 @@
+
+            {{ 'bss-b2b-state.js' | asset_url | script_tag }}
+            <script id="bss-b2b-wholesaler-form">
+            if (typeof BSS_B2B == 'undefined') {
+              var BSS_B2B = {};
+            }
+            BSS_B2B.formDataRender = [{"type":"text","required":true,"label":"Phone","className":"form-control phone-field","name":"phone-field","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":true,"label":"Address","className":"form-control address-field","name":"address-field","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":false,"label":"Address 2","className":"form-control apartment-field","name":"apartment-field","access":false,"subtype":"text","placement":"bottom"},{"type":"autocomplete","required":true,"label":"Country","className":"form-control country-field","name":"country-field","access":false,"requireValidOption":false,"values":[{"label":"","value":"","selected":false}],"placement":"bottom"},{"type":"text","required":true,"label":"City","className":"form-control city-field","name":"city-field","access":false,"subtype":"text","placement":"bottom"},{"type":"select","label":"State","className":"form-control state-field","name":"state-field","access":false,"values":[{"label":"","value":"","selected":false}],"placement":"bottom"},{"type":"text","required":true,"label":"Zip","className":"form-control zip-field","name":"zip-field","access":false,"subtype":"text","placement":"bottom"},{"type":"select","required":false,"label":"Are You A...","className":"form-control","name":"select-1706027090811-0","access":false,"values":[{"label":"Manufacturer ","value":"manufacturer ","selected":true},{"label":"Dealer","value":"dealer","selected":false},{"label":"Vehicle Builder","value":"vehicle-builder","selected":false},{"label":"Vehicle Owner","value":"vehicle-owner","selected":true},{"label":"Racer","value":"racer","selected":true}],"placement":"bottom"},{"type":"textarea","required":false,"label":"What's Your Plan?","className":"form-control","name":"textarea-1706027098446-0","access":false,"subtype":"textarea","placement":"bottom"},{"type":"file","required":false,"label":"Share Your Build Plan Photo","className":"form-control","name":"file-1706027150611-0","access":false,"placement":"bottom"}];
+            BSS_B2B.formId = 21309;
+            BSS_B2B.reCAPCHA = 1;
+            BSS_B2B.CAPCHA_SITE_KEY = "6LcYPEgbAAAAAKEQdimI1PPA4vuOJHxNb5p6eLUo";
+            BSS_B2B.status = 1;
+            BSS_B2B.created_account = 3;
+            BSS_B2B.redirect_url = "";
+            BSS_B2B.taxExempt = 0;
+            BSS_B2B.formPrivacyPolicyStatus = 0;
+            BSS_B2B.formPrivacyPolicyContent = `<p>By clicking Create, I confirm that I have read and accepted the <a href="/">privacy policy</a></p>`;
+            BSS_B2B.conditionalLogic = [];
+            </script>
+            <style>null</style>
+            
+            {% assign bss-b2b-include-password = true %}
+<div class="page-width">
+    <div class="grid">
+        <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+            <div class="section-header text-center">
+                <h1>{{ page.title }}</h1>
+            </div>
+            <div class="rte">
+                {{ page.content }}
+            </div>
+        </div>
+        {% section 'bss-b2b-wholesaler-form-21309' %}
+    </div>
+</div>
