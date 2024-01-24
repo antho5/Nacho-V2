@@ -16,7 +16,17 @@
             BSS_B2B.formPrivacyPolicyContent = `<p>By clicking Create, I confirm that I have read and accepted the <a href="/">privacy policy</a></p>`;
             BSS_B2B.conditionalLogic = [];
             </script>
-            <style>.page-width .grid{
+            <style>#RegisterForm input[type="submit"] {
+    width: fit-content !important;
+    padding: 16px 24px !important;
+    height: auto !important;
+    margin: auto !important;
+    margin-top: 10px !important;
+    background-color: #000 !important;
+    color: #fff !important;
+    font-size: 18px !important;
+}
+.page-width .grid{
     margin: auto;
     padding-left: 5%;
     padding-right: 5%;
@@ -66,16 +76,6 @@ height: auto;
 }
 .formbuilder-checkbox {
     display: flex;
-}
-#RegisterForm input[type="submit"] {
-    width: fit-content;
-    padding: 16px 24px;
-    height: auto;
-    margin: auto;
-    margin-top: 10px;
-    background-color: #000 !important;
-    color: #fff !important;
-    font-size: 18px;
 }</style>
             
             {% assign bss-b2b-include-password = true %}
