@@ -80,6 +80,12 @@ height: auto;
 }
 .formbuilder-checkbox {
     display: flex;
+}
+@media screen and (max-width: 750px) {
+.bss-grid-2 {
+    grid-template-columns: calc(50% - 8px) calc(50% - 8px);
+    column-gap: 16px;
+}
 }</style>
             
             {% assign bss-b2b-include-password = true %}
