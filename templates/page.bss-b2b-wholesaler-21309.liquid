@@ -34,7 +34,7 @@
 }
 #RegisterForm select,
 #RegisterForm textarea,
-#RegisterForm input {
+#RegisterForm input:not([type="checkbox"]):not([type="radio"]) {
     border: 1px solid #7D7D7D;
     background-color: rgba(238,238,238,1) !important;
     color: #333 !important;
@@ -42,7 +42,7 @@
     font-style: normal;
     border-radius: 6px;
 }
-#RegisterForm input { 
+#RegisterForm input:not([type="checkbox"]):not([type="radio"]) { 
 height: 32px;
     padding: 6px 12px;
 }
