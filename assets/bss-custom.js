@@ -7,5 +7,6 @@ if (window.location.pathname.includes("/pages/")) {
     const inputs = $('#RegisterForm  input:not([type="checkbox"]):not([type="file"]):not([type="hidden"]):not([type="submit"])');
     bss_grid_2.append(inputs.slice(2,9).parent())
     bss_grid_2_2.append(inputs.slice(11,14).parent())
+    bss_grid_2_2.append($("#state-field").parent())
   } , 500)
 }
