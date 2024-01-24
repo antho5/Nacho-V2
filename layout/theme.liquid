@@ -143,6 +143,7 @@
         </div>
         
         {% render 'halo-sidebar' %}
+        <script src={{ "bss-custom.js" | asset_url }} defer> </script>
     
       {% if content_for_header contains 'bss-b2b-cp' %}{% include 'bss-b2b-jquery-341-js' %}{% include 'bss-b2b-js' %}{% endif %}</body>
 </html>
