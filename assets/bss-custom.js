@@ -1,3 +1,3 @@
-if (window.location.pathname.include("/pages/")) {
+if (window.location.pathname.includes("/pages/")) {
   console.log(13)
 }
