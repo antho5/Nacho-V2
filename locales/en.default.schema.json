@@ -5208,6 +5208,7 @@
       "block": {
         "name": "Store Info",
         "settings": {
+          "store_name": Store Name
           "f_phone": "Formatted Phone Number",
           "city": "City",
           "country": "Country",
