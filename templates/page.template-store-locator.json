@@ -40,7 +40,7 @@
         "bounding_box": "-171.791110603, 18.91619, -66.96466, 71.3577635769",
         "map_style": "streets",
         "map_pitch": 60,
-        "map_bearing": 60,
+        "map_bearing": 0,
         "distance_unit": "miles",
         "enable_custom_marker": true,
         "marker_width": 42,
