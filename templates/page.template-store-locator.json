@@ -141,7 +141,7 @@
         "address_font_size": 16,
         "address_font_weight": "600",
         "address_text_color": "#000000",
-        "address_text_color_hover": "#59c1bd",
+        "address_text_color_hover": "#ff8b21",
         "info_font_size": 14,
         "info_font_weight": "400",
         "info_text_color": "#000000"
