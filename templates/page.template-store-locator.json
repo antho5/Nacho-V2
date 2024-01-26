@@ -8,7 +8,7 @@
           "settings": {
             "store_name": "Testing Dealer",
             "phone_formatted": "(202) 387-9338",
-            "address": "8204 Baltimore Ave",
+            "address": "Testing Dealer <br> 8204 Baltimore Ave",
             "city": "College Park",
             "country": "United States",
             "cross_street": "",
