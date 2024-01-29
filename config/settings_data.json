@@ -701,7 +701,7 @@
           "button_color": "#ff7903",
           "secondary_color": "#FFFFFF",
           "ternary_color": "#6A6A6A",
-          "button_icon": "https://cdn.shopify.com/s/files/1/0614/2341/9562/files/Moe_Race_PNG.png?v=1706547919",
+          "button_icon": "chat_bubble",
           "button_text": "no_text",
           "button_horizontal_position": "bottom_right",
           "button_vertical_position": "lowest",
