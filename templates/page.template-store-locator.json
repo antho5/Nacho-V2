@@ -133,6 +133,7 @@
         "map_bearing": 0,
         "distance_unit": "miles",
         "enable_custom_marker": true,
+        "custom_marker_image": "shopify:\/\/shop_images\/Moe_Race_PNG.png",
         "marker_width": 42,
         "marker_height": 42,
         "popup_header_color": "#ff8b21",
