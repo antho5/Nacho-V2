@@ -195,7 +195,7 @@
         "1180d91b-75f9-49d9-a9db-2b9f5a49408d"
       ],
       "settings": {
-        "container": "default",
+        "container": "container",
         "padding_full_width": 0,
         "show_sticky_info": true,
         "mg_top_desktop": 0,

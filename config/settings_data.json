@@ -119,7 +119,7 @@
     "dynamic_browser_title_content": "DON'T GET LEFT IN THE DARK ⚡",
     "product_block_image_ratio": "adapt",
     "portrait_height": "130",
-    "product_block_image_fit": "cover",
+    "product_block_image_fit": "contain",
     "show_image_swap": false,
     "show_image_loading": true,
     "image_loading_text": "NACHO",
