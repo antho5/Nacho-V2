@@ -10,7 +10,7 @@ if (window.location.pathname.includes("/pages/dealer")) {
     bss_grid_2_2.append($("#state-field").parent())
   } , 500)
 }
-if (window.location.pathname.includes("/pages/ambassador")) {
+if (window.location.pathname.includes("/pages/ambassador") || window.location.pathname.includes("/pages/career")) {
   setTimeout(() => {
     const bss_grid_2 = $('<div class="bss-grid-2">')
     const bss_grid_2_2 = $('<div class="bss-grid-2">')
