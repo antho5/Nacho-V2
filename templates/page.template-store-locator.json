@@ -240,6 +240,20 @@
             "lat": "39.1408486",
             "lng": "-78.1327126"
           }
+        },
+        "item_JBYrA7": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(214) 222-1323",
+            "address": "Dallas Offroad <br>11338 Emerald St.",
+            "city": "Dallas",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "75229",
+            "state": "TX",
+            "lat": "32.8942802",
+            "lng": "-96.901442"
+          }
         }
       },
       "block_order": [
@@ -259,7 +273,8 @@
         "item_jP7WyR",
         "item_JMJiHp",
         "item_iwGE36",
-        "item_bjjrWP"
+        "item_bjjrWP",
+        "item_JBYrA7"
       ],
       "settings": {
         "show_breadcrumb": false,
