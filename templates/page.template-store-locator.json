@@ -464,6 +464,20 @@
             "lat": "40.6049062",
             "lng": "-111.8915489"
           }
+        },
+        "item_Q4hkTn": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(574) 675-0695",
+            "address": "Michiana Auto Pros <br>11672 McKinley Hwy",
+            "city": "Osceola",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "46561",
+            "state": "IN",
+            "lat": "41.6879137",
+            "lng": "-86.1305777"
+          }
         }
       },
       "block_order": [
@@ -499,7 +513,8 @@
         "item_eA8BxN",
         "item_pcU3iA",
         "item_qRAJR3",
-        "item_Qt3MAy"
+        "item_Qt3MAy",
+        "item_Q4hkTn"
       ],
       "settings": {
         "show_breadcrumb": false,
