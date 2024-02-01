@@ -436,6 +436,20 @@
             "lat": "33.4769198",
             "lng": "-111.7336983"
           }
+        },
+        "item_qRAJR3": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(602) 909-6755",
+            "address": "LINE-X of West Phoenix Truck Accessories and Spray in Bed Liner <br>7150 W Roosevelt St suite D131",
+            "city": "Phoenix",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "85043",
+            "state": "AZ",
+            "lat": "33.4610028",
+            "lng": "-112.2498263"
+          }
         }
       },
       "block_order": [
@@ -469,7 +483,8 @@
         "item_AC4MCa",
         "item_pRJwM6",
         "item_eA8BxN",
-        "item_pcU3iA"
+        "item_pcU3iA",
+        "item_qRAJR3"
       ],
       "settings": {
         "show_breadcrumb": false,
