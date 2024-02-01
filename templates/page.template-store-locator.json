@@ -562,6 +562,20 @@
             "lat": "33.6351004",
             "lng": "-117.7123284"
           }
+        },
+        "item_E9giqz": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(866) 713-2888",
+            "address": "Rebel Off Road <br> 1320 Markum Gate Wy Suite 200",
+            "city": "Fort Worth",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "76126",
+            "state": "TX",
+            "lat": "32.6904621",
+            "lng": "-97.5243076"
+          }
         }
       },
       "block_order": [
@@ -604,7 +618,8 @@
         "item_eAPrmj",
         "item_CxihCa",
         "item_AttYax",
-        "item_TpEXxc"
+        "item_TpEXxc",
+        "item_E9giqz"
       ],
       "settings": {
         "show_breadcrumb": false,
