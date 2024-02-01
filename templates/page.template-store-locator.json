@@ -618,6 +618,20 @@
             "lat": "33.4946599",
             "lng": "-112.0291186"
           }
+        },
+        "item_XamTib": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(225) 698-5337",
+            "address": "Searchers 4wd Supply and Outfitters <br>16304 LA-16",
+            "city": "French Settlement",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "70733",
+            "state": "LA",
+            "lat": "30.3058843",
+            "lng": "-90.8040596"
+          }
         }
       },
       "block_order": [
@@ -664,7 +678,8 @@
         "item_E9giqz",
         "item_R6Nzdc",
         "item_FxjGbQ",
-        "item_kpg7TY"
+        "item_kpg7TY",
+        "item_XamTib"
       ],
       "settings": {
         "show_breadcrumb": false,
