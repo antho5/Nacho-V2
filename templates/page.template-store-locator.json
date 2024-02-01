@@ -156,6 +156,20 @@
             "lat": "35.3821043",
             "lng": "119.0178123"
           }
+        },
+        "item_3ppXGY": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(928) 645-2223",
+            "address": "B & B Auto Repair <br>809 Aqua Ave",
+            "city": "Page",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "86040",
+            "state": "AZ",
+            "lat": "36.9086265",
+            "lng": "-111.4522287"
+          }
         }
       },
       "block_order": [
@@ -169,7 +183,8 @@
         "item_GJB39t",
         "item_dijMPg",
         "item_nHPtGd",
-        "item_6Bbjxj"
+        "item_6Bbjxj",
+        "item_3ppXGY"
       ],
       "settings": {
         "show_breadcrumb": false,
