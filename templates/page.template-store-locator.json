@@ -170,6 +170,20 @@
             "lat": "39.0926885",
             "lng": "-108.6092591"
           }
+        },
+        "item_f9abrT": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(530) 598-2254",
+            "address": "Bear Valley Overland <br>41390 Big Bear Blvd",
+            "city": "Big Bear Lake",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "92315",
+            "state": "CA",
+            "lat": "34.2437821",
+            "lng": "-116.899142"
+          }
         }
       },
       "block_order": [
@@ -184,7 +198,8 @@
         "item_dijMPg",
         "item_nHPtGd",
         "item_6Bbjxj",
-        "item_3ppXGY"
+        "item_3ppXGY",
+        "item_f9abrT"
       ],
       "settings": {
         "show_breadcrumb": false,
