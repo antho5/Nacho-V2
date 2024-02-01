@@ -268,6 +268,20 @@
             "lat": "37.2278447",
             "lng": "-107.8123462"
           }
+        },
+        "item_JJ4Wft": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(801) 871-0569",
+            "address": "Expedition Superstore <br>2252 S Presidents Dr A",
+            "city": "West Valley City",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "84120",
+            "state": "UT",
+            "lat": "40.7220382",
+            "lng": "-111.9850921"
+          }
         }
       },
       "block_order": [
@@ -289,7 +303,8 @@
         "item_iwGE36",
         "item_bjjrWP",
         "item_JBYrA7",
-        "item_hEkVR9"
+        "item_hEkVR9",
+        "item_JJ4Wft"
       ],
       "settings": {
         "show_breadcrumb": false,
