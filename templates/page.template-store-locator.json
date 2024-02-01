@@ -674,6 +674,20 @@
             "lat": "30.2100501",
             "lng": "-95.574827"
           }
+        },
+        "item_9PtLKL": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(925) 292-4668",
+            "address": "The 4x4 Shop <br>4021 First St",
+            "city": "Livermore",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "94551",
+            "state": "CA",
+            "lat": "37.6905765",
+            "lng": "-121.7862251"
+          }
         }
       },
       "block_order": [
@@ -724,7 +738,8 @@
         "item_XamTib",
         "item_bJrqp7",
         "item_QDajgk",
-        "item_jBRm4n"
+        "item_jBRm4n",
+        "item_9PtLKL"
       ],
       "settings": {
         "show_breadcrumb": false,
