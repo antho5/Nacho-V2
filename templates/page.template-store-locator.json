@@ -198,6 +198,20 @@
             "lat": "33.1374648",
             "lng": "-117.1546432"
           }
+        },
+        "item_JMJiHp": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(800) 277-8619",
+            "address": "Best Off Road <br>521 N 1200 W",
+            "city": "Orem",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "84057",
+            "state": "UT",
+            "lat": "40.3068317",
+            "lng": "-111.7276203"
+          }
         }
       },
       "block_order": [
@@ -214,7 +228,8 @@
         "item_6Bbjxj",
         "item_3ppXGY",
         "item_f9abrT",
-        "item_jP7WyR"
+        "item_jP7WyR",
+        "item_JMJiHp"
       ],
       "settings": {
         "show_breadcrumb": false,
