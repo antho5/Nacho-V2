@@ -338,6 +338,20 @@
             "lat": "33.284081",
             "lng": "-111.6995057"
           }
+        },
+        "item_LfcMAg": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(775) 993-3700",
+            "address": "Truck Envy <br>75 E Patriot Blvd Suite 13",
+            "city": "Reno",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "89511",
+            "state": "NV",
+            "lat": "39.453231",
+            "lng": "-119.7791574"
+          }
         }
       },
       "block_order": [
@@ -364,7 +378,8 @@
         "item_mxrMcT",
         "item_wQ7gWw",
         "item_mmyPbM",
-        "item_nBEUhV"
+        "item_nBEUhV",
+        "item_LfcMAg"
       ],
       "settings": {
         "show_breadcrumb": false,
