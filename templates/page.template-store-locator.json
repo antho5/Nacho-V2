@@ -58,13 +58,28 @@
             "lat": "-82.5291213",
             "lng": "27.523753"
           }
+        },
+        "item_jd788a": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(281) 341-9494",
+            "address": "All Out Offroad Performance #1 <br>708 E Hwy 90 Alt",
+            "city": "Richmond",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "77406",
+            "state": "TX",
+            "lat": "-95.7495169",
+            "lng": "29.5875078"
+          }
         }
       },
       "block_order": [
         "item_eGkGr9",
         "item_6bAchF",
         "item_8bRQ6P",
-        "item_D9ydhD"
+        "item_D9ydhD",
+        "item_jd788a"
       ],
       "settings": {
         "show_breadcrumb": false,
