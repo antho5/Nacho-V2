@@ -394,6 +394,20 @@
             "lat": "34.472024",
             "lng": "-84.4603708"
           }
+        },
+        "item_pRJwM6": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(408) 816-8509",
+            "address": "Klean Ridez accessorries <br>901 Commercial St SPC 120",
+            "city": "San Jose",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "95112",
+            "state": "CA",
+            "lat": "37.3669317",
+            "lng": "-121.925879"
+          }
         }
       },
       "block_order": [
@@ -424,7 +438,8 @@
         "item_LfcMAg",
         "item_jQDRW4",
         "item_C4tXbn",
-        "item_AC4MCa"
+        "item_AC4MCa",
+        "item_pRJwM6"
       ],
       "settings": {
         "show_breadcrumb": false,
