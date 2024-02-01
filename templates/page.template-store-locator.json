@@ -590,6 +590,20 @@
             "lat": "33.66045",
             "lng": "-96.616043"
           }
+        },
+        "item_FxjGbQ": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(909)255-7575",
+            "address": "Redlands Motorsports <br>550 w State St.",
+            "city": "Redlands",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "92373",
+            "state": "CA",
+            "lat": "34.0569572",
+            "lng": "-117.1917129"
+          }
         }
       },
       "block_order": [
@@ -634,7 +648,8 @@
         "item_AttYax",
         "item_TpEXxc",
         "item_E9giqz",
-        "item_R6Nzdc"
+        "item_R6Nzdc",
+        "item_FxjGbQ"
       ],
       "settings": {
         "show_breadcrumb": false,
