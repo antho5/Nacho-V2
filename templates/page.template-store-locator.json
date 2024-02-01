@@ -520,6 +520,20 @@
             "lat": "47.6351309",
             "lng": "-122.7209587"
           }
+        },
+        "item_CxihCa": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(888) 497-3666",
+            "address": "Premier Performance Products <br>278 Dividend dr",
+            "city": "Rexburg",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "83440",
+            "state": "ID",
+            "lat": "43.8483133",
+            "lng": "-111.7752785"
+          }
         }
       },
       "block_order": [
@@ -559,7 +573,8 @@
         "item_Q4hkTn",
         "item_bJYejA",
         "item_mACHew",
-        "item_eAPrmj"
+        "item_eAPrmj",
+        "item_CxihCa"
       ],
       "settings": {
         "show_breadcrumb": false,
