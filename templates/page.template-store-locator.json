@@ -114,6 +114,20 @@
             "lat": "-95.5735241",
             "lng": "30.0599601"
           }
+        },
+        "item_dijMPg": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(817) 847-5777",
+            "address": "All Out Offroad Performance #5 <br>6920 NE Loop 820",
+            "city": "North Richland Hills",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "76180",
+            "state": "TX",
+            "lat": "-97.2317038",
+            "lng": "32.8390709"
+          }
         }
       },
       "block_order": [
@@ -124,7 +138,8 @@
         "item_jd788a",
         "item_3M3gtN",
         "item_Q77mUA",
-        "item_GJB39t"
+        "item_GJB39t",
+        "item_dijMPg"
       ],
       "settings": {
         "show_breadcrumb": false,
