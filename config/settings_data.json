@@ -688,6 +688,37 @@
           "lv_title_text_transform": "capitalize",
           "show_nav_all": true
         }
+      },
+      "password-page-1": {
+        "type": "password-page-1",
+        "settings": {
+          "background_color": "",
+          "brand_type": "image",
+          "brand_text": "",
+          "brand_logo_font_size": 30,
+          "logo_color": "#232323",
+          "brand_logo": "shopify:\/\/shop_images\/Full_Color_TAG.png",
+          "brand_logo_width": 200,
+          "banner": "shopify:\/\/shop_images\/Moe_Race_PNG.png",
+          "banner_color": "#232323",
+          "show_newsletter": false,
+          "title": "We're working on some things under the hood",
+          "title_font_size": 30,
+          "title_font_size_mb": 28,
+          "title_color": "#232323",
+          "subtitle": "In the meantime you can view our products on <a href=\"https:\/\/www.amazon.com\/stores\/NACHOOffroadLighting\/page\/E74D8B7E-34DD-46CF-8418-CD255CE09731?ref_=ast_bln\" target=\"_blank\" style=\"color: orange;\">Amazon<\/a>.",
+          "subtitle_font_size": 16,
+          "subtitle_color": "#232323",
+          "input_color": "#323232",
+          "terms_text_color": "#848484",
+          "terms_link_color": "#3c3c3c",
+          "btn": "1",
+          "show_social_media": true,
+          "social_media_color": "#232323",
+          "show_copyright": false,
+          "copyright_content": ".password-body {\n  max-width: 465px;\n}",
+          "copyright_color": "#7e7e7e"
+        }
       }
     },
     "content_for_index": [
