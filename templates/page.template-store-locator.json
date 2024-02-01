@@ -422,6 +422,20 @@
             "lat": "51.0089502",
             "lng": "-114.0403416"
           }
+        },
+        "item_pcU3iA": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(480) 999-5454",
+            "address": "LetzRoll Offroad <br>4611 E Virginia St",
+            "city": "Mesa",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "85215",
+            "state": "AZ",
+            "lat": "33.4769198",
+            "lng": "-111.7336983"
+          }
         }
       },
       "block_order": [
@@ -454,7 +468,8 @@
         "item_C4tXbn",
         "item_AC4MCa",
         "item_pRJwM6",
-        "item_eA8BxN"
+        "item_eA8BxN",
+        "item_pcU3iA"
       ],
       "settings": {
         "show_breadcrumb": false,
