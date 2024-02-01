@@ -30,11 +30,26 @@
             "lat": "-83.1251351",
             "lng": "42.6751849"
           }
+        },
+        "item_8bRQ6P": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(785) 862-8008",
+            "address": "4 X 4 Land <br>5620 SW Topeka Blvd",
+            "city": "Topeka",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "66609",
+            "state": "KS",
+            "lat": "-95.6865442",
+            "lng": "38.9665425"
+          }
         }
       },
       "block_order": [
         "item_eGkGr9",
-        "item_6bAchF"
+        "item_6bAchF",
+        "item_8bRQ6P"
       ],
       "settings": {
         "show_breadcrumb": false,
