@@ -604,6 +604,20 @@
             "lat": "34.0569572",
             "lng": "-117.1917129"
           }
+        },
+        "item_kpg7TY": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(480) 748-7721",
+            "address": "River Outdoors <br>2539 E Indian School Rd",
+            "city": "Phoenix",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "85016",
+            "state": "AZ",
+            "lat": "33.4946599",
+            "lng": "-112.0291186"
+          }
         }
       },
       "block_order": [
@@ -649,7 +663,8 @@
         "item_TpEXxc",
         "item_E9giqz",
         "item_R6Nzdc",
-        "item_FxjGbQ"
+        "item_FxjGbQ",
+        "item_kpg7TY"
       ],
       "settings": {
         "show_breadcrumb": false,
