@@ -16,10 +16,25 @@
             "lat": "-95.4525663",
             "lng": "43.327882"
           }
+        },
+        "item_6bAchF": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(248) 564-7023",
+            "address": "386 FAB <br>386 South St",
+            "city": "Rochester",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "48307",
+            "state": "MI",
+            "lat": "-83.1251351",
+            "lng": "42.6751849"
+          }
         }
       },
       "block_order": [
-        "item_eGkGr9"
+        "item_eGkGr9",
+        "item_6bAchF"
       ],
       "settings": {
         "show_breadcrumb": false,
