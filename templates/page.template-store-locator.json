@@ -688,6 +688,20 @@
             "lat": "37.6905765",
             "lng": "-121.7862251"
           }
+        },
+        "item_U4HVEm": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(602) 942-1007",
+            "address": "Total Offroad & More <br>6270 w Bell Rd",
+            "city": "Glendale",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "85308",
+            "state": "AZ",
+            "lat": "38.9730865",
+            "lng": "-125.0339716"
+          }
         }
       },
       "block_order": [
@@ -739,7 +753,8 @@
         "item_bJrqp7",
         "item_QDajgk",
         "item_jBRm4n",
-        "item_9PtLKL"
+        "item_9PtLKL",
+        "item_U4HVEm"
       ],
       "settings": {
         "show_breadcrumb": false,
