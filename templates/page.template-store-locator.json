@@ -646,6 +646,20 @@
             "lat": "39.7791785",
             "lng": "-105.2352596"
           }
+        },
+        "item_QDajgk": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(760) 796-3999",
+            "address": "TE Motorsports <br>380 N Engel St.",
+            "city": "Escondido",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "92029",
+            "state": "CA",
+            "lat": "33.1196228",
+            "lng": "-117.1098908"
+          }
         }
       },
       "block_order": [
@@ -694,7 +708,8 @@
         "item_FxjGbQ",
         "item_kpg7TY",
         "item_XamTib",
-        "item_bJrqp7"
+        "item_bJrqp7",
+        "item_QDajgk"
       ],
       "settings": {
         "show_breadcrumb": false,
