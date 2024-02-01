@@ -408,6 +408,20 @@
             "lat": "37.3669317",
             "lng": "-121.925879"
           }
+        },
+        "item_eA8BxN": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(403) 367-7851",
+            "address": "KRAVE Automotive <br>5019 11 St SE #3",
+            "city": "Calgary",
+            "country": "Canada",
+            "cross_street": "",
+            "postal_code": "T2H 1M7",
+            "state": "Alberta",
+            "lat": "51.0089502",
+            "lng": "-114.0403416"
+          }
         }
       },
       "block_order": [
@@ -439,7 +453,8 @@
         "item_jQDRW4",
         "item_C4tXbn",
         "item_AC4MCa",
-        "item_pRJwM6"
+        "item_pRJwM6",
+        "item_eA8BxN"
       ],
       "settings": {
         "show_breadcrumb": false,
