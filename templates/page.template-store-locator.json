@@ -212,6 +212,20 @@
             "lat": "40.3068317",
             "lng": "-111.7276203"
           }
+        },
+        "item_iwGE36": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(970) 224-2288",
+            "address": "Bullhide 4X4 & Auto Accessories <br>216 W Horsetooth Rd.",
+            "city": "Fort Collins",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "80525",
+            "state": "CO",
+            "lat": "40.5387909",
+            "lng": "-105.1168246"
+          }
         }
       },
       "block_order": [
@@ -229,7 +243,8 @@
         "item_3ppXGY",
         "item_f9abrT",
         "item_jP7WyR",
-        "item_JMJiHp"
+        "item_JMJiHp",
+        "item_iwGE36"
       ],
       "settings": {
         "show_breadcrumb": false,
