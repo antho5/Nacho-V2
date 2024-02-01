@@ -142,6 +142,20 @@
             "lat": "36.0966262",
             "lng": "-115.1821975"
           }
+        },
+        "item_6Bbjxj": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(661) 348-4750",
+            "address": "American Offroad <br>2505 K St",
+            "city": "Bakersfield",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "93301",
+            "state": "CA",
+            "lat": "35.3821043",
+            "lng": "119.0178123"
+          }
         }
       },
       "block_order": [
@@ -154,7 +168,8 @@
         "item_Q77mUA",
         "item_GJB39t",
         "item_dijMPg",
-        "item_nHPtGd"
+        "item_nHPtGd",
+        "item_6Bbjxj"
       ],
       "settings": {
         "show_breadcrumb": false,
