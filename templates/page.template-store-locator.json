@@ -478,6 +478,20 @@
             "lat": "41.6879137",
             "lng": "-86.1305777"
           }
+        },
+        "item_bJYejA": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(602) 692-0155",
+            "address": "Modern Off-Road and Automotive <br>3602 W Clarendon Ave.",
+            "city": "Phoenix",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "85019",
+            "state": "Az",
+            "lat": "33.4924193",
+            "lng": "-112.139843"
+          }
         }
       },
       "block_order": [
@@ -514,7 +528,8 @@
         "item_pcU3iA",
         "item_qRAJR3",
         "item_Qt3MAy",
-        "item_Q4hkTn"
+        "item_Q4hkTn",
+        "item_bJYejA"
       ],
       "settings": {
         "show_breadcrumb": false,
