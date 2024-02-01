@@ -128,6 +128,20 @@
             "lat": "32.8390709",
             "lng": "-97.2317038"
           }
+        },
+        "item_nHPtGd": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(702) 478-5222",
+            "address": "American Off-Road Customs <br>5115 Dean Martin Rd Suite 107",
+            "city": "Las Vegas",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "89118",
+            "state": "NV",
+            "lat": "36.0966262",
+            "lng": "-115.1821975"
+          }
         }
       },
       "block_order": [
@@ -139,7 +153,8 @@
         "item_3M3gtN",
         "item_Q77mUA",
         "item_GJB39t",
-        "item_dijMPg"
+        "item_dijMPg",
+        "item_nHPtGd"
       ],
       "settings": {
         "show_breadcrumb": false,
