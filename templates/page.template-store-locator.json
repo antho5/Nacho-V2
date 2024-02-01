@@ -352,6 +352,20 @@
             "lat": "39.453231",
             "lng": "-119.7791574"
           }
+        },
+        "item_jQDRW4": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(303) 761-7379",
+            "address": "High Country Performance 4 X 4 <br>1695 W Hamilton Pl",
+            "city": "Englewood",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "80110",
+            "state": "CO",
+            "lat": "39.6545546",
+            "lng": "-105.0102377"
+          }
         }
       },
       "block_order": [
@@ -379,7 +393,8 @@
         "item_wQ7gWw",
         "item_mmyPbM",
         "item_nBEUhV",
-        "item_LfcMAg"
+        "item_LfcMAg",
+        "item_jQDRW4"
       ],
       "settings": {
         "show_breadcrumb": false,
