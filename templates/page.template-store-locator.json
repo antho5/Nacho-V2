@@ -226,6 +226,20 @@
             "lat": "40.5387909",
             "lng": "-105.1168246"
           }
+        },
+        "item_bjjrWP": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(540) 323-7434",
+            "address": "Chaos Fab Shop <br>344 Victory Rd",
+            "city": "Winchester",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "22602",
+            "state": "VA",
+            "lat": "39.1408486",
+            "lng": "-78.1327126"
+          }
         }
       },
       "block_order": [
@@ -244,7 +258,8 @@
         "item_f9abrT",
         "item_jP7WyR",
         "item_JMJiHp",
-        "item_iwGE36"
+        "item_iwGE36",
+        "item_bjjrWP"
       ],
       "settings": {
         "show_breadcrumb": false,
