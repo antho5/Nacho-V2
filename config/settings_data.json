@@ -691,6 +691,9 @@
       },
       "password-page-1": {
         "type": "password-page-1",
+        "custom_css": [
+          ".password-body {max-width: 465px !important;}"
+        ],
         "settings": {
           "background_color": "",
           "brand_type": "image",
@@ -716,7 +719,7 @@
           "show_social_media": true,
           "social_media_color": "#232323",
           "show_copyright": false,
-          "copyright_content": ".password-body {\n  max-width: 465px !important;\n}",
+          "copyright_content": "",
           "copyright_color": "#7e7e7e"
         }
       }
