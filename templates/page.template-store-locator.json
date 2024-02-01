@@ -282,6 +282,20 @@
             "lat": "40.7220382",
             "lng": "-111.9850921"
           }
+        },
+        "item_mxrMcT": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(801) 395-2134",
+            "address": "Fat Bob's Garage <br>650 N Main St",
+            "city": "Layton",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "84041",
+            "state": "UT",
+            "lat": "41.069646",
+            "lng": "-111.9775374"
+          }
         }
       },
       "block_order": [
@@ -304,7 +318,8 @@
         "item_bjjrWP",
         "item_JBYrA7",
         "item_hEkVR9",
-        "item_JJ4Wft"
+        "item_JJ4Wft",
+        "item_mxrMcT"
       ],
       "settings": {
         "show_breadcrumb": false,
