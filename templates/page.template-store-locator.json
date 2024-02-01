@@ -72,6 +72,20 @@
             "lat": "-95.7495169",
             "lng": "29.5875078"
           }
+        },
+        "item_3M3gtN": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(281) 499-3806",
+            "address": "All Out Offroad Performance #2 <br>13261 Murphy Rd",
+            "city": "Stafford",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "77477",
+            "state": "TX",
+            "lat": "-95.5644801",
+            "lng": "29.6294755"
+          }
         }
       },
       "block_order": [
@@ -79,7 +93,8 @@
         "item_6bAchF",
         "item_8bRQ6P",
         "item_D9ydhD",
-        "item_jd788a"
+        "item_jd788a",
+        "item_3M3gtN"
       ],
       "settings": {
         "show_breadcrumb": false,
