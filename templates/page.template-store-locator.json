@@ -534,6 +534,20 @@
             "lat": "43.8483133",
             "lng": "-111.7752785"
           }
+        },
+        "item_AttYax": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(866) 601-5340",
+            "address": "Northridge 4 X 4 <br>4870 W 2100 S suite A",
+            "city": "Salt Lake City",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "84120",
+            "state": "UT",
+            "lat": "40.7270167",
+            "lng": "-112.0074893"
+          }
         }
       },
       "block_order": [
@@ -574,7 +588,8 @@
         "item_bJYejA",
         "item_mACHew",
         "item_eAPrmj",
-        "item_CxihCa"
+        "item_CxihCa",
+        "item_AttYax"
       ],
       "settings": {
         "show_breadcrumb": false,
