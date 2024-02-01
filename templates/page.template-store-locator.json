@@ -3,113 +3,23 @@
     "main": {
       "type": "store-locator",
       "blocks": {
-        "4510eed2-7267-448a-8bd8-bd54e93da332": {
+        "item_eGkGr9": {
           "type": "item",
           "settings": {
-            "phone_formatted": "360.340.0282",
-            "address": "Northridge4x4 <br> 7976 Rubicon Trail Pl NW",
-            "city": "Silverdale",
-            "country": "United States",
+            "phone_formatted": "(712) 348-3340",
+            "address": "300 Acres <br>6785 220th St",
+            "city": "Ocheyedan",
+            "country": "USA",
             "cross_street": "",
-            "postal_code": "98383",
-            "state": "WA",
-            "lat": "47.6351309",
-            "lng": "-122.7209587"
-          }
-        },
-        "item_KfgjQn": {
-          "type": "item",
-          "settings": {
-            "phone_formatted": "225.698.5337",
-            "address": "Searchers 4WD Supply and Outfitters <br> 16304 LA-16",
-            "city": "French Settlement",
-            "country": "United States",
-            "cross_street": "",
-            "postal_code": "70733",
-            "state": "LA",
-            "lat": "30.3059042",
-            "lng": "-90.8013778"
-          }
-        },
-        "item_gMxfL7": {
-          "type": "item",
-          "settings": {
-            "phone_formatted": "970.556.3304",
-            "address": "Bullhide 4x4 <br> 5817 S College Ave",
-            "city": "Fort Collins",
-            "country": "United States",
-            "cross_street": "",
-            "postal_code": "80525",
-            "state": "CO",
-            "lat": "40.505231",
-            "lng": "-105.0784378"
-          }
-        },
-        "item_rtntji": {
-          "type": "item",
-          "settings": {
-            "phone_formatted": "(202) 387-9338",
-            "address": "Northridge4x4 <br> 7976 Rubicon Trail Pl NW",
-            "city": "Silverdale",
-            "country": "United States",
-            "cross_street": "",
-            "postal_code": "98383",
-            "state": "WA",
-            "lat": "47.6351309",
-            "lng": "-122.7209587"
-          }
-        },
-        "item_tUnTim": {
-          "type": "item",
-          "settings": {
-            "phone_formatted": "(202) 387-9338",
-            "address": "Northridge4x4 <br> 7976 Rubicon Trail Pl NW",
-            "city": "Silverdale",
-            "country": "United States",
-            "cross_street": "",
-            "postal_code": "98383",
-            "state": "WA",
-            "lat": "47.6351309",
-            "lng": "-122.7209587"
-          }
-        },
-        "item_XTyG49": {
-          "type": "item",
-          "settings": {
-            "phone_formatted": "(202) 387-9338",
-            "address": "Northridge4x4 <br> 7976 Rubicon Trail Pl NW",
-            "city": "Silverdale",
-            "country": "United States",
-            "cross_street": "",
-            "postal_code": "98383",
-            "state": "WA",
-            "lat": "47.6351309",
-            "lng": "-122.7209587"
-          }
-        },
-        "item_QgkDfA": {
-          "type": "item",
-          "settings": {
-            "phone_formatted": "(202) 387-9338",
-            "address": "Northridge4x4 <br> 7976 Rubicon Trail Pl NW",
-            "city": "Silverdale",
-            "country": "United States",
-            "cross_street": "",
-            "postal_code": "98383",
-            "state": "WA",
-            "lat": "47.6351309",
-            "lng": "-122.7209587"
+            "postal_code": "51354",
+            "state": "IA",
+            "lat": "43.3275857",
+            "lng": "-95.4506779"
           }
         }
       },
       "block_order": [
-        "4510eed2-7267-448a-8bd8-bd54e93da332",
-        "item_KfgjQn",
-        "item_gMxfL7",
-        "item_rtntji",
-        "item_tUnTim",
-        "item_XTyG49",
-        "item_QgkDfA"
+        "item_eGkGr9"
       ],
       "settings": {
         "show_breadcrumb": false,
