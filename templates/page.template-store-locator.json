@@ -310,6 +310,20 @@
             "lat": "33.4451887",
             "lng": "-111.7313388"
           }
+        },
+        "item_mmyPbM": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(480) 296-5935",
+            "address": "Bullet Proof Off-Road <br>1722 N Banning STE 105",
+            "city": "Mesa",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "85205",
+            "state": "AZ",
+            "lat": "33.4467283",
+            "lng": "-111.7237231"
+          }
         }
       },
       "block_order": [
@@ -334,7 +348,8 @@
         "item_hEkVR9",
         "item_JJ4Wft",
         "item_mxrMcT",
-        "item_wQ7gWw"
+        "item_wQ7gWw",
+        "item_mmyPbM"
       ],
       "settings": {
         "show_breadcrumb": false,
