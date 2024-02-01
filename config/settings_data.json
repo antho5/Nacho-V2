@@ -716,7 +716,7 @@
           "show_social_media": true,
           "social_media_color": "#232323",
           "show_copyright": false,
-          "copyright_content": ".password-body {\n  max-width: 465px;\n}",
+          "copyright_content": ".password-body {\n  max-width: 465px !important;\n}",
           "copyright_color": "#7e7e7e"
         }
       }
