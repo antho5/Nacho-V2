@@ -380,6 +380,20 @@
             "lat": "33.378334",
             "lng": "-111.8212966"
           }
+        },
+        "item_AC4MCa": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(706) 692-5488",
+            "address": "JeepHut Offroad <br>172 Confederate Ave",
+            "city": "Jasper",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "30143",
+            "state": "GA",
+            "lat": "34.472024",
+            "lng": "-84.4603708"
+          }
         }
       },
       "block_order": [
@@ -409,7 +423,8 @@
         "item_nBEUhV",
         "item_LfcMAg",
         "item_jQDRW4",
-        "item_C4tXbn"
+        "item_C4tXbn",
+        "item_AC4MCa"
       ],
       "settings": {
         "show_breadcrumb": false,
