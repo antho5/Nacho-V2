@@ -44,12 +44,27 @@
             "lat": "-95.6865442",
             "lng": "38.9665425"
           }
+        },
+        "item_D9ydhD": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(941) 209-5144",
+            "address": "AFNY Specialties Inc. <br>3153 12th St E",
+            "city": "Ellenton",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "34222",
+            "state": "FL",
+            "lat": "-82.5291213",
+            "lng": "27.523753"
+          }
         }
       },
       "block_order": [
         "item_eGkGr9",
         "item_6bAchF",
-        "item_8bRQ6P"
+        "item_8bRQ6P",
+        "item_D9ydhD"
       ],
       "settings": {
         "show_breadcrumb": false,
