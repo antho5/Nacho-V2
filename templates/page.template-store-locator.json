@@ -254,6 +254,20 @@
             "lat": "32.8942802",
             "lng": "-96.901442"
           }
+        },
+        "item_hEkVR9": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(970) 259-1662",
+            "address": "Durango Truck Accessories & LINE-X <br>29465 US-160",
+            "city": "Durango",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "81301",
+            "state": "CO",
+            "lat": "37.2278447",
+            "lng": "-107.8123462"
+          }
         }
       },
       "block_order": [
@@ -274,7 +288,8 @@
         "item_JMJiHp",
         "item_iwGE36",
         "item_bjjrWP",
-        "item_JBYrA7"
+        "item_JBYrA7",
+        "item_hEkVR9"
       ],
       "settings": {
         "show_breadcrumb": false,
