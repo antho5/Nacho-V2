@@ -506,6 +506,20 @@
             "lat": "29.7845887",
             "lng": "-95.7962168"
           }
+        },
+        "item_eAPrmj": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(360) 340-0282",
+            "address": "Northridge 4 X 4 <br>7976 Rubicon Trail Pl NW",
+            "city": "Silverdale",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "98383",
+            "state": "WA",
+            "lat": "47.6351309",
+            "lng": "-122.7209587"
+          }
         }
       },
       "block_order": [
@@ -544,7 +558,8 @@
         "item_Qt3MAy",
         "item_Q4hkTn",
         "item_bJYejA",
-        "item_mACHew"
+        "item_mACHew",
+        "item_eAPrmj"
       ],
       "settings": {
         "show_breadcrumb": false,
