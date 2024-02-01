@@ -660,6 +660,20 @@
             "lat": "33.1196228",
             "lng": "-117.1098908"
           }
+        },
+        "item_jBRm4n": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(936) 321-4040",
+            "address": "Texas Truckworks <br>32311 FM2978",
+            "city": "Magnolia",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "77354",
+            "state": "TX",
+            "lat": "30.2100501",
+            "lng": "-95.574827"
+          }
         }
       },
       "block_order": [
@@ -709,7 +723,8 @@
         "item_kpg7TY",
         "item_XamTib",
         "item_bJrqp7",
-        "item_QDajgk"
+        "item_QDajgk",
+        "item_jBRm4n"
       ],
       "settings": {
         "show_breadcrumb": false,
