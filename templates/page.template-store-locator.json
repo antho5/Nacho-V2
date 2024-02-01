@@ -450,6 +450,20 @@
             "lat": "33.4610028",
             "lng": "-112.2498263"
           }
+        },
+        "item_Qt3MAy": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(801) 996-8369",
+            "address": "Lone Peak Collision Repair <br>8062 S State St",
+            "city": "Midvale",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "84047",
+            "state": "UT",
+            "lat": "40.6049062",
+            "lng": "-111.8915489"
+          }
         }
       },
       "block_order": [
@@ -484,7 +498,8 @@
         "item_pRJwM6",
         "item_eA8BxN",
         "item_pcU3iA",
-        "item_qRAJR3"
+        "item_qRAJR3",
+        "item_Qt3MAy"
       ],
       "settings": {
         "show_breadcrumb": false,
