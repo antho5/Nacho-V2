@@ -548,6 +548,20 @@
             "lat": "40.7270167",
             "lng": "-112.0074893"
           }
+        },
+        "item_TpEXxc": {
+          "type": "item",
+          "settings": {
+            "phone_formatted": "(266) 900-8841",
+            "address": "Rebel Off Road <br>22551 Shannon Cir",
+            "city": "Lake Forest",
+            "country": "USA",
+            "cross_street": "",
+            "postal_code": "92630",
+            "state": "CA",
+            "lat": "33.6351004",
+            "lng": "-117.7123284"
+          }
         }
       },
       "block_order": [
@@ -589,7 +603,8 @@
         "item_mACHew",
         "item_eAPrmj",
         "item_CxihCa",
-        "item_AttYax"
+        "item_AttYax",
+        "item_TpEXxc"
       ],
       "settings": {
         "show_breadcrumb": false,
