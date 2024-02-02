@@ -405,7 +405,7 @@
     "product-recommendations": {
       "type": "product-recommendations",
       "settings": {
-        "display_product_block": false,
+        "display_product_block": true,
         "product_block_container": "container",
         "padding_full_width": 0,
         "enable_border_top": true,
