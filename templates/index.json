@@ -539,6 +539,9 @@
         "73fc0d25-51e9-4ded-a79c-e447ae0d1100",
         "b2e3c340-a9df-488d-bda3-83f4c769e6ad"
       ],
+      "custom_css": [
+        ".themevale_MultiCategory_wrapper {bottom: 8px;}"
+      ],
       "settings": {
         "container": "fullwidth",
         "padding_full_width": 0,
@@ -548,7 +551,7 @@
         "mg_bottom_desktop": 75,
         "mg_bottom_tablet": 50,
         "mg_bottom_mobile": 50,
-        "slideshow_background": "",
+        "slideshow_background": "#232830",
         "slideshow_background_gradient": "",
         "autoplay": true,
         "slideshow_speed": "5000",
