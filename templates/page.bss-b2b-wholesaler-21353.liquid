@@ -4,8 +4,8 @@
             if (typeof BSS_B2B == 'undefined') {
               var BSS_B2B = {};
             }
-            BSS_B2B.formDataRender = [{"type":"text","required":true,"label":"Phone","className":"form-control phone-field","name":"phone-field","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":true,"label":"Address","className":"form-control address-field","name":"address-field","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":false,"label":"Address 2","className":"form-control apartment-field","name":"apartment-field","access":false,"subtype":"text","placement":"bottom"},{"type":"autocomplete","required":true,"label":"Country","className":"form-control country-field","name":"country-field","access":false,"requireValidOption":false,"values":[{"label":"","value":"","selected":false}],"placement":"bottom"},{"type":"text","required":true,"label":"City","className":"form-control city-field","name":"city-field","access":false,"subtype":"text","placement":"bottom"},{"type":"select","label":"State","className":"form-control state-field","name":"state-field","access":false,"values":[{"label":"","value":"","selected":false}],"placement":"bottom"},{"type":"text","required":true,"label":"Zip","className":"form-control zip-field","name":"zip-field","access":false,"subtype":"text","placement":"bottom"},{"type":"select","required":false,"label":"Are You A...","className":"form-control","name":"select-1706027090811-0","access":false,"values":[{"label":"Manufacturer ","value":"manufacturer ","selected":true},{"label":"Dealer","value":"dealer","selected":false},{"label":"Vehicle Builder","value":"vehicle-builder","selected":false},{"label":"Vehicle Owner","value":"vehicle-owner","selected":true},{"label":"Racer","value":"racer","selected":true}],"placement":"bottom"},{"type":"textarea","required":false,"label":"What's Your Plan?","className":"form-control","name":"textarea-1706027098446-0","access":false,"subtype":"textarea","placement":"bottom"},{"type":"file","required":false,"label":"Share Your Build Plan Photo","className":"form-control","name":"file-1706027150611-0","access":false,"placement":"bottom"}];
-            BSS_B2B.formId = 21308;
+            BSS_B2B.formDataRender = [{"type":"text","required":false,"label":"Phone","className":"form-control phone-field","name":"phone-field","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":false,"label":"Address","className":"form-control address-field","name":"address-field","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":false,"label":"Apartment/suite/etc.","className":"form-control apartment-field","name":"apartment-field","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":false,"label":"City","className":"form-control city-field","name":"city-field","access":false,"subtype":"text","placement":"bottom"},{"type":"select","label":"State","className":"form-control state-field","name":"state-field","access":false,"values":[{"label":"","value":"","selected":false}],"placement":"bottom"},{"type":"text","required":false,"label":"Zip","className":"form-control zip-field","name":"zip-field","access":false,"subtype":"text","placement":"bottom"},{"type":"autocomplete","required":false,"label":"Country","className":"form-control country-field","name":"country-field","access":false,"requireValidOption":false,"values":[{"label":"","value":"","selected":false}],"placement":"bottom"},{"type":"select","required":true,"label":"Department Desired","className":"form-control","name":"select-1706123664103-0","access":false,"values":[{"label":"Marketing","value":"marketing","selected":true},{"label":"Sales","value":"sales","selected":false},{"label":"Operations","value":"operations","selected":false},{"label":"Engineering","value":"engineering","selected":true},{"label":"Other","value":"other","selected":true}],"placement":"bottom"},{"type":"textarea","required":false,"label":"Please describe yourself in a fun non resume description","className":"form-control","name":"textarea-1706123678997-0","access":false,"subtype":"textarea","placement":"bottom"}];
+            BSS_B2B.formId = 21353;
             BSS_B2B.reCAPCHA = 1;
             BSS_B2B.CAPCHA_SITE_KEY = "6LcYPEgbAAAAAKEQdimI1PPA4vuOJHxNb5p6eLUo";
             BSS_B2B.status = 1;
@@ -34,10 +34,10 @@ margin: 0px 20px;
     margin: auto;
     padding-left: 5%;
     padding-right: 5%;
-    padding-bottom: 22px;
+    padding-bottom: 42px;
     color: rgb(86, 86, 86);
     font-weight: bold;
-    max-width: 700px;
+    max-width: 650px;
     margin-top: 40px;
     border-color: rgba(97,97,97,1);
     border-radius: 6px;
@@ -105,6 +105,6 @@ display: block;
                 {{ page.content }}
             </div>
         </div>
-        {% section 'bss-b2b-wholesaler-form-21308' %}
+        {% section 'bss-b2b-wholesaler-form-21353' %}
     </div>
 </div>
