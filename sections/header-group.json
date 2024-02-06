@@ -104,7 +104,7 @@
       ],
       "settings": {
         "container": "1770",
-        "padding_full_width": 20,
+        "padding_full_width": 0,
         "header_bg": "#e6e6e6",
         "header_bg_gradient": "",
         "header_text_transform": "uppercase",
@@ -205,11 +205,11 @@
         "padding_full_width": 0,
         "header_navigation_bg": "#232830",
         "header_navigation_bg_gradient": "",
+        "sticky_header_type": "always",
+        "sticky_header_width": "full",
         "enable_transparent": false,
         "transparent_color": "#ffffff",
-        "transparent_color_hover": "#ffffff",
-        "sticky_header_type": "always",
-        "sticky_header_width": "full"
+        "transparent_color_hover": "#ffffff"
       }
     },
     "header-mobile": {
