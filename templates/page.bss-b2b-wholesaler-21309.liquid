@@ -1,0 +1,110 @@
+
+            {{ 'bss-b2b-state.js' | asset_url | script_tag }}
+            <script id="bss-b2b-wholesaler-form">
+            if (typeof BSS_B2B == 'undefined') {
+              var BSS_B2B = {};
+            }
+            BSS_B2B.formDataRender = [{"type":"text","required":true,"label":"Legal Business Name","className":"form-control company-field","name":"company-field","access":false,"subtype":"text","placement":"top"},{"type":"text","required":true,"label":"DBA","className":"form-control","name":"text-1706028429218-0","access":false,"subtype":"text","placement":"top"},{"type":"file","required":true,"label":"Tax Resale Certificate","className":"form-control","name":"file-1707246258644-0","access":false,"placement":"top"},{"type":"text","required":true,"label":"Phone","className":"form-control phone-field","name":"phone-field","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":true,"label":"Website Address","className":"form-control","name":"text-1706028474897-0","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":true,"label":"State of Incorporation","className":"form-control","name":"text-1706028473941-0","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":true,"label":"Referred By","className":"form-control","name":"text-1706028475889-0","access":false,"subtype":"text","placement":"bottom"},{"type":"textarea","required":false,"label":"Business Description","className":"form-control","name":"textarea-1706028521041-0","access":false,"subtype":"textarea","placement":"bottom"},{"type":"header","subtype":"h3","label":"Shipping Information","access":false,"placement":"bottom"},{"type":"text","required":true,"label":"Address","className":"form-control address-field","name":"address-field","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":false,"label":"Address 2","className":"form-control apartment-field","name":"apartment-field","access":false,"subtype":"text","placement":"bottom"},{"type":"text","required":true,"label":"City","className":"form-control city-field","name":"city-field","access":false,"subtype":"text","placement":"bottom"},{"type":"select","label":"State","className":"form-control state-field","name":"state-field","access":false,"values":[{"label":"","value":"","selected":false}],"placement":"bottom"},{"type":"text","required":true,"label":"Zip","className":"form-control zip-field","name":"zip-field","access":false,"subtype":"text","placement":"bottom"},{"type":"autocomplete","required":true,"label":"Country","className":"form-control country-field","name":"country-field","access":false,"requireValidOption":false,"values":[{"label":"","value":"","selected":false}],"placement":"bottom"},{"type":"checkbox-group","required":true,"label":"Terms & Conditions","toggle":false,"inline":false,"name":"checkbox-group-1706029069833-0","access":false,"other":false,"values":[{"label":"I have read and agree to <a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/Dealer_Agreement_-_Final.pdf?v=1695102126\" target=\"_blank\" style=\"text-decoration: underline;\">Terms & Conditions</a>","value":"agree","selected":true},{"label":"I have read and agree to <a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/Dealer_Agreement_Web.pdf?v=1684278362\" target=\"_blank\" style=\"text-decoration: underline;\">Dealer Agreement</a>","value":"agree-1","selected":true}],"placement":"bottom"},{"type":"header","subtype":"h5","label":"All dealer requests for NACHO will be reviewed and a NACHO representative will reach back to you for the next steps. Thanks for your interest in offering our product line to your customers.","access":false,"placement":"bottom"}];
+            BSS_B2B.formId = 21309;
+            BSS_B2B.reCAPCHA = 1;
+            BSS_B2B.CAPCHA_SITE_KEY = "6LcYPEgbAAAAAKEQdimI1PPA4vuOJHxNb5p6eLUo";
+            BSS_B2B.status = 1;
+            BSS_B2B.created_account = 0;
+            BSS_B2B.redirect_url = "";
+            BSS_B2B.taxExempt = 0;
+            BSS_B2B.formPrivacyPolicyStatus = 0;
+            BSS_B2B.formPrivacyPolicyContent = `<p>By clicking Create, I confirm that I have read and accepted the <a href="/">privacy policy</a></p>`;
+            BSS_B2B.conditionalLogic = [];
+            </script>
+            <style>#RegisterForm input[type="submit"] {
+    width: fit-content !important;
+    padding: 16px 24px !important;
+    height: auto !important;
+    margin: auto !important;
+    margin-top: 10px !important;
+    background-color: #000 !important;
+    color: #fff !important;
+    font-size: 18px !important;
+border-radius: 8px;
+}
+.page-width {
+margin: 0px 20px;
+}
+.page-width .grid{
+    margin: auto;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 22px;
+    color: rgb(86, 86, 86);
+    font-weight: bold;
+    max-width: 650px;
+    margin-top: 40px;
+    border-color: rgba(97,97,97,1);
+    border-radius: 6px;
+    border-width: 2px;
+    border-style: solid;
+    background: #FFF;
+}
+#RegisterForm select,
+#RegisterForm textarea,
+#RegisterForm input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+    border: 1px solid #7D7D7D;
+    background-color: rgba(238,238,238,1) !important;
+    color: #333 !important;
+    font-weight: normal;
+    font-style: normal;
+    border-radius: 6px;
+}
+#RegisterForm input:not([type="checkbox"]):not([type="radio"]) { 
+    height: 32px;
+    padding: 6px 12px;
+}
+#RegisterForm .field {
+display: block !important;
+}
+#RegisterForm label {
+font-size: 14px;
+font-weight: 500;
+}
+.bss-grid-2 {
+    display: grid;
+    grid-template-columns: calc(50% - 14px) calc(50% - 14px);
+    column-gap: 28px;
+}
+#RegisterForm input[type=checkbox], input[type=radio] {
+appearance: auto !important;
+height: auto;
+    width: auto;
+    display: block;
+    position: unset;
+}
+.formbuilder-checkbox {
+    display: flex;
+}
+@media screen and (max-width: 750px) {
+.bss-grid-2 {
+display: block;
+}
+}
+.page-width h1 {
+    line-height: normal;
+}
+.g-recaptcha {
+    display: flex;
+    justify-content: center;
+}</style>
+            
+            {% assign bss-b2b-include-password = true %}
+<div class="page-width">
+    <div class="grid">
+        <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+            <div class="section-header text-center">
+                <h1>{{ page.title }}</h1>
+            </div>
+            <div class="rte">
+                {{ page.content }}
+            </div>
+        </div>
+        {% section 'bss-b2b-wholesaler-form-21309' %}
+    </div>
+</div>
