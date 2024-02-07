@@ -13,6 +13,21 @@
             "spacing_bottom": 0
           }
         },
+        "info_zkejUb": {
+          "type": "info",
+          "settings": {
+            "show_vendor": false,
+            "show_sku": true,
+            "show_availability": true,
+            "show_product_type": false,
+            "stock_level_display": "none",
+            "enable_border_top": false,
+            "enable_border_bottom": false,
+            "color_border": "#e6e6e6",
+            "spacing_top": 0,
+            "spacing_bottom": 18
+          }
+        },
         "0e4ea696-4820-4c98-aaa6-806d41782a3d": {
           "type": "meta",
           "settings": {
@@ -132,6 +147,7 @@
       },
       "block_order": [
         "b0ea69b7-8a54-4a3c-9abd-0fcceeabaaa0",
+        "info_zkejUb",
         "0e4ea696-4820-4c98-aaa6-806d41782a3d",
         "4f95b592-8369-4ab0-b30d-24e463fb6890",
         "d98e243b-3682-495a-965a-1c7f7d460880",
