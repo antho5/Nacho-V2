@@ -153,6 +153,8 @@
     "category_filter_label1": "Year",
     "category_filter_label2": "Make",
     "category_filter_label3": "Model",
+    "bg_button_filter_color": "#ff7a01",
+    "hover_bg_button_filter_color": "#ff7a01",
     "quick_search_to_show": 3,
     "show_search_trending": false,
     "search_trending_title": "",
