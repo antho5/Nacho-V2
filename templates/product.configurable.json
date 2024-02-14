@@ -125,7 +125,7 @@
             "content": "",
             "enable_btn_show_more": false,
             "maximum_des_to_show": 300,
-            "product_custom_source": "key_text",
+            "product_custom_source": "dynamic",
             "product_tab_key_metafield": "{{ product.metafields.c_f.custom_tab1.value }}"
           }
         },
@@ -179,6 +179,12 @@
             "spacing_top": 30,
             "spacing_bottom": 0
           }
+        },
+        "custom_liquid_KJiXHD": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% for variant in product.variants %}\n{% if product.selected_or_first_available_variant.id == variant.id %}\n<strong>Only {{ c_f.custom_tab1 }} PCS are available in {{variant.title}}!<\/strong>\n{% endif %}\n{% endfor %}\n<script src=\"https:\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/3.5.1\/jquery.min.js\"><\/script>\n<script type=\"text\/javascript\">\njQuery(document).ready(function($){\n$(\".no-js-hidden\").on(\"click\", function(){\nvar refreshint = setInterval(function(){\nlocation.reload();\n}, 1000);    });   });\n<\/script>"
+          }
         }
       },
       "block_order": [
@@ -196,7 +202,8 @@
         "3d9ea84d-5527-4bce-abe6-5debef3ec955",
         "19ab1d9f-74b2-4c76-bf2e-1bc749e5c2a3",
         "a86220cf-8641-4e06-87d3-b5ffa195501b",
-        "1180d91b-75f9-49d9-a9db-2b9f5a49408d"
+        "1180d91b-75f9-49d9-a9db-2b9f5a49408d",
+        "custom_liquid_KJiXHD"
       ],
       "settings": {
         "container": "default",
