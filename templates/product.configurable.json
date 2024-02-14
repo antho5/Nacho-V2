@@ -122,11 +122,11 @@
             "open_tab_mobile": false,
             "title": "Specification",
             "type": "metafield",
-            "content": "<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.Donec pretium egestas sapien et mollis. Pellentesque diam dolor cosmopolis etos lobortis.<\/p>\n<dl>\n<dt>Comodous:<\/dt>\n<dd>Comodous in tempor ullamcorper miaculis<\/dd>\n<\/dl>\n<dl>\n<dt>Mattis laoreet:<\/dt>\n<dd>Pellentesque vitae neque mollis urna mattis laoreet.<\/dd>\n<\/dl>\n<dl>\n<dt>Divamus de ametos:<\/dt>\n<dd>Divamus sit amet purus justo.<\/dd>\n<\/dl>\n<dl>\n<dt>Molestie:<\/dt>\n<dd>Proin molestie egestas orci ac suscipit risus posuere loremous<\/dd>\n<\/dl>",
+            "content": "",
             "enable_btn_show_more": false,
             "maximum_des_to_show": 300,
             "product_custom_source": "key_text",
-            "product_tab_key_metafield": "c_f.custom_tab1"
+            "product_tab_key_metafield": "{{ product.metafields.c_f.custom_tab1.value }}"
           }
         },
         "3d9ea84d-5527-4bce-abe6-5debef3ec955": {
