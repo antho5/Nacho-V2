@@ -179,6 +179,19 @@
             "spacing_top": 30,
             "spacing_bottom": 0
           }
+        },
+        "grouped_product_8wkRbp": {
+          "type": "grouped_product",
+          "settings": {
+            "spacing_top": 0,
+            "spacing_bottom": 0,
+            "atc_color": "#ffffff",
+            "atc_border_color": "#232323",
+            "atc_bg_color": "#232323",
+            "atc_color_hover": "#232323",
+            "atc_border_color_hover": "#232323",
+            "atc_bg_color_hover": "#ffffff"
+          }
         }
       },
       "block_order": [
@@ -196,7 +209,8 @@
         "3d9ea84d-5527-4bce-abe6-5debef3ec955",
         "19ab1d9f-74b2-4c76-bf2e-1bc749e5c2a3",
         "a86220cf-8641-4e06-87d3-b5ffa195501b",
-        "1180d91b-75f9-49d9-a9db-2b9f5a49408d"
+        "1180d91b-75f9-49d9-a9db-2b9f5a49408d",
+        "grouped_product_8wkRbp"
       ],
       "settings": {
         "container": "default",
