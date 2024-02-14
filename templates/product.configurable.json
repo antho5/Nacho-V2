@@ -126,7 +126,7 @@
             "enable_btn_show_more": false,
             "maximum_des_to_show": 300,
             "product_custom_source": "dynamic",
-            "product_tab_key_metafield": "{{ product.metafields.c_f.custom_tab1.value }}"
+            "product_tab_key_metafield": "c_f.custom_tab1"
           }
         },
         "3d9ea84d-5527-4bce-abe6-5debef3ec955": {
