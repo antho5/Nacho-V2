@@ -670,16 +670,10 @@
 
     ],
     "blocks": {
-      "15683396631634586217": {
-        "type": "shopify:\/\/apps\/inbox\/blocks\/chat\/841fc607-4181-4ad1-842d-e24d7f8bad6b",
+      "bss-b2b-c0bd2346b455": {
+        "type": "shopify:\/\/apps\/bss-b2b-wholesale-solution\/blocks\/config-header\/451233f2-9631-4c49-8b6f-057e4ebcde7f",
         "disabled": false,
         "settings": {
-          "button_color": "#ff9800",
-          "button_icon": "chat_bubble",
-          "button_horizontal_position": "bottom_right",
-          "button_vertical_position": "lowest",
-          "button_text": "no_text",
-          "greeting_message": "👋 Hi, message us with any questions. We're happy to help!"
         }
       }
     }
