@@ -126,15 +126,6 @@
             "spacing_bottom": 0
           }
         },
-        "bd066b80-c8e3-4f3e-8280-b27fbf6e9423": {
-          "type": "description",
-          "settings": {
-            "open_tab_mobile": true,
-            "title": "Description",
-            "enable_btn_show_more": true,
-            "maximum_des_to_show": 2000
-          }
-        },
         "2c38cf00-c2f0-4413-a324-01c020ddfceb": {
           "type": "share",
           "settings": {
@@ -142,6 +133,16 @@
             "share_layout": "2",
             "spacing_top": 0,
             "spacing_bottom": 0
+          }
+        },
+        "short_description_RnyFgr": {
+          "type": "short_description",
+          "settings": {
+            "word_number": "17",
+            "fontsize_text": 12,
+            "color_text": "#3c3c3c",
+            "spacing_top": 0,
+            "spacing_bottom": 13
           }
         }
       },
@@ -156,8 +157,8 @@
         "f1b31d90-1e43-4948-9fe3-97ba43f6fb34",
         "19de9abb-17c8-4d67-941d-b32706ed06fd",
         "10093fcf-2053-47e9-bedb-841bb0d046fa",
-        "bd066b80-c8e3-4f3e-8280-b27fbf6e9423",
-        "2c38cf00-c2f0-4413-a324-01c020ddfceb"
+        "2c38cf00-c2f0-4413-a324-01c020ddfceb",
+        "short_description_RnyFgr"
       ],
       "settings": {
         "container": "1770",
