@@ -122,8 +122,7 @@
   margin-right: -10px;
 }
 [data-sub-collection-slider]  .slick-track {
-  margin-left: 0;
-  margin-right: 0;
+  margin: 0 auto;
 }
 [data-sub-collection-slider] .slick-arrow.slick-prev {
   left: 10px !important;
