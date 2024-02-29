@@ -79,7 +79,7 @@
                             <em>*</em>
                         </label>      
                         <input class="form-input form-input-placeholder{% if form.errors contains "email" %} error{% endif %}"
-                            bss-b2b-is-email-field type="email"
+                            type="email"
                             name="customer[email]"
                             id="RegisterForm-email"
                             {% if form.email %} value="{{ form.email }}"{% endif %}
@@ -126,4 +126,4 @@
         </div>
     </div>
   </div>
-</div>{% include 'bss-b2b-wholesaler-default-login-form' %}
+</div>
