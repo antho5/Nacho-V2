@@ -9,3 +9,8 @@
 // Please use only CSS to style the layout.
 //
 // =============================================================================*/
+
+/* bss custom */
+#customer_login .password-field {
+  display: block !important;
+}
