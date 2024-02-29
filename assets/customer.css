@@ -1342,5 +1342,8 @@
 
 /* bss custom */
 #customer_login .password-field {
-  display: block !important;
+  flex-direction: column;
+}
+.icon-show-hide-password {
+    height: 138%;
 }
