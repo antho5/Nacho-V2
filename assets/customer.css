@@ -1358,3 +1358,8 @@
     padding-right: 3.2rem;
   }
 }
+
+/* bss custom */
+#customer_login .password-field {
+  display: block !important;
+}
