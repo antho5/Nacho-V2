@@ -160,6 +160,9 @@
         "2c38cf00-c2f0-4413-a324-01c020ddfceb",
         "short_description_RnyFgr"
       ],
+      "custom_css": [
+        ".installment {display: none;}"
+      ],
       "settings": {
         "container": "1770",
         "padding_full_width": 0,
