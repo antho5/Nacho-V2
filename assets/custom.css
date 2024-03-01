@@ -14,3 +14,10 @@
 #customer_login .password-field {
   display: block !important;
 }
+
+.productView-info {
+  text-transform: uppercase;
+}
+.productView-info-title {
+  text-transform: uppercase;
+}
