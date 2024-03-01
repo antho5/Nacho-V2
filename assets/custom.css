@@ -18,6 +18,11 @@
 .productView-info {
   text-transform: uppercase;
 }
+
 .productView-info-title {
   text-transform: uppercase;
+}
+
+.shopify-installments {
+  display: none !important;
 }
