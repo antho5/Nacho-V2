@@ -1506,7 +1506,7 @@ rect:empty,
 textarea:empty,
 .display-empty:empty,
 shopify-payment-terms:empty,
-shopify-installments-modal:none,
+shopify-installments-modal:empty,
 model-viewer:empty,
 polyline:empty,
 polygon:empty {
