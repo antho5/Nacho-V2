@@ -15,10 +15,9 @@
   display: block !important;
 }
 
-.collection-banner .image img {
-  object-fit: contain !important;
+.productView-info {
+  text-transform: uppercase;
 }
-
-.collection-banner {
-  top: -16px;
+.productView-info-title {
+  text-transform: uppercase;
 }
