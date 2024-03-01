@@ -26,3 +26,7 @@
 .installment {
   display: none;
 }
+
+.productView-info-name {
+  width: 150px !important;
+}
