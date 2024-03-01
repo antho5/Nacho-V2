@@ -23,6 +23,6 @@
   text-transform: uppercase;
 }
 
-#shopify-installments {
+p#shopify-installments {
   display: none !important;
 }
