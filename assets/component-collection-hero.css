@@ -29,6 +29,12 @@
     object-position: center;
 }
 
+@media(max-width: 990px){
+    .collection-banner .image img {
+        top: 0;
+    }
+}
+
 .collection-banner .image {
     display: none;
 }
