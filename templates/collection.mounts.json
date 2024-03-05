@@ -10,6 +10,7 @@
             "show_bg_overlay": true,
             "type": "full",
             "image": "shopify:\/\/shop_images\/unnamed.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/nacho-collection-header.webp",
             "bg_overlay": "#000000"
           }
         },
@@ -109,6 +110,7 @@
         "filter_rectangle": "Size",
         "filter_display_type": "show-more",
         "max_item_per_filter": 10,
+        "filter_label_all": "",
         "filter_hidden_tag_list": "",
         "show_toolbar": true,
         "show_sorting": true,
