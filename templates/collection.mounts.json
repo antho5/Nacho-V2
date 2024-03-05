@@ -3,11 +3,11 @@
     "banner": {
       "type": "main-collection-banner",
       "blocks": {
-        "2f29af17-8482-46cf-8d9c-05b734e165f7": {
+        "9f9a1a80-3370-40db-9cd2-836840e2073b": {
           "type": "image",
           "settings": {
             "show_image_parallax": false,
-            "show_bg_overlay": false,
+            "show_bg_overlay": true,
             "type": "full",
             "image": "shopify:\/\/shop_images\/unnamed.jpg",
             "image_mobile": "shopify:\/\/shop_images\/nacho-collection-header.webp",
@@ -17,7 +17,7 @@
         "9147d182-d0c6-4b47-ad9e-97ad5cd6ae5a": {
           "type": "description",
           "settings": {
-            "show_collection_description": false,
+            "show_collection_description": true,
             "show_read_more_read_less": false,
             "collection_description_position": "relative",
             "collection_description_align_tb": "center",
@@ -28,22 +28,22 @@
             "collection_description_bg_gradient": "",
             "show_sub_collection": true,
             "sub_collection_layout": "slider",
-            "maxheight_sub_collection": 50,
-            "sub_collection_description_position": "absolute",
+            "maxheight_sub_collection": 300,
+            "sub_collection_description_position": "relative",
             "sub_collection_type": "all",
             "colors_bg": "#ffffff",
             "colors_bg_gradient": "",
-            "all_sub_collection_padding_top": 0,
-            "all_sub_collection_padding_bottom": 0,
+            "all_sub_collection_padding_top": 10,
+            "all_sub_collection_padding_bottom": 10,
             "sub_collection_title": "",
             "sub_collection_title_color": "#232323",
-            "fontsize_sub_collection": 16,
+            "fontsize_sub_collection": 18,
             "fontweight_sub_collection": "500",
             "sub_collection_text_transform": "uppercase",
             "show_sub_collection_image": true,
-            "sub_collection_padding_top": 0,
-            "sub_collection_padding_bottom": 0,
-            "sub_collection_grid_gap": 5,
+            "sub_collection_padding_top": 10,
+            "sub_collection_padding_bottom": 10,
+            "sub_collection_grid_gap": 15,
             "color_sub_collection": "#232323",
             "sub_collection_background": "rgba(0,0,0,0)",
             "sub_collection_background_gradient": "",
@@ -51,13 +51,13 @@
             "sub_collection_color_hover": "#232323",
             "sub_collection_background_hover": "#ffffff",
             "sub_collection_background_gradient_hover": "",
-            "sub_collection_border_hover": "rgba(0,0,0,0)",
+            "sub_collection_border_hover": "#232323",
             "sub_collection_mg_top": 0
           }
         }
       },
       "block_order": [
-        "2f29af17-8482-46cf-8d9c-05b734e165f7",
+        "9f9a1a80-3370-40db-9cd2-836840e2073b",
         "9147d182-d0c6-4b47-ad9e-97ad5cd6ae5a"
       ],
       "settings": {
@@ -71,13 +71,13 @@
         "breadcrumb_gradient_mb": "",
         "show_page_title": true,
         "page_title_alignment": "left",
-        "container": "fullwidth",
+        "container": "default",
         "mg_top_desktop": 0,
         "mg_top_tablet": 0,
         "mg_top_mobile": 0,
-        "mg_bottom_desktop": 15,
-        "mg_bottom_tablet": 15,
-        "mg_bottom_mobile": 15,
+        "mg_bottom_desktop": 50,
+        "mg_bottom_tablet": 20,
+        "mg_bottom_mobile": 20,
         "layout": "1"
       }
     },
@@ -115,7 +115,7 @@
         "show_toolbar": true,
         "show_sorting": true,
         "show_item_per_page": true,
-        "show_view_as": false,
+        "show_view_as": true,
         "products_per_page": "20",
         "layout": "4",
         "show_infinite_scrolling": "show_more",
@@ -185,18 +185,11 @@
         "border_width_card": 5,
         "border_color_card": "#f0f1f4"
       }
-    },
-    "ce8304c4-11df-4f42-9ada-39c767cb5951": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<div class=\"powr-social-feed\" id=\"0db6845a_1650904810\"><\/div><script src=\"https:\/\/www.powr.io\/powr.js?platform=shopify\"><\/script>"
-      }
     }
   },
   "order": [
     "banner",
     "product-grid",
-    "product-recently-viewed",
-    "ce8304c4-11df-4f42-9ada-39c767cb5951"
+    "product-recently-viewed"
   ]
 }
