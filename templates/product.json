@@ -256,6 +256,9 @@
         "a86220cf-8641-4e06-87d3-b5ffa195501b",
         "1180d91b-75f9-49d9-a9db-2b9f5a49408d"
       ],
+      "custom_css": [
+        ".installment {display: none;}"
+      ],
       "settings": {
         "container": "container",
         "padding_full_width": 0,

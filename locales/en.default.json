@@ -218,7 +218,7 @@
       "cancel": "Cancel",
       "select_variant": "Select Options",
       "more_sizes": "More sizes available",
-      "measurements": "Measurements",
+      "measurements": "Specs",
       "media": {
         "media_alt": "Load media in gallery viewer, {{ mediaAlt }}",
         "video_alt": "Load video in gallery viewer, {{ mediaAlt }}",
