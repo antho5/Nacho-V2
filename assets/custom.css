@@ -30,3 +30,11 @@
 .productView-info-name {
   width: 150px !important;
 }
+
+.collection-banner .image img{
+  object-fit: contain !important;
+}
+
+.collection-banner {
+  top: -16px;
+}
