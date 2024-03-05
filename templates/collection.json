@@ -10,7 +10,7 @@
             "show_bg_overlay": false,
             "type": "full",
             "image": "shopify:\/\/shop_images\/unnamed.jpg",
-            "image_mobile": "shopify:\/\/shop_images\/header.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/nacho-collection-header.webp",
             "bg_overlay": "#000000"
           }
         },
