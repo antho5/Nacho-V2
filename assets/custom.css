@@ -14,3 +14,11 @@
 #customer_login .password-field {
   display: block !important;
 }
+
+.collection-banner .image img {
+  object-fit: contain !important;
+}
+
+.collection-banner {
+  top: -16px;
+}
