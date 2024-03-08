@@ -39,6 +39,12 @@
   top: -16px;
 }
 
+.govx-id-full-wrapper p{
+  font-size: 12px !important;
+}
+
+/*...Bootstrap CSS...*/
+
 .spec-container,
 .spec-container-fluid,
 .spec-container-xxl,
