@@ -733,8 +733,9 @@
   },
   "platform_customizations": {
     "custom_css": [
-      ".govx-id-full-wrapper p{font-size: 12px !important;}",
-      ".govx-id-button img {margin: 5px auto !important;}"
+      ".govx-id-full-wrapper p {font-size: 12px !important;}",
+      ".govx-id-button img {margin: 5px auto !important;}",
+      ".govx-id-full-wrapper .govx-id-full {margin: 0 auto !important;}"
     ]
   }
 }
