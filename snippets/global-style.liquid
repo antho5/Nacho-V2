@@ -1,4 +1,5 @@
 {{ 'base.css' | asset_url | stylesheet_tag }}
+{{ 'custom.css' | asset_url | stylesheet_tag }}
 
 {%- if settings.banner_animation == 'effect_fade_up' or settings.animations_hover_elements == '3d-lift' or settings.animations_hover_elements == 'vertical-lift' -%}
 	{{ 'fade-up-animation.css' | asset_url | stylesheet_tag }}
