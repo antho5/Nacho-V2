@@ -42,6 +42,10 @@
   font-weight: bold;
 }
 
+.halo-text-format p {
+  margin: 3px 0 !important;
+}
+
 /*...Bootstrap CSS...*/
 
 .spec-container,
