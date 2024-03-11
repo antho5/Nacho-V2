@@ -38,6 +38,10 @@
   background-color: #cfcfcf;
 }
 
+.spec-description {
+  font-weight: bold;
+}
+
 /*...Bootstrap CSS...*/
 
 .spec-container,
