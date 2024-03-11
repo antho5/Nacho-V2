@@ -99,7 +99,6 @@
   margin-right: calc(-0.5 * var(--bs-gutter-x));
   margin-left: calc(-0.5 * var(--bs-gutter-x));
   text-align: center;
-  overflow: auto;
 }
 .row > * {
   box-sizing: border-box;
@@ -110,7 +109,6 @@
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-top: var(--bs-gutter-y);
   text-align: center;
-  overflow: auto;
 }
 
 .col {
