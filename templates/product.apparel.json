@@ -166,7 +166,7 @@
       "settings": {
         "container": "1770",
         "padding_full_width": 0,
-        "show_sticky_info": false,
+        "show_sticky_info": true,
         "mg_top_desktop": 50,
         "mg_top_tablet": 50,
         "mg_top_mobile": 0,
@@ -206,7 +206,7 @@
         "show_qty": true,
         "show_subtotal": false,
         "subtotal_style": "1",
-        "show_sticky_add_to_cart": true,
+        "show_sticky_add_to_cart": false,
         "show_sticky_vendor": false,
         "sticky_atc_layout": "1",
         "show_tab": true,
