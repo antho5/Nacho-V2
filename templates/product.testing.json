@@ -1,11 +1,5 @@
 {
   "sections": {
-    "custom_liquid_EYDaDg": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": ""
-      }
-    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -393,7 +387,6 @@
     }
   },
   "order": [
-    "custom_liquid_EYDaDg",
     "main",
     "product-recommendations",
     "product-recently-viewed"
