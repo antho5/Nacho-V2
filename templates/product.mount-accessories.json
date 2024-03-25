@@ -160,7 +160,7 @@
       "settings": {
         "container": "default",
         "padding_full_width": 0,
-        "show_sticky_info": true,
+        "show_sticky_info": false,
         "mg_top_desktop": 50,
         "mg_top_tablet": 50,
         "mg_top_mobile": 0,
