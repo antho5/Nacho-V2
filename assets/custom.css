@@ -17,6 +17,7 @@
 
 .productView-info-name {
   width: 50%;
+  font-weight: bold !important;
 }
 
 .collection-banner .image img{
