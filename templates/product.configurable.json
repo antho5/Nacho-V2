@@ -259,8 +259,8 @@
       ],
       "custom_css": [
         ".installment {display: none;}",
-        ".productView-info {width: initial;}",
-        ".productView-info-name {width: initial;}"
+        ".productView-info {width: initial !important;}",
+        ".productView-info-name {width: initial !important;}"
       ],
       "settings": {
         "container": "container",
