@@ -258,7 +258,9 @@
         "1180d91b-75f9-49d9-a9db-2b9f5a49408d"
       ],
       "custom_css": [
-        ".installment {display: none;}"
+        ".installment {display: none;}",
+        ".productView-info {width: initial;}",
+        ".productView-info-name {width: initial;}"
       ],
       "settings": {
         "container": "container",
