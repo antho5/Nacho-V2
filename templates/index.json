@@ -917,11 +917,11 @@
             "mg_top_btn": 30
           }
         },
-        "template--15963530461354__8ca832d8-6669-441d-b6d9-9db74f475d94-1681322157c759736b-0": {
+        "image_HhphYj": {
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify:\/\/shop_images\/Industrial_Banner.jpg",
+            "image": "shopify:\/\/shop_images\/Offroad_Catagory_Banner.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
@@ -937,7 +937,7 @@
             "fontsize_sub_title": 20,
             "font_weight_sub_title": "500",
             "mg_bottom_sub_title": 10,
-            "title": "Industrial",
+            "title": "Off-Road",
             "color_title": "#232323",
             "fontsize_title": 20,
             "fontsize_title_mb": 20,
@@ -951,7 +951,7 @@
             "mg_top_des": 8,
             "enable_des_hover": false,
             "button": "",
-            "link": "shopify:\/\/products\/hb221",
+            "link": "shopify:\/\/collections\/off-road",
             "fontsize_btn": 16,
             "button_width": 190,
             "color_button": "#ffffff",
@@ -1025,7 +1025,7 @@
       "block_order": [
         "template--15963530461354__8ca832d8-6669-441d-b6d9-9db74f475d94-1681322157c759736b-2",
         "template--15963530461354__8ca832d8-6669-441d-b6d9-9db74f475d94-1681322157c759736b-1",
-        "template--15963530461354__8ca832d8-6669-441d-b6d9-9db74f475d94-1681322157c759736b-0",
+        "image_HhphYj",
         "609134ee-6609-4741-b5a8-4b400dee8339"
       ],
       "custom_css": [
