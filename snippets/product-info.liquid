@@ -1,7 +1,7 @@
 <div class="productView-info{% if enable_border_top %} has-border-top{% endif %}{% if enable_border_bottom %} has-border-bottom{% endif %}" style="--color-border: {{ color_border }}">
     {%- if show_vendor -%}
         <div class="productView-info-item">
-            <span class="productView-info-name" style="width: initial;">
+            <span class="productView-info-name" style="width: initial !important;">
                 {{ 'products.product.text.vendor' | t }}
             </span>
             <span class="productView-info-value">{{ product.vendor | link_to_vendor }}</span>
@@ -9,7 +9,7 @@
     {%- endif -%}
     {%- if show_sku -%}
         <div class="productView-info-item" data-sku {% unless current_variant.sku != blank %} style="display: none;"{% endunless %}>
-            <span class="productView-info-name" style="width: initial;">
+            <span class="productView-info-name" style="width: initial !important;">
                 {{ 'products.product.text.sku' | t }}
             </span>
             <span class="productView-info-value">{{ current_variant.sku }}</span>
@@ -25,7 +25,7 @@
     {%- endif -%}
     {%- if show_availability -%}
         <div class="productView-info-item" data-inventory data-stock-level="{{ stock_level_display }}">
-            <span class="productView-info-name" style="width: initial;">
+            <span class="productView-info-name" style="width: initial !important;">
                 {{ 'products.product.text.availability' | t }}
             </span>
             <span class="productView-info-value">
