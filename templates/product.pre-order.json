@@ -464,7 +464,7 @@
         "autoplay": true,
         "video_height": "55",
         "style_video": "mp4",
-        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "video_url": "",
         "url_mp4": "{{ product.metafields.custom.video_url_2.value }}",
         "description": "{{ product.title }} Video",
         "full_width": false
