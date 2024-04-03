@@ -11,7 +11,6 @@
       "blocks": {
         "0c57501e-3fe5-436d-9315-1a12a03f66ad": {
           "type": "image",
-          "disabled": true,
           "settings": {
             "enable_image": true,
             "image": "shopify:\/\/shop_images\/Supreme150Front.jpg",
