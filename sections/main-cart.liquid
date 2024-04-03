@@ -294,7 +294,7 @@
                                     <div class="cart--totals-title">{{ 'general.cart.order_summary' | t }}</div>
                                     <li class="cart-total cart-total-subtotal">
                                         <div class="cart-total-label"><span class="text">{{ 'general.cart.subtotal' | t }}</span></div>
-                                        <div class="cart-total-value"><span class="text">{{ cart.original_total_price | money }}</span></div>
+                                        <div class="cart-total-value"><span class="text" bss-b2b-cart-total-price>{{ cart.original_total_price | money }}</span></div>
                                     </li>
                                     {%- if show_shipping_rate_calculator -%}
                                         <li class="cart-total cart-total-shipping">
