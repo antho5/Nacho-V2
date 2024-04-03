@@ -742,7 +742,7 @@
         "color_view_all": "#3c3c3c",
         "icon_view_all": "",
         "color_view_all_icon": "#eb492f",
-        "title_align": "center",
+        "title_align": "left",
         "button_text": "Show More",
         "button_text_font_size": 14,
         "button_text_font_weight": "700",
