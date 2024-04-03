@@ -237,7 +237,7 @@
                                                             <dd class="price price--end" data-item-final-price-display>{{ current_variant.price | money }}</dd>
                                                         </dl>
                                                     {%- else -%}
-                                                        <span class="price price--end" data-item-final-price-display>{{ item.original_price | money }}</span>
+                                                        <span class="price price--end" data-item-final-price-display bss-b2b-cart-item-key="{{ item.key }}" bss-b2b-item-final-price>{{ item.original_price | money }}</span>
                                                     {%- endif -%}
                                                 </div>
                                             </div>
