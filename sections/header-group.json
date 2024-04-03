@@ -132,9 +132,9 @@
         "megamenu_style_3_LifhAt": {
           "type": "megamenu_style_3",
           "settings": {
-            "layout_block": "full",
+            "layout_block": "custom_width",
             "header_custom_width_size": 1200,
-            "mega_tyle": "style2",
+            "mega_tyle": "style1",
             "item": "Lights",
             "column": 3,
             "show_banner_1": true,
