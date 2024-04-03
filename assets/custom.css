@@ -32,6 +32,10 @@
   text-align: center !important;
 }
 
+.site-nav-title {
+  font-size: large;
+}
+
 .govx-id-full-wrapper p{
   font-size: 12px !important;
 }
