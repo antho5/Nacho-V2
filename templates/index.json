@@ -764,7 +764,7 @@
         "product_block_collection": "top-sellers",
         "product_block_limit": 3,
         "grid_gap": 30,
-        "pb_style": "style2",
+        "pb_style": "style1",
         "style_countdown": "style_1",
         "countdown": "",
         "font_size_countdown_text": 14,
