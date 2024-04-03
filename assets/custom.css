@@ -28,6 +28,10 @@
   top: -16px;
 }
 
+.megamenu_style_3 .menu-dropdown__column {
+  text-align: center !important;
+}
+
 .govx-id-full-wrapper p{
   font-size: 12px !important;
 }
