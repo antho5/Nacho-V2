@@ -6,8 +6,8 @@
         "image_yzj4PT": {
           "type": "image",
           "settings": {
-            "image_slide": "shopify:\/\/shop_images\/Grande_Pre_Order_Web_Banner.jpg",
-            "image_slide_mb": "shopify:\/\/shop_images\/Grande_Pre_Order_Mobile_Banner.jpg",
+            "image_slide": "shopify:\/\/shop_images\/Grande_Web_rev_1.jpg",
+            "image_slide_mb": "shopify:\/\/shop_images\/Grande_mobile_rev_1.jpg",
             "alignment": "left",
             "enable_custom_position": false,
             "custom_horizontal": "10",
