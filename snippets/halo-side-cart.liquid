@@ -94,7 +94,7 @@
                                             <s class="before-discount-price" data-item-original-price-display>
                                                 {{ item.original_price | money }}
                                             </s>
-                                            <span class="discounted-price" data-item-final-price-display bss-b2b-cart-item-key="{{ item.key }}" bss-b2b-item-final-price>
+                                            <span class="discounted-price" data-item-final-price-display>
                                                 {{ item.final_price | money }}
                                             </span>
                                         </span>
@@ -108,7 +108,7 @@
                                             </span>
                                         </span>
                                     {% else %}  
-                                        <span data-item-final-price-display>
+                                        <span data-item-final-price-display bss-b2b-cart-item-key="{{ item.key }}" bss-b2b-item-final-price>
                                           aaa
                                             {{ item.price | money }}
                                         </span>
