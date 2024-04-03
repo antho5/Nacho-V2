@@ -163,7 +163,7 @@
                                                                         <dt class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</dt>
                                                                         <dd><s class="cart-item__old-price price price--end" data-item-original-price-display>{{ item.original_price | money }}</s></dd>
                                                                         <dt class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</dt>
-                                                                        <dd class="price price--end" data-item-final-price-display>{{ item.final_price | money }}</dd>
+                                                                        <dd class="price price--end" data-item-final-price-display bss-b2b-cart-item-key="{{ item.key }}" bss-b2b-item-final-price>{{ item.final_price | money }}</dd>
                                                                     </dl>
                                                                     {%- if item.variant.available and item.unit_price_measurement -%}
                                                                         <div class="unit-price caption">
