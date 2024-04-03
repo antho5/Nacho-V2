@@ -33,7 +33,7 @@
 }
 
 .site-nav-title {
-  font-size: large;
+  font-size: large !important;
 }
 
 .govx-id-full-wrapper p{
