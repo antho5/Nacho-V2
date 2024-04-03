@@ -171,6 +171,29 @@
             "hot_label_bg_gradient": ""
           }
         },
+        "megamenu_style_3_LifhAt": {
+          "type": "megamenu_style_3",
+          "settings": {
+            "layout_block": "custom_width",
+            "header_custom_width_size": 1200,
+            "mega_tyle": "style1",
+            "item": "Lights",
+            "column": 3,
+            "show_banner_1": true,
+            "banner_1": "shopify:\/\/shop_images\/Supreme150Front.jpg",
+            "banner_url_1": "shopify:\/\/collections\/grande-products",
+            "show_banner_2": true,
+            "banner_2": "shopify:\/\/shop_images\/SAE1_f6e1c2eb-325a-42f2-9d9a-6cced5ab29bb.jpg",
+            "banner_url_2": "shopify:\/\/collections\/quatro-products",
+            "show_banner_3": true,
+            "banner_3": "shopify:\/\/shop_images\/tm5.jpg",
+            "banner_url_3": "shopify:\/\/collections\/tm5-products",
+            "show_banner_4": false,
+            "banner_url_4": "",
+            "show_banner_5": false,
+            "banner_url_5": ""
+          }
+        },
         "sections--14682829619277__9c03747e-b054-4db8-8194-5a35c71f82ca-1680876693acfad79f-2": {
           "type": "header_icons",
           "settings": {
@@ -193,42 +216,17 @@
             "cart_count_bubble_bg": "#ff7a01",
             "cart_count_bubble_bg_gradient": ""
           }
-        },
-        "megamenu_style_3_LifhAt": {
-          "type": "megamenu_style_3",
-          "disabled": true,
-          "settings": {
-            "layout_block": "custom_width",
-            "header_custom_width_size": 1200,
-            "mega_tyle": "style1",
-            "item": "Lights",
-            "column": 4,
-            "show_banner_1": true,
-            "banner_1": "shopify:\/\/shop_images\/PreOrderLaunchPhoto_e14344d0-dc4f-4442-b2a8-5831b0046017.png",
-            "banner_url_1": "",
-            "show_banner_2": true,
-            "banner_2": "shopify:\/\/shop_images\/SAE1_f6e1c2eb-325a-42f2-9d9a-6cced5ab29bb.jpg",
-            "banner_url_2": "",
-            "show_banner_3": true,
-            "banner_3": "shopify:\/\/shop_images\/SAEPair_985755cf-aeeb-4a80-a2ed-8cb6c63b52c3.jpg",
-            "banner_url_3": "",
-            "show_banner_4": true,
-            "banner_4": "shopify:\/\/shop_images\/tm5.png",
-            "banner_url_4": "",
-            "show_banner_5": false,
-            "banner_url_5": ""
-          }
         }
       },
       "block_order": [
         "sections--14682829619277__9c03747e-b054-4db8-8194-5a35c71f82ca-1680876693acfad79f-0",
         "sections--14682829619277__9c03747e-b054-4db8-8194-5a35c71f82ca-1680876693acfad79f-1",
-        "sections--14682829619277__9c03747e-b054-4db8-8194-5a35c71f82ca-1680876693acfad79f-2",
-        "megamenu_style_3_LifhAt"
+        "megamenu_style_3_LifhAt",
+        "sections--14682829619277__9c03747e-b054-4db8-8194-5a35c71f82ca-1680876693acfad79f-2"
       ],
       "settings": {
         "container": "1770",
-        "padding_full_width": 0,
+        "padding_full_width": 5,
         "header_navigation_bg": "#232830",
         "header_navigation_bg_gradient": "",
         "sticky_header_type": "always",
