@@ -118,8 +118,9 @@ class CartItems extends HTMLElement {
         if (checkoutHref == null) {
             checkoutHref = `${window.routes?.root ? window.routes.root : ""}/checkout`;
         }
-        
-        window.location = checkoutHref;
+        setTimeout(() => {
+          window.location = checkoutHref;
+        }, 2000)
     }
 
     initCartCountdown(){
