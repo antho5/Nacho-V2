@@ -214,7 +214,8 @@
         "grouped_product_8wkRbp"
       ],
       "custom_css": [
-        ".installment {display: none;}"
+        ".installment {display: none;}",
+        ".productView-pickUp {display: none;}"
       ],
       "settings": {
         "container": "default",
