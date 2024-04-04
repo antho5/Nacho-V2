@@ -161,6 +161,9 @@
     
       {% if content_for_header contains 'bss-b2b-cp' %}{% endif %}
       <script>
+          window.addEventListener("cart_changed", () => {
+          console.log(1111)
+         })
           let btn_cart_side_bar =  document.querySelector('.cart-icon-bubble[data-cart-sidebar]');
           console.log(btn_cart_side_bar)
           if(btn_cart_side_bar) {
