@@ -162,16 +162,20 @@
       {% if content_for_header contains 'bss-b2b-cp' %}{% endif %}
       <script>
           window.addEventListener("cart_changed", () => {
-          console.log(1111)
+            setTimeout(() => {
+              let chk_cart_drawer = document.querySelector(".halo-cart-sidebar #cart-sidebar-checkout");
+              if(BSS_B2B && BSS_B2B.addEventCheckoutBTN && chk_cart_drawer) {
+                  chk_cart_drawer.onclick = null;
+              }
+            }, 1500)
          })
           let btn_cart_side_bar =  document.querySelector('.cart-icon-bubble[data-cart-sidebar]');
-          console.log(btn_cart_side_bar)
           if(btn_cart_side_bar) {
             btn_cart_side_bar.addEventListener("click", () => {
               setTimeout(() => {
                 let chk_cart_drawer = document.querySelector(".halo-cart-sidebar #cart-sidebar-checkout");
                 if(BSS_B2B && BSS_B2B.addEventCheckoutBTN && chk_cart_drawer) {
-                  chk_cart_drawer.removeAttribute("onclick");
+                  chk_cart_drawer.onclick = null;
                 }
               }, 1500)
             })
