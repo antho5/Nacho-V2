@@ -166,6 +166,7 @@
               let chk_cart_drawer = document.querySelector(".halo-cart-sidebar #cart-sidebar-checkout");
               if(BSS_B2B && BSS_B2B.addEventCheckoutBTN && chk_cart_drawer) {
                   chk_cart_drawer.onclick = null;
+                  BSS_B2B.handleCartCheckoutBtn(JSON.parse(document.getElementById("bss-b2b-store-data").innerHTML))
               }
             }, 1500)
          })
