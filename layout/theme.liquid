@@ -159,5 +159,18 @@
         
         {% render 'halo-sidebar' %}
     
-      {% if content_for_header contains 'bss-b2b-cp' %}{% endif %}</body>
+      {% if content_for_header contains 'bss-b2b-cp' %}{% endif %}
+      <script>
+        window.onload = () => {
+          let chk_cart_drawer =  document.querySelector(".halo-cart-sidebar #cart-sidebar-checkout");
+          chk_cart_drawer.style.pointerEvents = "none";
+          chk_cart_drawer.style.opacity = "0.6";
+          setTimeout(() => {
+            chk_cart_drawer.removeAttribute("onclick");
+            chk_cart_drawer.style.pointerEvents = "unset";
+            chk_cart_drawer.style.opacity = "1";
+          }, 2000)
+        }
+      </script>
+      </body>
 </html>
