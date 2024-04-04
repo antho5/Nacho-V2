@@ -118,7 +118,13 @@ class CartItems extends HTMLElement {
         if (checkoutHref == null) {
             checkoutHref = `${window.routes?.root ? window.routes.root : ""}/checkout`;
         }
-          window.location = checkoutHref;
+          let data_bss_b2b = document.querySelector("[data-bss-b2b]");
+          if(data_bss_b2b){
+            console.log(data_bss_b2b)
+          }
+          else {
+            window.location = checkoutHref;
+          }
     }
 
     initCartCountdown(){
