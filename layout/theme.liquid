@@ -161,6 +161,9 @@
     
       {% if content_for_header contains 'bss-b2b-cp' %}{% endif %}
       <script>
+        window.addEventListener("cart_changed", () => {
+          console.log(1111)
+        })
         window.onload = () => {
           let chk_cart_drawer =  document.querySelector(".halo-cart-sidebar #cart-sidebar-checkout");
           chk_cart_drawer.style.pointerEvents = "none";
