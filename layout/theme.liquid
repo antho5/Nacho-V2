@@ -166,7 +166,9 @@
           chk_cart_drawer.style.pointerEvents = "none";
           chk_cart_drawer.style.opacity = "0.6";
           setTimeout(() => {
-            chk_cart_drawer.removeAttribute("onclick");
+            if(BSS_B2B && BSS_B2B.addEventCheckoutBTN) {
+              chk_cart_drawer.removeAttribute("onclick");
+            }
             chk_cart_drawer.style.pointerEvents = "unset";
             chk_cart_drawer.style.opacity = "1";
           }, 2000)
