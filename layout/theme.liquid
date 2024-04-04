@@ -166,7 +166,8 @@
           if(btn_cart_side_bar) {
             btn_cart_side_bar.addEventListener("click", () => {
               setTimeout(() => {
-                if(BSS_B2B && BSS_B2B.addEventCheckoutBTN) {
+                let chk_cart_drawer =  document.querySelector(".halo-cart-sidebar #cart-sidebar-checkout");
+                if(BSS_B2B && BSS_B2B.addEventCheckoutBTN && chk_cart_drawer) {
                   chk_cart_drawer.removeAttribute("onclick");
                 }
               }, 1000)
