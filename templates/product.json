@@ -143,14 +143,6 @@
             "spacing_bottom": 22
           }
         },
-        "19de9abb-17c8-4d67-941d-b32706ed06fd": {
-          "type": "pickup_availability",
-          "settings": {
-            "show_pickup_availability": true,
-            "spacing_top": 0,
-            "spacing_bottom": 27
-          }
-        },
         "10093fcf-2053-47e9-bedb-841bb0d046fa": {
           "type": "trust_image",
           "disabled": true,
@@ -247,7 +239,6 @@
         "04ea8843-f461-4f1d-8ea4-43f62fdfb21e",
         "f1b31d90-1e43-4948-9fe3-97ba43f6fb34",
         "683f2b15-db3b-4f63-8d0f-e688cc678581",
-        "19de9abb-17c8-4d67-941d-b32706ed06fd",
         "10093fcf-2053-47e9-bedb-841bb0d046fa",
         "bd066b80-c8e3-4f3e-8280-b27fbf6e9423",
         "87197f5f-be0e-4b89-9270-62bf6917ebe7",
