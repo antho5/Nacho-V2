@@ -414,12 +414,11 @@
         "color_des": "#3c3c3c",
         "fontsize_des": 16,
         "title_align": "center",
-        "cover_image": "{{ product.metafields.custom.cover_image_3.value }}",
         "autoplay": false,
         "video_height": "55",
         "style_video": "youtube",
         "video_url": "https:\/\/www.youtube.com\/watch?v=e8_Y1Oo9vTo",
-        "url_mp4": "{{ product.metafields.custom.video_url_3.value }}",
+        "url_mp4": "",
         "description": "{{ product.title }} Video",
         "full_width": false
       }
