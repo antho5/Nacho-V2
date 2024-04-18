@@ -395,6 +395,7 @@
     },
     "video_block_WwizQJ": {
       "type": "video-block",
+      "disabled": true,
       "settings": {
         "container": "container",
         "mg_top_desktop": 15,
@@ -425,6 +426,7 @@
     },
     "video_block_WWU9k7": {
       "type": "video-block",
+      "disabled": true,
       "settings": {
         "container": "container",
         "mg_top_desktop": 15,
