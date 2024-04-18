@@ -109,6 +109,16 @@
             "bin_bg_color_hover_gradient": ""
           }
         },
+        "short_description_RnyFgr": {
+          "type": "short_description",
+          "settings": {
+            "word_number": "250",
+            "fontsize_text": 14,
+            "color_text": "#3c3c3c",
+            "spacing_top": 0,
+            "spacing_bottom": 13
+          }
+        },
         "10093fcf-2053-47e9-bedb-841bb0d046fa": {
           "type": "trust_image",
           "disabled": true,
@@ -126,16 +136,6 @@
             "spacing_top": 0,
             "spacing_bottom": 0
           }
-        },
-        "short_description_RnyFgr": {
-          "type": "short_description",
-          "settings": {
-            "word_number": "250",
-            "fontsize_text": 14,
-            "color_text": "#3c3c3c",
-            "spacing_top": 0,
-            "spacing_bottom": 13
-          }
         }
       },
       "block_order": [
@@ -147,9 +147,9 @@
         "faa2b3e6-c0a1-4269-baa6-d2605efe4c05",
         "04ea8843-f461-4f1d-8ea4-43f62fdfb21e",
         "f1b31d90-1e43-4948-9fe3-97ba43f6fb34",
+        "short_description_RnyFgr",
         "10093fcf-2053-47e9-bedb-841bb0d046fa",
-        "2c38cf00-c2f0-4413-a324-01c020ddfceb",
-        "short_description_RnyFgr"
+        "2c38cf00-c2f0-4413-a324-01c020ddfceb"
       ],
       "custom_css": [
         ".installment {display: none;}"
