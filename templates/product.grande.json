@@ -395,7 +395,6 @@
     },
     "video_block_WwizQJ": {
       "type": "video-block",
-      "disabled": true,
       "settings": {
         "container": "container",
         "mg_top_desktop": 15,
@@ -415,6 +414,7 @@
         "color_des": "#3c3c3c",
         "fontsize_des": 16,
         "title_align": "center",
+        "cover_image": "shopify:\/\/shop_images\/Grande_harnes_TN.png",
         "autoplay": false,
         "video_height": "55",
         "style_video": "youtube",
@@ -426,7 +426,6 @@
     },
     "video_block_WWU9k7": {
       "type": "video-block",
-      "disabled": true,
       "settings": {
         "container": "container",
         "mg_top_desktop": 15,
@@ -446,6 +445,7 @@
         "color_des": "#3c3c3c",
         "fontsize_des": 16,
         "title_align": "center",
+        "cover_image": "shopify:\/\/shop_images\/Grande_Lens_Thumbnail.png",
         "autoplay": false,
         "video_height": "55",
         "style_video": "youtube",
