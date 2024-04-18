@@ -18,7 +18,7 @@
           "settings": {
             "show_vendor": false,
             "show_sku": true,
-            "show_availability": false,
+            "show_availability": true,
             "show_product_type": false,
             "stock_level_display": "none",
             "enable_border_top": false,
@@ -93,7 +93,7 @@
         "19de9abb-17c8-4d67-941d-b32706ed06fd": {
           "type": "pickup_availability",
           "settings": {
-            "show_pickup_availability": false,
+            "show_pickup_availability": true,
             "spacing_top": 0,
             "spacing_bottom": 27
           }
@@ -173,7 +173,7 @@
       "settings": {
         "container": "default",
         "padding_full_width": 0,
-        "show_sticky_info": false,
+        "show_sticky_info": true,
         "mg_top_desktop": 50,
         "mg_top_tablet": 50,
         "mg_top_mobile": 0,
@@ -203,12 +203,12 @@
         "sidebar_heading_font_size": 14,
         "sidebar_heading_font_weight": "700",
         "sidebar_heading_text_transform": "uppercase",
-        "product_image_ratio": "adapt",
+        "product_image_ratio": "portrait",
         "portrait_aspect_ratio": 148,
-        "zoomed_image": false,
+        "zoomed_image": true,
         "media_fit": "unset",
         "product_image_popup": "fancybox",
-        "video_layout": "thumbnail",
+        "video_layout": "popup",
         "show_badge": true,
         "show_qty": true,
         "show_subtotal": true,
@@ -256,17 +256,17 @@
     },
     "video_block_ANXfLh": {
       "type": "video-block",
-      "disabled": true,
       "settings": {
         "container": "container",
         "mg_top_desktop": 15,
         "mg_top_tablet": 15,
         "mg_top_mobile": 15,
-        "mg_bottom_desktop": 0,
-        "mg_bottom_tablet": 0,
-        "mg_bottom_mobile": 0,
-        "spotlight_bg": "#fff",
+        "mg_bottom_desktop": 50,
+        "mg_bottom_tablet": 15,
+        "mg_bottom_mobile": 15,
+        "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
+        "spotlight_bg_image": "shopify:\/\/shop_images\/Grande_harnes_TN.png",
         "video_block_title": "",
         "color_title": "#232323",
         "fontsize_title": 16,
