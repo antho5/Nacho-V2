@@ -426,6 +426,9 @@
     },
     "video_block_WWU9k7": {
       "type": "video-block",
+      "custom_css": [
+
+      ],
       "settings": {
         "container": "container",
         "mg_top_desktop": 15,
