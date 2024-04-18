@@ -395,7 +395,6 @@
     },
     "video_block_WwizQJ": {
       "type": "video-block",
-      "disabled": true,
       "settings": {
         "container": "container",
         "mg_top_desktop": 15,
@@ -415,12 +414,44 @@
         "color_des": "#3c3c3c",
         "fontsize_des": 16,
         "title_align": "center",
+        "cover_image": "shopify:\/\/shop_images\/Grande_harnes_TN.png",
         "autoplay": false,
         "video_height": "55",
         "style_video": "youtube",
         "video_url": "https:\/\/www.youtube.com\/watch?v=e8_Y1Oo9vTo",
         "url_mp4": "",
-        "description": "{{ product.title }}video",
+        "description": "{{ product.title }} Video",
+        "full_width": false
+      }
+    },
+    "video_block_WWU9k7": {
+      "type": "video-block",
+      "settings": {
+        "container": "container",
+        "mg_top_desktop": 15,
+        "mg_top_tablet": 15,
+        "mg_top_mobile": 15,
+        "mg_bottom_desktop": 0,
+        "mg_bottom_tablet": 0,
+        "mg_bottom_mobile": 0,
+        "spotlight_bg": "#ffffff",
+        "spotlight_bg_gradient": "",
+        "video_block_title": "",
+        "color_title": "#232323",
+        "fontsize_title": 16,
+        "fontsize_title_mb": 22,
+        "margin_bottom_title": 45,
+        "video_block_des": "",
+        "color_des": "#3c3c3c",
+        "fontsize_des": 16,
+        "title_align": "center",
+        "cover_image": "shopify:\/\/shop_images\/Grande_Lens_Thumbnail.png",
+        "autoplay": false,
+        "video_height": "55",
+        "style_video": "youtube",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=aD9Q9R9jyTs",
+        "url_mp4": "",
+        "description": "{{ product.title }} Video",
         "full_width": false
       }
     },
