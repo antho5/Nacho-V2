@@ -131,7 +131,7 @@
           "type": "short_description",
           "settings": {
             "word_number": "250",
-            "fontsize_text": 16,
+            "fontsize_text": 14,
             "color_text": "#3c3c3c",
             "spacing_top": 0,
             "spacing_bottom": 13
