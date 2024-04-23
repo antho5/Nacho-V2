@@ -248,7 +248,7 @@
     "video_block_ANXfLh": {
       "type": "video-block",
       "settings": {
-        "container": "container",
+        "container": "1170",
         "mg_top_desktop": 15,
         "mg_top_tablet": 15,
         "mg_top_mobile": 15,
