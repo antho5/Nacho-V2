@@ -248,7 +248,7 @@
     "video_block_ANXfLh": {
       "type": "video-block",
       "settings": {
-        "container": "1170",
+        "container": "container",
         "mg_top_desktop": 15,
         "mg_top_tablet": 15,
         "mg_top_mobile": 15,
@@ -257,7 +257,6 @@
         "mg_bottom_mobile": 15,
         "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
-        "spotlight_bg_image": "shopify:\/\/shop_images\/Grande_harnes_TN.png",
         "video_block_title": "",
         "color_title": "#232323",
         "fontsize_title": 16,
@@ -267,6 +266,7 @@
         "color_des": "#3c3c3c",
         "fontsize_des": 16,
         "title_align": "center",
+        "cover_image": "shopify:\/\/shop_images\/Grande_harnes_TN.png",
         "autoplay": false,
         "video_height": "55",
         "style_video": "youtube",
