@@ -18,9 +18,35 @@
             "question_5": "Question: “Response Time?”",
             "answer_5": "NACHO is a small team with big ambitions.  We will do our best to get back with everyone’s phone call or email questions same day.",
             "question_6": "Question: “Is there a military or first responder discount?”",
-            "answer_6": "Please reach out to <a href=\"mailto:support@nachooffroadtechnology.com\" target=\"_blank\">support@NACHOOFFROADTECHNOLOGY.COM<\/a> with your information. We support all military, ex-military, and first-responders.",
+            "answer_6": "Yes, check out the GOVX page <a href=\"https:\/\/www.nachooffroadtechnology.com\/pages\/govx\" target=\"_blank\">military\/first responder discount<\/a>.",
             "question_7": "Question: \"Is there a warranty on your products?\"",
             "answer_7": "We offer a limited lifetime warranty on all our light products.  What that means is if there is a manufacturer failure on the light we will make sure we get it repaired or replaced for the life of the product.  Our High Boy Shop light is a 5 year limited lifetime warranty and all our mounts are 2 years limited lifetime.",
+            "question_8": "",
+            "answer_8": "",
+            "question_9": "",
+            "answer_9": "",
+            "question_10": "",
+            "answer_10": ""
+          }
+        },
+        "paragraph_HDTCtn": {
+          "type": "paragraph",
+          "settings": {
+            "title": "Quatro Questions",
+            "question_1": "Question: “What light configurations are available in the NACHO Quatro?”",
+            "answer_1": "PM411 Quatro Combo - a Spot and Flood beam pattern. Ideal for average off roader who needs more driving light.<br>\n\nPM431 Quatro Spot – an all-spot beam ideal for higher speed driving.<br>\n\nPM451 Quatro Flood – an all-flood beam Ideal for area light or slow speed driving.<br>\n\nPM461\/PM491 SAE Fog and Spot Combo – A street legal fog light with a off-road spot function. Comes in a white or amber lens.",
+            "question_2": "Question: “What is the light output of the NACHO Quatro?”",
+            "answer_2": "PM411 – Candela 62,000 and 5,243 effective lumens per light.<br>\n\nPM431 – Candela 106,000 and 5,410 effective lumens per light.<br>\n\nPM451 – Candela 24,000 and 4,083 effective lumens per light.<br>",
+            "question_3": "Question: “What is the most common configuration setups?”",
+            "answer_3": "The most common Quatro setup for touring would be a Quatro Spot or Quatro Combo for A pillar locations depending if you are looking for more side light or distance, Quatro Floods for rack mounting or rear facing mounting for area and back up lighting.<br>\n\nAny bumper mounted lighting would consist of a mixture of Quatro Spots and Combos.",
+            "question_4": "Question: “How is the reflector design unique in the Quatro?”",
+            "answer_4": "The Quatro utilizes a engineered TIR optic.  A TIR optic is designed to harness more light output from the LED making it more efficient than other common reflectors on the market.",
+            "question_5": "Question: “Do you have to use all the wires from the Quatro?”",
+            "answer_5": "You do not need to use all the wires.  The Quatro has 3 functions into each light.  You can make it as versatile as possible or just simply power on the blue wire and have the light work as simple as on off.",
+            "question_6": "Question: “How do you change out the covers on the Quatro?”",
+            "answer_6": "The Quatro comes with Amber and Black branded covers.  The covers are integrated into the housing using a snap geometry on the removal bezel.  Please remove the bezel by pulling equally on both sides of the bezel.  Once the bezel is removed, please put the cover in place by using the indicators in the housing and then snap the bezel back on with equal pressure while holding the cover in place.",
+            "question_7": "Question: Is the housing replaceable on the Quatro?\"",
+            "answer_7": "The Quatro housing adds a unique style to the Quatro and is meant to protect the main light engine.  The light engine is built to withstand the toughest off-road conditions but the added layer of the housing allows you to not back down from any challenge. The housing can be replaced at anytime and keep your lights looking fresh.  You can also paint match the housing without jeopardizing the light engine.",
             "question_8": "",
             "answer_8": "",
             "question_9": "",
@@ -31,7 +57,8 @@
         }
       },
       "block_order": [
-        "15d9d2f4-1bdd-49c8-9a99-58246020f05c"
+        "15d9d2f4-1bdd-49c8-9a99-58246020f05c",
+        "paragraph_HDTCtn"
       ],
       "custom_css": [
         ".faqs .faqs-title:after {background-color: #ff8b21;}"
