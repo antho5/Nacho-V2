@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+      }
+    },
+    "custom_liquid_G6V3c7": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<web-component-embed id=\"L7vEMp\" app_slug=\"map\"><\/web-component-embed><script src=\"https:\/\/app.powr.io\/assets\/webcomponent.js\"><\/script>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_liquid_G6V3c7"
+  ]
+}

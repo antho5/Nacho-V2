@@ -8,7 +8,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "<p class=\"message\">Free shipping on orders over $99!<\/p>",
+            "text": "<p class=\"message\">*** Free shipping on orders over $500 (within US) ***<\/p>",
             "btn_color": "#cc0e14",
             "btn_border_color": "#2da116",
             "btn_bg_color": "#232323",
@@ -19,24 +19,23 @@
       "block_order": [
         "announcement-bar-0"
       ],
-      "disabled": true,
       "custom_css": [
         ".message {text-transform: uppercase;}"
       ],
       "settings": {
         "enable_announcement": true,
-        "layout": "slider",
+        "layout": "scroll",
         "enable_close": false,
-        "color_text": "#ffffff",
-        "bg_color_text": "#232323",
+        "color_text": "#232323",
+        "bg_color_text": "#ff7a01",
         "bg_color_text_gradient": "",
         "font_size_text": 12,
         "font_style_text": "normal",
         "font_weight_text": "500",
         "arrow_active": false,
         "content_max_width": 38,
-        "padding_top": 0,
-        "padding_bottom": 0
+        "padding_top": 2,
+        "padding_bottom": 2
       }
     },
     "0233f54c-81fe-4fac-b946-755c29c900b0": {
@@ -72,12 +71,6 @@
             "color": "#232323"
           }
         },
-        "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-3": {
-          "type": "wishlist",
-          "settings": {
-            "color": "#232323"
-          }
-        },
         "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-4": {
           "type": "customer",
           "settings": {
@@ -98,7 +91,6 @@
         "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-0",
         "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-1",
         "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-2",
-        "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-3",
         "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-4",
         "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-5"
       ],
@@ -136,13 +128,13 @@
             "menu_top_spacing": 11,
             "menu_bottom_spacing": 12,
             "grid_gap_menu_item": 20,
-            "alignment": "left",
-            "bg_mega_menu": "#ffffff",
+            "alignment": "center",
+            "bg_mega_menu": "#232323",
             "bg_mega_menu_gradient": "",
             "lv_1_color": "#ffffff",
-            "lv_1_color_hover": "#ffffff",
-            "lv_2_color": "#232323",
-            "lv_2_color_hover": "#232323",
+            "lv_1_color_hover": "#ff7a01",
+            "lv_2_color": "#ffffff",
+            "lv_2_color_hover": "#ff7a01",
             "lv_3_color": "#3c3c3c",
             "lv_3_color_hover": "#3c3c3c",
             "sale_item_1": "",
@@ -196,6 +188,7 @@
         },
         "megamenu_style_3_LifhAt": {
           "type": "megamenu_style_3",
+          "disabled": true,
           "settings": {
             "layout_block": "full",
             "header_custom_width_size": 1200,
