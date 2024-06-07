@@ -20,7 +20,7 @@
         "announcement-bar-0"
       ],
       "custom_css": [
-        ".message {text-transform: uppercase;}"
+        ".message {text-transform: uppercase; font-family: var(--font-heading-family);}"
       ],
       "settings": {
         "enable_announcement": true,
