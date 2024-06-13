@@ -492,7 +492,7 @@
             "type": "menu-1",
             "settings": {
               "show_banner": true,
-              "heading": "Mounting",
+              "heading": "",
               "url": "shopify:\/\/collections\/mounting",
               "menu": "",
               "label": "",
@@ -605,7 +605,7 @@
               "show_custom_style": false,
               "text_color": "#000000",
               "label_bg_color": "#000000",
-              "label_text_color": "#FFFFFF"
+              "label_text_color": "#ffffff"
             }
           }
         },
