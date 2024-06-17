@@ -95,6 +95,7 @@
     "type_page_title_font_weight": "700",
     "type_page_title_letter_spacing": ".05em",
     "favicon": "shopify:\/\/shop_images\/Logomark_Full_Color.png",
+    "show_wishlist": false,
     "show_effect_close": true,
     "show_global_checkbox": false,
     "global_checkbox_text": "I agree with",
