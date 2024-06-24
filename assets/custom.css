@@ -67,6 +67,11 @@
   font-weight: bold;
 }
 
+.isheet-btn:hover {
+  color: black;
+}
+
+
 /*...Bootstrap CSS...*/
 
 .spec-container,
