@@ -227,7 +227,8 @@
         "grouped_product_8wkRbp"
       ],
       "custom_css": [
-        ".installment {display: none;}"
+        ".installment {display: none;}",
+        ".product-form__radio:checked + .product-form__label .text {background-color: #ff7a01 !important; font-weight: bold; text-transform: uppercase;}"
       ],
       "settings": {
         "container": "default",
