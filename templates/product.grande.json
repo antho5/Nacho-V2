@@ -228,8 +228,8 @@
       ],
       "custom_css": [
         ".installment {display: none;}",
-        ".product-form__radio:checked + .product-form__label .text {background-color: #ff7a01 !important; font-weight: bold; text-transform: uppercase;}",
-        ".product-form__label .text {text-transform: uppercase; font-weight: bold; border: 2px solid var(--swatch-border)}"
+        ".product-form__radio:checked + .product-form__label .text {background-color: #ff7a01 !important; font-weight: bold; text-transform: uppercase; border: 2px solid #000;}",
+        ".product-form__label .text {text-transform: uppercase; font-weight: bold; border: 2px solid var(--swatch-border);}"
       ],
       "settings": {
         "container": "default",
