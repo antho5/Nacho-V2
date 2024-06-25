@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "type": "header",
   "name": "Header Group",
@@ -135,8 +144,8 @@
             "lv_1_color_hover": "#ff7a01",
             "lv_2_color": "#ffffff",
             "lv_2_color_hover": "#ff7a01",
-            "lv_3_color": "#3c3c3c",
-            "lv_3_color_hover": "#3c3c3c",
+            "lv_3_color": "#ffffff",
+            "lv_3_color_hover": "#ff7a01",
             "sale_item_1": "",
             "sale_item_2": "",
             "sale_item_3": "",
