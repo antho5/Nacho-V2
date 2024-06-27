@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "main": {
@@ -377,7 +386,7 @@
             "enable_style_italic": false,
             "border_title": "none",
             "border_color_title": "",
-            "des": "<a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0614\/2341\/9562\/files\/I-sheet_17-23_KTM_P-10096.pdf?v=1717777759\">KTM Mount<\/a><br>\n\n<a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0614\/2341\/9562\/files\/I-sheet_17-23_Husky.pdf?v=1717777759\">Husky Mount<\/a><br>",
+            "des": "<a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0614\/2341\/9562\/files\/I-sheet_17-23_KTM_P-10096.pdf?v=1717777759\">KTM Mount<\/a><br>\n\n<a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0614\/2341\/9562\/files\/I-sheet_17-23_Husky.pdf?v=1717777759\">Husky Mount<\/a><br>\n\n<a href=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0614\/2341\/9562\/files\/V3RZ3_Bumper_Mount_I-sheet.pdf?v=1718741086\">Polaris Bumper Mount<\/a><br>",
             "color_des": "#3c3c3c",
             "fontsize_des": 14,
             "mg_top_des": 8,
