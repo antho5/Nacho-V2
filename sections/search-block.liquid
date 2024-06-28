@@ -1,6 +1,8 @@
 {{ 'component-main-search.css' | asset_url | stylesheet_tag }}
 {{ 'component-search-block.css' | asset_url | stylesheet_tag }}
-
+{% unless result.object.tags contains 'noindex' %}
+  <!-- Code to display the search result -->
+{% endunless %}
 {% liquid 
     assign padding_top = section.settings.mg_top_desktop | append: 'px'
     assign padding_bottom = section.settings.mg_bottom_desktop | append: 'px'
