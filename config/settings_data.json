@@ -127,7 +127,7 @@
     "trust_image_cart_1": "shopify:\/\/shop_images\/image-trust.jpg",
     "dynamic_browser_title_content": "LIGHTEN UP⚡",
     "enable_background_button_card": false,
-    "product_block_image_ratio": "square",
+    "product_block_image_ratio": "adapt",
     "portrait_height": "130",
     "product_block_image_fit": "cover",
     "show_image_swap": true,
