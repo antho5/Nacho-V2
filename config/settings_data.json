@@ -624,6 +624,18 @@
         "disabled": false,
         "settings": {
         }
+      },
+      "1115855741281207229": {
+        "type": "shopify:\/\/apps\/powr-map-embed-store-locator\/blocks\/app-embed\/9044b7a6-9786-4034-a66f-350b6e75cfd1",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "11576833278641654045": {
+        "type": "shopify:\/\/apps\/instagram-feed-reels-instafeed\/blocks\/app-embed\/0ef0f2d8-4861-4613-a8e4-82a7151be72e",
+        "disabled": false,
+        "settings": {
+        }
       }
     }
   },
