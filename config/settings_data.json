@@ -247,7 +247,7 @@
     "gdpr_cookie_consent_color": "#ffffff",
     "gdpr_cookie_consent_color_privacy": "#818181",
     "gdpr_cookie_consent_bg": "#141414",
-    "show_newsletter_popup": true,
+    "show_newsletter_popup": false,
     "newsletter_popup_expire": 1,
     "newsletter_popup_delay": 5,
     "newsletter_popup_image": "shopify:\/\/shop_images\/Website_Pop-up-2.jpg",
