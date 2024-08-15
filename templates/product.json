@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "main": {
@@ -441,11 +450,28 @@
         "border_width_card": 5,
         "border_color_card": "#f0f1f4"
       }
+    },
+    "1723752996c7b51e89": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_reviews_product_reviews_eGkLFB": {
+          "type": "shopify:\/\/apps\/klaviyo-reviews\/blocks\/product-reviews\/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "klaviyo_reviews_product_reviews_eGkLFB"
+      ],
+      "settings": {
+        "include_margins": false
+      }
     }
   },
   "order": [
     "main",
     "product-recommendations",
-    "product-recently-viewed"
+    "product-recently-viewed",
+    "1723752996c7b51e89"
   ]
 }
