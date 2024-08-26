@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "16321237356a896dad": {
@@ -1005,6 +1014,22 @@
         "content_border_color": "#e2e2e2"
       }
     },
+    "172469927922c5c775": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_reviews_all_reviews_WjXdRQ": {
+          "type": "shopify:\/\/apps\/klaviyo-reviews\/blocks\/all-reviews\/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "klaviyo_reviews_all_reviews_WjXdRQ"
+      ],
+      "settings": {
+        "include_margins": false
+      }
+    },
     "f28eb02f-72f2-4cd6-b11f-64dd2dcd067c": {
       "type": "customer-review-block",
       "blocks": {
@@ -1063,6 +1088,7 @@
         "d31099b0-674e-4187-bdde-8e25ab1c333e",
         "74b7dee2-6d93-4009-89b2-beea48bc64f8"
       ],
+      "disabled": true,
       "settings": {
         "container": "1770",
         "padding_full_width": 20,
@@ -1140,6 +1166,7 @@
     "16321237356a896dad",
     "163247026462da6862",
     "8ca832d8-6669-441d-b6d9-9db74f475d94",
+    "172469927922c5c775",
     "f28eb02f-72f2-4cd6-b11f-64dd2dcd067c",
     "17060332145bef553f"
   ]
