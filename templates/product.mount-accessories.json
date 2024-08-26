@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "main": {
@@ -11,6 +20,12 @@
             "color_title": "#232323",
             "spacing_top": 50,
             "spacing_bottom": 0
+          }
+        },
+        "klaviyo_reviews_average_rating_HT8Qpj": {
+          "type": "shopify:\/\/apps\/klaviyo-reviews\/blocks\/average-rating\/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {
+            "product": "{{product}}"
           }
         },
         "info_xGfEgk": {
@@ -149,6 +164,7 @@
       },
       "block_order": [
         "b0ea69b7-8a54-4a3c-9abd-0fcceeabaaa0",
+        "klaviyo_reviews_average_rating_HT8Qpj",
         "info_xGfEgk",
         "4f95b592-8369-4ab0-b30d-24e463fb6890",
         "variant_picker_JqB6JP",
@@ -243,6 +259,22 @@
         "total_btn_border_hover": "#232323",
         "total_btn_bg_hover": "#ffffff",
         "total_btn_bg_gradient_hover": ""
+      }
+    },
+    "1724699716678c1158": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_reviews_product_reviews_list_EjwGVx": {
+          "type": "shopify:\/\/apps\/klaviyo-reviews\/blocks\/product-reviews-list\/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "klaviyo_reviews_product_reviews_list_EjwGVx"
+      ],
+      "settings": {
+        "include_margins": false
       }
     },
     "product-recommendations": {
@@ -356,6 +388,7 @@
   },
   "order": [
     "main",
+    "1724699716678c1158",
     "product-recommendations",
     "product-recently-viewed"
   ]
