@@ -239,7 +239,7 @@
         ".product-form__label .text {text-transform: uppercase; font-weight: bold; border: 2px solid var(--swatch-border);}"
       ],
       "settings": {
-        "container": "default",
+        "container": "1170",
         "padding_full_width": 0,
         "show_sticky_info": false,
         "mg_top_desktop": 50,
@@ -333,6 +333,9 @@
       },
       "block_order": [
         "klaviyo_reviews_product_reviews_6ki6fX"
+      ],
+      "custom_css": [
+
       ],
       "settings": {
         "include_margins": true
