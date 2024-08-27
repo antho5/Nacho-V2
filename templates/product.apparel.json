@@ -267,7 +267,7 @@
         "klaviyo_reviews_product_reviews_k3fz4w"
       ],
       "settings": {
-        "include_margins": false
+        "include_margins": true
       }
     },
     "product-recommendations": {

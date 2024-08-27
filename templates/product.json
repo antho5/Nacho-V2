@@ -363,7 +363,7 @@
         "klaviyo_reviews_product_reviews_zAYUFr"
       ],
       "settings": {
-        "include_margins": false
+        "include_margins": true
       }
     },
     "product-recommendations": {
