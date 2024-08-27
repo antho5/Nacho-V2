@@ -353,14 +353,14 @@
     "1723752996c7b51e89": {
       "type": "apps",
       "blocks": {
-        "klaviyo_reviews_product_reviews_list_DJiNBh": {
-          "type": "shopify:\/\/apps\/klaviyo-reviews\/blocks\/product-reviews-list\/db20e365-d984-4ac4-9655-e1588d951ca9",
+        "klaviyo_reviews_product_reviews_zAYUFr": {
+          "type": "shopify:\/\/apps\/klaviyo-reviews\/blocks\/product-reviews\/db20e365-d984-4ac4-9655-e1588d951ca9",
           "settings": {
           }
         }
       },
       "block_order": [
-        "klaviyo_reviews_product_reviews_list_DJiNBh"
+        "klaviyo_reviews_product_reviews_zAYUFr"
       ],
       "settings": {
         "include_margins": false
