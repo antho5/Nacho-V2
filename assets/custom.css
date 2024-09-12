@@ -1,3 +1,6 @@
+.bss-b2b-rf-submit-button .btn {
+  background: #ff7a01!important;
+}
 #customer_login .password-field {
   display: block !important;
 }
