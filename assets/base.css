@@ -6742,7 +6742,7 @@ summary::-webkit-details-marker {
     }
 }
 
-.bss-b2b-rf-field .field-checkbox input[type="checkbox"] {
+.bss-b2b-rf-field.field-checkbox input[type="checkbox"] {
   display: inline!important;
   height: 12px !important;
   width: 12px !important;
