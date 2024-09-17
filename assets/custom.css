@@ -1,6 +1,11 @@
 .bss-b2b-rf-submit-button .btn {
   background: #ff7a01!important;
 }
+
+.kl_reviews__carousel.kl_reviews__carousel.kl_reviews__carousel {
+  max-width: 1600px !important;
+}
+
 #customer_login .password-field {
   display: block !important;
 }
