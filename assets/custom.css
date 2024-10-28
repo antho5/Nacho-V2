@@ -2,6 +2,10 @@
   background: #f15c23 !important;
 }
 
+a.tab-title.is-open {
+  --border-color: #F15C23;
+}
+
 .bundle-product-options .swatch-element .text {
   border-radius: 5px;
 }
