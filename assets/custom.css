@@ -5,14 +5,17 @@
 .product-form__label .text {
   text-transform: uppercase !important;
   font-weight: bold !important;
+  border-radius: 5px !important;
 }
 
 a.button.bundle-product-toogle.button-2 {
   text-transform: uppercase;
   font-weight: bold;
+  border-radius: 5px !important;
 }
 input.button.button--primary.button-bundle.style- {
   text-transform: uppercase;
+  border-radius: 5px !important;
 }
 
 .kl_reviews__carousel.kl_reviews__carousel.kl_reviews__carousel {
