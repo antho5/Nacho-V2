@@ -1,5 +1,5 @@
 .bss-b2b-rf-submit-button .btn {
-  background: #ff7a01!important;
+  background: #f15c23 !important;
 }
 
 .kl_reviews__carousel.kl_reviews__carousel.kl_reviews__carousel {
@@ -65,7 +65,7 @@
 }
 
 .product-form__radio:checked + .product-form__label .text {
-  background-color: #ff7a01 !important;
+  background-color: #f15c23 !important;
   font-weight: bold;
   text-transform: uppercase;
   border: 2px solid #000;
@@ -82,7 +82,7 @@
   border: none;
   box-shadow: none;
   text-decoration: none !important;
-  background-color: #ff7a01;
+  background-color: #f15c23;
   padding: 5px 15px;
   font-weight: bold;
 }
