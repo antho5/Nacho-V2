@@ -7,7 +7,7 @@ a.tab-title.is-open {
 }
 
 .bundle-product-options .swatch-element .text {
-  border-radius: 5px;
+  border-radius: 5px !important;
 }
 
 .productView-action .button{
