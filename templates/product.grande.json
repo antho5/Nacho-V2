@@ -86,7 +86,7 @@
             "atc_bg_color_gradient": "",
             "atc_color_hover": "#232323",
             "atc_border_color_hover": "#232323",
-            "atc_bg_color_hover": "#ffffff",
+            "atc_bg_color_hover": "#f15c23",
             "atc_bg_color_gradient_hover": "",
             "bin_color": "#232323",
             "bin_border_color": "#acacac",
@@ -235,7 +235,7 @@
       ],
       "custom_css": [
         ".installment {display: none;}",
-        ".product-form__radio:checked + .product-form__label .text {background-color: #ff7a01 !important; font-weight: bold; text-transform: uppercase; border: 2px solid #000;}",
+        ".product-form__radio:checked + .product-form__label .text {background-color: #f15c23 !important; font-weight: bold; text-transform: uppercase; border: 2px solid #000;}",
         ".product-form__label .text {text-transform: uppercase; font-weight: bold; border: 2px solid var(--swatch-border);}"
       ],
       "settings": {
