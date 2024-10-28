@@ -3,8 +3,8 @@
 }
 
 .product-form__label .text {
-  text-transform: uppercase;
-  font-weight: bold;
+  text-transform: uppercase !important;
+  font-weight: bold !important;
 }
 .kl_reviews__carousel.kl_reviews__carousel.kl_reviews__carousel {
   max-width: 1600px !important;
