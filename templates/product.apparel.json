@@ -1,12 +1,12 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -23,7 +23,7 @@
           }
         },
         "klaviyo_reviews_average_rating_AfbATm": {
-          "type": "shopify:\/\/apps\/klaviyo-reviews\/blocks\/average-rating\/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "type": "shopify://apps/klaviyo-reviews/blocks/average-rating/db20e365-d984-4ac4-9655-e1588d951ca9",
           "settings": {
             "product": "{{product}}"
           }
@@ -249,8 +249,8 @@
         "total_btn_bg": "#000000",
         "total_btn_bg_gradient": "",
         "total_btn_color_hover": "#ffffff",
-        "total_btn_border_hover": "#d12442",
-        "total_btn_bg_hover": "#d12442",
+        "total_btn_border_hover": "#f15c23",
+        "total_btn_bg_hover": "#f15c23",
         "total_btn_bg_gradient_hover": ""
       }
     },
@@ -258,7 +258,7 @@
       "type": "apps",
       "blocks": {
         "klaviyo_reviews_product_reviews_k3fz4w": {
-          "type": "shopify:\/\/apps\/klaviyo-reviews\/blocks\/product-reviews\/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "type": "shopify://apps/klaviyo-reviews/blocks/product-reviews/db20e365-d984-4ac4-9655-e1588d951ca9",
           "settings": {
           }
         }
