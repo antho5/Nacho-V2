@@ -6,7 +6,6 @@
   text-transform: uppercase !important;
   font-weight: bold !important;
   border-radius: 5px !important;
-  border-radius: 5px !important;
 }
 
 a.button.bundle-product-toogle.button-2 {
@@ -90,7 +89,7 @@ input.button.button--primary.button-bundle.style- {
 .product-form__label .text {
   text-transform: uppercase;
   font-weight: bold;
-  border: 2px solid var(--swatch-border);
+  border: 2px solid var(--swatch-border) !important;
 }
 
 .isheet-btn {
