@@ -6,6 +6,15 @@
   text-transform: uppercase !important;
   font-weight: bold !important;
 }
+
+a.button.bundle-product-toogle.button-2 {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+input.button.button--primary.button-bundle.style- {
+  text-transform: uppercase;
+}
+
 .kl_reviews__carousel.kl_reviews__carousel.kl_reviews__carousel {
   max-width: 1600px !important;
 }
