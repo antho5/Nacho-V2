@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "banner": {
@@ -9,8 +18,8 @@
             "show_image_parallax": false,
             "show_bg_overlay": false,
             "type": "full",
-            "image": "shopify:\/\/shop_images\/unnamed.jpg",
-            "image_mobile": "shopify:\/\/shop_images\/nacho-collection-header.webp",
+            "image": "shopify://shop_images/unnamed.jpg",
+            "image_mobile": "shopify://shop_images/nacho-collection-header.webp",
             "bg_overlay": "#000000"
           }
         },
@@ -114,7 +123,7 @@
         "filter_hidden_tag_list": "",
         "show_toolbar": true,
         "show_sorting": true,
-        "show_item_per_page": true,
+        "show_item_per_page": false,
         "show_view_as": false,
         "products_per_page": "20",
         "layout": "4",
@@ -189,7 +198,7 @@
     "ce8304c4-11df-4f42-9ada-39c767cb5951": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<div class=\"powr-social-feed\" id=\"0db6845a_1650904810\"><\/div><script src=\"https:\/\/www.powr.io\/powr.js?platform=shopify\"><\/script>"
+        "custom_liquid": "<div class=\"powr-social-feed\" id=\"0db6845a_1650904810\"></div><script src=\"https://www.powr.io/powr.js?platform=shopify\"></script>"
       }
     }
   },
