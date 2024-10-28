@@ -3,7 +3,7 @@
 }
 
 a.tab-title.is-open {
-  --border-color: #F15C23;
+  --border-color: #F15C23 !important;
 }
 
 .bundle-product-options .swatch-element .text {
