@@ -6,6 +6,10 @@
   border-radius: 5px;
 }
 
+.quantity__group--1 .quantity__input{
+  border-radius: 5px;
+}
+
 .product-form__label .text {
   text-transform: uppercase !important;
   font-weight: bold !important;
