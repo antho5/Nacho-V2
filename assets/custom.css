@@ -2,6 +2,10 @@
   background: #f15c23 !important;
 }
 
+.productView-action .button{
+  border-radius: 5px;
+}
+
 .product-form__label .text {
   text-transform: uppercase !important;
   font-weight: bold !important;
