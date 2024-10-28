@@ -2,6 +2,10 @@
   background: #f15c23 !important;
 }
 
+.bundle-product-options .swatch-element .text {
+  border-radius: 5px;
+}
+
 .productView-action .button{
   border-radius: 5px;
 }
