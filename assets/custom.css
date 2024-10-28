@@ -2,6 +2,10 @@
   background: #f15c23 !important;
 }
 
+.product-form__label .text {
+  text-transform: uppercase;
+  font-weight: bold;
+}
 .kl_reviews__carousel.kl_reviews__carousel.kl_reviews__carousel {
   max-width: 1600px !important;
 }
