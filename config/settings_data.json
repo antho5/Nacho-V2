@@ -292,6 +292,7 @@
     "product_swatch_border_active": "#232323",
     "product_wishlist_color_added": "#ffffff",
     "product_wishlist_bg_added": "#000000",
+    "product_compare_color_added": "#f15c23",
     "product_action_color": "#232323",
     "product_action_bg": "#ffffff",
     "product_action_color_hover": "#232323",
