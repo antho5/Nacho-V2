@@ -91,7 +91,7 @@
           "type": "cart",
           "settings": {
             "color": "#232323",
-            "cart_bg_item": "#ff7a01",
+            "cart_bg_item": "#f15c23",
             "cart_color_item": "#ffffff",
             "cart_item_font_size": 14
           }
