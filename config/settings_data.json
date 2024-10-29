@@ -591,6 +591,36 @@
           "lv_title_text_transform": "capitalize",
           "show_nav_all": true
         }
+      },
+      "password-page-1": {
+        "type": "password-page-1",
+        "settings": {
+          "background_color": "",
+          "brand_type": "image",
+          "brand_text": "",
+          "brand_logo_font_size": 33,
+          "logo_color": "#232323",
+          "brand_logo": "shopify://shop_images/Logo_PNG.png",
+          "brand_logo_width": 200,
+          "banner_color": "#FFFFFF",
+          "show_newsletter": true,
+          "title": "Our store will be opening soon",
+          "title_font_size": 24,
+          "title_font_size_mb": 24,
+          "title_color": "#FFFFFF",
+          "subtitle": "Phasellus lorem de pulvinar maecenas.",
+          "subtitle_font_size": 12,
+          "subtitle_color": "#FFFFFF",
+          "input_color": "#323232",
+          "terms_text_color": "#848484",
+          "terms_link_color": "#3c3c3c",
+          "btn": "1",
+          "show_social_media": true,
+          "social_media_color": "#FFFFFF",
+          "show_copyright": true,
+          "copyright_content": "",
+          "copyright_color": "#7e7e7e"
+        }
       }
     },
     "content_for_index": [
