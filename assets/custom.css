@@ -7,7 +7,8 @@
 }
 
 .button.button-1:hover{
-  background: var(--color-link)
+  background: var(--color-link);
+  border: 1px solid var(--color-link);
 }
 
 a.tab-title.is-open {
