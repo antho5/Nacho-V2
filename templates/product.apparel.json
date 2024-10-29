@@ -111,7 +111,7 @@
             "atc_bg_color": "#232323",
             "atc_bg_color_gradient": "",
             "atc_color_hover": "#232323",
-            "atc_border_color_hover": "#232323",
+            "atc_border_color_hover": "#f15c23",
             "atc_bg_color_hover": "#f15c23",
             "atc_bg_color_gradient_hover": "",
             "bin_color": "#232323",
@@ -248,7 +248,7 @@
         "total_btn_border": "#000000",
         "total_btn_bg": "#000000",
         "total_btn_bg_gradient": "",
-        "total_btn_color_hover": "#ffffff",
+        "total_btn_color_hover": "#232323",
         "total_btn_border_hover": "#f15c23",
         "total_btn_bg_hover": "#f15c23",
         "total_btn_bg_gradient_hover": ""
