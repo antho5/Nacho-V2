@@ -6,6 +6,10 @@
   border-radius: 5px;
 }
 
+.button.button-1:hover{
+  background: var(--color-link)
+}
+
 a.tab-title.is-open {
   --border-color: #F15C23 !important;
 }
