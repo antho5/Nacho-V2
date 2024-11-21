@@ -127,6 +127,7 @@ input.button.button--primary.button-bundle.style- {
   background-color: #f15c23;
   padding: 5px 15px;
   font-weight: bold;
+  border-radius: 5px;
 }
 
 .isheet-btn:hover {
