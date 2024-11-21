@@ -1,18 +1,17 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-page",
-      "settings": {
-      }
+      "settings": {}
     },
     "b0fe5418-c621-46b7-b0b1-58e86000da1e": {
       "type": "spotlight-block",
@@ -333,7 +332,7 @@
             "enable_style_italic": false,
             "border_title": "none",
             "border_color_title": "",
-            "des": "<a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/I-sheet_17-23_KTM_P-10096.pdf?v=1717777759\">2017-2023 KTM Mount</a><br>\n\n<a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/I-sheet_17-23_Husky.pdf?v=1717777759\">2017-2023 Husky Mount</a><br>\n\n<a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/I-sheet_2024_KTM_P-10098-A.pdf?v=1728425139\">24+ KTM Mount</a><br>\n\n<a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/I-sheet_2024_HUSKY_P-10099-A.pdf?v=1728425136\">24+ Husky Mount</a><br>\n\n<a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/I-sheet_17-24_KTM_40W_KIT_P-10105-A.pdf?v=1728425619\">17-24 No OEM Headlight KTM/Husky Mount</a><br>\n\n<a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/V3RZ3_Bumper_Mount_I-sheet.pdf?v=1718741086\">Polaris Bumper Mount</a><br>",
+            "des": "<a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/I-sheet_17-23_KTM_P-10096.pdf?v=1717777759\">2017-2023 KTM Mount</a><br>\n\n<a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/I-sheet_17-23_Husky.pdf?v=1717777759\">2017-2023 Husky Mount</a><br>\n\n<a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/I-sheet_2024_KTM_P-10098-A.pdf?v=1728425139\">24+ KTM Mount</a><br>\n\n<a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/I-sheet_2024_HUSKY_P-10099-A.pdf?v=1728425136\">24+ Husky Mount</a><br>\n\n<a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/I-sheet_2024_KTM_P-10098-A_1.pdf?v=1732204766\">17-24 No OEM Headlight KTM/Husky Mount</a><br>\n\n<a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/V3RZ3_Bumper_Mount_I-sheet.pdf?v=1718741086\">Polaris Bumper Mount</a><br>",
             "color_des": "#3c3c3c",
             "fontsize_des": 14,
             "mg_top_des": 8,
