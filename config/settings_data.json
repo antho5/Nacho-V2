@@ -489,10 +489,54 @@
             "settings": {
               "menu": "main-menu"
             }
+          },
+          "menu_2_TQejUQ": {
+            "type": "menu-2",
+            "settings": {
+              "heading": "Dealer Locator",
+              "url": "shopify://pages/dealer-locator",
+              "label": "Dealer Locator",
+              "icon": "",
+              "show_item_1": false,
+              "heading_1": "",
+              "link_1": "",
+              "show_item_2": false,
+              "heading_2": "",
+              "link_2": "",
+              "show_item_3": false,
+              "heading_3": "",
+              "link_3": "",
+              "show_item_4": false,
+              "heading_4": "",
+              "link_4": "",
+              "show_item_5": false,
+              "heading_5": "",
+              "link_5": "",
+              "show_item_6": false,
+              "heading_6": "",
+              "link_6": "",
+              "show_item_7": false,
+              "heading_7": "",
+              "link_7": "",
+              "show_item_8": false,
+              "heading_8": "",
+              "link_8": "",
+              "show_item_9": false,
+              "heading_9": "",
+              "link_9": "",
+              "show_item_10": false,
+              "heading_10": "",
+              "link_10": "",
+              "show_custom_style": false,
+              "text_color": "#000000",
+              "label_bg_color": "#000000",
+              "label_text_color": "#FFFFFF"
+            }
           }
         },
         "block_order": [
-          "menu_3_MKwiX6"
+          "menu_3_MKwiX6",
+          "menu_2_TQejUQ"
         ],
         "settings": {
           "heading": "Menu",
