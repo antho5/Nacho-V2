@@ -495,7 +495,7 @@
             "settings": {
               "heading": "Dealer Locator",
               "url": "shopify://pages/dealer-locator",
-              "label": "Dealer Locator",
+              "label": "",
               "icon": "",
               "show_item_1": false,
               "heading_1": "",
