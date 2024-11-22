@@ -18,7 +18,7 @@
     "type_font_2_name": "Permanent Marker",
     "type_font_2_font": "abril_fatface_n4",
     "type_body": "font_1",
-    "type_body_font_size": 12,
+    "type_body_font_size": 16,
     "type_body_font_weight": "400",
     "type_body_line_height": 22,
     "type_heading": "font_2",
@@ -32,7 +32,7 @@
     "type_menu_lv1_line_height": 22,
     "type_menu_lv1_letter_spacing": ".05em",
     "type_menu_lv_2": "font_1",
-    "type_menu_lv2_font_size": 12,
+    "type_menu_lv2_font_size": 14,
     "type_menu_lv2_font_weight": "400",
     "type_menu_lv2_text_transform": "capitalize",
     "type_menu_lv2_line_height": 22,
@@ -56,18 +56,23 @@
     "type_mega_menu_lv3_line_height": 22,
     "type_mega_menu_lv3_letter_spacing": ".02em",
     "product_title_font": "font_1",
-    "product_title_font_size": 12,
+    "product_title_font_size": 16,
     "product_title_font_weight": "400",
     "product_title_text_transform": "capitalize",
     "product_title_line_height": 22,
     "product_title_letter_spacing": ".02em",
     "product_title_line_text": "2",
+    "product_vendor_font_size": 16,
+    "product_price_font_size": 16,
+    "badge_font_size": 14,
+    "product_quickview_font_size": 16,
     "blog_title_font": "font_2",
     "blog_title_font_size": 20,
     "blog_title_font_weight": "700",
     "blog_title_text_transform": "uppercase",
     "blog_title_line_height": 29,
     "blog_title_letter_spacing": ".09em",
+    "blog_info_font_size": 16,
     "type_button_1": "font_1",
     "type_button_1_font_size": 14,
     "type_button_1_font_weight": "700",
@@ -623,33 +628,27 @@
         }
       }
     },
-    "content_for_index": [
-
-    ],
+    "content_for_index": [],
     "blocks": {
       "bss-b2b-b65e14db9ccd": {
         "type": "shopify://apps/bss-b2b-wholesale-solution/blocks/config-header/451233f2-9631-4c49-8b6f-057e4ebcde7f",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "855628211100114053": {
         "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "1115855741281207229": {
         "type": "shopify://apps/powr-map-embed-store-locator/blocks/app-embed/9044b7a6-9786-4034-a66f-350b6e75cfd1",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "11576833278641654045": {
         "type": "shopify://apps/instagram-feed-reels-instafeed/blocks/app-embed/0ef0f2d8-4861-4613-a8e4-82a7151be72e",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "15683396631634586217": {
         "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
