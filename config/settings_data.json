@@ -245,7 +245,7 @@
     "show_someone_purchase": true,
     "show_someone_purchase_mobile": true,
     "someone_purchase_position": "right",
-    "show_gdpr_cookie_consent": false,
+    "show_gdpr_cookie_consent": true,
     "gdpr_cookie_consent_type": "left",
     "gdpr_cookie_consent_btn_1_link": "https://policies.google.com/",
     "gdpr_cookie_consent_btn_2_text": "Accept",
@@ -502,7 +502,7 @@
               "show_custom_style": false,
               "text_color": "#000000",
               "label_bg_color": "#000000",
-              "label_text_color": "#FFFFFF"
+              "label_text_color": "#ffffff"
             }
           }
         },
