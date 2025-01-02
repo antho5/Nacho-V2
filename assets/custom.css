@@ -5,6 +5,9 @@
 .button{
   border-radius: 5px;
 }
+svg {
+  stroke: #000000;
+}
 
 .button.button-1:hover{
   background: var(--color-link);
