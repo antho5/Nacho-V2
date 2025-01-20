@@ -111,9 +111,9 @@
         "id_section": "",
         "container": "fullwidth",
         "padding_full_width": 0,
-        "mg_top_desktop": 50,
-        "mg_top_tablet": 50,
-        "mg_top_mobile": 50,
+        "mg_top_desktop": 0,
+        "mg_top_tablet": 0,
+        "mg_top_mobile": 0,
         "mg_bottom_desktop": 50,
         "mg_bottom_tablet": 50,
         "mg_bottom_mobile": 50,
@@ -136,6 +136,86 @@
         "arrows_position": "",
         "enable_dots": false,
         "enable_autoplay": false
+      }
+    },
+    "rich_text_gkcrFf": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_zRpKnD": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": 30,
+            "heading_size_mb": 30,
+            "heading_line_height": 1,
+            "heading_color": "#000"
+          }
+        },
+        "text_qEmz7a": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "text_size": 16,
+            "text_line_height": 1,
+            "margin_top_text": 20,
+            "text_color": "#000",
+            "text_width": "800px"
+          }
+        },
+        "button_PQAPh6": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "margin_top_button": 30,
+            "button_link": "",
+            "button_color": "#fff",
+            "enable_underline_button": false,
+            "button_border_color": "#000",
+            "button_bg_color": "#000",
+            "button_bg_gradient": "",
+            "button_color_hover": "#000",
+            "button_border_color_hover": "#000",
+            "button_bg_color_hover": "#fff",
+            "button_bg_gradient_hover": "",
+            "button_width": "270px"
+          }
+        },
+        "social_media_bzzLAr": {
+          "type": "social_media",
+          "settings": {
+            "social_spacing_top": 0,
+            "social_spacing_bottom": 0,
+            "social_icon_color": "",
+            "social_icon_background_color": "",
+            "social_icon_background_gradient": "",
+            "social_icon_hover_color": "",
+            "social_icon_background_hover_color": "",
+            "social_icon_background_hover_gradient": "",
+            "social_icon_ring_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_zRpKnD",
+        "text_qEmz7a",
+        "button_PQAPh6",
+        "social_media_bzzLAr"
+      ],
+      "settings": {
+        "container": "container",
+        "padding_full_width": 0,
+        "enable_border_top": false,
+        "enable_border_bottom": false,
+        "color_border_bottom": "#e8e8e8",
+        "mg_top_desktop": 50,
+        "mg_top_tablet": 50,
+        "mg_top_mobile": 50,
+        "mg_bottom_desktop": 50,
+        "mg_bottom_tablet": 50,
+        "mg_bottom_mobile": 50,
+        "rich_text_bg": "#fff",
+        "rich_text_bg_gradient": "",
+        "enable_column": false
       }
     },
     "featured_product_e7rPEc": {
@@ -313,11 +393,101 @@
         "show_badge": true,
         "show_qty": true
       }
+    },
+    "video_block_cE9kfp": {
+      "type": "video-block",
+      "settings": {
+        "container": "container",
+        "mg_top_desktop": 50,
+        "mg_top_tablet": 50,
+        "mg_top_mobile": 50,
+        "mg_bottom_desktop": 50,
+        "mg_bottom_tablet": 50,
+        "mg_bottom_mobile": 50,
+        "spotlight_bg": "#fff",
+        "spotlight_bg_gradient": "",
+        "video_block_title": "Video",
+        "color_title": "#232323",
+        "fontsize_title": 16,
+        "fontsize_title_mb": 22,
+        "margin_bottom_title": 45,
+        "video_block_des": "",
+        "color_des": "#3c3c3c",
+        "fontsize_des": 16,
+        "title_align": "center",
+        "autoplay": true,
+        "video_height": "54",
+        "style_video": "youtube",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "url_mp4": "",
+        "description": "",
+        "full_width": false
+      }
+    },
+    "large_lookbook_banners_9keE4T": {
+      "type": "large-lookbook-banners",
+      "settings": {
+        "container": "container",
+        "padding_full_width": 0,
+        "section_bg": "#fafafa",
+        "section_gradient": "",
+        "mg_top_desktop": 50,
+        "mg_top_tablet": 50,
+        "mg_top_mobile": 50,
+        "mg_bottom_desktop": 50,
+        "mg_bottom_tablet": 50,
+        "mg_bottom_mobile": 50,
+        "title": "",
+        "color_title": "#232323",
+        "mg_bottom_title": 18,
+        "mg_top_title": 62,
+        "fontsize_title": 16,
+        "fontsize_title_mb": 16,
+        "des": "",
+        "color_des": "#3c3c3c",
+        "margin_bottom_des": 35,
+        "fontsize_des": 16,
+        "fontsize_des_mb": 12,
+        "title_align": "center",
+        "content_width": 700,
+        "view_more": "",
+        "view_all_link": "",
+        "view_all_color": "",
+        "view_all_enable_border": false,
+        "view_all_font_size": 12,
+        "view_all_font_weight": "700",
+        "view_all_pos": "right",
+        "view_more_mg_top": 35,
+        "image_behavior": "none",
+        "lookbook_style": "1",
+        "enable_lookbook_width": false,
+        "lookbook_width": 250,
+        "dot_desktop_size": 24,
+        "dot_mobile_size": 16,
+        "dot_shadow_color": "rgba(255, 255, 255, 0.5)",
+        "dot_outer_color": "#fff",
+        "show_dot_number": false,
+        "show_dot_number_mobile": false,
+        "dot_inner_color": "#000",
+        "number_desktop_size": 24,
+        "number_mobile_size": 16,
+        "lookbook_truncate": "1",
+        "show_text": "Show Products",
+        "hide_text": "Hide Products",
+        "show_btn_bg_color": "",
+        "show_btn_gradient": "rgba(0,0,0,0.5)",
+        "show_btn_text_color": "#fff",
+        "show_btn_height": 30,
+        "show_btn_width": 135
+      }
     }
   },
   "order": [
     "main",
     "image_banner_A39HJL",
-    "featured_product_e7rPEc"
+    "rich_text_gkcrFf",
+    "featured_product_e7rPEc",
+    "video_block_cE9kfp",
+    "large_lookbook_banners_9keE4T"
   ]
 }
