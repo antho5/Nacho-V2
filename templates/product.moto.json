@@ -150,6 +150,19 @@
             "product_tab_key_metafield": "{{ product.metafields.c_f.custom_tab4.value }}"
           }
         },
+        "custom_gqftaX": {
+          "type": "custom",
+          "settings": {
+            "open_tab_mobile": false,
+            "title": "Fitment Guide",
+            "type": "metafield",
+            "content": "<a href=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/All_Moto_Kits_Training_Chart_1-23-25.pdf?v=1738084444\"><img src=\"https://cdn.shopify.com/s/files/1/0614/2341/9562/files/All-Moto-Kits-Training-Chart-1-23-25.jpg?v=1738084464\" alt=\"Fitment Guide\"></a>",
+            "enable_btn_show_more": false,
+            "maximum_des_to_show": 300,
+            "product_custom_source": "dynamic",
+            "product_tab_key_metafield": ""
+          }
+        },
         "19ab1d9f-74b2-4c76-bf2e-1bc749e5c2a3": {
           "type": "share",
           "settings": {
@@ -188,6 +201,7 @@
         "10093fcf-2053-47e9-bedb-841bb0d046fa",
         "bd066b80-c8e3-4f3e-8280-b27fbf6e9423",
         "3d9ea84d-5527-4bce-abe6-5debef3ec955",
+        "custom_gqftaX",
         "19ab1d9f-74b2-4c76-bf2e-1bc749e5c2a3",
         "1180d91b-75f9-49d9-a9db-2b9f5a49408d"
       ],
