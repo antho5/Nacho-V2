@@ -111,7 +111,7 @@
         "custom_liquid_9AN7FP": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<button><a href=\"\" target=\"_blank\">Purchase on VanUp</a></button>"
+            "custom_liquid": "<a class=\"isheet-btn\" href=\"\" target=\"_blank\">Purchase on VanUp</a>"
           }
         },
         "bd066b80-c8e3-4f3e-8280-b27fbf6e9423": {
