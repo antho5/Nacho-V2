@@ -224,6 +224,7 @@
     "show_quick_view_vendor": false,
     "show_quick_view_sku": true,
     "show_quick_view_product_type": false,
+    "show_quick_view_variant_image_group": true,
     "show_size_chart": false,
     "show_compare_color": false,
     "show_compare_color_drop_drap": false,
