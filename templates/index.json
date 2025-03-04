@@ -1,22 +1,21 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "16321237356a896dad": {
       "type": "slide-show",
       "blocks": {
-        "image_yzj4PT": {
+        "73fc0d25-51e9-4ded-a79c-e447ae0d1100": {
           "type": "image",
           "settings": {
-            "image_slide": "shopify:\/\/shop_images\/1_f840e99d-cb18-4414-8abd-8aca7243f374.jpg",
-            "image_slide_mb": "shopify:\/\/shop_images\/1-m.jpg",
+            "image_slide": "shopify://shop_images/1000000058.jpg",
             "alignment": "left",
             "enable_custom_position": false,
             "custom_horizontal": "10",
@@ -80,7 +79,7 @@
             "enable_underline": true,
             "font_size_link": 36,
             "button_slide": "",
-            "link": "shopify:\/\/collections\/lights",
+            "link": "shopify://collections/lights",
             "button_style": "button_1",
             "button_slide_2": "",
             "link_2": "",
@@ -94,7 +93,7 @@
             "bg_button_hover": "#232323",
             "bg_button_gradient_hover": "",
             "lb_product_1": "",
-            "horizontal_pos_1": 0,
+            "horizontal_pos_1": 100,
             "vertical_pos_1": 0,
             "lookbook_pos_1": "right",
             "lb_product_2": "",
@@ -107,11 +106,10 @@
             "lookbook_pos_3": "right"
           }
         },
-        "73fc0d25-51e9-4ded-a79c-e447ae0d1100": {
+        "image_yzj4PT": {
           "type": "image",
           "settings": {
-            "image_slide": "shopify:\/\/shop_images\/2_46b9bad1-e540-44ad-a308-a03cefbd5bb2.jpg",
-            "image_slide_mb": "shopify:\/\/shop_images\/2-m.jpg",
+            "image_slide": "shopify://shop_images/1000000057.jpg",
             "alignment": "left",
             "enable_custom_position": false,
             "custom_horizontal": "10",
@@ -125,7 +123,7 @@
             "border_color_content": "",
             "profile_name": "",
             "profile_name_color": "",
-            "profile_name_fs": 20,
+            "profile_name_fs": 100,
             "profile_name_fs_mb": 20,
             "profile_name_fw": "normal",
             "profile_title": "",
@@ -164,7 +162,7 @@
             "font_style_heading_mb": "normal",
             "font_size_heading_mb": 24,
             "line_height_heading_mb": 24,
-            "heading_spacing_bottom_mb": 8,
+            "heading_spacing_bottom_mb": 100,
             "color_heading_mb": "#ffffff",
             "slide-des-mb": "",
             "font_size_des_mb": 12,
@@ -175,7 +173,7 @@
             "enable_underline": true,
             "font_size_link": 36,
             "button_slide": "",
-            "link": "shopify:\/\/products\/nacho-grande",
+            "link": "shopify://pages/team-nacho",
             "button_style": "button_1",
             "button_slide_2": "",
             "link_2": "",
@@ -205,9 +203,9 @@
         "16321237356a896dad-0": {
           "type": "image",
           "settings": {
-            "image_slide": "shopify:\/\/shop_images\/3_56df873b-dc5d-411e-b154-e34acc78f7f5.jpg",
-            "image_slide_mb": "shopify:\/\/shop_images\/3-m.jpg",
-            "alignment": "left",
+            "image_slide": "shopify://shop_images/3_56df873b-dc5d-411e-b154-e34acc78f7f5.jpg",
+            "image_slide_mb": "shopify://shop_images/3-m.jpg",
+            "alignment": "center",
             "enable_custom_position": false,
             "custom_horizontal": "40",
             "custom_vertical": "30",
@@ -270,7 +268,7 @@
             "enable_underline": true,
             "font_size_link": 36,
             "button_slide": "",
-            "link": "shopify:\/\/products\/nacho-quatro-offroad",
+            "link": "shopify://products/nacho-quatro-offroad",
             "button_style": "button_1",
             "button_slide_2": "",
             "link_2": "",
@@ -300,8 +298,7 @@
         "d6466aac-4eb8-4f7c-83f6-8be691ab03a3": {
           "type": "image",
           "settings": {
-            "image_slide": "shopify:\/\/shop_images\/7.jpg",
-            "image_slide_mb": "shopify:\/\/shop_images\/7-m.jpg",
+            "image_slide": "shopify://shop_images/1000000059.jpg",
             "alignment": "left",
             "enable_custom_position": false,
             "custom_horizontal": "",
@@ -365,7 +362,7 @@
             "enable_underline": true,
             "font_size_link": 36,
             "button_slide": "",
-            "link": "shopify:\/\/collections\/lights",
+            "link": "shopify://pages/team-nacho",
             "button_style": "button_1",
             "button_slide_2": "",
             "link_2": "",
@@ -395,8 +392,8 @@
         "c9855230-0acd-4e55-9366-73d8d1960fed": {
           "type": "image",
           "settings": {
-            "image_slide": "shopify:\/\/shop_images\/5_a1c6eee0-dd41-4289-9da5-8abf27f610b7.jpg",
-            "image_slide_mb": "shopify:\/\/shop_images\/5-m.jpg",
+            "image_slide": "shopify://shop_images/5_a1c6eee0-dd41-4289-9da5-8abf27f610b7.jpg",
+            "image_slide_mb": "shopify://shop_images/5-m.jpg",
             "alignment": "left",
             "enable_custom_position": false,
             "custom_horizontal": "10",
@@ -460,7 +457,7 @@
             "enable_underline": true,
             "font_size_link": 36,
             "button_slide": "",
-            "link": "shopify:\/\/products\/nacho-quatro-offroad",
+            "link": "shopify://products/nacho-quatro-offroad",
             "button_style": "button_1",
             "button_slide_2": "",
             "link_2": "",
@@ -486,67 +483,14 @@
             "vertical_pos_3": 0,
             "lookbook_pos_3": "right"
           }
-        },
-        "b2e3c340-a9df-488d-bda3-83f4c769e6ad": {
-          "type": "video",
-          "disabled": true,
-          "settings": {
-            "style_video": "mp4",
-            "video_link": "eTCtDW7O1aM",
-            "enable_border_line": false,
-            "padding_vertical": 30,
-            "bg_color_content": "",
-            "border_color_content": "",
-            "content_width": 475,
-            "alignment": "left",
-            "enable_custom_position": false,
-            "custom_horizontal": "",
-            "custom_vertical": "",
-            "text_alignment": "center",
-            "video_mp4_link": "https:\/\/cdn.shopify.com\/s\/files\/1\/0614\/2341\/9562\/files\/homepage-video.mp4?v=1649107880",
-            "sub_heading": "",
-            "letter_spacing_sub_title": "",
-            "font_size_sub_heading": 30,
-            "sub_heading_spacing_bottom": 20,
-            "font_weight_sub_heading": "400",
-            "border_sub_heading": "none",
-            "sub_title_position": "sub_title_above",
-            "color_sub_heading": "#ffffff",
-            "color_sub_heading_mb": "#ffffff",
-            "heading": "",
-            "letter_spacing_heading": "",
-            "font_size_heading": 40,
-            "line_height_heading": 40,
-            "heading_spacing_bottom": 8,
-            "color_heading": "#232323",
-            "color_heading_mb": "#ffffff",
-            "slide-des": "",
-            "des_spacing_bottom": 35,
-            "font_size_des": 12,
-            "color_des": "#232323",
-            "color_des_mb": "#ffffff",
-            "button_slide": "",
-            "link": "shopify:\/\/collections\/lights",
-            "enable_button_link": false,
-            "enable_underline": true,
-            "font_size_link": 36,
-            "min_width_banner_button": 270,
-            "color_button": "#ffffff",
-            "bg_button": "#232323",
-            "border_button": "#232323",
-            "color_button_hover": "#ffffff",
-            "bg_button_hover": "#232323",
-            "border_button_hover": "#232323"
-          }
         }
       },
       "block_order": [
-        "image_yzj4PT",
         "73fc0d25-51e9-4ded-a79c-e447ae0d1100",
+        "image_yzj4PT",
         "16321237356a896dad-0",
         "d6466aac-4eb8-4f7c-83f6-8be691ab03a3",
-        "c9855230-0acd-4e55-9366-73d8d1960fed",
-        "b2e3c340-a9df-488d-bda3-83f4c769e6ad"
+        "c9855230-0acd-4e55-9366-73d8d1960fed"
       ],
       "custom_css": [
         ".themevale_MultiCategory_wrapper {bottom: 8px;}"
@@ -651,7 +595,7 @@
         "mg_bottom_view": 10,
         "mg_bottom_view_mb": 0,
         "enable_border_view_all": true,
-        "link_view_all": "shopify:\/\/collections\/lights",
+        "link_view_all": "shopify://collections/lights",
         "color_view_all": "#3c3c3c",
         "icon_view_all": "",
         "color_view_all_icon": "#eb492f",
@@ -729,7 +673,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify:\/\/shop_images\/automotive_banner.jpg",
+            "image": "shopify://shop_images/automotive_banner.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
@@ -759,7 +703,7 @@
             "mg_top_des": 8,
             "enable_des_hover": false,
             "button": "",
-            "link": "shopify:\/\/collections\/automotive",
+            "link": "shopify://collections/automotive",
             "fontsize_btn": 16,
             "button_width": 190,
             "color_button": "#ffffff",
@@ -781,7 +725,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify:\/\/shop_images\/Offroad_Catagory_Banner.jpg",
+            "image": "shopify://shop_images/Offroad_Catagory_Banner.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
@@ -811,7 +755,7 @@
             "mg_top_des": 8,
             "enable_des_hover": false,
             "button": "",
-            "link": "shopify:\/\/collections\/off-road",
+            "link": "shopify://collections/off-road",
             "fontsize_btn": 16,
             "button_width": 190,
             "color_button": "#ffffff",
@@ -833,7 +777,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify:\/\/shop_images\/Catagory_Banner_Powerspots.jpg",
+            "image": "shopify://shop_images/Catagory_Banner_Powerspots.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
@@ -863,7 +807,7 @@
             "mg_top_des": 8,
             "enable_des_hover": false,
             "button": "",
-            "link": "shopify:\/\/collections\/powersports",
+            "link": "shopify://collections/powersports",
             "fontsize_btn": 16,
             "button_width": 190,
             "color_button": "#ffffff",
@@ -885,7 +829,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify:\/\/shop_images\/casual-5.jpg",
+            "image": "shopify://shop_images/casual-5.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
@@ -915,7 +859,7 @@
             "mg_top_des": 8,
             "enable_des_hover": false,
             "button": "",
-            "link": "shopify:\/\/collections\/apparel",
+            "link": "shopify://collections/apparel",
             "fontsize_btn": 16,
             "button_width": 190,
             "color_button": "#ffffff",
@@ -1018,9 +962,8 @@
       "type": "apps",
       "blocks": {
         "klaviyo_reviews_featured_reviews_carousel_XVJKaU": {
-          "type": "shopify:\/\/apps\/klaviyo-reviews\/blocks\/featured-reviews-carousel\/db20e365-d984-4ac4-9655-e1588d951ca9",
-          "settings": {
-          }
+          "type": "shopify://apps/klaviyo-reviews/blocks/featured-reviews-carousel/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {}
         }
       },
       "block_order": [
@@ -1036,7 +979,7 @@
         "593a5596-61e9-4e93-9f2d-e59a104b1694": {
           "type": "review",
           "settings": {
-            "avatar": "shopify:\/\/shop_images\/SAE.jpg",
+            "avatar": "shopify://shop_images/SAE.jpg",
             "heading": "Wow!!",
             "sub_heading": "",
             "rating": "star5",
@@ -1048,7 +991,7 @@
         "7b46cd31-e2ca-4c03-b5f5-3c453ad27094": {
           "type": "review",
           "settings": {
-            "avatar": "shopify:\/\/shop_images\/bronco_test.png",
+            "avatar": "shopify://shop_images/bronco_test.png",
             "heading": "My Bronco Is Dialed In",
             "sub_heading": "",
             "rating": "star5",
@@ -1060,7 +1003,7 @@
         "d31099b0-674e-4187-bdde-8e25ab1c333e": {
           "type": "review",
           "settings": {
-            "avatar": "shopify:\/\/shop_images\/TM5_Combo.jpg",
+            "avatar": "shopify://shop_images/TM5_Combo.jpg",
             "heading": "Great Product",
             "sub_heading": "",
             "rating": "star5",
@@ -1072,7 +1015,7 @@
         "74b7dee2-6d93-4009-89b2-beea48bc64f8": {
           "type": "review",
           "settings": {
-            "avatar": "shopify:\/\/shop_images\/Flood.jpg",
+            "avatar": "shopify://shop_images/Flood.jpg",
             "heading": "Excellent Company and Product",
             "sub_heading": "",
             "rating": "star5",
@@ -1148,7 +1091,7 @@
       "type": "apps",
       "blocks": {
         "powr_instagram_feed_app_block_fqwd6D": {
-          "type": "shopify:\/\/apps\/instagram-feed-reels-instafeed\/blocks\/app-block\/0ef0f2d8-4861-4613-a8e4-82a7151be72e",
+          "type": "shopify://apps/powr-instagram-feed/blocks/app-block/0ef0f2d8-4861-4613-a8e4-82a7151be72e",
           "settings": {
             "app_id": "0db6845a_1650904810"
           }
