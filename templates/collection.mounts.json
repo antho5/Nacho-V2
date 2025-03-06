@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "banner": {
@@ -9,8 +18,7 @@
             "show_image_parallax": false,
             "show_bg_overlay": true,
             "type": "full",
-            "image": "shopify:\/\/shop_images\/unnamed.jpg",
-            "image_mobile": "shopify:\/\/shop_images\/nacho-collection-header.webp",
+            "image_mobile": "shopify://shop_images/nacho-collection-header.webp",
             "bg_overlay": "#000000"
           }
         },
@@ -61,6 +69,9 @@
         "9147d182-d0c6-4b47-ad9e-97ad5cd6ae5a"
       ],
       "settings": {
+        "container": "default",
+        "padding_full_width": 0,
+        "layout": "1",
         "show_breadcrumb": false,
         "breadcrumb_alignment": "left",
         "breadcrumb_color": "#999999",
@@ -71,30 +82,22 @@
         "breadcrumb_gradient_mb": "",
         "show_page_title": true,
         "page_title_alignment": "left",
-        "container": "default",
         "mg_top_desktop": 0,
         "mg_top_tablet": 0,
         "mg_top_mobile": 0,
         "mg_bottom_desktop": 50,
         "mg_bottom_tablet": 20,
-        "mg_bottom_mobile": 20,
-        "layout": "1"
+        "mg_bottom_mobile": 20
       }
     },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
+        "container": "default",
+        "padding_full_width": 0,
         "colors_bg": "rgba(0,0,0,0)",
         "colors_bg_gradient": "",
-        "container": "default",
-        "mg_top_desktop": 0,
-        "mg_top_tablet": 0,
-        "mg_top_mobile": 0,
-        "mg_bottom_desktop": 0,
-        "mg_bottom_tablet": 0,
-        "mg_bottom_mobile": 0,
-        "show_sidebar": false,
-        "show_sidebar_collapse": true,
+        "sidebar_collapse": "collapse",
         "enable_sticky": false,
         "sidebar_layout": "layout_1",
         "sidebar_collapse_default": "expand",
@@ -104,9 +107,10 @@
         "sidebar_heading_font_size": 14,
         "sidebar_heading_font_weight": "700",
         "sidebar_heading_text_transform": "uppercase",
-        "show_filter": true,
+        "show_filter": false,
         "filter_swatch": "Color",
         "filter_swatch_type": "color",
+        "filter_swatch_layout": "color",
         "filter_rectangle": "Size",
         "filter_display_type": "show-more",
         "max_item_per_filter": 10,
@@ -128,7 +132,17 @@
         "link_banner_2": "",
         "show_banner_3": true,
         "banner_position_3": "12",
-        "link_banner_3": ""
+        "link_banner_3": "",
+        "product_space_between_vert_desk": 30,
+        "product_space_between_vert_mb": 16,
+        "product_space_between_horiz_desk": 60,
+        "product_space_between_horiz_mb": 30,
+        "mg_top_desktop": 0,
+        "mg_top_tablet": 0,
+        "mg_top_mobile": 0,
+        "mg_bottom_desktop": 0,
+        "mg_bottom_tablet": 0,
+        "mg_bottom_mobile": 0
       }
     },
     "product-recently-viewed": {
@@ -176,7 +190,6 @@
         "scroll_track_bg": "#f1f1f1",
         "scroll_thumb_color": "#000000",
         "scroll_thumb_hover_color": "#444444",
-        "enable_hover_drag_icon": true,
         "enable_layout_special": false,
         "bg_card": "#ffffff",
         "padding_card": 15,
