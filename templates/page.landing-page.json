@@ -112,12 +112,12 @@
         "id_section": "",
         "container": "fullwidth",
         "padding_full_width": 0,
-        "mg_top_desktop": 0,
-        "mg_top_tablet": 0,
-        "mg_top_mobile": 0,
-        "mg_bottom_desktop": 50,
-        "mg_bottom_tablet": 50,
-        "mg_bottom_mobile": 50,
+        "display_type": "slide",
+        "enable_arrows": false,
+        "arrows_position": "",
+        "enable_dots": false,
+        "enable_autoplay": false,
+        "list_gap": 0,
         "image_banner_title": "",
         "enable_border_title": false,
         "color_title": "#202020",
@@ -131,12 +131,12 @@
         "style_bg": "none",
         "bg_color": "",
         "bg_color_gradient": "",
-        "display_type": "slide",
-        "list_gap": 0,
-        "enable_arrows": false,
-        "arrows_position": "",
-        "enable_dots": false,
-        "enable_autoplay": false
+        "mg_top_desktop": 0,
+        "mg_top_tablet": 0,
+        "mg_top_mobile": 0,
+        "mg_bottom_desktop": 50,
+        "mg_bottom_tablet": 50,
+        "mg_bottom_mobile": 50
       }
     },
     "rich_text_gkcrFf": {
@@ -167,10 +167,10 @@
           "type": "button",
           "settings": {
             "button_label": "Button label",
-            "margin_top_button": 30,
             "button_link": "",
-            "button_color": "#ffffff",
+            "margin_top_button": 30,
             "enable_underline_button": false,
+            "button_color": "#ffffff",
             "button_border_color": "#000000",
             "button_bg_color": "#000000",
             "button_bg_gradient": "",
@@ -208,15 +208,15 @@
         "enable_border_top": false,
         "enable_border_bottom": false,
         "color_border_bottom": "#e8e8e8",
+        "rich_text_bg": "#ffffff",
+        "rich_text_bg_gradient": "",
+        "enable_column": false,
         "mg_top_desktop": 50,
         "mg_top_tablet": 50,
         "mg_top_mobile": 50,
         "mg_bottom_desktop": 50,
         "mg_bottom_tablet": 50,
-        "mg_bottom_mobile": 50,
-        "rich_text_bg": "#ffffff",
-        "rich_text_bg_gradient": "",
-        "enable_column": false
+        "mg_bottom_mobile": 50
       }
     },
     "featured_product_e7rPEc": {
@@ -235,13 +235,12 @@
         "meta_hVN4j7": {
           "type": "meta",
           "settings": {
-            "spacing_top": 0,
-            "spacing_bottom": 13,
-            "show_review": true,
             "show_sold_in": true,
             "sold_in_number": "3,5,6,7,8,10,12,15",
             "sold_in_hours": "10,15,16,17,18,20,25,35",
-            "color_text_sold_in": "#b60b32"
+            "color_text_sold_in": "#b60b32",
+            "spacing_top": 0,
+            "spacing_bottom": 13
           }
         },
         "short_description_wLaxLN": {
@@ -310,8 +309,6 @@
             "fontsize_text": 14,
             "checkbox_color": "#ffffff",
             "checkbox_border_color": "#494a4d",
-            "spacing_top": 0,
-            "spacing_bottom": 15,
             "color_qty_label": "#ffffff",
             "color_qty_input": "#f2f5ff",
             "bg_color_qty_input": "rgba(0,0,0,0)",
@@ -337,7 +334,9 @@
             "bin_color_hover": "#ffffff",
             "bin_border_color_hover": "rgba(0,0,0,0)",
             "bin_bg_color_hover": "rgba(0,0,0,0)",
-            "bin_bg_color_hover_gradient": "linear-gradient(90deg, rgba(48, 188, 237, 1), rgba(127, 72, 176, 1) 50%, rgba(229, 26, 203, 1) 100%)"
+            "bin_bg_color_hover_gradient": "linear-gradient(90deg, rgba(48, 188, 237, 1), rgba(127, 72, 176, 1) 50%, rgba(229, 26, 203, 1) 100%)",
+            "spacing_top": 0,
+            "spacing_bottom": 15
           }
         }
       },
@@ -356,12 +355,6 @@
         "container": "container",
         "padding_full_width": 0,
         "show_sticky_info": false,
-        "mg_top_desktop": 60,
-        "mg_top_tablet": 50,
-        "mg_top_mobile": 40,
-        "mg_bottom_desktop": 50,
-        "mg_bottom_tablet": 30,
-        "mg_bottom_mobile": 30,
         "bg_color_product": "#000000",
         "title": "Shop Now",
         "color_title": "#ffffff",
@@ -380,31 +373,30 @@
         "main_image_counter_mobile": false,
         "main_image_position": "left",
         "main_image_bg_color": "rgba(0,0,0,0)",
-        "show_thumbnail_mobile": true,
         "thumnail_layout": "2",
+        "show_thumbnail_mobile": true,
         "thumbnail_to_show": 5,
         "thumbnail_active_color": "#ff7a01",
         "thumbnail_arrow_color_mb": "#ffffff",
         "thumbnail_image_bg_color": "#121212",
+        "media_fit": "unset",
         "product_image_ratio": "adapt",
         "portrait_aspect_ratio": 100,
-        "media_fit": "unset",
         "product_image_popup": "fancybox",
         "video_layout": "thumbnail",
         "show_badge": true,
-        "show_qty": true
+        "mg_top_desktop": 60,
+        "mg_top_tablet": 50,
+        "mg_top_mobile": 40,
+        "mg_bottom_desktop": 50,
+        "mg_bottom_tablet": 30,
+        "mg_bottom_mobile": 30
       }
     },
     "video_block_cE9kfp": {
       "type": "video-block",
       "settings": {
         "container": "container",
-        "mg_top_desktop": 50,
-        "mg_top_tablet": 50,
-        "mg_top_mobile": 50,
-        "mg_bottom_desktop": 50,
-        "mg_bottom_tablet": 50,
-        "mg_bottom_mobile": 50,
         "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "video_block_title": "Video",
@@ -422,7 +414,13 @@
         "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "url_mp4": "",
         "description": "",
-        "full_width": false
+        "full_width": false,
+        "mg_top_desktop": 50,
+        "mg_top_tablet": 50,
+        "mg_top_mobile": 50,
+        "mg_bottom_desktop": 50,
+        "mg_bottom_tablet": 50,
+        "mg_bottom_mobile": 50
       }
     },
     "large_lookbook_banners_9keE4T": {
@@ -461,12 +459,6 @@
         "padding_full_width": 0,
         "section_bg": "#fafafa",
         "section_gradient": "",
-        "mg_top_desktop": 50,
-        "mg_top_tablet": 50,
-        "mg_top_mobile": 50,
-        "mg_bottom_desktop": 50,
-        "mg_bottom_tablet": 50,
-        "mg_bottom_mobile": 50,
         "title": "",
         "color_title": "#232323",
         "mg_bottom_title": 18,
@@ -508,7 +500,13 @@
         "show_btn_gradient": "rgba(0,0,0,0.5)",
         "show_btn_text_color": "#ffffff",
         "show_btn_height": 30,
-        "show_btn_width": 135
+        "show_btn_width": 135,
+        "mg_top_desktop": 50,
+        "mg_top_tablet": 50,
+        "mg_top_mobile": 50,
+        "mg_bottom_desktop": 50,
+        "mg_bottom_tablet": 50,
+        "mg_bottom_mobile": 50
       }
     }
   },

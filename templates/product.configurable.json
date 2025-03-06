@@ -77,8 +77,6 @@
           "settings": {
             "show_dynamic_checkout": false,
             "show_gift_card_recipient": false,
-            "spacing_top": 0,
-            "spacing_bottom": 15,
             "atc_animation": "horizontal-shaking",
             "atc_color": "#ffffff",
             "atc_border_color": "#232323",
@@ -95,7 +93,9 @@
             "bin_color_hover": "#ffffff",
             "bin_border_color_hover": "#232323",
             "bin_bg_color_hover": "#232323",
-            "bin_bg_color_hover_gradient": ""
+            "bin_bg_color_hover_gradient": "",
+            "spacing_top": 0,
+            "spacing_bottom": 15
           }
         },
         "a86220cf-8641-4e06-87d3-b5ffa195501b": {
@@ -106,8 +106,8 @@
             "color_title": "#232323",
             "text_description": "<p>Please allow 24-48 for your order to be picked and shipped.</p>",
             "color_des": "#4d4d4d",
-            "content_popup": "<p>Please allow 24-48 for your order to be picked and shipped. When you place an order, we will estimate shipping delivery dates for you based on the availability of your items and the shipping options you choose. Depending on the shipping provider you choose, shipping date estimates may appear on the shipping quotes page. Please also note that the shipping rates for many items we sell are weight-based. The weight of any such item can be found on its detail page. To reflect the policies of the shipping companies we use, all weights will be rounded up to the next full pound.</p>",
             "fontsize_text": 12,
+            "content_popup": "<p>Please allow 24-48 for your order to be picked and shipped. When you place an order, we will estimate shipping delivery dates for you based on the availability of your items and the shipping options you choose. Depending on the shipping provider you choose, shipping date estimates may appear on the shipping quotes page. Please also note that the shipping rates for many items we sell are weight-based. The weight of any such item can be found on its detail page. To reflect the policies of the shipping companies we use, all weights will be rounded up to the next full pound.</p>",
             "spacing_top": 0,
             "spacing_bottom": 12
           }
@@ -144,10 +144,10 @@
             "title": "Specification",
             "type": "metafield",
             "content": "",
-            "enable_btn_show_more": false,
-            "maximum_des_to_show": 300,
             "product_custom_source": "dynamic",
-            "product_tab_key_metafield": "{{ product.metafields.c_f.custom_tab1.value }}"
+            "product_tab_key_metafield": "{{ product.metafields.c_f.custom_tab1.value }}",
+            "enable_btn_show_more": false,
+            "maximum_des_to_show": 300
           }
         },
         "custom_aNqVRp": {
@@ -157,10 +157,10 @@
             "title": "Reviews",
             "type": "metafield",
             "content": "",
-            "enable_btn_show_more": false,
-            "maximum_des_to_show": 300,
             "product_custom_source": "dynamic",
-            "product_tab_key_metafield": ""
+            "product_tab_key_metafield": "",
+            "enable_btn_show_more": false,
+            "maximum_des_to_show": 300
           }
         },
         "3d9ea84d-5527-4bce-abe6-5debef3ec955": {
@@ -170,10 +170,10 @@
             "title": "Instructions",
             "type": "metafield",
             "content": "<h3>Returns Policy</h3>\n<p>You may return most new, unopened items within 30 days of delivery for a full refund. We'll also pay the return shipping costs if the return is a result of our error (you received an incorrect or defective item, etc.).</p>\n<p>You should expect to receive your refund within four weeks of giving your package to the return shipper, however, in many cases you will receive a refund more quickly. This time period includes the transit time for us to receive your return from the shipper (5 to 10 business days), the time it takes us to process your return once we receive it (3 to 5 business days), and the time it takes your bank to process our refund request (5 to 10 business days).</p>\n<p>If you need to return an item, simply login to your account, view the order using the \"Complete Orders\" link under the My Account menu and click the Return Item(s) button. We'll notify you via e-mail of your refund once we've received and processed the returned item.</p>\n<h3>Shipping</h3>\n<p>We can ship to virtually any address in the world. Note that there are restrictions on some products, and some products cannot be shipped to international destinations.</p>\n<p>When you place an order, we will estimate shipping and delivery dates for you based on the availability of your items and the shipping options you choose. Depending on the shipping provider you choose, shipping date estimates may appear on the shipping quotes page.</p>\n<p>Please also note that the shipping rates for many items we sell are weight-based. The weight of any such item can be found on its detail page. To reflect the policies of the shipping companies we use, all weights will be rounded up to the next full pound.</p>",
-            "enable_btn_show_more": false,
-            "maximum_des_to_show": 300,
             "product_custom_source": "dynamic",
-            "product_tab_key_metafield": "{{ product.metafields.c_f.custom_tab4.value }}"
+            "product_tab_key_metafield": "{{ product.metafields.c_f.custom_tab4.value }}",
+            "enable_btn_show_more": false,
+            "maximum_des_to_show": 300
           }
         },
         "19ab1d9f-74b2-4c76-bf2e-1bc749e5c2a3": {
@@ -188,13 +188,12 @@
         "1180d91b-75f9-49d9-a9db-2b9f5a49408d": {
           "type": "complementary_products",
           "settings": {
-            "show_complementary_product": true,
             "complementary_product_title": "Pairs well with",
-            "complementary_product_arrows": false,
-            "complementary_product_dots": true,
             "complementary_product_layout": "2",
             "complementary_product_limit_1": 2,
             "complementary_product_limit_2": 3,
+            "complementary_product_arrows": false,
+            "complementary_product_dots": true,
             "complementary_product_object": "cover",
             "spacing_top": 30,
             "spacing_bottom": 0
@@ -203,14 +202,14 @@
         "grouped_product_8wkRbp": {
           "type": "grouped_product",
           "settings": {
-            "spacing_top": 0,
-            "spacing_bottom": 0,
             "atc_color": "#ffffff",
             "atc_border_color": "#232323",
             "atc_bg_color": "#232323",
             "atc_color_hover": "#232323",
             "atc_border_color_hover": "#232323",
-            "atc_bg_color_hover": "#ffffff"
+            "atc_bg_color_hover": "#ffffff",
+            "spacing_top": 0,
+            "spacing_bottom": 0
           }
         }
       },
@@ -240,27 +239,24 @@
         "container": "default",
         "padding_full_width": 0,
         "show_sticky_info": false,
-        "mg_top_desktop": 50,
-        "mg_top_tablet": 50,
-        "mg_top_mobile": 0,
-        "mg_bottom_desktop": 0,
-        "mg_bottom_tablet": 0,
-        "mg_bottom_mobile": 0,
+        "media_fit": "unset",
+        "product_image_ratio": "adapt",
+        "portrait_aspect_ratio": 148,
+        "video_layout": "thumbnail",
+        "zoomed_image": false,
+        "product_image_popup": "fancybox",
+        "main_image_show_custom_cursor": true,
+        "icon_color": "#000000",
+        "main_image_position": "left",
+        "main_image_layout": "1",
         "main_image_arrows_desktop": true,
         "main_image_arrows_mobile": true,
         "main_image_counter_mobile": true,
         "main_image_enable_parallax_mb": false,
         "main_image_show_zoom_icon_mb": true,
-        "main_image_position": "left",
-        "main_image_layout": "1",
-        "main_image_show_custom_cursor": true,
-        "count_color": "#191919",
-        "icon_color": "#000000",
         "show_thumbnail_mobile": true,
         "thumnail_layout": "3",
         "thumbnail_to_show": 4,
-        "show_sidebar": false,
-        "show_sidebar_collapse": true,
         "enable_sticky": false,
         "sidebar_layout": "layout_1",
         "sidebar_collapse_default": "expand",
@@ -269,19 +265,12 @@
         "sidebar_heading_font_size": 14,
         "sidebar_heading_font_weight": "700",
         "sidebar_heading_text_transform": "uppercase",
-        "product_image_ratio": "adapt",
-        "portrait_aspect_ratio": 148,
-        "zoomed_image": false,
-        "media_fit": "unset",
-        "product_image_popup": "fancybox",
-        "video_layout": "thumbnail",
         "show_badge": true,
-        "show_qty": true,
         "show_subtotal": true,
         "subtotal_style": "1",
         "show_sticky_add_to_cart": false,
-        "show_sticky_vendor": false,
         "sticky_atc_layout": "1",
+        "show_sticky_vendor": false,
         "show_tab": true,
         "tab_layout": "horizontal",
         "tab_layout_mobile": "popup",
@@ -295,16 +284,8 @@
         "tab_border_color_rgb": "",
         "show_product_bundle": true,
         "background_color": "",
-        "padding_top": 30,
-        "padding_top_tablet": 30,
-        "padding_top_mobile": 30,
-        "padding_bottom": 70,
-        "padding_bottom_tablet": 40,
-        "padding_bottom_mobile": 30,
         "block_title": "Frequently Bought Together",
         "block_title_align": "center",
-        "block_dots": false,
-        "block_arrows": true,
         "product_style": "2",
         "block_image_ratio": "adapt",
         "bundle_discount": false,
@@ -317,7 +298,21 @@
         "total_btn_color_hover": "#232323",
         "total_btn_border_hover": "#f15c23",
         "total_btn_bg_hover": "#f15c23",
-        "total_btn_bg_gradient_hover": ""
+        "total_btn_bg_gradient_hover": "",
+        "block_dots": false,
+        "block_arrows": true,
+        "padding_top": 30,
+        "padding_top_tablet": 30,
+        "padding_top_mobile": 30,
+        "padding_bottom": 70,
+        "padding_bottom_tablet": 40,
+        "padding_bottom_mobile": 30,
+        "mg_top_desktop": 50,
+        "mg_top_tablet": 50,
+        "mg_top_mobile": 0,
+        "mg_bottom_desktop": 0,
+        "mg_bottom_tablet": 0,
+        "mg_bottom_mobile": 0
       }
     },
     "1724699610d861f76b": {
@@ -325,8 +320,7 @@
       "blocks": {
         "klaviyo_reviews_product_reviews_jVzBi4": {
           "type": "shopify://apps/klaviyo-reviews/blocks/product-reviews/db20e365-d984-4ac4-9655-e1588d951ca9",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -340,12 +334,6 @@
       "type": "video-block",
       "settings": {
         "container": "container",
-        "mg_top_desktop": 15,
-        "mg_top_tablet": 15,
-        "mg_top_mobile": 15,
-        "mg_bottom_desktop": 0,
-        "mg_bottom_tablet": 0,
-        "mg_bottom_mobile": 0,
         "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "video_block_title": "",
@@ -364,19 +352,19 @@
         "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "url_mp4": "{{ product.metafields.custom.video_url.value }}",
         "description": "{{ product.title }} Video",
-        "full_width": false
+        "full_width": false,
+        "mg_top_desktop": 15,
+        "mg_top_tablet": 15,
+        "mg_top_mobile": 15,
+        "mg_bottom_desktop": 0,
+        "mg_bottom_tablet": 0,
+        "mg_bottom_mobile": 0
       }
     },
     "video_block_zaUE3E": {
       "type": "video-block",
       "settings": {
         "container": "container",
-        "mg_top_desktop": 15,
-        "mg_top_tablet": 15,
-        "mg_top_mobile": 15,
-        "mg_bottom_desktop": 0,
-        "mg_bottom_tablet": 0,
-        "mg_bottom_mobile": 0,
         "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "video_block_title": "",
@@ -395,19 +383,19 @@
         "video_url": "",
         "url_mp4": "{{ product.metafields.custom.video_url_2.value }}",
         "description": "{{ product.title }} Video",
-        "full_width": false
+        "full_width": false,
+        "mg_top_desktop": 15,
+        "mg_top_tablet": 15,
+        "mg_top_mobile": 15,
+        "mg_bottom_desktop": 0,
+        "mg_bottom_tablet": 0,
+        "mg_bottom_mobile": 0
       }
     },
     "video_block_BVkHUh": {
       "type": "video-block",
       "settings": {
         "container": "container",
-        "mg_top_desktop": 15,
-        "mg_top_tablet": 15,
-        "mg_top_mobile": 15,
-        "mg_bottom_desktop": 0,
-        "mg_bottom_tablet": 0,
-        "mg_bottom_mobile": 0,
         "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "video_block_title": "",
@@ -426,7 +414,13 @@
         "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "url_mp4": "{{ product.metafields.custom.video_url_3.value }}",
         "description": "{{ product.title }} Video",
-        "full_width": false
+        "full_width": false,
+        "mg_top_desktop": 15,
+        "mg_top_tablet": 15,
+        "mg_top_mobile": 15,
+        "mg_bottom_desktop": 0,
+        "mg_bottom_tablet": 0,
+        "mg_bottom_mobile": 0
       }
     },
     "product-recommendations": {
@@ -472,7 +466,6 @@
         "scroll_track_bg": "#f1f1f1",
         "scroll_thumb_color": "#000000",
         "scroll_thumb_hover_color": "#444444",
-        "enable_hover_drag_icon": true,
         "enable_layout_special": false,
         "bg_card": "#ffffff",
         "padding_card": 15,
@@ -527,7 +520,6 @@
         "scroll_track_bg": "#f1f1f1",
         "scroll_thumb_color": "#000000",
         "scroll_thumb_hover_color": "#444444",
-        "enable_hover_drag_icon": false,
         "enable_layout_special": false,
         "bg_card": "#ffffff",
         "padding_card": 15,

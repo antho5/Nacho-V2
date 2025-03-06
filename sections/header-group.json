@@ -33,7 +33,6 @@
         ".message {text-transform: uppercase; font-family: var(--font-heading-family);}"
       ],
       "settings": {
-        "enable_announcement": true,
         "layout": "scroll",
         "enable_close": false,
         "color_text": "#232323",

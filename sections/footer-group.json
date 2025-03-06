@@ -60,7 +60,6 @@
             "icon_size": 16,
             "icon_color": "#ffffff",
             "content_spacing": 5,
-            "mg_bottom": 0,
             "enable_custom_position_icon": false,
             "show_social": false,
             "social_heading": "",
@@ -78,7 +77,8 @@
             "social_border_color_hover": "#ffffff",
             "social_background_color_hover": "#ffffff",
             "social_background_color_gradient_hover": "",
-            "social_box_hover_color": "#ffffff"
+            "social_box_hover_color": "#ffffff",
+            "mg_bottom": 0
           }
         },
         "d935a709-71e0-48ff-8d74-5a367ae6d12d": {
@@ -86,8 +86,6 @@
           "settings": {
             "custom_width": "25",
             "show_newsletter": true,
-            "newsletter_margin_bottom": 45,
-            "newsletter_padding_bottom": 0,
             "heading": "Newsletter Sign Up",
             "subtext": "<p>Sign up for exclusive updates, new arrivals & insider only discounts</p>",
             "mg_top_des": 0,
@@ -133,7 +131,8 @@
             "show_app_store": false,
             "app_store_heading": "",
             "app_store_link_1": "",
-            "app_store_link_2": ""
+            "app_store_link_2": "",
+            "newsletter_margin_bottom": 45
           }
         }
       },
@@ -149,9 +148,9 @@
         "padding_full_width": 60,
         "type_footer_heading": "font_1",
         "type_footer_heading_font_size": 15,
+        "type_footer_heading_line_height": 22,
         "type_footer_heading_font_weight": "600",
         "type_footer_heading_text_transform": "uppercase",
-        "type_footer_heading_line_height": 22,
         "type_footer_heading_letter_spacing": ".05em",
         "type_footer_link": "font_1",
         "type_footer_link_font_size": 12,

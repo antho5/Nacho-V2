@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "banner": {
@@ -10,7 +19,7 @@
             "show_image_parallax": false,
             "show_bg_overlay": true,
             "type": "full",
-            "image": "shopify:\/\/shop_images\/unnamed.jpg",
+            "image": "shopify://shop_images/unnamed.jpg",
             "bg_overlay": "#000000"
           }
         },
@@ -61,6 +70,8 @@
         "9147d182-d0c6-4b47-ad9e-97ad5cd6ae5a"
       ],
       "settings": {
+        "container": "1770",
+        "layout": "1",
         "show_breadcrumb": false,
         "breadcrumb_alignment": "left",
         "breadcrumb_color": "#999999",
@@ -71,30 +82,20 @@
         "breadcrumb_gradient_mb": "",
         "show_page_title": true,
         "page_title_alignment": "left",
-        "container": "1770",
         "mg_top_desktop": 0,
         "mg_top_tablet": 0,
         "mg_top_mobile": 0,
         "mg_bottom_desktop": 15,
         "mg_bottom_tablet": 15,
-        "mg_bottom_mobile": 15,
-        "layout": "1"
+        "mg_bottom_mobile": 15
       }
     },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
+        "container": "default",
         "colors_bg": "rgba(0,0,0,0)",
         "colors_bg_gradient": "",
-        "container": "default",
-        "mg_top_desktop": 0,
-        "mg_top_tablet": 0,
-        "mg_top_mobile": 0,
-        "mg_bottom_desktop": 0,
-        "mg_bottom_tablet": 0,
-        "mg_bottom_mobile": 0,
-        "show_sidebar": false,
-        "show_sidebar_collapse": true,
         "enable_sticky": false,
         "sidebar_layout": "layout_1",
         "sidebar_collapse_default": "expand",
@@ -128,7 +129,13 @@
         "link_banner_2": "",
         "show_banner_3": true,
         "banner_position_3": "12",
-        "link_banner_3": ""
+        "link_banner_3": "",
+        "mg_top_desktop": 0,
+        "mg_top_tablet": 0,
+        "mg_top_mobile": 0,
+        "mg_bottom_desktop": 0,
+        "mg_bottom_tablet": 0,
+        "mg_bottom_mobile": 0
       }
     },
     "845f01b2-9e77-4755-b5cb-b807ca8596f4": {
@@ -136,12 +143,6 @@
       "disabled": true,
       "settings": {
         "container": "1170",
-        "mg_top_desktop": 10,
-        "mg_top_tablet": 10,
-        "mg_top_mobile": 10,
-        "mg_bottom_desktop": 15,
-        "mg_bottom_tablet": 15,
-        "mg_bottom_mobile": 15,
         "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "video_block_title": "",
@@ -156,10 +157,16 @@
         "autoplay": false,
         "video_height": "54",
         "style_video": "mp4",
-        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "url_mp4": "{{ collection.metafields.custom.collection_video_1.value }}",
         "description": "",
-        "full_width": false
+        "full_width": false,
+        "mg_top_desktop": 10,
+        "mg_top_tablet": 10,
+        "mg_top_mobile": 10,
+        "mg_bottom_desktop": 15,
+        "mg_bottom_tablet": 15,
+        "mg_bottom_mobile": 15
       }
     },
     "e73876c9-65a3-452a-a0d5-004394ac2c85": {
@@ -167,12 +174,6 @@
       "disabled": true,
       "settings": {
         "container": "1170",
-        "mg_top_desktop": 10,
-        "mg_top_tablet": 10,
-        "mg_top_mobile": 10,
-        "mg_bottom_desktop": 15,
-        "mg_bottom_tablet": 15,
-        "mg_bottom_mobile": 15,
         "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "video_block_title": "",
@@ -187,10 +188,16 @@
         "autoplay": false,
         "video_height": "54",
         "style_video": "mp4",
-        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "url_mp4": "{{ collection.metafields.custom.collection_video_2.value }}",
         "description": "",
-        "full_width": false
+        "full_width": false,
+        "mg_top_desktop": 10,
+        "mg_top_tablet": 10,
+        "mg_top_mobile": 10,
+        "mg_bottom_desktop": 15,
+        "mg_bottom_tablet": 15,
+        "mg_bottom_mobile": 15
       }
     },
     "product-recently-viewed": {
@@ -238,7 +245,6 @@
         "scroll_track_bg": "#f1f1f1",
         "scroll_thumb_color": "#000000",
         "scroll_thumb_hover_color": "#444444",
-        "enable_hover_drag_icon": true,
         "enable_layout_special": false,
         "bg_card": "#ffffff",
         "padding_card": 15,
@@ -251,7 +257,7 @@
     "ce8304c4-11df-4f42-9ada-39c767cb5951": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<div class=\"powr-social-feed\" id=\"0db6845a_1650904810\"><\/div><script src=\"https:\/\/www.powr.io\/powr.js?platform=shopify\"><\/script>"
+        "custom_liquid": "<div class=\"powr-social-feed\" id=\"0db6845a_1650904810\"></div><script src=\"https://www.powr.io/powr.js?platform=shopify\"></script>"
       }
     }
   },
