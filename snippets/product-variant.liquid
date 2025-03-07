@@ -65,9 +65,9 @@
                                         value="{{ value | escape }}"
                                         {% if option.selected_value == value %}checked{% endif %}
                                         {% if is_swatch and show_variant_image_group %}
+                                        {% endif %}
                                             data-filter=".filter-{{ value | handle }}"
                                             data-metafields-vig="{{ variant.metafields.custom.variant_image_group }}"
-                                        {% endif %}
                                         data-variant-id="{{ variant.id }}"
                                     >
                                     {%- if is_swatch -%}
