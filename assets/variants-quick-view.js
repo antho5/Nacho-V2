@@ -33,6 +33,9 @@ class VariantQuickViewSelects extends HTMLElement {
             this.updateAttribute(false, !this.currentVariant.available);
             this.checkQuantityWhenVariantChange();
         }
+        if (BSS_B2B) {
+          document.dispatchEvent(new Event(`bss_b2b:QuickviewLoaded`))
+        }
     }
 
     updateVariants(variants){
