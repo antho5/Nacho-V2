@@ -122,7 +122,7 @@
                                                 endif 
                                             endif
                                         %}
-                                        <div class="cart-item" data-item-row {% if item.product.variants.size != 0 %}{% unless item.variant.title contains 'Default' %}data-cart-edit-productItem{% endunless %}{% endif %} data-line="{{ item.key }}"{% if settings.discount_calculator_free_shipping == 'setup_shipping_delivery' and item.product.gift_card? %} data-price-gift-card="{{ price_gift_card | times: item.quantity }}"{% endif %}>
+                                        <div bss-b2b-cart-item-key="{{ item.key }}" class="cart-item" data-item-row {% if item.product.variants.size != 0 %}{% unless item.variant.title contains 'Default' %}data-cart-edit-productItem{% endunless %}{% endif %} data-line="{{ item.key }}"{% if settings.discount_calculator_free_shipping == 'setup_shipping_delivery' and item.product.gift_card? %} data-price-gift-card="{{ price_gift_card | times: item.quantity }}"{% endif %}>
                                             <div class="cart-item-block cart-item-info">
                                                 <div class="cart-item-wrapper">
                                                     <div class="cart-item-block-left">
@@ -187,6 +187,7 @@
                                                         {% comment %} adding-block {% endcomment %}
                                                         <div class="cart-item-block cart-item-price small-screen-visible">
                                                             <div class="cart-item__price-wrapper">
+                                                              <span bss-b2b-item-original-price>
                                                                 {%- assign current_variant = item.variant -%}
                                                                 {%- if item.original_price != item.final_price -%}
                                                                     <dl class="cart-item__discounted-prices">
@@ -217,6 +218,7 @@
                                                                 {%- else -%}
                                                                     <span class="price price--end" data-item-final-price-display>{{ item.original_price | money }}</span>
                                                                 {%- endif -%}
+                                                              </span>
                                                             </div>
                                                         </div>
                                                         <div class="cart-item-blocks small-screen-visible">
@@ -317,6 +319,7 @@
                                             </div>
                                             <div class="cart-item-block cart-item-price">
                                                 <div class="cart-item__price-wrapper">
+                                                  <span bss-b2b-item-original-price>
                                                     {%- assign current_variant = item.variant -%}
                                                     {%- if item.original_price != item.final_price -%}
                                                         <dl class="cart-item__discounted-prices">
@@ -347,6 +350,7 @@
                                                     {%- else -%}
                                                         <span class="price price--end" data-item-final-price-display>{{ item.original_price | money }}</span>
                                                     {%- endif -%}
+                                                  </span>
                                                 </div>
                                             </div>
                                             <div class="cart-item-block cart-item-quantity">
@@ -443,7 +447,7 @@
                                                 endif 
                                             -%} 
                                             <div class="cart-item-block cart-item-total" data-price="{{ price_to_display }}" data-original-price="{{ item.original_price }}">
-                                                <span class="cart-item-value" data-item-price-with-quantity-display>{{ price_to_display | times: item.quantity | money }}</span>
+                                                <span class="cart-item-value" data-item-price-with-quantity-display bss-b2b-final-line-price>{{ price_to_display | times: item.quantity | money }}</span>
                                             </div>
                                             <div class="cart-item-block cart-item-remove">
                                                 <a class="cart-remove" href="javascript:void(0)" data-cart-remove data-cart-remove-id="{{ item.id }}" data-line="{{ item.key }}" data-index="{{ item.index | plus: 1 }}" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}">{% render 'icon-close' %}</a>
