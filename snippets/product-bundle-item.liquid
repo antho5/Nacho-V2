@@ -123,7 +123,7 @@
                 </div>
             {%- endif -%}
             <div class="bundle-product-price">
-                <div class="price-box card-price">
+                <div class="price-box card-price" bss-b2b-product-id="{{ product.id }}" bss-b2b-product-price>
                     {%- if product.compare_at_price > product.price -%}
                         <div class="price-sale clearfix">
                             <span class="old-price">
