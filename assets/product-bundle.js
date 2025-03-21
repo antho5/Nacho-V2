@@ -536,11 +536,11 @@ class ProductBundle extends HTMLElement {
         const productBundle = document.querySelector("product-bundle");
         if (productBundle) {
           let total = 0;
-          const productItems = productBundle.querySelectorAll("[class='#product-bundle-item'], [class='#product-bundle-item @main']");
+          const productItems = productBundle.querySelectorAll(".bundlePdItem-container");
     
           if (productItems.length) {
             productItems.forEach((productItem) => {
-              const inputChecked = productItem.querySelector("[class='#product-bundle-item-check']");
+              const inputChecked = productItem.querySelector(".bundle-product-checkbox > input");
               if (!inputChecked || inputChecked.querySelector("input")?.checked) {
                 const groupPriceEle = productItem.querySelector("[bss-b2b-product-price]");
     
