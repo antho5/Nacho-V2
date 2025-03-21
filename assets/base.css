@@ -7344,6 +7344,7 @@ summary::-webkit-details-marker {
     letter-spacing: 0;
     line-height: var(--product-price-line-height);
     margin: -2px 10px 0 0;
+   text-transform: lowercase;
 }
 .price:has(.not-applied-cp) .from-text {
     display: none;
