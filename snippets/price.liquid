@@ -44,6 +44,7 @@
     {% endunless %}
   {% endif %}
   <span bss-b2b-product-id="{{ product.id }}" bss-b2b-product-price {% if use_variant %}bss-b2b-variant-price bss-b2b-variant-id="{{ product.selected_or_first_available_variant.id }}" bss-b2b-featured-product="true"{% endif %}>
+     <span class="not-applied-cp"></span>
     <dl>
         {%- comment -%}
           Explanation of description list:
