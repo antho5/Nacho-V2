@@ -38,6 +38,12 @@
     {%- if compare_at_price > price %} price--on-sale {% endif -%}
     {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}
     {% if price_style == '2' %} price-style-2{% endif %}">
+  {% if product.variants.size > 1 %}
+    {% unless use_variant %}
+      <small class="from-text">{{ 'sections.collection_template.from' | t }}</small>
+    {% endunless %}
+  {% endif %}
+  <span bss-b2b-product-id="{{ product.id }}" bss-b2b-product-price {% if use_variant %}bss-b2b-variant-price bss-b2b-variant-id="{{ product.selected_or_first_available_variant.id }}" bss-b2b-featured-product="true"{% endif %}>
     <dl>
         {%- comment -%}
           Explanation of description list:
@@ -96,4 +102,5 @@
                         {{- product.selected_or_first_available_variant.unit_price_measurement.reference_value -}}{%- endif -%} {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}</span></dd>
         </small>
     </dl>
+  </span>
 </div>
