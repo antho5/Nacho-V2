@@ -7334,3 +7334,7 @@ summary::-webkit-details-marker {
         transition: none !important;
     }
 }
+/* BSS custom */
+.price:has(.not-applied-cp) .from-text {
+    display: none;
+}
