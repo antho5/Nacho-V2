@@ -1,3 +1,4 @@
+var Currency = Shopify.formatMoney
 class VariantSelects extends HTMLElement {
     constructor() {
         super();
