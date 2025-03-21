@@ -511,7 +511,7 @@ class VariantSelects extends HTMLElement {
                 }
             }
         }
-        if (BSS_B2B) {
+        if (BSS_B2B && BSS_B2B.observer && BSS_B2B.observer.productSubject) {
           const productForm = document.querySelector("[bss-b2b-main-product-form]");
           BSS_B2B.observer.productSubject.notifyObserver('VariantChange', 'VariantSelectChange', {productForm});
         }
