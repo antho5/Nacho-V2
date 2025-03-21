@@ -7335,6 +7335,16 @@ summary::-webkit-details-marker {
     }
 }
 /* BSS custom */
+.price .from-text{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: var(--font-body-size);
+    font-weight: var(--font-weight-normal);
+    color: var(--product-compare-price-color);
+    letter-spacing: 0;
+    line-height: var(--product-price-line-height);
+    margin: -2px 10px 0 0;
+}
 .price:has(.not-applied-cp) .from-text {
     display: none;
 }
