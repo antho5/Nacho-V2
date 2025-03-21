@@ -4639,6 +4639,9 @@
                         window.sharedFunctionsAnimation.onEnterButton();
                         window.sharedFunctionsAnimation.onLeaveButton();
                     }
+                    if (BSS_B2B) {
+                      document.dispatchEvent(new Event(`bss_b2b:QuickviewLoaded`))
+                    }
                 }
             });
         },
