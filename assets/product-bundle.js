@@ -564,7 +564,7 @@ class ProductBundle extends HTMLElement {
             });
           }
           const totalPrice = BSS_B2B.formatMoney(total * 100);
-          const totalBundleEle = productBundle.querySelector("[class='#product-bundle-total'] [data-element='subtotal']")
+          const totalBundleEle = productBundle.querySelector(".bundle-product-totalPrice")
           if (totalBundleEle) {
             totalBundleEle.innerHTML = totalPrice;
           }
