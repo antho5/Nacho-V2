@@ -280,6 +280,7 @@ class ProductBundle extends HTMLElement {
                 this.querySelector('[data-bundle-addtocart]').value = window.total_btn.add_item.replace('[item]', bundleItem.length);
                 this.querySelector('[data-bundle-product-total]').innerHTML = Shopify.formatMoney(totalPrice, window.money_format);
             }
+            this._bssShowTotalPrice()
         }
     }
 
@@ -507,6 +508,68 @@ class ProductBundle extends HTMLElement {
 
     checkNeedToConvertCurrency() {
         return (window.show_multiple_currencies && Currency.currentCurrency != shopCurrency) || window.show_auto_currency;
+    }
+
+  _calculatePrice(priceProduct) {
+        let price = 0;
+        let placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+        let formatString = BSS_B2B.shopData?.shop?.money_format;
+        switch (formatString.match(placeholderRegex)[1]) {
+            case 'amount':
+                price = parseFloat(priceProduct.innerText.replace(/[^\d,.]/g, '').replace(',', ''));
+                break;
+            case 'amount_no_decimals':
+                price = parseFloat(priceProduct.innerText.replace(/[^\d]/g, ''));
+                break;
+            case 'amount_with_comma_separator':
+                price = parseFloat(priceProduct.innerText.replace(/[^\d,,]/g, '').replace(',', '.'));
+                break;
+            case 'amount_no_decimals_with_comma_separator':
+                price = parseFloat(priceProduct.innerText.replace(/[^\d]/g, ''));
+                break;
+        }
+        return price;
+    };
+  
+    _bssShowTotalPrice() {
+       if (typeof BSS_B2B !== "undefined") {
+        const productBundle = document.querySelector("product-bundle");
+        if (productBundle) {
+          let total = 0;
+          const productItems = productBundle.querySelectorAll("[class='#product-bundle-item'], [class='#product-bundle-item @main']");
+    
+          if (productItems.length) {
+            productItems.forEach((productItem) => {
+              const inputChecked = productItem.querySelector("[class='#product-bundle-item-check']");
+              if (!inputChecked || inputChecked.querySelector("input")?.checked) {
+                const groupPriceEle = productItem.querySelector("[bss-b2b-product-price]");
+    
+                if (groupPriceEle) {
+                  const childrenCount = groupPriceEle.children.length;
+                  let cpPrice = 0;
+    
+                  if (childrenCount === 2) {
+                    const cpPriceEle = groupPriceEle.querySelector("span:nth-child(2)");
+                    cpPrice = this._calculatePrice(cpPriceEle);
+                  } else if (childrenCount === 1) {
+                    const cpPriceEle = groupPriceEle.querySelector("span");
+                    cpPrice = this._calculatePrice(cpPriceEle);
+                  } else {
+                    cpPrice = this._calculatePrice(groupPriceEle);
+                  }
+    
+                  total += cpPrice;
+                }
+              }
+            });
+          }
+          const totalPrice = BSS_B2B.formatMoney(total * 100);
+          const totalBundleEle = productBundle.querySelector("[class='#product-bundle-total'] [data-element='subtotal']")
+          if (totalBundleEle) {
+            totalBundleEle.innerHTML = totalPrice;
+          }
+        }
+      }
     }
 }
 
