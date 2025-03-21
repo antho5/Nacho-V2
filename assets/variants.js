@@ -610,6 +610,10 @@ class VariantSelects extends HTMLElement {
         if (elementProductAddToCart && this.currentVariant?.available !== undefined && typeof maxValue !== 'undefined') {
             elementProductAddToCart.dataset.available = this.currentVariant.available && maxValue <= 0;
         }
+      if (BSS_B2B) {
+        const productForm = document.querySelector("[bss-b2b-main-product-form]");
+BSS_B2B.observer.productSubject.notifyObserver('VariantChange', 'VariantSelectChange', {productForm});
+      }
     }
 
     updateVariantStatuses() {
