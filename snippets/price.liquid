@@ -40,7 +40,7 @@
     {% if price_style == '2' %} price-style-2{% endif %}">
   {% if product.variants.size > 1 %}
     {% unless use_variant %}
-      <small class="from-text">{{ 'sections.collection_template.from' | t }}</small>
+      <span class="text from-text">{{ 'sections.collection_template.from' | t }}</span>
     {% endunless %}
   {% endif %}
   <span bss-b2b-product-id="{{ product.id }}" bss-b2b-product-price {% if use_variant %}bss-b2b-variant-price bss-b2b-variant-id="{{ product.selected_or_first_available_variant.id }}" bss-b2b-featured-product="true"{% endif %}>
