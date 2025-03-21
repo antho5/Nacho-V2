@@ -12,7 +12,7 @@ class VariantQuickViewSelects extends HTMLElement {
             if (this.checkNeedToConvertCurrency()) {
                 let currencyCode = document.getElementById('currencies')?.querySelector('.active')?.getAttribute('data-currency');
 
-                Currency.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
+                Currency?.convertAll?.(window.shop_currency, currencyCode, 'span.money', 'money_format');
             }
         }, 500);
 
@@ -106,7 +106,7 @@ class VariantQuickViewSelects extends HTMLElement {
                 if (this.checkNeedToConvertCurrency()) {
                     let currencyCode = document.getElementById('currencies')?.querySelector('.active')?.getAttribute('data-currency');
 
-                    Currency.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
+                    Currency?.convertAll?.(window.shop_currency, currencyCode, 'span.money', 'money_format');
                 }
 
                 destination?.classList.remove('visibility-hidden');
@@ -232,7 +232,7 @@ class VariantQuickViewSelects extends HTMLElement {
                     
                     if (this.checkNeedToConvertCurrency()) {
                         let currencyCode = document.getElementById('currencies')?.querySelector('.active')?.getAttribute('data-currency');
-                        Currency.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
+                        Currency?.convertAll?.(window.shop_currency, currencyCode, 'span.money', 'money_format');
                     }
         
                     subTotal = moneySpan.innerText 
@@ -292,7 +292,7 @@ class VariantQuickViewSelects extends HTMLElement {
                 if (this.checkNeedToConvertCurrency()) {
                     let currencyCode = document.getElementById('currencies')?.querySelector('.active')?.getAttribute('data-currency');
 
-                    Currency.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
+                    Currency?.convertAll?.(window.shop_currency, currencyCode, 'span.money', 'money_format');
                 }
             }
             
@@ -451,7 +451,7 @@ class QuantityQuickViewInput extends HTMLElement {
 
             if (this.checkNeedToConvertCurrency()) {
                 let currencyCode = document.getElementById('currencies')?.querySelector('.active')?.getAttribute('data-currency');
-                Currency.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
+                Currency?.convertAll?.(window.shop_currency, currencyCode, 'span.money', 'money_format');
             }
 
             subTotal = moneySpan.innerText 
@@ -459,6 +459,10 @@ class QuantityQuickViewInput extends HTMLElement {
             const pdView_subTotal = document.querySelector('.quickView .productView-subtotal .money') || document.querySelector('.quickView .productView-subtotal .money-subtotal');
             pdView_subTotal.innerText = subTotal;
         }   
+        if (BSS_B2B && BSS_B2B.observer && BSS_B2B.observer.productSubject) {
+          const productForm = document.querySelector("[bss-b2b-quickview-product-form]");
+          BSS_B2B.observer.productSubject.notifyObserver('VariantChange', 'VariantSelectChange', {productForm});
+        }
     }
 
     onButtonClick(event) {
