@@ -429,7 +429,7 @@
                 </div>
             {%- endif -%}
             <div class="previewCartGroup">
-                <button class="button button-1 button-checkout" onclick="window.location='{{ routes.cart_url | split: '/cart' | first }}/checkout'"{% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="cart-sidebar-checkout">
+                <button class="button button-1 button-checkout" {% comment %}onclick="window.location='{{ routes.cart_url | split: '/cart' | first }}/checkout'"{% endcomment %}{% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="cart-sidebar-checkout">
                     {{ 'sections.cart.checkout' | t }}
                 </button>
                 {% if additional_checkout_buttons %}
