@@ -541,7 +541,7 @@ class ProductBundle extends HTMLElement {
           if (productItems.length) {
             productItems.forEach((productItem) => {
               const inputChecked = productItem.querySelector(".bundle-product-checkbox > input");
-              if (!inputChecked || inputChecked.querySelector("input")?.checked) {
+              if (inputChecked.checked) {
                 const groupPriceEle = productItem.querySelector("[bss-b2b-product-price]");
     
                 if (groupPriceEle) {
