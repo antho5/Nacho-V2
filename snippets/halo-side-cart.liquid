@@ -38,7 +38,7 @@
                         endif 
                     endif
                 -%} 
-                <li class="previewCartItem clearfix" data-item-row{% if settings.discount_calculator_free_shipping == 'setup_shipping_delivery' and item.product.gift_card? %} data-price-gift-card="{{ price_gift_card | times: item.quantity }}"{% endif %}>
+                <li bss-b2b-cart-item-key="{{ item.key }}" class="previewCartItem clearfix" data-item-row{% if settings.discount_calculator_free_shipping == 'setup_shipping_delivery' and item.product.gift_card? %} data-price-gift-card="{{ price_gift_card | times: item.quantity }}"{% endif %}>
                     <a href="{{ item.url }}" class="previewCartItem-image">
                         <img srcset="{{ item.image | img_url: '110x' }}" src="{{ item.image | img_url: '110x' }}" width="110" height="{{ 110 | divided_by: item.image.aspect_ratio | round }}" alt="{{ item.title | escape }}" sizes="110px" loading="lazy">
                     </a>
@@ -115,6 +115,7 @@
                             -%}  
                             <div class="previewCartItem-price" data-price="{{ price_to_display }}" data-original-price="{{ item.original_price }}">
                                 <span class="price">
+                                  <span bss-b2b-item-original-price>
                                     {%- assign current_variant = item.variant -%}
                                     {% if item.original_price != item.final_price %}
                                         <span class="previewCartItem-saving-price">
@@ -139,6 +140,7 @@
                                             {{ item.price | money }}
                                         </span>
                                     {% endif %}
+                                  </span>                       
                                 </span>
                             </div>
                             <cart-update-quantity class="previewCartItem-qty" data-product="{{ item.product_id }}" data-variant="{{ item.variant.id }}">
@@ -374,7 +376,7 @@
                 <div class="previewCartTotals-label">
                     {{ 'sections.cart.subtotal' | t }}:
                 </div>
-                <div class="previewCartTotals-value" data-cart-subtotal>
+                <div class="previewCartTotals-value" data-cart-subtotal bss-b2b-cart-total-price>
                     {{ cart.original_total_price | money }}
                 </div>  
             </li>       
@@ -400,7 +402,7 @@
                 <div class="previewCartTotals-label">
                     {{ 'general.cart.total' | t }}
                 </div>  
-                <div class="previewCartTotals-value" data-cart-total-value="{{ cart.total_price }}">
+                <div class="previewCartTotals-value" data-cart-total-value="{{ cart.total_price }}" bss-b2b-cart-total-price>
                     {{ cart.total_price | money }}
                 </div>
             </li>
