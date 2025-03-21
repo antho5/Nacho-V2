@@ -34,7 +34,9 @@ class VariantQuickViewSelects extends HTMLElement {
             this.checkQuantityWhenVariantChange();
         }
         if (BSS_B2B) {
-          document.dispatchEvent(new Event(`bss_b2b:QuickviewLoaded`))
+          setTimeout(()=>{
+            document.dispatchEvent(new Event(`bss_b2b:QuickviewLoaded`))
+          },1000)
         }
     }
 
