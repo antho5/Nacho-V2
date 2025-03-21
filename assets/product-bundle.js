@@ -280,7 +280,7 @@ class ProductBundle extends HTMLElement {
                 this.querySelector('[data-bundle-addtocart]').value = window.total_btn.add_item.replace('[item]', bundleItem.length);
                 this.querySelector('[data-bundle-product-total]').innerHTML = Shopify.formatMoney(totalPrice, window.money_format);
             }
-            // this._bssShowTotalPrice()
+            this._bssShowTotalPrice()
         }
     }
 
