@@ -888,6 +888,10 @@ class QuantityInput extends HTMLElement {
                 mainQty2.value = inputValue;
             }
         }
+      if (BSS_B2B) {
+        const productForm = document.querySelector("[bss-b2b-main-product-form]");
+        BSS_B2B.observer.productSubject.notifyObserver('VariantChange', 'VariantSelectChange', {productForm});
+      }
     }
 
     onButtonClick(event) {
