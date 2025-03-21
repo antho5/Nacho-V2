@@ -7349,3 +7349,6 @@ summary::-webkit-details-marker {
 .price:has(.not-applied-cp) .from-text {
     display: none;
 }
+.cart-list [bss-b2b-item-original-price] {
+  font-size: 18px;
+}
