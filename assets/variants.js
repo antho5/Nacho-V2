@@ -326,7 +326,7 @@ class VariantSelects extends HTMLElement {
 
                     if (this.checkNeedToConvertCurrency()) {
                         let currencyCode = document.getElementById('currencies')?.querySelector('.active')?.getAttribute('data-currency');
-                        Currency.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
+                        Currency?.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
                     }
 
                     subTotal = moneySpan.innerText
