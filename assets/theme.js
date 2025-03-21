@@ -1,4 +1,3 @@
-const Currency = Shopify.formatMoney
 (function ($) {
     var $body = $('body'),
         $doc = $(document),
