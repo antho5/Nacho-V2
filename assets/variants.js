@@ -511,6 +511,10 @@ class VariantSelects extends HTMLElement {
                 }
             }
         }
+        if (BSS_B2B) {
+          const productForm = document.querySelector("[bss-b2b-main-product-form]");
+          BSS_B2B.observer.productSubject.notifyObserver('VariantChange', 'VariantSelectChange', {productForm});
+        }
     }
 
     updateStickyAddToCart(unavailable = true, disable = true){
