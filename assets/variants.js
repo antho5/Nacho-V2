@@ -187,7 +187,7 @@ class VariantSelects extends HTMLElement {
                 if (this.checkNeedToConvertCurrency()) {
                     let currencyCode = document.getElementById('currencies')?.querySelector('.active')?.getAttribute('data-currency');
 
-                    Currency.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
+                    Currency?.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
                 }
 
                 if(destinationProperty) {
@@ -414,7 +414,7 @@ class VariantSelects extends HTMLElement {
 
                     if (this.checkNeedToConvertCurrency()) {
                         let currencyCode = document.getElementById('currencies')?.querySelector('.active')?.getAttribute('data-currency');
-                        Currency.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
+                        Currency?.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
                     }
 
                     subTotal = moneySpan.innerText
@@ -482,7 +482,7 @@ class VariantSelects extends HTMLElement {
                             
                             if (this.checkNeedToConvertCurrency()) {
                                 let currencyCode = document.getElementById('currencies')?.querySelector('.active')?.getAttribute('data-currency');
-                                Currency.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
+                                Currency?.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
                             }
 
                             thisStickyPrice.prepend(`<s class="money-compare-price" data-compare-price="${compare_at_price}"><span class="money"></span></s>`);
@@ -831,7 +831,7 @@ class QuantityInput extends HTMLElement {
 
             if (this.checkNeedToConvertCurrency()) {
                 let currencyCode = document.getElementById('currencies')?.querySelector('.active')?.getAttribute('data-currency');
-                Currency.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
+                Currency?.convertAll(window.shop_currency, currencyCode, 'span.money', 'money_format');
             }
 
             subTotal = moneySpan.innerText 
