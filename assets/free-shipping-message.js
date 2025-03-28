@@ -38,7 +38,16 @@ class FreeShippingMeter extends HTMLElement {
     }
 
     calculateProgress(cart) {
-        const cartTotalPrice = parseInt(cart.total_price) / 100;
+        let totalPrice = cart.total_price;
+        if ($('body').hasClass('setup_shipping_delivery')) {
+            const giftCardItems = $(".cart-item[data-price-gift-card], .previewCartItem[data-price-gift-card]");
+            if (giftCardItems.length > 0) {
+                giftCardItems.each(function() {
+                    totalPrice -= parseFloat($(this).attr("data-price-gift-card"));
+                });
+            }
+        }
+        const cartTotalPrice = parseInt(totalPrice) / 100;
         const cartTotalPriceFormatted = cartTotalPrice.toFixed(2);
         const cartTotalPriceRounded = parseFloat(cartTotalPriceFormatted);
 
@@ -106,7 +115,7 @@ class FreeShippingMeter extends HTMLElement {
 
             this.progressMeter.style.width = `${freeShipBar}%`;
             if (this.textEnabled) {
-                const textWrapper = this.progressMeter.querySelector('.text').innerHTML = `${freeShipBar}%`;
+                const textWrapper = this.progressMeter.querySelector('.text').innerHTML = `${freeShipBar.toFixed(2)}%`;
             }
 
             this.messageElement.innerHTML = text;

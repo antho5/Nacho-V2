@@ -68,10 +68,12 @@
     {% render 'halo-term-condition-popup' %}
 {%- endif -%}
 
-{%- if settings.quick_shop_type == '2' -%}
+{%- if settings.quick_shop_type == '1' or settings.quick_shop_type == '2' -%}
     {% render 'halo-popup-card-mobile' %}
-{%- elsif  settings.quick_shop_type == '3' -%}
+{%- elsif settings.quick_shop_type == '3' -%}
     {% render 'halo-quickshop-popup' %}
+{%- elsif settings.quick_shop_type == '4' -%}
+    {% render 'halo-quick-bulk-popup' %}
 {%- endif -%}
 
 {%- if settings.enable_sticky_notification or settings.enable_sticky_notification_mb -%}

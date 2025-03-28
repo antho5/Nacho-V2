@@ -37,7 +37,7 @@
     /* Settings Header Tab */
     .header-nav-multi-site .header-top--wrapper{background: {% if bg_tab_home_gradient != 'rgba(0,0,0,0)' and bg_tab_home_gradient != blank %}{{ bg_tab_home_gradient }}{% else %}{{ bg_tab_home }}{% endif %}}.header-nav-multi-site .header-top--left .header__list li svg {height: {{ tab_font_size }};width: auto}.header-nav-multi-site .header-top--left .header__list .item--border:before {background-color: {{ color_border_separation }}}
     {%- if section.settings.header_style == 'style_2' -%}
-        .header-nav-multi-site .halo-productBadges {top: 15px}.header-nav-multi-site .halo-productBadges--right {right: 15px}.header-nav-multi-site .halo-productBadges--left {left: 15px}.header-nav-multi-site .card-review {line-height: 24px}.product-block__banner .product-block__cap--text {font-style: italic}
+        .header-nav-multi-site .halo-productBadges {top: 15px}.header-nav-multi-site .halo-productBadges--right {right: 15px}.header-nav-multi-site .halo-productBadges--left {left: 15px}.product-block__banner .product-block__cap--text {font-style: italic}
     {%- endif -%}
     {%- if settings.enable_layout_rtl -%}
     .layout_rtl .header-nav-multi-site .header__list .item--border:not(.is-active):before {right: auto;left: 0}.layout_rtl .header-nav-multi-site .header__icon+.header__icon, .layout_rtl .header-nav-multi-site .header__iconItem+.header__iconItem, .layout_rtl .header-nav-multi-site .header__languageCurrency {margin-left: 0;margin-right: 20px}.layout_rtl .header-nav-multi-site .header__group .cart-count-bubble {margin-right: 0}.layout_rtl .header-nav-multi-site .halo-top-currency .dropdown-toggle .text {margin-left: 5px;margin-right: 5px}.layout_rtl .header-nav-multi-site .live_help,.layout_rtl .header-nav-multi-site .customer-links {margin-left: 0;margin-right: 20px}
@@ -64,14 +64,17 @@
             {%- endif -%}
         }
         .header-nav-multi-site .header__inline-menu{display: none}.header-nav-multi-site .header__inline-menu.is-active{display: block}
+        .header-nav-multi-site--style_2 .header-top--right .customer-links.show_wishlist_number {margin-left: 30px}
+        .header-nav-multi-site .header-top--right .wishlist-count-bubble{top: -8px}
+        .header-nav-multi-site.header-nav-multi-site--style_2 .header__icon--wishlist .wishlist-count-bubble {position: inherit;top: auto}
     }
 </style>
-<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+<!-- <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script> -->
 {%- liquid
     assign menu_tab = section.blocks | where: "type", "tab"
     assign page_handle = page.handle
 -%}
-<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-navigation-wrapper header-wrapper">
+<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-navigation-wrapper header-wrapper"{% if settings.enable_following_cursor and settings.following_cursor_style == 'default' %} no-effect-cursor{% endif %}>
     <header class="header header-06 header-nav-multi-site{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if section.settings.header_style == 'style_2' %} header-nav-multi-site--style_2{% endif %}" data-id="shopify-section-{{ section.id }}" style="--spacing-l-r: {{ section.settings.padding_full_width }}px; --icon-mobile-spacing: {{ section.settings.header_icon_mobile_spacing | append: 'px' }}">
         <div class="header-top--wrapper flex-align-center pr-30">
             {%- if section.settings.header_style == 'style_2' -%}
@@ -149,9 +152,7 @@
                                 {% render 'icon-cart-02' %}
                                 <span class="cart-text">{{ 'general.cart.shopping_cart' | t }}</span>
                                 <div class="cart-count-bubble">
-                                    {%- if cart.item_count < 100 -%}
-                                        <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
-                                    {%- endif -%}
+                                    <span class="text" aria-hidden="true" data-cart-count>{%- if cart.item_count < 100 -%}{{ cart.item_count }}{%- else -%}{{ 'sections.cart.item_99' | t }}{%- endif -%}</span>
                                     <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
                                 </div>
                             </a>
@@ -160,7 +161,13 @@
 
                     {%- if section.settings.header_style == 'style_2' %}
                         {%- if settings.show_wishlist and section.settings.show_wishlist -%}
-                            <a href="{{ pages['wish-list'].url }}" class="header__icon header__icon--wishlist link link--text focus-inset">{% render 'icon-heart-2' %}<span class="wishlist-text">{{ 'wishlist.general.wishlist' | t }}</span></a>
+                            <a href="{% if settings.link_wishlist != blank %}{{ settings.link_wishlist }}{% else %}{{ pages['wish-list'].url }}{% endif %}" class="header__icon header__icon--wishlist link link--text focus-inset">
+                                {% render 'icon-heart-2' %}
+                                <span class="wishlist-text">{{ 'wishlist.general.wishlist' | t }}</span>
+                                {%- if section.settings.show_wishlist_number -%}
+                                    <div class="wishlist-count-bubble"><span class="text" aria-hidden="true" data-wishlist-count></span><span class="visually-hidden">{{ 'wishlist.general.wishlist' | t }}</span></div>
+                                {%- endif -%}
+                            </a>
                         {%- endif -%}
                     {%-  endif -%}
                     {%- if section.settings.header_style == 'style_2' -%}
@@ -170,11 +177,19 @@
                             {% else %}
                                 {% assign is_contained = false %}
                             {% endif %}
-                            <div class="customer-links">
+                            <div class="customer-links{% if section.settings.show_wishlist_number %} show_wishlist_number{% endif %}">
                               {%- if customer -%}
                                   <a class="header__link--account" id="customer_logout_link" href="{{ routes.account_logout_url }}">{{ 'customer.log_out' | t }}</a>
                                   <span> / </span>
-                                  <a class="header__link--account" href="{{ routes.account_url }}">{{ 'customer.account.my_account' | t }}</a>
+                                  <a class="header__link--account" href="{{ routes.account_url }}">
+                                    {%- if customer and customer.has_avatar? -%}
+                                        <account-icon>
+                                            {{ customer | avatar }}
+                                        </account-icon>
+                                    {%- else -%}
+                                        {{ 'customer.account.my_account' | t }}
+                                    {%- endif -%}
+                                  </a>
                               {%- else -%}  
                                   <a class="header__link--account" id="customer_login_link" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"{% if is_contained %} data-open-auth-sidebar{% endif %}>{{ 'customer.sign_in' | t }}</a>
                                   <span class="or-text">{{ 'customer.or' | t }}</span>
@@ -192,7 +207,13 @@
                                 {% assign is_contained = false %}
                             {% endif %}
                             <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account link link--text"{% if is_contained %} data-open-auth-sidebar{% endif %}>
-                                {% render 'icon-account-2' %}
+                                {%- if customer and customer.has_avatar? -%}
+                                    <account-icon>
+                                        {{ customer | avatar }}
+                                    </account-icon>
+                                {%- else -%}
+                                    {% render 'icon-account-2' %}
+                                {%- endif -%}
                                 <span class="visually-hidden">
                                     {%- liquid
                                     if customer
@@ -208,9 +229,11 @@
 
                     {%- unless section.settings.header_style == 'style_2' -%}
                         {%- if settings.show_wishlist and section.settings.show_wishlist -%}
-                            <a href="{{ pages['wish-list'].url }}" class="header__icon header__icon--wishlist link link--text focus-inset">
+                            <a href="{% if settings.link_wishlist != blank %}{{ settings.link_wishlist }}{% else %}{{ pages['wish-list'].url }}{% endif %}" class="header__icon header__icon--wishlist link link--text focus-inset">
                                 {% render 'icon-heart-2' %}
-                                <div class="wishlist-count-bubble"><span class="text" aria-hidden="true" data-wishlist-count></span><span class="visually-hidden">{{ 'wishlist.general.wishlist' | t }}</span></div>
+                                {%- if section.settings.show_wishlist_number -%}
+                                    <div class="wishlist-count-bubble"><span class="text" aria-hidden="true" data-wishlist-count></span><span class="visually-hidden">{{ 'wishlist.general.wishlist' | t }}</span></div>
+                                {%- endif -%}
                             </a>
                         {%- endif -%}
                     {%- endunless -%}
@@ -221,9 +244,7 @@
                                 {% render 'icon-cart' %}
                                 <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
                                 <div class="cart-count-bubble">
-                                    {%- if cart.item_count < 100 -%} 
-                                    <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
-                                    {%- endif -%}
+                                    <span class="text" aria-hidden="true" data-cart-count>{%- if cart.item_count < 100 -%}{{ cart.item_count }}{%- else -%}{{ 'sections.cart.item_99' | t }}{%- endif -%}</span>
                                     <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
                                 </div>
                             </a>
@@ -284,6 +305,8 @@
                                     {%- endif -%}
                                 </div>
                             </div>
+                        {%- else -%}
+                            {% render 'halo-currency-js' %}
                         {%- endif -%}
                     {%- endif -%}
                 </div>
@@ -299,7 +322,7 @@
                         <div class="header__logo">
                             {%- if menu_tab.size > 0 -%}
                                 {% assign page_handle = page.handle %}
-                                <div class="header__heading header__heading--item">
+                                <{% if request.page_type == 'index' %}h1{% else %}div{% endif %} class="header__heading header__heading--item">
                                     {%- for block in menu_tab -%}
                                         {%- liquid
                                             assign multi_page_handle = pages[block.settings.link].handle
@@ -334,9 +357,9 @@
                                             {%- endif -%}
                                         </a>
                                     {%- endfor -%}
-                                </div>
+                                </{% if request.page_type == 'index' %}h1{% else %}div{% endif %}>
                             {%- else -%}
-                                <div class="header__heading">
+                                <{% if request.page_type == 'index' %}h1{% else %}div{% endif %} class="header__heading">
                                     <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
                                         {%- if section.settings.logo != blank -%}
                                             {%- assign image = section.settings.logo -%}
@@ -348,7 +371,7 @@
                                             <span class="h2 {{ section.settings.logo_text_transform }}">{{ shop.name }}</span>
                                         {%- endif -%}
                                     </a>
-                                </div>
+                                </{% if request.page_type == 'index' %}h1{% else %}div{% endif %}>
                             {%- endif -%}
                         </div>
                     </div>
@@ -377,10 +400,13 @@
                                             endif
                                         -%}
                                     <nav class="{{class}}" data-navigation role="navigation" data-load-menu-page="{{ multi_page_handle }}" style="--menu_bottom_spacing: {{section.settings.menu_bottom_spacing | append: 'px'}};--menu_top_spacing: {{section.settings.menu_top_spacing | append: 'px'}};--menu_top_spacing_sticky: -{{section.settings.menu_top_spacing | plus: 1 | append: 'px'}};--grid_gap_menu_item: {{section.settings.grid_gap_menu_item | append: 'px'}};--lv_1_color: {{ section.settings.lv_1_color }};--lv_1_color_hover: {{ section.settings.lv_1_color_hover }};--lv_2_color: {{ section.settings.lv_2_color }}; --lv_2_color_hover: {{ section.settings.lv_2_color_hover }};--lv_3_color: {{ section.settings.lv_3_color }};--lv_3_color_hover: {{ section.settings.lv_3_color_hover }};--bg_mega_menu: {% if section.settings.bg_mega_menu_gradient != blank %}{{ section.settings.bg_mega_menu_gradient }}{% else %}{{ section.settings.bg_mega_menu }}{% endif %};--sale_item_color: {{section.settings.sale_item_color}};--new_label_color: {{ section.settings.new_label_color }};--new_label_border: {{ section.settings.new_label_bg }};--new_label_bg: {% if section.settings.new_label_bg_gradient != blank %}{{ section.settings.new_label_bg_gradient }}{% else %}{{ section.settings.new_label_bg }}{% endif %};--sale_label_color: {{ section.settings.sale_label_color }};--sale_label_border: {{ section.settings.sale_label_bg }};--sale_label_bg: {% if section.settings.sale_label_bg_gradient != blank %}{{ section.settings.sale_label_bg_gradient }}{% else %}{{ section.settings.sale_label_bg }}{% endif %};--hot_label_color: {{ section.settings.hot_label_color }};--hot_label_border: {{ section.settings.hot_label_bg }};--hot_label_bg: {% if section.settings.hot_label_bg_gradient != blank %}{{ section.settings.hot_label_bg_gradient }}{% else %}{{ section.settings.hot_label_bg }}{% endif %}">
-                                        {% render 'halo-navigation-list-multi',listClass: 'list-menu list-menu--inline text-left', menu_handle: multi_page_handle%}
+                                        {% render 'halo-navigation-list-multi', listClass: 'list-menu list-menu--inline text-left', menu_handle: multi_page_handle %}
                                     </nav>
                                 {%- endfor -%}
-                            {%- endif -%}    
+                                {% unless settings.enable_currencies %}
+                                    {{ "jquery.currencies.min.js" | asset_url | script_tag }}
+                                {%- endunless -%}
+                            {%- endif -%}
                         </div>
                     </div>
                     <div class="header-items header-bottom-right">
@@ -431,9 +457,7 @@
                                 {%- endif -%}
                                 <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
                                 <div class="cart-count-bubble">
-                                    {%- if cart.item_count < 100 -%} 
-                                    <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
-                                    {%- endif -%}
+                                    <span class="text" aria-hidden="true" data-cart-count>{%- if cart.item_count < 100 -%}{{ cart.item_count }}{%- else -%}{{ 'sections.cart.item_99' | t }}{%- endif -%}</span>
                                     <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
                                 </div>
                             </a>
@@ -462,6 +486,7 @@ if (sticky != undefined || sticky != null) {
           };
           this.currentScrollTop = 0;
           this.preventReveal = false;
+          this.predictiveSearch = this.querySelector('predictive-search');
           this.onScrollHandler = this.onScroll.bind(this);
           this.hideHeaderOnScrollUp = () => this.preventReveal = true;
           this.addEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
@@ -488,6 +513,7 @@ if (sticky != undefined || sticky != null) {
 
         onScroll() {
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          if (this.predictiveSearch && this.predictiveSearch.isOpen) return;
           if (scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
             if (this.preventHide) return;
             this.header.classList.add('scrolled-past-header');
@@ -551,10 +577,10 @@ if (sticky != undefined || sticky != null) {
           this.disclosures.forEach(disclosure => disclosure.close());
         }
     }
-    customElements.define('sticky-header', StickyHeader);
+    document.addEventListener('DOMContentLoaded', () => {customElements.define('sticky-header', StickyHeader)});
 }
 {% endjavascript %}
-<script> 
+<script>
     var appendPrependMenuMobile = function() {
         var headerLanguageCurrencyPC = $('.wrapper-language-currency'),
             headerLanguageCurrencyMB = $('.nav-currency-language'),
@@ -607,7 +633,7 @@ if (sticky != undefined || sticky != null) {
     "settings": [
         {
             "type": "paragraph",
-            "content": "*You should only activate \/ use \"Header with Navigation\" you want, don't use the redundant headers which may not optimize for performance."
+            "content": "You should only activate\/use \"header with navigation\" you want, don't use the redundant headers which may not optimize for performance."
         },
         {
             "type": "header",
@@ -650,11 +676,10 @@ if (sticky != undefined || sticky != null) {
             "id": "padding_full_width",
             "label": "t:sections.layout.container.padding_full_width",
             "min": 0,
-            "max": 75,
+            "max": 100,
             "step": 5,
             "unit": "t:sections.layout.fontsize.fontsize_title.unit",
-            "default": 30,
-            "info": "t:sections.layout.container.info_full_width"
+            "default": 30
         },
         {
           "type": "select",
@@ -664,11 +689,11 @@ if (sticky != undefined || sticky != null) {
           "options": [
             {
               "value": "style_1",
-              "label": "t:sections.header.settings.header_top.style_search.option1"
+              "label": "t:settings_schema.typography.settings.typography.style_1"
             },
             {
               "value": "style_2",
-              "label": "t:sections.header.settings.header_top.style_search.option2"
+              "label": "t:settings_schema.typography.settings.typography.style_2"
             }
           ]
         },
@@ -728,6 +753,12 @@ if (sticky != undefined || sticky != null) {
         },
         {
             "type": "checkbox",
+            "id": "show_wishlist_number",
+            "label": "t:sections.header.settings.header_icons.label__6",
+            "default": true
+        },
+        {
+            "type": "checkbox",
             "id": "show_customer",
             "label": "t:sections.header.settings.header_icons.label__2",
             "default": true
@@ -745,7 +776,7 @@ if (sticky != undefined || sticky != null) {
         {
             "type": "select",
             "id": "sticky_header_type",
-            "label": "t:settings_schema.general.settings.swatch.label__2",
+            "label": "t:sections.main-sidebar.settings.general.label__3",
             "default": "on_scroll",
             "options": [
                 {
@@ -763,6 +794,17 @@ if (sticky != undefined || sticky != null) {
             ]
         },
         {
+            "type": "color",
+            "id": "header_bottom_bg",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "color_background",
+            "id": "header_bottom_bg_gradient",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color_gradient"
+        },
+        {
             "type": "header",
             "content": "t:sections.header.settings.header_tab.content"
         },
@@ -775,7 +817,7 @@ if (sticky != undefined || sticky != null) {
         {
             "type": "color",
             "id": "bg_tab_home",
-            "label": "t:settings_schema.colors.settings.colors_name.background_color",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
             "default": "#000"
         },
         {
@@ -955,21 +997,6 @@ if (sticky != undefined || sticky != null) {
         },
         {
             "type": "header",
-            "content": "t:sections.header.settings.header__2.header"
-        },
-        {
-            "type": "color",
-            "id": "header_bottom_bg",
-            "label": "t:settings_schema.colors.settings.colors_name.background_color",
-            "default": "#FFFFFF"
-        },
-        {
-            "type": "color_background",
-            "id": "header_bottom_bg_gradient",
-            "label": "t:settings_schema.colors.settings.colors_name.background_color_gradient"
-        },
-        {
-            "type": "header",
             "content": "t:sections.header.settings.header_top.search"
         },
         {
@@ -980,11 +1007,11 @@ if (sticky != undefined || sticky != null) {
           "options": [
             {
               "value": "style1",
-              "label": "t:sections.header.settings.header_top.style_search.option1"
+              "label": "t:settings_schema.typography.settings.typography.style_1"
             },
             {
               "value": "style2",
-              "label": "t:sections.header.settings.header_top.style_search.option2"
+              "label": "t:settings_schema.typography.settings.typography.style_2"
             }
           ]
         },
@@ -1097,7 +1124,7 @@ if (sticky != undefined || sticky != null) {
         },
         {
             "type": "header",
-            "content": "t:sections.header.settings.navigation.cart_count_bubble"
+            "content": "t:sections.header.settings.navigation.cart_wishlist_count_bubble"
         },
         {
             "type": "color",
@@ -1108,7 +1135,7 @@ if (sticky != undefined || sticky != null) {
         {
             "type": "color",
             "id": "cart_bg_item",
-            "label": "t:settings_schema.colors.settings.colors_name.background_color",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
             "default": "#FFE5E8"
         },
         {
@@ -1128,7 +1155,7 @@ if (sticky != undefined || sticky != null) {
         {
             "type": "image_picker",
             "id": "logo",
-            "label": "t:settings_schema.quick_view.settings.header__2.content",
+            "label": "t:sections.header.settings.mega_menu.banner__img",
             "info": "t:sections.header.settings.logo.logo_info"
         },
         {
@@ -1153,7 +1180,7 @@ if (sticky != undefined || sticky != null) {
         {
             "type": "range",
             "id": "logo_font_size",
-            "label": "t:settings_schema.typography.settings.font_size.label",
+            "label": "t:settings_schema.typography.settings.typography.text_font_size",
             "min": 15,
             "max": 30,
             "step": 1,
@@ -1163,7 +1190,7 @@ if (sticky != undefined || sticky != null) {
         {
             "type": "select",
             "id": "logo_font_weight",
-            "label": "t:settings_schema.typography.settings.font_weight.label",
+            "label": "t:settings_schema.typography.settings.typography.text_font_weight",
             "default": "900",
             "options": [
             {
@@ -1198,6 +1225,10 @@ if (sticky != undefined || sticky != null) {
             "default": "uppercase",
             "options": [
             {
+                "value": "none",
+                "label": "t:settings_schema.typography.settings.text_transform.options__1"
+            },
+            {
                 "value": "capitalize",
                 "label": "t:settings_schema.typography.settings.text_transform.options__2"
             },
@@ -1213,7 +1244,7 @@ if (sticky != undefined || sticky != null) {
         {
             "type": "color",
             "id": "logo_color",
-            "label": "t:settings_schema.typography.settings.typography.text_color",
+            "label": "t:sections.header.settings.header_top.label__4",
             "default": "#000"
         },
         {
@@ -1223,7 +1254,7 @@ if (sticky != undefined || sticky != null) {
         {
             "type": "color",
             "id": "bg_mega_menu",
-            "label": "t:settings_schema.colors.settings.colors_name.background_color",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
             "default": "#fff"
         },
         {
@@ -1286,17 +1317,20 @@ if (sticky != undefined || sticky != null) {
         {
             "type": "textarea",
             "id": "sale_item_1",
-            "label": "t:sections.header.settings.sale_item.label__1"
+            "label": "t:sections.header.settings.sale_item.label__1",
+            "info": "t:sections.header.settings.sale_item.info"
         },
         {
             "type": "textarea",
             "id": "sale_item_2",
-            "label": "t:sections.header.settings.sale_item.label__2"
+            "label": "t:sections.header.settings.sale_item.label__2",
+            "info": "t:sections.header.settings.sale_item.info"
         },
         {
             "type": "textarea",
             "id": "sale_item_3",
-            "label": "t:sections.header.settings.sale_item.label__3"
+            "label": "t:sections.header.settings.sale_item.label__3",
+            "info": "t:sections.header.settings.sale_item.info"
         },
         {
             "type": "color",
@@ -1331,7 +1365,7 @@ if (sticky != undefined || sticky != null) {
         {
             "type": "checkbox",
             "id": "show_label_blink",
-            "label": "t:sections.header.settings.menu_label.label__5",
+            "label": "t:sections.header.settings.menu_label.label",
             "info": "t:sections.header.settings.menu_label.info",
             "default": false
         },
@@ -1342,29 +1376,37 @@ if (sticky != undefined || sticky != null) {
         {
             "type": "textarea",
             "id": "new_label_1",
-            "label": "t:sections.header.settings.header__6.menu_lv_1"
+            "label": "t:sections.header.settings.header__6.menu_lv_1",
+            "info": "t:sections.header.settings.header__6.info_1"
         },
         {
             "type": "textarea",
             "id": "new_label_2",
-            "label": "t:sections.header.settings.header__6.menu_lv_2"
+            "label": "t:sections.header.settings.header__6.menu_lv_2",
+            "info": "t:sections.header.settings.header__6.info_1"
         },
         {
             "type": "textarea",
             "id": "new_label_3",
-            "label": "t:sections.header.settings.header__6.menu_lv_3"
-        },
-        {
-            "type": "color_background",
-            "id": "new_label_bg",
-            "label": "t:settings_schema.colors.settings.colors_name.background_color",
-            "default": "#BAE4ED"
+            "label": "t:sections.header.settings.header__6.menu_lv_3",
+            "info": "t:sections.header.settings.header__6.info_1"
         },
         {
             "type": "color",
             "id": "new_label_color",
-            "label": "t:settings_schema.colors.settings.colors_name.color",
+            "label": "t:settings_schema.colors.settings.colors_name.text_color",
             "default": "#FFFFFF"
+        },
+        {
+            "type": "color_background",
+            "id": "new_label_bg",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
+            "default": "#BAE4ED"
+        },
+        {
+            "type": "color_background",
+            "id": "new_label_bg_gradient",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color_gradient"
         },
         {
             "type": "paragraph",
@@ -1373,29 +1415,37 @@ if (sticky != undefined || sticky != null) {
         {
             "type": "textarea",
             "id": "sale_label_1",
-            "label": "t:sections.header.settings.header__6.menu_lv_1"
+            "label": "t:sections.header.settings.header__6.menu_lv_1",
+            "info": "t:sections.header.settings.header__6.info_2"
         },
         {
             "type": "textarea",
             "id": "sale_label_2",
-            "label": "t:sections.header.settings.header__6.menu_lv_2"
+            "label": "t:sections.header.settings.header__6.menu_lv_2",
+            "info": "t:sections.header.settings.header__6.info_2"
         },
         {
             "type": "textarea",
             "id": "sale_label_3",
-            "label": "t:sections.header.settings.header__6.menu_lv_3"
-        },
-        {
-            "type": "color_background",
-            "id": "sale_label_bg",
-            "label": "t:settings_schema.colors.settings.colors_name.background_color",
-            "default": "#D12442"
+            "label": "t:sections.header.settings.header__6.menu_lv_3",
+            "info": "t:sections.header.settings.header__6.info_2"
         },
         {
             "type": "color",
             "id": "sale_label_color",
-            "label": "t:settings_schema.colors.settings.colors_name.color",
+            "label": "t:settings_schema.colors.settings.colors_name.text_color",
             "default": "#FFFFFF"
+        },
+        {
+            "type": "color_background",
+            "id": "sale_label_bg",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
+            "default": "#D12442"
+        },
+        {
+            "type": "color_background",
+            "id": "sale_label_bg_gradient",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color_gradient"
         },
         {
             "type": "paragraph",
@@ -1404,29 +1454,37 @@ if (sticky != undefined || sticky != null) {
         {
             "type": "textarea",
             "id": "hot_label_1",
-            "label": "t:sections.header.settings.header__6.menu_lv_1"
+            "label": "t:sections.header.settings.header__6.menu_lv_1",
+            "info": "t:sections.header.settings.header__6.info_3"
         },
         {
             "type": "textarea",
             "id": "hot_label_2",
-            "label": "t:sections.header.settings.header__6.menu_lv_2"
+            "label": "t:sections.header.settings.header__6.menu_lv_2",
+            "info": "t:sections.header.settings.header__6.info_3"
         },
         {
             "type": "textarea",
             "id": "hot_label_3",
-            "label": "t:sections.header.settings.header__6.menu_lv_3"
-        },
-        {
-            "type": "color_background",
-            "id": "hot_label_bg",
-            "label": "t:settings_schema.colors.settings.colors_name.background_color",
-            "default": "#FFF993"
+            "label": "t:sections.header.settings.header__6.menu_lv_3",
+            "info": "t:sections.header.settings.header__6.info_3"
         },
         {
             "type": "color",
             "id": "hot_label_color",
-            "label": "t:settings_schema.colors.settings.colors_name.color",
+            "label": "t:settings_schema.colors.settings.colors_name.text_color",
             "default": "#FFFFFF"
+        },
+        {
+            "type": "color_background",
+            "id": "hot_label_bg",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
+            "default": "#FFF993"
+        },
+        {
+            "type": "color_background",
+            "id": "hot_label_bg_gradient",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color_gradient"
         }
     ],
     "blocks": [
@@ -1477,7 +1535,7 @@ if (sticky != undefined || sticky != null) {
                 {
                     "type": "color",
                     "id": "text_bg",
-                    "label": "t:settings_schema.colors.settings.colors_name.background_color",
+                    "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
                     "default": "#000000"
                 },
                 {
@@ -1539,10 +1597,6 @@ if (sticky != undefined || sticky != null) {
             "name": "t:sections.header.blocks.header__4.menu_menu_1",
             "settings": [
                 {
-                    "type": "header",
-                    "content": "t:settings_schema.multiple_layouts.settings.general.layout_block"
-                },
-                {
                     "type": "radio",
                     "id": "layout_block",
                     "label": "t:settings_schema.multiple_layouts.settings.general.layout_select",
@@ -1561,7 +1615,7 @@ if (sticky != undefined || sticky != null) {
                 {
                     "type": "range",
                     "id": "header_custom_width_size",
-                    "label": "t:settings_schema.multiple_layouts.settings.general.custom_width_2",
+                    "label": "t:settings_schema.multiple_layouts.settings.general.custom_width",
                     "max": 1920,
                     "min": 1200,
                     "step": 10,
@@ -1572,6 +1626,7 @@ if (sticky != undefined || sticky != null) {
                     "type": "text",
                     "id": "item",
                     "label": "t:sections.header.settings.mega_menu.label__2",
+                    "info": "t:sections.header.settings.mega_menu.info__2",
                     "default": "Catalog"
                 },
                 {
@@ -1634,10 +1689,6 @@ if (sticky != undefined || sticky != null) {
             "name": "t:sections.header.blocks.header__4.menu_menu_2",
             "settings": [
                 {
-                    "type": "header",
-                    "content": "t:settings_schema.multiple_layouts.settings.general.layout_block"
-                },
-                {
                     "type": "radio",
                     "id": "layout_block",
                     "label": "t:settings_schema.multiple_layouts.settings.general.layout_select",
@@ -1656,7 +1707,7 @@ if (sticky != undefined || sticky != null) {
                 {
                     "type": "range",
                     "id": "header_custom_width_size",
-                    "label": "t:settings_schema.multiple_layouts.settings.general.custom_width_2",
+                    "label": "t:settings_schema.multiple_layouts.settings.general.custom_width",
                     "max": 1920,
                     "min": 1200,
                     "step": 10,
@@ -1667,6 +1718,7 @@ if (sticky != undefined || sticky != null) {
                     "type": "text",
                     "id": "item",
                     "label": "t:sections.header.settings.mega_menu.label__2",
+                    "info": "t:sections.header.settings.mega_menu.info__2",
                     "default": "Catalog"
                 },
                 {
@@ -1684,52 +1736,60 @@ if (sticky != undefined || sticky != null) {
                 },
                 {
                     "type": "header",
-                    "content": "t:sections.header.blocks.header__8.content"
+                    "content": "t:sections.header.settings.mega_menu.label__31"
                 },
                 {
                     "type": "checkbox",
                     "id": "show_banner_1",
-                    "label": "t:sections.header.settings.mega_menu.label__31"
+                    "label": "t:sections.header.settings.mega_menu.label__9"
                 },
                 {
                     "type": "image_picker",
                     "id": "banner_1",
-                    "label": "t:sections.header.settings.mega_menu.label__10"
+                    "label": "t:sections.header.settings.mega_menu.banner__img"
                 },
                 {
                     "type": "url",
                     "id": "banner_url_1",
-                    "label": "t:sections.header.settings.mega_menu.label__13"
+                    "label": "t:sections.header.settings.mega_menu.label__8"
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.header.settings.mega_menu.label__32"
                 },
                 {
                     "type": "checkbox",
                     "id": "show_banner_2",
-                    "label": "t:sections.header.settings.mega_menu.label__32"
+                    "label": "t:sections.header.settings.mega_menu.label__9"
                 },
                 {
                     "type": "image_picker",
                     "id": "banner_2",
-                    "label": "t:sections.header.settings.mega_menu.label__14"
+                    "label": "t:sections.header.settings.mega_menu.banner__img"
                 },
                 {
                     "type": "url",
                     "id": "banner_url_2",
-                    "label": "t:sections.header.settings.mega_menu.label__17"
+                    "label": "t:sections.header.settings.mega_menu.label__8"
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.header.settings.mega_menu.label__33"
                 },
                 {
                     "type": "checkbox",
                     "id": "show_banner_3",
-                    "label": "t:sections.header.settings.mega_menu.label__33"
+                    "label": "t:sections.header.settings.mega_menu.label__9"
                 },
                 {
                     "type": "image_picker",
                     "id": "banner_3",
-                    "label": "t:sections.header.settings.mega_menu.label__18"
+                    "label": "t:sections.header.settings.mega_menu.banner__img"
                 },
                 {
                     "type": "url",
                     "id": "banner_url_3",
-                    "label": "t:sections.header.settings.mega_menu.label__21"
+                    "label": "t:sections.header.settings.mega_menu.label__8"
                 }
             ]
         },
@@ -1737,10 +1797,6 @@ if (sticky != undefined || sticky != null) {
             "type": "megamenu_style_3",
             "name": "t:sections.header.blocks.header__4.menu_menu_3",
             "settings": [
-                {
-                    "type": "header",
-                    "content": "t:settings_schema.multiple_layouts.settings.general.layout_block"
-                },
                 {
                     "type": "radio",
                     "id": "layout_block",
@@ -1760,7 +1816,7 @@ if (sticky != undefined || sticky != null) {
                 {
                     "type": "range",
                     "id": "header_custom_width_size",
-                    "label": "t:settings_schema.multiple_layouts.settings.general.custom_width_2",
+                    "label": "t:settings_schema.multiple_layouts.settings.general.custom_width",
                     "max": 1920,
                     "min": 1200,
                     "step": 10,
@@ -1786,6 +1842,7 @@ if (sticky != undefined || sticky != null) {
                     "type": "text",
                     "id": "item",
                     "label": "t:sections.header.settings.mega_menu.label__2",
+                    "info": "t:sections.header.settings.mega_menu.info__2",
                     "default": "Catalog"
                 },
                 {
@@ -1803,82 +1860,98 @@ if (sticky != undefined || sticky != null) {
                 },
                 {
                     "type": "header",
-                    "content": "t:sections.header.blocks.header__8.content"
+                    "content": "t:sections.header.settings.mega_menu.label__31"
                 },
                 {
                     "type": "checkbox",
                     "id": "show_banner_1",
-                    "label": "t:sections.header.settings.mega_menu.label__31"
+                    "label": "t:sections.header.settings.mega_menu.label__9"
                 },
                 {
                     "type": "image_picker",
                     "id": "banner_1",
-                    "label": "t:sections.header.settings.mega_menu.label__10"
+                    "label": "t:sections.header.settings.mega_menu.banner__img"
                 },
                 {
                     "type": "url",
                     "id": "banner_url_1",
-                    "label": "t:sections.header.settings.mega_menu.label__13"
+                    "label": "t:sections.header.settings.mega_menu.label__8"
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.header.settings.mega_menu.label__32"
                 },
                 {
                     "type": "checkbox",
                     "id": "show_banner_2",
-                    "label": "t:sections.header.settings.mega_menu.label__32"
+                    "label": "t:sections.header.settings.mega_menu.label__9"
                 },
                 {
                     "type": "image_picker",
                     "id": "banner_2",
-                    "label": "t:sections.header.settings.mega_menu.label__14"
+                    "label": "t:sections.header.settings.mega_menu.banner__img"
                 },
                 {
                     "type": "url",
                     "id": "banner_url_2",
-                    "label": "t:sections.header.settings.mega_menu.label__17"
+                    "label": "t:sections.header.settings.mega_menu.label__8"
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.header.settings.mega_menu.label__33"
                 },
                 {
                     "type": "checkbox",
                     "id": "show_banner_3",
-                    "label": "t:sections.header.settings.mega_menu.label__33"
+                    "label": "t:sections.header.settings.mega_menu.label__9"
                 },
                 {
                     "type": "image_picker",
                     "id": "banner_3",
-                    "label": "t:sections.header.settings.mega_menu.label__18"
+                    "label": "t:sections.header.settings.mega_menu.banner__img"
                 },
                 {
                     "type": "url",
                     "id": "banner_url_3",
-                    "label": "t:sections.header.settings.mega_menu.label__21"
+                    "label": "t:sections.header.settings.mega_menu.label__8"
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.header.settings.mega_menu.label__34"
                 },
                 {
                     "type": "checkbox",
                     "id": "show_banner_4",
-                    "label": "t:sections.header.settings.mega_menu.label__34"
+                    "label": "t:sections.header.settings.mega_menu.label__9"
                 },
                 {
                     "type": "image_picker",
                     "id": "banner_4",
-                    "label": "t:sections.header.settings.mega_menu.label__22"
+                    "label": "t:sections.header.settings.mega_menu.banner__img"
                 },
                 {
                     "type": "url",
                     "id": "banner_url_4",
-                    "label": "t:sections.header.settings.mega_menu.label__25"
+                    "label": "t:sections.header.settings.mega_menu.label__8"
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.header.settings.mega_menu.label__39"
                 },
                 {
                     "type": "checkbox",
                     "id": "show_banner_5",
-                    "label": "t:sections.header.settings.mega_menu.label__36"
+                    "label": "t:sections.header.settings.mega_menu.label__9"
                 },
                 {
                     "type": "image_picker",
                     "id": "banner_5",
-                    "label": "t:sections.header.settings.mega_menu.label__37"
+                    "label": "t:sections.header.settings.mega_menu.banner__img"
                 },
                 {
                     "type": "url",
                     "id": "banner_url_5",
-                    "label": "t:sections.header.settings.mega_menu.label__38"
+                    "label": "t:sections.header.settings.mega_menu.label__8"
                 }
             ]
         },
@@ -1886,10 +1959,6 @@ if (sticky != undefined || sticky != null) {
             "type": "megamenu_style_4",
             "name": "t:sections.header.blocks.header__4.menu_menu_4",
             "settings": [
-                {
-                    "type": "header",
-                    "content": "t:settings_schema.multiple_layouts.settings.general.layout_block"
-                },
                 {
                     "type": "radio",
                     "id": "layout_block",
@@ -1909,7 +1978,7 @@ if (sticky != undefined || sticky != null) {
                 {
                     "type": "range",
                     "id": "header_custom_width_size",
-                    "label": "t:settings_schema.multiple_layouts.settings.general.custom_width_2",
+                    "label": "t:settings_schema.multiple_layouts.settings.general.custom_width",
                     "max": 1920,
                     "min": 1200,
                     "step": 10,
@@ -1920,6 +1989,7 @@ if (sticky != undefined || sticky != null) {
                     "type": "text",
                     "id": "item",
                     "label": "t:sections.header.settings.mega_menu.label__2",
+                    "info": "t:sections.header.settings.mega_menu.info__2",
                     "default": "Catalog"
                 },
                 {
@@ -1948,37 +2018,41 @@ if (sticky != undefined || sticky != null) {
                 },
                 {
                     "type": "header",
-                    "content": "t:sections.header.blocks.header__8.content"
+                    "content": "t:sections.header.settings.mega_menu.label__31"
                 },
                 {
                     "type": "checkbox",
                     "id": "show_banner_1",
-                    "label": "t:sections.header.settings.mega_menu.label__31"
+                    "label": "t:sections.header.settings.mega_menu.label__9"
                 },
                 {
                     "type": "image_picker",
                     "id": "banner_1",
-                    "label": "t:sections.header.settings.mega_menu.label__10"
+                    "label": "t:sections.header.settings.mega_menu.banner__img"
                 },
                 {
                     "type": "url",
                     "id": "banner_url_1",
-                    "label": "t:sections.header.settings.mega_menu.label__13"
+                    "label": "t:sections.header.settings.mega_menu.label__8"
+                },
+                {
+                    "type": "header",
+                    "content": "t:sections.header.settings.mega_menu.label__32"
                 },
                 {
                     "type": "checkbox",
                     "id": "show_banner_2",
-                    "label": "t:sections.header.settings.mega_menu.label__32"
+                    "label": "t:sections.header.settings.mega_menu.label__9"
                 },
                 {
                     "type": "image_picker",
                     "id": "banner_2",
-                    "label": "t:sections.header.settings.mega_menu.label__14"
+                    "label": "t:sections.header.settings.mega_menu.banner__img"
                 },
                 {
                     "type": "url",
                     "id": "banner_url_2",
-                    "label": "t:sections.header.settings.mega_menu.label__17"
+                    "label": "t:sections.header.settings.mega_menu.label__8"
                 },
                 {
                     "type": "header",
@@ -2030,10 +2104,6 @@ if (sticky != undefined || sticky != null) {
             "name": "t:sections.header.blocks.header__4.menu_menu_5",
             "settings": [
                 {
-                    "type": "header",
-                    "content": "t:settings_schema.multiple_layouts.settings.general.layout_block"
-                },
-                {
                     "type": "radio",
                     "id": "layout_block",
                     "label": "t:settings_schema.multiple_layouts.settings.general.layout_select",
@@ -2052,7 +2122,7 @@ if (sticky != undefined || sticky != null) {
                 {
                     "type": "range",
                     "id": "header_custom_width_size",
-                    "label": "t:settings_schema.multiple_layouts.settings.general.custom_width_2",
+                    "label": "t:settings_schema.multiple_layouts.settings.general.custom_width",
                     "max": 1920,
                     "min": 1200,
                     "step": 10,
@@ -2086,6 +2156,7 @@ if (sticky != undefined || sticky != null) {
                     "type": "text",
                     "id": "item",
                     "label": "t:sections.header.settings.mega_menu.label__2",
+                    "info": "t:sections.header.settings.mega_menu.info__2",
                     "default": "Catalog"
                 },
                 {

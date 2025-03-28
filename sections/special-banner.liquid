@@ -5,7 +5,7 @@
             {%- for block in section.blocks -%}
                 {%-  case block.type  -%}
                     {%- when 'image_rotating_text' -%}
-                        {%-  liquid 
+                        {%-  liquid
                             assign image = block.settings.image
                             assign rotating_text = block.settings.rotating_text
                             assign link = block.settings.link
@@ -13,7 +13,7 @@
                         {%- if image != blank or rotating_text != blank -%}
                             <div class="special-banner__item special-banner__item--{{ block.type }}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" sticky-special-banner>
                                 <div class="special-banner__img_box{% if block.settings.image_behavior != 'none' %} animate--{{ block.settings.image_behavior }} o-hidden{% endif %}">
-                                    <div class="special-banner__img image-zoom adaptive_height image{% if image == blank %} no-image{% endif %}" style="padding-top: {% if image != blank %}{% unless image.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: image.aspect_ratio | times: 120 }}%{% else %}{{ 1 | divided_by: image.aspect_ratio | times: 100 }}%{% endunless %}{% else %}112.63157894736842%{% endif %}">
+                                    <div class="special-banner__img image-zoom adaptive_height image" style="padding-top: {% if image != blank %}{% unless image.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: image.aspect_ratio | times: 120 }}%{% else %}{{ 1 | divided_by: image.aspect_ratio | times: 100 }}%{% endunless %}{% endif %}">
                                         {%- if image != blank -%}
                                             <img {% if settings.enable_lazyload %}data-{% endif %}srcset="{%- if image.width < 320 -%}{{ image | image_url: width: image.width }} 320w,{%- endif -%}
                                                 {%- if image.width >= 320 -%}{{ image | image_url: width: 375 }} 375w,{%- endif -%}
@@ -25,10 +25,14 @@
                                                 {%- if image.width >= 2000 -%}{{ image | image_url: width: 2000 }} 2000w,{%- endif -%}
                                                 {%- if image.width >= 2800 -%}{{ image | image_url: width: 2800 }} 2800w{%- endif -%}"
                                                 sizes="{% if section.settings.image != blank and section.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif section.settings.image != blank %}50vw{% else %}100vw{% endif %}" {% unless settings.enable_lazyload %}src="{{ image | image_url: width: 750 }}"{% endunless %} alt="{{ image.alt | escape }}" width="{{ image.width }}" height="{{ image.width | divided_by: image.aspect_ratio | round}}"
-                                                {%- if settings.enable_lazyload -%}class="lazyload" loading="lazy"{%- endif -%}
+                                                {%- if settings.enable_lazyload -%}class="lazyload" {% unless settings.enable_layout_rtl %} loading="lazy"{% endunless %}{%- endif -%}
                                                 {% unless image.presentation.focal_point == '50.0% 50.0%' %}style="object-position: {{ image.presentation.focal_point }}"{% endunless %}
                                             >
                                             {%- if settings.enable_lazyload -%}<span class="data-lazy-loading"></span>{%- endif -%}
+                                        {%- else -%}
+                                            <div class="placeholder" style="--height_placeholder: clamp(550px, calc(1070 /1920 * 100vw), 1070px);">
+                                                {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                            </div>
                                         {%- endif -%}
                                         {%- if rotating_text != blank -%}
                                             <div class="special-banner__rotatingText position--{{ block.settings.position }}" style="--color: {{ block.settings.rotating_text_color }}; --letter-spacing: {{ block.settings.letter_spacing }}px">
@@ -43,7 +47,7 @@
                             </div>
                         {%- endif -%}
                     {%- when 'image_with_text' -%}
-                        {%-  liquid 
+                        {%-  liquid
                             assign image = block.settings.image
                             assign link = block.settings.link
                             assign heading = block.settings.heading
@@ -65,12 +69,14 @@
                                             {%- if image.width >= 2000 -%}{{ image | image_url: width: 2000 }} 2000w,{%- endif -%}
                                             {%- if image.width >= 2800 -%}{{ image | image_url: width: 2800 }} 2800w{%- endif -%}"
                                             sizes="{% if section.settings.image != blank %}(min-width: 750px) 50vw, 100vw{% elsif section.settings.image != blank %}50vw{% else %}100vw{% endif %}" {% unless settings.enable_lazyload %}src="{{ image | image_url: width: 750 }}"{% endunless %} alt="{{ image.alt | escape }}" width="{{ image.width }}" height="{{ image.width | divided_by: image.aspect_ratio | round}}"
-                                            {%- if settings.enable_lazyload -%}class="lazyload" loading="lazy"{%- endif -%}
+                                            {%- if settings.enable_lazyload -%}class="lazyload" {% unless settings.enable_layout_rtl %} loading="lazy"{% endunless %}{%- endif -%}
                                             {% unless image.presentation.focal_point == '50.0% 50.0%' %}style="object-position: {{ image.presentation.focal_point }}"{% endunless %}
                                         >
                                         {%- if settings.enable_lazyload -%}<span class="data-lazy-loading"></span>{%- endif -%}
                                     {%- else -%}
-                                        <div class="not_img" style="--height_not_img: 1070px">950 x 1070px</div>
+                                        <div class="placeholder" style="--height_placeholder: clamp(550px, calc(1070 /1920 * 100vw), 1070px);">
+                                            {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                        </div>
                                     {%- endif -%}
                                     {%- if heading != blank or desc != blank or btn_txt != blank -%}
                                         <div class="special-banner__content p-absolute left-0 right-0 text-{{block.settings.text_align}}{% if content_align == 'top' %} special-banner__content_top top-0{% elsif content_align == 'center' %} special-banner__content_center middle-y{% else %} special-banner__content_bottom bottom-0{% endif %}" style="--text-color: {{ block.settings.text_color }}">
@@ -94,7 +100,7 @@
                     {%- when 'collection_banner' -%}
                         <div class="special-banner__item special-banner__item--{{ block.type }} d-flex flex-jc-center flex-align-center p-relative{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
                             <div class="special-banner__collection d-flex" style="--font-size: {{block.settings.fontsize_heading | append: 'px'}};--font-size-mb: {{block.settings.fontsize_heading_mb | append: 'px'}};--line-height: {{block.settings.fontsize_heading | plus: 8 | append: 'px'}}; --line-height-mb: {{block.settings.fontsize_heading_mb | plus: 8 | append: 'px'}};--font-size-btn: {{block.settings.fontsize_btn | append: 'px'}}">
-                                {%-  liquid 
+                                {%-  liquid
                                     assign image_1 = block.settings.image_1
                                     assign image_2 = block.settings.image_2
                                 -%}
@@ -111,13 +117,15 @@
                                             {%- if image_1.width >= 2000 -%}{{ image_1 | image_url: width: 2000 }} 2000w,{%- endif -%}
                                             {%- if image_1.width >= 2800 -%}{{ image_1 | image_url: width: 2800 }} 2800w{%- endif -%}"
                                             sizes="50vw"{% unless settings.enable_lazyload %} src="{{ image_1 | image_url: width: 750 }}"{% endunless %} alt="{{ image_1.alt | escape }}" width="{{ image_1.width }}" height="{{ image_1.width | divided_by: image_1.aspect_ratio | round}}" 
-                                            {%- if settings.enable_lazyload -%}class="lazyload" loading="lazy"{%- endif -%}
+                                            {%- if settings.enable_lazyload -%}class="lazyload" {% unless settings.enable_layout_rtl %} loading="lazy"{% endunless %}{%- endif -%}
                                             {% unless image_1.presentation.focal_point == '50.0% 50.0%' %}style="object-position: {{ image_1.presentation.focal_point }}"{% endunless %}
                                         >
                                     {%- if block.settings.btn_lnk_1 != blank -%}</a>{%- endif -%}
                                         {%- if settings.enable_lazyload -%}<span class="data-lazy-loading"></span>{%- endif -%}
                                     {%- else -%}
-                                        <div class="not_img" style="--height_not_img: 450px">320 x 450px</div>
+                                        <div class="placeholder" style="--height_placeholder: 450px;">
+                                            {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                        </div>
                                     {%- endif -%}
                                     {%- if block.settings.heading_1 != blank -%}
                                     <h3 class="heading mt-25 mb-20{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">{%- if block.settings.btn_lnk_1 != blank -%}<a href="{{block.settings.btn_lnk_1}}" class="link-effect p-relative">{%- endif -%}<span class="text">{{ block.settings.heading_1 }}</span>{%- if block.settings.btn_lnk_1 != blank -%}</a>{%- endif -%}</h3>
@@ -146,13 +154,15 @@
                                             {%- if image_2.width >= 2000 -%}{{ image_2 | image_url: width: 2000 }} 2000w,{%- endif -%}
                                             {%- if image_2.width >= 2800 -%}{{ image_2 | image_url: width: 2800 }} 2800w{%- endif -%}"
                                             sizes="50vw"{% unless settings.enable_lazyload %} src="{{ image_2 | image_url: width: 320 }}"{% endunless %} alt="{{ image_2.alt | escape }}" width="{{ image_2.width }}" height="{{ image_2.width | divided_by: image_2.aspect_ratio | round}}" class="lazyload" 
-                                            {%- if settings.enable_lazyload -%}class="lazyload" loading="lazy"{%- endif -%}
+                                            {%- if settings.enable_lazyload -%}class="lazyload" {% unless settings.enable_layout_rtl %} loading="lazy"{% endunless %}{%- endif -%}
                                             {% unless image_2.presentation.focal_point == '50.0% 50.0%' %}style="object-position: {{ image_2.presentation.focal_point }}"{% endunless %}
                                         >
                                         {%- if block.settings.btn_lnk_2 != blank -%}</a>{%- endif -%}
                                         {%- if settings.enable_lazyload -%}<span class="data-lazy-loading"></span>{%- endif -%}
                                     {%- else -%}
-                                        <div class="not_img" style="--height_not_img: 450px">320 x 450px</div>
+                                        <div class="placeholder" style="--height_placeholder: 450px;">
+                                            {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+                                        </div>
                                     {%- endif -%}
                                     {%- if block.settings.heading_2 != blank -%}
                                     <h3 class="heading mt-25 mb-20{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">{%- if block.settings.btn_lnk_2 != blank -%}<a href="{{block.settings.btn_lnk_2}}" class="link-effect p-relative">{%- endif -%}<span class="text">{{ block.settings.heading_2 }}</span>{%- if block.settings.btn_lnk_2 != blank -%}</a>{%- endif -%}</h3>
@@ -202,7 +212,6 @@
                             assign lookbook_style = block.settings.lookbook_style
                             assign check_lookbook = true
                         -%}
-                    {%- if image_1 != blank or image_2 != blank or image_3 != blank -%}
                     <div class="special-banner__item special-banner__item--{{ block.type }} d-flex flex-jc-center flex-align-center p-relative{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
                         {%- if check_lookbook -%}
                             {%- if product_1_1 != blank or product_1_2 != blank or product_2_1 != blank or product_2_2 != blank or product_3_1 != blank or product_3_2 != blank -%}
@@ -228,7 +237,7 @@
                                             {%- if image_1.width >= 2000 -%}{{ image_1 | image_url: width: 2000 }} 2000w,{%- endif -%}
                                             {%- if image_1.width >= 2800 -%}{{ image_1 | image_url: width: 2800 }} 2800w{%- endif -%}"
                                             sizes="50vw"{% unless settings.enable_lazyload %} src="{{ image_1 | image_url: width: 750 }}"{% endunless %} alt="{{ image_1.alt | escape }}" width="{{ image_1.width }}" height="{{ image_1.width | divided_by: image_1.aspect_ratio | round}}" 
-                                            {%- if settings.enable_lazyload -%}class="lazyload" loading="lazy"{%- endif -%}
+                                            {%- if settings.enable_lazyload -%}class="lazyload" {% unless settings.enable_layout_rtl %} loading="lazy"{% endunless %}{%- endif -%}
                                             {% unless image_1.presentation.focal_point == '50.0% 50.0%' %}style="object-position: {{ image_1.presentation.focal_point }}"{% endunless %}
                                         >
                                         {%- if block.settings.lnk_1 != blank -%}</a>{%- endif -%}
@@ -245,11 +254,13 @@
                                             </lookbook-wrapper>
                                         {%- endif -%}
                                     </div>
-                                {% if settings.animations_hover_elements == '3d-lift' or settings.animations_hover_elements == 'vertical-lift' %}    
+                                {% if settings.animations_hover_elements == '3d-lift' or settings.animations_hover_elements == 'vertical-lift' %}
                                 </div>
                                 {% endif %}
                                 {%- else -%}
-                                    <div class="not_img" style="--height_not_img: 770px">670 x 770px</div>
+                                    <div class="placeholder" style="--height_placeholder: 770px;">
+                                        {{ 'collection-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                    </div>
                                 {%- endif -%}
 
                                 {%- if block.settings.heading_1 != blank -%}
@@ -270,7 +281,7 @@
                                             {%- if image_2.width >= 2000 -%}{{ image_2 | image_url: width: 2000 }} 2000w,{%- endif -%}
                                             {%- if image_2.width >= 2800 -%}{{ image_2 | image_url: width: 2800 }} 2800w{%- endif -%}"
                                             sizes="50vw"{% unless settings.enable_lazyload %} src="{{ image_2 | image_url: width: 320 }}"{% endunless %} alt="{{ image_2.alt | escape }}" width="{{ image_2.width }}" height="{{ image_2.width | divided_by: image_2.aspect_ratio | round}}" class="lazyload" 
-                                            {%- if settings.enable_lazyload -%}class="lazyload" loading="lazy"{%- endif -%}
+                                            {%- if settings.enable_lazyload -%}class="lazyload" {% unless settings.enable_layout_rtl %} loading="lazy"{% endunless %}{%- endif -%}
                                             {% unless image_2.presentation.focal_point == '50.0% 50.0%' %}style="object-position: {{ image_2.presentation.focal_point }}"{% endunless %}
                                         >
                                         {%- if block.settings.lnk_2 != blank -%}</a>{%- endif -%}
@@ -288,7 +299,9 @@
                                     {%- endif -%}
                                     </div>
                                 {%- else -%}
-                                    <div class="not_img" style="--height_not_img: 770px">670 x 770px</div>
+                                    <div class="placeholder" style="--height_placeholder: 770px;">
+                                        {{ 'collection-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+                                    </div>
                                 {%- endif -%}
                                 {%- if block.settings.heading_2 != blank -%}
                                 <h3 class="heading mt-25 mb-0 text-center">{%- if block.settings.lnk_2 != blank -%}<a href="{{block.settings.lnk_2}}" class="link-effect p-relative">{%- endif -%}<span class="text">{{ block.settings.heading_2 }}</span>{%- if block.settings.lnk_2 != blank -%}</a>{%- endif -%}</h3>
@@ -308,7 +321,7 @@
                                         {%- if image_3.width >= 2000 -%}{{ image_3 | image_url: width: 2000 }} 2000w,{%- endif -%}
                                         {%- if image_3.width >= 2800 -%}{{ image_3 | image_url: width: 2800 }} 2800w{%- endif -%}"
                                         sizes="50vw"{% unless settings.enable_lazyload %} src="{{ image_3 | image_url: width: 320 }}"{% endunless %} alt="{{ image_3.alt | escape }}" width="{{ image_3.width }}" height="{{ image_3.width | divided_by: image_3.aspect_ratio | round}}" class="lazyload" 
-                                        {%- if settings.enable_lazyload -%}class="lazyload" loading="lazy"{%- endif -%}
+                                        {%- if settings.enable_lazyload -%}class="lazyload" {% unless settings.enable_layout_rtl %} loading="lazy"{% endunless %}{%- endif -%}
                                         {% unless image_3.presentation.focal_point == '50.0% 50.0%' %}style="object-position: {{ image_3.presentation.focal_point }}"{% endunless %}
                                     >
                                     {%- if block.settings.lnk_3 != blank -%}</a>{%- endif -%}
@@ -323,7 +336,9 @@
                                     </lookbook-wrapper>
                                     </div>
                                 {%- else -%}
-                                    <div class="not_img" style="--height_not_img: 770px">670 x 770px</div>
+                                    <div class="placeholder" style="--height_placeholder: 770px;">
+                                        {{ 'collection-apparel-3' | placeholder_svg_tag: 'placeholder-svg' }}
+                                    </div>
                                 {%- endif -%}
                                 {%- if block.settings.heading_3 != blank -%}
                                 <h3 class="heading mt-25 mb-0 text-center">{%- if block.settings.lnk_3 != blank -%}<a href="{{block.settings.lnk_3}}" class="link-effect p-relative">{%- endif -%}<span class="text">{{ block.settings.heading_3 }}</span>{%- if block.settings.lnk_3 != blank -%}</a>{%- endif -%}</h3>
@@ -363,7 +378,6 @@
                             </div>
                         {%- endif -%}
                     </div>
-                    {%- endif -%}
                     {%- when 'product' -%}
                         <div class="special-banner__item special-banner__item--{{ block.type }}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
                             {%- liquid 
@@ -408,7 +422,7 @@
                                         {%- endfor -%}
                                     {%- else -%}
                                         <div class="product{% if swipe %} slider__slide grid__item{% endif %}">
-                                            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                                            {% capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture %}
                                             {% render 'product-card-placeholder', index: current %}
                                         </div>
                                     {%- endif -%}
@@ -487,7 +501,7 @@
                 "max": 100,
                 "step": 1,
                 "unit": "px",
-                "label": "t:sections.main-list-collections.settings.spacing.mg_top",
+                "label": "t:settings_schema.typography.settings.type_button_font.padding_top",
                 "default": 0
             },
             {
@@ -497,7 +511,7 @@
                 "max": 100,
                 "step": 1,
                 "unit": "px",
-                "label": "t:sections.main-list-collections.settings.spacing.mg_bottom",
+                "label": "t:settings_schema.typography.settings.type_button_font.padding_bottom",
                 "default": 0
             }
         ],
@@ -509,7 +523,7 @@
                     {
                         "type" : "image_picker",
                         "id" : "image",
-                        "label" : "t:sections.image-banner.blocks.image.settings.image.label__1"
+                        "label" : "t:sections.header.settings.mega_menu.banner__img"
                     },
                     {
                         "type": "url",
@@ -538,6 +552,7 @@
                         }
                       ],
                       "default": "none",
+                      "info": "t:sections.main-product.settings.general.image_behavior.info",
                       "label": "t:sections.main-product.settings.general.image_behavior.label"
                     },
                     {
@@ -553,7 +568,7 @@
                     {
                         "type": "color",
                         "id": "rotating_text_color",
-                        "label": "t:settings_schema.colors.settings.colors_name.color",
+                        "label": "t:settings_schema.typography.settings.typography.text_color",
                         "default": "#ffffff"
                     },
                     {
@@ -569,19 +584,19 @@
                     {
                         "type": "select",
                         "id": "position",
-                        "label": "t:sections.product_block.settings.general.label__7",
+                        "label": "t:sections.general.settings.alignment.label__1",
                         "options": [
                         {
                             "value": "left",
-                            "label": "t:sections.product_block.settings.general.options__7"
+                            "label": "t:settings_schema.typography.settings.type_button_font.left"
                         },
                         {
                             "value": "center",
-                            "label": "t:sections.product_block.settings.general.options__8"
+                            "label": "t:settings_schema.typography.settings.type_button_font.center"
                         },
                         {
                             "value": "right",
-                            "label": "t:sections.product_block.settings.general.options__9"
+                            "label": "t:settings_schema.typography.settings.type_button_font.right"
                         }],
                         "default": "right"
                     }
@@ -594,7 +609,7 @@
                     {
                         "type" : "image_picker",
                         "id" : "image",
-                        "label" : "t:sections.image-banner.blocks.image.settings.image.label__1"
+                        "label" : "t:sections.header.settings.mega_menu.banner__img"
                     },
                     {
                         "type": "url",
@@ -623,6 +638,7 @@
                         }
                       ],
                       "default": "none",
+                      "info": "t:sections.main-product.settings.general.image_behavior.info",
                       "label": "t:sections.main-product.settings.general.image_behavior.label"
                     },
                     {
@@ -637,21 +653,21 @@
                         "options": [
                         {
                             "value": "left",
-                            "label": "t:sections.image-banner.blocks.image.settings.content.options__6"
+                            "label": "t:settings_schema.typography.settings.type_button_font.left"
                         },
                         {
                             "value": "center",
-                            "label": "t:sections.image-banner.blocks.image.settings.content.options__7"
+                            "label": "t:settings_schema.typography.settings.type_button_font.center"
                         },
                         {
                             "value": "right",
-                            "label": "t:sections.image-banner.blocks.image.settings.content.options__8"
+                            "label": "t:settings_schema.typography.settings.type_button_font.right"
                         }]
                     },
                     {
                         "type": "select",
                         "id": "content_align",
-                        "label": "t:sections.image-banner.blocks.image.settings.content.label__9",
+                        "label": "t:sections.slide-show.blocks.image.slider_layout.alignment.option",
                         "default": "bottom",
                         "options": [
                         {
@@ -660,7 +676,7 @@
                         },
                         {
                             "value": "center",
-                            "label": "t:sections.image-banner.blocks.image.settings.content.options__7"
+                            "label": "t:settings_schema.typography.settings.type_button_font.center"
                         },
                         {
                             "value": "bottom",
@@ -686,7 +702,7 @@
                     {
                         "type": "range",
                         "id": "fontsize_heading_mb",
-                        "label": "t:sections.rich-text.blocks.heading.settings.heading_size.fz_mb",
+                        "label": "t:sections.slide-show.blocks.image.slider_content.font_size_heading_mb",
                         "min": 10,
                         "max": 100,
                         "step": 1,
@@ -696,12 +712,12 @@
                     {
                         "type": "richtext",
                         "id": "desc",
-                        "label": "t:settings_schema.newsletter_popup.settings.general.label__7"
+                        "label": "t:sections.image-banner.blocks.image.settings.content.label__2"
                     },
                     {
                         "type": "range",
                         "id": "fontsize_desc",
-                        "label": "t:sections.layout.fontsize.fontsize_des.label",
+                        "label": "t:settings_schema.typography.settings.typography.des_font_size",
                         "min": 10,
                         "max": 50,
                         "step": 1,
@@ -727,7 +743,7 @@
                     {
                         "type": "color",
                         "id": "text_color",
-                        "label": "t:settings_schema.colors.settings.colors_name.color",
+                        "label": "t:settings_schema.typography.settings.typography.text_color",
                         "default": "#ffffff"
                     }
                 ]
@@ -749,7 +765,7 @@
                     {
                         "type": "range",
                         "id": "fontsize_heading_mb",
-                        "label": "t:sections.rich-text.blocks.heading.settings.heading_size.fz_mb",
+                        "label": "t:sections.slide-show.blocks.image.slider_content.font_size_heading_mb",
                         "min": 10,
                         "max": 100,
                         "step": 1,
@@ -759,7 +775,7 @@
                     {
                         "type": "range",
                         "id": "fontsize_desc",
-                        "label": "t:sections.layout.fontsize.fontsize_des.label",
+                        "label": "t:settings_schema.typography.settings.typography.des_font_size",
                         "min": 10,
                         "max": 50,
                         "step": 1,
@@ -778,12 +794,12 @@
                     },
                     {
                         "type": "header",
-                        "content": "t:sections.policies_block.settings.setting_block.item_1"
+                        "content": "t:sections.image-banner.blocks.customImg.settings.item_1"
                     },
                     {
                         "type" : "image_picker",
                         "id" : "image_1",
-                        "label" : "t:sections.image-banner.blocks.image.settings.image.label__1"
+                        "label" : "t:sections.header.settings.mega_menu.banner__img"
                     },
                     {
                         "type": "text",
@@ -794,7 +810,7 @@
                     {
                         "type": "richtext",
                         "id": "desc_1",
-                        "label": "t:settings_schema.newsletter_popup.settings.general.label__7",
+                        "label": "t:sections.image-banner.blocks.image.settings.content.label__2",
                         "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
                     },
                     {
@@ -810,12 +826,12 @@
                     },
                     {
                         "type": "header",
-                        "content": "t:sections.policies_block.settings.setting_block.item_2"
+                        "content": "t:sections.image-banner.blocks.customImg.settings.item_2"
                     },
                     {
                         "type" : "image_picker",
                         "id" : "image_2",
-                        "label" : "t:sections.image-banner.blocks.image.settings.image.label__1"
+                        "label" : "t:sections.header.settings.mega_menu.banner__img"
                     },
                     {
                         "type": "text",
@@ -826,7 +842,7 @@
                     {
                         "type": "richtext",
                         "id": "desc_2",
-                        "label": "t:settings_schema.newsletter_popup.settings.general.label__7",
+                        "label": "t:sections.image-banner.blocks.image.settings.content.label__2",
                         "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
                     },
                     {
@@ -838,7 +854,7 @@
                     {
                         "type": "url",
                         "id": "btn_lnk_2",
-                        "label": "t:settings_schema.typography.settings.typography.button_link"
+                        "label": "t:settings_schema.before_you_leave.settings.back_to_store.label__3"
                     }
                 ]
             },
@@ -859,7 +875,7 @@
                     {
                         "type": "range",
                         "id": "fontsize_heading_mb",
-                        "label": "t:sections.rich-text.blocks.heading.settings.heading_size.fz_mb",
+                        "label": "t:sections.slide-show.blocks.image.slider_content.font_size_heading_mb",
                         "min": 10,
                         "max": 100,
                         "step": 1,
@@ -880,11 +896,11 @@
                         "options": [
                             {
                                 "value": "1",
-                                "label": "t:settings_schema.typography.settings.typography.style_1"
+                                "label": "t:sections.main_lookbook_page.settings.style_1"
                             },
                             {
                                 "value": "2",
-                                "label": "t:settings_schema.typography.settings.typography.style_2"
+                                "label": "t:sections.main_lookbook_page.settings.style_2"
                             }
                         ]
                     },
@@ -896,12 +912,12 @@
                     },
                     {
                         "type": "header",
-                        "content": "t:sections.policies_block.settings.setting_block.item_1"
+                        "content": "t:sections.image-banner.blocks.customImg.settings.item_1"
                     },
                     {
                         "type" : "image_picker",
                         "id" : "image_1",
-                        "label" : "t:sections.image-banner.blocks.image.settings.image.label__1"
+                        "label" : "t:sections.header.settings.mega_menu.banner__img"
                     },
                     {
                         "type": "text",
@@ -916,7 +932,7 @@
                     },
                     {
                         "type" : "paragraph",
-                        "content" : "t:sections.slide-show.blocks.image.slider_look.product_1"
+                        "content" : "t:sections.collection_lookbook.blocks.lookbook.settings.content_1"
                     },
                     {
                         "type" : "product",
@@ -945,7 +961,7 @@
                     },
                     {
                         "type" : "paragraph",
-                        "content" : "t:sections.slide-show.blocks.image.slider_look.product_2"
+                        "content" : "t:sections.collection_lookbook.blocks.lookbook.settings.content_2"
                     },
                     {
                         "type" : "product",
@@ -974,12 +990,12 @@
                     },
                     {
                         "type": "header",
-                        "content": "t:sections.policies_block.settings.setting_block.item_2"
+                        "content": "t:sections.image-banner.blocks.customImg.settings.item_2"
                     },
                     {
                         "type" : "image_picker",
                         "id" : "image_2",
-                        "label" : "t:sections.image-banner.blocks.image.settings.image.label__1"
+                        "label" : "t:sections.header.settings.mega_menu.banner__img"
                     },
                     {
                         "type": "text",
@@ -994,7 +1010,7 @@
                     },
                     {
                         "type" : "paragraph",
-                        "content" : "t:sections.slide-show.blocks.image.slider_look.product_1"
+                        "content" : "t:sections.collection_lookbook.blocks.lookbook.settings.content_1"
                     },
                     {
                         "type" : "product",
@@ -1023,7 +1039,7 @@
                     },
                     {
                         "type" : "paragraph",
-                        "content" : "t:sections.slide-show.blocks.image.slider_look.product_2"
+                        "content" : "t:sections.collection_lookbook.blocks.lookbook.settings.content_2"
                     },
                     {
                         "type" : "product",
@@ -1052,12 +1068,12 @@
                     },
                     {
                         "type": "header",
-                        "content": "t:sections.policies_block.settings.setting_block.item_3"
+                        "content": "t:sections.image-banner.blocks.customImg.settings.item_3"
                     },
                     {
                         "type" : "image_picker",
                         "id" : "image_3",
-                        "label" : "t:sections.image-banner.blocks.image.settings.image.label__1"
+                        "label" : "t:sections.header.settings.mega_menu.banner__img"
                     },
                     {
                         "type": "text",
@@ -1072,7 +1088,7 @@
                     },
                     {
                         "type" : "paragraph",
-                        "content" : "t:sections.slide-show.blocks.image.slider_look.product_1"
+                        "content" : "t:sections.collection_lookbook.blocks.lookbook.settings.content_1"
                     },
                     {
                         "type" : "product",
@@ -1101,7 +1117,7 @@
                     },
                     {
                         "type" : "paragraph",
-                        "content" : "t:sections.slide-show.blocks.image.slider_look.product_2"
+                        "content" : "t:sections.collection_lookbook.blocks.lookbook.settings.content_2"
                     },
                     {
                         "type" : "product",
@@ -1150,6 +1166,7 @@
                         }
                       ],
                       "default": "none",
+                      "info": "t:sections.main-product.settings.general.image_behavior.info",
                       "label": "t:sections.main-product.settings.general.image_behavior.label"
                     }
                 ]
@@ -1188,7 +1205,7 @@
                     {
                         "type": "range",
                         "id": "limit",
-                        "label": "t:sections.product_block.settings.product_block_limit",
+                        "label": "t:settings_schema.quick_search.settings.general.label__2",
                         "min": 1,
                         "max": 10,
                         "step": 1,

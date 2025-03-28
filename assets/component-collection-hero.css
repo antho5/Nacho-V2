@@ -20,19 +20,13 @@
 
 .collection-banner .image img {
     position: absolute;
-    top: -8%;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: 1;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
-}
-
-@media(max-width: 990px){
-    .collection-banner .image img {
-        top: 0;
-    }
 }
 
 .collection-banner .image {
@@ -128,7 +122,8 @@
   margin-right: -10px;
 }
 [data-sub-collection-slider]  .slick-track {
-  margin: 0 auto;
+  margin-left: 0;
+  margin-right: 0;
 }
 [data-sub-collection-slider] .slick-arrow.slick-prev {
   left: 10px !important;

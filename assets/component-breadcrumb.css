@@ -140,7 +140,6 @@ breadcrumb-component {
         position: relative;
         padding-left: 7px;
         padding-right: 10px;
-
         padding-top: 10px;
         padding-bottom: 10px;
     }
@@ -362,6 +361,11 @@ breadcrumb-component {
         padding-left: 0px !important;
         padding-right: 30px;
     }
+
+    .product-full-width .breadcrumb-collection.animate--text {
+        overflow: visible;
+        animation: none;
+    }
 }
 
 @media (max-width: 551px) {
@@ -403,6 +407,10 @@ breadcrumb-component {
     .breadcrumb-container.style--line_clamp_1 .breadcrumb {
         padding-left: 5px;
         padding-right: 15px;
+    }
+
+    .collection-header.container-full .breadcrumb-container.style--line_clamp_1 .breadcrumb {
+        padding-left: 30px;
     }
 
     .breadcrumb-with-sidebar .breadcrumb-container.style--line_clamp_1 .breadcrumb {

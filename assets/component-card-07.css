@@ -15,7 +15,7 @@
     border-color: var(--product-quick-view-bg);
     padding: var(--product-quickview-padding-top) var(--product-quickview-padding-left-right) var(--product-quickview-padding-bottom) var(--product-quickview-padding-left-right);
     min-width: 86px;
-    width: auto;
+    width: 100%;
 }
 
 .product-card-layout-07 .product-item.enable_background_button_card .card-action {

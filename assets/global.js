@@ -294,80 +294,42 @@ Shopify.onCartUpdate = function(cart) {
     alert('There are now ' + cart.item_count + ' items in the cart.');
 }
 
-Shopify.changeItem = function(variant_id, quantity, callback) {
-    var params = {
-        type: 'POST',
-        url: '/cart/change.js',
-        data:  'quantity='+quantity+'&id='+variant_id,
-        dataType: 'json',
-        success: function(cart) {
-            if ((typeof callback) === 'function') {
-                callback(cart);
-            } else {
-                Shopify.onCartUpdate(cart);
-            }
-        },
-        error: function(XMLHttpRequest, textStatus) {
-            // console.log(XMLHttpRequest.responseJSON.message);
-            if (XMLHttpRequest.responseJSON.message == 'nu există un id valid sau parametru de linie' || XMLHttpRequest.responseJSON.message == 'Required parameter missing or invalid: line or id param is required' || XMLHttpRequest.responseJSON.message == 'Parameter Missing or Invalid' || XMLHttpRequest.responseJSON.message == 'no valid id or line parameter') {
-                $.ajax({
-                    type: 'POST',
-                    url: '/cart/change.js',
-                    data:  'quantity='+quantity+'&id='+variant_id.split(':')[0],
-                    dataType: 'json',
-                    success: function(cart) {
-                        if ((typeof callback) === 'function') {
-                            callback(cart);
-                        } else {
-                            Shopify.onCartUpdate(cart);
-                        }
-                    }
-                })
-            } else {
-                Shopify.onError(XMLHttpRequest, textStatus);
-            }
-        }
-    };
-
-    $.ajax(params);
+Shopify.changeItem = function(variant_id, quantity, index, callback) {
+    getCartUpdate(index, quantity, callback)
 }
 
-Shopify.removeItem = function(variant_id, callback) {
-    var params = {
-        type: 'POST',
-        url: '/cart/change.js',
-        data:  'quantity=0&id='+variant_id,
-        dataType: 'json',
-        success: function(cart) {
-            if ((typeof callback) === 'function') {
-                callback(cart);
-            } else {
-                Shopify.onCartUpdate(cart);
-            }
-        },
-        error: function(XMLHttpRequest, textStatus) {
-            // console.log(XMLHttpRequest.responseJSON.message);
-            if (XMLHttpRequest.responseJSON.message == 'nu există un id valid sau parametru de linie' || XMLHttpRequest.responseJSON.message == 'Required parameter missing or invalid: line or id param is required' || XMLHttpRequest.responseJSON.message == 'Parameter Missing or Invalid' || XMLHttpRequest.responseJSON.message == 'no valid id or line parameter') {
-                $.ajax({
-                    type: 'POST',
-                    url: '/cart/change.js',
-                    data:  'quantity=0&id='+variant_id.split(':')[0],
-                    dataType: 'json',
-                    success: function(cart) {
-                        if ((typeof callback) === 'function') {
-                            callback(cart);
-                        } else {
-                            Shopify.onCartUpdate(cart);
-                        }
-                    }
-                })
-            } else {
-                Shopify.onError(XMLHttpRequest, textStatus);
-            }
-        }
-    };
+Shopify.removeItem = function(variant_id, index, callback) {
+    getCartUpdate(index, 0, callback)
+}
 
-    $.ajax(params);
+function getCartUpdate(line, quantity, callback) {
+    const body = JSON.stringify({
+        line,
+        quantity,
+        sections_url: window.location.pathname,
+    });
+
+    fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+    .then((response) => {
+        return response.text();
+    })
+    .then((state) => {
+        const parsedState = JSON.parse(state);
+
+        if (parsedState.errors) {
+            showWarning('Error : ' + parsedState.errors, warningTime);
+            return;
+        }
+
+        if ((typeof callback) === 'function') {
+            callback(parsedState);
+        } else {
+            Shopify.onCartUpdate(parsedState);
+        }
+    })
+    .catch((e) => {
+        console.error(e);
+    })
 }
 
 Shopify.addItem = function(variant_id, quantity, $target, callback, input = null) {
@@ -401,7 +363,7 @@ Shopify.addItem = function(variant_id, quantity, $target, callback, input = null
             } 
             
             Shopify.onError(XMLHttpRequest, textStatus, message);
-            target?.classList.remove('is-loading');
+            $target.removeClass('is-loading');
         }
     };
     $.ajax(params);
@@ -919,4 +881,271 @@ class SmoothScrollMenu {
 
 document.addEventListener('DOMContentLoaded', function () {
     new SmoothScrollMenu('.header__inline-menu .menu-lv-1');
+    customElements.define('details-disclosure', DetailsDisclosure);
 });
+
+class DetailsDisclosure extends HTMLElement {
+    constructor() {
+        super();
+        this.mainDetailsToggle = this.querySelector('details');
+
+        this.addEventListener('keyup', this.onKeyUp);
+        this.mainDetailsToggle.addEventListener('focusout', this.onFocusOut.bind(this));
+    }
+
+    onKeyUp(event) {
+        if (event.code.toUpperCase() !== 'ESCAPE') return;
+
+        const openDetailsElement = event.target.closest('details[open]');
+        if (!openDetailsElement) return;
+
+        const summaryElement = openDetailsElement.querySelector('summary');
+        openDetailsElement.removeAttribute('open');
+        summaryElement.focus();
+    }
+
+    onFocusOut() {
+        setTimeout(() => {
+            if (!this.contains(document.activeElement)) this.close();
+        })
+    }
+
+    close() {
+        this.mainDetailsToggle.removeAttribute('open')
+    }
+}
+
+class AccountIcon extends HTMLElement {
+  constructor() {
+    super();
+
+    this.icon = this.querySelector('.icon');
+  }
+
+  connectedCallback() {
+    document.addEventListener('storefront:signincompleted', this.handleStorefrontSignInCompleted.bind(this));
+  }
+
+  handleStorefrontSignInCompleted(event) {
+    if (event?.detail?.avatar) {
+      this.icon?.replaceWith(event.detail.avatar.cloneNode());
+    }
+  }
+}
+
+customElements.define('account-icon', AccountIcon);
+
+class PositiveVibesComponent extends HTMLElement {
+    constructor() {
+        super();
+        this.productPositiveVibes();
+    }
+
+    productPositiveVibes() {
+        const parent = this.querySelector('.text-vibes');
+        const children = this.querySelectorAll('.text-vibes--child');
+        let currentIndex = 0;
+
+        if (children.length > 1) {
+            const newDiv = document.createElement("div");
+            newDiv.classList.add("text-vibes--child");
+            newDiv.innerHTML = children[0].innerHTML;
+            parent.appendChild(newDiv);
+            
+            const childrens = parent.querySelectorAll('.text-vibes--child');
+            setInterval(() => {
+                const height = childrens[currentIndex].offsetHeight;
+                childrens.forEach((child, index) => {
+                    parent.style.cssText = `transform: translateY(${height * -currentIndex}px); transition: all .5s ease;`;
+                    if (currentIndex == 0) {
+                        parent.style.cssText = `transform: translateY(${height * -currentIndex}px); transition: none;`;
+                    }
+                });
+                currentIndex = (currentIndex + 1) % childrens.length;
+                this.heightPositive();
+            }, 3000);
+        }
+    }
+
+    heightPositive() {
+        const parent = this.querySelector('.text-vibes');
+        const childrens = this.querySelectorAll('.text-vibes--child');
+        
+        let maxHeight = 0;
+        childrens.forEach(child => {
+            maxHeight = Math.max(maxHeight, child.querySelector('p').offsetHeight);
+        });
+
+        this.style.minHeight = maxHeight + 'px';
+
+        childrens.forEach(child => {
+            child.style.minHeight = `${maxHeight}px`;
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    customElements.define('positive-vibes', PositiveVibesComponent);
+})
+
+function checkTransparentHeader() {
+    allowTransparent();
+
+    if (Shopify.designMode) {
+        document.addEventListener("shopify:section:load", allowTransparent);
+        document.addEventListener("shopify:section:unload", allowTransparent);
+        document.addEventListener("shopify:section:reorder", allowTransparent);
+    }
+}
+
+function allowTransparent() {
+    if (document.querySelector(".shopify-section:first-child [allow-transparent-header]")) {
+        return;
+    } else {
+        document.querySelector("body").removeAttribute("allow-transparency");
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    checkTransparentHeader();
+});
+
+const PUB_SUB_EVENTS = {
+    cartUpdate: 'cart-update',
+    quantityUpdate: 'quantity-update',
+    optionValueSelectionChange: 'option-value-selection-change',
+    variantChange: 'variant-change',
+    cartError: 'cart-error',
+};
+
+let subscribers = {};
+
+function subscribe(eventName, callback) {
+    if (subscribers[eventName] === undefined) {
+        subscribers[eventName] = [];
+    }
+
+    subscribers[eventName] = [...subscribers[eventName], callback];
+
+    return function unsubscribe() {
+        subscribers[eventName] = subscribers[eventName].filter((cb) => {
+            return cb !== callback;
+        });
+    };
+}
+
+function publish(eventName, data) {
+    if (subscribers[eventName]) {
+        subscribers[eventName].forEach((callback) => {
+            callback(data);
+        });
+    }
+}
+
+class BulkAdd extends HTMLElement {
+    constructor() {
+        super();
+        this.queue = [];
+        this.requestStarted = false;
+        this.ids = [];
+    }
+
+    startQueue(id, quantity) {
+        this.queue.push({ id, quantity });
+        const interval = setInterval(() => {
+            if (this.queue.length > 0) {
+                if (!this.requestStarted) {
+                    this.sendRequest(this.queue);
+                }
+            } else {
+                clearInterval(interval);
+            }
+        }, 250);
+    }
+
+    sendRequest(queue) {
+        this.requestStarted = true;
+        const items = {};
+        queue.forEach((queueItem) => {
+            items[parseInt(queueItem.id)] = queueItem.quantity;
+        });
+        this.queue = this.queue.filter((queueElement) => !queue.includes(queueElement));
+        const quickBulkElement = this.closest('quick-order-list') || this.closest('quick-add-bulk');
+        quickBulkElement.updateMultipleQty(items);
+    }
+
+    resetQuantityInput(id) {
+        const input = this.querySelector(`#Quantity-${id}`);
+        input.value = input.getAttribute('value');
+        this.isEnterPressed = false;
+    }
+
+    setValidity(event, index, message) {
+        event.target.setCustomValidity(message);
+        event.target.reportValidity();
+        this.resetQuantityInput(index);
+        event.target.select();
+    }
+
+    validateQuantity(event) {
+        const inputValue = parseInt(event.target.value);
+        const index = event.target.dataset.index;
+
+        if (inputValue < event.target.dataset.min) {
+            this.setValidity(event, index, window.quickOrderListStrings.min_error.replace('[min]', event.target.dataset.min));
+        } else if (inputValue > parseInt(event.target.max)) {
+            this.setValidity(event, index, window.quickOrderListStrings.max_error.replace('[max]', event.target.max));
+        } else if (inputValue % parseInt(event.target.step) != 0) {
+            this.setValidity(event, index, window.quickOrderListStrings.step_error.replace('[step]', event.target.step));
+        } else {
+            event.target.setCustomValidity('');
+            event.target.reportValidity();
+            this.startQueue(index, inputValue);
+        }
+    }
+
+    getSectionsUrl() {
+        if (window.pageNumber) {
+            return `${window.location.pathname}?page=${window.pageNumber}`;
+        } else {
+            return `${window.location.pathname}`;
+        }
+    }
+
+    getSectionInnerHTML(html, selector) {
+        return new DOMParser().parseFromString(html, 'text/html').querySelector(selector).innerHTML;
+    }
+}
+
+if (!customElements.get('bulk-add')) {
+    customElements.define('bulk-add', BulkAdd);
+}
+
+class SearchForm extends HTMLElement {
+    constructor() {
+      super();
+      this.input = this.querySelector('input[type="search"]');
+  
+      if (this.input) {
+        this.input.form.addEventListener('reset', this.onFormReset.bind(this));
+        this.input.addEventListener('input', debounce((event) => {
+          this.onChange(event);
+        }, 300).bind(this))
+      }
+    }
+  
+    shouldResetForm() {
+      return !document.querySelector('[aria-selected="true"] a')
+    }
+  
+    onFormReset(event) {
+      // Prevent default so the form reset doesn't set the value gotten from the url on page load
+      event.preventDefault();
+      // Don't reset if the user has selected an element on the predictive search dropdown
+      if (this.shouldResetForm()) {
+        this.input.value = '';
+        this.input.focus();
+      }
+    }
+  }
+  customElements.define('search-form', SearchForm);

@@ -17,7 +17,6 @@ class CartItems extends HTMLElement {
         this.initCartCountdown()
         if (this.giftCardElement) this.initGiftCardElement()
         this.initGiftCardManipulation()
-        // this.initQuantityUpdateButtons()
   }
 
     initGiftCardElement() {
@@ -64,32 +63,6 @@ class CartItems extends HTMLElement {
         }
     }
 
-    // initQuantityUpdateButtons() {
-    //     this.querySelectorAll('.btn-quantity').forEach(button => {
-    //         button.removeEventListener('click', this.onButtonClick.bind(this))
-    //         button.addEventListener('click', this.onButtonClick.bind(this))
-    //     })
-    // }
-
-    // onButtonClick(event) {
-    //     event.preventDefault();
-    //     const inputElement = event.target.parentElement.querySelector('.quantity');
-    //     const value = Number(inputElement.value);
-    //     let newVal
-    //     if (event.target.classList.contains('plus')) {
-    //         newVal = value + 1;
-    //     } else {
-    //         newVal = value - 1;
-    //     }
-
-    //     if (newVal >= 0) {
-    //         const changeEvent = new Event('change', { bubbles: true })
-
-    //         inputElement.value = newVal;
-    //         inputElement.dispatchEvent(changeEvent);
-    //     } 
-    // }
-
     async handleToCheckoutPage(e) {
         e.preventDefault()
 
@@ -118,12 +91,8 @@ class CartItems extends HTMLElement {
         if (checkoutHref == null) {
             checkoutHref = `${window.routes?.root ? window.routes.root : ""}/checkout`;
         }
-          if(BSS_B2B && BSS_B2B.addEventCheckoutBTN){
-            // nothing
-          }
-          else {
-            window.location = checkoutHref;
-          }
+        
+        window.location = checkoutHref;
     }
 
     initCartCountdown(){
@@ -160,4 +129,35 @@ class CartItems extends HTMLElement {
 }
 
 customElements.define('cart-items', CartItems);
+
+class Accordion extends HTMLElement {
+    constructor() {
+        super();
+        this.header = this.firstElementChild;
+        this.content = this.lastElementChild;
+
+        this.header.addEventListener('click', this.onSummaryClick.bind(this));
+    }
+
+    onSummaryClick(event) {
+        event.preventDefault();
+        this.hasAttribute('open') ? this.close() : this.open(event);
+    }
+
+    open(event) {
+        this.setAttribute('open', true);
+        this.setAttribute('aria-expanded', 'true');
+        this.content.setAttribute('aria-hidden', 'false');
+        $(this.content).slideDown()
+    }
+
+    close() {
+        this.removeAttribute('open');
+        this.setAttribute('aria-expanded', 'false');
+        this.content.setAttribute('aria-hidden', 'true');
+        $(this.content).slideUp()
+    }
+}
+
+customElements.define('accordion-block', Accordion);
 

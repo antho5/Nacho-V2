@@ -46,7 +46,7 @@
     {%- endif -%}
     <sticky-notification data-display-type="{{ show_notification_again_when }}" data-hide-interval="{{ time_interval }}" class="sticky-notification notification-shaking{% unless show_on_desktop %} hide-on-desktop{% endunless %}{% unless show_on_mobile %} hide-on-mobile{% endunless %}" id="sticky-notification" data-link-action="{{ link_action }}" style="display: none;--vertical-padding: {{ vertical_padding }};--horizontal-padding: {{ horizontal_padding }};--background: {% if background_gradient != blank %}{{ background_gradient }}{% elsif background != blank %}{{ background }}{% endif %};--background-hover: {% if background_gradient_hover != blank %}{{ background_gradient_hover }}{% elsif background_hover != blank %}{{ background_hover }}{% endif %};--intro-text-color: {% if intro_text_color != blank %}{{ intro_text_color }}{% endif %};--intro-text-color-hover: {% if intro_text_color_hover != blank %}{{ intro_text_color_hover }}{% endif %};--intro-text-font-size: {{ intro_text_font_size }};--intro-text-font-size-mb: {{ intro_text_font_size_mb }};--intro-text-font-weight: {{ intro_text_font_weight }};--link-text-color: {% if link_text_color != blank %}{{ link_text_color }}{% endif %};--link-text-color-hover: {% if link_text_color_hover != blank %}{{ link_text_color_hover }}{% endif %};--link-text-font-size: {{ link_text_font_size }};--link-text-font-size-mb: {{ link_text_font_size_mb }};--link-text-font-weight: {{ link_text_font_weight }};--right-arrow-size: {{ arrow_right_size }};--mobile-icon-size: {{ icon_image_size }}">
         {%- if mobile_icon_image_1 != blank -%}
-            <span class="adaptive_height image-zoom mobile-image-icon"class="fancybox" rel="gallery1" href="{{ mobile_icon_image_1 | img_url: 'master' }}" data-fancybox="images"> 
+            <span class="adaptive_height image-zoom mobile-image-icon"class="fancybox" rel="gallery1" href="{{ mobile_icon_image_1 | img_url: 'master' }}" data-fancybox="sticky-notification-images"> 
                 <img srcset="{{ mobile_icon_image_1 | img_url: 'master' }}" {% unless settings.enable_lazyload %}src="{{ mobile_icon_image_1 | img_url: 'master' }}"{% endunless %} alt="{{ mobile_icon_image_1.alt | default: shop.name | escape }}" loading="lazy"{% if settings.enable_lazyload %} class="lazyload"{% endif %}>
                 {%- if settings.enable_lazyload -%}<span class="data-lazy-loading"></span>{%-endif -%}
             </span>
@@ -60,7 +60,7 @@
             </{% if link != blank and link_action != 'popup' %}a{% else %}div{% endif %}>
         </div>
         {%- if mobile_icon_image_2 != blank -%}
-            <span class="adaptive_height image-zoom mobile-image-icon"class="fancybox" rel="gallery1" href="{{ mobile_icon_image_2 | img_url: 'master' }}" data-fancybox="images"> 
+            <span class="adaptive_height image-zoom mobile-image-icon"class="fancybox" rel="gallery1" href="{{ mobile_icon_image_2 | img_url: 'master' }}" data-fancybox="sticky-notification-images"> 
                 <img srcset="{{ mobile_icon_image_2 | img_url: 'master' }}" {% unless settings.enable_lazyload %}src="{{ mobile_icon_image_2 | img_url: 'master' }}"{% endunless %} alt="{{ mobile_icon_image_2.alt | default: shop.name | escape }}" loading="lazy"{% if settings.enable_lazyload %} class="lazyload"{% endif %}>
                 {%- if settings.enable_lazyload -%}<span class="data-lazy-loading"></span>{%- endif -%}
             </span>  
@@ -95,7 +95,7 @@
         -%}
         <div id="notification-popup" style="display: none;">
             {%- if popup_image != blank -%}
-                <a class="adaptive_height image-zoom notification-popup-image"class="fancybox" rel="gallery1" href="{{ popup_image | img_url: 'master' }}" data-fancybox="images" style="padding-top: {{ 1 | divided_by: popup_image.aspect_ratio | times: 100 }}%"> 
+                <a class="adaptive_height image-zoom notification-popup-image"class="fancybox" rel="gallery1" href="{{ popup_image | img_url: 'master' }}" data-fancybox="sticky-notification-images" style="padding-top: {{ 1 | divided_by: popup_image.aspect_ratio | times: 100 }}%"> 
                     <img srcset="{{ popup_image | img_url: 'master' }}" {% unless settings.enable_lazyload %}src="{{ popup_image | img_url: 'master' }}"{% endunless %} alt="{{ image.alt | default: shop.name | escape }}" loading="lazy"{% if settings.enable_lazyload %} class="lazyload"{% endif %}>
                     {%- if settings.enable_lazyload -%}<span class="data-lazy-loading"></span>{%- endif -%}
                 </a>                       
@@ -121,6 +121,7 @@
                 this.NOTIFICATION_COOKIE = 'notification'
                 this.popupOpener = this.querySelector('[data-popup-opener]')
                 this.popup = document.getElementById('notification-popup')
+                this.action = this.dataset.linkAction;
                 this.closeBtn = this.querySelector('[data-close-notification-btn]')
                 this.closeBtn.addEventListener('click', this.hideNotification.bind(this))
                 this.currentScroll = 0;
@@ -140,7 +141,9 @@
                 }
                 document.addEventListener('click', this.handleDocumentClick.bind(this))
                 document.addEventListener('scroll', this.scrollHandler.bind(this))
-                this.addEventListener('click', this.handleSelfClick.bind(this))
+                if (this.action === 'popup'){
+                    this.addEventListener('click', this.handleSelfClick.bind(this))
+                }
                 this.calculateNotificationBottomPosition()
                 this.showNotificationWithTime(1500)
                 this.setTextHeightOnMobile()
@@ -151,7 +154,7 @@
                 if (e.target.matches('[data-close-notification-btn]') || e.target.closest('[data-close-notification-btn]')) return 
 
                 document.body.classList.add('show_popup_notification');
-
+                
                 const link = this.querySelector('[data-main-link]')
                 if (!link) return;
                 link.click()

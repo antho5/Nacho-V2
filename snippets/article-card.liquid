@@ -6,6 +6,7 @@
     assign author = article.author
     assign summary = article.excerpt_or_content | strip_html | truncatewords: catewords
 -%}
+
 <article class="article-item{% if image == blank %} article-card--no-image{% unless show_placeholder %} not-placeholder{% endunless %}{% endif %}" aria-labelledby="Article-{{ id }}">
     <div class="blog-top text-{{ blog_text_align }}">
         <h3 class="blog-title" id="Article-{{ article.id }}">
@@ -31,15 +32,15 @@
         <div class="blog-image img-box">
                 {%- assign preview_img = image -%}
                 {%- assign img_url = preview_img | img_url: '700px', crop: 'center' -%}
-                <a href="{{ link }}" class="image image-{{ media_size }} image-zoom" 
+                <a href="{{ link }}" class="image image-{{ media_size }} image-zoom"
                     {% if media_size == 'adapt' %}
-                      style="padding-bottom: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%;"
+                        style="padding-bottom: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%;"
                     {% elsif media_size == 'square' %}
-                      style="padding-bottom: 100%;"
+                        style="padding-bottom: 100%;"
                     {% elsif media_size == 'portrait' %}
                         style="padding-bottom: {{ portrait_aspect_ratio }};"
                     {% endif %}
-                  >
+                >
                     <img srcset="
                         {%- if image.src.width >= 165 -%}{{ image.src | img_url: '165x' }} 165w,{%- endif -%}
                         {%- if image.src.width >= 360 -%}{{ image.src | img_url: '360x' }} 360w,{%- endif -%}
@@ -52,8 +53,10 @@
         </div>
     {%- elsif show_placeholder -%}
         <div class="blog-image img-box">
-            <a href="{{ link }}" class="image">
-                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            <a {% if link == blank %}role="link" aria-disabled="true"{% else %}href="{{ link }}"{% endif %} class="image">
+                <div class="placeholder" style="--height_placeholder: 100%;">
+                    {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
             </a>
         </div>
     {%- endif -%}
@@ -64,7 +67,7 @@
             </div>
         {%- endif -%}
         {%- if show_read_more -%}
-            <a href="{{ link }}" class="button button-2 blog-btn link">
+            <a {% if link == blank %}role="link" aria-disabled="true"{% else %}href="{{ link }}"{% endif %} class="button button-2 blog-btn link">
                 <span class="text">
                     {{ 'blogs.article.read_more' | t }}
                 </span>

@@ -302,7 +302,7 @@
     {%- else -%}
         {%- if enable_auto_currency -%}
             <div id="currencies" style="display: none;">
-                <a class="dropdown-item active " href="#" data-currency="{{ shop.currency }}"><span class="text">{{ shop.currency }}</span></a>
+                <a role="link" aria-disabled="true" class="dropdown-item active" data-currency="{{ shop.currency }}"><span class="text">{{ shop.currency }}</span></a>
             </div>
             {{ "//cdn.shopify.com/s/javascripts/currencies.js" | script_tag }}
             {%- if settings.currency_format_enable -%}

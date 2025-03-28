@@ -30,7 +30,7 @@
                     {%- case block.type -%}
                         {%-  when 'logo' -%}
                             <div class="header__logo text-left clearfix">
-                                <div class="header__heading">
+                                <{% if request.page_type == 'index' %}h1{% else %}div{% endif %} class="header__heading">
                                     <a href="{{ routes.root_url }}" class="header__heading-link focus-inset">
                                         {%- if block.settings.logo != blank -%}
                                             {%- liquid 
@@ -50,7 +50,7 @@
                                             <span class="h2 {{ block.settings.logo_text_transform }}">{% if block.settings.logo_text != blank %}{{ block.settings.logo_text }}{% else %}{{ shop.name }}{% endif %}</span>
                                         {%- endif -%}
                                     </a>
-                                </div>
+                                </{% if request.page_type == 'index' %}h1{% else %}div{% endif %}>
                             </div>
                         {%-  when 'search' -%}
                             <div class="header__search clearfix{% if block.settings.show_box_shadow %} show-box-shadow{% endif %}" style="--bg-search-color: {{ block.settings.bg_search_color }}; --search-color: {{ block.settings.search_color }}; --search-icon-color: {{ block.settings.search_icon_color }}; --search-border-radius: {{ block.settings.search_border_radius }}px">
@@ -96,8 +96,14 @@
                             {% endif %}
                         {%-  when 'wishlist' -%}
                             {%- if settings.show_wishlist -%}
-                                <div class="header__iconItem header__group" style="--color: {{ block.settings.color }}">
-                                    <a href="{{ pages['wish-list'].url }}" class="header__icon header__icon--wishlist link link--text focus-inset">{% render 'icon-heart-2' %}<span class="wishlist-text">{{ 'wishlist.general.wishlist' | t }}</span></a>
+                                <div class="header__iconItem header__group" style="--color: {{ block.settings.color }};--wishlist-bg-item: {{ block.settings.wishlist_bg_item }}; --wishlist-color-item: {{ block.settings.wishlist_color_item }}; --wishlist-font-size: {{ block.settings.wishlist_text_size }}px">
+                                    <a href="{% if settings.link_wishlist != blank %}{{ settings.link_wishlist }}{% else %}{{ pages['wish-list'].url }}{% endif %}" class="header__icon header__icon--wishlist link link--text focus-inset">
+                                        {% render 'icon-heart-2' %}
+                                        <span class="wishlist-text">{{ 'wishlist.general.wishlist' | t }}</span>
+                                        {%- if block.settings.show_wishlist_number -%}
+                                            <div class="wishlist-count-bubble"><span class="text" aria-hidden="true" data-wishlist-count></span><span class="visually-hidden">{{ 'wishlist.general.wishlist' | t }}</span></div>
+                                        {%- endif -%}
+                                    </a>
                                 </div>
                             {%- endif -%}
                         {%-  when 'gift_cards' -%}
@@ -113,16 +119,22 @@
                                         {% assign is_contained = false %}
                                     {% endif %}
                                     <a href="{{ routes.account_login_url }}" class="header__icon header__icon--account link link--text"{% if is_contained %} data-open-auth-sidebar{% endif %}>
+                                        {%- if customer and customer.has_avatar? -%}
+                                            <account-icon>
+                                                {{ customer | avatar }}
+                                            </account-icon>
+                                        {%- else -%}
                                         {% render 'icon-account-2' %}
-                                        <span class="customer-links">
-                                            {%- liquid
-                                            if customer
-                                            echo 'customer.account_fallback' | t
-                                            else
-                                            echo 'customer.sign_in' | t
-                                            endif
-                                            -%}
-                                        </span>
+                                            <span class="customer-links">
+                                                {%- liquid
+                                                if customer
+                                                echo 'customer.account_fallback' | t
+                                                else
+                                                echo 'customer.sign_in' | t
+                                                endif
+                                                -%}
+                                            </span>
+                                        {%- endif -%}
                                     </a>                               
                                 {%- endif -%}
                             </div>
@@ -130,9 +142,7 @@
                             <div class="header__iconItem header__group" style="--color: {{ block.settings.color }}; --cart-bg-item: {{ block.settings.cart_bg_item }}; --cart-color-item: {{ block.settings.cart_color_item }}; --cart-item-font-size: {{ block.settings.cart_item_font_size }}px">
                                 <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset cart-icon-bubble"{% if settings.show_quick_cart %} data-cart-sidebar{% endif %}>{% render 'icon-cart-03' %} <span class="cart-text">{{ 'general.cart.cart' | t }}</span>
                                     <div class="cart-count-bubble">
-                                        {%- if cart.item_count < 100 -%}
-                                            <span class="text" aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
-                                        {%- endif -%}
+                                        <span class="text" aria-hidden="true" data-cart-count>{%- if cart.item_count < 100 -%}{{ cart.item_count }}{%- else -%}{{ 'sections.cart.item_99' | t }}{%- endif -%}</span>
                                         <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
                                     </div>
                                 </a>
@@ -156,7 +166,7 @@
     "settings": [
         {
             "type": "paragraph",
-            "content": "*You should only activate \/ use \"Header\" you want, don't use the redundant headers which may not optimize for performance."
+            "content": "*You should only activate\/use \"Header\" you want, don't use the redundant headers which may not optimize for performance."
         },
         {
             "type": "select",
@@ -195,16 +205,15 @@
             "id": "padding_full_width",
             "label": "t:sections.layout.container.padding_full_width",
             "min": 0,
-            "max": 75,
+            "max": 100,
             "step": 5,
             "unit": "t:sections.layout.fontsize.fontsize_title.unit",
-            "default": 0,
-            "info": "t:sections.layout.container.info_full_width"
+            "default": 0
         },
         {
             "type": "color",
             "id": "header_bg",
-            "label": "t:settings_schema.colors.settings.colors_name.background_color",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
             "default": "#234bbb"
         },
         {
@@ -246,7 +255,7 @@
             "max": 100,
             "step": 1,
             "unit": "px",
-            "label": "t:sections.main-list-collections.settings.spacing.mg_top",
+            "label": "t:settings_schema.typography.settings.type_button_font.padding_top",
             "default": 18
         },
         {
@@ -256,7 +265,7 @@
             "max": 100,
             "step": 1,
             "unit": "px",
-            "label": "t:sections.main-list-collections.settings.spacing.mg_bottom",
+            "label": "t:settings_schema.typography.settings.type_button_font.padding_bottom",
             "default": 18
         }
     ],
@@ -288,12 +297,13 @@
                 {
                     "type": "textarea",
                     "id": "logo_text",
-                    "label": "t:sections.header.settings.logo.label__7"
+                    "label": "t:settings_schema.typography.settings.typography.text_svg_icon",
+                    "info": "t:settings_schema.typography.settings.typography.logo_icon_info"
                 },
                 {
                     "type": "range",
                     "id": "logo_font_size",
-                    "label": "t:settings_schema.typography.settings.font_size.label",
+                    "label": "t:settings_schema.typography.settings.typography.text_font_size",
                     "min": 15,
                     "max": 60,
                     "step": 1,
@@ -303,7 +313,7 @@
                 {
                     "type": "select",
                     "id": "logo_font_weight",
-                    "label": "t:settings_schema.typography.settings.font_weight.label",
+                    "label": "t:settings_schema.typography.settings.typography.text_font_weight",
                     "default": "900",
                     "options": [
                     {
@@ -338,6 +348,10 @@
                     "default": "uppercase",
                     "options": [
                     {
+                        "value": "none",
+                        "label": "t:settings_schema.typography.settings.text_transform.options__1"
+                    },
+                    {
                         "value": "capitalize",
                         "label": "t:settings_schema.typography.settings.text_transform.options__2"
                     },
@@ -364,10 +378,6 @@
             "limit": 1,
             "settings": [
                 {
-                    "type": "header",
-                    "content": "t:sections.header.settings.header_top.search"
-                },
-                {
                     "type": "checkbox",
                     "id": "show_box_shadow",
                     "label": "t:settings_schema.typography.settings.type_button_font.show_box_shadow"
@@ -375,19 +385,19 @@
                 {
                     "type": "color",
                     "id": "search_color",
-                    "label": "t:sections.header.settings.header_top.search_color_text",
+                    "label": "t:settings_schema.typography.settings.typography.text_color",
                     "default": "#323232"
                 },
                 {
                     "type": "color",
                     "id": "search_icon_color",
-                    "label": "t:sections.header.settings.header_top.search_color_icon",
+                    "label": "t:settings_schema.typography.settings.typography.icon_color",
                     "default": "#323232"
                 },
                 {
                     "type": "color",
                     "id": "bg_search_color",
-                    "label": "t:settings_schema.colors.settings.colors_name.background_color",
+                    "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
                     "default": "#fafafa"
                 },
                 {
@@ -397,7 +407,7 @@
                     "max": 50,
                     "step": 1,
                     "unit": "t:sections.header.settings.logo_width.unit",
-                    "label": "t:sections.header.settings.header_top.search_border_radius",
+                    "label": "t:settings_schema.typography.settings.type_button_font.border_radius",
                     "default": 5
                 }
             ]
@@ -410,7 +420,7 @@
                 {
                     "type": "richtext",
                     "id": "customer_service_text",
-                    "label": "t:sections.header.settings.header_top.customer_service_text",
+                    "label": "t:settings_schema.typography.settings.typography.text",
                     "default": "<p>Need Help?</p><p><strong>(012) 345-6789</strong></p>"
                 },
                 {
@@ -426,7 +436,7 @@
                 {
                     "type": "color",
                     "id": "color",
-                    "label": "t:sections.header.settings.header_top.label__4",
+                    "label": "t:settings_schema.typography.settings.typography.text_color",
                     "default": "#ffffff"
                 }
             ]
@@ -441,6 +451,34 @@
                     "id": "color",
                     "label": "t:sections.header.settings.header_top.label__4",
                     "default": "#ffffff"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "show_wishlist_number",
+                    "label": "t:sections.header.settings.header_icons.label__6",
+                    "default": false
+                },
+                {
+                    "type": "range",
+                    "id": "wishlist_text_size",
+                    "label": "t:sections.header.settings.header_top.font_size_cart_item",
+                    "min": 12,
+                    "max": 30,
+                    "step": 1,
+                    "unit": "t:sections.header.settings.logo.unit",
+                    "default": 14
+                },
+                {
+                    "type": "color",
+                    "id": "wishlist_color_item",
+                    "label": "t:settings_schema.typography.settings.typography.text_color",
+                    "default": "#ffffff"
+                },
+                {
+                    "type": "color",
+                    "id": "wishlist_bg_item",
+                    "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
+                    "default": "#232323"
                 }
             ]
         },

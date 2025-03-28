@@ -12,10 +12,13 @@
   assign padding_full_width = section.settings.padding_full_width | append: 'px'
   assign section_text_align = section.settings.section_text_align
   assign newsletter_bg_image = section.settings.newsletter_bg_image
+  assign enable_parallax = section.settings.enable_parallax
+  
 -%}
 <style>
   {% if newsletter_bg_image != blank %}
-    .newsletter-section{background: url({{ newsletter_bg_image | img_url: '1920x' }});background-position: center;background-repeat: repeat-x;background-attachment: fixed;background-size: cover;}
+    .newsletter-section{background: url({{ newsletter_bg_image | img_url: '1920x' }});background-repeat: round;}
+    .newsletter-section.enable_parallax{background-position: center;background-repeat: repeat-x;background-attachment: fixed;background-size: cover;}
   {% endif %}
   .newsletter-section .newsletter-form__field-wrapper .form-input-placeholder::placeholder {opacity: 0}
   .newsletter-success-modal.halo-popup {opacity: 1;visibility: visible;pointer-events: auto;display: none;border-radius: 3px;transition: none;}
@@ -36,9 +39,9 @@
   }
 </style>
 
-<div class="newsletter-section section-block-{{section.id}}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger{% if newsletter_bg_image != blank %} animate--fade-in{% else %}animate--slide-in{% endif %}{% endif %}" id="newsletter-section-{{section.id}}" style="--footer-top-bg: {% if section.settings.background_gradient != blank %}{{ section.settings.background_gradient }}{% elsif section.settings.background != blank %}{{ section.settings.background }}{% endif %}">
+<div class="newsletter-section {% if enable_parallax %} enable_parallax{% endif %} section-block-{{section.id}}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger{% if newsletter_bg_image != blank %} animate--fade-in{% else %}animate--slide-in{% endif %}{% endif %}" id="newsletter-section-{{section.id}}" style="--footer-top-bg: {% if section.settings.background_gradient != blank %}{{ section.settings.background_gradient }}{% elsif section.settings.background != blank %}{{ section.settings.background }}{% endif %}">
   <div class="{% if container == 'fullwidth' %}container-full{% elsif container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% else %}container{% endif %}">
-    <div class="section-content-wrapper{% if section.settings.section_item_distance == 0 %} empty_gap{% endif %}{% if section.settings.enable_social_media_below %} enable_social_media_below{% endif %}" style="--justify-content: {{ section.settings.justify_section_content }}; --grid-gap-style: {{ section.settings.section_item_distance | append: 'px' }}">
+    <animate-element class="section-content-wrapper{% if section.settings.section_item_distance == 0 %} empty_gap{% endif %}{% if section.settings.enable_social_media_below %} enable_social_media_below{% endif %}{% if enable_parallax %} enable_parallax{% endif %}" style="--justify-content: {{ section.settings.justify_section_content }}; --grid-gap-style: {{ section.settings.section_item_distance | append: 'px' }}">
       {%- for block in section.blocks -%}
         {%- if block.type == 'newsletter' -%}
           {% liquid
@@ -54,6 +57,7 @@
             assign section_description_color = block.settings.section_description_color
 
             assign button_text = block.settings.button_text
+            assign button_style = block.settings.button_style
             assign button_font_size = block.settings.button_font_size | append: 'px'
             assign button_width = block.settings.button_width | append: 'px'
             assign button_text_color = block.settings.button_text_color
@@ -90,11 +94,20 @@
                     {%- if show_input_field -%}
                       <div class="field">
                         <label class="field__label hiddenLabels" for="NewsletterForm--{{ section.id }}">{{ 'newsletter.label' | t }}</label>
-                        <input id="NewsletterForm--{{ section.id }}" type="email" name="contact[email]" class="field__input form-input-placeholder" value="{{ form.email }}" aria-required="true" autocorrect="off" autocapitalize="off" autocomplete="email"{% if form.errors %} autofocus aria-invalid="true" aria-describedby="ContactFooter-error"{% elsif form.posted_successfully? %} aria-describedby="ContactFooter-success" {% endif %} placeholder="{{ input_placeholder }}">
+                        <input id="NewsletterForm--{{ section.id }}" type="email" name="contact[email]" class="field__input form-input-placeholder" value="{{ form.email }}" aria-required="true" autocorrect="off" autocapitalize="off" autocomplete="email"{% if form.errors %} autofocus aria-invalid="true" aria-describedby="ContactFooter-error"{% elsif form.posted_successfully? %} aria-describedby="ContactFooter-success" {% endif %} placeholder="{{ input_placeholder }}" required="required">
                         <div class="effect_placeholder"><span class="input_placeholder" style="font-size: var(--input-text-font-size, var(--font-body-size));{% if input_style == 'style_2' %}font-weight: 700;{% endif %}">{{ input_placeholder }}</span></div>
                       </div>
                     {%- endif -%}
-                    <button {% unless show_input_field %}data-open-newsletter-popup{% endunless %} type="{% if show_input_field %}submit{% else %}button{% endif %}" class="button newsletter-form__button" name="commit" id="Subscribe-{{ section.id }}" aria-label="{{ 'newsletter.button_label' | t }}" style="--button-width: {{ button_width }};--button-font-size: {{ button_font_size }};--button-text-color: {% if button_text_color != blank %}{{ button_text_color }}{% endif %};--button-border-color: {% if button_border_color != blank %}{{ button_border_color }}{% endif %};--button-background: {% if button_gradient_color != blank %}{{ button_gradient_color }}{% elsif button_background_color != blank %}{{ button_background_color }}{% endif %};--button-text-color-hover: {% if button_text_color_hover != blank %}{{ button_text_color_hover }}{% endif %};--button-border-color-hover: {% if button_border_color_hover != blank %}{{ button_border_color_hover }}{% endif %};--button-background-hover: {% if button_gradient_color_hover != blank %}{{ button_gradient_color_hover }}{% elsif button_background_color_hover != blank %}{{ button_background_color_hover }}{% endif %};--button-text-transform: {{ button_text_transform }};--button-font-weight: {{ button_font_weight }}">{{ button_text }}</button>
+                    <button {% unless show_input_field %}data-open-newsletter-popup{% endunless %} type="{% if show_input_field %}submit{% else %}button{% endif %}" class="button newsletter-form__button" name="commit" id="Subscribe-{{ section.id }}" aria-label="{{ 'newsletter.button_label' | t }}" style="--button-width: {{ button_width }};--button-font-size: {{ button_font_size }};--button-text-color: {% if button_text_color != blank %}{{ button_text_color }}{% endif %};--button-border-color: {% if button_border_color != blank %}{{ button_border_color }}{% endif %};--button-background: {% if button_gradient_color != blank %}{{ button_gradient_color }}{% elsif button_background_color != blank %}{{ button_background_color }}{% endif %};--button-text-color-hover: {% if button_text_color_hover != blank %}{{ button_text_color_hover }}{% endif %};--button-border-color-hover: {% if button_border_color_hover != blank %}{{ button_border_color_hover }}{% endif %};--button-background-hover: {% if button_gradient_color_hover != blank %}{{ button_gradient_color_hover }}{% elsif button_background_color_hover != blank %}{{ button_background_color_hover }}{% endif %};--button-text-transform: {{ button_text_transform }};--button-font-weight: {{ button_font_weight }}">
+                      {% if settings.enable_button_1_border_outside %}<span>{% endif %}
+                        {% if button_style == 'icon' %}
+                          <svg class="icon icon-fly" data-name="Layer 2" viewBox="0 0 311.13 316.39">   <g data-name="Layer 2">     <path d="M304.27,1.97c-4.3-2.54-9.48-2.63-13.86-.23L7.16,164.15c-4.77,2.67-7.5,7.7-7.13,13.16,.36,5.38,3.64,9.94,8.6,11.99l110.07,49.16,4.93,2.21v61.71c0,5.71,3.41,10.79,8.69,12.96,1.73,.71,3.54,1.05,5.33,1.05,3.67,0,7.26-1.45,9.95-4.19l41.58-42.25,76.72,34.27,.45,.19c1.64,.64,3.36,.95,5.07,.95,2.79,0,5.54-.83,7.91-2.44,3.65-2.5,5.9-6.56,6.08-10.96L311.08,14.94l.05-.92c0-5-2.57-9.5-6.86-12.05Zm-100.11,252.76l-54.57-24.37L288.4,42.99l-22.19,239.46-62.05-27.72Zm-60.53,33v-38.13l26.06,11.64-26.06,26.49ZM266.9,38.26L130.32,221.75,27.22,175.7,266.9,38.26Z"></path>   </g> </svg>
+                          {% comment %} new code {% endcomment %}
+                          <svg class="icon icon-fly" data-name="Layer 2" viewBox="0 0 311.13 316.39">   <g data-name="Layer 2">     <path d="M304.27,1.97c-4.3-2.54-9.48-2.63-13.86-.23L7.16,164.15c-4.77,2.67-7.5,7.7-7.13,13.16,.36,5.38,3.64,9.94,8.6,11.99l110.07,49.16,4.93,2.21v61.71c0,5.71,3.41,10.79,8.69,12.96,1.73,.71,3.54,1.05,5.33,1.05,3.67,0,7.26-1.45,9.95-4.19l41.58-42.25,76.72,34.27,.45,.19c1.64,.64,3.36,.95,5.07,.95,2.79,0,5.54-.83,7.91-2.44,3.65-2.5,5.9-6.56,6.08-10.96L311.08,14.94l.05-.92c0-5-2.57-9.5-6.86-12.05Zm-100.11,252.76l-54.57-24.37L288.4,42.99l-22.19,239.46-62.05-27.72Zm-60.53,33v-38.13l26.06,11.64-26.06,26.49ZM266.9,38.26L130.32,221.75,27.22,175.7,266.9,38.26Z"></path>   </g> </svg>
+                        {% else %}
+                          {{ button_text }}
+                        {% endif %}
+                      {% if settings.enable_button_1_border_outside %}</span>{% endif %}</button>
                   </div>
                   {%- if form.errors -%}
                     <div class="newsletter-form__message newsletter-form__message--error form__message" id="ContactFooter-error">
@@ -176,8 +189,12 @@
               assign banner_button = block.settings.banner_button
               assign banner_link = block.settings.banner_link
               assign preview_img = block.settings.banner_image
+              assign title_margin_top = block.settings.title_margin_top
+              assign title_margin_bottom = block.settings.title_margin_bottom
+              assign banner_mg_left = block.settings.banner_mg_left
+              assign banner_mg_right = block.settings.banner_mg_right
           -%}
-          <div class="section-banner{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}{% if block.settings.image_behavior != 'none' %} animate--{{ block.settings.image_behavior }} o-hidden{% endif %}">
+          <div class="section-banner{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}{% if block.settings.image_behavior != 'none' %} animate--{{ block.settings.image_behavior }} o-hidden{% endif %}" style="--title_margin_top: {{ title_margin_top }}px;--title_margin_bottom: {{ title_margin_bottom }}px;--banner_mg_left: {{ banner_mg_left }}px;--banner_mg_right: {{ banner_mg_right }}px;">
             {%- if preview_img != blank -%}
               <a {% if banner_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ banner_link }}"{% endif %} class="image adaptive_height image-zoom" style="padding-top: {% unless preview_img.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img.aspect_ratio | times: 120 | append: '%' }}{% else %}{{ 1 | divided_by: preview_img.aspect_ratio | times: 100 | append: '%' }}{% endunless %}" title="{{ block.settings.banner_title | default: shop.name | escape  }}"><img {% render 'lazyload',preview_img: preview_img %}{% unless preview_img.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img.presentation.focal_point }}"{% endunless %} /></a>
             {%- endif -%}
@@ -198,10 +215,34 @@
           {% render 'footer-social', block: block, text_align: text_align %}
         {%- endif -%}
       {%- endfor -%}
-    </div>
+    </animate-element>
   </div>
 </div>
 <script>
+  class AnimateElement extends HTMLElement {
+    constructor() {
+      super();
+    }
+  
+    connectedCallback() {
+      this.init();
+    }
+  
+    init() {
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.setAttribute('loaded', true);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {rootMargin: `-100px 0px`});
+  
+      observer.observe(this);
+    }
+  }
+  customElements.define('animate-element', AnimateElement);
+
   document.querySelectorAll('[data-open-newsletter-popup]').forEach(button => {
     button.addEventListener('click', (e) => {
       e.preventDefault();
@@ -222,6 +263,10 @@
       "name": "t:sections.footer.blocks.newsletter.name",
       "limit": 1,
       "settings": [
+        {
+            "type": "header",
+            "content": "t:settings_schema.newsletter_popup.settings.general.label__6"
+        },
         {
           "type": "text",
           "id": "section_title",
@@ -283,7 +328,7 @@
         {
           "type": "select",
           "id": "section_title_text_transform",
-          "label": "t:settings_schema.typography.settings.typography.button_text_transform",
+          "label": "t:settings_schema.typography.settings.typography.title_style",
           "default": "none",
           "options": [
             {
@@ -307,7 +352,7 @@
         {
           "type": "select",
           "id": "section_title_font_style",
-          "label": "t:settings_schema.typography.settings.font_style.label",
+          "label": "t:settings_schema.typography.settings.typography.title_font_style",
           "default": "normal",
           "options": [
             {
@@ -333,7 +378,7 @@
         {
           "type": "range",
           "id": "mg_bottom_title",
-          "label": "t:sections.layout.mg_bottom_title.label",
+          "label": "t:settings_schema.typography.settings.typography.title_margin_bottom",
           "min": 0,
           "max": 50,
           "step": 1,
@@ -343,7 +388,7 @@
         {
           "type": "range",
           "id": "mg_bottom_title_mb",
-          "label": "t:sections.layout.mg_bottom_title.label_mb",
+          "label": "t:settings_schema.typography.settings.typography.title_mg_bottom_mobile",
           "min": 0,
           "max": 50,
           "step": 1,
@@ -351,9 +396,13 @@
           "default": 12
         },
         {
+            "type": "header",
+            "content": "t:sections.image-banner.blocks.image.settings.content.label__2"
+        },
+        {
           "type": "richtext",
           "id": "section_description",
-          "label": "t:sections.rich-text.blocks.text.settings.text.label"
+          "label": "t:sections.image-banner.blocks.image.settings.content.label__2"
         },
         {
           "type": "range",
@@ -410,18 +459,18 @@
         {
           "type": "color",
           "id": "section_description_color",
-          "label": "t:sections.layout.color.color_des",
+          "label": "t:settings_schema.typography.settings.typography.des_color",
           "default": "#191919"
         },
         {
           "type": "range",
           "id": "margin_bottom_des",
-          "label": "t:sections.layout.fontsize.fontsize_des.margin_bottom",
+          "label": "t:settings_schema.typography.settings.typography.des_margin_bottom",
           "min": 0,
           "max": 100,
           "step": 1,
           "unit": "t:sections.layout.fontsize.fontsize_title.unit",
-          "default": 0
+          "default": 45
         },
         {
           "type": "range",
@@ -442,7 +491,7 @@
         {
           "type": "select",
           "id": "input_style",
-          "label": "t:settings_schema.typography.settings.typography.style_layout",
+          "label": "t:settings_schema.typography.settings.typography.newsletter_form_style",
           "default": "style_1",
           "options": [
           {
@@ -485,9 +534,29 @@
           "unit": "px"
         },
         {
+            "type": "header",
+            "content": "t:settings_schema.typography.settings.typography.button"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "t:settings_schema.typography.settings.typography.button_style",
+          "default": "text",
+          "options": [
+            {
+              "value": "text",
+              "label": "t:settings_schema.typography.settings.typography.text"
+            },
+            {
+              "value": "icon",
+              "label": "t:settings_schema.typography.settings.typography.icon"
+            }
+          ]
+        },
+        {
           "type": "text",
           "id": "button_text",
-          "label": "t:sections.spotlight_block.blocks.image.button",
+          "label": "t:settings_schema.typography.settings.typography.button_text",
           "default": "Subscribe"
         },
         {
@@ -513,48 +582,48 @@
         {
           "type": "color",
           "id": "button_text_color",
-          "label": "t:settings_schema.colors.settings.colors_name.color",
+          "label": "t:settings_schema.typography.settings.typography.button_color",
           "default": "#fff"
         },
         {
           "type": "color",
           "id": "button_border_color",
-          "label": "t:settings_schema.colors.settings.colors_name.border_color",
+          "label": "t:sections.rich-text.blocks.button.settings.button_border",
           "default": "#232323"
         },
         {
           "type": "color",
           "id": "button_background_color",
-          "label": "t:settings_schema.colors.settings.colors_name.background_color",
+          "label": "t:sections.rich-text.blocks.button.settings.button_bg",
           "default": "#232323"
         },
         {
           "type": "color_background",
           "id": "button_gradient_color",
-          "label": "t:settings_schema.colors.settings.colors_name.background_color_gradient"
+          "label": "t:sections.rich-text.blocks.button.settings.button_bg_gradient"
         },
         {
           "type": "color",
           "id": "button_text_color_hover",
-          "label": "t:settings_schema.colors.settings.colors_name.color_hover",
+          "label": "t:sections.rich-text.blocks.button.settings.button_color_hover",
           "default": "#fff"
         },
         {
           "type": "color",
           "id": "button_border_color_hover",
-          "label": "t:settings_schema.colors.settings.colors_name.border_hover",
+          "label": "t:sections.rich-text.blocks.button.settings.button_border_hover",
           "default": "#232323"
         },
         {
           "type": "color",
           "id": "button_background_color_hover",
-          "label": "t:settings_schema.colors.settings.colors_name.background_hover",
+          "label": "t:sections.rich-text.blocks.button.settings.button_bg_hover",
           "default": "#232323"
         },
         {
           "type": "color_background",
           "id": "button_gradient_color_hover",
-          "label": "t:settings_schema.colors.settings.colors_name.background_hover_gradient"
+          "label": "t:sections.rich-text.blocks.button.settings.button_bg_gradient_hover"
         },
         {
           "type": "select",
@@ -583,7 +652,7 @@
         {
           "type": "select",
           "id": "button_font_weight",
-          "label": "t:settings_schema.typography.settings.typography.sub_title_font_weight",
+          "label": "t:settings_schema.typography.settings.typography.button_font_weight",
           "default": "600",
           "options": [
             {
@@ -611,6 +680,10 @@
               "label": "t:settings_schema.typography.settings.font_weight.options__6"
             }
           ]
+        },
+        {
+            "type": "header",
+            "content": "t:settings_schema.typography.settings.typography.input"
         },
         {
           "type": "text",
@@ -649,7 +722,8 @@
         {
           "type": "select",
           "id": "newsletter_content_direction",
-          "label": "t:sections.footer.blocks.newsletter.settings.content_direction",
+          "label": "t:settings_schema.typography.settings.typography.layout_style",
+          "info": "t:sections.footer.blocks.newsletter.settings.info__1",
           "default": "row",
           "options": [
             {
@@ -698,7 +772,7 @@
             },
             {
               "value": "restricted",
-              "label": "Restricted with width"
+              "label": "t:sections.footer.blocks.newsletter.settings.limited_width"
             }
           ]
         }
@@ -706,17 +780,33 @@
     },
     {
       "type": "banner",
-      "name": "t:sections.slide-show.settings.categories.content_banner",
+      "name": "t:sections.product_block.blocks.banner.name",
       "limit": 1,
       "settings": [
         {
-          "type": "header",
-          "content": "t:sections.slide-show.settings.categories.content_banner"
-        },
-        {
           "type" : "image_picker",
           "id" : "banner_image",
-          "label" : "t:sections.slide-show.settings.categories.select_image"
+          "label" : "t:sections.header.settings.mega_menu.banner__img"
+        },
+        {
+          "type": "range",
+          "id": "banner_mg_left",
+          "label": "t:sections.general.settings.page-content.mg_left",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "banner_mg_right",
+          "label": "t:sections.general.settings.page-content.mg_right",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+          "default": 0
         },
         {
           "type": "text",
@@ -727,13 +817,13 @@
         {
           "type" : "color",
           "id" : "banner_color_title",
-          "label": "t:sections.layout.color.color_title",
+          "label": "t:settings_schema.typography.settings.typography.title_color",
           "default" : "#ffffff"
         },
         {
           "type": "range",
           "id": "banner_fontsize_title",
-          "label": "t:sections.layout.fontsize.fontsize_title.label",
+          "label": "t:settings_schema.typography.settings.typography.title_font_size",
           "min": 10,
           "max": 100,
           "step": 1,
@@ -743,7 +833,7 @@
         {
           "type": "range",
           "id": "banner_fontsize_title_mb",
-          "label": "t:sections.layout.fontsize.fontsize_title.label_mb",
+          "label": "t:settings_schema.typography.settings.typography.title_font_size_mb",
           "min": 10,
           "max": 100,
           "step": 1,
@@ -751,9 +841,29 @@
           "default": 22
         },
         {
+          "type": "range",
+          "id": "title_margin_top",
+          "label": "t:sections.footer.blocks.newsletter.settings.title_margin_top",
+          "min": -100,
+          "max": 100,
+          "step": 2,
+          "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+          "default": -50
+        },
+        {
+          "type": "range",
+          "id": "title_margin_bottom",
+          "label": "t:sections.footer.blocks.newsletter.settings.title_margin_bottom",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+          "default": 12
+        },
+        {
           "type": "text",
           "id": "banner_button",
-          "label": "t:sections.spotlight_block.blocks.image.button",
+          "label": "t:settings_schema.typography.settings.typography.button_text",
           "default": "Find nearest"
         },
         {
@@ -764,13 +874,13 @@
         {
           "type" : "color",
           "id" : "banner_color_button",
-          "label": "t:sections.layout.color.color_title",
+          "label": "t:settings_schema.typography.settings.typography.button_color",
           "default" : "#ffffff"
         },
         {
           "type": "range",
           "id": "banner_fontsize_button",
-          "label": "t:sections.layout.fontsize.fontsize_title.label",
+          "label": "t:settings_schema.typography.settings.typography.button_font_size",
           "min": 10,
           "max": 50,
           "step": 1,
@@ -799,6 +909,7 @@
             }
           ],
           "default": "none",
+          "info": "t:sections.main-product.settings.general.image_behavior.info",
           "label": "t:sections.main-product.settings.general.image_behavior.label"
         }
       ]
@@ -809,22 +920,19 @@
       "limit": 1,
       "settings": [
         {
-          "type": "header",
-          "content": "t:sections.footer.settings.social_media_link.content",
-          "info": "t:sections.footer.settings.social_media_link.info"
+          "type": "paragraph",
+          "content": "t:sections.footer.settings.social_media_link.info"
         },
         {
           "type": "text",
           "id": "social_block_width",
           "label": "t:sections.footer.settings.custom_width.label",
-          "info": "t:sections.footer.settings.custom_width.info",
           "default": "40"
         },
         {
           "id": "social_heading",
           "type": "text",
-          "label": "t:sections.image-banner.blocks.image.settings.content.label__19",
-          "info": "t:sections.footer.blocks.link_list.settings.heading.info"
+          "label": "t:sections.image-banner.blocks.image.settings.content.label__19"
         },
         {
           "type": "checkbox",
@@ -839,100 +947,8 @@
           "min": 0,
           "max": 50,
           "step": 1,
-          "unit": "t:sections.footer.settings.footer_bottom.pdtop_footer_bottom.unit",
+          "unit": "t:settings_schema.typography.settings.font_size.unit",
           "default": 0
-        },
-        {
-          "type": "range",
-          "id": "social_icon_width",
-          "label": "t:sections.footer.settings.social_media_link.social_width",
-          "min": 0,
-          "max": 50,
-          "step": 1,
-          "unit": "t:sections.footer.settings.footer_bottom.pdtop_footer_bottom.unit",
-          "default": 12
-        },
-        {
-          "type": "range",
-          "id": "social_icon_padding",
-          "label": "t:sections.footer.settings.social_media_link.social_padding",
-          "min": 0,
-          "max": 50,
-          "step": 1,
-          "unit": "t:sections.footer.settings.footer_bottom.pdtop_footer_bottom.unit",
-          "default": 12
-        },
-        {
-          "type": "range",
-          "id": "social_icon_border_width",
-          "label": "t:sections.footer.settings.social_media_link.social_border_width",
-          "min": 0,
-          "max": 50,
-          "step": 1,
-          "unit": "t:sections.footer.settings.footer_bottom.pdtop_footer_bottom.unit",
-          "default": 1
-        },
-        {
-          "type": "range",
-          "id": "social_icon_margin_right",
-          "label": "t:sections.footer.settings.social_media_link.social_margin_left",
-          "min": 0,
-          "max": 50,
-          "step": 1,
-          "unit": "t:sections.footer.settings.footer_bottom.pdtop_footer_bottom.unit",
-          "default": 15
-        },
-        {
-          "id": "social_color",
-          "type": "color",
-          "label": "t:settings_schema.colors.settings.colors_name.color",
-          "default": "#282828"
-        },
-        {
-          "id": "social_border_color",
-          "type": "color",
-          "label": "t:settings_schema.colors.settings.colors_name.border_color",
-          "default": "#fff"
-        },
-        {
-          "id": "social_background_color",
-          "type": "color",
-          "label": "t:settings_schema.colors.settings.colors_name.background_color",
-          "default": "#fff"
-        },
-        {
-          "id": "social_background_color_gradient",
-          "type": "color_background",
-          "label": "t:settings_schema.colors.settings.colors_name.background_color_gradient"
-        },
-        {
-          "id": "social_color_hover",
-          "type": "color",
-          "label": "t:settings_schema.colors.settings.colors_name.color_hover",
-          "default": "#282828"
-        },
-        {
-          "id": "social_border_color_hover",
-          "type": "color",
-          "label": "t:settings_schema.colors.settings.colors_name.border_hover",
-          "default": "#fff"
-        },
-        {
-          "id": "social_background_color_hover",
-          "type": "color",
-          "label": "t:settings_schema.colors.settings.colors_name.background_hover",
-          "default": "#fff"
-        },
-        {
-          "id": "social_background_color_gradient_hover",
-          "type": "color_background",
-          "label": "t:settings_schema.colors.settings.colors_name.background_hover_gradient"
-        },
-        {
-          "id": "social_box_hover_color",
-          "type": "color",
-          "label": "t:sections.footer.settings.social_media_link.social_box_hover_color",
-          "default": "#fff"
         }
       ]
     }
@@ -974,13 +990,12 @@
       "max": 100,
       "step": 5,
       "unit": "t:sections.layout.fontsize.fontsize_title.unit",
-      "default": 0,
-      "info": "t:sections.layout.container.info_full_width"
+      "default": 0
     },
     {
       "id": "background",
       "type": "color",
-      "label": "t:settings_schema.colors.settings.colors_name.background_color",
+      "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
       "default": "#fff"
     },
     {
@@ -992,6 +1007,77 @@
         "type" : "image_picker",
         "id" : "newsletter_bg_image",
         "label" : "t:settings_schema.colors.settings.colors_name.background_image"
+    },
+    {
+        "type": "checkbox",
+        "id": "enable_parallax",
+        "label": "t:sections.main_contact.settings.label__3",
+        "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.image-banner.blocks.image.settings.content.label__18"
+    },
+    {
+      "type": "select",
+      "id": "section_text_align",
+      "label": "t:sections.footer.settings.footer_top.footer_top_text_align.option",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:settings_schema.typography.settings.type_button_font.left"
+        },
+        {
+          "value": "center",
+          "label": "t:settings_schema.typography.settings.type_button_font.center"
+        },
+        {
+          "value": "right",
+          "label": "t:settings_schema.typography.settings.type_button_font.right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "justify_section_content",
+      "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.label",
+      "default": "center",
+      "options": [
+        {
+          "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.option_1",
+          "value": "space-between"
+        },
+        {
+          "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.option_2",
+          "value": "flex-start"
+        },
+        {
+          "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.option_3",
+          "value": "flex-end"
+        },
+        {
+          "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.option_4",
+          "value": "center"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "section_item_distance",
+      "label": "t:settings_schema.typography.settings.typography.grid_gap",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_social_media_below",
+      "label": "t:sections.newsletter.show_social_media_icons",
+      "info": "t:sections.newsletter.info__1",
+      "default": false
     },
     {
       "type": "header",
@@ -1060,75 +1146,16 @@
       "step": 5,
       "unit": "t:sections.layout.mg_desktop.unit",
       "default": 50
-    },
-    {
-      "type": "header",
-      "content": "t:sections.image-banner.blocks.image.settings.content.label__18"
-    },
-    {
-      "type": "select",
-      "id": "section_text_align",
-      "label": "t:sections.footer.settings.footer_top.footer_top_text_align.option",
-      "default": "left",
-      "options": [
-        {
-          "value": "left",
-          "label": "t:sections.footer.settings.footer_top.footer_top_text_align.option1"
-        },
-        {
-          "value": "center",
-          "label": "t:sections.footer.settings.footer_top.footer_top_text_align.option2"
-        },
-        {
-          "value": "right",
-          "label": "t:sections.footer.settings.footer_top.footer_top_text_align.option3"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "justify_section_content",
-      "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.label",
-      "default": "center",
-      "options": [
-        {
-          "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.option_1",
-          "value": "space-between"
-        },
-        {
-          "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.option_2",
-          "value": "flex-start"
-        },
-        {
-          "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.option_3",
-          "value": "flex-end"
-        },
-        {
-          "label": "t:sections.image-banner.blocks.smallImg.settings.style.justify_content.option_4",
-          "value": "center"
-        }
-      ]
-    },
-    {
-      "type": "range",
-      "id": "section_item_distance",
-      "label": "t:settings_schema.typography.settings.typography.grid_gap",
-      "min": 0,
-      "max": 50,
-      "step": 1,
-      "unit": "t:sections.layout.fontsize.fontsize_title.unit",
-      "default": 20
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_social_media_below",
-      "label": "Enable Social Media Icons Position Below",
-      "default": false
     }
   ],
   "presets": [
     {
-      "name": "t:sections.newsletter.name"
+      "name": "t:sections.newsletter.name",
+      "blocks": [
+          {
+            "type": "newsletter"
+          }
+      ]
     }
   ],
   "disabled_on": {

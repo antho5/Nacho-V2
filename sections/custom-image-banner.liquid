@@ -27,13 +27,15 @@
                                     <div class="img-box{% if block.settings.image_behavior != 'none' %} animate--{{ block.settings.image_behavior }} o-hidden{% endif %}">
                                         {%- if block.settings.image_1 != blank -%}
                                             {%- assign preview_img_1 = block.settings.image_1 -%}
-                                            <a {% if block.settings.link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_1 }}"{% endif %} class="image-zoom adaptive_height image" style="padding-top: {% unless preview_img_1.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img_1.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img_1.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                                <img {% render 'lazyload',preview_img: preview_img_1 %}{% unless preview_img_1.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img_1.presentation.focal_point }}"{% endunless %} />
+                                            <a {% if block.settings.link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_1 }}" aria-label="{{ block.settings.button_1 }}"{% endif %} class="image-zoom adaptive_height image" style="padding-top: {% unless preview_img_1.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img_1.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img_1.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radius | append: 'px' }}">
+                                                <img {% render 'lazyload',preview_img: preview_img_1,enable_rtl: settings.enable_layout_rtl %}{% unless preview_img_1.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img_1.presentation.focal_point }}"{% endunless %} />
                                                 {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                             </a>
                                         {%- else -%}
-                                            <a {% if block.settings.link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_1 }}"{% endif %} class="image-zoom" style="--item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                                <div class="not_img" style="--height_not_img: 260px">270 x 260px</div>
+                                            <a {% if block.settings.link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_1 }}"{% endif %} class="image-zoom" style="--item-border-radirus-style: {{ block.settings.item_border_radius | append: 'px' }}">
+                                                <div class="placeholder" style="--height_placeholder: 260px;">
+                                                    {{ 'collection-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                                </div>
                                             </a>
                                         {%- endif -%}
                                     </div>
@@ -49,7 +51,7 @@
                                                 <div class="des custom-text-style" style="--color-text-style: {{ block.settings.color_des_1 }}; --fontsize-text-style: {{ block.settings.fontsize_des | append: 'px' }}; --margin-bottom-des-style: {{ block.settings.mg_bottom_des | append: 'px' }}; --margin-bottom-des-style-mb: {{ block.settings.mg_bottom_des_mb | append: 'px' }}; ">{{ block.settings.des_1 }}</div>
                                             {%- endif -%}
                                             {%- if block.settings.button_1 != blank -%}
-                                                <a {% if block.settings.link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_1 }}"{% endif %} class="spotlight-button button custom-button-style" style="--color-button-style: {{ block.settings.color_button_1 }}; --bg-color-button-style: {% if block.settings.bg_gradient_color_button_1 != blank %}{{ block.settings.bg_gradient_color_button_1 }}{% else %}{{ block.settings.bg_color_button_1 | color_modify: 'alpha', block.settings.bg_opacity_button }}{% endif %}; --border-color-button-style: {{ block.settings.border_color_button_1 }}; --color-button-hover-style: {{ block.settings.color_button_hover_1 }}; --bg-color-button-hover-style: {% if block.settings.bg_gradient_color_button_hover_1 != blank %}{{ block.settings.bg_gradient_color_button_hover_1 }}{% else %}{{ block.settings.bg_color_button_hover_1 }}{% endif %}; --border-color-button-hover-style: {{ block.settings.border_color_button_hover_1 }}; --text-transform-button-style: {{ block.settings.btn_text_transform }}; --font-size-button-style: {{block.settings.fontsize_btn | append: 'px' }}; --button-width-style: {{block.settings.button_width | append: 'px' }}">
+                                                <a {% if block.settings.link_1 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_1 }}" aria-label="{{ block.settings.button_1 }}"{% endif %} class="spotlight-button button custom-button-style" style="--color-button-style: {{ block.settings.color_button_1 }}; --bg-color-button-style: {% if block.settings.bg_gradient_color_button_1 != blank %}{{ block.settings.bg_gradient_color_button_1 }}{% else %}{{ block.settings.bg_color_button_1 | color_modify: 'alpha', block.settings.bg_opacity_button }}{% endif %}; --border-color-button-style: {{ block.settings.border_color_button_1 }}; --color-button-hover-style: {{ block.settings.color_button_hover_1 }}; --bg-color-button-hover-style: {% if block.settings.bg_gradient_color_button_hover_1 != blank %}{{ block.settings.bg_gradient_color_button_hover_1 }}{% else %}{{ block.settings.bg_color_button_hover_1 }}{% endif %}; --border-color-button-hover-style: {{ block.settings.border_color_button_hover_1 }}; --text-transform-button-style: {{ block.settings.btn_text_transform }}; --font-size-button-style: {{block.settings.fontsize_btn | append: 'px' }}; --button-width-style: {{block.settings.button_width | append: 'px' }}">
                                                     {%- if block.settings.btn_icon_1 != blank -%}
                                                         {{ block.settings.btn_icon_1 }}
                                                     {%- endif -%}
@@ -67,13 +69,15 @@
                                     <div class="img-box{% if block.settings.image_behavior != 'none' %} animate--{{ block.settings.image_behavior }} o-hidden{% endif %}">
                                         {%- if block.settings.image_2 != blank -%}
                                             {%- assign preview_img_2 = block.settings.image_2 -%}
-                                            <a {% if block.settings.link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_2 }}"{% endif %} class="image-zoom adaptive_height image" style="padding-top: {% unless preview_img_2.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img_2.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img_2.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                                <img {% render 'lazyload',preview_img: preview_img_2 %}{% unless preview_img_2.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img_2.presentation.focal_point }}"{% endunless %} />
+                                            <a {% if block.settings.link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_2 }}" aria-label="{{ block.settings.button_2 }}"{% endif %} class="image-zoom adaptive_height image" style="padding-top: {% unless preview_img_2.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img_2.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img_2.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radius | append: 'px' }}">
+                                                <img {% render 'lazyload',preview_img: preview_img_2,enable_rtl: settings.enable_layout_rtl %}{% unless preview_img_2.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img_2.presentation.focal_point }}"{% endunless %} />
                                                 {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                             </a>
                                         {%- else -%}
-                                            <a {% if block.settings.link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_2 }}"{% endif %} class="image-zoom" style="--item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                                <div class="not_img" style="--height_not_img: 260px">270 x 260px</div>
+                                            <a {% if block.settings.link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_2 }}"{% endif %} class="image-zoom" style="--item-border-radirus-style: {{ block.settings.item_border_radius | append: 'px' }}">
+                                                <div class="placeholder" style="--height_placeholder: 260px;">
+                                                    {{ 'collection-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+                                                </div>
                                             </a>
                                         {%- endif -%}
                                     </div>
@@ -91,7 +95,7 @@
                                                 <div class="des custom-text-style" style="--color-text-style: {{ block.settings.color_des_2 }}; --fontsize-text-style: {{ block.settings.fontsize_des | append: 'px' }}; --margin-bottom-des-style: {{ block.settings.mg_bottom_des | append: 'px' }}; --margin-bottom-des-style-mb: {{ block.settings.mg_bottom_des_mb | append: 'px' }};">{{ block.settings.des_2 }}</div>
                                             {%- endif -%}
                                             {%- if block.settings.button_2 != blank -%}
-                                                <a {% if block.settings.link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_2 }}"{% endif %} class="spotlight-button button custom-button-style" style="--color-button-style: {{ block.settings.color_button_2 }}; --bg-color-button-style: {% if block.settings.bg_gradient_color_button_2 != blank %}{{ block.settings.bg_gradient_color_button_2 }}{% else %}{{ block.settings.bg_color_button_2 | color_modify: 'alpha', block.settings.bg_opacity_button }}{% endif %}; --border-color-button-style: {{ block.settings.border_color_button_2 }}; --color-button-hover-style: {{ block.settings.color_button_hover_2 }}; --bg-color-button-hover-style: {% if block.settings.bg_gradient_color_button_hover_2 != blank %}{{ block.settings.bg_gradient_color_button_hover_2 }}{% else %}{{ block.settings.bg_color_button_hover_2 }}{% endif %}; --border-color-button-hover-style: {{ block.settings.border_color_button_hover_2 }}; --text-transform-button-style: {{ block.settings.btn_text_transform }}; --font-size-button-style: {{block.settings.fontsize_btn | append: 'px' }}; --button-width-style: {{block.settings.button_width | append: 'px' }}">
+                                                <a {% if block.settings.link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_2 }}" aria-label="{{ block.settings.button_2 }}"{% endif %} class="spotlight-button button custom-button-style" style="--color-button-style: {{ block.settings.color_button_2 }}; --bg-color-button-style: {% if block.settings.bg_gradient_color_button_2 != blank %}{{ block.settings.bg_gradient_color_button_2 }}{% else %}{{ block.settings.bg_color_button_2 | color_modify: 'alpha', block.settings.bg_opacity_button }}{% endif %}; --border-color-button-style: {{ block.settings.border_color_button_2 }}; --color-button-hover-style: {{ block.settings.color_button_hover_2 }}; --bg-color-button-hover-style: {% if block.settings.bg_gradient_color_button_hover_2 != blank %}{{ block.settings.bg_gradient_color_button_hover_2 }}{% else %}{{ block.settings.bg_color_button_hover_2 }}{% endif %}; --border-color-button-hover-style: {{ block.settings.border_color_button_hover_2 }}; --text-transform-button-style: {{ block.settings.btn_text_transform }}; --font-size-button-style: {{block.settings.fontsize_btn | append: 'px' }}; --button-width-style: {{block.settings.button_width | append: 'px' }}">
                                                     {%- if block.settings.btn_icon_2 != blank -%}
                                                         {{ block.settings.btn_icon_2 }}
                                                     {%- endif -%}
@@ -109,13 +113,15 @@
                                     <div class="img-box{% if block.settings.image_behavior != 'none' %} animate--{{ block.settings.image_behavior }} o-hidden{% endif %}">
                                         {%- if block.settings.image_3 != blank -%}
                                             {%- assign preview_img_3 = block.settings.image_3 -%}
-                                            <a {% if block.settings.link_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_3 }}"{% endif %} class="image-zoom adaptive_height image" style="padding-top: {% unless preview_img_3.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img_3.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img_3.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                                <img {% render 'lazyload',preview_img: preview_img_3 %}{% unless preview_img_3.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img_3.presentation.focal_point }}"{% endunless %} />
+                                            <a {% if block.settings.link_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_3 }}" aria-label="{{ block.settings.button_3 }}"{% endif %} class="image-zoom adaptive_height image" style="padding-top: {% unless preview_img_3.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img_3.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img_3.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radius | append: 'px' }}">
+                                                <img {% render 'lazyload',preview_img: preview_img_3,enable_rtl: settings.enable_layout_rtl %}{% unless preview_img_3.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img_3.presentation.focal_point }}"{% endunless %} />
                                                 {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                             </a>
                                         {%- else -%}
-                                            <a {% if block.settings.link_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_3 }}"{% endif %} class="image-zoom" style="--item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                                <div class="not_img" style="--height_not_img: 260px">270 x 260px</div>
+                                            <a {% if block.settings.link_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_3 }}"{% endif %} class="image-zoom" style="--item-border-radirus-style: {{ block.settings.item_border_radius | append: 'px' }}">
+                                                <div class="placeholder" style="--height_placeholder: 260px;">
+                                                    {{ 'collection-apparel-3' | placeholder_svg_tag: 'placeholder-svg' }}
+                                                </div>
                                             </a>
                                         {%- endif -%}
                                     </div>
@@ -133,7 +139,7 @@
                                                 <div class="des custom-text-style"style="--color-text-style: {{ block.settings.color_des_3 }}; --fontsize-text-style: {{ block.settings.fontsize_des | append: 'px' }}; --margin-bottom-des-style: {{ block.settings.mg_bottom_des | append: 'px' }}; --margin-bottom-des-style-mb: {{ block.settings.mg_bottom_des_mb | append: 'px' }};">{{ block.settings.des_3 }}</div>
                                             {%- endif -%}
                                             {%- if block.settings.button_3 != blank -%}
-                                                <a {% if block.settings.link_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_3 }}"{% endif %} class="spotlight-button button custom-button-style" style="--color-button-style: {{ block.settings.color_button_3 }}; --bg-color-button-style: {% if block.settings.bg_gradient_color_button_3 != blank %}{{ block.settings.bg_gradient_color_button_3 }}{% else %}{{ block.settings.bg_color_button_3 | color_modify: 'alpha', block.settings.bg_opacity_button }}{% endif %}; --border-color-button-style: {{ block.settings.border_color_button_3 }}; --color-button-hover-style: {{ block.settings.color_button_hover_3 }}; --bg-color-button-hover-style: {% if block.settings.bg_gradient_color_button_hover_3 != blank %}{{ block.settings.bg_gradient_color_button_hover_3 }}{% else %}{{ block.settings.bg_color_button_hover_3 }}{% endif %}; --border-color-button-hover-style: {{ block.settings.border_color_button_hover_3 }}; --text-transform-button-style: {{ block.settings.btn_text_transform }}; --font-size-button-style: {{block.settings.fontsize_btn | append: 'px' }}; --button-width-style: {{block.settings.button_width | append: 'px' }}">
+                                                <a {% if block.settings.link_3 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_3 }}" aria-label="{{ block.settings.button_3 }}"{% endif %} class="spotlight-button button custom-button-style" style="--color-button-style: {{ block.settings.color_button_3 }}; --bg-color-button-style: {% if block.settings.bg_gradient_color_button_3 != blank %}{{ block.settings.bg_gradient_color_button_3 }}{% else %}{{ block.settings.bg_color_button_3 | color_modify: 'alpha', block.settings.bg_opacity_button }}{% endif %}; --border-color-button-style: {{ block.settings.border_color_button_3 }}; --color-button-hover-style: {{ block.settings.color_button_hover_3 }}; --bg-color-button-hover-style: {% if block.settings.bg_gradient_color_button_hover_3 != blank %}{{ block.settings.bg_gradient_color_button_hover_3 }}{% else %}{{ block.settings.bg_color_button_hover_3 }}{% endif %}; --border-color-button-hover-style: {{ block.settings.border_color_button_hover_3 }}; --text-transform-button-style: {{ block.settings.btn_text_transform }}; --font-size-button-style: {{block.settings.fontsize_btn | append: 'px' }}; --button-width-style: {{block.settings.button_width | append: 'px' }}">
                                                     {%- if block.settings.btn_icon_3 != blank -%}
                                                         {{ block.settings.btn_icon_3 }}
                                                     {%- endif -%}
@@ -151,13 +157,15 @@
                                     <div class="img-box{% if block.settings.image_behavior != 'none' %} animate--{{ block.settings.image_behavior }} o-hidden{% endif %}">
                                         {%- if block.settings.image_4 != blank -%}
                                             {%- assign preview_img_4 = block.settings.image_4 -%}
-                                            <a {% if block.settings.link_4 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_4 }}"{% endif %} class="image-zoom adaptive_height image" style="padding-top: {% unless preview_img_4.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img_4.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img_4.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                                <img {% render 'lazyload',preview_img: preview_img_4 %}{% unless preview_img_4.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img_4.presentation.focal_point }}"{% endunless %} />
+                                            <a {% if block.settings.link_4 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_4 }}" aria-label="{{ block.settings.button_4 }}"{% endif %} class="image-zoom adaptive_height image" style="padding-top: {% unless preview_img_4.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img_4.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img_4.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radius | append: 'px' }}">
+                                                <img {% render 'lazyload',preview_img: preview_img_4,enable_rtl: settings.enable_layout_rtl %}{% unless preview_img_4.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img_4.presentation.focal_point }}"{% endunless %} />
                                                 {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                             </a>
                                         {%- else -%}
-                                            <a {% if block.settings.link_4 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_4 }}"{% endif %} class="image-zoom" style="--item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                                <div class="not_img" style="--height_not_img: 260px">270 x 260px</div>
+                                            <a {% if block.settings.link_4 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_4 }}"{% endif %} class="image-zoom" style="--item-border-radirus-style: {{ block.settings.item_border_radius | append: 'px' }}">
+                                                <div class="placeholder" style="--height_placeholder: 260px;">
+                                                    {{ 'collection-apparel-4' | placeholder_svg_tag: 'placeholder-svg' }}
+                                                </div>
                                             </a>
                                         {%- endif -%}
                                     </div>
@@ -175,7 +183,7 @@
                                                 <div class="des custom-text-style" style="--color-text-style: {{ block.settings.color_des_4 }}; --fontsize-text-style: {{ block.settings.fontsize_des | append: 'px' }}; --margin-bottom-des-style: {{ block.settings.mg_bottom_des | append: 'px' }}; --margin-bottom-des-style-mb: {{ block.settings.mg_bottom_des_mb | append: 'px' }};">{{ block.settings.des_4 }}</div>
                                             {%- endif -%}
                                             {%- if block.settings.button_4 != blank -%}
-                                                <a{% if block.settings.link_4 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_4 }}"{% endif %} class="spotlight-button button custom-button-style" style="--color-button-style: {{ block.settings.color_button_4 }}; --bg-color-button-style: {% if block.settings.bg_gradient_color_button_4 != blank %}{{ block.settings.bg_gradient_color_button_4 }}{% else %}{{ block.settings.bg_color_button_4 | color_modify: 'alpha', block.settings.bg_opacity_button }}{% endif %}; --border-color-button-style: {{ block.settings.border_color_button_4 }}; --color-button-hover-style: {{ block.settings.color_button_hover_4 }}; --bg-color-button-hover-style: {% if block.settings.bg_gradient_color_button_hover_4 != blank %}{{ block.settings.bg_gradient_color_button_hover_4 }}{% else %}{{ block.settings.bg_color_button_hover_4 }}{% endif %}; --border-color-button-hover-style: {{ block.settings.border_color_button_hover_4 }}; --text-transform-button-style: {{ block.settings.btn_text_transform }}; --font-size-button-style: {{block.settings.fontsize_btn | append: 'px' }}; --button-width-style: {{block.settings.button_width | append: 'px' }}">
+                                                <a{% if block.settings.link_4 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link_4 }}" aria-label="{{ block.settings.button_4 }}"{% endif %} class="spotlight-button button custom-button-style" style="--color-button-style: {{ block.settings.color_button_4 }}; --bg-color-button-style: {% if block.settings.bg_gradient_color_button_4 != blank %}{{ block.settings.bg_gradient_color_button_4 }}{% else %}{{ block.settings.bg_color_button_4 | color_modify: 'alpha', block.settings.bg_opacity_button }}{% endif %}; --border-color-button-style: {{ block.settings.border_color_button_4 }}; --color-button-hover-style: {{ block.settings.color_button_hover_4 }}; --bg-color-button-hover-style: {% if block.settings.bg_gradient_color_button_hover_4 != blank %}{{ block.settings.bg_gradient_color_button_hover_4 }}{% else %}{{ block.settings.bg_color_button_hover_4 }}{% endif %}; --border-color-button-hover-style: {{ block.settings.border_color_button_hover_4 }}; --text-transform-button-style: {{ block.settings.btn_text_transform }}; --font-size-button-style: {{block.settings.fontsize_btn | append: 'px' }}; --button-width-style: {{block.settings.button_width | append: 'px' }}">
                                                     {%- if block.settings.btn_icon_4 != blank -%}
                                                         {{ block.settings.btn_icon_4 }}
                                                     {%- endif -%}
@@ -196,13 +204,15 @@
                         <div class="img-box{% if block.settings.image_behavior != 'none' %} animate--{{ block.settings.image_behavior }} o-hidden{% endif %}">
                             {%- if block.settings.image != blank -%}
                                 {%- assign preview_img = block.settings.image -%}
-                                <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} class="image-zoom adaptive_height image" style="padding-top: {% unless preview_img.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                    <img {% render 'lazyload',preview_img: preview_img %}{% unless preview_img.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img.presentation.focal_point }}"{% endunless %} />
+                                <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}" aria-label="{{ block.settings.button }}"{% endif %} class="image-zoom adaptive_height image" style="padding-top: {% unless preview_img.presentation.focal_point == '50.0% 50.0%' %}{{ 1 | divided_by: preview_img.aspect_ratio | times: 120 }}%;{% else %}{{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%;{% endunless %} --item-border-radirus-style: {{ block.settings.item_border_radius | append: 'px' }}">
+                                    <img {% render 'lazyload',preview_img: preview_img,enable_rtl: settings.enable_layout_rtl %}{% unless preview_img.presentation.focal_point == '50.0% 50.0%' %} style="object-position: {{ preview_img.presentation.focal_point }}"{% endunless %} />
                                     {% if settings.enable_lazyload %}<span class="data-lazy-loading"></span>{% endif %}
                                 </a>
                             {%- else -%}
-                                <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} class="image-zoom" style="--item-border-radirus-style: {{ block.settings.item_border_radirus | append: 'px' }}">
-                                    <div class="not_img" style="--height_not_img: 570px">570 x 570px</div>
+                                <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} class="image-zoom" style="--item-border-radirus-style: {{ block.settings.item_border_radius | append: 'px' }}">
+                                    <div class="placeholder" style="--height_placeholder: 570px;">
+                                        {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                    </div>
                                 </a>
                             {%- endif -%}
                         </div>
@@ -220,7 +230,7 @@
                                     <div class="des custom-text-style" style="--color-text-style: {{ block.settings.color_des }}; --fontsize-text-style: {{ block.settings.fontsize_des | append: 'px' }}; --margin-bottom-des-style: {{ block.settings.mg_bottom_des | append: 'px' }}; --margin-bottom-des-style-mb: {{ block.settings.mg_bottom_des_mb | append: 'px' }};">{{ block.settings.des }}</div>
                                 {%- endif -%}
                                 {%- if block.settings.button != blank -%}
-                                    <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} class="spotlight-button button custom-button-style" style="--color-button-style: {{ block.settings.color_button }}; --bg-color-button-style: {% if block.settings.bg_gradient_color_button != blank %}{{ block.settings.bg_gradient_color_button }}{% else %}{{ block.settings.bg_color_button | color_modify: 'alpha', block.settings.bg_opacity_button }}{% endif %}; --border-color-button-style: {{ block.settings.border_color_button }}; --color-button-hover-style: {{ block.settings.color_button_hover }}; --bg-color-button-hover-style: {% if block.settings.bg_gradient_color_button_hover != blank %}{{ block.settings.bg_gradient_color_button_hover }}{% else %}{{ block.settings.bg_color_button_hover }}{% endif %}; --border-color-button-hover-style: {{ block.settings.border_color_button_hover }}; --text-transform-button-style: {{block.settings.btn_text_transform}}; --font-size-button-style: {{block.settings.fontsize_btn | append: 'px' }}; --button-width-style: {{block.settings.button_width | append: 'px' }}">
+                                    <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}" aria-label="{{ block.settings.button }}"{% endif %} class="spotlight-button button custom-button-style" style="--color-button-style: {{ block.settings.color_button }}; --bg-color-button-style: {% if block.settings.bg_gradient_color_button != blank %}{{ block.settings.bg_gradient_color_button }}{% else %}{{ block.settings.bg_color_button | color_modify: 'alpha', block.settings.bg_opacity_button }}{% endif %}; --border-color-button-style: {{ block.settings.border_color_button }}; --color-button-hover-style: {{ block.settings.color_button_hover }}; --bg-color-button-hover-style: {% if block.settings.bg_gradient_color_button_hover != blank %}{{ block.settings.bg_gradient_color_button_hover }}{% else %}{{ block.settings.bg_color_button_hover }}{% endif %}; --border-color-button-hover-style: {{ block.settings.border_color_button_hover }}; --text-transform-button-style: {{block.settings.btn_text_transform}}; --font-size-button-style: {{block.settings.fontsize_btn | append: 'px' }}; --button-width-style: {{block.settings.button_width | append: 'px' }}">
                                         {%- if block.settings.btn_icon != blank -%}
                                             {{ block.settings.btn_icon }}
                                         {%- endif -%}
@@ -281,6 +291,9 @@
     {%- if section.settings.container == 'fullwidth' -%}
         .custom-image-banner-block {overflow: hidden;}
     {%- endif -%}
+    {%- if padding_full_width == '45' -%}
+        .customImageBanner-inner .spotlight-button.custom-button-style span {display: block;}
+    {%- endif -%}
     @media (min-width: 1200px) {.section-block-{{section.id}} {padding-top: {{ mg_top_desktop | append: 'px' }}; padding-bottom: {{ mg_bottom_desktop | append: 'px' }};}}
     @media (min-width: 1025px) {
         {%- if section.settings.container == 'fullwidth' -%}
@@ -297,8 +310,14 @@
             .section-block-{{section.id}}{background-position: center top;}
         {%- endif -%}
         .section-block-{{section.id}}{overflow: hidden;}
+        {%- if section.settings.container == 'fullwidth' -%}
+            .section-block-{{section.id}} .container-full {padding-left: 15px;padding-right: 15px}
+        {%- endif -%}
     }
     @media (max-width: 767px) {
+        {%- if section.settings.container == 'fullwidth' -%}
+            .section-block-{{section.id}} .container-full {padding-left: 10px;padding-right: 10px}
+        {%- endif -%}
         .section-block-{{section.id}} {padding-top: {{ mg_top_mobile | append: 'px' }}; padding-bottom: {{ mg_bottom_mobile | append: 'px' }};}
         .section-block-{{section.id}} .halo-block-header .title {font-size: {{ fontsize_title_mb | append: 'px' }};}
     }
@@ -346,8 +365,7 @@
         "max": 100,
         "step": 5,
         "unit": "t:sections.layout.fontsize.fontsize_title.unit",
-        "default": 0,
-        "info": "t:sections.layout.container.info_full_width"
+        "default": 0
     },
     {
         "type": "select",
@@ -381,7 +399,7 @@
     {
         "type" : "color",
         "id" : "custom_image_banner_bg",
-        "label" : "t:settings_schema.colors.settings.colors_name.background_color",
+        "label" : "t:settings_schema.colors.settings.colors_name.background_color_2",
         "default" : "#fff"
     },
     {
@@ -393,6 +411,98 @@
         "type" : "image_picker",
         "id" : "custom_image_bg_image",
         "label" : "t:settings_schema.colors.settings.colors_name.background_image"
+    },
+    {
+        "type": "header",
+        "content": "t:sections.image-banner.blocks.image.settings.content.section_header"
+    },
+    {
+        "type": "select",
+        "id": "title_align",
+        "label": "t:sections.general.settings.alignment.label__1",
+        "options": [
+        {
+            "value": "left",
+            "label": "t:settings_schema.typography.settings.type_button_font.left"
+        },
+        {
+            "value": "center",
+            "label": "t:settings_schema.typography.settings.type_button_font.center"
+        },
+        {
+            "value": "right",
+            "label": "t:settings_schema.typography.settings.type_button_font.right"
+        }],
+        "default": "center"
+    },
+    {
+        "type": "text",
+        "id": "custom_image_banner_title",
+        "label": "t:sections.image-banner.blocks.image.settings.content.label__1",
+        "default": "#Featured On Ella"
+    },
+    {
+        "type": "checkbox",
+        "id": "enable_border_title",
+        "label": "t:sections.spotlight_block.blocks.image.enable_border_title",
+        "default": true
+    },
+    {
+        "type" : "color",
+        "id" : "color_title",
+        "label": "t:settings_schema.typography.settings.typography.title_color",
+        "default" : "#232323"
+    },
+    {
+        "type": "range",
+        "id": "fontsize_title",
+        "label": "t:settings_schema.typography.settings.typography.title_font_size",
+        "min": 10,
+        "max": 50,
+        "step": 1,
+        "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+        "default": 16
+    },
+    {
+        "type": "range",
+        "id": "fontsize_title_mb",
+        "label": "t:settings_schema.typography.settings.typography.title_font_size_mb",
+        "min": 10,
+        "max": 50,
+        "step": 1,
+        "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+        "default": 16
+    },
+    {
+        "type": "range",
+        "id": "margin_bottom_title",
+        "label": "t:settings_schema.typography.settings.typography.title_margin_bottom",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+        "default": 45
+    },
+    {
+        "type" : "textarea",
+        "id" : "custom_image_banner_des",
+        "label" : "t:sections.image-banner.blocks.image.settings.content.label__2"
+    },
+    {
+        "type" : "color",
+        "id" : "color_des",
+        "label": "t:settings_schema.typography.settings.typography.des_color",
+        "default" : "#3c3c3c"
+    },
+    {
+        "type": "range",
+        "id": "fontsize_des",
+        "label": "t:settings_schema.typography.settings.typography.des_font_size",
+        "min": 10,
+        "max": 50,
+        "step": 1,
+        "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+        "default": 16
     },
     {
         "type": "header",
@@ -461,99 +571,8 @@
         "step": 5,
         "unit": "t:sections.layout.mg_desktop.unit",
         "default": 50
-    },
-    {
-        "type": "header",
-        "content": "t:sections.custom_image_banner_block.settings.header"
-    },
-    {
-        "type": "select",
-        "id": "title_align",
-        "label": "t:sections.product_block.settings.general.label__7",
-        "options": [
-        {
-            "value": "left",
-            "label": "t:sections.product_block.settings.general.options__7"
-        },
-        {
-            "value": "center",
-            "label": "t:sections.product_block.settings.general.options__8"
-        },
-        {
-            "value": "right",
-            "label": "t:sections.product_block.settings.general.options__9"
-        }],
-        "default": "center"
-    },
-    {
-        "type": "text",
-        "id": "custom_image_banner_title",
-        "label": "t:sections.image-banner.blocks.image.settings.content.label__1",
-        "default": "#Featured On Ella"
-    },
-    {
-        "type": "checkbox",
-        "id": "enable_border_title",
-        "label": "t:sections.spotlight_block.blocks.image.enable_border_title",
-        "default": true
-    },
-    {
-        "type" : "color",
-        "id" : "color_title",
-        "label": "t:sections.layout.color.color_title",
-        "default" : "#232323"
-    },
-    {
-        "type": "range",
-        "id": "fontsize_title",
-        "label": "t:sections.layout.fontsize.fontsize_title.label",
-        "min": 10,
-        "max": 50,
-        "step": 1,
-        "unit": "t:sections.layout.fontsize.fontsize_title.unit",
-        "default": 16
-    },
-    {
-        "type": "range",
-        "id": "fontsize_title_mb",
-        "label": "t:sections.layout.fontsize.fontsize_title.label_mb",
-        "min": 10,
-        "max": 50,
-        "step": 1,
-        "unit": "t:sections.layout.fontsize.fontsize_title.unit",
-        "default": 16
-    },
-    {
-        "type": "range",
-        "id": "margin_bottom_title",
-        "label": "t:sections.layout.fontsize.margin_bottom",
-        "min": 0,
-        "max": 50,
-        "step": 1,
-        "unit": "t:sections.layout.fontsize.fontsize_title.unit",
-        "default": 45
-    },
-    {
-        "type" : "textarea",
-        "id" : "custom_image_banner_des",
-        "label" : "t:sections.image-banner.blocks.image.settings.content.label__2"
-    },
-    {
-        "type" : "color",
-        "id" : "color_des",
-        "label": "t:sections.layout.color.color_des",
-        "default" : "#3c3c3c"
-    },
-    {
-        "type": "range",
-        "id": "fontsize_des",
-        "label": "t:sections.layout.fontsize.fontsize_des.label",
-        "min": 10,
-        "max": 50,
-        "step": 1,
-        "unit": "t:sections.layout.fontsize.fontsize_title.unit",
-        "default": 16
-    }],
+    }
+    ],
     "blocks": [
     {
         "type": "smallImg",
@@ -582,8 +601,8 @@
         },
         {
             "type": "range",
-            "id": "item_border_radirus",
-            "label": "t:settings_schema.typography.settings.typography.item_border_radirus",
+            "id": "item_border_radius",
+            "label": "t:settings_schema.typography.settings.typography.item_border_radius",
             "min": 0,
             "max": 30,
             "step": 1,
@@ -598,21 +617,21 @@
             "options": [
             {
                 "value": "left",
-                "label": "t:sections.product_block.settings.general.options__7"
+                "label": "t:settings_schema.typography.settings.type_button_font.left"
             },
             {
                 "value": "center",
-                "label": "t:sections.product_block.settings.general.options__8"
+                "label": "t:settings_schema.typography.settings.type_button_font.center"
             },
             {
                 "value": "right",
-                "label": "t:sections.product_block.settings.general.options__9"
+                "label": "t:settings_schema.typography.settings.type_button_font.right"
             }]
         },
         {
             "type": "select",
             "id": "align_items",
-            "label": "t:sections.image-banner.blocks.image.settings.content.label__9",
+            "label": "t:sections.image-banner.blocks.image.settings.content.label__7",
             "default": "bottom",
             "options": [
             {
@@ -621,7 +640,7 @@
             },
             {
                 "value": "center",
-                "label": "t:sections.image-banner.blocks.image.settings.content.options__7"
+                "label": "t:settings_schema.typography.settings.type_button_font.center"
             },
             {
                 "value": "bottom",
@@ -677,7 +696,7 @@
         {
             "type": "range",
             "id": "fontsize_title",
-            "label": "t:sections.layout.fontsize.fontsize_title.label",
+            "label": "t:settings_schema.typography.settings.typography.title_font_size",
             "min": 10,
             "max": 50,
             "step": 1,
@@ -722,7 +741,7 @@
         {
             "type": "range",
             "id": "fontsize_des",
-            "label": "t:sections.layout.fontsize.fontsize_des.label",
+            "label": "t:settings_schema.typography.settings.typography.des_font_size",
             "min": 10,
             "max": 50,
             "step": 1,
@@ -819,11 +838,12 @@
             }
           ],
           "default": "none",
+          "info": "t:sections.main-product.settings.general.image_behavior.info",
           "label": "t:sections.main-product.settings.general.image_behavior.label"
         },
         {
             "type": "header",
-            "content": "t:sections.custom_image_banner_block.settings.item_1"
+            "content": "t:sections.image-banner.blocks.customImg.settings.item_1"
         },
         {
             "type": "checkbox",
@@ -873,7 +893,7 @@
         {
             "type" : "color",
             "id" : "color_title_1",
-            "label": "t:sections.layout.color.color_title",
+            "label": "t:settings_schema.typography.settings.typography.title_color",
             "default" : "#ffffff"
         },
         {
@@ -885,7 +905,7 @@
         {
             "type" : "color",
             "id" : "color_des_1",
-            "label": "t:sections.layout.color.color_des",
+            "label": "t:settings_schema.typography.settings.typography.des_color",
             "default" : "#ffffff"
         },
         {
@@ -948,11 +968,11 @@
             "type": "textarea",
             "id" : "btn_icon_1",
             "label" : "t:sections.spotlight_block.settings.icon",
-            "info" : "Go to this link [Find your Icon](https://fontawesome.com/v5.15/icons?d=gallery&p=2). Find the icon you want, then copy the SVG code and paste it here."
+            "info" : "Go to this link [find your icon](https://fontawesome.com/v5.15/icons?d=gallery&p=2). Find the icon you want, then copy the SVG code and paste it here."
         },
         {
             "type": "header",
-            "content": "t:sections.custom_image_banner_block.settings.item_2"
+            "content": "t:sections.image-banner.blocks.customImg.settings.item_2"
         },
         {
             "type": "checkbox",
@@ -1002,7 +1022,7 @@
         {
             "type" : "color",
             "id" : "color_title_2",
-            "label": "t:sections.layout.color.color_title",
+            "label": "t:settings_schema.typography.settings.typography.title_color",
             "default" : "#ffffff"
         },
         {
@@ -1014,7 +1034,7 @@
         {
             "type" : "color",
             "id" : "color_des_2",
-            "label": "t:sections.layout.color.color_des",
+            "label": "t:settings_schema.typography.settings.typography.des_color",
             "default" : "#ffffff"
         },
         {
@@ -1077,11 +1097,11 @@
             "type": "textarea",
             "id" : "btn_icon_2",
             "label" : "t:sections.spotlight_block.settings.icon",
-            "info" : "Go to this link [Find your Icon](https://fontawesome.com/v5.15/icons?d=gallery&p=2). Find the icon you want, then copy the SVG code and paste it here."
+            "info" : "Go to this link [find your icon](https://fontawesome.com/v5.15/icons?d=gallery&p=2). Find the icon you want, then copy the SVG code and paste it here."
         },
         {
             "type": "header",
-            "content": "t:sections.custom_image_banner_block.settings.item_3"
+            "content": "t:sections.image-banner.blocks.customImg.settings.item_3"
         },
         {
             "type": "checkbox",
@@ -1131,7 +1151,7 @@
         {
             "type" : "color",
             "id" : "color_title_3",
-            "label": "t:sections.layout.color.color_title",
+            "label": "t:settings_schema.typography.settings.typography.title_color",
             "default" : "#ffffff"
         },
         {
@@ -1143,7 +1163,7 @@
         {
             "type" : "color",
             "id" : "color_des_3",
-            "label": "t:sections.layout.color.color_des",
+            "label": "t:settings_schema.typography.settings.typography.des_color",
             "default" : "#ffffff"
         },
         {
@@ -1206,11 +1226,11 @@
             "type": "textarea",
             "id" : "btn_icon_3",
             "label" : "t:sections.spotlight_block.settings.icon",
-            "info" : "Go to this link [Find your Icon](https://fontawesome.com/v5.15/icons?d=gallery&p=2). Find the icon you want, then copy the SVG code and paste it here."
+            "info" : "Go to this link [find your icon](https://fontawesome.com/v5.15/icons?d=gallery&p=2). Find the icon you want, then copy the SVG code and paste it here."
         },
         {
             "type": "header",
-            "content": "t:sections.custom_image_banner_block.settings.item_4"
+            "content": "t:sections.image-banner.blocks.customImg.settings.item_4"
         },
         {
             "type": "checkbox",
@@ -1260,7 +1280,7 @@
         {
             "type" : "color",
             "id" : "color_title_4",
-            "label": "t:sections.layout.color.color_title",
+            "label": "t:settings_schema.typography.settings.typography.title_color",
             "default" : "#ffffff"
         },
         {
@@ -1272,7 +1292,7 @@
         {
             "type" : "color",
             "id" : "color_des_4",
-            "label": "t:sections.layout.color.color_des",
+            "label": "t:settings_schema.typography.settings.typography.des_color",
             "default" : "#ffffff"
         },
         {
@@ -1335,7 +1355,7 @@
             "type": "textarea",
             "id" : "btn_icon_4",
             "label" : "t:sections.spotlight_block.settings.icon",
-            "info" : "Go to this link [Find your Icon](https://fontawesome.com/v5.15/icons?d=gallery&p=2). Find the icon you want, then copy the SVG code and paste it here."
+            "info" : "Go to this link [find your icon](https://fontawesome.com/v5.15/icons?d=gallery&p=2). Find the icon you want, then copy the SVG code and paste it here."
         }]
     },
     {
@@ -1351,8 +1371,8 @@
         },
         {
             "type": "range",
-            "id": "item_border_radirus",
-            "label": "t:settings_schema.typography.settings.typography.item_border_radirus",
+            "id": "item_border_radius",
+            "label": "t:settings_schema.typography.settings.typography.item_border_radius",
             "min": 0,
             "max": 30,
             "step": 1,
@@ -1377,26 +1397,26 @@
         {
             "type": "select",
             "id": "title_align",
-            "label": "t:sections.product_block.settings.general.label__7",
+            "label": "t:sections.general.settings.alignment.label__1",
             "default": "left",
             "options": [
             {
                 "value": "left",
-                "label": "t:sections.product_block.settings.general.options__7"
+                "label": "t:settings_schema.typography.settings.type_button_font.left"
             },
             {
                 "value": "center",
-                "label": "t:sections.product_block.settings.general.options__8"
+                "label": "t:settings_schema.typography.settings.type_button_font.center"
             },
             {
                 "value": "right",
-                "label": "t:sections.product_block.settings.general.options__9"
+                "label": "t:settings_schema.typography.settings.type_button_font.right"
             }]
         },
         {
             "type": "select",
             "id": "align_items",
-            "label": "t:sections.image-banner.blocks.image.settings.content.label__9",
+            "label": "t:sections.image-banner.blocks.image.settings.content.label__7",
             "default": "bottom",
             "options": [
             {
@@ -1405,7 +1425,7 @@
             },
             {
                 "value": "center",
-                "label": "t:sections.image-banner.blocks.image.settings.content.options__7"
+                "label": "t:settings_schema.typography.settings.type_button_font.center"
             },
             {
                 "value": "bottom",
@@ -1478,13 +1498,13 @@
         {
             "type" : "color",
             "id" : "color_title",
-            "label": "t:sections.layout.color.color_title",
+            "label": "t:settings_schema.typography.settings.typography.title_color",
             "default" : "#ffffff"
         },
         {
             "type": "range",
             "id": "fontsize_title",
-            "label": "t:sections.layout.fontsize.fontsize_title.label",
+            "label": "t:settings_schema.typography.settings.typography.title_font_size",
             "min": 10,
             "max": 50,
             "step": 1,
@@ -1535,13 +1555,13 @@
         {
             "type" : "color",
             "id" : "color_des",
-            "label": "t:sections.layout.color.color_des",
+            "label": "t:settings_schema.typography.settings.typography.des_color",
             "default" : "#ffffff"
         },
         {
             "type": "range",
             "id": "fontsize_des",
-            "label": "t:sections.layout.fontsize.fontsize_des.label",
+            "label": "t:settings_schema.typography.settings.typography.des_font_size",
             "min": 10,
             "max": 50,
             "step": 1,
@@ -1681,7 +1701,7 @@
             "type": "textarea",
             "id" : "btn_icon",
             "label" : "t:sections.spotlight_block.settings.icon",
-            "info" : "Go to this link [Find your Icon](https://fontawesome.com/v5.15/icons?d=gallery&p=2). Find the icon you want, then copy the SVG code and paste it here."
+            "info" : "Go to this link [find your icon](https://fontawesome.com/v5.15/icons?d=gallery&p=2). Find the icon you want, then copy the SVG code and paste it here."
         },
         {
           "type": "select",
@@ -1701,6 +1721,7 @@
             }
           ],
           "default": "none",
+          "info": "t:sections.main-product.settings.general.image_behavior.info",
           "label": "t:sections.main-product.settings.general.image_behavior.label"
         }
     ]

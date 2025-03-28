@@ -17,6 +17,7 @@
 
     assign margin_bottom_title = section.settings.margin_bottom_title | append: 'px'
     assign margin_bottom_info = section.settings.margin_bottom_info | append: 'px' 
+    assign margin_left_info = section.settings.margin_left_info | append: 'px' 
     assign margin_bottom_des = section.settings.margin_bottom_des | append: 'px'
     assign limit_content_des = section.settings.limit_content_des
 
@@ -51,7 +52,7 @@
         </div>
     {%- endif -%}
     {%- assign blog = blogs[section.settings.blog_posts] -%}
-    <div class="halo-block-content" style="--blog-title-margin-bottom: {{ margin_bottom_title }};--blog-info-margin-bottom: {{ margin_bottom_info }};--blog-description-margin-bottom: {{ margin_bottom_des }}">
+    <div class="halo-block-content" style="--blog-title-margin-bottom: {{ margin_bottom_title }};--blog-info-margin-bottom: {{ margin_bottom_info }};--blog-info-margin-left: {{ margin_left_info }};--blog-description-margin-bottom: {{ margin_bottom_des }}">
         <div class="content-block main-blog-view" style="--button-text-color: {% if show_more_button_text_color != blank %}{{ show_more_button_text_color }}{% endif %};--button-border-color: {% if show_more_button_border_color != blank %}{{ show_more_button_border_color }}{% endif %};--button-background-color: {% if show_more_button_background_color != blank %}{{ show_more_button_background_color }}{% endif %};--button-text-color-hover: {% if show_more_button_text_color_hover != blank %}{{ show_more_button_text_color_hover }}{% endif %};--button-border-color-hover: {% if show_more_button_border_color_hover != blank %}{{ show_more_button_border_color_hover }}{% endif %};--button-background-color-hover: {% if show_more_button_background_color_hover != blank %}{{ show_more_button_background_color_hover }}{% endif %}">   
             <div class="blog-post-main-item" data-main-view data-article-id="{{ blog.articles[0].id }}">
                 {% render 'article-card-main-view', article: blog.articles[0], limit_content_des: limit_content_des %}  
@@ -116,8 +117,189 @@
             "max": 100,
             "step": 5,
             "unit": "t:sections.layout.fontsize.fontsize_title.unit",
-            "default": 0,
-            "info": "t:sections.layout.container.info_full_width"
+            "default": 0
+        },
+        {
+            "type": "text",
+            "id": "featured_blog_title",
+            "label": "t:sections.image-banner.blocks.image.settings.content.label__1",
+            "default": "Latest Posts"
+        },
+        {   
+            "type": "header",
+            "content": "t:sections.featured_blog.settings.blog.header"
+        },
+        {
+            "id": "blog_posts",
+            "type": "blog",
+            "label": "t:sections.featured_blog.settings.blog.blog_posts"
+        },  
+        {
+            "type": "range",
+            "id": "item_distance",
+            "label": "t:settings_schema.typography.settings.typography.grid_gap",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+            "default": 15
+        },
+        {
+            "type": "range",
+            "id": "post_limit",
+            "label": "t:sections.featured_blog.settings.blog.post_limit",
+            "min": 2,
+            "max": 9,
+            "step": 1,
+            "default": 3
+        },
+        {
+            "type": "range",
+            "id": "limit_content_des",
+            "label": "t:sections.blog_posts_list.settings.posts_content_des",
+            "min": 10,
+            "max": 100,
+            "step": 1,
+            "default": 22
+        },
+        {
+            "type": "range",
+            "id": "margin_bottom_title",
+            "label": "t:settings_schema.typography.settings.typography.title_margin_bottom",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "unit": "t:sections.layout.mg_desktop.unit",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "margin_bottom_info",
+            "label": "t:sections.featured_blog.settings.settings_item.margin_bottom_info",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "unit": "t:sections.layout.mg_desktop.unit",
+            "default": 13
+        },  
+        {
+            "type": "range",
+            "id": "margin_bottom_des",
+            "label": "t:settings_schema.typography.settings.typography.des_margin_bottom",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "unit": "t:sections.layout.mg_desktop.unit",
+            "default": 6
+        },
+        {
+            "type": "range",
+            "id": "margin_left_info",
+            "label": "t:sections.blog_posts_list.settings.info_left_margin",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "unit": "t:sections.layout.mg_desktop.unit",
+            "default": 0
+        },
+        {
+            "type": "color",
+            "id": "show_more_button_text_color",
+            "label": "t:settings_schema.typography.settings.typography.text_color",
+            "default": "#3c3c3c"
+        },
+        {
+            "type": "color",
+            "id": "show_more_button_border_color",
+            "label": "t:settings_schema.colors.settings.colors_name.border_color",
+            "default": "#1e1e1e"
+        },
+        {
+            "type": "color",
+            "id": "show_more_button_background_color",
+            "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
+            "default": "#1e1e1e"
+        },
+        {
+            "type": "color",
+            "id": "show_more_button_text_color_hover",
+            "label": "t:settings_schema.typography.settings.typography.text_color_hover",
+            "default": "#000"
+        },
+        {
+            "type": "color",
+            "id": "show_more_button_border_color_hover",
+            "label": "t:settings_schema.colors.settings.colors_name.border_hover",
+            "default": "#fff"
+        },
+        {
+            "type": "color",
+            "id": "show_more_button_background_color_hover",
+            "label": "t:settings_schema.colors.settings.colors_name.background_hover",
+            "default": "#fff"
+        },  
+        {
+            "type": "text",
+            "id": "view_all",
+            "label": "t:settings_schema.typography.settings.typography.view_all"
+        },
+        {
+            "type": "select",
+            "id": "font_weight_view_all",
+            "label": "t:settings_schema.typography.settings.typography.view_all_font_weight",
+            "default": "400",
+            "options": [
+            {
+                "value": "400",
+                "label": "t:settings_schema.typography.settings.font_weight.options__1"
+            },
+            {
+                "value": "500",
+                "label": "t:settings_schema.typography.settings.font_weight.options__2"
+            },
+            {
+                "value": "600",
+                "label": "t:settings_schema.typography.settings.font_weight.options__3"
+            },
+            {
+                "value": "700",
+                "label": "t:settings_schema.typography.settings.font_weight.options__4"
+            },
+            {
+                "value": "800",
+                "label": "t:settings_schema.typography.settings.font_weight.options__5"
+            },
+            {
+                "value": "900",
+                "label": "t:settings_schema.typography.settings.font_weight.options__6"
+            }]
+        },
+        {
+            "type": "range",
+            "id": "mg_top_view",
+            "label": "t:sections.layout.mg_top_view.label",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "unit": "t:sections.layout.mg_desktop.unit",
+            "default": 0
+        },
+        { 
+            "type" : "checkbox",
+            "id" : "enable_border_view_all",
+            "label": "t:settings_schema.typography.settings.typography.view_all_enable_border",
+            "default" : true
+        },
+        {
+            "type": "url",
+            "id": "link_view_all",
+            "label": "t:settings_schema.typography.settings.typography.view_all_link"
+        },
+        {
+            "type" : "color",
+            "id" : "color_view_all",
+            "label": "t:settings_schema.typography.settings.typography.view_all_color",
+            "default" : "#3c3c3c"
         },
         {
             "type": "header",
@@ -186,178 +368,6 @@
             "step": 5,
             "unit": "t:sections.layout.mg_desktop.unit",
             "default": 50
-        },
-        {
-            "type": "text",
-            "id": "featured_blog_title",
-            "label": "t:sections.image-banner.blocks.image.settings.content.label__1",
-            "default": "Latest Posts"
-        },
-        {   
-            "type": "header",
-            "content": "t:sections.featured_blog.settings.blog.header"
-        },
-        {
-            "id": "blog_posts",
-            "type": "blog",
-            "label": "t:sections.featured_blog.settings.blog.blog_posts"
-        },  
-        {
-            "type": "range",
-            "id": "item_distance",
-            "label": "t:settings_schema.typography.settings.typography.grid_gap",
-            "min": 0,
-            "max": 50,
-            "step": 1,
-            "unit": "t:sections.layout.fontsize.fontsize_title.unit",
-            "default": 15
-        },
-        {
-            "type": "range",
-            "id": "post_limit",
-            "label": "t:sections.featured_blog.settings.blog.post_limit",
-            "min": 2,
-            "max": 9,
-            "step": 1,
-            "default": 3
-        },
-        {
-            "type": "range",
-            "id": "limit_content_des",
-            "label": "Posts Content Description Limit",
-            "min": 10,
-            "max": 100,
-            "step": 1,
-            "default": 22
-        },
-        {
-            "type": "range",
-            "id": "margin_bottom_title",
-            "label": "t:settings_schema.typography.settings.typography.title_margin_bottom",
-            "min": 0,
-            "max": 50,
-            "step": 1,
-            "unit": "t:sections.layout.mg_desktop.unit",
-            "default": 0
-        },
-        {
-            "type": "range",
-            "id": "margin_bottom_info",
-            "label": "t:sections.featured_blog.settings.settings_item.margin_bottom_info",
-            "min": 0,
-            "max": 50,
-            "step": 1,
-            "unit": "t:sections.layout.mg_desktop.unit",
-            "default": 13
-        },  
-        {
-            "type": "range",
-            "id": "margin_bottom_des",
-            "label": "t:sections.featured_blog.settings.settings_item.margin_bottom_des",
-            "min": 0,
-            "max": 50,
-            "step": 1,
-            "unit": "t:sections.layout.mg_desktop.unit",
-            "default": 6
-        },
-        {
-            "type": "color",
-            "id": "show_more_button_text_color",
-            "label": "t:sections.featured_blog.settings.settings_item.color_button_item",
-            "default": "#3c3c3c"
-        },
-        {
-            "type": "color",
-            "id": "show_more_button_border_color",
-            "label": "t:sections.featured_blog.settings.settings_item.color_button_item_border",
-            "default": "#1e1e1e"
-        },
-        {
-            "type": "color",
-            "id": "show_more_button_background_color",
-            "label": "t:sections.featured_blog.settings.settings_item.color_button_item_bg",
-            "default": "#1e1e1e"
-        },
-        {
-            "type": "color",
-            "id": "show_more_button_text_color_hover",
-            "label": "t:sections.featured_blog.settings.settings_item.color_button_item_hover",
-            "default": "#000"
-        },
-        {
-            "type": "color",
-            "id": "show_more_button_border_color_hover",
-            "label": "t:sections.featured_blog.settings.settings_item.color_button_item_border_hover",
-            "default": "#fff"
-        },
-        {
-            "type": "color",
-            "id": "show_more_button_background_color_hover",
-            "label": "t:sections.featured_blog.settings.settings_item.color_button_item_bg_hover",
-            "default": "#fff"
-        },  
-        {
-            "type": "text",
-            "id": "view_all",
-            "label": "t:settings_schema.typography.settings.typography.view_all"
-        },
-        {
-            "type": "select",
-            "id": "font_weight_view_all",
-            "label": "t:settings_schema.typography.settings.typography.view_all_font_weight",
-            "default": "400",
-            "options": [
-            {
-                "value": "400",
-                "label": "t:settings_schema.typography.settings.font_weight.options__1"
-            },
-            {
-                "value": "500",
-                "label": "t:settings_schema.typography.settings.font_weight.options__2"
-            },
-            {
-                "value": "600",
-                "label": "t:settings_schema.typography.settings.font_weight.options__3"
-            },
-            {
-                "value": "700",
-                "label": "t:settings_schema.typography.settings.font_weight.options__4"
-            },
-            {
-                "value": "800",
-                "label": "t:settings_schema.typography.settings.font_weight.options__5"
-            },
-            {
-                "value": "900",
-                "label": "t:settings_schema.typography.settings.font_weight.options__6"
-            }]
-        },
-        {
-            "type": "range",
-            "id": "mg_top_view",
-            "label": "t:sections.layout.mg_top_view.label",
-            "min": 0,
-            "max": 50,
-            "step": 1,
-            "unit": "t:sections.layout.mg_desktop.unit",
-            "default": 0
-        },
-        { 
-            "type" : "checkbox",
-            "id" : "enable_border_view_all",
-            "label": "t:settings_schema.typography.settings.typography.view_all_enable_border",
-            "default" : true
-        },
-        {
-            "type": "url",
-            "id": "link_view_all",
-            "label": "t:settings_schema.typography.settings.typography.view_all_link"
-        },
-        {
-            "type" : "color",
-            "id" : "color_view_all",
-            "label": "t:settings_schema.typography.settings.typography.view_all_color",
-            "default" : "#3c3c3c"
         }
         ],
     "presets": [

@@ -442,15 +442,6 @@
 }
 /* END: Product Info */
 
-.collection-lookbook .not_img {
-    aspect-ratio: 42 / 57;
-    height: unset;
-    line-height: unset;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 /* START: Dot Style */
 .collection-lookbook .lookbook-image-item .select-icon,
 .collection-lookbook .lookbook-image-item .select-icon::before,

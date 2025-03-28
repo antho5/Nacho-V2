@@ -7,10 +7,16 @@
         assign arrow =  section.settings.arrow_active
         assign container = section.settings.container
         assign check_lookbook = true
+
+        if section.settings.dot_with_image and section.settings.dots_shape == 'disc' and dots == 'shape'
+            assign show_dot_with_image = true
+        else
+            assign show_dot_with_image = false
+        endif
     -%}
 
-    <div class="slideshow-wrapper section-block-{{section.id}}" id="slideshow-wrapper-{{section.id}}" {% if section.blocks.size > 1 %}data-loader-script="{{ 'halo.slide-show.js' | asset_url }}"{% endif %}>
-        <div class="{% if container == '1170' %}container-1170{% elsif container == '1770' %}container-1770{% elsif container == 'fullwidth'%}container-full{% else %}container{% endif %}">
+    <div class="slideshow-wrapper section-block-{{section.id}}" id="slideshow-wrapper-{{section.id}}" {% if section.blocks.size > 1 %}data-loader-script="{{ 'halo.slide-show.js' | asset_url }}"{% endif %} allow-transparent-header>
+        <div class="{% if container == '1170' %}container-1170{% elsif section.settings.container == '1470' %}container-1470{% elsif section.settings.container == '1570' %}container-1570{% elsif container == '1770' %}container-1770{% elsif container == '1920' %}container-1920{% elsif container == 'fullwidth'%}container-full{% else %}container{% endif %}">
         {%- if section.settings.enable_categories or section.settings.enable_banner -%}
         <div class="wrapper-category-banner{% if section.settings.enable_categories %} has-categories{% endif %}{% if section.settings.enable_banner %} has-banner{% endif %}">
         {%- endif -%}
@@ -26,14 +32,14 @@
                                 <li>
                                     <a class="item-menu"  href="{{ link.url }}">
                                         {% assign img = link.handle | downcase | replace: ' ', '-' | append: '.png' | file_url %}
-                                        <span class="icon-img image-zoom"><img src="{{ img }}" alt="{{ link.title }}" onError="style.display = 'none';" width="{{ img.width }}" height="{{ img.height }}" loading="lazy"/></span> <span class="text-menu">{{ link.title }}</span> </a>      
+                                        <span class="icon-img image-zoom"><img src="{{ img }}" alt="{{ link.title }}" onError="style.display = 'none';" width="{{ img.width }}" height="{{ img.height }}" {% unless settings.enable_layout_rtl %}loading="lazy"{% endunless %}/></span> <span class="text-menu">{{ link.title }}</span> </a>      
                                 </li>
                             {% endfor %}
                         </ul>
                     </div>
                 </div>
             {%- endif -%}
-            <div class="slideshow{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--fade-in{% endif %}" data-auto-video="{{ section.settings.auto_playvideo }}" {% if section.blocks.size > 1 %}data-init-slideshow data-arrows="{{arrow}}" data-dots="{{dots}}" data-autoplay="{{ autoplay }}" data-autoplay-speed="{{ autoplaySpeed }}" data-fade="{{ fade }}" {% endif %}>
+            <div class="slideshow{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--fade-in{% endif %}{% if show_dot_with_image %} show-dot-with-image{% endif %}" data-auto-video="{{ section.settings.auto_playvideo }}" {% if section.blocks.size > 1 %}data-init-slideshow data-arrows="{{arrow}}" data-dots="{{dots}}" data-autoplay="{{ autoplay }}" data-autoplay-speed="{{ autoplaySpeed }}" data-fade="{{ fade }}" {% endif %} data-dot-with-image="{% if show_dot_with_image %}true{% else %}false{% endif %}">
             {%- for block in section.blocks -%}
                 {%- if block.type == 'image' or block.type == 'video' -%}
                     {%- if block.type == 'image' -%}
@@ -71,7 +77,7 @@
                             assign lookbook_pos_3 = block.settings.lookbook_pos_3
                         -%}
                     {%- endif -%}
-                    <div class="item slide-block-{{block.id}}" id="block-{{block.id}}" data-index="{{forloop.index}}" data-style="{{ lookbook_style }}" data-show-lookbook-container>
+                <div class="item slide-block-{{block.id}}" id="block-{{block.id}}" data-index="{{forloop.index}}" data-style="{{ lookbook_style }}" data-show-lookbook-container{% if block.settings.image_for_dot != blank %} data-dot-img="{{ block.settings.image_for_dot | img_url: 'master' }}"{% endif %}>
                         {%- if block.type == 'image' -%}
                             {%- if check_lookbook -%}
                                 {%- if product_1 != blank or product_2 != blank or product_3 != blank -%}
@@ -96,7 +102,7 @@
                                                 {%- if img_url_mb.width >= 2000 -%}{{ img_url_mb | image_url: width: 2000 }} 2000w,{%- endif -%}
                                                 {%- if img_url_mb.width >= 2800 -%}{{ img_url_mb | image_url: width: 2800 }} 2800w{%- endif -%}"
                                                 sizes="{% if section.settings.image != blank and section.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif section.settings.image != blank %}50vw{% else %}100vw{% endif %}" {% unless settings.enable_lazyload and forloop.first == false %}src="{{ img_url_mb | image_url: width: 750 }}"{% endunless %} alt="{{ img_url_mb.alt | escape }}" width="{{ img_url_mb.width }}" height="{{ img_url_mb.width | divided_by: img_url_mb.aspect_ratio | round}}"
-                                                {%- if settings.enable_lazyload and forloop.first == false -%}class="lazyload" loading="lazy"{%- endif -%}
+                                                {%- if settings.enable_lazyload and forloop.first == false -%}class="lazyload" {% unless settings.enable_layout_rtl %}loading="lazy"{% endunless %}{%- endif -%}
                                                 {% unless img_url_mb.presentation.focal_point == '50.0% 50.0%' %}style="object-position: {{ img_url_mb.presentation.focal_point }}"{% endunless %}
                                             >
                                             {%- if settings.enable_lazyload and forloop.first == false -%}<span class="data-lazy-loading"></span>{%- endif -%}
@@ -121,16 +127,14 @@
                                                 {%- if img_url.width >= 2000 -%}{{ img_url | image_url: width: 2000 }} 2000w,{%- endif -%}
                                                 {%- if img_url.width >= 2800 -%}{{ img_url | image_url: width: 2800 }} 2800w{%- endif -%}"
                                                 sizes="{% if section.settings.image != blank and section.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif section.settings.image != blank %}50vw{% else %}100vw{% endif %}" {% unless settings.enable_lazyload and forloop.first == false %}src="{{ img_url | image_url: width: 750 }}"{% endunless %} alt="{{ img_url.alt  | escape }}" width="{{ img_url.width }}" height="{{ img_url.width | divided_by: img_url.aspect_ratio | round }}" 
-                                                {%- if settings.enable_lazyload and forloop.first == false -%}class="lazyload" loading="lazy"{%- endif -%}
+                                                {%- if settings.enable_lazyload and forloop.first == false -%}class="lazyload" {% unless settings.enable_layout_rtl %}loading="lazy"{% endunless %}{%- endif -%}
                                                 {% unless img_url.presentation.focal_point == '50.0% 50.0%' %}style="object-position: {{ img_url.presentation.focal_point }}"{% endunless %}
                                             >{%- if settings.enable_lazyload and forloop.first == false -%}<span class="data-lazy-loading"></span>{%- endif -%}</a>
                                     </div>
                                 {%- else -%}
-                                    {% if section.settings.enable_banner %}
-                                        <div class="not_img {% if block.settings.image_slide_mb != blank %} slide-pc{% endif %}" style="--height_not_img: 510px">740 x 510px</div>
-                                    {% else %}
-                                        <div class="not_img {% if block.settings.image_slide_mb != blank %} slide-pc{% endif %}" style="--height_not_img: 720px">1880 x 720px</div>
-                                    {% endif %}
+                                    <div class="placeholder{% if block.settings.image_slide_mb != blank %} slide-pc{% endif %}" style="--height_placeholder:{% if section.settings.enable_banner %} 510px{% else %} clamp(570px, calc(720 / 1920 * 100vw), 720px){% endif %};">
+                                        {{ 'hero-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+                                    </div>
                                 {%- endif -%}
 
                                 {%- if product_1 != blank or product_2 != blank or product_3 != blank -%}
@@ -164,25 +168,37 @@
                             </div>
                         {%- elsif block.type == 'video'-%}
                             {% if block.settings.style_video == 'youtube' %}
+                                {%- liquid
+                                    assign autoplay_youtube = 0
+                                    if forloop.first and section.settings.auto_playvideo
+                                        assign autoplay_youtube = 1
+                                    endif
+                                -%}
                                 <div data-video-youtube class="item slide-youtube embed-responsive item-video" id="slide-{{ block.id }}">
                                     <div class="fluid-width-video-wrapper">
-                                        <iframe class="youtube-player" id="player_{{ block.id }}" width="100%" height="100%" data-video-id="{{ block.settings.video_link }}" src="https://www.youtube.com/embed/{{ block.settings.video_link }}?enablejsapi=1&rel=0&autoplay=0&mute=1" frameborder="0" allowfullscreen=""></iframe>
+                                        <iframe class="youtube-player{% if block.settings.video_link_mb != blank %} slide-pc{% endif %}" id="player_{{ block.id }}" width="100%" height="100%" data-video-id="{{ block.settings.video_link }}" src="https://www.youtube.com/embed/{{ block.settings.video_link }}?enablejsapi=1&rel=0&autoplay={{ autoplay_youtube }}&mute=1" frameborder="0" allowfullscreen=""></iframe>
+                                        {%- if block.settings.video_link_mb != blank -%}
+                                            <iframe class="youtube-player slide-mobile" id="player_mb_{{ block.id }}" width="100%" height="100%" data-video-id="{{ block.settings.video_link_mb }}" src="https://www.youtube.com/embed/{{ block.settings.video_link_mb }}?enablejsapi=1&rel=0&autoplay={{ autoplay_youtube }}&mute=1" frameborder="0" allowfullscreen=""></iframe>
+                                        {%- endif -%}
                                     </div>
                                 </div>
-                                {% else %}
+                            {% else %}
                                 <div data-video-mp4 class="item slide-video item-video" id="slide-{{ block.id }}">
                                     <div class="fluid-width-video-wrapper">
-                                        <video class="video" muted playsinline preload="none" autoplay loop><source type="video/mp4" src="{{ block.settings.video_mp4_link }}"></video>
+                                        <video class="video{% if block.settings.video_mp4_link_mb != blank %} slide-pc{% endif %}" muted playsinline preload="none" autoplay loop><source type="video/mp4" src="{{ block.settings.video_mp4_link }}"></video>
+                                        {%- if block.settings.video_mp4_link_mb != blank -%}
+                                            <video class="video slide-mobile" muted playsinline preload="none" autoplay loop><source type="video/mp4" src="{{ block.settings.video_mp4_link_mb }}"></video>
+                                        {%- endif -%}
                                     </div>
                                 </div>
                             {% endif %}
                         {%- endif -%}
                         {%- if block.settings.heading != blank or block.settings.slide-des != blank or block.settings.button_slide != blank or section.settings.dots_shape == 'line' -%}
-                            <div class="slide-content content-box--absolute content-box--{{ block.settings.alignment }} text-{{ block.settings.text_alignment }} {% if block.settings.enable_custom_position %}custom_position{% endif %} {% if block.settings.enable_position_outside_image %}enable_position_outside_image{% endif %}" {% if block.settings.enable_custom_position %}style="--horizontal_position: {{ block.settings.custom_horizontal }}%;--vertical_position: {{ block.settings.custom_vertical }}%;--minus_horizontal_position: -{{ block.settings.custom_horizontal }}%;--minus_vertical_position: -{{ block.settings.custom_vertical }}%"{% endif %}>
+                            <div class="slide-content content-box--absolute content-box--{{ block.settings.alignment }} text-{{ block.settings.text_alignment }}{% if block.settings.text_alignment_mb != blank %} text-mb-{{ block.settings.text_alignment_mb }}{% endif %} {% if block.settings.enable_custom_position %}custom_position{% endif %} {% if block.settings.enable_position_outside_image %}enable_position_outside_image{% endif %}{% if block.settings.sub_heading_font == 'font_1' %} sub_heading_font_1{% endif %}" {% if block.settings.enable_custom_position %}style="--horizontal_position: {{ block.settings.custom_horizontal }}%;--vertical_position: {{ block.settings.custom_vertical }}%;--minus_horizontal_position: -{{ block.settings.custom_horizontal }}%;--minus_vertical_position: -{{ block.settings.custom_vertical }}%"{% endif %}>
                             {%- if block.settings.profile_name != blank or block.settings.profile_title != blank or block.settings.profile_picture != blank -%}
                                 <div class="slide-content__person slide-testimonial{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
                                     {%- if block.settings.profile_picture != blank -%}
-                                        <img class="slide-content__person profile-image" src="{{ block.settings.profile_picture | image_url: width: 720, height: 720 }}" width={{ block.settings.profile_picture.width }} height={{ block.settings.profile_picture.height }} loading="lazy" />
+                                        <img class="slide-content__person profile-image" src="{{ block.settings.profile_picture | image_url: width: 720, height: 720 }}" width={{ block.settings.profile_picture.width }} height={{ block.settings.profile_picture.height }} {% unless settings.enable_layout_rtl %}loading="lazy"{% endunless %} />
                                     {%- else -%}
                                         <div class="slide-content__person profile-image empty"></div>
                                     {%- endif -%}
@@ -201,46 +217,46 @@
                             {%- if block.settings.sub_title_position == 'sub_title_above' -%}
                                 {%- if block.settings.sub_heading != blank or block.settings.sub_heading_mb != blank -%}
                                     {%- if block.settings.sub_heading != blank -%}
-                                    <h3 class="slide-sub slide-pc border--{{ block.settings.border_sub_heading }}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 0;{% endif %}--slide-sub-font-size-style: {{ block.settings.font_size_sub_heading | append: 'px' }}; --slide-sub-color-style: {{ block.settings.color_sub_heading }}; --sub-heading-spacing-bottom-style: {{ block.settings.sub_heading_spacing_bottom | append: 'px' }}; --font-weight-sub-heading-style: {{ block.settings.font_weight_sub_heading }}"><span>{{ block.settings.sub_heading }}</span></h3>
+                                    <h3 class="slide-sub slide-pc border--{{ block.settings.border_sub_heading }}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 0;{% endif %}--slide-sub-font-size-style: {{ block.settings.font_size_sub_heading | append: 'px' }}; --slide-sub-color-style: {{ block.settings.color_sub_heading }}; --sub-heading-spacing-bottom-style: {{ block.settings.sub_heading_spacing_bottom | append: 'px' }}; --font-weight-sub-heading-style: {{ block.settings.font_weight_sub_heading }}; --font-sub-heading-type:{%- if block.settings.sub_heading_font == 'font_1' -%}var(--font-tab-type-1){%- else -%}var(--font-tab-type-2){%- endif -%}"><span>{{ block.settings.sub_heading }}</span></h3>
                                     {%- endif -%}
                                     {%- if block.settings.sub_heading_mb != blank -%}
-                                    <h3 class="slide-sub slide-mobile border--{{ block.settings.border_sub_heading_mb }}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 0;{% endif %}--sub-heading-spacing-bottom-style: {{ block.settings.sub_heading_spacing_bottom_mb | append: 'px' }}; --font-weight-sub-heading-style: {{ block.settings.font_weight_sub_heading_mb }}"><span>{{ block.settings.sub_heading_mb }}</span></h3>
+                                    <h3 class="slide-sub slide-mobile border--{{ block.settings.border_sub_heading_mb }}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 0;{% endif %}--sub-heading-spacing-bottom-style: {{ block.settings.sub_heading_spacing_bottom_mb | append: 'px' }}; --font-weight-sub-heading-style: {{ block.settings.font_weight_sub_heading_mb }};--slide-sub-color-style: {{ block.settings.color_sub_heading }};"><span>{{ block.settings.sub_heading_mb }}</span></h3>
                                     {%- endif -%}
                                 {%- endif -%}
                             {%- endif -%}
 
                             {%- if block.settings.heading != blank or block.settings.heading_mb != blank -%}
                                 {%- if block.settings.heading != blank -%}
-                                    <h2 class="slide-heading slide-pc {% if block.settings.enable_border_heading %}has-border{% endif %}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 1;{% endif %}{%- if block.settings.font_size_heading != blank -%}font-size: {{ block.settings.font_size_heading | append: 'px' }};line-height: {{ block.settings.line_height_heading | append: 'px' }};{%- endif -%}{%- if block.settings.color_heading != blank -%}color:{{ block.settings.color_heading }};{%- endif -%}font-style: {{ block.settings.font_style_heading }};--heading-spacing-bottom-style: {{ block.settings.heading_spacing_bottom | append: 'px' }}">{%- if block.settings.enable_border_heading -%}<span class="line" style="background-color: {{ block.settings.color_heading }}"></span>{%- endif -%}{{ block.settings.heading }}</h2>
-                            {%- endif -%}
-                            {%- if block.settings.heading_mb != blank -%}
-                                <h2 class="slide-heading slide-mobile{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 1;{% endif %}--heading-spacing-bottom-style: {{ block.settings.heading_spacing_bottom_mb | append: 'px' }}">{%- if block.settings.enable_border_heading -%}<span class="line" style="background-color: {{ block.settings.color_heading_mb }};"></span>{%- endif -%}{{ block.settings.heading_mb }}</h2>
-                            {%- endif -%}
+                                    <h2 class="slide-heading slide-pc {% if block.settings.enable_border_heading %}has-border{% endif %}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 1;{% endif %}{%- if block.settings.font_size_heading != blank -%}font-size: {% if show_dot_with_image and section.blocks.size > 1 %}clamp({{ block.settings.font_size_heading_mb | append: 'px' }}, calc({{ block.settings.font_size_heading }} / 1920 * 100vw), {{ block.settings.font_size_heading | append: 'px' }}){% else %}{{ block.settings.font_size_heading | append: 'px' }}{% endif %};line-height: {{ block.settings.line_height_heading | append: 'px' }};{%- endif -%}{%- if block.settings.color_heading != blank -%}color:{{ block.settings.color_heading }};{%- endif -%}font-style: {{ block.settings.font_style_heading }};--heading-spacing-bottom-style: {{ block.settings.heading_spacing_bottom | append: 'px' }}">{%- if block.settings.enable_border_heading -%}<span class="line" style="background-color: {{ block.settings.color_heading }}"></span>{%- endif -%}{{ block.settings.heading }}</h2>
+                                {%- endif -%}
+                                {%- if block.settings.heading_mb != blank -%}
+                                    <h2 class="slide-heading slide-mobile{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 1;{% endif %}--heading-spacing-bottom-style: {{ block.settings.heading_spacing_bottom_mb | append: 'px' }}">{%- if block.settings.enable_border_heading -%}<span class="line" style="background-color: {{ block.settings.color_heading_mb }};"></span>{%- endif -%}{{ block.settings.heading_mb }}</h2>
+                                {%- endif -%}
                             {%- endif -%}
 
                             {%- if block.settings.sub_title_position == 'sub_title_below' -%}
                                 {%- if block.settings.sub_heading != blank or block.settings.sub_heading_mb != blank -%}
                                     {%- if block.settings.sub_heading != blank -%}
-                                    <h3 class="slide-sub slide-pc border--{{ block.settings.border_sub_heading }}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 0;{% endif %}--slide-sub-font-size-style: {{ block.settings.font_size_sub_heading | append: 'px' }}; --slide-sub-color-style: {{ block.settings.color_sub_heading }}; --sub-heading-spacing-bottom-style: {{ block.settings.sub_heading_spacing_bottom | append: 'px' }}; --font-weight-sub-heading-style: {{ block.settings.font_weight_sub_heading }}"><span>{{ block.settings.sub_heading }}</span></h3>
+                                        <h3 class="slide-sub slide-pc border--{{ block.settings.border_sub_heading }}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 0;{% endif %}--slide-sub-font-size-style: {{ block.settings.font_size_sub_heading | append: 'px' }}; --slide-sub-color-style: {{ block.settings.color_sub_heading }}; --sub-heading-spacing-bottom-style: {{ block.settings.sub_heading_spacing_bottom | append: 'px' }}; --font-weight-sub-heading-style: {{ block.settings.font_weight_sub_heading }}"><span>{{ block.settings.sub_heading }}</span></h3>
                                     {%- endif -%}
                                     {%- if block.settings.sub_heading_mb != blank -%}
-                                    <h3 class="slide-sub slide-mobile border--{{ block.settings.border_sub_heading_mb }}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 0;{% endif %}--sub-heading-spacing-bottom-style: {{ block.settings.sub_heading_spacing_bottom_mb | append: 'px' }}; --font-weight-sub-heading-style: {{ block.settings.font_weight_sub_heading_mb }}"><span>{{ block.settings.sub_heading_mb }}</span></h3>
+                                        <h3 class="slide-sub slide-mobile border--{{ block.settings.border_sub_heading_mb }}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 0;{% endif %}--sub-heading-spacing-bottom-style: {{ block.settings.sub_heading_spacing_bottom_mb | append: 'px' }}; --font-weight-sub-heading-style: {{ block.settings.font_weight_sub_heading_mb }}"><span>{{ block.settings.sub_heading_mb }}</span></h3>
                                     {%- endif -%}
                                 {%- endif -%}
                             {%- endif -%}
 
                             {%- if block.settings.slide-des != blank or block.settings.slide-des-mb != blank -%}
                             {%- if block.settings.slide-des != blank -%}
-                                <p class="slide-text slide-pc{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 2;{% endif %}{%- if block.settings.font_size_des != blank -%}font-size: {{ block.settings.font_size_des | append: 'px' }};{%- endif -%}{%- if block.settings.color_des != blank -%}color: {{ block.settings.color_des }};{%- endif -%}--des-spacing-bottom-style: {{ block.settings.des_spacing_bottom | append: 'px' }}">{{ block.settings.slide-des }}</p>
+                                <p class="slide-text slide-pc{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 2;{% endif %}{%- if block.settings.font_size_des != blank -%}font-size: {{ block.settings.font_size_des | append: 'px' }};line-height:{{ block.settings.line_height_des | append: 'px' }};{%- endif -%}{%- if block.settings.color_des != blank -%}color: {{ block.settings.color_des }};{%- endif -%}--des-spacing-bottom-style: {{ block.settings.des_spacing_bottom | append: 'px' }}">{{ block.settings.slide-des }}</p>
                             {%- endif -%}
 
-                            {%- if block.settings.slide-des-mb != blank -%}
+                                {%- if block.settings.slide-des-mb != blank -%}
                                     <p class="slide-text slide-mobile{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" style="{% if settings.banner_animation == 'effect_fade_up' %}--animation-order: 2;{% endif %}--des-spacing-bottom-style: {{ block.settings.des_spacing_bottom_mb | append: 'px' }}">{{ block.settings.slide-des-mb }}</p>
-                            {%- endif -%}
+                                {%- endif -%}
                             {%- endif -%}
 
                             {%- if block.settings.button_slide != blank and block.settings.button_slide_2 != blank -%}
-                            <div class="grouped_btn--slider">
+                            <div class="grouped_btn--slider{% if block.settings.use_contrasting_colors %} contrasting_colors{% endif %}">
                             {%- endif -%}
 
                             {%- if block.settings.button_slide != blank -%}
@@ -275,7 +291,7 @@
                             {%- endif -%}
 
                             <style>
-                                .slide-block-{{ block.id }} .slide-content {width: {{ block.settings.content_width | append: 'px' }};padding-top: {{ block.settings.padding_vertical | minus: 5 | append: 'px' }};padding-bottom: {{ block.settings.padding_vertical | append: 'px' }}}
+                                .slide-block-{{ block.id }} .slide-content {width: {% if block.settings.enable_content_fullwidth %}100%{% else %}{% if show_dot_with_image and section.blocks.size > 1 %} clamp(300px, calc({{ block.settings.content_width }} / 1920 * 100vw), {{ block.settings.content_width | append: 'px' }}){% else %}{{ block.settings.content_width | append: 'px' }}{% endif %}{% endif %};padding-top: {{ block.settings.padding_vertical | minus: 5 | append: 'px' }};padding-bottom: {{ block.settings.padding_vertical | append: 'px' }}}
                                 .slide-block-{{ block.id }} .slide-content .slide-text {max-width: 100%;margin-bottom: {{ block.settings.des_spacing_bottom | append: 'px' }}}
                                 .slide-block-{{ block.id }} .slide-content .slide-sub {
                                     {%- if block.settings.enable_border_line -%}font-family: var(--font-body-family);{%- endif -%}
@@ -294,14 +310,18 @@
                                 .slide-block-{{ block.id }} .slide-content .slide-button{min-width: {{ block.settings.min_width_banner_button | append: 'px' }}}
 
                                 {%- if block.settings.enable_button_link -%}
-                                    .slide-block-{{ block.id }} .slide-content .slide-button{background: none; border: none; box-shadow: none; padding: 0;text-decoration: underline;text-underline-offset: 0.3em;min-width: 78px}
+                                    .slide-block-{{ block.id }} .slide-content .slide-button{background: none; border: none; box-shadow: none; padding: 0;text-decoration: underline;text-underline-offset: 0.2em;min-width: 78px}
                                     .slide-block-{{ block.id }} .slide-content .slide-button:hover{background: none; border: none; box-shadow: none}
                                     {%- unless block.settings.enable_underline -%}
                                         .slide-block-{{ block.id }} .slide-content .slide-button{text-decoration: none; font-size: {{ block.settings.font_size_link | append: 'px' }};line-height: 1;}
                                     {%- endunless -%}
                                 {%- endif -%}
                                 .slide-block-{{ block.id }} .slide-content .slide-button { {% if block.settings.enable_button_link == false %}background:{% if block.settings.bg_button_gradient != blank %}{{ block.settings.bg_button_gradient }}{% else %}{{ block.settings.bg_button }}{% endif %};border-color:{{ block.settings.border_button }};{% endif %}color:{{ block.settings.color_button }}}
+                                .slide-block-{{ block.id }} .slide-content .contrasting_colors .slide-button+.slide-button { {% if block.settings.enable_button_link == false %}background:{% if block.settings.bg_button_gradient_hover != blank %}{{ block.settings.bg_button_gradient_hover }}{% else %}{{ block.settings.bg_button_hover }}{% endif %};border-color:{{ block.settings.border_button_hover }};{% endif %}color:{{ block.settings.color_button_hover }}}
+                                .btn_1_br_outside .slide-block-{{ block.id }} .slide-content .slide-button:after {border-color:{{ block.settings.border_button }};}
                                 .slide-block-{{ block.id }} .slide-content .slide-button:hover { {% if block.settings.enable_button_link == false %}background:{% if block.settings.bg_button_gradient_hover != blank %}{{ block.settings.bg_button_gradient_hover }}{% else %}{{ block.settings.bg_button_hover }}{% endif %};border-color:{{ block.settings.border_button_hover }};{% endif %}color:{{ block.settings.color_button_hover }}}
+                                .slide-block-{{ block.id }} .slide-content .contrasting_colors .slide-button+.slide-button:hover { {% if block.settings.enable_button_link == false %}background:{% if block.settings.bg_button_gradient != blank %}{{ block.settings.bg_button_gradient }}{% else %}{{ block.settings.bg_button }}{% endif %};border-color:{{ block.settings.border_button }};{% endif %}color:{{ block.settings.color_button }}}
+                                .btn_1_br_outside .slide-block-{{ block.id }} .slide-content .slide-button:hover:after {border-color:{{ block.settings.border_button_hover }};}
                                 
                                 .slide-block-{{ block.id }} .slide-content .slide-button:hover svg{fill: {{ block.settings.color_button_hover }}}
 
@@ -317,15 +337,32 @@
                                         left: var(--spacing-sides);flex-direction: column;
                                     {%- elsif section.settings.dots_direction == 'right' -%}
                                         left: calc(100% - var(--spacing-sides));flex-direction: column;
+                                    {%- elsif show_dot_with_image -%}
+                                        flex-direction: column;
                                     {%- else -%}
                                         flex-direction: row;
                                     {%- endif -%}
                                 } 
                                 .section-block-{{ section.id }} .slideshow .slick-dots li {margin: 0;width: 12px;height: 12px}
+                                {%- if block.settings.content_width == 650 -%}
+                                    .section-block-{{ section.id }} .slideshow .slick-dots{gap: 10px}
+                                    .section-block-{{ section.id }} .slideshow .slick-dots li{width: 8px;height: 8px;line-height: 1}
+                                    .section-block-{{ section.id }} .slideshow .slick-dots li button{width: 8px;height: 8px}
+                                {%- endif -%}
+
                                 {%- if section.settings.dots_direction == 'bottom' and section.settings.dots_shape == 'line' -%}
                                     .section-block-{{ section.id }} .slideshow .slick-dots li {margin: 0;width: 32px;height: 3px}
                                     .section-block-{{ section.id }} .slideshow .slick-dots li button {border-radius: 0;width: 100%;height: 100%}
                                 {%- endif -%}
+
+                                {% if show_dot_with_image %}
+                                    .section-block-{{ section.id }} .slideshow .slick-dots li {width: {{ section.settings.dot_width }}px;height: {{ section.settings.dot_width }}px}
+                                    .section-block-{{ section.id }} .slideshow .slick-dots li.slick-active {width: {{ section.settings.dot_width_active }}px;height: {{ section.settings.dot_width_active }}px}
+                                    .section-block-{{ section.id }} .slick-dots li button {width: {{ section.settings.dot_width }}px;height: {{ section.settings.dot_width }}px}
+                                    .section-block-{{ section.id }} .slick-dots li.slick-active button {width: {{ section.settings.dot_width_active }}px;height: {{ section.settings.dot_width_active }}px}
+                                    .section-block-{{ section.id }} .slideshow .slick-dots {--spacing-sides: {{ section.settings.dot_width_active | divided_by: 2 | plus: 45 }}px} 
+                                {% endif %}
+                              
                                 .style-dots-2 .section-block-{{ section.id }} .slideshow .slick-dots li {height: 24px;line-height: 24px}
                                 .style-dots-2 .slick-dots li:first-child, .style-dots-2 .slider-dots li:first-child {margin-left: 5px}
                                 .style-dots-2 .slick-dots li:last-child, .style-dots-2 .slider-dots li:last-child {margin-right: 5px}
@@ -342,9 +379,17 @@
                                             .slide-block-{{ block.id }} .item-video+.slide-content {display: none;}
                                         {%- endunless -%}
                                     {%- endif -%}
-                                }
-
-                                @media (max-width: 767px){
+                                    .slide-block-{{ block.id }} .slide-content.enable_position_outside_image{position: initial;width: 100%;transform: none}
+                                    .show-dot-with-image .slide-block-{{ block.id }} .slide-content.enable_position_outside_image{padding: 40px 15px 34px;}
+                                    .show-dot-with-image .slide-block-{{ block.id }} .slide-content.enable_position_outside_image .slide-button{width:100%;}
+                                    {%- if block.settings.enable_position_outside_image -%}
+                                        .slideshow .slick-dots{bottom: 0}
+                                    {%- endif -%}
+                                    {%- if block.settings.content_width == 650 -%}
+                                        .slide-block-{{ block.id }} .grouped_btn--slider .slide-button:first-child{margin-bottom: 5px}
+                                        .slide-block-{{ block.id }} .grouped_btn--slider .slide-button{padding-top: 10px !important;padding-bottom: 10px !important}
+                                    {%- endif -%}
+                                    
                                     .slide-block-{{ block.id }} .slide-testimonial {margin-bottom: 15px}
                                     .slide-block-{{ block.id }} .slide-content .slide-heading {color: {{ block.settings.color_heading_mb }} !important;font-style: {{ block.settings.font_style_heading_mb }} !important}
                                     .slide-block-{{ block.id }} .slide-content .slide-sub {color: {{ block.settings.color_sub_heading_mb }} !important;font-size: {{ block.settings.font_size_sub_heading_mb | append: 'px' }} !important}
@@ -352,7 +397,7 @@
                                     .slide-block-{{ block.id }} .slide-content .slide-text {color: {{ block.settings.color_des_mb }} !important;font-size: {{ block.settings.font_size_des_mb | append: 'px' }} !important}
                                     .slide-block-{{ block.id }} .slide-content__person .profile-name-and-title .profile-name {font-size: {{ block.settings.profile_name_fs_mb | append: "px" }}}
                                     .slide-block-{{ block.id }} .slide-content__person .profile-name-and-title .profile-title {font-size: {{ block.settings.profile_title_fs_mb | append: "px" }}}
-                                    .section-block-{{ section.id }} .slideshow .slick-dots {--spacing-sides: 20px;gap: 10px;left: 50%;transform: translateX(-50%);bottom: 7%;flex-direction: row}
+                                    .section-block-{{ section.id }} .slideshow:not([data-dot-with-image="true"]) .slick-dots {--spacing-sides: 20px;gap: 10px;left: 50%;transform: translateX(-50%);bottom: 7%;flex-direction: row}
                                     {%- if section.settings.dots == 'number' -%}
                                         {%- if block.settings.enable_position_outside_image -%}
                                             .section-block-{{ section.id }} .slideshow .slick-arrow,
@@ -361,19 +406,56 @@
                                             .section-block-{{ section.id }} .slideshow .slick-dots li .dot {color: {{ block.settings.color_heading_mb }}}
                                         {%- endif -%}
                                     {%- endif -%}
+                                    .slide-block-{{ block.id }} .slide-content.sub_heading_font_1{
+                                        padding: 105px 10px 30px;
+                                    }
                                 }
+
+                                @media (max-width: 767px){
+                                    {% if show_dot_with_image %}
+                                        .section-block-{{ section.id }} .slideshow .slick-dots li {width: {{ section.settings.dot_width_mb }}px;height: {{ section.settings.dot_width_mb }}px}
+                                        .section-block-{{ section.id }} .slideshow .slick-dots li.slick-active {width: {{ section.settings.dot_width_active_mb }}px;height: {{ section.settings.dot_width_active_mb }}px}
+                                        .section-block-{{ section.id }} .slick-dots li button {width: {{ section.settings.dot_width_mb }}px;height: {{ section.settings.dot_width_mb }}px}
+                                        .section-block-{{ section.id }} .slick-dots li.slick-active button {width: {{ section.settings.dot_width_active_mb }}px;height: {{ section.settings.dot_width_active_mb }}px}
+                                        .section-block-{{ section.id }} .slideshow .slick-dots {--spacing-sides: {{ section.settings.dot_width_active_mb | divided_by: 2 | plus: 20 }}px}
+                                        .section-block-{{ section.id }} .grouped_btn--slider:has(.button+.button) .slide-button{display: block;width: 100%;}
+                                        .section-block-{{ section.id }} .grouped_btn--slider:has(.button+.button) .slide-button:first-child{margin-bottom: 10px;}
+                                        body[allow-transparency] .shopify-section:first-child .slide-block-{{ block.id }} .slide-content {top: 54.2%;padding-left: 20px;padding-right: 20px;}
+                                        .slide-block-{{ block.id }} .slide-content .slide-text {line-height: {{ block.settings.font_size_des_mb | plus: 7 }}px !important;}
+                                    {% endif %}
+                                }
+                                
+                                {% if show_dot_with_image %}
                                 @media (max-width: 551px){
-                                    .slide-block-{{ block.id }} .slide-content.enable_position_outside_image{position: initial;transform: none}
-                                    {%- if block.settings.enable_position_outside_image -%}
-                                        .slideshow .slick-dots{bottom: 0}
-                                    {%- endif -%}
-                                    .slide-block-{{ block.id }} .slide-content.text-left{text-align: left}
-                                    .slide-block-{{ block.id }} .slide-content.text-right{text-align: right}
+                                    .section-block-{{ section.id }} .show-dot-with-image.slideshow .slick-dots{gap: 10px;}
+                                    .show-dot-with-image .slide-block-{{ block.id }} .slide-content.enable_position_outside_image{padding: 50px 20px 40px;}
+                                    .show-dot-with-image .slide-block-{{ block.id }} .slide-content.enable_position_outside_image .slide-button{
+                                        display: block;
+                                        min-width: unset;
+                                        padding-top: 15px !important;
+                                        padding-bottom: 16px !important;
+                                    }
                                 }
+                                {% endif %} 
+
                                 @media (min-width: 768px){
                                     .slide-block-{{ block.id }} .slide-content {background-color: {{ block.settings.bg_color_content }}}
                                     {%- if block.settings.enable_border_line -%}
                                         .slide-block-{{ block.id }} .content-box--absolute:before {border-color: {{ block.settings.border_color_content }};display: block}
+                                    {%- endif -%}
+                                    {%- if block.settings.content_width == 650 -%}
+                                        .slide-block-{{ block.id }} .grouped_btn--slider .slide-button:first-child{margin-left: 0}
+                                    {%- endif -%}
+                                }
+                                @media (min-width: 1025px){
+                                    {%- if block.settings.content_width == 650 -%}
+                                        .slide-block-{{ block.id }} .grouped_btn--slider .slide-button:first-child{margin-right: 25px}
+                                    {%- endif -%}
+                                }
+                                @media (min-width: 1200px){
+                                    {%- if block.settings.enable_content_fullwidth -%}
+                                        .slide-block-{{ block.id }} .slide-content.content-box--left{left: 0}
+                                        .slide-block-{{ block.id }} .slide-content.content-box--right{right: 0}
                                     {%- endif -%}
                                 }
                                 @media (min-width: 768px) and (max-width: 1024px){
@@ -383,11 +465,18 @@
                                     {%- if block.settings.border_sub_heading == 'solid' -%}
                                         .slide-block-{{block.id}} .images-contain .adaptive_height.slide-pc{padding-top: 36.595745% !important}
                                         .slide-block-{{ block.id }} .slide-pc .slide-image img{min-height: 290px;width: 100%;object-fit: cover}
+                                        .btn_1_br_outside .slide-block-{{block.id}} .images-contain .adaptive_height.slide-pc{padding-top: 48.595745% !important}
                                     {%- endif -%}
                                     {%- if section.settings.dots_direction == 'left' or section.settings.dots_direction == 'right' -%} 
                                         .slide-block-{{ block.id }} .slide-content {width: 680px}
                                         .section-block-{{ section.id }} .slideshow .slick-dots {--spacing-sides: 35px}
                                     {%- endif -%}
+                              
+                                    {% if show_dot_with_image %}
+                                        .section-block-{{ section.id }} .slideshow .slick-dots {--spacing-sides: {{ section.settings.dot_width_active | divided_by: 2 | plus: 25 }}px} 
+                                        .slide-block-{{ block.id }} .slide-content {width: auto;top: 50%;left: 50%;transform: translate(-50%, -50%);}
+                                        .slide-block-{{ block.id }} .slide-content .slide-button{min-width: {{ block.settings.min_width_banner_button | minus: 50 }}px}
+                                    {% endif %}
                                 }
                             </style>
                         </div>
@@ -405,10 +494,17 @@
                         <div class="banner{% if section.settings.image_behavior != 'none' %} o-hidden{% endif %}">
                             {%- if block.settings.image != blank -%}
                                 <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} class="adaptive_height image" style="padding-top: {{ 1 | divided_by: preview_img.aspect_ratio | times: 100 }}%">
-                                    <img {% if settings.enable_lazyload %}data-{% endif %}srcset="{{ img_url }}" {% unless settings.enable_lazyload %}src="{{ img_url }}"{% endunless %} alt="{{ preview_img.alt | escape }}" width="{{ preview_img.width }}" height="{{ preview_img.width | divided_by: preview_img.aspect_ratio }}" {% if settings.enable_lazyload and forloop.first == false %}class="lazyload" loading="lazy" {% elsif forloop.first %}src="{{ img_url }}"{% endif %}>
-                                    {% if settings.enable_lazyload and forloop.first == false %}<span class="data-lazy-loading"></span>{% endif %}</a>
+                                    <img {% if settings.enable_lazyload %}data-{% endif %}srcset="{{ img_url }}" {% unless settings.enable_lazyload %}src="{{ img_url }}"{% endunless %} alt="{{ preview_img.alt | escape }}" width="{{ preview_img.width }}" height="{{ preview_img.width | divided_by: preview_img.aspect_ratio }}" {% if settings.enable_lazyload and forloop.first == false %}class="lazyload" {% unless settings.enable_layout_rtl %}loading="lazy"{% endunless %} {% elsif forloop.first %}src="{{ img_url }}"{% endif %}>
+                                    {% if settings.enable_lazyload and forloop.first == false %}<span class="data-lazy-loading"></span>{% endif %}
+                                </a>
                             {%- else -%}
-                                <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} class="banner"><div class="not_img" style="--height_not_img: 250px">250 x 250px</div></a>
+                                <a {% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} class="banner">
+                                    {%- assign placeholder_image_index = forloop.index0 | modulo: 4 | plus: 1 -%}
+                                    {%- assign placeholder_image = 'product-apparel-' | append: placeholder_image_index -%}
+                                    <div class="placeholder" style="--height_placeholder: 250px;">
+                                        {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
+                                    </div>
+                                </a>
                             {%- endif -%}
                         </div>
                     {%- endfor -%}
@@ -422,9 +518,6 @@
         <div class="home-category-filter-sections{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--fade-in{% endif %}">{% render 'multi-level-category' %}</div>
         {%- endif -%}
     </div>
-    {%- if settings.banner_animation == 'none' and section.settings.image_behavior == 'zoom-in' -%}
-        <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
     <style>
         {%- liquid
             assign slideshow_background =  section.settings.slideshow_background
@@ -458,8 +551,15 @@
 
             assign padding_full_width = section.settings.padding_full_width
         -%}
-
-        @media (min-width: 1366px) {
+        @media (min-width: 1500px) {
+            {%- if section.settings.dots == 'shape' -%}
+                {%- if section.blocks.size > 1 -%}
+                    .section-block-{{ section.id }} .slick-arrow.slick-prev {left: calc({{ position_slick_arrow }} - 2%) !important}
+                    .section-block-{{ section.id }} .slick-arrow.slick-next {right: calc({{ position_slick_arrow }} - 2%) !important}
+                {%- endif -%}
+            {%- endif -%}
+        }
+        @media (min-width: 1680px) {
             {%- if section.settings.dots == 'shape' -%}
                 {%- if section.blocks.size > 1 -%}
                     .section-block-{{ section.id }} .slick-arrow.slick-prev {left: {{ position_slick_arrow }} !important}
@@ -467,11 +567,22 @@
                 {%- endif -%}
             {%- endif -%}
         }
+        @media (min-width: 2100px) {
+            {%- if section.blocks.size > 1 and custom_arrow -%}
+                .section-block-{{ section.id }} .slick-arrow {top: calc({{ position_vertical_slick_arrow }} + 1%) !important}
+            {%- endif -%}
+        }
         @media (min-width: 1200px) {
             .section-block-{{ section.id }} {padding-top: {{ mg_top_desktop | append: 'px' }};padding-bottom: {{ mg_bottom_desktop | append: 'px' }}}
             .section-block-{{ section.id }} .slideshow .slick-dots {bottom: {{ section.settings.position_slick_dots }}}
         }
         @media (min-width: 1025px) {
+            {%- if section.settings.dots == 'shape' -%}
+                {%- if section.blocks.size > 1 -%}
+                    .section-block-{{ section.id }} .slick-arrow.slick-prev {left: calc({{ position_slick_arrow }} - 2%) !important}
+                    .section-block-{{ section.id }} .slick-arrow.slick-next {right: calc({{ position_slick_arrow }} - 2%) !important}
+                {%- endif -%}
+            {%- endif -%}
             {%- if section.settings.container == 'fullwidth' -%}
                 .section-block-{{ section.id }} .container-full {padding-left: {{ padding_full_width | append: 'px' }};padding-right: {{ padding_full_width | append: 'px' }}}
             {%- endif -%}
@@ -479,12 +590,13 @@
             {%- if section.settings.container == 'custom' -%}
                 .section-block-{{ section.id }} .slideshow {max-width: {{ custom_max_width | append: 'px' }};margin-left: auto;margin-right: auto}
             {%- endif -%}
+            {% if section.settings.dots_shape == 'number' %}
+            .section-block-{{ section.id }} .slideshow .slick-dots li:hover button:before {width: 80px}
+            .section-block-{{ section.id }} .slideshow .slick-dots li:hover button{padding-right: 90px}
+        {% endif %}
         }
         @media (min-width: 768px) and (max-width: 1199px) {
             .section-block-{{ section.id }} {padding-top: {{ mg_top_tablet | append: 'px' }};padding-bottom: {{ mg_bottom_tablet | append: 'px' }}}
-        }
-        @media (max-width: 767px) {
-            .section-block-{{ section.id }} {padding-top: {{ mg_top_mobile | append: 'px' }};padding-bottom: {{ mg_bottom_mobile | append: 'px' }}}
         }
         {%- if section.blocks.size > 1 and custom_arrow -%}
             .section-block-{{ section.id }} .slick-arrow {width: {{ arrow_width | append: 'px' }};height: {{ arrow_height | append: 'px' }};color: {{ arrow_color }};border-color: {{ arrow_border_color }};background-color: {{ arrow_bg_color }};top: {{ position_vertical_slick_arrow }};{%- if section.settings.dots == 'shape' -%}transform: translateY(-{{ position_vertical_slick_arrow }}) !important{%- endif -%}}
@@ -535,6 +647,58 @@
                 }
             {%- endif -%}
         {%- endif -%}
+
+        {% if section.settings.dots_shape == 'number' %}
+            .section-block-{{ section.id }} .slideshow .slick-dots {bottom: auto;top: 50%;left: auto;right: 50px;transform: translateY(-50%);gap: 5px;}
+            .section-block-{{ section.id }} .slideshow .slick-dots li {display: block;width: auto;height: auto;padding: 0;margin: 0;border-radius: 0;text-align: right;}
+            .section-block-{{ section.id }} .slideshow .slick-dots li button {font-size: calc(var(--font-body-size) + 2px);color: {{ section.settings.dots_color }};border: none;border-radius: 0;width: auto;height: auto;position: relative;transition: var(--anchor-transition);background-color: transparent !important;border-bottom: 1px solid transparent !important;line-height: 40px;}
+            .section-block-{{ section.id }} .slideshow .slick-dots li button:before {content: "";display: block;position: absolute;top: 20px;left: auto;right: 0;width: 0;height: 2px;z-index: 1;opacity: 1;visibility: visible;border: 0;border-radius: 0;line-height: unset;font-size: 0;font-weight: unset;background: currentColor;transition: all ease .3s;}
+            .section-block-{{ section.id }} .slideshow .slick-dots li button:after {content: none;}
+            .section-block-{{ section.id }} .slideshow .slick-dots li.slick-active button:before {width: 80px;}
+            .section-block-{{ section.id }} .slideshow .slick-dots li.slick-active button {padding-right: 90px;}
+        {% endif %}
+
+        @media (max-width: 1630px) {
+            {%- if section.settings.dots == 'shape' -%}
+                {%- if section.blocks.size > 1 and custom_arrow -%}
+                    .section-block-{{ section.id }} .slick-arrow{top: calc({{ position_vertical_slick_arrow }} - 1%)}
+                {%- endif -%}
+            {%- endif -%}
+        }
+
+        @media (max-width: 1500px) {
+            {%- if section.settings.dots == 'shape' -%}
+                {%- if section.blocks.size > 1 and custom_arrow -%}
+                    .section-block-{{ section.id }} .slick-arrow{top: calc({{ position_vertical_slick_arrow }} - 2%)}
+                {%- endif -%}
+            {%- endif -%}
+        }
+
+        @media (max-width: 991px) {
+            {% if section.settings.dots_shape == 'number' %}
+                .section-block-{{ section.id }} .slideshow .slick-dots {right: 20px;gap: 0;}
+                .section-block-{{ section.id }} .slideshow .slick-dots li.slick-active button:before {width: 50px;}
+                .section-block-{{ section.id }} .slideshow .slick-dots li.slick-active button {padding-right: 60px;}
+            {%- endif -%}
+        }
+
+        @media (max-width: 767px) {
+            .section-block-{{ section.id }} {padding-top: {{ mg_top_mobile | append: 'px' }};padding-bottom: {{ mg_bottom_mobile | append: 'px' }}}
+            {% if section.settings.dots_shape == 'number' %}
+                .section-block-{{ section.id }} .slideshow .slick-dots {right: 10px;flex-direction: column}
+                .section-block-{{ section.id }} .slideshow .slick-dots li button{font-size: var(--font-body-size)}
+                .section-block-{{ section.id }} .slideshow .slick-dots li.slick-active button:before {width: 20px;height: 1px}
+                .section-block-{{ section.id }} .slideshow .slick-dots li.slick-active button {padding-right: 25px}
+            {%- endif -%}
+        }
+
+        @media (max-width: 551px) {
+            .section-block-{{ section.id }} .item-video .fluid-width-video-wrapper {padding-top: {{ section.settings.video_height_mb }} !important}
+            .section-block-{{ section.id }} .item-video .fluid-width-video-wrapper video,
+            .section-block-{{ section.id }} .item-video .fluid-width-video-wrapper iframe {
+                object-fit: cover;
+            }
+        }
         
         @media (min-width: 768px) {
             {%- if section.settings.dots_opacity -%}
@@ -569,8 +733,20 @@
                         "label": "t:sections.layout.container.option4"
                     },
                     {
+                        "value": "1470",
+                        "label": "t:sections.layout.container.option5"
+                    },
+                    {
+                        "value": "1570",
+                        "label": "t:sections.layout.container.option6"
+                    },
+                    {
                         "value": "1770",
                         "label": "t:sections.layout.container.option3"
+                    },
+                    {
+                        "value": "1920",
+                        "label": "t:sections.layout.container.option9"
                     },
                     {
                         "value": "fullwidth",
@@ -583,11 +759,536 @@
                 "id": "padding_full_width",
                 "label": "t:sections.layout.container.padding_full_width",
                 "min": 0,
-                "max": 70,
+                "max": 100,
                 "step": 5,
                 "unit": "t:sections.layout.fontsize.fontsize_title.unit",
-                "default": 0,
-                "info": "t:sections.layout.container.info_full_width"
+                "default": 0
+            },
+            {
+                "type" : "color",
+                "id" : "slideshow_background",
+                "label" : "t:settings_schema.colors.settings.colors_name.background_color_2"
+            },
+            {
+                "type" : "color_background",
+                "id" : "slideshow_background_gradient",
+                "label" : "t:settings_schema.colors.settings.colors_name.background_color_gradient"
+            },
+            {
+                "type" : "image_picker",
+                "id" : "slideshow_background_image",
+                "label" : "t:settings_schema.colors.settings.colors_name.background_image"
+            },
+            {
+                "type": "header",
+                "content": "t:sections.product_block.settings.slider.content"
+            },
+            {
+                "type": "checkbox",
+                "id": "autoplay",
+                "label": "t:sections.slide-show.settings.autoplay",
+                "default": true
+            },
+            {
+                "type": "select",
+                "id": "slideshow_speed",
+                "label": "t:sections.slide-show.settings.slideshow_speed.option",
+                "options": [
+                    { "value": "3000", "label": "t:sections.slide-show.settings.slideshow_speed.option1" },
+                    { "value": "4000", "label": "t:sections.slide-show.settings.slideshow_speed.option2" },
+                    { "value": "5000", "label": "t:sections.slide-show.settings.slideshow_speed.option3" },
+                    { "value": "6000", "label": "t:sections.slide-show.settings.slideshow_speed.option4" },
+                    { "value": "7000", "label": "t:sections.slide-show.settings.slideshow_speed.option5" },
+                    { "value": "8000", "label": "t:sections.slide-show.settings.slideshow_speed.option6" },
+                    { "value": "9000", "label": "t:sections.slide-show.settings.slideshow_speed.option7" },
+                    { "value": "10000", "label": "t:sections.slide-show.settings.slideshow_speed.option8" }
+                ],
+                "default": "5000"
+            },
+            {
+                "type": "select",
+                "id": "slideshow_transition",
+                "label": "t:sections.slide-show.settings.slideshow_transition.option",
+                "options": [
+                  {
+                    "value": "false",
+                    "label": "t:sections.slide-show.settings.slideshow_transition.option1"
+                  },
+                  {
+                    "value": "true",
+                    "label": "t:sections.slide-show.settings.slideshow_transition.option2"
+                  }
+                ],
+                "default": "true"
+            },
+            {
+                "type": "paragraph",
+                "content": "t:sections.slide-show.settings.dots.content"
+            },
+            {
+                "type": "select",
+                "id": "dots",
+                "label": "t:sections.slide-show.settings.dots.option",
+                "default": "shape",
+                "options": [
+                    {
+                        "value": "none",
+                        "label": "t:settings_schema.typography.settings.text_transform.options__1"
+                    },
+                    {
+                        "value": "shape",
+                        "label": "t:sections.slide-show.settings.dots.option3"
+                    },
+                    {
+                        "value": "number",
+                        "label": "t:sections.slide-show.settings.dots.option4"
+                    }
+                ]
+            },
+            {
+                "type": "color",
+                "id": "dots_color",
+                "label": "t:settings_schema.colors.settings.colors_name.background_color",
+                "default": "#707979"
+            },
+            {
+                "type": "color",
+                "id": "dots_border_color",
+                "label": "t:settings_schema.colors.settings.colors_name.border_color",
+                "default": "#707979"
+            },
+            {
+                "type": "color",
+                "id": "dots_active_color",
+                "label": "t:settings_schema.colors.settings.colors_name.background_hover",
+                "default": "transparent"
+            },
+            {
+                "type": "color",
+                "id": "dots_active_border_color",
+                "label": "t:settings_schema.colors.settings.colors_name.border_hover",
+                "default": "#505656"
+            },
+            {
+                "type": "select",
+                "id": "dots_direction",
+                "label": "t:sections.slide-show.settings.dots.dots_direction",
+                "options": [
+                    {
+                        "value": "left",
+                        "label": "t:settings_schema.typography.settings.type_button_font.left"
+                    },
+                    {
+                        "value": "bottom",
+                        "label": "t:settings_schema.typography.settings.type_button_font.center"
+                    },
+                    {
+                        "value": "right",
+                        "label": "t:settings_schema.typography.settings.type_button_font.right"
+                    }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "dots_shape",
+                "label": "t:sections.slide-show.settings.dots.dots_shape.name",
+                "default": "disc",
+                "options": [
+                    {
+                        "label": "t:sections.slide-show.settings.dots.dots_shape.label__1",
+                        "value": "disc"
+                    },
+                    {
+                        "label": "t:sections.slide-show.settings.dots.dots_shape.label__2",
+                        "value": "line" 
+                    },
+                    {
+                        "label": "t:sections.slide-show.settings.dots.dots_shape.label__3",
+                        "value": "number" 
+                    }
+                ],
+                "info": "t:sections.slide-show.settings.dots.dots_shape.info"
+            },
+            {
+                "type" : "text",
+                "id" : "position_slick_dots",
+                "label" : "t:sections.slide-show.settings.dots.position_slick_dots",
+                "default" : "34px"
+            },
+            {
+                "type": "checkbox",
+                "id": "dots_opacity",
+                "label": "t:sections.slide-show.settings.dots.dots_opacity",
+                "default": false
+            },
+            {
+                "type": "checkbox",
+                "id": "dot_with_image",
+                "label": "Show dot with image",
+                "info": "Only works when the navigation dots on desktop is 'Show dots with shape' and the dots style is 'Disc'",
+                "default": false
+            },
+            {
+                "type": "range",
+                "id": "dot_width",
+                "label": "Dots size",
+                "max": 130,
+                "min": 30,
+                "step": 1,
+                "unit": "px",
+                "info": "Only applicable for 'Show dot with image'.",
+                "default": 66
+            },
+            {
+                "type": "range",
+                "id": "dot_width_active",
+                "label": "Dots size active",
+                "max": 130,
+                "min": 30,
+                "step": 1,
+                "unit": "px",
+                "info": "Only applicable for 'Show dot with image'.",
+                "default": 130
+            },
+            {
+                "type": "range",
+                "id": "dot_width_mb",
+                "label": "Dots size on mobile",
+                "max": 70,
+                "min": 10,
+                "step": 1,
+                "unit": "px",
+                "info": "Only applicable for 'Show dot with image'.",
+                "default": 38
+            },
+            {
+                "type": "range",
+                "id": "dot_width_active_mb",
+                "label": "Dots size active on mobile",
+                "max": 70,
+                "min": 10,
+                "step": 1,
+                "unit": "px",
+                "info": "Only applicable for 'Show dot with image'.",
+                "default": 65
+            },
+            {
+                "type": "paragraph",
+                "content": "t:sections.slide-show.settings.dots.content_2"
+            },
+            {
+                "type": "checkbox",
+                "id": "arrow_active",
+                "label": "t:sections.slide-show.settings.arrows.arrow_active",
+                "default": true
+            },
+            {
+                "type": "checkbox",
+                "id": "enable_custom_arrow",
+                "label": "t:sections.slide-show.settings.arrows.custom_arrow"
+            },
+            {
+                "type": "range",
+                "id": "arrow_width",
+                "label": "t:settings_schema.general.settings.style_dots.dots_width",
+                "max": 100,
+                "min": 10,
+                "step": 1,
+                "unit": "px",
+                "default": 35
+            },
+            {
+                "type": "range",
+                "id": "arrow_height",
+                "label": "t:settings_schema.general.settings.style_dots.dots_height",
+                "max": 100,
+                "min": 10,
+                "step": 1,
+                "unit": "px",
+                "default": 35
+            },
+            {
+                "type": "range",
+                "id": "arrow_size_icon",
+                "label": "t:settings_schema.general.settings.style_arrows.options__3",
+                "max": 100,
+                "min": 10,
+                "step": 1,
+                "unit": "px",
+                "default": 17
+            },
+            {
+                "type": "color",
+                "id": "arrow_color",
+                "label": "t:settings_schema.typography.settings.typography.icon_color",
+                "default": "#666d6d"
+            },
+            {
+                "type": "color",
+                "id": "arrow_border_color",
+                "label": "t:settings_schema.colors.settings.colors_name.border_color",
+                "default": "#666d6d"
+            },
+            {
+                "type": "color",
+                "id": "arrow_bg_color",
+                "label": "t:settings_schema.colors.settings.colors_name.background_color_2",
+                "default": "#fff"
+            },
+            {
+                "type": "color",
+                "id": "arrow_color_hover",
+                "label": "t:settings_schema.typography.settings.typography.icon_color_hover"
+            },
+            {
+                "type": "color",
+                "id": "arrow_border_color_hover",
+                "label": "t:settings_schema.colors.settings.colors_name.border_hover"
+            },
+            {
+                "type": "color",
+                "id": "arrow_bg_color_hover",
+                "label": "t:settings_schema.colors.settings.colors_name.background_hover"
+            },
+            {
+                "type" : "text",
+                "id" : "position_slick_arrow",
+                "label" : "t:sections.slide-show.settings.arrows.position_slick_arrow",
+                "default" : "10%"
+            },
+            {
+                "type" : "text",
+                "id" : "position_vertical_slick_arrow",
+                "label" : "t:sections.slide-show.settings.arrows.position_vertical_slick_arrow",
+                "default" : "50%"
+            },
+            {
+              "type": "header",
+              "content": "t:sections.main-product.settings.general.animation"
+            },
+            {
+              "type": "select",
+              "id": "image_behavior",
+              "options": [
+                {
+                  "value": "none",
+                  "label": "t:settings_schema.typography.settings.text_transform.options__1"
+                },
+                {
+                  "value": "ambient",
+                  "label": "t:sections.main-product.settings.general.image_behavior.option__1"
+                },
+                {
+                  "value": "zoom-in",
+                  "label": "t:sections.main-product.settings.general.image_behavior.option__3"
+                }
+              ],
+              "default": "none",
+              "info": "t:sections.main-product.settings.general.image_behavior.info",
+              "label": "t:sections.main-product.settings.general.image_behavior.label"
+            },
+            {
+                "type": "header",
+                "content": "t:sections.image-banner.blocks.smallImg.settings.video.content"
+            },
+            {
+                "type": "text",
+                "id": "video_height",
+                "label": "t:sections.slide-show.settings.video.video_height",
+                "default": "41.7%",
+                "info": "t:sections.slide-show.settings.video.info_video_height"
+            },
+            {
+                "type": "text",
+                "id": "video_height_mb",
+                "label": "t:sections.video.settings.video_height.label_1",
+                "default": "41.7%",
+                "info": "t:sections.slide-show.settings.video.info_video_height"
+            },
+            {
+                "type": "checkbox",
+                "id": "auto_playvideo",
+                "label": "t:sections.slide-show.settings.video.auto_playvideo",
+                "default": true
+            },
+            {
+                "type": "header",
+                "content": "t:sections.slide-show.settings.categories.content"
+            },
+            {
+                "type": "checkbox",
+                "id": "enable_categories",
+                "label": "t:sections.slide-show.settings.categories.enable_categories",
+                "default": false
+            },
+            {
+                "type": "text",
+                "id": "text_categories",
+                "label": "t:sections.slide-show.settings.categories.title",
+                "default": "Shop by categories"
+            },
+            {
+                "type": "color",
+                "id": "title_color",
+                "label": "t:settings_schema.typography.settings.typography.title_color",
+                "default": "#fff"
+            },
+            {
+                "type": "color",
+                "id": "bg_title",
+                "label": "t:sections.slide-show.settings.categories.title_bg_color",
+                "default": "#fd6506"
+            },
+            {
+                "type": "color",
+                "id": "text_icon_color",
+                "label": "t:settings_schema.typography.settings.typography.text_color",
+                "default": "#202020" 
+            },
+            {
+                "type": "link_list",
+                "id": "menu_category",
+                "label": "t:sections.slide-show.settings.categories.select_menu",
+                "info": "t:sections.slide-show.settings.categories.info__1"
+            },
+            {
+                "type": "header",
+                "content": "t:settings_schema.multiple_layouts.settings.general.select_banner_right"
+            },
+            {
+                "type": "checkbox",
+                "id": "enable_banner",
+                "label": "t:sections.slide-show.settings.categories.enable_banner",
+                "default": false
+            },
+            {
+                "type": "header",
+                "content": "t:sections.main_lookbook_page.settings.header__2"
+            },
+            {
+                "type": "select",
+                "id": "lookbook_style",
+                "label": "t:sections.main_lookbook_page.settings.style",
+                "default": "1",
+                "options": [
+                    {
+                        "value": "1",
+                        "label": "t:sections.main_lookbook_page.settings.style_1"
+                    },
+                    {
+                        "value": "2",
+                        "label": "t:sections.main_lookbook_page.settings.style_2"
+                    }
+                ]
+            },
+            {
+                "type": "checkbox",
+                "id": "enable_lookbook_width",
+                "label": "t:sections.collection_lookbook.settings.label_13",
+                "default": false
+            },
+            {
+                "type": "range",
+                "id": "lookbook_width",
+                "label": "t:sections.collection_lookbook.settings.label_14",
+                "min": 200,
+                "max": 500,
+                "step": 5,
+                "default": 250,
+                "unit": "t:sections.layout.fontsize.fontsize_title.unit"
+            },
+            {
+                "type": "range",
+                "id": "dot_desktop_size",
+                "label": "t:sections.collection_lookbook.settings.label_1",
+                "min": 10,
+                "max": 50,
+                "step": 1,
+                "default": 24,
+                "unit": "t:sections.layout.fontsize.fontsize_title.unit"
+            },
+            {
+                "type": "range",
+                "id": "dot_mobile_size",
+                "label": "t:sections.collection_lookbook.settings.label_2",
+                "min": 10,
+                "max": 50,
+                "step": 1,
+                "default": 16,
+                "unit": "t:sections.layout.fontsize.fontsize_title.unit"
+            },
+            {
+                "type": "color",
+                "id": "dot_inner_color",
+                "label": "t:sections.collection_lookbook.settings.label_7",
+                "default": "#000"
+            },
+            {
+                "type": "color",
+                "id": "dot_shadow_color",
+                "label": "t:sections.collection_lookbook.settings.label_3",
+                "default": "rgba(255, 255, 255, 0.5)"
+            },
+            {
+                "type": "color",
+                "id": "dot_outer_color",
+                "label": "t:sections.collection_lookbook.settings.label_4",
+                "default": "#fff"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_dot_number",
+                "label": "t:sections.collection_lookbook.settings.label_5",
+                "default": false
+            },
+            {
+                "type": "checkbox",
+                "id": "show_dot_number_mobile",
+                "label": "t:sections.collection_lookbook.settings.label_6",
+                "default": false
+            },
+            {
+                "type": "checkbox",
+                "id": "show_plus_icon",
+                "label": "t:sections.collection_lookbook.settings.label_19",
+                "info": "t:sections.collection_lookbook.settings.info__1",
+                "default": false
+            },
+            {
+                "type": "range",
+                "id": "number_desktop_size",
+                "label": "t:sections.collection_lookbook.settings.label_8",
+                "min": 10,
+                "max": 50,
+                "step": 1,
+                "default": 24,
+                "unit": "t:sections.layout.fontsize.fontsize_title.unit"
+            },
+            {
+                "type": "range",
+                "id": "number_mobile_size",
+                "label": "t:sections.collection_lookbook.settings.label_9",
+                "min": 10,
+                "max": 50,
+                "step": 1,
+                "default": 16,
+                "unit": "t:sections.layout.fontsize.fontsize_title.unit"
+            },
+            {
+                "type": "select",
+                "id": "lookbook_truncate",
+                "label": "t:sections.collection_lookbook.settings.label_16",
+                "default": "1",
+                "options": [
+                    {
+                        "value": "1",
+                        "label": "t:sections.collection_lookbook.settings.option_3"
+                    },
+                    {
+                        "value": "2",
+                        "label": "t:sections.collection_lookbook.settings.option_4"
+                    }
+                ]
             },
             {
                 "type": "header",
@@ -656,465 +1357,6 @@
                 "step": 5,
                 "unit": "t:sections.layout.mg_desktop.unit",
                 "default": 50
-            },
-            {
-                "type" : "color",
-                "id" : "slideshow_background",
-                "label" : "t:settings_schema.colors.settings.colors_name.background_color"
-            },
-            {
-                "type" : "color_background",
-                "id" : "slideshow_background_gradient",
-                "label" : "t:settings_schema.colors.settings.colors_name.background_color_gradient"
-            },
-            {
-                "type" : "image_picker",
-                "id" : "slideshow_background_image",
-                "label" : "t:settings_schema.colors.settings.colors_name.background_image"
-            },
-            {
-                "type": "header",
-                "content": "t:sections.slide-show.settings.content"
-            },
-            {
-                "type": "checkbox",
-                "id": "autoplay",
-                "label": "t:sections.slide-show.settings.autoplay",
-                "default": true
-            },
-            {
-                "type": "select",
-                "id": "slideshow_speed",
-                "label": "t:sections.slide-show.settings.slideshow_speed.option",
-                "options": [
-                    { "value": "3000", "label": "t:sections.slide-show.settings.slideshow_speed.option1" },
-                    { "value": "4000", "label": "t:sections.slide-show.settings.slideshow_speed.option2" },
-                    { "value": "5000", "label": "t:sections.slide-show.settings.slideshow_speed.option3" },
-                    { "value": "6000", "label": "t:sections.slide-show.settings.slideshow_speed.option4" },
-                    { "value": "7000", "label": "t:sections.slide-show.settings.slideshow_speed.option5" },
-                    { "value": "8000", "label": "t:sections.slide-show.settings.slideshow_speed.option6" },
-                    { "value": "9000", "label": "t:sections.slide-show.settings.slideshow_speed.option7" },
-                    { "value": "10000", "label": "t:sections.slide-show.settings.slideshow_speed.option8" }
-                ],
-                "default": "5000"
-            },
-            {
-                "type": "select",
-                "id": "slideshow_transition",
-                "label": "t:sections.slide-show.settings.slideshow_transition.option",
-                "options": [
-                  {
-                    "value": "false",
-                    "label": "t:sections.slide-show.settings.slideshow_transition.option1"
-                  },
-                  {
-                    "value": "true",
-                    "label": "t:sections.slide-show.settings.slideshow_transition.option2"
-                  }
-                ],
-                "default": "true"
-            },
-            {
-                "type": "select",
-                "id": "dots",
-                "label": "t:sections.slide-show.settings.dots.option",
-                "default": "shape",
-                "options": [
-                    {
-                        "value": "none",
-                        "label": "t:settings_schema.typography.settings.text_transform.options__1"
-                    },
-                    {
-                        "value": "shape",
-                        "label": "t:sections.slide-show.settings.dots.option3"
-                    },
-                    {
-                        "value": "number",
-                        "label": "t:sections.slide-show.settings.dots.option4"
-                    }
-                ]
-            },
-            {
-                "type": "color",
-                "id": "dots_color",
-                "label": "t:settings_schema.colors.settings.colors_name.background_color",
-                "default": "#707979"
-            },
-            {
-                "type": "color",
-                "id": "dots_border_color",
-                "label": "t:settings_schema.colors.settings.colors_name.border_color",
-                "default": "#707979"
-            },
-            {
-                "type": "color",
-                "id": "dots_active_color",
-                "label": "t:settings_schema.colors.settings.colors_name.background_hover",
-                "default": "transparent"
-            },
-            {
-                "type": "color",
-                "id": "dots_active_border_color",
-                "label": "t:settings_schema.colors.settings.colors_name.border_hover",
-                "default": "#505656"
-            },
-            {
-                "type": "select",
-                "id": "dots_direction",
-                "label": "t:sections.slide-show.settings.dots.dots_direction",
-                "info": "t:sections.slide-show.settings.dots.dots_direction_info",
-                "options": [
-                    {
-                        "value": "bottom",
-                        "label": "t:sections.slide-show.settings.dots.dots_default"
-                    },
-                    {
-                        "value": "left",
-                        "label": "t:sections.slide-show.settings.dots.dots_left"
-                    },
-                    {
-                        "value": "right",
-                        "label": "t:sections.slide-show.settings.dots.dots_right"
-                    }
-                ]
-            },
-            {
-                "type": "select",
-                "id": "dots_shape",
-                "label": "t:sections.slide-show.settings.dots.dots_shape.name",
-                "default": "disc",
-                "options": [
-                    {
-                        "label": "t:sections.slide-show.settings.dots.dots_shape.label__1",
-                        "value": "disc"
-                    },
-                    {
-                        "label": "t:sections.slide-show.settings.dots.dots_shape.label__2",
-                        "value": "line" 
-                    }
-                ],
-                "info": "t:sections.slide-show.settings.dots.dots_shape.info"
-            },
-            {
-                "type" : "text",
-                "id" : "position_slick_dots",
-                "label" : "t:sections.slide-show.settings.dots.position_slick_dots",
-                "default" : "34px"
-            },
-            {
-                "type": "checkbox",
-                "id": "dots_opacity",
-                "label": "t:sections.slide-show.settings.dots.dots_opacity",
-                "default": false
-            },
-            {
-                "type": "checkbox",
-                "id": "arrow_active",
-                "label": "t:sections.slide-show.settings.arrows.arrow_active",
-                "default": true
-            },
-            {
-                "type": "checkbox",
-                "id": "enable_custom_arrow",
-                "label": "t:sections.slide-show.settings.arrows.custom_arrow"
-            },
-            {
-                "type": "range",
-                "id": "arrow_width",
-                "label": "t:settings_schema.general.settings.style_arrows.width",
-                "max": 100,
-                "min": 10,
-                "step": 1,
-                "unit": "px",
-                "default": 35
-            },
-            {
-                "type": "range",
-                "id": "arrow_height",
-                "label": "t:settings_schema.general.settings.style_arrows.height",
-                "max": 100,
-                "min": 10,
-                "step": 1,
-                "unit": "px",
-                "default": 35
-            },
-            {
-                "type": "range",
-                "id": "arrow_size_icon",
-                "label": "t:settings_schema.general.settings.style_arrows.options__3",
-                "max": 100,
-                "min": 10,
-                "step": 1,
-                "unit": "px",
-                "default": 17
-            },
-            {
-                "type": "color",
-                "id": "arrow_color",
-                "label": "t:settings_schema.colors.settings.colors_name.color",
-                "default": "#666d6d"
-            },
-            {
-                "type": "color",
-                "id": "arrow_border_color",
-                "label": "t:settings_schema.colors.settings.colors_name.border_color",
-                "default": "#666d6d"
-            },
-            {
-                "type": "color",
-                "id": "arrow_bg_color",
-                "label": "t:settings_schema.colors.settings.colors_name.background_color",
-                "default": "#fff"
-            },
-            {
-                "type": "color",
-                "id": "arrow_color_hover",
-                "label": "t:settings_schema.colors.settings.colors_name.color_hover"
-            },
-            {
-                "type": "color",
-                "id": "arrow_border_color_hover",
-                "label": "t:settings_schema.colors.settings.colors_name.border_hover"
-            },
-            {
-                "type": "color",
-                "id": "arrow_bg_color_hover",
-                "label": "t:settings_schema.colors.settings.colors_name.background_hover"
-            },
-            {
-                "type" : "text",
-                "id" : "position_slick_arrow",
-                "label" : "t:sections.slide-show.settings.arrows.position_slick_arrow",
-                "default" : "10%"
-            },
-            {
-                "type" : "text",
-                "id" : "position_vertical_slick_arrow",
-                "label" : "t:sections.slide-show.settings.arrows.position_vertical_slick_arrow",
-                "default" : "50%"
-            },
-            {
-              "type": "header",
-              "content": "t:sections.main-product.settings.general.animation"
-            },
-            {
-              "type": "select",
-              "id": "image_behavior",
-              "options": [
-                {
-                  "value": "none",
-                  "label": "t:settings_schema.typography.settings.text_transform.options__1"
-                },
-                {
-                  "value": "ambient",
-                  "label": "t:sections.main-product.settings.general.image_behavior.option__1"
-                },
-                {
-                  "value": "zoom-in",
-                  "label": "t:sections.main-product.settings.general.image_behavior.option__3"
-                }
-              ],
-              "default": "none",
-              "label": "t:sections.main-product.settings.general.image_behavior.label"
-            },
-            {
-                "type": "header",
-                "content": "t:sections.slide-show.settings.video.content"
-            },
-            {
-                "type": "text",
-                "id": "video_height",
-                "label": "t:sections.slide-show.settings.video.video_height",
-                "default": "41.7%",
-                "info": "t:sections.slide-show.settings.video.info_video_height"
-            },
-            {
-                "type": "checkbox",
-                "id": "auto_playvideo",
-                "label": "t:sections.slide-show.settings.video.auto_playvideo",
-                "default": true
-            },
-            {
-                "type": "header",
-                "content": "t:sections.slide-show.settings.categories.content"
-            },
-            {
-                "type": "checkbox",
-                "id": "enable_categories",
-                "label": "t:sections.slide-show.settings.categories.enable_categories",
-                "default": false
-            },
-            {
-                "type": "text",
-                "id": "text_categories",
-                "label": "t:sections.slide-show.settings.categories.title",
-                "default": "Shop by categories"
-            },
-            {
-                "type": "color",
-                "id": "title_color",
-                "label": "t:sections.slide-show.settings.categories.title_color",
-                "default": "#fff"
-            },
-            {
-                "type": "color",
-                "id": "bg_title",
-                "label": "t:sections.slide-show.settings.categories.title_bg_color",
-                "default": "#fd6506"
-            },
-            {
-                "type": "color",
-                "id": "text_icon_color",
-                "label": "t:settings_schema.typography.settings.typography.text_color",
-                "default": "#202020" 
-            },
-            {
-                "type": "link_list",
-                "id": "menu_category",
-                "label": "t:sections.slide-show.settings.categories.select_menu"
-            },
-            {
-                "type": "header",
-                "content": "t:sections.slide-show.settings.categories.content_banner"
-            },
-            {
-                "type": "checkbox",
-                "id": "enable_banner",
-                "label": "t:sections.slide-show.settings.categories.enable_banner",
-                "default": false
-            },
-            {
-                "type": "header",
-                "content": "t:sections.main_lookbook_page.settings.header__2"
-            },
-            {
-                "type": "select",
-                "id": "lookbook_style",
-                "label": "t:sections.main_lookbook_page.settings.style",
-                "default": "1",
-                "options": [
-                    {
-                        "value": "1",
-                        "label": "t:settings_schema.typography.settings.typography.style_1"
-                    },
-                    {
-                        "value": "2",
-                        "label": "t:settings_schema.typography.settings.typography.style_2"
-                    }
-                ]
-            },
-            {
-                "type": "header",
-                "content": "t:sections.collection_lookbook.settings.content_1"
-            },
-            {
-                "type": "checkbox",
-                "id": "enable_lookbook_width",
-                "label": "t:sections.collection_lookbook.settings.label_13",
-                "default": false
-            },
-            {
-                "type": "range",
-                "id": "lookbook_width",
-                "label": "t:sections.collection_lookbook.settings.label_14",
-                "min": 200,
-                "max": 500,
-                "step": 5,
-                "default": 250,
-                "unit": "t:sections.layout.fontsize.fontsize_title.unit"
-            },
-            {
-                "type": "range",
-                "id": "dot_desktop_size",
-                "label": "t:sections.collection_lookbook.settings.label_1",
-                "min": 10,
-                "max": 50,
-                "step": 1,
-                "default": 24,
-                "unit": "t:sections.layout.fontsize.fontsize_title.unit"
-            },
-            {
-                "type": "range",
-                "id": "dot_mobile_size",
-                "label": "t:sections.collection_lookbook.settings.label_2",
-                "min": 10,
-                "max": 50,
-                "step": 1,
-                "default": 16,
-                "unit": "t:sections.layout.fontsize.fontsize_title.unit"
-            },
-            {
-                "type": "color",
-                "id": "dot_shadow_color",
-                "label": "t:sections.collection_lookbook.settings.label_3",
-                "default": "rgba(255, 255, 255, 0.5)"
-            },
-            {
-                "type": "color",
-                "id": "dot_outer_color",
-                "label": "t:sections.collection_lookbook.settings.label_4",
-                "default": "#fff"
-            },
-            {
-                "type": "checkbox",
-                "id": "show_dot_number",
-                "label": "t:sections.collection_lookbook.settings.label_5",
-                "default": false
-            },
-            {
-                "type": "checkbox",
-                "id": "show_dot_number_mobile",
-                "label": "t:sections.collection_lookbook.settings.label_6",
-                "default": false
-            },
-            {
-                "type": "checkbox",
-                "id": "show_plus_icon",
-                "label": "Show Plus Icon",
-                "info": "Not compatible with dot number on both desktop and mobile",
-                "default": false
-            },
-            {
-                "type": "color",
-                "id": "dot_inner_color",
-                "label": "t:sections.collection_lookbook.settings.label_7",
-                "default": "#000"
-            },
-            {
-                "type": "range",
-                "id": "number_desktop_size",
-                "label": "t:sections.collection_lookbook.settings.label_8",
-                "min": 10,
-                "max": 50,
-                "step": 1,
-                "default": 24,
-                "unit": "t:sections.layout.fontsize.fontsize_title.unit"
-            },
-            {
-                "type": "range",
-                "id": "number_mobile_size",
-                "label": "t:sections.collection_lookbook.settings.label_9",
-                "min": 10,
-                "max": 50,
-                "step": 1,
-                "default": 16,
-                "unit": "t:sections.layout.fontsize.fontsize_title.unit"
-            },
-            {
-                "type": "select",
-                "id": "lookbook_truncate",
-                "label": "t:sections.collection_lookbook.settings.label_16",
-                "default": "1",
-                "options": [
-                    {
-                        "value": "1",
-                        "label": "1"
-                    },
-                    {
-                        "value": "2",
-                        "label": "2"
-                    }
-                ]
             }
         ],
         "blocks" : [
@@ -1125,81 +1367,65 @@
                     {
                         "type": "image_picker",
                         "id": "image_slide",
-                        "label" : "t:sections.slide-show.blocks.image.image_slide",
+                        "label" : "t:sections.header.settings.mega_menu.banner__img",
                         "info": "t:sections.slide-show.blocks.image.info_image_slide"
                     },
                     {
                         "type": "image_picker",
                         "id": "image_slide_mb",
-                        "label" : "t:sections.slide-show.blocks.image.image_slide_mb",
+                        "label" : "t:sections.image-banner.blocks.image.settings.image.label__2",
                         "info": "t:sections.slide-show.blocks.image.info_image_slide_mb"
                     },
                     {
+                        "type": "image_picker",
+                        "id": "image_for_dot",
+                        "label" : "t:sections.slide-show.blocks.image_for_dot.label_1",
+                        "info": "t:sections.slide-show.blocks.image_for_dot.info_1"
+                    },
+                    {
                         "type": "header",
-                        "content": "t:sections.slide-show.blocks.image.slider_layout.content"
+                        "content": "t:sections.image-banner.blocks.image.settings.header__2.content_layout"
                     },
                     {
                         "type": "select",
                         "id": "alignment",
-                        "label": "t:sections.slide-show.blocks.image.slider_layout.alignment.option",
+                        "label": "t:settings_schema.someone_purchase.settings.general.label__2",
                         "default": "left",
+                        "info": "t:sections.slide-show.blocks.image.slider_layout.info__1",
                         "options": [
                         {
                             "value": "left",
-                            "label": "t:sections.product_block.settings.general.options__7"
+                            "label": "t:settings_schema.typography.settings.type_button_font.left"
                         },
                         {
                             "value": "center",
-                            "label": "t:sections.product_block.settings.general.options__8"
+                            "label": "t:settings_schema.typography.settings.type_button_font.center"
                         },
                         {
                             "value": "right",
-                            "label": "t:sections.product_block.settings.general.options__9"
+                            "label": "t:settings_schema.typography.settings.type_button_font.right"
                         }]
                     },
                     {
                         "type": "checkbox",
                         "id": "enable_custom_position",
-                        "label" : "t:sections.slide-show.blocks.image.enable_custom_position",
-                        "info": "t:sections.slide-show.blocks.image.info_enable_custom_position"
+                        "label" : "t:sections.slide-show.blocks.image.enable_custom_position_content"
                     },
                     {
                         "type": "text",
                         "id": "custom_horizontal",
-                        "label" : "t:sections.slide-show.blocks.image.custom_horizontal",
-                        "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                        "label" : "t:sections.slide-show.settings.arrows.position_slick_arrow"
                     },
                     {
                         "type": "text",
                         "id": "custom_vertical",
-                        "label" : "t:sections.slide-show.blocks.image.custom_vertical",
-                        "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                        "label" : "t:sections.slide-show.settings.arrows.position_vertical_slick_arrow"
                     },
                     {
                         "type": "checkbox",
                         "id": "enable_position_outside_image",
                         "label" : "t:sections.slide-show.blocks.image.enable_content_outside",
-                        "default": false,
-                        "info": "t:sections.slide-show.blocks.image.enable_content_outside_info"
-                    },
-                    {
-                        "type": "select",
-                        "id": "text_alignment",
-                        "label": "t:sections.slide-show.blocks.image.slider_layout.alignment.option_1",
-                        "options": [
-                        {
-                            "value": "left",
-                            "label": "t:sections.product_block.settings.general.options__7"
-                        },
-                        {
-                            "value": "center",
-                            "label": "t:sections.product_block.settings.general.options__8"
-                        },
-                        {
-                            "value": "right",
-                            "label": "t:sections.product_block.settings.general.options__9"
-                        }],
-                        "default": "center"
+                        "default": false
                     },
                     {
                         "type": "checkbox",
@@ -1227,14 +1453,57 @@
                         "default": 475
                     },
                     {
-                        "type": "color",
-                        "id": "bg_color_content",
-                        "label" : "t:sections.slide-show.blocks.image.slider_layout.bg_color_content"
+                        "type": "select",
+                        "id": "text_alignment",
+                        "label": "t:sections.slide-show.blocks.image.slider_layout.alignment.option_2",
+                        "options": [
+                        {
+                            "value": "left",
+                            "label": "t:settings_schema.typography.settings.type_button_font.left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "t:settings_schema.typography.settings.type_button_font.center"
+                        },
+                        {
+                            "value": "right",
+                            "label": "t:settings_schema.typography.settings.type_button_font.right"
+                        }],
+                        "default": "center"
+                    },
+                    {
+                        "type": "select",
+                        "id": "text_alignment_mb",
+                        "label": "t:sections.slide-show.blocks.image.slider_layout.alignment.option_3",
+                        "options": [
+                        {
+                            "value": "left",
+                            "label": "t:settings_schema.typography.settings.type_button_font.left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "t:settings_schema.typography.settings.type_button_font.center"
+                        },
+                        {
+                            "value": "right",
+                            "label": "t:settings_schema.typography.settings.type_button_font.right"
+                        }],
+                        "default": "center"
+                    },
+                    {
+                        "type": "checkbox",
+                        "id": "enable_content_fullwidth",
+                        "label" : "t:sections.slide-show.blocks.image.slider_layout.enable_content_full"
                     },
                     {
                         "type": "color",
                         "id": "border_color_content",
                         "label" : "t:sections.slide-show.blocks.image.slider_layout.border_color_content"
+                    },
+                    {
+                        "type": "color",
+                        "id": "bg_color_content",
+                        "label" : "t:sections.slide-show.blocks.image.slider_layout.bg_color_content"
                     },
                     {
                         "type": "header",
@@ -1246,19 +1515,33 @@
                         "label": "t:sections.slide-show.blocks.image.slide_testimonial.profile_pic"
                     },
                     {
+                        "type": "range",
+                        "id": "profile_spacing_bottom",
+                        "label": "t:settings_schema.product_card.settings.product_title.label__8",
+                        "default": 50,
+                        "min": 10,
+                        "max": 100,
+                        "step": 1,
+                        "unit": "t:sections.layout.fontsize.fontsize_title.unit"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "t:sections.slide-show.blocks.image.slide_testimonial.author_name"
+                    },
+                    {
                         "type": "text",
                         "id": "profile_name",
-                        "label": "t:sections.slide-show.blocks.image.slide_testimonial.profile_name"
+                        "label": "t:sections.slide-show.blocks.image.slide_testimonial.author_name"
                     },
                     {
                         "type": "color",
                         "id": "profile_name_color",
-                        "label": "t:sections.slide-show.blocks.image.slide_testimonial.profile_name_color"
+                        "label": "t:settings_schema.typography.settings.typography.text_color"
                     },
                     {
                         "type": "range",
                         "id": "profile_name_fs",
-                        "label": "t:sections.slide-show.blocks.image.slide_testimonial.profile_name_fs",
+                        "label": "t:settings_schema.typography.settings.font_size.label",
                         "min": 10,
                         "max": 100,
                         "step": 1,
@@ -1268,7 +1551,7 @@
                     {
                         "type": "range",
                         "id": "profile_name_fs_mb",
-                        "label": "t:sections.slide-show.blocks.image.slide_testimonial.profile_name_fs_mb",
+                        "label": "t:settings_schema.typography.settings.font_size.label_mb",
                         "min": 10,
                         "max": 100,
                         "step": 1,
@@ -1278,7 +1561,7 @@
                     {
                         "type": "select",
                         "id": "profile_name_fw",
-                        "label": "t:sections.slide-show.blocks.image.slide_testimonial.profile_name_fw",
+                        "label": "t:settings_schema.typography.settings.font_weight.label",
                         "default": "normal",
                         "options": [
                             {
@@ -1306,6 +1589,10 @@
                                 "label": "t:settings_schema.typography.settings.font_weight.options__6"
                             }
                         ]
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "t:sections.slide-show.blocks.image.slide_testimonial.profile_title"
                     },
                     {
                         "type": "text",
@@ -1315,12 +1602,12 @@
                     {
                         "type": "color",
                         "id": "profile_title_color",
-                        "label": "t:sections.slide-show.blocks.image.slide_testimonial.profile_title_color"
+                        "label": "t:settings_schema.typography.settings.typography.text_color"
                     },
                     {
                         "type": "range",
                         "id": "profile_title_fs",
-                        "label": "t:sections.slide-show.blocks.image.slide_testimonial.profile_title_fs",
+                        "label": "t:settings_schema.typography.settings.font_size.label",
                         "min": 10,
                         "max": 100,
                         "step": 1,
@@ -1330,7 +1617,7 @@
                     {
                         "type": "range",
                         "id": "profile_title_fs_mb",
-                        "label": "t:sections.slide-show.blocks.image.slide_testimonial.profile_title_fs_mb",
+                        "label": "t:settings_schema.typography.settings.font_size.label_mb",
                         "min": 10,
                         "max": 100,
                         "step": 1,
@@ -1340,7 +1627,7 @@
                     {
                         "type": "select",
                         "id": "profile_title_fw",
-                        "label": "t:sections.slide-show.blocks.image.slide_testimonial.profile_title_fw",
+                        "label": "t:settings_schema.typography.settings.font_weight.label",
                         "default": "normal",
                         "options": [
                             {
@@ -1368,16 +1655,6 @@
                                 "label": "t:settings_schema.typography.settings.font_weight.options__6"
                             }
                         ]
-                    },
-                    {
-                        "type": "range",
-                        "id": "profile_spacing_bottom",
-                        "label": "t:sections.slide-show.blocks.image.slide_testimonial.spacing_bottom",
-                        "default": 50,
-                        "min": 10,
-                        "max": 100,
-                        "step": 1,
-                        "unit": "t:sections.layout.fontsize.fontsize_title.unit"
                     },
                     {
                         "type": "header",
@@ -1412,6 +1689,21 @@
                         "step": 1,
                         "unit": "t:sections.layout.fontsize.fontsize_title.unit",
                         "default": 20
+                    },
+                    {
+                        "type": "select",
+                        "id": "sub_heading_font",
+                        "label": "t:sections.slide-show.blocks.image.slider_content.sub_heading_font_family",
+                        "options": [
+                        {
+                            "value": "font_1",
+                            "label": "t:settings_schema.typography.settings.font_family__1.content"
+                        },
+                        {
+                            "value": "font_2",
+                            "label": "t:settings_schema.typography.settings.font_family__2.content"
+                        }],
+                        "default": "font_2"
                     },
                     {
                         "type": "select",
@@ -1462,7 +1754,7 @@
                     {
                         "type": "select",
                         "id": "sub_title_position",
-                        "label": "t:settings_schema.typography.settings.typography.sub_title_position",
+                        "label": "t:sections.slide-show.blocks.image.slider_content.position_sub_heading",
                         "default": "sub_title_above",
                         "options": [
                         {
@@ -1521,7 +1813,7 @@
                         "id": "font_size_heading",
                         "label": "t:sections.slide-show.blocks.image.slider_content.font_size_heading",
                         "min": 10,
-                        "max": 100,
+                        "max": 110,
                         "step": 1,
                         "unit": "t:sections.layout.fontsize.fontsize_title.unit",
                         "default": 40
@@ -1531,7 +1823,7 @@
                         "id": "line_height_heading",
                         "label": "t:sections.slide-show.blocks.image.slider_content.line_height_heading",
                         "min": 10,
-                        "max": 100,
+                        "max": 110,
                         "step": 1,
                         "unit": "t:sections.layout.fontsize.fontsize_title.unit",
                         "default": 40
@@ -1555,13 +1847,13 @@
                     {
                         "type" : "textarea",
                         "id" : "slide-des",
-                        "label" : "t:settings_schema.newsletter_popup.settings.general.label__7",
+                        "label" : "t:sections.image-banner.blocks.image.settings.content.label__2",
                         "default": "Quisquemos sodales suscipit tortor ditaemcos condimentum de cosmo lacus meleifend menean diverra loremous."
                     },               
                     {
                         "type": "range",
                         "id": "font_size_des",
-                        "label": "t:sections.slide-show.blocks.image.slider_content.font_size_des",
+                        "label": "t:settings_schema.typography.settings.typography.des_font_size",
                         "min": 10,
                         "max": 100,
                         "step": 1,
@@ -1570,8 +1862,18 @@
                     },
                     {
                         "type": "range",
+                        "id": "line_height_des",
+                        "label": "t:settings_schema.typography.settings.typography.des_line_height",
+                        "min": 10,
+                        "max": 100,
+                        "step": 1,
+                        "unit": "t:sections.layout.fontsize.fontsize_title.unit",
+                        "default": 22
+                    },
+                    {
+                        "type": "range",
                         "id": "des_spacing_bottom",
-                        "label": "t:sections.slide-show.blocks.image.slider_content.des_spacing_bottom",
+                        "label": "t:settings_schema.typography.settings.typography.des_margin_bottom",
                         "min": 0,
                         "max": 100,
                         "step": 1,
@@ -1581,7 +1883,7 @@
                     {
                         "type" : "color",
                         "id" : "color_des",
-                        "label" : "t:sections.slide-show.blocks.image.slider_content.color_des",
+                        "label" : "t:settings_schema.typography.settings.typography.des_color",
                         "default" : "#232323"
                     },
                     {
@@ -1662,7 +1964,7 @@
                     {
                         "type" : "color",
                         "id" : "color_sub_heading_mb",
-                        "label" : "t:sections.slide-show.blocks.image.slider_content.color_sub_heading_mb",
+                        "label" : "t:sections.slide-show.blocks.image.slider_content.color_sub_heading",
                         "default" : "#fff"
                     },
                     {
@@ -1723,19 +2025,19 @@
                     {
                         "type" : "color",
                         "id" : "color_heading_mb",
-                        "label" : "t:sections.slide-show.blocks.image.slider_content.color_heading_mb",
+                        "label" : "t:sections.slide-show.blocks.image.slider_content.color_heading",
                         "default" : "#fff"
                     },
                     {
                         "type" : "textarea",
                         "id" : "slide-des-mb",
-                        "label" : "t:settings_schema.newsletter_popup.settings.general.label__7",
+                        "label" : "t:sections.image-banner.blocks.image.settings.content.label__2",
                         "default": "Quisquemos sodales suscipit tortor ditaemcos condimentum de cosmo lacus meleifend menean diverra loremous."
                     },
                     {
                         "type": "range",
                         "id": "font_size_des_mb",
-                        "label" : "t:sections.slide-show.blocks.image.slider_content.font_size_des",
+                        "label" : "t:settings_schema.typography.settings.typography.des_font_size",
                         "min": 10,
                         "max": 100,
                         "step": 1,
@@ -1745,7 +2047,7 @@
                     {
                         "type": "range",
                         "id": "des_spacing_bottom_mb",
-                        "label": "t:sections.slide-show.blocks.image.slider_content.des_spacing_bottom",
+                        "label": "t:settings_schema.typography.settings.typography.des_margin_bottom",
                         "min": 0,
                         "max": 100,
                         "step": 1,
@@ -1755,7 +2057,7 @@
                     {
                         "type" : "color",
                         "id" : "color_des_mb",
-                        "label" : "t:sections.slide-show.blocks.image.slider_content.color_des_mb",
+                        "label" : "t:settings_schema.typography.settings.typography.des_color",
                         "default" : "#fff"
                     },
                     {
@@ -1784,6 +2086,7 @@
                         "type": "range",
                         "id": "font_size_link",
                         "label" : "t:sections.collection_lookbook.blocks.collection.link.link_fs",
+                        "info": "t:sections.slide-show.blocks.image.slider_layout.info__2",
                         "min": 10,
                         "max": 100,
                         "step": 1,
@@ -1793,31 +2096,31 @@
                     {
                         "type" : "text",
                         "id" : "button_slide",
-                        "label" : "t:settings_schema.typography.settings.typography.button_text",
+                        "label" : "t:sections.slide-show.blocks.image.slider_content.button_text_1",
                         "default" : "Shop Now"
                     },
                     {
                         "type" : "url",
                         "id" : "link",
-                        "label" : "t:settings_schema.typography.settings.typography.button_link"
+                        "label" : "t:sections.slide-show.blocks.image.slider_content.button_link_1"
                     },
                     {
                         "type": "select",
                         "id": "button_style",
-                        "label": "t:sections.image-banner.blocks.image.settings.content.label__11",
+                        "label": "t:sections.slide-show.blocks.image.slider_content.button_style_1",
                         "default": "button_1",
                         "options": [
                             {
                                 "value": "button_1",
-                                "label": "t:sections.image-banner.blocks.image.settings.content.options__1"
+                                "label": "t:settings_schema.styles.settings.button.option__1"
                             },
                             {
                                 "value": "button_2",
-                                "label": "t:sections.image-banner.blocks.image.settings.content.options__2"
+                                "label": "t:settings_schema.styles.settings.button.option__2"
                             },
                             {
                                 "value": "button_3",
-                                "label": "t:sections.image-banner.blocks.image.settings.content.options__3"
+                                "label": "t:settings_schema.styles.settings.button.option__3"
                             }
                         ]
                     },
@@ -1844,7 +2147,7 @@
                     {
                         "type" : "color",
                         "id" : "color_button",
-                        "label" : "t:settings_schema.colors.settings.colors_name.color",
+                        "label" : "t:sections.rich-text.blocks.button.settings.label_color",
                         "default" : "#fff"
                     },
                     {
@@ -1856,7 +2159,7 @@
                     {
                         "type" : "color",
                         "id" : "bg_button",
-                        "label" : "t:settings_schema.colors.settings.colors_name.background_color",
+                        "label" : "t:settings_schema.colors.settings.colors_name.background_color_2",
                         "default" : "#232323"
                     },
                     {
@@ -1867,7 +2170,7 @@
                     {
                         "type" : "color",
                         "id" : "color_button_hover",
-                        "label" : "t:settings_schema.colors.settings.colors_name.color_hover",
+                        "label" : "t:sections.rich-text.blocks.button.settings.label_hover_color",
                         "default" : "#fff"
                     },
                     {
@@ -1888,12 +2191,17 @@
                         "label" : "t:settings_schema.colors.settings.colors_name.background_hover_gradient"
                     },
                     {
+                        "type" : "checkbox",
+                        "id" : "use_contrasting_colors",
+                        "label" : "t:sections.slide-show.blocks.image.slider_content.use_contrasting_colors"
+                    },
+                    {
                         "type": "header",
                         "content": "t:sections.slide-show.blocks.image.slider_look.content"
                     },
                     {
                         "type" : "header",
-                        "content" : "t:sections.slide-show.blocks.image.slider_look.product_1"
+                        "content" : "t:sections.collection_lookbook.blocks.lookbook.settings.content_1"
                     },
                     {
                         "type" : "product",
@@ -1946,7 +2254,7 @@
                     },
                     {
                         "type" : "header",
-                        "content" : "t:sections.slide-show.blocks.image.slider_look.product_2"
+                        "content" : "t:sections.collection_lookbook.blocks.lookbook.settings.content_2"
                     },
                     {
                         "type" : "product",
@@ -1999,7 +2307,7 @@
                     },
                     {
                         "type" : "header",
-                        "content" : "t:sections.slide-show.blocks.image.slider_look.product_3"
+                        "content" : "t:sections.collection_lookbook.blocks.lookbook.settings.content_3"
                     },
                     {
                         "type" : "product",
@@ -2054,8 +2362,14 @@
             },
             {
                 "type": "video",
-                "name": "Video Slider",
+                "name": "t:sections.slide-show.blocks.video.name",
                 "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "image_for_dot",
+                        "label" : "t:sections.slide-show.blocks.image_for_dot.label_1",
+                        "info": "t:sections.slide-show.blocks.image_for_dot.info_1"
+                    },
                     {
                         "type" : "radio",
                         "id" : "style_video",
@@ -2084,13 +2398,82 @@
                         "info": "[Find your YouTube video ID](https://www.youtube.com/watch?v=liJVSwOiiwg)."
                     },
                     {
+                        "type": "text",
+                        "id": "video_link_mb",
+                        "label": "t:sections.slide-show.blocks.video.video_link_mb",
+                        "default": "eTCtDW7O1aM",
+                        "info": "[Find your YouTube video ID](https://www.youtube.com/watch?v=liJVSwOiiwg)."
+                    },
+                    {
                         "type": "header",
-                        "content": "t:sections.slide-show.blocks.image.slider_layout.content"
+                        "content": "t:sections.slide-show.blocks.video.style_video.option2"
+                    },
+                    {
+                        "type": "text",
+                        "id": "video_mp4_link",
+                        "label": "t:sections.slide-show.blocks.video.video_mp4_link"
+                    },
+                    {
+                        "type": "text",
+                        "id": "video_mp4_link_mb",
+                        "label": "t:sections.slide-show.blocks.video.video_mp4_link_mb"
+                    },
+                    {
+                        "type": "header",
+                        "content": "t:sections.image-banner.blocks.image.settings.header__2.content_layout"
+                    },
+                    {
+                        "type": "select",
+                        "id": "alignment",
+                        "label": "t:settings_schema.someone_purchase.settings.general.label__2",
+                        "default": "left",
+                        "options": [
+                        {
+                            "value": "left",
+                            "label": "t:settings_schema.typography.settings.type_button_font.left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "t:settings_schema.typography.settings.type_button_font.center"
+                        },
+                        {
+                            "value": "right",
+                            "label": "t:settings_schema.typography.settings.type_button_font.right"
+                        }]
                     },
                     {
                         "type": "checkbox",
-                        "id": "enable_border_line",
-                        "label" : "t:sections.slide-show.blocks.image.slider_layout.enable_border_line"
+                        "id": "enable_custom_position",
+                        "label" : "t:sections.slide-show.blocks.image.enable_custom_position_content"
+                    },
+                    {
+                        "type": "text",
+                        "id": "custom_horizontal",
+                        "label" : "t:sections.slide-show.settings.arrows.position_slick_arrow"
+                    },
+                    {
+                        "type": "text",
+                        "id": "custom_vertical",
+                        "label" : "t:sections.slide-show.settings.arrows.position_vertical_slick_arrow"
+                    },
+                    {
+                        "type": "select",
+                        "id": "text_alignment",
+                        "label": "t:sections.general.settings.alignment.label__1",
+                        "options": [
+                        {
+                            "value": "left",
+                            "label": "t:settings_schema.typography.settings.type_button_font.left"
+                        },
+                        {
+                            "value": "center",
+                            "label": "t:settings_schema.typography.settings.type_button_font.center"
+                        },
+                        {
+                            "value": "right",
+                            "label": "t:settings_schema.typography.settings.type_button_font.right"
+                        }],
+                        "default": "center"
                     },
                     {
                         "type": "range",
@@ -2103,19 +2486,9 @@
                         "default": 30
                     },
                     {
-                        "type": "color",
-                        "id": "bg_color_content",
-                        "label" : "t:sections.slide-show.blocks.image.slider_layout.bg_color_content"
-                    },
-                    {
-                        "type": "color",
-                        "id": "border_color_content",
-                        "label" : "t:sections.slide-show.blocks.image.slider_layout.border_color_content"
-                    },
-                    {
                         "type": "range",
                         "id": "content_width",
-                        "label": "t:sections.image-banner.blocks.image.settings.content.label__8",
+                        "label": "t:sections.slide-show.blocks.image.slider_layout.enable_content_full",
                         "min": 250,
                         "max": 750,
                         "step": 5,
@@ -2123,74 +2496,23 @@
                         "default": 475
                     },
                     {
-                        "type": "select",
-                        "id": "alignment",
-                        "label": "t:sections.slide-show.blocks.image.slider_layout.alignment.option",
-                        "default": "left",
-                        "options": [
-                        {
-                            "value": "left",
-                            "label": "t:sections.product_block.settings.general.options__7"
-                        },
-                        {
-                            "value": "center",
-                            "label": "t:sections.product_block.settings.general.options__8"
-                        },
-                        {
-                            "value": "right",
-                            "label": "t:sections.product_block.settings.general.options__9"
-                        }]
-                    },
-                    {
                         "type": "checkbox",
-                        "id": "enable_custom_position",
-                        "label" : "t:sections.slide-show.blocks.image.enable_custom_position",
-                        "info": "t:sections.slide-show.blocks.image.info_enable_custom_position"
+                        "id": "enable_border_line",
+                        "label" : "t:sections.slide-show.blocks.image.slider_layout.enable_border_line"
                     },
                     {
-                        "type": "text",
-                        "id": "custom_horizontal",
-                        "label" : "t:sections.slide-show.blocks.image.custom_horizontal",
-                        "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
+                        "type": "color",
+                        "id": "border_color_content",
+                        "label" : "t:sections.slide-show.blocks.image.slider_layout.border_color_content"
                     },
                     {
-                        "type": "text",
-                        "id": "custom_vertical",
-                        "label" : "t:sections.slide-show.blocks.image.custom_vertical",
-                        "info" : "t:sections.slide-show.blocks.image.slider_look.info_position"
-                    },
-                    {
-                        "type": "select",
-                        "id": "text_alignment",
-                        "label": "t:sections.product_block.settings.general.label__7",
-                        "options": [
-                        {
-                            "value": "left",
-                            "label": "t:sections.product_block.settings.general.options__7"
-                        },
-                        {
-                            "value": "center",
-                            "label": "t:sections.product_block.settings.general.options__8"
-                        },
-                        {
-                            "value": "right",
-                            "label": "t:sections.product_block.settings.general.options__9"
-                        }],
-                        "default": "center"
+                        "type": "color",
+                        "id": "bg_color_content",
+                        "label" : "t:sections.slide-show.blocks.image.slider_layout.bg_color_content"
                     },
                     {
                         "type": "header",
-                        "content": "t:sections.slide-show.blocks.video.style_video.option2"
-                    },
-                    {
-                        "type": "text",
-                        "id": "video_mp4_link",
-                        "label": "t:sections.slide-show.blocks.video.video_mp4_link"
-                    },
-                    {
-                        "type": "header",
-                        "content": "t:sections.slide-show.blocks.video.slider_content.content",
-                        "info" : "t:sections.slide-show.blocks.video.slider_content.info"
+                        "content": "t:sections.image-banner.blocks.image.settings.header__2.content"
                     },
                     {
                         "type" : "text",
@@ -2200,7 +2522,7 @@
                     {
                         "type": "text",
                         "id": "letter_spacing_sub_title",
-                        "label": "t:settings_schema.typography.settings.typography.sub_title_letter_spacing"
+                        "label": "t:sections.slide-show.blocks.image.slider_content.sub_heading_letter_spacing"
                     },
                     {
                         "type": "range",
@@ -2271,7 +2593,7 @@
                     {
                         "type": "select",
                         "id": "sub_title_position",
-                        "label": "t:settings_schema.typography.settings.typography.sub_title_position",
+                        "label": "t:sections.slide-show.blocks.image.slider_content.position_sub_heading",
                         "default": "sub_title_above",
                         "options": [
                         {
@@ -2304,7 +2626,7 @@
                     {
                         "type": "text",
                         "id": "letter_spacing_heading",
-                        "label": "t:settings_schema.typography.settings.typography.title_letter_spacing"
+                        "label": "t:sections.slide-show.blocks.image.slider_content.heading_letter_spacing"
                     },
                     {
                         "type": "range",
@@ -2351,13 +2673,13 @@
                     {
                         "type" : "textarea",
                         "id" : "slide-des",
-                        "label" : "t:settings_schema.newsletter_popup.settings.general.label__7",
+                        "label" : "t:sections.image-banner.blocks.image.settings.content.label__2",
                         "default": "Quisquemos sodales suscipit tortor ditaemcos condimentum de cosmo lacus meleifend menean diverra loremous."
                     },
                     {
                         "type": "range",
                         "id": "des_spacing_bottom",
-                        "label": "t:sections.slide-show.blocks.image.slider_content.des_spacing_bottom",
+                        "label": "t:settings_schema.typography.settings.typography.des_margin_bottom",
                         "min": 0,
                         "max": 100,
                         "step": 1,
@@ -2367,7 +2689,7 @@
                     {
                         "type": "range",
                         "id": "font_size_des",
-                        "label" : "t:sections.slide-show.blocks.image.slider_content.font_size_des",
+                        "label" : "t:settings_schema.typography.settings.typography.des_font_size",
                         "min": 10,
                         "max": 100,
                         "step": 1,
@@ -2377,19 +2699,19 @@
                     {
                         "type" : "color",
                         "id" : "color_des",
-                        "label" : "t:sections.slide-show.blocks.image.slider_content.color_des",
+                        "label" : "t:settings_schema.typography.settings.typography.des_color",
                         "default" : "#232323"
                     },
                     {
                         "type" : "color",
                         "id" : "color_des_mb",
-                        "label" : "t:sections.slide-show.blocks.image.slider_content.color_des_mb",
+                        "label" : "t:settings_schema.typography.settings.typography.des_color_mb",
                         "default" : "#fff"
                     },
                     {
                         "type" : "text",
                         "id" : "button_slide",
-                        "label" : "t:sections.slide-show.blocks.image.slider_content.button_slide",
+                        "label" : "t:settings_schema.typography.settings.typography.button_text",
                         "default" : "Shop Now"
                     },
                     {
@@ -2413,6 +2735,7 @@
                         "type": "range",
                         "id": "font_size_link",
                         "label" : "t:sections.collection_lookbook.blocks.collection.link.link_fs",
+                        "info": "t:sections.slide-show.blocks.image.slider_layout.info__2",
                         "min": 10,
                         "max": 100,
                         "step": 1,
@@ -2432,37 +2755,37 @@
                     {
                         "type" : "color",
                         "id" : "color_button",
-                        "label" : "t:settings_schema.colors.settings.colors_name.color",
+                        "label" : "t:settings_schema.typography.settings.typography.button_color",
                         "default" : "#fff"
                     },
                     {
                         "type" : "color",
-                        "id" : "bg_button",
-                        "label" : "t:settings_schema.colors.settings.colors_name.background_color",
+                        "id" : "border_button",
+                        "label" : "t:sections.rich-text.blocks.button.settings.button_border",
                         "default" : "#232323"
                     },
                     {
                         "type" : "color",
-                        "id" : "border_button",
-                        "label" : "t:settings_schema.colors.settings.colors_name.border_color",
+                        "id" : "bg_button",
+                        "label" : "t:sections.rich-text.blocks.button.settings.button_bg",
                         "default" : "#232323"
                     },
                     {
                         "type" : "color",
                         "id" : "color_button_hover",
-                        "label" : "t:settings_schema.colors.settings.colors_name.color_hover",
+                        "label" : "t:sections.rich-text.blocks.button.settings.button_color_hover",
                         "default" : "#fff"
                     },
                     {
                         "type" : "color",
-                        "id" : "bg_button_hover",
-                        "label" : "t:settings_schema.colors.settings.colors_name.background_hover",
+                        "id" : "border_button_hover",
+                        "label" : "t:sections.rich-text.blocks.button.settings.button_border_hover",
                         "default" : "#232323"
                     },
                     {
                         "type" : "color",
-                        "id" : "border_button_hover",
-                        "label" : "t:settings_schema.colors.settings.colors_name.border_hover",
+                        "id" : "bg_button_hover",
+                        "label" : "t:sections.rich-text.blocks.button.settings.button_bg_hover",
                         "default" : "#232323"
                     }
                 ]
@@ -2472,15 +2795,21 @@
                 "name": "Banner",
                 "settings": [
                     {
+                        "type": "image_picker",
+                        "id": "image_for_dot",
+                        "label" : "t:sections.slide-show.blocks.image_for_dot.label_1",
+                        "info": "t:sections.slide-show.blocks.image_for_dot.info_1"
+                    },
+                    {
                         "type" : "image_picker",
                         "id" : "image",
-                        "label" : "t:sections.slide-show.settings.categories.select_image",
+                        "label" : "t:sections.header.settings.mega_menu.banner__img",
                         "info" : "t:sections.slide-show.settings.categories.recommen_image"
                     },
                     {
                         "type" : "url",
                         "id" : "link",
-                        "label" : "t:sections.slide-show.settings.categories.banner_link"
+                        "label" : "t:settings_schema.colors.settings.colors_link.label__4"
                     }
                 ]
             }

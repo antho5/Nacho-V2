@@ -4,6 +4,7 @@
 {{ 'component-grid.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
+    assign padding_full_width = section.settings.padding_full_width
     assign padding_top = section.settings.mg_top_desktop | append: 'px'
     assign padding_bottom = section.settings.mg_bottom_desktop | append: 'px'
     assign padding_top_tablet = section.settings.mg_top_tablet | append: 'px'
@@ -34,14 +35,18 @@
     else 
         assign limit = 3 
     endif
-    assign show_sidebar = section.settings.show_sidebar
-    if show_sidebar
+    assign has_sidebar = false
+    for block in section.blocks
+        case block.type
+            when 'category', 'recent_post', 'recent_tag', 'product_block', 'image', 'text'
+                assign has_sidebar = true
+        endcase
+    endfor
+    if has_sidebar
         assign show_collapse = section.settings.show_collapse
         assign sidebar_position = section.settings.sidebar_position
         assign sidebar_collapse_default = section.settings.sidebar_collapse_default
         assign enable_sticky = section.settings.enable_sticky
-    endif
-    if show_sidebar and section.blocks.size > 0
         assign sidebar_heading_font = section.settings.sidebar_heading_font
         assign sidebar_heading_font_size = section.settings.sidebar_heading_font_size
         assign sidebar_heading_font_weight = section.settings.sidebar_heading_font_weight
@@ -67,7 +72,7 @@
 
 <style type="text/css" media="screen">
     :root {
-        {% if show_sidebar and section.blocks.size > 0 %}
+        {% if has_sidebar %}
             {% if sidebar_heading_font == 'font_1' %}
                 --sidebar-heading-font: var(--font-heading-family);
             {% elsif sidebar_heading_font == 'font_2' %}
@@ -81,7 +86,7 @@
         padding-bottom: {{ padding_bottom }};
     }
 
-    {% if show_sidebar and section.blocks.size > 0 %}
+    {% if has_sidebar %}
         #BlogSection-{{ section.id }} .sidebarBlock-heading{
             font-family: var(--sidebar-heading-font);
             font-size: {{ sidebar_heading_font_size | append: 'px' }};
@@ -145,6 +150,13 @@
     }
 
     @media (min-width: 1025px) {
+        {% if container == 'fullwidth' %}
+            #BlogSection-{{ section.id }} > .container-full {
+                padding-left: {{ padding_full_width | append: 'px' }};
+                padding-right: {{ padding_full_width | append: 'px' }};
+            }
+        {% endif %}
+
         #BlogSection-{{ section.id }} .breadcrumb-container {
             position: relative;
         }
@@ -167,7 +179,7 @@
         {%- if show_breadcrumb -%}
             {% render 'breadcrumb', alignment: breadcrumb_alignment %}
         {%- endif -%}
-        {%- if show_sidebar -%}
+        {%- if has_sidebar -%}
             <div class="header-with-sidebar{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
         {%- endif -%}
             {%- if show_page_title -%}
@@ -175,16 +187,16 @@
                     {{ blog.title | escape }}
                 </h1> 
             {%- endif -%}
-            {%- if show_sidebar and section.blocks.size > 0 -%}
+            {%- if has_sidebar -%}
                 <div class="sidebar-toogle" data-sidebar>
                     {% render 'icon-sidebar' %}
                 </div>
             {%- endif -%}
-        {%- if show_sidebar -%}
+        {%- if has_sidebar -%}
             </div>
         {%- endif -%}
-        <div class="halo-blog-content halo-grid-content{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
-            {%- if show_sidebar and section.blocks.size > 0 -%}
+        <div class="halo-blog-content halo-grid-content">
+            {%- if has_sidebar -%}
                 {{ 'component-main-sidebar.css' | asset_url | stylesheet_tag }}
                 <div class="page-sidebar page-sidebar-{{ sidebar_position }} page-sidebar--vertical sidebar--{{ section.settings.sidebar_layout }}{% if enable_sticky %} has-sticky{% endif %}" id="halo-sidebar">
                     <a href="javascript:void(0)" class="halo-sidebar-close" data-close-sidebar role="button">
@@ -196,7 +208,7 @@
                             {{ 'sections.sidebar.title' | t }}
                         </span>
                     </div>
-                    <div class="halo-sidebar-wrapper custom-scrollbar">
+                    <div class="halo-sidebar-wrapper custom-scrollbar{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
                         {% render 'sidebar',
                             section: section,
                             show_collapse: show_collapse,
@@ -206,7 +218,7 @@
                 </div>
             {%- endif -%}
             {%- paginate blog.articles by limit -%}
-                <div class="page-content main-blog">
+                <div class="page-content main-blog{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}">
                     <div class="blog-row blog-block-item column-{{ item_per_row }}">
                         {%- for article in blog.articles -%}
                             <div class="item{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}"{% if settings.banner_animation == 'effect_fade_up' %} style="--animation-order: {{ forloop.index }};"{% endif %}>

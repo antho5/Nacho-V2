@@ -1,6 +1,6 @@
 .tiktok-embedder-section {
     background: var(--section-bg);
-    --column-gap: 10px;
+    --column-gap: 0;
 }
 
 .tiktok-embedder-section .section-video-wrapper {
@@ -41,7 +41,6 @@
     font-size: var(--title-font-size);
     font-weight: var(--title-font-weight);
     font-style: var(--title-font-style);
-
     margin: 0;
     margin-top: var(--title-margin-top);
     line-height: 1.5;
@@ -102,21 +101,20 @@
     font-size: var(--link-text-font-size);
     font-weight: var(--link-text-font-weight);
     font-style: var(--link-text-font-style);
-
     margin: 0;
     margin-top: var(--link-text-margin-top);
-
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     gap: 8px;
     position: relative;
-    width: max-content;
-    max-width: 100%;
+    width: 100%;
 }   
 
 .tiktok-embedder-section .link-to-instagram a {
-    flex-shrink: 0;
+    color: var(--link-text-color);
+    word-break: break-all;
+    line-height: 1.2;
 }
 
 .tiktok-embedder-section .link-to-instagram a:hover {
@@ -152,12 +150,6 @@
     justify-content: flex-end;
 }
 
-
-.tiktok-embedder-section .halo-row .halo-item {
-    padding-right: 0;
-    padding-left: 0;
-}
-
 .tiktok-embedder-section blockquote {
     padding: 0;
     border-radius: 0;
@@ -186,10 +178,19 @@
 .tiktok-embedder-section .view-all.button {
     width: var(--button-width);
     background: var(--button-background);
+    border: 1px solid var(--button-border-color);
+}
+
+.btn_1_br_outside .tiktok-embedder-section .view-all.button:after {
+    border: 1px solid var(--button-border-color);
 }
 
 .tiktok-embedder-section .view-all.button:hover {
     background: var(--button-background-hover);
+    border: 1px solid var(--button-border-color-hover);
+}
+
+.btn_1_br_outside .tiktok-embedder-section .view-all.button:hover:after {
     border: 1px solid var(--button-border-color-hover);
 }
 
@@ -291,11 +292,6 @@
         margin-top: 25px;
     }
 
-    .tiktok-embedder-section .slider-buttons .slider-button {
-        width: 35px;
-        height: 35px;
-    }
-
     .tiktok-embedder-section .slider-buttons .slider-button--prev {
         right: 58px;
         left: unset;
@@ -333,6 +329,13 @@
 
     .tiktok-embedder-section .section-video-wrapper.scroll-snap-mobile {
         --column-gap: 0;
+    }
+}
+
+@media (min-width: 1025px) {
+    .tiktok-embedder-section .halo-row .halo-item {
+        padding-right: 10px;
+        padding-left: 10px;
     }
 }
 

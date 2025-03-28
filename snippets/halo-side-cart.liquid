@@ -5,18 +5,42 @@
     
     assign check = false
     for item in cart.items
-      if item.id == id
-        assign check = true
-      endif
+        if item.id == id
+            assign check = true
+        endif
+        assign has_qty_rules = false
+        if item.variant.quantity_rule.increment > 1 or item.variant.quantity_rule.min > 1 or item.variant.quantity_rule.max != null
+            assign has_qty_rules = true
+        endif
+        assign has_vol_pricing = false
+        if item.variant.quantity_price_breaks.size > 0
+            assign has_vol_pricing = true
+        endif
     endfor
 -%}
+{%- if has_qty_rules or has_vol_pricing -%}
+    <link rel="stylesheet" href="{{ 'quantity-popover.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'quick-order-list.css' | asset_url }}" media="print" onload="this.media='all'">
+    <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+    <noscript>{{ 'quantity-popover.css' | asset_url | stylesheet_tag }}</noscript>
+    <noscript>{{ 'quick-order-list.css' | asset_url | stylesheet_tag }}</noscript>
+{%- endif -%}
 {% unless cart == empty %}
     <div class="previewCart">
-    	<ul class="previewCartList list-unstyled">
-    		{%- for item in cart.items -%}
-    			<li class="previewCartItem clearfix" data-item-row>
-    				<a href="{{ item.url }}" class="previewCartItem-image">
-                        <img srcset="{{ item.image | img_url: '110x' }}" src="{{ item.image | img_url: '110x' }}" width="110" height="{{ 110 | divided_by: item.image.aspect_ratio | round }}" alt="{{ item.title | escape }}" sizes="auto" loading="lazy">
+        <ul class="previewCartList list-unstyled">
+            {%- for item in cart.items -%}
+                {%- liquid 
+                    if settings.discount_calculator_free_shipping == 'setup_shipping_delivery'
+                        if item.original_price != item.final_price
+                            assign price_gift_card = item.final_price
+                        else 
+                            assign price_gift_card = item.original_price
+                        endif 
+                    endif
+                -%} 
+                <li class="previewCartItem clearfix" data-item-row{% if settings.discount_calculator_free_shipping == 'setup_shipping_delivery' and item.product.gift_card? %} data-price-gift-card="{{ price_gift_card | times: item.quantity }}"{% endif %}>
+                    <a href="{{ item.url }}" class="previewCartItem-image">
+                        <img srcset="{{ item.image | img_url: '110x' }}" src="{{ item.image | img_url: '110x' }}" width="110" height="{{ 110 | divided_by: item.image.aspect_ratio | round }}" alt="{{ item.title | escape }}" sizes="110px" loading="lazy">
                     </a>
                     <div class="previewCartItem-content cart-item-block-right">
                         {%- liquid
@@ -30,17 +54,17 @@
                                 {%- endfor -%}
                             };
                         </script>
-                    	<a class="previewCartItem-name link-underline" href="{{ item.url }}">
+                        <a class="previewCartItem-name link-underline card-title" href="{{ item.url }}">
                             <span class="text">{{ item.product.title }}</span>
                         </a>
                         {%- if item.product.variants.size != 0 -%}
                             {%- unless item.variant.title contains 'Default' -%}
-                            	<div class="previewCartItem-options">
+                                <div class="previewCartItem-options">
                                     <span class="previewCartItem-variant">
                                         {{ item.variant.title }}
                                     </span>
                                     {%- if settings.show_quick_edit_cart -%}
-                                        <button type="button" class="previewCartItem-edit" data-open-edit-cart data-edit-cart-url="{{ item.url }}&view=ajax_edit_cart" data-edit-cart-id="{{ item.id }}" data-edit-cart-quantity="{{ item.quantity }}" data-line="{{ item.key }}" title="{{ 'sections.cart.edit_title' | t: title: item.variant.title }}">
+                                        <button type="button" class="previewCartItem-edit" data-open-edit-cart data-edit-cart-url="{{ item.url }}&view=ajax_edit_cart" data-edit-cart-id="{{ item.id }}" data-edit-cart-quantity="{{ item.quantity }}" data-line="{{ item.key }}" data-index="{{ item.index | plus: 1 }}" title="{{ 'sections.cart.edit_title' | t: title: item.variant.title }}">
                                             {% render 'icon-edit' %}
                                         </button>
                                     {%- endif -%}
@@ -68,6 +92,9 @@
                                 {%- endfor -%}
                             {%- endif -%}
                         </dl>
+                        {%- if item.selling_plan_allocation != nil -%}
+                            <p class="cart-item-allocation">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                        {%- endif -%}
                         {%- if item.discounts.size > 0 -%}
                             <ul class="cart-discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
                                 {%- for discount in item.line_level_discount_allocations -%}
@@ -108,7 +135,7 @@
                                             </span>
                                         </span>
                                     {% else %}  
-                                        <span data-item-final-price-display bss-b2b-cart-item-key="{{ item.key }}" bss-b2b-item-final-price>
+                                        <span data-item-final-price-display>
                                             {{ item.price | money }}
                                         </span>
                                     {% endif %}
@@ -118,18 +145,93 @@
                                 <label class="form-label hiddenLabels" for="upsell-update-{{ item.id }}">
                                     {{ 'sections.cart.heading.quantity' | t }}
                                 </label>
-                                <a href="#" data-minus-quantity-cart="" class="minus btn-quantity"></a>
-                                <input class="form-input quantity" name="quantity" id="upsell-update-{{ item.id }}" data-qtt-id1="quantity{{ item.id }}" value="{{ item.quantity }}" type="number"{% if item.variant.inventory_management != null and item.variant.inventory_quantity > 0 %} data-inventory-quantity="{{ item.variant.inventory_quantity }}"{% endif %} data-cart-quantity data-cart-quantity-id="{{ item.id }}" data-line="{{ item.key }}" />
-                                <a href="#" data-plus-quantity-cart="" class="plus btn-quantity"></a>
+                                <a role="link" aria-disabled="true" class="minus btn-quantity" data-minus-quantity-cart=""></a>
+                                <input class="form-input quantity" name="quantity" id="upsell-update-{{ item.id }}" data-qtt-id1="quantity{{ item.id }}" value="{{ item.quantity }}" type="number"{% if item.variant.inventory_management != null and item.variant.inventory_quantity > 0 %} data-inventory-quantity="{{ item.variant.inventory_quantity }}"{% endif %} data-cart-quantity data-cart-quantity-id="{{ item.id }}" data-line="{{ item.key }}" data-index="{{ item.index | plus: 1 }}"/>
+                                <a role="link" aria-disabled="true" class="plus btn-quantity" data-plus-quantity-cart=""></a>
                             </cart-update-quantity>
+                            {%- if has_qty_rules or has_vol_pricing -%}
+                                <quantity-popover class="quantity-popover-container">
+                                    <button
+                                        type="button"
+                                        aria-expanded="false"
+                                        aria-controls="quantity-popover-info-{{ item.id }}"
+                                        aria-label="
+                                        {%- if has_vol_pricing -%}
+                                          {{ 'products.product.volume_pricing.note' | t }}
+                                        {%- elsif has_qty_rules -%}
+                                          {{ 'products.product.quantity.note' | t }}
+                                        {%- endif -%}
+                                        "
+                                        class="quantity-popover__info-button quantity-popover__info-button--icon-only button button--tertiary small-hide1 no-js-hidden"
+                                        >
+                                        {% render 'icon-info' %}
+                                        <span class="volume-pricing-label-cart">{{ 'products.product.volume_pricing.note' | t }}</span>
+                                    </button>
+                                    <div
+                                      class="global-settings-popup quantity-popover__info quantity-popover__info_sideCart"
+                                      tabindex="-1"
+                                      hidden
+                                      id="quantity-popover-info-{{ item.id }}"
+                                        >
+                                      {%- if has_qty_rules == false -%}
+                                        <span class="volume-pricing-label caption">{{ 'products.product.volume_pricing.title' | t }}</span>
+                                      {%- endif -%}
+                                      <div class="quantity__rules caption no-js-hidden">
+                                        {%- if item.variant.quantity_rule.increment > 1 -%}
+                                          <span class="divider">
+                                            {{- 'products.product.quantity.multiples_of' | t: quantity: item.variant.quantity_rule.increment -}}
+                                          </span>
+                                        {%- endif -%}
+                                        {%- if item.variant.quantity_rule.min > 1 -%}
+                                          <span class="divider">
+                                            {{- 'products.product.quantity.min_of' | t: quantity: item.variant.quantity_rule.min -}}
+                                          </span>
+                                        {%- endif -%}
+                                        {%- if item.variant.quantity_rule.max != null -%}
+                                          <span class="divider">
+                                            {{- 'products.product.quantity.max_of' | t: quantity: item.variant.quantity_rule.max -}}
+                                          </span>
+                                        {%- endif -%}
+                                      </div>
+                                      <button
+                                        class="button-close button button--tertiary medium-up-hide"
+                                        type="button"
+                                        aria-label="{{ 'accessibility.close' | t }}"
+                                      >
+                                        {%- render 'icon-close' -%}
+                                      </button>
+                                      {%- if item.variant.quantity_price_breaks.size > 0 -%}
+                                        <volume-pricing class="parent-display">
+                                          <ul class="list-unstyled">
+                                            <li>
+                                              <span>{{ item.variant.quantity_rule.min }}+</span>
+                                              {%- assign price = item.variant.price | money_with_currency -%}
+                                              <span>{{ 'sections.quick_order_list.each' | t: money: price }}</span>
+                                            </li>
+                                            {%- for price_break in item.variant.quantity_price_breaks -%}
+                                              <li>
+                                                <span>
+                                                  {{- price_break.minimum_quantity -}}
+                                                  <span aria-hidden="true">+</span></span
+                                                >
+                                                {%- assign price = price_break.price | money_with_currency -%}
+                                                <span> {{ 'sections.quick_order_list.each' | t: money: price }}</span>
+                                              </li>
+                                            {%- endfor -%}
+                                          </ul>
+                                        </volume-pricing>
+                                      {%- endif -%}
+                                    </div>
+                                </quantity-popover>
+                            {%- endif -%}
                         </div>
                     </div>
-                    <button type="button" class="previewCartItem-remove" data-cart-remove data-cart-remove-id="{{ item.id }}" data-line="{{ item.key }}" title="{{ 'sections.cart.remove_title' | t: title: item.title }}">
+                    <button type="button" class="previewCartItem-remove{% if has_qty_rules or has_vol_pricing %} has_vol_pricing{% endif %}" data-cart-remove data-cart-remove-id="{{ item.id }}" data-line="{{ item.key }}" data-index="{{ item.index | plus: 1 }}" title="{{ 'sections.cart.remove_title' | t: title: item.title }}">
                         {% render 'icon-close' %}
                     </button>
-    			</li>
-    		{%- endfor -%}
-    	</ul>
+                </li>
+            {%- endfor -%}
+        </ul>
 
         {%- if settings.show_quick_cart_popular_product -%}
         {%- liquid
@@ -156,7 +258,7 @@
                     {%- else -%}
                         {%- for product in (1..limit) -%}
                             <div class="product">
-                                {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                                {% capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture %}
                                 {% render 'product-card-custom-placeholder',
                                     index: current
                                 %}
@@ -268,31 +370,41 @@
     
     <div class="previewCartInfo">
         <ul class="previewCartTotalsPrice list-unstyled">
-        	<li class="previewCartTotals subTotal clearfix">
-        		<div class="previewCartTotals-label">
+            <li class="previewCartTotals subTotal clearfix">
+                <div class="previewCartTotals-label">
                     {{ 'sections.cart.subtotal' | t }}:
                 </div>
-                <div class="previewCartTotals-value" data-cart-subtotal bss-b2b-cart-total-price>
-                	{{ cart.original_total_price | money }}
+                <div class="previewCartTotals-value" data-cart-subtotal>
+                    {{ cart.original_total_price | money }}
                 </div>  
-        	</li>       
-            <li class="previewCartTotals cart-total-savings" {% if item.original_price == item.price %}style="display: none;"{% endif %} data-saved-discount-display>
+            </li>       
+            <li class="previewCartTotals cart-total-savings" {% if cart.total_discount == 0 %}style="display: none;"{% endif %} data-saved-discount-display>
                 <div class="previewCartTotals-label">
                     <span class="text">{{ 'general.cart.are_saving' | t }}</span>
                 </div>
                 <div class="previewCartTotals-value">
-                    <span class="text" data-saved-discount-value>{{ cart.total_discount | money }}</span>
+                    <span class="text" data-saved-discount-value>
+                        {%- if cart.cart_level_discount_applications != blank -%}
+                            {%- for discount in cart.cart_level_discount_applications -%}
+                                {%- render 'icon-discount' -%}
+                                {{ discount.title }}
+                                (-{{ discount.total_allocated_amount | money }})
+                            {%- endfor -%}
+                        {%- else -%}
+                            {{ cart.total_discount | money | prepend: '-' }}
+                        {%- endif -%}
+                    </span>
                 </div>  
             </li> 
             <li class="previewCartTotals total clearfix">
-        		<div class="previewCartTotals-label">
+                <div class="previewCartTotals-label">
                     {{ 'general.cart.total' | t }}
                 </div>  
-                <div class="previewCartTotals-value" data-cart-total-value="{{ cart.total_price }}" bss-b2b-cart-total-price>
-                	{{ cart.total_price | money }}
+                <div class="previewCartTotals-value" data-cart-total-value="{{ cart.total_price }}">
+                    {{ cart.total_price | money }}
                 </div>
-        	</li>
-        	{% if settings.show_shipping_note %}
+            </li>
+            {% if settings.show_shipping_note %}
                 <li class="previewCartTotals shipTotal clearfix">
                     <div class="previewCartTotals-value">
                         {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
@@ -301,7 +413,7 @@
             {% endif %}
         </ul>
         <div class="previewCartAction text-left">
-        	{%- if settings.show_global_checkbox -%}
+            {%- if settings.show_global_checkbox -%}
                 <div class="previewCartCheckbox global-checkbox">
                     <input class="global-checkbox--input" type="checkbox" name="conditions" id="sidebar_cart_conditions" data-target="#cart-sidebar-checkout">
                     <label class="global-checkbox--label form-label--checkbox" for="sidebar_cart_conditions">
@@ -315,14 +427,16 @@
                 </div>
             {%- endif -%}
             <div class="previewCartGroup">
-            	<button class="button button-1 button-checkout" onclick="window.location='{{ routes.cart_url | split: '/cart' | first }}/checkout'"{% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="cart-sidebar-checkout">
+                <button class="button button-1 button-checkout" onclick="window.location='{{ routes.cart_url | split: '/cart' | first }}/checkout'"{% if settings.show_global_checkbox %} disabled="disabled"{% endif %} id="cart-sidebar-checkout">
                     {{ 'sections.cart.checkout' | t }}
                 </button>
+                {% if additional_checkout_buttons %}
+                  {{ content_for_additional_checkout_buttons }}
+                {% endif %}
                 <a class="button button-2 button-view-cart" href="{{ routes.cart_url }}">
                     {{ 'sections.cart.view_cart' | t }}
                 </a>
             </div>
-            <i data-govx-id></i>
         </div>
     </div>
 {% else %}

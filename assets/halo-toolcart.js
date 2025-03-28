@@ -59,6 +59,7 @@ class CouponCode extends HTMLElement {
       });
       document.querySelector('.popup-toolDown.show').classList.remove('show');
       document.querySelector('.previewCart').classList.remove('active-tool');
+      Shopify.getCart((cart) => {window.sharedFunctions?.updateSidebarCart(cart)});
     })
   }
 }

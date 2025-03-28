@@ -21,7 +21,7 @@
             endif
         -%}
         <div class="bundle-product-image">
-            <a href="{{ product.url | within: collection }}" class="bundle-product-media bundle-product-media--{{ image_ratio }}"
+            <a href="{{ product.url }}" class="bundle-product-media bundle-product-media--{{ image_ratio }}"
                 {% if product.featured_media %}
                     {% if image_ratio == 'adapt' %}
                         style="padding-bottom: {{ 1 | divided_by: featured_media_aspect_ratio | times: 100 }}%;"
@@ -61,15 +61,16 @@
                         class="motion-reduce"
                     >
                 {%- else -%}
-                    {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-                    {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture -%}
+                    {%- assign placeholder_image = 'product-apparel-' | append: current -%}
+                    {{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
                 {%- endif -%}
             </a>
         </div>
         <div class="bundle-product-information">
             <div class="bundle-product-content">
-                <div class="bundle-product-checkbox {% if settings.show_review %} halo-productReview{% endif %}">
-                    <a class="card-title card-title-ellipsis" href="{{ product.url | within: collection }}">
+                <div class="bundle-product-checkbox">
+                    <a class="card-title card-title-ellipsis" href="{{ product.url }}">
                         {{ product.title | split: '|' | first }}
                         {% comment %} <span data-bundle-product-title> - {{ current_variant.title }}</span> {% endcomment %}
                     </a>
@@ -82,27 +83,6 @@
                             </div>
                         {%- endif -%}
                     {% endif %}
-                    {% assign show_review = true %}
-                    {%- if show_review -%}
-                        {%- liquid
-                            assign average = product.metafields.reviews.rating.value
-                            assign rating = average | replace: '', '' | plus : 0 | round
-                        -%}
-                        {% if rating > 1 %}
-                            <span class="spr-badge" id="spr_badge_{{ product.id }}" data-rating="{{ average }}">
-                                <span class="spr-starrating spr-badge-starrating">
-                                    {%- for review in (1..5) -%}
-                                        {%- if rating >= forloop.index -%}
-                                            <i class="spr-icon spr-icon-star" role="none"></i>
-                                        {%- else -%}
-                                            <i class="spr-icon spr-icon-star-empty" role="none"></i>
-                                        {%- endif -%}
-                                    {%- endfor -%}
-                                </span>
-                                <div class='animated-loading rating-loading'></div>
-                            </span>
-                        {% endif %}
-                    {%- endif -%}
                 </div>
                 <div class="bundle-product-price">
                     <div class="price-box card-price">
@@ -126,7 +106,7 @@
                 </div>
             </div>
             {%- if variantCount > 1 -%}
-                <select id="product-variants-{{ product.id }}" name="group_id" style="display: none;" autocomplete="off">
+                <select id="product-variants-{{ product.id }}{{forloop1.index}}" name="group_id" style="display: none;" autocomplete="off">
                     {%- for variant in product.variants -%}
                         {%- if variant.available -%}
                             <option {% if variant == current_variant %} selected="selected" {% endif %} value="{{ variant.id }}" data-price="{{ variant.price }}" {% if variant.image.src != blank %}data-image="{{ variant.image.src | product_img_url: 'master' }}"{% endif %}>
@@ -142,7 +122,8 @@
                 <div class="combo-options customPopup-small isChecked" data-product-option-id="{{ product.id }}">
                     {% render 'product-combo-swatch',
                         product: product,
-                        picker_type: picker_type
+                        picker_type: picker_type,
+                        forloop2: forloop1
                     %}
                     {% comment %} {%- if settings.show_hot_stock -%}
                         {% assign productMaxStock = settings.hot_stock_limit | plus: 0 %}

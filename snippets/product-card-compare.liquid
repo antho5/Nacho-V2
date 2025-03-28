@@ -46,7 +46,7 @@
 		                    endif
 		                -%}
 		                <a class="card-media card-media--{{ media_size }}{% if settings.show_image_swap %} media--hover-effect{% endif%}"
-		                    href="{{ product_card_product.url | within: collection }}"
+		                    href="{{ product_card_product.url }}"
 		                    {% if product_card_product.featured_media %}
 		                        {% if media_size == 'adapt' %}
 		                            style="padding-bottom: {{ 1 | divided_by: featured_media_aspect_ratio | times: 100 }}%;"
@@ -141,8 +141,9 @@
 		                            >
 		                        {%- endif -%}
 		                    {%- else -%}
-		                        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-		                        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+		                        {%- capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture -%}
+								{%- assign placeholder_image = 'product-apparel-' | append: current -%}
+								{{ placeholder_image | placeholder_svg_tag: 'placeholder-svg' }}
 		                    {%- endif -%}
 		                </a>
 		            </div>
@@ -160,7 +161,7 @@
 	                            </div>
 	                        {% endif %}
 	                    </div>
-		                <a class="card-title link-underline{% if settings.product_title_line_text != 'full' %} card-title-ellipsis{% endif %}{% if variant_selected != blank %} card-title-change{% endif %}" href="{{ product_card_product.url | within: collection }}" data-product-title="{{ product_card_product.title | escape }}" data-product-url="{{ product_card_product.url | within: collection }}">
+		                <a class="card-title link-underline{% if settings.product_title_line_text != 'full' %} card-title-ellipsis{% endif %}{% if variant_selected != blank %} card-title-change{% endif %}" href="{{ product_card_product.url }}" data-product-title="{{ product_card_product.title | escape }}" data-product-url="{{ product_card_product.url }}">
 		                    <span class="text">
 		                        {{ product_card_product.title | escape }}
 		                        {% if variant_selected != blank %}
@@ -182,11 +183,6 @@
 	<td class="compareTable-item">
 		{{ current_variant.sku }}
 	</td>
-	{%- if settings.show_review -%}
-		<td class="compareTable-item halo-productReview">
-			<span class="shopify-product-reviews-badge" data-id="{{ product_card_product.id }}"></span>
-		</td>
-	{%- endif -%}
 	<td class="compareTable-item compareTable-desc">
 		{%- liquid
 			assign desc = product_card_product.description
@@ -194,7 +190,7 @@
 		-%}
 		{% if product_card_product.metafields.c_f.short_description %}
 			{%- liquid
-				assign desc = product_card_product.metafields.c_f.short_description
+				assign desc = product_card_product.metafields.c_f.short_description | strip_html
 				assign word_number = 100000
 			-%}
         {% else %}
@@ -202,7 +198,7 @@
         {% endif %}
         {%- if desc != blank -%}
             <div class="halo-text-format">
-                {{ desc | truncatewords: word_number }}
+                {{ desc | strip_html | truncatewords: word_number }}
             </div>
         {%- endif -%}
 	</td>
@@ -236,7 +232,7 @@
 				    </div>
 				    <div class="compareTable-optionValue">
 				    	{%- for value in option.values -%}
-					        <span class="text">{{ value }}{% unless forloop.last %},{% endunless %}</span>
+					        <span class="text">{{ value }}{% unless forloop.last %}, {% endunless %}</span>
 					    {%- endfor -%}
 				    </div>
 				</div>

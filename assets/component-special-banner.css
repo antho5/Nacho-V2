@@ -424,6 +424,14 @@
 /* END: Product Info */
 /* END: Lookbook Card style */
 
+.slick-next .products-counter-number .counter {
+    font-size: calc(var(--font-body-size) - 2px);
+}
+
+.special-banner__products--grid.products-grid+.products-counter-number {
+    display: none;
+}
+
 @media (max-width: 1024px) {
     .special-banner__collection {
         display: inline-block;
@@ -569,12 +577,16 @@
   
     .special-banner__lookbook {
         position: absolute;
-        position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
         max-height: 100%;
         width: 73%;
+    }
+
+    .special-banner__item--collection_banner+.special-banner__item--lookbook_banner .special-banner__lookbook {
+        position: initial;
+        transform: none;
     }
 
     .special-banner__img_box.is-sticky {

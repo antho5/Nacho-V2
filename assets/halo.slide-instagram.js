@@ -8,11 +8,13 @@
 	                dataRows = self.data('rows'),
 	                dataSlideRow = self.data('slide-rows'),
 	                dataArrow = self.data('arrow'),
+					dataColumn = self.data('column'),
+	                dataDots = self.data('dots'),
 	                dataMode = self.data('mode'),
 	                dataLimit = self.data('limit');
 	                
 	            if (dataSlideRow == 2) {
-            		var x =  self.children();
+            		var x = self.children();
 		            for (i = 0; i < x.length ; i += 2) {
 		              x.slice(i,i+2).wrapAll('<div class="'+ i +'"></div>');
 		            }
@@ -33,6 +35,7 @@
 					    }
 					},
 	              	arrows: dataArrow,
+	              	dots: dataDots,
 	              	nextArrow: window.arrows.icon_next,
                     prevArrow: window.arrows.icon_prev,
 	              	slidesToShow: dataRows,
@@ -73,15 +76,18 @@
 							},
 							get slidesToScroll() {
 							    if (dataSlideRow == 1) {
-									return this.slidesToScroll = 3
+									return this.slidesToScroll = 2
 							    }
 							},
 							get slidesToShow() {
 								if (dataMode == true) {
 									return this.slidesToScroll = 2
 								} else {
-									return this.slidesToScroll = 3
+									return this.slidesToScroll = 2.5
 								}
+							},
+							get initialSlide() {
+								return this.initialSlide = 0.5;
 							}
 		                }
 	                },
@@ -103,8 +109,11 @@
 								if (dataMode == true) {
 									return this.slidesToScroll = 1
 								} else {
-									return this.slidesToScroll = 2
+									return this.slidesToScroll = 1.5
 								}
+							},
+							get initialSlide() {
+								return this.initialSlide = 0.5;
 							}
 	                  	}
 	                }                                          
@@ -114,4 +123,8 @@
 	    }
 	}
 	halo.initInstagramSlider();
+	if ($('body').hasClass('cursor-fixed__show')){
+		window.sharedFunctionsAnimation.onEnterButton();
+		window.sharedFunctionsAnimation.onLeaveButton();
+	}
 })(jQuery);
