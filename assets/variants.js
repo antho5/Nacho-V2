@@ -131,7 +131,6 @@ class VariantSelects extends HTMLElement {
       const newMedia = document.querySelectorAll(
         `[data-media-id="${this.dataset.section}-${this.currentVariant.featured_media.id}"]`
       );
-
       if (!newMedia) return;
       window.setTimeout(() => {
         $(newMedia).trigger("click");
@@ -140,6 +139,7 @@ class VariantSelects extends HTMLElement {
       if (!this.isFullWidth || window.innerWidth < 768 || !this.currentVariant)
         return;
       const mediaId = this.currentVariant.featured_media.id;
+
       const activeMedia = document?.querySelector(
         `.product-single__media[data-media-id="${mediaId}"]`
       );
@@ -244,7 +244,7 @@ class VariantSelects extends HTMLElement {
             ?.querySelector(".active")
             ?.getAttribute("data-currency");
 
-          Currency?.convertAll?.(
+          Currency.convertAll(
             window.shop_currency,
             currencyCode,
             "span.money",
@@ -421,7 +421,7 @@ class VariantSelects extends HTMLElement {
               .getElementById("currencies")
               ?.querySelector(".active")
               ?.getAttribute("data-currency");
-            Currency?.convertAll?.(
+            Currency.convertAll(
               window.shop_currency,
               currencyCode,
               "span.money",
@@ -535,7 +535,7 @@ class VariantSelects extends HTMLElement {
               .getElementById("currencies")
               ?.querySelector(".active")
               ?.getAttribute("data-currency");
-            Currency?.convertAll?.(
+            Currency.convertAll(
               window.shop_currency,
               currencyCode,
               "span.money",
@@ -632,7 +632,7 @@ class VariantSelects extends HTMLElement {
                   .getElementById("currencies")
                   ?.querySelector(".active")
                   ?.getAttribute("data-currency");
-                Currency?.convertAll?.(
+                Currency.convertAll(
                   window.shop_currency,
                   currencyCode,
                   "span.money",
@@ -677,14 +677,6 @@ class VariantSelects extends HTMLElement {
           notifyMe.slideUp("slow");
         }
       }
-    }
-    if (BSS_B2B && BSS_B2B.observer && BSS_B2B.observer.productSubject) {
-      const productForm = document.querySelector("[bss-b2b-main-product-form]");
-      BSS_B2B.observer.productSubject.notifyObserver(
-        "VariantChange",
-        "VariantSelectChange",
-        { productForm }
-      );
     }
   }
 
@@ -807,18 +799,6 @@ class VariantSelects extends HTMLElement {
     ) {
       elementProductAddToCart.dataset.available =
         this.currentVariant.available && maxValue <= 0;
-    }
-    if (BSS_B2B) {
-      setTimeout(() => {
-        const productForm = document.querySelector(
-          "[bss-b2b-main-product-form]"
-        );
-        BSS_B2B.observer.productSubject.notifyObserver(
-          "VariantChange",
-          "VariantSelectChange",
-          { productForm }
-        );
-      }, 1000);
     }
   }
 
@@ -1122,7 +1102,7 @@ class QuantityInput extends HTMLElement {
           .getElementById("currencies")
           ?.querySelector(".active")
           ?.getAttribute("data-currency");
-        Currency?.convertAll?.(
+        Currency.convertAll(
           window.shop_currency,
           currencyCode,
           "span.money",
@@ -1199,14 +1179,6 @@ class QuantityInput extends HTMLElement {
         );
         mainQty2.value = inputValue;
       }
-    }
-    if (BSS_B2B) {
-      const productForm = document.querySelector("[bss-b2b-main-product-form]");
-      BSS_B2B.observer.productSubject.notifyObserver(
-        "VariantChange",
-        "VariantSelectChange",
-        { productForm }
-      );
     }
   }
 

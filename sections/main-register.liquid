@@ -67,6 +67,7 @@
                     <div class="form-field{% if form.errors contains "last_name" %} form-field--error{% endif %}">
                         <label class="form-label" for="RegisterForm-LastName">
                             {{ 'customer.register.last_name' | t }}
+                            <em>*</em>
                         </label>      
                         <input class="form-input form-input-placeholder{% if form.errors contains "last_name" %} error{% endif %}"
                             type="text"
@@ -75,6 +76,7 @@
                             {% if form.last_name %}value="{{ form.last_name }}"{% endif %}
                             autocomplete="family-name"
                             placeholder=""
+                            required
                         >
                     </div>
                     <div class="form-field{% if form.errors contains "email" %} form-field--error{% endif %}">
@@ -134,6 +136,7 @@
         </div>
     </div>
   </div>
+<<<<<<<< HEAD:sections/main-register.liquid
 </div>
 
 <style>
@@ -202,3 +205,6 @@
   ]
 }
 {% endschema %}
+========
+</div>
+>>>>>>>> refs/heads/dev/v6.7.2:templates/customers/register.liquid
