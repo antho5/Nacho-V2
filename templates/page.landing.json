@@ -325,6 +325,58 @@
     },
     "large_lookbook_banners_4yUU4h": {
       "type": "large-lookbook-banners",
+      "blocks": {
+        "lookbook_image_FmPpnK": {
+          "type": "lookbook_image",
+          "settings": {
+            "lookbook_image_action": "popup_image",
+            "lookbook_image_link": "",
+            "product_1": "",
+            "horizontal_pos_1": 0,
+            "vertical_pos_1": 0,
+            "lookbook_pos_1": "right",
+            "product_2": "",
+            "horizontal_pos_2": 0,
+            "vertical_pos_2": 0,
+            "lookbook_pos_2": "right",
+            "product_3": "",
+            "horizontal_pos_3": 0,
+            "vertical_pos_3": 0,
+            "lookbook_pos_3": "right",
+            "product_4": "",
+            "horizontal_pos_4": 0,
+            "vertical_pos_4": 0,
+            "lookbook_pos_4": "right"
+          }
+        },
+        "lookbook_image_QJCMk3": {
+          "type": "lookbook_image",
+          "settings": {
+            "lookbook_image_action": "popup_image",
+            "lookbook_image_link": "",
+            "product_1": "",
+            "horizontal_pos_1": 0,
+            "vertical_pos_1": 0,
+            "lookbook_pos_1": "right",
+            "product_2": "",
+            "horizontal_pos_2": 0,
+            "vertical_pos_2": 0,
+            "lookbook_pos_2": "right",
+            "product_3": "",
+            "horizontal_pos_3": 0,
+            "vertical_pos_3": 0,
+            "lookbook_pos_3": "right",
+            "product_4": "",
+            "horizontal_pos_4": 0,
+            "vertical_pos_4": 0,
+            "lookbook_pos_4": "right"
+          }
+        }
+      },
+      "block_order": [
+        "lookbook_image_FmPpnK",
+        "lookbook_image_QJCMk3"
+      ],
       "settings": {
         "container": "1770",
         "padding_full_width": 60,
