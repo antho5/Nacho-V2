@@ -44,7 +44,11 @@
         "arrow_active": false,
         "content_max_width": 38,
         "padding_top": 2,
-        "padding_bottom": 2
+        "padding_top_tablet": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom": 2,
+        "padding_bottom_tablet": 0,
+        "padding_bottom_mobile": 0
       }
     },
     "0233f54c-81fe-4fac-b946-755c29c900b0": {
@@ -89,7 +93,7 @@
         "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-5": {
           "type": "cart",
           "settings": {
-            "color": "#232323",
+            "color": "#ffffff",
             "cart_bg_item": "#f15c23",
             "cart_color_item": "#ffffff",
             "cart_item_font_size": 14
@@ -179,6 +183,7 @@
             "show_search": false,
             "show_customer": false,
             "show_wishlist": false,
+            "show_wishlist_number": false,
             "show_cart": false,
             "text_font_size": 14,
             "show_language_currency_sticky": false,
@@ -186,13 +191,16 @@
             "show_customer_sticky": true,
             "show_wishlist_sticky": false,
             "show_cart_sticky": true,
+            "cart_icon": "1",
             "header_icons_color": "#ffffff",
             "header_icons_color_hover": "#ffffff",
             "header_icons_border_color": "rgba(0,0,0,0)",
             "header_icons_border_sticky_color": "#232323",
             "cart_count_bubble_color": "#323232",
             "cart_count_bubble_bg": "#ff7a01",
-            "cart_count_bubble_bg_gradient": ""
+            "cart_count_bubble_bg_gradient": "",
+            "wishlist_color_item": "#ffffff",
+            "wishlist_bg_item": "#232323"
           }
         },
         "megamenu_style_3_LifhAt": {
@@ -236,7 +244,8 @@
         "sticky_header_width": "full",
         "enable_transparent": false,
         "transparent_color": "#ffffff",
-        "transparent_color_hover": "#ffffff"
+        "transparent_color_hover": "#ffffff",
+        "border_color": "transparent"
       }
     },
     "header-mobile": {
@@ -245,12 +254,15 @@
         "13dd6938-3a12-407d-98a3-6de97c7c72f5": {
           "type": "menu",
           "settings": {
-            "color": "#232323"
+            "color": "#232323",
+            "menu_tab_bg": "#000000"
           }
         },
         "163e2cb5-14f2-4af6-9ac3-77193c082f53": {
           "type": "search",
           "settings": {
+            "icon": "1",
+            "popup_action": false,
             "color": "#232323"
           }
         },
@@ -263,13 +275,15 @@
             "logo_font_size": 20,
             "logo_font_weight": "900",
             "logo_text_transform": "uppercase",
-            "logo_color": "#232323"
+            "logo_color": "#232323",
+            "alignment": "center"
           }
         },
         "633f9dae-3f65-4bda-9ca8-9d3e231aaf9d": {
           "type": "cart",
           "settings": {
             "icon": "3",
+            "show_cart_count_bubble": true,
             "color": "#232323",
             "color_bubble": "#ffffff",
             "bg_bubble": "#ff7a01"
@@ -294,6 +308,9 @@
         "background": "#e6e6e6",
         "gradient": "",
         "sticky_header_type": "on_scroll",
+        "enable_transparent": false,
+        "transparent_color": "#fff",
+        "transparent_border_color": "",
         "padding_top": 0,
         "padding_bottom": 0
       }
