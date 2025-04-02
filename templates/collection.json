@@ -12,16 +12,6 @@
     "banner": {
       "type": "main-collection-banner",
       "blocks": {
-        "2f29af17-8482-46cf-8d9c-05b734e165f7": {
-          "type": "image",
-          "settings": {
-            "show_image_parallax": false,
-            "show_bg_overlay": false,
-            "type": "full",
-            "image_mobile": "shopify://shop_images/nacho-collection-header.webp",
-            "bg_overlay": "#000000"
-          }
-        },
         "9147d182-d0c6-4b47-ad9e-97ad5cd6ae5a": {
           "type": "description",
           "settings": {
@@ -65,7 +55,6 @@
         }
       },
       "block_order": [
-        "2f29af17-8482-46cf-8d9c-05b734e165f7",
         "9147d182-d0c6-4b47-ad9e-97ad5cd6ae5a"
       ],
       "settings": {
