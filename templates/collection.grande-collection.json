@@ -68,6 +68,9 @@
         "2f29af17-8482-46cf-8d9c-05b734e165f7",
         "9147d182-d0c6-4b47-ad9e-97ad5cd6ae5a"
       ],
+      "custom_css": [
+        "[data-sub-collection-slider] .slick-track {margin: 0 auto !important;}"
+      ],
       "settings": {
         "container": "1770",
         "padding_full_width": 0,
@@ -189,11 +192,11 @@
         "btn_text": "",
         "link": "",
         "button_width": 235,
-        "button_color": "#fff",
+        "button_color": "#ffffff",
         "button_border": "#232323",
         "button_background": "#232323",
         "button_background_gradient": "",
-        "button_color_hover": "#fff",
+        "button_color_hover": "#ffffff",
         "button_border_hover": "#232323",
         "button_background_hover": "#232323",
         "button_background_gradient_hover": "",
@@ -249,11 +252,11 @@
         "btn_text": "",
         "link": "",
         "button_width": 235,
-        "button_color": "#fff",
+        "button_color": "#ffffff",
         "button_border": "#232323",
         "button_background": "#232323",
         "button_background_gradient": "",
-        "button_color_hover": "#fff",
+        "button_color_hover": "#ffffff",
         "button_border_hover": "#232323",
         "button_background_hover": "#232323",
         "button_background_gradient_hover": "",
