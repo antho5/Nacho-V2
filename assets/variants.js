@@ -244,7 +244,7 @@ class VariantSelects extends HTMLElement {
             ?.querySelector(".active")
             ?.getAttribute("data-currency");
 
-          Currency.convertAll(
+          Currency?.convertAll(
             window.shop_currency,
             currencyCode,
             "span.money",
