@@ -93,7 +93,7 @@
         "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-5": {
           "type": "cart",
           "settings": {
-            "color": "#ffffff",
+            "color": "#232323",
             "cart_bg_item": "#f15c23",
             "cart_color_item": "#ffffff",
             "cart_item_font_size": 14
@@ -245,7 +245,7 @@
         "enable_transparent": false,
         "transparent_color": "#ffffff",
         "transparent_color_hover": "#ffffff",
-        "border_color": "transparent"
+        "border_color": "rgba(0,0,0,0)"
       }
     },
     "header-mobile": {
@@ -309,7 +309,7 @@
         "gradient": "",
         "sticky_header_type": "on_scroll",
         "enable_transparent": false,
-        "transparent_color": "#fff",
+        "transparent_color": "#ffffff",
         "transparent_border_color": "",
         "padding_top": 0,
         "padding_bottom": 0
