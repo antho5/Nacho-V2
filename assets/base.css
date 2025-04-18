@@ -7352,3 +7352,16 @@ summary::-webkit-details-marker {
 .cart-list [bss-b2b-item-original-price] {
   font-size: 18px;
 }
+
+
+.bss-b2b-rf-field.field-checkbox .checkbox-option {
+    display: flex;
+    gap: 5px;
+}
+.bss-b2b-rf-field.field-checkbox input[type=checkbox] {
+    display: block;
+    width: auto !important;
+    height: auto !important;
+    clip: unset;
+    position: relative;
+}
