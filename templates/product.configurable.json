@@ -18,7 +18,7 @@
             "fontsize_text": 20,
             "fontsize_text_mb": 18,
             "color_title": "#232323",
-            "spacing_top": 10,
+            "spacing_top": 80,
             "spacing_bottom": 0
           }
         },
@@ -312,10 +312,10 @@
         "padding_top": 10,
         "padding_top_tablet": 30,
         "padding_top_mobile": 30,
-        "padding_bottom": 10,
+        "padding_bottom": 0,
         "padding_bottom_tablet": 40,
         "padding_bottom_mobile": 30,
-        "mg_top_desktop": 10,
+        "mg_top_desktop": 0,
         "mg_top_tablet": 50,
         "mg_top_mobile": 0,
         "mg_bottom_desktop": 0,
