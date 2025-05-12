@@ -52,6 +52,17 @@
             "spacing_bottom": 0
           }
         },
+        "short_description_3HqW44": {
+          "type": "short_description",
+          "settings": {
+            "show_short_description": true,
+            "word_number": "100",
+            "fontsize_text": 16,
+            "color_text": "#3c3c3c",
+            "spacing_top": 0,
+            "spacing_bottom": 13
+          }
+        },
         "variant_picker_zm6kdD": {
           "type": "variant_picker",
           "settings": {
@@ -222,6 +233,7 @@
         "klaviyo_reviews_average_rating_wFFpJa",
         "info_kVa733",
         "4f95b592-8369-4ab0-b30d-24e463fb6890",
+        "short_description_3HqW44",
         "variant_picker_zm6kdD",
         "faa2b3e6-c0a1-4269-baa6-d2605efe4c05",
         "f1b31d90-1e43-4948-9fe3-97ba43f6fb34",
