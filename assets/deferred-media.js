@@ -28,8 +28,6 @@
 // customElements.define('deferred-media', DeferredMedia);
 
 
-
-
 class DeferredMedia extends HTMLElement {
     constructor() {
         super();
