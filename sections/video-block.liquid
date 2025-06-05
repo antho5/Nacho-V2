@@ -33,7 +33,6 @@
     assign button_width = section.settings.button_width
 -%}
 
-
 <div class="video-section section-block-{{section.id}}{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}" allow-transparent-header data-loader-script="{%- if autoVideo -%}{{ 'autoplay-video.js' | asset_url }}{%- else -%}{{ 'deferred-media.js' | asset_url }}{%- endif -%}">
     <div class="{% if section.settings.container == 'fullwidth' %}container-full{% elsif section.settings.container == '1770' %}container-1770{% elsif section.settings.container == '1170' %}container-1170{% else %}container{% endif %}">
         {% if section.settings.video_block_title != blank %}
@@ -344,7 +343,7 @@
         "default": 45
     },
     {
-        "type" : "textarea",
+        "type" : "liquid",
         "id" : "video_block_des",
         "label" : "t:sections.image-banner.blocks.image.settings.content.label__2"
     },
