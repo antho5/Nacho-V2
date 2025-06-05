@@ -314,6 +314,7 @@
     },
     "video_block_zhAnwe": {
       "type": "video-block",
+      "disabled": true,
       "settings": {
         "container": "container",
         "spotlight_bg": "#ffffff",
@@ -374,6 +375,7 @@
     },
     "video_block_zaUE3E": {
       "type": "video-block",
+      "disabled": true,
       "settings": {
         "container": "container",
         "spotlight_bg": "#ffffff",
@@ -434,6 +436,7 @@
     },
     "video_block_BVkHUh": {
       "type": "video-block",
+      "disabled": true,
       "settings": {
         "container": "container",
         "spotlight_bg": "#ffffff",
