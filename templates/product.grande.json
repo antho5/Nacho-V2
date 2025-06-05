@@ -477,7 +477,6 @@
     },
     "video_block_BVkHUh": {
       "type": "video-block",
-      "disabled": true,
       "settings": {
         "container": "container",
         "spotlight_bg": "#ffffff",
