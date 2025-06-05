@@ -63,19 +63,6 @@
             "spacing_bottom": 13
           }
         },
-        "variant_picker_zm6kdD": {
-          "type": "variant_picker",
-          "disabled": true,
-          "settings": {
-            "picker_type": "button",
-            "show_variant_image_group": true,
-            "enable_border_top": false,
-            "enable_border_bottom": false,
-            "color_border": "#e6e6e6",
-            "spacing_top": 0,
-            "spacing_bottom": 15
-          }
-        },
         "custom_liquid_gCRHRM": {
           "type": "custom_liquid",
           "settings": {
@@ -104,15 +91,6 @@
             "spacing_bottom": 12
           }
         },
-        "10093fcf-2053-47e9-bedb-841bb0d046fa": {
-          "type": "trust_image",
-          "disabled": true,
-          "settings": {
-            "show_trust_image": true,
-            "spacing_top": 0,
-            "spacing_bottom": 0
-          }
-        },
         "bd066b80-c8e3-4f3e-8280-b27fbf6e9423": {
           "type": "description",
           "settings": {
@@ -124,7 +102,6 @@
         },
         "87197f5f-be0e-4b89-9270-62bf6917ebe7": {
           "type": "custom",
-          "disabled": true,
           "settings": {
             "open_tab_mobile": false,
             "title": "Specification",
@@ -197,11 +174,9 @@
         "info_kVa733",
         "4f95b592-8369-4ab0-b30d-24e463fb6890",
         "short_description_3HqW44",
-        "variant_picker_zm6kdD",
         "custom_liquid_gCRHRM",
         "a86220cf-8641-4e06-87d3-b5ffa195501b",
         "d97e417a-941b-4a5d-bef3-a651adb918d8",
-        "10093fcf-2053-47e9-bedb-841bb0d046fa",
         "bd066b80-c8e3-4f3e-8280-b27fbf6e9423",
         "87197f5f-be0e-4b89-9270-62bf6917ebe7",
         "custom_aNqVRp",
