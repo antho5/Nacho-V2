@@ -149,9 +149,9 @@
                         {%- endif -%}
                     {%- endif -%}
                 {%- else -%}
-                <video class="js-video  slide-pc" muted playsinline preload="none" autoplay loop controls>
+                <video class="js-video{% if section.settings.url_mp4_mb != blank %} slide-pc{% endif %}"{% unless videoSound %} muted{% endunless %} playsinline preload="none" autoplay loop controls>
                         <source type="video/mp4" src="{{ section.settings.url_mp4 }}">
-                </video>
+                    </video>
                     
             {% endif %}
             </{% if autoVideo %}div{% else %}template{% endif %}>
