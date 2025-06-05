@@ -371,7 +371,7 @@
         "fontsize_des": 16,
         "title_align": "center",
         "cover_image": "{{ product.metafields.custom.cover_image.value }}",
-        "autoplay": true,
+        "autoplay": false,
         "video_sound": false,
         "video_height": "55",
         "video_height_mb": "100",
