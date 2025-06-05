@@ -149,8 +149,8 @@
                         {%- endif -%}
                     {%- endif -%}
                 {%- else -%}
-                <video class="js-video{% if section.settings.url_mp4_mb != blank %} slide-pc{% endif %}"{% unless videoSound %} muted{% endunless %} playsinline preload="none" autoplay loop controls>
-                        <source class="quoc-{{  section.settings.url_mp4 }}" type="video/mp4" src="{{ section.settings.url_mp4 }}">
+                <video class="quoc js-video{% if section.settings.url_mp4_mb != blank %} slide-pc{% endif %}"{% unless videoSound %} muted{% endunless %} playsinline preload="none" autoplay loop controls>
+                        <source type="video/mp4" src="{{ section.settings.url_mp4 }}">
                     </video>
                     {%- if section.settings.url_mp4_mb != blank -%}
                         <video class="js-video slide-mb"{% unless videoSound %} muted{% endunless %} playsinline preload="none" autoplay loop controls>
