@@ -378,7 +378,7 @@
         "style_video": "mp4",
         "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "video_url_mb": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "url_mp4": "{{ product.metafields.custom.video_url.value }}",
+        "url_mp4": "https://cdn.shopify.com/videos/c/o/v/b79155b8bb8045da821584203d7abf48.mp4",
         "url_mp4_mb": "https://cdn.shopify.com/videos/c/o/v/b79155b8bb8045da821584203d7abf48.mp4",
         "description": "{{ product.title }} Video",
         "full_width": false,
