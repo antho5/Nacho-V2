@@ -289,7 +289,6 @@
     },
     "video_block_zhAnwe": {
       "type": "video-block",
-      "disabled": true,
       "settings": {
         "container": "container",
         "spotlight_bg": "#ffffff",
