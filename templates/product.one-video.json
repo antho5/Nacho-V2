@@ -154,7 +154,7 @@
           "type": "custom",
           "settings": {
             "open_tab_mobile": false,
-            "title": "Specification",
+            "title": "Reviews",
             "type": "metafield",
             "content": "<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.Donec pretium egestas sapien et mollis. Pellentesque diam dolor cosmopolis etos lobortis.</p>\n<dl>\n<dt>Comodous:</dt>\n<dd>Comodous in tempor ullamcorper miaculis</dd>\n</dl>\n<dl>\n<dt>Mattis laoreet:</dt>\n<dd>Pellentesque vitae neque mollis urna mattis laoreet.</dd>\n</dl>\n<dl>\n<dt>Divamus de ametos:</dt>\n<dd>Divamus sit amet purus justo.</dd>\n</dl>\n<dl>\n<dt>Molestie:</dt>\n<dd>Proin molestie egestas orci ac suscipit risus posuere loremous</dd>\n</dl>",
             "product_custom_source": "dynamic",
@@ -162,10 +162,6 @@
             "enable_btn_show_more": false,
             "maximum_des_to_show": 300
           }
-        },
-        "klaviyo_reviews_product_reviews_bJ7VCp": {
-          "type": "shopify://apps/klaviyo-reviews/blocks/product-reviews/db20e365-d984-4ac4-9655-e1588d951ca9",
-          "settings": {}
         },
         "3d9ea84d-5527-4bce-abe6-5debef3ec955": {
           "type": "custom",
@@ -219,7 +215,6 @@
         "10093fcf-2053-47e9-bedb-841bb0d046fa",
         "bd066b80-c8e3-4f3e-8280-b27fbf6e9423",
         "87197f5f-be0e-4b89-9270-62bf6917ebe7",
-        "klaviyo_reviews_product_reviews_bJ7VCp",
         "3d9ea84d-5527-4bce-abe6-5debef3ec955",
         "19ab1d9f-74b2-4c76-bf2e-1bc749e5c2a3",
         "1180d91b-75f9-49d9-a9db-2b9f5a49408d"
