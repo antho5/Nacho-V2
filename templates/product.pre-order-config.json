@@ -171,6 +171,19 @@
             "maximum_des_to_show": 300
           }
         },
+        "custom_r6JJN6": {
+          "type": "custom",
+          "settings": {
+            "open_tab_mobile": false,
+            "title": "Reviews",
+            "type": "all",
+            "content": "",
+            "product_custom_source": "dynamic",
+            "product_tab_key_metafield": "",
+            "enable_btn_show_more": false,
+            "maximum_des_to_show": 300
+          }
+        },
         "b9d6eb19-10f4-41f8-bfdc-ea10e8b3182a": {
           "type": "custom",
           "settings": {
@@ -239,6 +252,7 @@
         "683f2b15-db3b-4f63-8d0f-e688cc678581",
         "10093fcf-2053-47e9-bedb-841bb0d046fa",
         "bd066b80-c8e3-4f3e-8280-b27fbf6e9423",
+        "custom_r6JJN6",
         "b9d6eb19-10f4-41f8-bfdc-ea10e8b3182a",
         "19ab1d9f-74b2-4c76-bf2e-1bc749e5c2a3",
         "a86220cf-8641-4e06-87d3-b5ffa195501b",
