@@ -200,7 +200,7 @@
         "product_image_ratio": "portrait",
         "portrait_aspect_ratio": 148,
         "video_layout": "popup",
-        "zoomed_image": true,
+        "zoomed_image": false,
         "product_image_popup": "fancybox",
         "main_image_show_custom_cursor": false,
         "icon_color": "#000000",
