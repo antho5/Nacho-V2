@@ -155,7 +155,6 @@
         },
         "10093fcf-2053-47e9-bedb-841bb0d046fa": {
           "type": "trust_image",
-          "disabled": true,
           "settings": {
             "show_trust_image": true,
             "spacing_top": 0,
