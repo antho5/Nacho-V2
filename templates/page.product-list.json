@@ -187,8 +187,8 @@
       ],
       "name": "t:sections.spotlight_block.presets.name",
       "settings": {
-        "container": "container",
-        "padding_full_width": 0,
+        "container": "fullwidth",
+        "padding_full_width": 55,
         "disable_padding_content": false,
         "mg_minus_desktop": 0,
         "block_layout": "slider",
@@ -263,10 +263,10 @@
         "mg_bottom_mobile": 50
       }
     },
-    "spotlight_block_Apz7dt": {
+    "spotlight_block_WBRPJH": {
       "type": "spotlight-block",
       "blocks": {
-        "image_wnaRBd": {
+        "image_LkxPFY": {
           "type": "image",
           "settings": {
             "enable_image": true,
@@ -320,7 +320,7 @@
             "bg_color_button_gradient_hover": ""
           }
         },
-        "image_awyCLq": {
+        "image_6CmGX6": {
           "type": "image",
           "settings": {
             "enable_image": true,
@@ -374,7 +374,7 @@
             "bg_color_button_gradient_hover": ""
           }
         },
-        "image_ibTQXd": {
+        "image_WrayHK": {
           "type": "image",
           "settings": {
             "enable_image": true,
@@ -430,21 +430,21 @@
         }
       },
       "block_order": [
-        "image_wnaRBd",
-        "image_awyCLq",
-        "image_ibTQXd"
+        "image_LkxPFY",
+        "image_6CmGX6",
+        "image_WrayHK"
       ],
       "name": "t:sections.spotlight_block.presets.name",
       "settings": {
-        "container": "container",
-        "padding_full_width": 0,
+        "container": "fullwidth",
+        "padding_full_width": 55,
         "disable_padding_content": false,
         "mg_minus_desktop": 0,
         "block_layout": "slider",
         "spotlight_block_swipe_on_mobile": "slider",
         "column": "3",
         "column_mb": "1",
-        "center_mode": false,
+        "center_mode": true,
         "item_distance": 15,
         "item_radius": 0,
         "enable_arrows": true,
@@ -516,6 +516,6 @@
   "order": [
     "main",
     "spotlight_block_kCQqgF",
-    "spotlight_block_Apz7dt"
+    "spotlight_block_WBRPJH"
   ]
 }
