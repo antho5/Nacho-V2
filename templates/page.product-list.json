@@ -75,7 +75,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify://shop_images/NANO-Scene-Lifestyle-Underglow-White.jpg",
+            "image": "shopify://shop_images/RaptorAmber_27b48f5b-a385-4141-9bb8-60692e6b1c3e.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
@@ -196,7 +196,7 @@
         "column": "3",
         "column_mb": "1",
         "center_mode": true,
-        "item_distance": 15,
+        "item_distance": 0,
         "item_radius": 0,
         "enable_arrows": true,
         "enable_arrows_mb": false,
