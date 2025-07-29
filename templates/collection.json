@@ -57,6 +57,9 @@
       "block_order": [
         "9147d182-d0c6-4b47-ad9e-97ad5cd6ae5a"
       ],
+      "custom_css": [
+        "[data-sub-collection-slider] .slick-track {margin: 0 auto;}"
+      ],
       "settings": {
         "container": "container",
         "padding_full_width": 0,
