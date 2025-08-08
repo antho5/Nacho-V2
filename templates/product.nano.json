@@ -447,7 +447,7 @@
         "title_align": "center",
         "cover_image": "{{ product.metafields.custom.cover_image_3.value }}",
         "autoplay": false,
-        "video_sound": false,
+        "video_sound": true,
         "video_height": "55",
         "video_height_mb": "100",
         "style_video": "youtube",
