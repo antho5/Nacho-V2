@@ -6710,6 +6710,13 @@
         if (event.data === YT.PlayerState.PLAYING) {
           $slick.slick("slickPause");
         }
+        if (event.data == YT.PlayerState.PLAYING) {
+          players.forEach(player => {
+            if (player !== event.target) {
+              player.pauseVideo();
+            }
+          });
+        }
 
         if (event.data === YT.PlayerState.ENDED) {
           $slick.slick("slickNext");
