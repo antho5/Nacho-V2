@@ -138,7 +138,7 @@
             <{% if autoVideo %}div{% else %}template{% endif %}>
                 {% if section.settings.style_video == 'youtube' %}
                     {%- if section.settings.video_url.type == 'youtube' -%}
-                        <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?enablejsapi=1&modestbranding=1&autohide=1&showinfo=0&controls=1&mute={% if videoSound %}0{% else %}1{%endif%}&autoplay=1&loop=0&playlist={{section.settings.video_url.id}}" class="js-youtube{% if section.settings.video_url_mb != blank %} slide-pc{% endif %}" allow="autoplay; loop; encrypted-media" allowfullscreen title="{{ section.settings.description | escape }}"></iframe>
+                        <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?enablejsapi=1&modestbranding=1&autohide=1&showinfo=0&controls=1&mute={% if videoSound %}0{% else %}1{%endif%}&autoplay=1&loop=0&playlist={{section.settings.video_url.id}}" class="js-youtube{% if section.settings.video_url_mb != blank %} slide-pc{% endif %}" allow="autoplay; encrypted-media" allowfullscreen title="{{ section.settings.description | escape }}"></iframe>
                         {%- if section.settings.video_url_mb != blank -%}
                             <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url_mb.id }}?enablejsapi=1&modestbranding=1&autohide=1&showinfo=0&controls=0&mute={% if videoSound %}0{% else %}1{%endif%}&autoplay=1&loop=1&playlist={{section.settings.video_url_mb.id}}" class="js-youtube slide-mb" allow="autoplay; loop; encrypted-media" allowfullscreen title="{{ section.settings.description | escape }}"></iframe>
                         {%- endif -%}
