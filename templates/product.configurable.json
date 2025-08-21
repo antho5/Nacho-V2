@@ -117,7 +117,7 @@
             "color_icon": "#232323",
             "text": "Shipping Information",
             "color_title": "#232323",
-            "text_description": "<p>Please allow 24-48 for your order to be picked and shipped.</p>",
+            "text_description": "<p>Please allow 5-7 business days for your order to be picked and shipped.</p>",
             "color_des": "#4d4d4d",
             "fontsize_text": 12,
             "content_popup": "<p>Please allow 24-48 for your order to be picked and shipped. When you place an order, we will estimate shipping delivery dates for you based on the availability of your items and the shipping options you choose. Depending on the shipping provider you choose, shipping date estimates may appear on the shipping quotes page. Please also note that the shipping rates for many items we sell are weight-based. The weight of any such item can be found on its detail page. To reflect the policies of the shipping companies we use, all weights will be rounded up to the next full pound.</p>",
