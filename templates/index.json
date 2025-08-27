@@ -16,7 +16,6 @@
           "type": "image",
           "settings": {
             "image_slide": "shopify://shop_images/Nano_Web_Banner.webp",
-            "image_slide_mb": "shopify://shop_images/Mobile_Nano_Web_Banner_1.webp",
             "alignment": "left",
             "enable_custom_position": false,
             "custom_horizontal": "",
