@@ -284,16 +284,16 @@
           "settings": {
             "icon": "3",
             "show_cart_count_bubble": true,
-            "color": "#232323",
-            "color_bubble": "#ffffff",
-            "bg_bubble": "#ff7a01"
+            "color": "#ffffff",
+            "color_bubble": "#000000",
+            "bg_bubble": "#ffffff"
           }
         },
         "customer_3KFg9z": {
           "type": "customer",
           "settings": {
             "icon": "1",
-            "color": "#232323"
+            "color": "#ffffff"
           }
         }
       },
