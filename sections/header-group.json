@@ -70,9 +70,9 @@
           "type": "search",
           "settings": {
             "show_box_shadow": true,
-            "search_color": "#323232",
-            "search_icon_color": "#323232",
-            "bg_search_color": "#f5f5f5",
+            "search_color": "#ffffff",
+            "search_icon_color": "#ffffff",
+            "bg_search_color": "#000000",
             "search_border_radius": 5
           }
         },
@@ -87,15 +87,15 @@
         "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-4": {
           "type": "customer",
           "settings": {
-            "color": "#232323"
+            "color": "#ffffff"
           }
         },
         "sections--16115241943210__0233f54c-81fe-4fac-b946-755c29c900b0-1681321201d528f813-5": {
           "type": "cart",
           "settings": {
-            "color": "#232323",
-            "cart_bg_item": "#f15c23",
-            "cart_color_item": "#ffffff",
+            "color": "#ffffff",
+            "cart_bg_item": "#ffffff",
+            "cart_color_item": "#000000",
             "cart_item_font_size": 14
           }
         }
@@ -110,7 +110,7 @@
       "settings": {
         "container": "1570",
         "padding_full_width": 0,
-        "header_bg": "#e6e6e6",
+        "header_bg": "#000000",
         "header_bg_gradient": "",
         "header_text_transform": "uppercase",
         "padding_top": 20,
@@ -238,7 +238,7 @@
       "settings": {
         "container": "1770",
         "padding_full_width": 5,
-        "header_navigation_bg": "#232830",
+        "header_navigation_bg": "#000000",
         "header_navigation_bg_gradient": "",
         "sticky_header_type": "always",
         "sticky_header_width": "full",
@@ -254,7 +254,7 @@
         "13dd6938-3a12-407d-98a3-6de97c7c72f5": {
           "type": "menu",
           "settings": {
-            "color": "#232323",
+            "color": "#ffffff",
             "menu_tab_bg": "#000000"
           }
         },
@@ -263,7 +263,7 @@
           "settings": {
             "icon": "1",
             "popup_action": false,
-            "color": "#232323"
+            "color": "#ffffff"
           }
         },
         "550fbd21-75fb-4051-9dee-77d91b5239f0": {
@@ -305,7 +305,7 @@
         "customer_3KFg9z"
       ],
       "settings": {
-        "background": "#e6e6e6",
+        "background": "#000000",
         "gradient": "",
         "sticky_header_type": "on_scroll",
         "enable_transparent": false,
