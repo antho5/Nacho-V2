@@ -248,11 +248,7 @@
         "grouped_product_8wkRbp"
       ],
       "custom_css": [
-        ".installment {display: none;}",
-        ".product-form__radio:checked + .product-form__label .text {background-color: #f15c23 !important; font-weight: bold; text-transform: uppercase; border: 2px solid #000;}",
-        ".product-form__label .text {text-transform: uppercase; font-weight: bold; border: 2px solid var(--swatch-border);}",
-        "a.button.bundle-product-toogle.button-2 {text-transform: uppercase;}",
-        "input.button.button--primary.button-bundle.style- {text-transform: uppercase;}"
+        ".installment {display: none;}"
       ],
       "settings": {
         "container": "container",
