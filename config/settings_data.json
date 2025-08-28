@@ -337,6 +337,7 @@
     "colors_link": "#ff5a00",
     "colors_link_hover": "#ff5a00",
     "colors_breadcrumb_active": "#ff5a00",
+    "colors_info": "#000000",
     "colors_global": "#000000",
     "colors_arrow": "#ffffff",
     "border_colors_arrow": "#ccc",
