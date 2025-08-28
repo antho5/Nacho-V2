@@ -1,5 +1,5 @@
 .bss-b2b-rf-submit-button .btn {
-  background: #f15c23 !important;
+  background: #FF5A00 !important;
 }
 
 .button{
@@ -15,7 +15,7 @@ svg {
 }
 
 a.tab-title.is-open {
-  --border-color: #F15C23 !important;
+  --border-color: #FF5A00 !important;
 }
 
 .bundle-product-options .swatch-element .text {
@@ -109,7 +109,7 @@ input.button.button--primary.button-bundle.style- {
 }
 
 .product-form__radio:checked + .product-form__label .text {
-  background-color: #f15c23 !important;
+  background-color: #FF5A00 !important;
   font-weight: bold;
   text-transform: uppercase;
   border: 2px solid #000;
@@ -126,7 +126,7 @@ input.button.button--primary.button-bundle.style- {
   border: none;
   box-shadow: none;
   text-decoration: none !important;
-  background-color: #f15c23;
+  background-color: #FF5A00;
   padding: 5px 15px;
   font-weight: bold;
   border-radius: 5px;
