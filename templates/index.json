@@ -523,7 +523,7 @@
       "settings": {
         "container": "fullwidth",
         "padding_full_width": 0,
-        "slideshow_background": "#232830",
+        "slideshow_background": "#000000",
         "slideshow_background_gradient": "",
         "autoplay": true,
         "slideshow_speed": "5000",
@@ -562,7 +562,7 @@
         "enable_categories": false,
         "text_categories": "Shop by categories",
         "title_color": "#ffffff",
-        "bg_title": "#fd6506",
+        "bg_title": "#ff5a00",
         "text_icon_color": "#202020",
         "menu_category": "",
         "enable_banner": false,
