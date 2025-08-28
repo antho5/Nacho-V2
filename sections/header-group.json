@@ -94,7 +94,7 @@
           "type": "cart",
           "settings": {
             "color": "#232323",
-            "cart_bg_item": "#f15c23",
+            "cart_bg_item": "#ff5a00",
             "cart_color_item": "#ffffff",
             "cart_item_font_size": 14
           }
@@ -145,11 +145,11 @@
             "bg_mega_menu": "#232323",
             "bg_mega_menu_gradient": "",
             "lv_1_color": "#ffffff",
-            "lv_1_color_hover": "#ff7a01",
+            "lv_1_color_hover": "#ff5a00",
             "lv_2_color": "#ffffff",
-            "lv_2_color_hover": "#ff7a01",
+            "lv_2_color_hover": "#ff5a00",
             "lv_3_color": "#ffffff",
-            "lv_3_color_hover": "#ff7a01",
+            "lv_3_color_hover": "#ff5a00",
             "sale_item_1": "",
             "sale_item_2": "",
             "sale_item_3": "",
@@ -197,7 +197,7 @@
             "header_icons_border_color": "rgba(0,0,0,0)",
             "header_icons_border_sticky_color": "#232323",
             "cart_count_bubble_color": "#323232",
-            "cart_count_bubble_bg": "#ff7a01",
+            "cart_count_bubble_bg": "#ff5a00",
             "cart_count_bubble_bg_gradient": "",
             "wishlist_color_item": "#ffffff",
             "wishlist_bg_item": "#232323"
@@ -286,7 +286,7 @@
             "show_cart_count_bubble": true,
             "color": "#232323",
             "color_bubble": "#ffffff",
-            "bg_bubble": "#ff7a01"
+            "bg_bubble": "#ff5a00"
           }
         },
         "customer_3KFg9z": {
@@ -311,8 +311,8 @@
         "enable_transparent": false,
         "transparent_color": "#ffffff",
         "transparent_border_color": "",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "padding_top": 5,
+        "padding_bottom": 5
       }
     }
   },
