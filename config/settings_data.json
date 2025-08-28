@@ -385,6 +385,8 @@
     "notification_intro_text_mobile": "",
     "notification_link_text_desktop": "",
     "notification_link_text_mobile": "",
+    "enable_preloading_screen": true,
+    "preloading_screen_image": "shopify://shop_images/Moe_Race_PNG.png",
     "show_review": false,
     "notify_form_mail": "support@nachooffroadtechnology.com",
     "checkout_logo_image": "shopify://shop_images/Full_Color_TAG_2x_918a31e2-86db-4070-8432-c72eec87f4db.png",
