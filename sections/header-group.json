@@ -145,7 +145,7 @@
             "bg_mega_menu": "#232323",
             "bg_mega_menu_gradient": "",
             "lv_1_color": "#ffffff",
-            "lv_1_color_hover": "#ff7a01",
+            "lv_1_color_hover": "#f15c23",
             "lv_2_color": "#ffffff",
             "lv_2_color_hover": "#ff7a01",
             "lv_3_color": "#ffffff",
@@ -195,12 +195,12 @@
             "header_icons_color": "#ffffff",
             "header_icons_color_hover": "#ffffff",
             "header_icons_border_color": "rgba(0,0,0,0)",
-            "header_icons_border_sticky_color": "#232323",
-            "cart_count_bubble_color": "#323232",
-            "cart_count_bubble_bg": "#ff7a01",
+            "header_icons_border_sticky_color": "#000000",
+            "cart_count_bubble_color": "#000000",
+            "cart_count_bubble_bg": "#ffffff",
             "cart_count_bubble_bg_gradient": "",
             "wishlist_color_item": "#ffffff",
-            "wishlist_bg_item": "#232323"
+            "wishlist_bg_item": "#000000"
           }
         },
         "megamenu_style_3_LifhAt": {
