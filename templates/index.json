@@ -1021,18 +1021,18 @@
         "lookbook_image_pTg8fw": {
           "type": "lookbook_image",
           "settings": {
-            "lookbook_image": "shopify://shop_images/NANO-Scene-Lifestyle-Underglow-White.jpg",
+            "lookbook_image": "shopify://shop_images/Trip-17.webp",
             "lookbook_image_action": "popup_image",
             "lookbook_image_link": "",
             "product_1": "nacho-nano",
-            "horizontal_pos_1": 21,
-            "vertical_pos_1": 60,
+            "horizontal_pos_1": 30,
+            "vertical_pos_1": 50,
             "lookbook_pos_1": "bottom",
             "product_2": "nano-mount-pair",
-            "horizontal_pos_2": 93,
-            "vertical_pos_2": 58,
+            "horizontal_pos_2": 75,
+            "vertical_pos_2": 50,
             "lookbook_pos_2": "bottom",
-            "product_3": "nacho-quatro-offroad",
+            "product_3": "",
             "horizontal_pos_3": 37,
             "vertical_pos_3": 40,
             "lookbook_pos_3": "bottom",
@@ -1048,8 +1048,8 @@
       ],
       "name": "t:sections.large_lookbook_banner.name",
       "settings": {
-        "container": "1170",
-        "padding_full_width": 60,
+        "container": "fullwidth",
+        "padding_full_width": 15,
         "section_bg": "#ffffff",
         "section_gradient": "",
         "title": "The Monthly Spotlight",
@@ -1064,7 +1064,7 @@
         "fontsize_des": 16,
         "fontsize_des_mb": 40,
         "title_align": "left",
-        "content_width": 515,
+        "content_width": 430,
         "view_more": "Shop NANOS",
         "view_all_link": "shopify://collections/nano",
         "view_all_color": "#ff5a00",
@@ -1083,7 +1083,7 @@
         "dot_outer_color": "#2d2d2d",
         "show_dot_number": false,
         "show_dot_number_mobile": false,
-        "dot_inner_color": "#ff5a00",
+        "dot_inner_color": "#ffffff",
         "number_desktop_size": 16,
         "number_mobile_size": 14,
         "lookbook_truncate": "1",
@@ -1100,38 +1100,6 @@
         "mg_bottom_desktop": 50,
         "mg_bottom_tablet": 70,
         "mg_bottom_mobile": 55
-      }
-    },
-    "172469927922c5c775": {
-      "type": "apps",
-      "blocks": {
-        "klaviyo_reviews_featured_reviews_carousel_XVJKaU": {
-          "type": "shopify://apps/klaviyo-reviews/blocks/featured-reviews-carousel/db20e365-d984-4ac4-9655-e1588d951ca9",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "klaviyo_reviews_featured_reviews_carousel_XVJKaU"
-      ],
-      "settings": {
-        "include_margins": true
-      }
-    },
-    "17060332145bef553f": {
-      "type": "apps",
-      "blocks": {
-        "powr_instagram_feed_app_block_fqwd6D": {
-          "type": "shopify://apps/powr-instagram-feed/blocks/app-block/0ef0f2d8-4861-4613-a8e4-82a7151be72e",
-          "settings": {
-            "app_id": "0db6845a_1650904810"
-          }
-        }
-      },
-      "block_order": [
-        "powr_instagram_feed_app_block_fqwd6D"
-      ],
-      "settings": {
-        "include_margins": false
       }
     },
     "video_block_wa3nKy": {
@@ -1192,6 +1160,38 @@
         "mg_bottom_desktop": 50,
         "mg_bottom_tablet": 50,
         "mg_bottom_mobile": 50
+      }
+    },
+    "172469927922c5c775": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_reviews_featured_reviews_carousel_XVJKaU": {
+          "type": "shopify://apps/klaviyo-reviews/blocks/featured-reviews-carousel/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "klaviyo_reviews_featured_reviews_carousel_XVJKaU"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "17060332145bef553f": {
+      "type": "apps",
+      "blocks": {
+        "powr_instagram_feed_app_block_fqwd6D": {
+          "type": "shopify://apps/powr-instagram-feed/blocks/app-block/0ef0f2d8-4861-4613-a8e4-82a7151be72e",
+          "settings": {
+            "app_id": "0db6845a_1650904810"
+          }
+        }
+      },
+      "block_order": [
+        "powr_instagram_feed_app_block_fqwd6D"
+      ],
+      "settings": {
+        "include_margins": false
       }
     }
   },
