@@ -56,7 +56,7 @@
             "phone_text": "<p><a href=\"tel:888.611.9299\" target=\"_blank\" title=\"tel:888.611.9299\">888.611.9299</a></p>",
             "email_icon": "envelope_icon",
             "show_email_icon": true,
-            "email_text": "<p><a href=\"mailto:support@nachooffroadtechnology.com\" target=\"_blank\" title=\"mailto:support@nachooffroadtechnology.com\">support@nachooffroadtechnology.com</a></p>",
+            "email_text": "<p><a href=\"mailto:support@nachooffroadtechnology.com\" target=\"_blank\" title=\"mailto:support@nachooffroadtechnology.com\">support@nacho.love</a></p>",
             "icon_size": 16,
             "icon_color": "#ffffff",
             "content_spacing": 5,
@@ -129,9 +129,21 @@
             "social_background_color_gradient_hover": "",
             "social_box_hover_color": "#ffffff",
             "show_app_store": false,
+            "top_spacing": 16,
             "app_store_heading": "",
+            "heading_bottom_margin": 20,
             "app_store_link_1": "",
             "app_store_link_2": "",
+            "logo_margin_bottom": 28,
+            "content_subtext": "",
+            "phone_icon": "message_icon",
+            "show_phone_icon": false,
+            "phone_text": "",
+            "email_icon": "envelope_icon",
+            "show_email_icon": false,
+            "email_text": "",
+            "icon_size": 16,
+            "icon_color": "",
             "newsletter_margin_bottom": 45
           }
         }
@@ -151,6 +163,7 @@
         "type_footer_heading_line_height": 22,
         "type_footer_heading_font_weight": "600",
         "type_footer_heading_text_transform": "uppercase",
+        "type_footer_heading_margin_bottom": 12,
         "type_footer_heading_letter_spacing": ".05em",
         "type_footer_link": "font_1",
         "type_footer_link_font_size": 12,
@@ -175,6 +188,7 @@
         "footer_top_color_link": "#cfcfcf",
         "footer_top_color_link_hover": "#ffffff",
         "show_border_item": false,
+        "space_border_item": 65,
         "footer_border_item": "#808080"
       }
     }
