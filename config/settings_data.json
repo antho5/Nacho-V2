@@ -182,7 +182,7 @@
     "hover_bg_button_filter_color": "#ffffff",
     "quick_search_to_show": 3,
     "search_type": "all",
-    "show_search_trending": true,
+    "show_search_trending": false,
     "search_trending_title": "",
     "seach_trending_item_1": "",
     "seach_trending_item_2": "",
