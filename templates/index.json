@@ -1084,7 +1084,7 @@
         "show_dot_number": false,
         "show_dot_number_mobile": false,
         "dot_inner_color": "#ffffff",
-        "number_desktop_size": 14,
+        "number_desktop_size": 16,
         "number_mobile_size": 11,
         "lookbook_truncate": "1",
         "show_text": "Show Products",
