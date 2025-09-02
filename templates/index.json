@@ -1083,7 +1083,7 @@
         "dot_outer_color": "#2d2d2d",
         "show_dot_number": false,
         "show_dot_number_mobile": false,
-        "dot_inner_color": "#ffffff",
+        "dot_inner_color": "#ff5a00",
         "number_desktop_size": 16,
         "number_mobile_size": 14,
         "lookbook_truncate": "1",
