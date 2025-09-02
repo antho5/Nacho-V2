@@ -1118,122 +1118,6 @@
         "include_margins": true
       }
     },
-    "f28eb02f-72f2-4cd6-b11f-64dd2dcd067c": {
-      "type": "customer-review-block",
-      "blocks": {
-        "593a5596-61e9-4e93-9f2d-e59a104b1694": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/SAE.jpg",
-            "heading": "Wow!!",
-            "sub_heading": "",
-            "rating": "star5",
-            "name": "",
-            "date": "",
-            "body": "I can't say enough about the NACHO product.  I saw them popping up more and more in the offroad industry and decided to check into them.  When I saw what they where doing and actually being different than others I had to give them a shot.  I am blown away by the attention to detail, performance, and more importantly their customer service.  They helped me understand their product and my needs in lighting."
-          }
-        },
-        "7b46cd31-e2ca-4c03-b5f5-3c453ad27094": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/bronco_test.png",
-            "heading": "My Bronco Is Dialed In",
-            "sub_heading": "",
-            "rating": "star5",
-            "name": "",
-            "date": "",
-            "body": "I was looking all over to try and find a replacement fog light for my new Bronco.  I came across NACHO and saw what looked like to be a great fitting replacement.  So I dug into it further and checked out the fog light that goes with the bracket.  3-N-1 lighting come on.  I had to give it a try and not only is the fitment like OEM, the option to be street legal and have offroad performance in the same light is game changing!  Highly recommended"
-          }
-        },
-        "d31099b0-674e-4187-bdde-8e25ab1c333e": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/TM5_Combo.jpg",
-            "heading": "Great Product",
-            "sub_heading": "",
-            "rating": "star5",
-            "name": "",
-            "date": "",
-            "body": "I am a offroad hobbyist and wheel my Jeep where and when I can.  I have seen Jeeps with lights all over the place and always wondered do you need that many?  When I started my search I saw a video about these lights and it looked like they answered all my questions. I made the purchase and when I received the product I was very impressed with the quality.  After the install and running through the modes of the light, I realized I just bought my last set of lights because these things do everything."
-          }
-        },
-        "74b7dee2-6d93-4009-89b2-beea48bc64f8": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/Flood.jpg",
-            "heading": "Excellent Company and Product",
-            "sub_heading": "",
-            "rating": "star5",
-            "name": "",
-            "date": "",
-            "body": "First off their customer service is like nothing else out there. Well maybe QuickTrip.  I reached out several times for info and suggestions as I looked for what I needed.  They are very knowledgeable and it is evident they are not new to lighting.  I ended up getting the Quatro Floods and the flush mount kit to help me at the lake when I load up or load out.  I was nervous because I was having to submerge the lights to dock the boat.  They assured me that is ok they are made for that and let me know they have a lifetime warranty.  Lights fit and work great and after several uses show no signs of issues event though they have been in and out of water several times."
-          }
-        }
-      },
-      "block_order": [
-        "593a5596-61e9-4e93-9f2d-e59a104b1694",
-        "7b46cd31-e2ca-4c03-b5f5-3c453ad27094",
-        "d31099b0-674e-4187-bdde-8e25ab1c333e",
-        "74b7dee2-6d93-4009-89b2-beea48bc64f8"
-      ],
-      "disabled": true,
-      "settings": {
-        "container": "1770",
-        "padding_full_width": 20,
-        "section_style": "style_1",
-        "review_bg": "#ffffff",
-        "review_bg_gradient": "",
-        "enable_heading_style_2": false,
-        "review_title": "Top Reviews",
-        "color_title": "#232323",
-        "mg_bottom_title": 18,
-        "fontsize_title": 16,
-        "fontsize_title_mb": 16,
-        "review_des": "",
-        "color_des": "#3c3c3c",
-        "margin_bottom_des": 10,
-        "fontsize_des": 16,
-        "title_align": "center",
-        "block_layout_style": "layout2",
-        "review_rows": "3",
-        "show_arrow": true,
-        "center_mode": false,
-        "show_avatar": true,
-        "avatar_margin_bottom": 10,
-        "color_heading": "#202020",
-        "fontsize_heading": 20,
-        "heading_margin_bottom": 14,
-        "heading_font_weight": "400",
-        "color_sub_heading": "#808080",
-        "fontsize_sub_heading": 13,
-        "sub_heading_margin_bottom": 20,
-        "color_name": "#202020",
-        "fontsize_name": 14,
-        "name_margin_bottom": 0,
-        "color_date": "#808080",
-        "fontsize_date": 13,
-        "color_body": "#202020",
-        "fontsize_body": 16,
-        "body_margin_bottom": 24,
-        "color_icon": "#ffffff",
-        "bg_color_icon": "#cbcbcb",
-        "star_font_size": 25,
-        "star_margin_bottom": 0,
-        "start_position": "below_title",
-        "star_color": "#eac806",
-        "star_empty_color": "#cccccc",
-        "scroll_height": 4,
-        "scroll_track_bg": "#f1f1f1",
-        "scroll_thumb_color": "#000000",
-        "scroll_thumb_hover_color": "#444444",
-        "mg_top_desktop": 20,
-        "mg_top_tablet": 20,
-        "mg_top_mobile": 20,
-        "mg_bottom_desktop": 20,
-        "mg_bottom_tablet": 20,
-        "mg_bottom_mobile": 20
-      }
-    },
     "17060332145bef553f": {
       "type": "apps",
       "blocks": {
@@ -1258,7 +1142,6 @@
     "8ca832d8-6669-441d-b6d9-9db74f475d94",
     "large_lookbook_banners_F7cBw6",
     "172469927922c5c775",
-    "f28eb02f-72f2-4cd6-b11f-64dd2dcd067c",
     "17060332145bef553f"
   ]
 }
