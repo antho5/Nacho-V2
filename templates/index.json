@@ -1048,7 +1048,7 @@
       ],
       "name": "t:sections.large_lookbook_banner.name",
       "settings": {
-        "container": "1770",
+        "container": "1170",
         "padding_full_width": 60,
         "section_bg": "#ffffff",
         "section_gradient": "",
