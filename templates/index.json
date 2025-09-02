@@ -1046,7 +1046,6 @@
       "block_order": [
         "lookbook_image_pTg8fw"
       ],
-      "disabled": true,
       "name": "t:sections.large_lookbook_banner.name",
       "settings": {
         "container": "1770",
