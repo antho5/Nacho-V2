@@ -1046,6 +1046,7 @@
       "block_order": [
         "lookbook_image_pTg8fw"
       ],
+      "disabled": true,
       "name": "t:sections.large_lookbook_banner.name",
       "settings": {
         "container": "1770",
@@ -1074,7 +1075,7 @@
         "view_all_pos": "left",
         "view_more_mg_top": 12,
         "image_behavior": "ambient",
-        "lookbook_style": "1",
+        "lookbook_style": "2",
         "enable_lookbook_width": false,
         "lookbook_width": 250,
         "dot_desktop_size": 24,
