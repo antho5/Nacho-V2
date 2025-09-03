@@ -957,7 +957,7 @@
         "enable_dots_mb": true,
         "display_border_bottom": false,
         "border_color": "rgba(0,0,0,0)",
-        "spotlight_bg": "rgba(0,0,0,0)",
+        "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "enable_custom_position_title": false,
         "spotlight_block_title": "Shop by Category",
