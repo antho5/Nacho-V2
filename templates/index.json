@@ -712,7 +712,7 @@
     "8ca832d8-6669-441d-b6d9-9db74f475d94": {
       "type": "spotlight-block",
       "blocks": {
-        "template--15963530461354__8ca832d8-6669-441d-b6d9-9db74f475d94-1681322157c759736b-1": {
+        "template--15963530461354__8ca832d8-6669-441d-b6d9-9db74f475d94-1681322157c759736b-2": {
           "type": "image",
           "settings": {
             "enable_image": true,
@@ -766,7 +766,7 @@
             "bg_color_button_gradient_hover": ""
           }
         },
-        "image_HhphYj": {
+        "image_fX8R4e": {
           "type": "image",
           "settings": {
             "enable_image": true,
@@ -776,7 +776,7 @@
             "align_items": "center",
             "align_items_spacing_top_bottom_position": 0,
             "align_items_spacing_top_bottom_position_mb": 0,
-            "bg_color_content": "",
+            "bg_color_content": "rgba(0,0,0,0)",
             "align_items_spacing_top": 10,
             "align_items_spacing_bottom": 10,
             "align_items_spacing_lr": 10,
@@ -820,7 +820,7 @@
             "bg_color_button_gradient_hover": ""
           }
         },
-        "template--15963530461354__8ca832d8-6669-441d-b6d9-9db74f475d94-1681322157c759736b-2": {
+        "image_BFphc8": {
           "type": "image",
           "settings": {
             "enable_image": true,
@@ -930,9 +930,9 @@
         }
       },
       "block_order": [
-        "template--15963530461354__8ca832d8-6669-441d-b6d9-9db74f475d94-1681322157c759736b-1",
-        "image_HhphYj",
         "template--15963530461354__8ca832d8-6669-441d-b6d9-9db74f475d94-1681322157c759736b-2",
+        "image_fX8R4e",
+        "image_BFphc8",
         "609134ee-6609-4741-b5a8-4b400dee8339"
       ],
       "custom_css": [
@@ -957,7 +957,7 @@
         "enable_dots_mb": true,
         "display_border_bottom": false,
         "border_color": "rgba(0,0,0,0)",
-        "spotlight_bg": "#ffffff",
+        "spotlight_bg": "rgba(0,0,0,0)",
         "spotlight_bg_gradient": "",
         "enable_custom_position_title": false,
         "spotlight_block_title": "Shop by Category",
