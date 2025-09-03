@@ -716,7 +716,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify://shop_images/automotive_banner.jpg",
+            "image": "shopify://shop_images/Automotive_d874ed5e-cbf3-4a7f-b425-9cd018b1a666.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
@@ -770,7 +770,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify://shop_images/Offroad_Catagory_Banner.jpg",
+            "image": "shopify://shop_images/Off-Road.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
@@ -824,7 +824,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify://shop_images/Catagory_Banner_Powerspots.jpg",
+            "image": "shopify://shop_images/Powersports_04ceea70-5121-476f-b362-67c1c6af217e.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
@@ -878,7 +878,7 @@
           "type": "image",
           "settings": {
             "enable_image": true,
-            "image": "shopify://shop_images/casual-5.jpg",
+            "image": "shopify://shop_images/Apparel_280de162-9ba0-4459-9176-b61b6bf8558a.jpg",
             "title_align": "center",
             "enable_absolute": false,
             "align_items": "center",
