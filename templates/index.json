@@ -966,7 +966,7 @@
         "color_title_mb": "",
         "fontsize_title": 16,
         "fontsize_title_mb": 22,
-        "margin_bottom_title": 45,
+        "margin_bottom_title": 25,
         "spotlight_block_des": "",
         "color_des": "#3c3c3c",
         "margin_bottom_des": 30,
@@ -1007,12 +1007,12 @@
         "shadow_spread": 0,
         "shadow_color": "transparent",
         "shadow_inset": "no",
-        "mg_top_desktop": 15,
-        "mg_top_tablet": 15,
-        "mg_top_mobile": 15,
-        "mg_bottom_desktop": 15,
-        "mg_bottom_tablet": 15,
-        "mg_bottom_mobile": 15
+        "mg_top_desktop": 25,
+        "mg_top_tablet": 25,
+        "mg_top_mobile": 25,
+        "mg_bottom_desktop": 25,
+        "mg_bottom_tablet": 25,
+        "mg_bottom_mobile": 25
       }
     },
     "large_lookbook_banners_Kch8tt": {
