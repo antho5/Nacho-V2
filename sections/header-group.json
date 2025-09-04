@@ -138,8 +138,8 @@
           "type": "main_menu",
           "settings": {
             "menu": "main-menu",
-            "menu_top_spacing": 11,
-            "menu_bottom_spacing": 12,
+            "menu_top_spacing": 15,
+            "menu_bottom_spacing": 15,
             "grid_gap_menu_item": 20,
             "alignment": "center",
             "bg_mega_menu": "#000000",
