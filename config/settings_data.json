@@ -176,7 +176,7 @@
     "category_filter_label2": "Make",
     "category_filter_label3": "Model",
     "color_filter_label": "#000000",
-    "bg_button_filter_color": "{{ shop.brand.colors.primary[0].background }}",
+    "bg_button_filter_color": "#ff5a00",
     "border_button_filter_color": "#000000",
     "hover_text_button_filter_color": "#000000",
     "hover_bg_button_filter_color": "#ffffff",
