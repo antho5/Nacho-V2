@@ -1,0 +1,181 @@
+{% comment %}
+  This snippet creates a popup that warns customers if they are adding an item
+  to the cart that is out of stock (inventory <= 0). This is useful for
+  managing backorders or pre-orders transparently.
+{% endcomment %}
+
+{%- if product.available -%}
+	<script>
+        // Create a map of variant IDs to their inventory quantities.
+        // This data is passed from Liquid (server) to JavaScript (client).
+        const variantInventory = {
+		{%- for variant in product.variants -%}
+		{{ variant.id }}: {{ variant.inventory_quantity | default: 0 }}{% unless forloop.last %},{% endunless %}
+		{%- endfor -%}
+        };
+	</script>
+
+	<style>
+        /* Styles for the popup modal and overlay */
+        .backorder-popup-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .backorder-popup-modal {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .backorder-popup-overlay.visible .backorder-popup-modal {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .backorder-popup-modal h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .backorder-popup-modal p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .backorder-popup-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .backorder-popup-btn {
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .backorder-popup-btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn-confirm {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-confirm:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-cancel {
+            background-color: #f1f1f1;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        .btn-cancel:hover {
+            background-color: #e6e6e6;
+        }
+
+	</style>
+
+	<!-- HTML structure for the popup -->
+	<div id="backorder-popup-overlay" class="backorder-popup-overlay">
+		<div id="backorder-popup-modal" class="backorder-popup-modal">
+			<h2>Just a heads up!</h2>
+			<p>This item is currently out of stock, but it's available for backorder. Please proceed if you're comfortable with a potential shipping delay.</p>
+			<div class="backorder-popup-buttons">
+				<button id="backorder-cancel" class="backorder-popup-btn btn-cancel">Cancel</button>
+				<button id="backorder-confirm" class="backorder-popup-btn btn-confirm">Add to Cart</button>
+			</div>
+		</div>
+	</div>
+
+	<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Find the product form on your page.
+            // IMPORTANT: Your form might have a different selector.
+            // Common selectors are 'form[action="/cart/add"]' or '#product-form'.
+            const productForm = document.querySelector('form[action$="/cart/add"]');
+            const popupOverlay = document.getElementById('backorder-popup-overlay');
+            const confirmButton = document.getElementById('backorder-confirm');
+            const cancelButton = document.getElementById('backorder-cancel');
+
+            if (!productForm || !popupOverlay) {
+                console.warn('Backorder Popup: Could not find product form or popup elements.');
+                return;
+            }
+
+            const showPopup = () => {
+                popupOverlay.style.display = 'flex';
+                // Use a timeout to allow the display property to apply before transitioning opacity/transform
+                setTimeout(() => {
+                    popupOverlay.classList.add('visible');
+                }, 10);
+            };
+
+            const hidePopup = () => {
+                popupOverlay.classList.remove('visible');
+                setTimeout(() => {
+                    popupOverlay.style.display = 'none';
+                }, 300); // Wait for the transition to finish
+            };
+
+            // Handle the main form submission
+            productForm.addEventListener('submit', (event) => {
+                // Find the selected variant's ID.
+                const formData = new FormData(productForm);
+                const selectedVariantId = formData.get('id');
+
+                // Check if we have inventory data for this variant.
+                if (selectedVariantId && variantInventory.hasOwnProperty(selectedVariantId)) {
+                    const inventory = variantInventory[selectedVariantId];
+
+                    // If inventory is 0 or less, and we haven't already confirmed via the popup...
+                    if (inventory <= 0) {
+                        event.preventDefault(); // Stop the form from submitting
+                        showPopup(); // Show the backorder warning
+                    }
+                    // If inventory is positive, the form submits as normal.
+                }
+            });
+
+            // User clicks 'Add to Cart' in the popup to confirm the backorder
+            confirmButton.addEventListener('click', () => {
+                hidePopup();
+                // Manually trigger the form submission after confirmation
+                productForm.submit();
+            });
+
+            // User clicks 'Cancel' or the overlay
+            cancelButton.addEventListener('click', hidePopup);
+            popupOverlay.addEventListener('click', (event) => {
+                if (event.target === popupOverlay) {
+                    hidePopup();
+                }
+            });
+        });
+	</script>
+{%- endif -%}
