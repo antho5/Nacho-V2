@@ -113,6 +113,7 @@ input.button.button--primary.button-bundle.style- {
   font-weight: bold;
   text-transform: uppercase;
   border: 2px solid #000;
+    color: #000 !important;
 }
 .product-form__label .text {
   text-transform: uppercase;
