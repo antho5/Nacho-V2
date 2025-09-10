@@ -7,7 +7,6 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-
 {
   "sections": {
     "main": {
@@ -403,6 +402,11 @@
         "border_color_card": "#f0f1f4"
       }
     },
+    "product_backorder_popup_gnbeEA": {
+      "type": "product-backorder-popup",
+      "name": "Backorder Popup",
+      "settings": {}
+    },
     "product-recently-viewed": {
       "type": "product-recently-viewed",
       "settings": {
@@ -460,6 +464,7 @@
   },
   "order": [
     "main",
+    "product_backorder_popup_gnbeEA",
     "1724699610d861f76b",
     "product-recommendations",
     "product-recently-viewed"
