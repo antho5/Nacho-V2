@@ -115,22 +115,25 @@
 
 	<script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Find the product form on your page.
-            // IMPORTANT: Your form might have a different selector.
-            // Common selectors are 'form[action="/cart/add"]' or '#product-form'.
-            const productForm = document.querySelector('form[action$="/cart/add"]');
+            // --- START OF UPDATE ---
+            // This selector is now more robust. It looks for a form that contains the variant ID input.
+            // This is the most common reason the popup fails.
+            // If this still doesn't work, you will need to inspect your add-to-cart form to find its unique ID or class.
+            // For example: const productForm = document.querySelector('#AddToCartForm');
+            const productForm = document.querySelector('form[action*="/cart/add"]');
+            // --- END OF UPDATE ---
+
             const popupOverlay = document.getElementById('backorder-popup-overlay');
             const confirmButton = document.getElementById('backorder-confirm');
             const cancelButton = document.getElementById('backorder-cancel');
 
             if (!productForm || !popupOverlay) {
-                console.warn('Backorder Popup: Could not find product form or popup elements.');
+                console.warn('Backorder Popup: Could not find a product form or the popup elements on this page. Please check the `productForm` selector in the script.');
                 return;
             }
 
             const showPopup = () => {
                 popupOverlay.style.display = 'flex';
-                // Use a timeout to allow the display property to apply before transitioning opacity/transform
                 setTimeout(() => {
                     popupOverlay.classList.add('visible');
                 }, 10);
@@ -143,33 +146,24 @@
                 }, 300); // Wait for the transition to finish
             };
 
-            // Handle the main form submission
             productForm.addEventListener('submit', (event) => {
-                // Find the selected variant's ID.
                 const formData = new FormData(productForm);
                 const selectedVariantId = formData.get('id');
 
-                // Check if we have inventory data for this variant.
                 if (selectedVariantId && variantInventory.hasOwnProperty(selectedVariantId)) {
                     const inventory = variantInventory[selectedVariantId];
-
-                    // If inventory is 0 or less, and we haven't already confirmed via the popup...
                     if (inventory <= 0) {
-                        event.preventDefault(); // Stop the form from submitting
-                        showPopup(); // Show the backorder warning
+                        event.preventDefault(); // Stop the original form submission
+                        showPopup();
                     }
-                    // If inventory is positive, the form submits as normal.
                 }
             });
 
-            // User clicks 'Add to Cart' in the popup to confirm the backorder
             confirmButton.addEventListener('click', () => {
                 hidePopup();
-                // Manually trigger the form submission after confirmation
-                productForm.submit();
+                productForm.submit(); // Resubmit the form
             });
 
-            // User clicks 'Cancel' or the overlay
             cancelButton.addEventListener('click', hidePopup);
             popupOverlay.addEventListener('click', (event) => {
                 if (event.target === popupOverlay) {
@@ -179,3 +173,4 @@
         });
 	</script>
 {%- endif -%}
+
