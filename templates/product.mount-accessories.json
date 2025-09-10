@@ -396,12 +396,18 @@
         "border_width_card": 5,
         "border_color_card": "#f0f1f4"
       }
+    },
+    "product_backorder_popup_9nP3LQ": {
+      "type": "product-backorder-popup",
+      "name": "Backorder Popup",
+      "settings": {}
     }
   },
   "order": [
     "main",
     "1724699716678c1158",
     "product-recommendations",
-    "product-recently-viewed"
+    "product-recently-viewed",
+    "product_backorder_popup_9nP3LQ"
   ]
 }

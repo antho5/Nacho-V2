@@ -607,6 +607,11 @@
         "border_width_card": 5,
         "border_color_card": "#f0f1f4"
       }
+    },
+    "product_backorder_popup_dh9JNY": {
+      "type": "product-backorder-popup",
+      "name": "Backorder Popup",
+      "settings": {}
     }
   },
   "order": [
@@ -616,6 +621,7 @@
     "fa6b49c0-a981-49e0-a090-103be2440682",
     "b60fca5b-1ced-4c72-9c52-f91112ef6192",
     "product-recommendations",
-    "product-recently-viewed"
+    "product-recently-viewed",
+    "product_backorder_popup_dh9JNY"
   ]
 }
