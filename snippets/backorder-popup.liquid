@@ -116,17 +116,18 @@
 
 	<script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- START OF UPDATE ---
-            // This selector is now updated to match your theme's specific form structure.
             const productForm = document.querySelector('form[data-type="add-to-cart-form"]');
+            // --- START OF UPDATE ---
+            // We will now target the submit button directly for the event listener.
+            const submitButton = document.getElementById('product-add-to-cart');
             // --- END OF UPDATE ---
 
             const popupOverlay = document.getElementById('backorder-popup-overlay');
             const confirmButton = document.getElementById('backorder-confirm');
             const cancelButton = document.getElementById('backorder-cancel');
 
-            if (!productForm || !popupOverlay) {
-                console.warn('Backorder Popup: Could not find a product form or the popup elements on this page. Please check the `productForm` selector in the script.');
+            if (!productForm || !submitButton || !popupOverlay) {
+                console.warn('Backorder Popup: Could not find required elements (form, submit button, or popup). Please check selectors.');
                 return;
             }
 
@@ -144,22 +145,25 @@
                 }, 300); // Wait for the transition to finish
             };
 
-            productForm.addEventListener('submit', (event) => {
+            // --- START OF UPDATE ---
+            // The event listener is now on the button's 'click' event, not the form's 'submit' event.
+            submitButton.addEventListener('click', (event) => {
                 const formData = new FormData(productForm);
                 const selectedVariantId = formData.get('id');
 
                 if (selectedVariantId && variantInventory.hasOwnProperty(selectedVariantId)) {
                     const inventory = variantInventory[selectedVariantId];
                     if (inventory <= 0) {
-                        event.preventDefault(); // Stop the original form submission
+                        event.preventDefault(); // Stop the button's default submit action
                         showPopup();
                     }
                 }
             });
+            // --- END OF UPDATE ---
 
             confirmButton.addEventListener('click', () => {
                 hidePopup();
-                productForm.submit(); // Resubmit the form
+                productForm.submit(); // After confirmation, submit the form directly.
             });
 
             cancelButton.addEventListener('click', hidePopup);
