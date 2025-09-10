@@ -1,0 +1,192 @@
+{% comment %}
+  This snippet creates a popup that warns customers if they are adding an item
+  to the cart that is out of stock (inventory <= 0). This is useful for
+  managing backorders or pre-orders transparently.
+
+{% endcomment %}
+
+{%- if product.available -%}
+	<script>
+        // Create a map of variant IDs to their inventory quantities.
+        // This data is passed from Liquid (server) to JavaScript (client).
+        const variantInventory = {
+		{%- for variant in product.variants -%}
+		{{ variant.id }}: {{ variant.inventory_quantity | default: 0 }}{% unless forloop.last %},{% endunless %}
+		{%- endfor -%}
+        };
+	</script>
+
+	<style>
+        /* Styles for the popup modal and overlay */
+        .backorder-popup-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 10000; /* Increased z-index */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .backorder-popup-modal {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .backorder-popup-overlay.visible .backorder-popup-modal {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .backorder-popup-modal h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .backorder-popup-modal p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .backorder-popup-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .backorder-popup-btn {
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .backorder-popup-btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn-confirm {
+            background-color: #FF5A00;
+            color: #000;
+        }
+        .btn-confirm:hover {
+            background-color: #FF5A00;
+        }
+
+        .btn-cancel {
+            background-color: #f1f1f1;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        .btn-cancel:hover {
+            background-color: #e6e6e6;
+        }
+
+	</style>
+
+	<!-- HTML structure for the popup -->
+	<div id="backorder-popup-overlay" class="backorder-popup-overlay">
+		<div id="backorder-popup-modal" class="backorder-popup-modal">
+			<h2>Just a heads up!</h2>
+			<p>This item is currently out of stock, but it's available for backorder. Please proceed if you're comfortable with a potential shipping delay.</p>
+			<div class="backorder-popup-buttons">
+				<button id="backorder-cancel" class="backorder-popup-btn btn-cancel">Cancel</button>
+				<button id="backorder-confirm" class="backorder-popup-btn btn-confirm">Add to Cart</button>
+			</div>
+		</div>
+	</div>
+
+	<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const popupOverlay = document.getElementById('backorder-popup-overlay');
+            const confirmButton = document.getElementById('backorder-confirm');
+            const cancelButton = document.getElementById('backorder-cancel');
+
+            if (!popupOverlay) {
+                console.error('Backorder Popup: Could not find the popup overlay element.');
+                return;
+            }
+
+            const showPopup = () => {
+                popupOverlay.style.display = 'flex';
+                setTimeout(() => {
+                    popupOverlay.classList.add('visible');
+                }, 10);
+            };
+
+            const hidePopup = () => {
+                popupOverlay.classList.remove('visible');
+                setTimeout(() => {
+                    popupOverlay.style.display = 'none';
+                }, 300);
+            };
+
+            document.body.addEventListener('click', (event) => {
+                const addToCartButton = event.target.closest('#product-add-to-cart');
+
+                if (addToCartButton) {
+                    // Check if this click is from the user confirming the popup.
+                    // If it is, we let it go through without showing the popup again.
+                    if (addToCartButton.hasAttribute('data-popup-confirmed')) {
+                        addToCartButton.removeAttribute('data-popup-confirmed');
+                        return;
+                    }
+
+                    const productForm = addToCartButton.closest('form[data-type="add-to-cart-form"]');
+                    if (!productForm) return;
+
+                    const variantIdInput = productForm.querySelector('input[name="id"]');
+                    if (!variantIdInput) return;
+
+                    const selectedVariantId = variantIdInput.value;
+
+                    if (selectedVariantId && variantInventory.hasOwnProperty(selectedVariantId)) {
+                        const inventory = variantInventory[selectedVariantId];
+                        if (inventory <= 0) {
+                            // This is a backorder item. Stop the theme's default action and show our popup.
+                            event.preventDefault();
+                            event.stopPropagation();
+                            showPopup();
+                        }
+                    }
+                }
+            }, true); // Use event capturing to run our script before the theme's.
+
+            confirmButton.addEventListener('click', () => {
+                const addToCartButton = document.getElementById('product-add-to-cart');
+                if (addToCartButton) {
+                    hidePopup();
+                    // Set a flag so our listener ignores the next click
+                    addToCartButton.setAttribute('data-popup-confirmed', 'true');
+                    // Programmatically click the button again to trigger the theme's add-to-cart logic
+                    addToCartButton.click();
+                }
+            });
+
+            cancelButton.addEventListener('click', hidePopup);
+            popupOverlay.addEventListener('click', (event) => {
+                if (event.target === popupOverlay) {
+                    hidePopup();
+                }
+            });
+        });
+	</script>
+{%- endif -%}
+
