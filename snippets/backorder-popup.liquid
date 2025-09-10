@@ -145,13 +145,17 @@
                 }, 300);
             };
 
-            // --- START OF UPDATE ---
-            // This listener is attached to the whole document body. It's more reliable.
             document.body.addEventListener('click', (event) => {
-                // Check if the clicked element is the "Add to Cart" button.
                 const addToCartButton = event.target.closest('#product-add-to-cart');
 
                 if (addToCartButton) {
+                    // Check if this click is from the user confirming the popup.
+                    // If it is, we let it go through without showing the popup again.
+                    if (addToCartButton.hasAttribute('data-popup-confirmed')) {
+                        addToCartButton.removeAttribute('data-popup-confirmed');
+                        return;
+                    }
+
                     const productForm = addToCartButton.closest('form[data-type="add-to-cart-form"]');
                     if (!productForm) return;
 
@@ -163,27 +167,23 @@
                     if (selectedVariantId && variantInventory.hasOwnProperty(selectedVariantId)) {
                         const inventory = variantInventory[selectedVariantId];
                         if (inventory <= 0) {
-                            // This is a backorder item. Stop the theme's script and show the popup.
+                            // This is a backorder item. Stop the theme's default action and show our popup.
                             event.preventDefault();
                             event.stopPropagation();
                             showPopup();
                         }
                     }
                 }
-            });
-            // --- END OF UPDATE ---
+            }, true); // Use event capturing to run our script before the theme's.
 
             confirmButton.addEventListener('click', () => {
-                const productForm = document.querySelector('form[data-type="add-to-cart-form"]');
-                if (productForm) {
+                const addToCartButton = document.getElementById('product-add-to-cart');
+                if (addToCartButton) {
                     hidePopup();
-                    // Create a temporary button to submit the form, bypassing our click listener
-                    const tempSubmit = document.createElement('button');
-                    tempSubmit.type = 'submit';
-                    tempSubmit.style.display = 'none';
-                    productForm.appendChild(tempSubmit);
-                    tempSubmit.click();
-                    productForm.removeChild(tempSubmit);
+                    // Set a flag so our listener ignores the next click
+                    addToCartButton.setAttribute('data-popup-confirmed', 'true');
+                    // Programmatically click the button again to trigger the theme's add-to-cart logic
+                    addToCartButton.click();
                 }
             });
 
