@@ -402,6 +402,11 @@
         "border_color_card": "#f0f1f4"
       }
     },
+    "product_backorder_popup_gnbeEA": {
+      "type": "product-backorder-popup",
+      "name": "Backorder Popup",
+      "settings": {}
+    },
     "product-recently-viewed": {
       "type": "product-recently-viewed",
       "settings": {
@@ -455,18 +460,13 @@
         "border_width_card": 5,
         "border_color_card": "#f0f1f4"
       }
-    },
-    "product_backorder_popup_gnbeEA": {
-      "type": "product-backorder-popup",
-      "name": "Backorder Popup",
-      "settings": {}
     }
   },
   "order": [
     "main",
+    "product_backorder_popup_gnbeEA",
     "1724699610d861f76b",
     "product-recommendations",
-    "product-recently-viewed",
-    "product_backorder_popup_gnbeEA"
+    "product-recently-viewed"
   ]
 }
