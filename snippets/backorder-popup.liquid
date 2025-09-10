@@ -2,6 +2,8 @@
   This snippet creates a popup that warns customers if they are adding an item
   to the cart that is out of stock (inventory <= 0). This is useful for
   managing backorders or pre-orders transparently.
+
+
 {% endcomment %}
 
 {%- if product.available -%}
@@ -116,11 +118,8 @@
 	<script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- START OF UPDATE ---
-            // This selector is now more robust. It looks for a form that contains the variant ID input.
-            // This is the most common reason the popup fails.
-            // If this still doesn't work, you will need to inspect your add-to-cart form to find its unique ID or class.
-            // For example: const productForm = document.querySelector('#AddToCartForm');
-            const productForm = document.querySelector('form[action*="/cart/add"]');
+            // This selector is now updated to match your theme's specific form structure.
+            const productForm = document.querySelector('form[data-type="add-to-cart-form"]');
             // --- END OF UPDATE ---
 
             const popupOverlay = document.getElementById('backorder-popup-overlay');
