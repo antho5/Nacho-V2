@@ -3,6 +3,12 @@
   to the cart that is out of stock (inventory <= 0). This is useful for
   managing backorders or pre-orders transparently.
 
+  How to use:
+  1. Save this file as a new snippet named 'backorder-popup.liquid'.
+  2. Include it in your product template (e.g., sections/main-product.liquid)
+     using: {% render 'backorder-popup' %}
+  3. Make sure your product form has an id of 'product-form' or update the
+     JavaScript selector below to match your form's ID or class.
 {% endcomment %}
 
 {%- if product.available -%}
@@ -26,7 +32,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
-            z-index: 1000;
+            z-index: 10000; /* Increased z-index */
             justify-content: center;
             align-items: center;
         }
@@ -116,18 +122,12 @@
 
 	<script>
         document.addEventListener('DOMContentLoaded', () => {
-            const productForm = document.querySelector('form[data-type="add-to-cart-form"]');
-            // --- START OF UPDATE ---
-            // We will now target the submit button directly for the event listener.
-            const submitButton = document.getElementById('product-add-to-cart');
-            // --- END OF UPDATE ---
-
             const popupOverlay = document.getElementById('backorder-popup-overlay');
             const confirmButton = document.getElementById('backorder-confirm');
             const cancelButton = document.getElementById('backorder-cancel');
 
-            if (!productForm || !submitButton || !popupOverlay) {
-                console.warn('Backorder Popup: Could not find required elements (form, submit button, or popup). Please check selectors.');
+            if (!popupOverlay) {
+                console.error('Backorder Popup: Could not find the popup overlay element.');
                 return;
             }
 
@@ -142,28 +142,49 @@
                 popupOverlay.classList.remove('visible');
                 setTimeout(() => {
                     popupOverlay.style.display = 'none';
-                }, 300); // Wait for the transition to finish
+                }, 300);
             };
 
             // --- START OF UPDATE ---
-            // The event listener is now on the button's 'click' event, not the form's 'submit' event.
-            submitButton.addEventListener('click', (event) => {
-                const formData = new FormData(productForm);
-                const selectedVariantId = formData.get('id');
+            // This listener is attached to the whole document body. It's more reliable.
+            document.body.addEventListener('click', (event) => {
+                // Check if the clicked element is the "Add to Cart" button.
+                const addToCartButton = event.target.closest('#product-add-to-cart');
 
-                if (selectedVariantId && variantInventory.hasOwnProperty(selectedVariantId)) {
-                    const inventory = variantInventory[selectedVariantId];
-                    if (inventory <= 0) {
-                        event.preventDefault(); // Stop the button's default submit action
-                        showPopup();
+                if (addToCartButton) {
+                    const productForm = addToCartButton.closest('form[data-type="add-to-cart-form"]');
+                    if (!productForm) return;
+
+                    const variantIdInput = productForm.querySelector('input[name="id"]');
+                    if (!variantIdInput) return;
+
+                    const selectedVariantId = variantIdInput.value;
+
+                    if (selectedVariantId && variantInventory.hasOwnProperty(selectedVariantId)) {
+                        const inventory = variantInventory[selectedVariantId];
+                        if (inventory <= 0) {
+                            // This is a backorder item. Stop the theme's script and show the popup.
+                            event.preventDefault();
+                            event.stopPropagation();
+                            showPopup();
+                        }
                     }
                 }
             });
             // --- END OF UPDATE ---
 
             confirmButton.addEventListener('click', () => {
-                hidePopup();
-                productForm.submit(); // After confirmation, submit the form directly.
+                const productForm = document.querySelector('form[data-type="add-to-cart-form"]');
+                if (productForm) {
+                    hidePopup();
+                    // Create a temporary button to submit the form, bypassing our click listener
+                    const tempSubmit = document.createElement('button');
+                    tempSubmit.type = 'submit';
+                    tempSubmit.style.display = 'none';
+                    productForm.appendChild(tempSubmit);
+                    tempSubmit.click();
+                    productForm.removeChild(tempSubmit);
+                }
             });
 
             cancelButton.addEventListener('click', hidePopup);
