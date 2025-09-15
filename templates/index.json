@@ -1015,6 +1015,11 @@
         "mg_bottom_mobile": 25
       }
     },
+    "product_backorder_popup_jWMXcE": {
+      "type": "product-backorder-popup",
+      "name": "Backorder Popup",
+      "settings": {}
+    },
     "large_lookbook_banners_F7cBw6": {
       "type": "large-lookbook-banners",
       "blocks": {
@@ -1199,6 +1204,7 @@
     "16321237356a896dad",
     "163247026462da6862",
     "8ca832d8-6669-441d-b6d9-9db74f475d94",
+    "product_backorder_popup_jWMXcE",
     "large_lookbook_banners_F7cBw6",
     "video_block_wa3nKy",
     "172469927922c5c775",
