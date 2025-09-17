@@ -134,7 +134,7 @@
     "show_effect_close": false,
     "product_card_layout": "01",
     "enable_background_button_card": false,
-    "product_block_image_ratio": "adapt",
+    "product_block_image_ratio": "square",
     "portrait_height": "130",
     "product_block_image_fit": "cover",
     "show_image_swap": true,
