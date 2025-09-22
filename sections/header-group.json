@@ -17,7 +17,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "<p class=\"message\">*** Free shipping on orders over $500 (within US) ***</p>",
+            "text": "<p class=\"message\">*** Check out our National Sales Rebate <a href=\"https://www.nachooffroadtechnology.com/rebate-form\">Here</a> ***</p>",
             "btn_color": "#cc0e14",
             "btn_border_color": "#2da116",
             "btn_bg_color": "#232323",
@@ -28,7 +28,6 @@
       "block_order": [
         "announcement-bar-0"
       ],
-      "disabled": true,
       "custom_css": [
         ".message {text-transform: uppercase; font-family: var(--font-heading-family);}"
       ],
@@ -36,7 +35,7 @@
         "layout": "scroll",
         "enable_close": false,
         "color_text": "#232323",
-        "bg_color_text": "#ff7a01",
+        "bg_color_text": "#ff5a00",
         "bg_color_text_gradient": "",
         "font_size_text": 12,
         "font_style_text": "normal",
