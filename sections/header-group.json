@@ -34,7 +34,7 @@
       "settings": {
         "layout": "scroll",
         "enable_close": false,
-        "color_text": "#000000",
+        "color_text": "#ffffff",
         "bg_color_text": "#ff5a00",
         "bg_color_text_gradient": "",
         "font_size_text": 12,
@@ -47,7 +47,7 @@
         "padding_top_mobile": 2,
         "padding_bottom": 2,
         "padding_bottom_tablet": 2,
-        "padding_bottom_mobile": 0
+        "padding_bottom_mobile": 2
       }
     },
     "0233f54c-81fe-4fac-b946-755c29c900b0": {
