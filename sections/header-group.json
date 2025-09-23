@@ -43,10 +43,10 @@
         "arrow_active": false,
         "content_max_width": 38,
         "padding_top": 2,
-        "padding_top_tablet": 0,
-        "padding_top_mobile": 0,
+        "padding_top_tablet": 2,
+        "padding_top_mobile": 2,
         "padding_bottom": 2,
-        "padding_bottom_tablet": 0,
+        "padding_bottom_tablet": 2,
         "padding_bottom_mobile": 0
       }
     },
