@@ -15,9 +15,9 @@
         "b0ea69b7-8a54-4a3c-9abd-0fcceeabaaa0": {
           "type": "title",
           "settings": {
-            "fontsize_text": 20,
+            "fontsize_text": 32,
             "fontsize_text_mb": 18,
-            "color_title": "#232323",
+            "color_title": "#ffffff",
             "spacing_top": 50,
             "spacing_bottom": 0
           }
@@ -58,7 +58,7 @@
             "show_short_description": true,
             "word_number": "100",
             "fontsize_text": 16,
-            "color_text": "#3c3c3c",
+            "color_text": "#ffffff",
             "spacing_top": 0,
             "spacing_bottom": 13
           }
@@ -70,7 +70,7 @@
             "show_variant_image_group": true,
             "enable_border_top": false,
             "enable_border_bottom": false,
-            "color_border": "#ff7a01",
+            "color_border": "#ff5a00",
             "spacing_top": 0,
             "spacing_bottom": 15
           }
@@ -89,22 +89,22 @@
           "settings": {
             "show_dynamic_checkout": false,
             "show_gift_card_recipient": false,
-            "atc_animation": "horizontal-shaking",
-            "atc_color": "#ffffff",
-            "atc_border_color": "#000000",
-            "atc_bg_color": "#000000",
+            "atc_animation": "none",
+            "atc_color": "#000000",
+            "atc_border_color": "rgba(0,0,0,0)",
+            "atc_bg_color": "#ffffff",
             "atc_bg_color_gradient": "",
             "atc_color_hover": "#000000",
             "atc_border_color_hover": "#ff5a00",
-            "atc_bg_color_hover": "#ff5a00",
+            "atc_bg_color_hover": "#ffffff",
             "atc_bg_color_gradient_hover": "",
-            "bin_color": "#232323",
-            "bin_border_color": "#acacac",
+            "bin_color": "#000000",
+            "bin_border_color": "rgba(0,0,0,0)",
             "bin_bg_color": "#ffffff",
             "bin_bg_color_gradient": "",
-            "bin_color_hover": "#ffffff",
-            "bin_border_color_hover": "#232323",
-            "bin_bg_color_hover": "#232323",
+            "bin_color_hover": "#000000",
+            "bin_border_color_hover": "#ff5a00",
+            "bin_bg_color_hover": "#ffffff",
             "bin_bg_color_hover_gradient": "",
             "spacing_top": 0,
             "spacing_bottom": 15
@@ -261,7 +261,7 @@
         "zoomed_image": false,
         "product_image_popup": "fancybox",
         "main_image_show_custom_cursor": false,
-        "icon_color": "#000000",
+        "icon_color": "#ffffff",
         "main_image_position": "left",
         "main_image_layout": "1",
         "main_image_arrows_desktop": true,
@@ -310,7 +310,7 @@
         "block_image_ratio": "adapt",
         "bundle_discount": false,
         "bundle_discount_text": "Get a [discount]% discount buying these products together",
-        "bundle_discount_text_color": "#000000",
+        "bundle_discount_text_color": "#ffffff",
         "total_btn_color": "#ffffff",
         "total_btn_border": "#000000",
         "total_btn_bg": "#000000",
