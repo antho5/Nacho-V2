@@ -248,7 +248,8 @@
         "grouped_product_8wkRbp"
       ],
       "custom_css": [
-        ".installment {display: none;}"
+        ".installment {display: none;}",
+        "#halo-product-bundle {background: #000; color: #fff;}"
       ],
       "settings": {
         "container": "container",
@@ -312,12 +313,12 @@
         "bundle_discount_text": "Get a [discount]% discount buying these products together",
         "bundle_discount_text_color": "#000000",
         "total_btn_color": "#ffffff",
-        "total_btn_border": "#000000",
+        "total_btn_border": "#ffffff",
         "total_btn_bg": "#000000",
         "total_btn_bg_gradient": "",
-        "total_btn_color_hover": "#000000",
+        "total_btn_color_hover": "#ffffff",
         "total_btn_border_hover": "#ff5a00",
-        "total_btn_bg_hover": "#ff5a00",
+        "total_btn_bg_hover": "#000000",
         "total_btn_bg_gradient_hover": "",
         "block_dots": false,
         "block_arrows": true,
