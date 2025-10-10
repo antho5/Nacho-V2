@@ -384,6 +384,7 @@
     "spinner_bottom_color": "#000000",
     "spinner_left_color": "#ffffff",
     "enable_following_cursor": false,
+    "following_cursor_style": "default",
     "banner_animation": "none",
     "use_custom_css": true,
     "use_custom_js": false,
