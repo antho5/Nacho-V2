@@ -1071,7 +1071,7 @@
             "video_title_5": "",
             "video_muted": true,
             "video_loop": false,
-            "autoplay": true,
+            "autoplay": false,
             "autoplay_delay": 5,
             "transition_duration": 0.5,
             "show_navigation": true,
