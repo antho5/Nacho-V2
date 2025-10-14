@@ -12,7 +12,7 @@
     "image_banner_8PY3xL": {
       "type": "image-banner",
       "blocks": {
-        "large_img_RLpd7r": {
+        "large_img_e7CxYX": {
           "type": "largeImg",
           "settings": {
             "image": "shopify://shop_images/Nacho_Lighting_Co_-_Wordmark_3_-_Black.png",
@@ -104,7 +104,7 @@
         }
       },
       "block_order": [
-        "large_img_RLpd7r"
+        "large_img_e7CxYX"
       ],
       "name": "t:sections.image-banner.presets.name",
       "settings": {
