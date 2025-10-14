@@ -1051,6 +1051,74 @@
         "mg_bottom_mobile": 50
       }
     },
+    "1760481387a0316535": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_07758d1_bzBWhr": {
+          "type": "ai_gen_block_07758d1",
+          "settings": {
+            "title": "Featured Videos",
+            "description": "Watch our latest video content",
+            "video_url_1": "https://cdn.shopify.com/videos/c/o/v/b79155b8bb8045da821584203d7abf48.mp4",
+            "video_title_1": "",
+            "video_url_2": "",
+            "video_title_2": "",
+            "video_url_3": "",
+            "video_title_3": "",
+            "video_url_4": "https://www.youtube.com/watch?v=e8_Y1Oo9vTo",
+            "video_title_4": "",
+            "video_url_5": "https://www.youtube.com/watch?v=aD9Q9R9jyTs",
+            "video_title_5": "",
+            "video_muted": true,
+            "video_loop": false,
+            "autoplay": true,
+            "autoplay_delay": 5,
+            "transition_duration": 0.5,
+            "show_navigation": true,
+            "show_dots": true,
+            "show_video_titles": true,
+            "max_width": 800,
+            "video_height": 450,
+            "border_radius": 8,
+            "text_alignment": "center",
+            "header_padding": 30,
+            "header_background_color": "#ffffff",
+            "title_font_size": 28,
+            "title_font_weight": "600",
+            "title_margin_bottom": 10,
+            "title_color": "#000000",
+            "description_font_size": 16,
+            "description_color": "#666666",
+            "video_title_font_size": 18,
+            "video_title_font_weight": "500",
+            "play_button_size": 80,
+            "play_button_background": "rgba(255, 255, 255, 0.9)",
+            "play_button_hover_background": "#ffffff",
+            "play_button_color": "#000000",
+            "play_button_hover_color": "#000000",
+            "control_size": 48,
+            "control_offset": 20,
+            "control_background_color": "rgba(255, 255, 255, 0.9)",
+            "control_hover_background_color": "#ffffff",
+            "control_color": "#000000",
+            "control_hover_color": "#000000",
+            "dots_padding": 20,
+            "dots_background_color": "#ffffff",
+            "dot_size": 12,
+            "dot_spacing": 8,
+            "dot_color": "#cccccc",
+            "dot_active_color": "#000000",
+            "dot_hover_color": "#666666",
+            "background_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_07758d1_bzBWhr"
+      ],
+      "settings": {}
+    },
     "17604776611a3876b7": {
       "type": "_blocks",
       "blocks": {
@@ -1513,6 +1581,7 @@
     "main",
     "172469934207cda7f8",
     "slide_show_UL7jcE",
+    "1760481387a0316535",
     "17604776611a3876b7",
     "video_block_zhAnwe",
     "video_block_zaUE3E",
