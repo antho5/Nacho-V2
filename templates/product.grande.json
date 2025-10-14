@@ -15,7 +15,7 @@
         "ai_gen_block_ead19a7_LgfAff": {
           "type": "ai_gen_block_ead19a7",
           "settings": {
-            "max_width": 800,
+            "max_width": 1200,
             "video_height": 450,
             "background_color": "#000000",
             "border_radius": 8,
@@ -24,7 +24,7 @@
             "transition_duration": 0.5,
             "muted": true,
             "loop_videos": false,
-            "control_bg_color": "#ffffff",
+            "control_bg_color": "#000000",
             "control_text_color": "#000000",
             "control_hover_bg_color": "#f0f0f0",
             "control_hover_text_color": "#000000",
@@ -1509,11 +1509,11 @@
     }
   },
   "order": [
-    "17604776611a3876b7",
     "image_banner_8PY3xL",
     "main",
     "172469934207cda7f8",
     "slide_show_UL7jcE",
+    "17604776611a3876b7",
     "video_block_zhAnwe",
     "video_block_zaUE3E",
     "video_block_BVkHUh",
