@@ -996,7 +996,7 @@
         "dots_border_color": "#000000",
         "dots_active_color": "#ff5a00",
         "dots_active_border_color": "#ff5a00",
-        "dots_direction": "left",
+        "dots_direction": "bottom",
         "dots_shape": "disc",
         "position_slick_dots": "34px",
         "dots_opacity": false,
