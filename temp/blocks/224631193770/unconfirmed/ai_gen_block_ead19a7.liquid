@@ -1,6 +1,738 @@
+{% doc %}
+  @prompt
+    I want to create a section that can have multiple videos added in a slideshow style
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-video-slideshow-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+  }
+
+  .ai-video-slideshow-container-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: {{ block.settings.video_height }}px;
+    overflow: hidden;
+  }
+
+  .ai-video-slide-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity {{ block.settings.transition_duration }}s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-video-slide-{{ ai_gen_id }}.active {
+    opacity: 1;
+  }
+
+  .ai-video-slide-{{ ai_gen_id }} video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-video-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-video-placeholder-{{ ai_gen_id }} svg {
+    width: 100px;
+    height: 100px;
+    opacity: 0.5;
+  }
+
+  .ai-video-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-video-controls-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+  }
+
+  .ai-video-nav-button-{{ ai_gen_id }} {
+    background-color: {{ block.settings.control_bg_color }};
+    color: {{ block.settings.control_text_color }};
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .ai-video-nav-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.control_hover_bg_color }};
+    color: {{ block.settings.control_hover_text_color }};
+    transform: scale(1.1);
+  }
+
+  .ai-video-nav-button-{{ ai_gen_id }}:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .ai-video-nav-button-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ai-video-play-pause-{{ ai_gen_id }} {
+    background-color: {{ block.settings.control_bg_color }};
+    color: {{ block.settings.control_text_color }};
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .ai-video-play-pause-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.control_hover_bg_color }};
+    color: {{ block.settings.control_hover_text_color }};
+    transform: scale(1.1);
+  }
+
+  .ai-video-play-pause-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ai-video-indicators-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+
+  .ai-video-indicator-{{ ai_gen_id }} {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .ai-video-indicator-{{ ai_gen_id }}.active {
+    background-color: {{ block.settings.indicator_active_color }};
+    transform: scale(1.2);
+  }
+
+  .ai-video-title-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-video-slide-{{ ai_gen_id }}.active .ai-video-title-overlay-{{ ai_gen_id }} {
+    opacity: 1;
+  }
+
+  .ai-video-title-{{ ai_gen_id }} {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 5px;
+  }
+
+  .ai-video-description-{{ ai_gen_id }} {
+    font-size: 14px;
+    margin: 0;
+    opacity: 0.9;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-video-slideshow-container-{{ ai_gen_id }} {
+      height: {{ block.settings.video_height | times: 0.7 }}px;
+    }
+
+    .ai-video-nav-button-{{ ai_gen_id }} {
+      width: 40px;
+      height: 40px;
+    }
+
+    .ai-video-play-pause-{{ ai_gen_id }} {
+      width: 50px;
+      height: 50px;
+    }
+
+    .ai-video-title-overlay-{{ ai_gen_id }} {
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      padding: 10px 15px;
+    }
+
+    .ai-video-title-{{ ai_gen_id }} {
+      font-size: 16px;
+    }
+
+    .ai-video-description-{{ ai_gen_id }} {
+      font-size: 12px;
+    }
+  }
+{% endstyle %}
+
+<video-slideshow-{{ ai_gen_id }}
+  class="ai-video-slideshow-{{ ai_gen_id }}"
+  data-autoplay="{{ block.settings.autoplay }}"
+  data-autoplay-interval="{{ block.settings.autoplay_interval }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-video-slideshow-container-{{ ai_gen_id }}">
+    {% assign video_count = 0 %}
+    {% for i in (1..5) %}
+      {% liquid
+        assign video_key = 'video_' | append: i
+        assign title_key = 'video_' | append: i | append: '_title'
+        assign description_key = 'video_' | append: i | append: '_description'
+        
+        assign video = block.settings[video_key]
+        assign title = block.settings[title_key]
+        assign description = block.settings[description_key]
+      %}
+      
+      {% if video != blank %}
+        {% assign video_count = video_count | plus: 1 %}
+        <div class="ai-video-slide-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}">
+          <video
+            preload="metadata"
+            {% if block.settings.muted %}muted{% endif %}
+            {% if block.settings.loop_videos %}loop{% endif %}
+            playsinline
+          >
+            <source src="{{ video }}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          
+          {% if title != blank or description != blank %}
+            <div class="ai-video-title-overlay-{{ ai_gen_id }}">
+              {% if title != blank %}
+                <h3 class="ai-video-title-{{ ai_gen_id }}">{{ title }}</h3>
+              {% endif %}
+              {% if description != blank %}
+                <p class="ai-video-description-{{ ai_gen_id }}">{{ description }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    {% if video_count == 0 %}
+      <div class="ai-video-slide-{{ ai_gen_id }} active">
+        <div class="ai-video-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-video-empty-state-{{ ai_gen_id }}">
+            Add videos to create your slideshow
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if video_count > 1 %}
+      <div class="ai-video-controls-{{ ai_gen_id }}">
+        <button class="ai-video-nav-button-{{ ai_gen_id }}" data-action="prev" aria-label="Previous video">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15,18 9,12 15,6"></polyline>
+          </svg>
+        </button>
+        
+        <button class="ai-video-play-pause-{{ ai_gen_id }}" data-action="play-pause" aria-label="Play/Pause video">
+          <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5,3 19,12 5,21"></polygon>
+          </svg>
+          <svg class="pause-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+        </button>
+        
+        <button class="ai-video-nav-button-{{ ai_gen_id }}" data-action="next" aria-label="Next video">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9,18 15,12 9,6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <div class="ai-video-indicators-{{ ai_gen_id }}">
+        {% for i in (1..video_count) %}
+          <div class="ai-video-indicator-{{ ai_gen_id }} {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}"></div>
+        {% endfor %}
+      </div>
+    {% elsif video_count == 1 %}
+      <div class="ai-video-controls-{{ ai_gen_id }}">
+        <button class="ai-video-play-pause-{{ ai_gen_id }}" data-action="play-pause" aria-label="Play/Pause video">
+          <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5,3 19,12 5,21"></polygon>
+          </svg>
+          <svg class="pause-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+        </button>
+      </div>
+    {% endif %}
+  </div>
+</video-slideshow-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class VideoSlideshow{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentSlide = 0;
+        this.isPlaying = false;
+        this.autoplayInterval = null;
+      }
+
+      connectedCallback() {
+        this.slides = this.querySelectorAll('.ai-video-slide-{{ ai_gen_id }}');
+        this.indicators = this.querySelectorAll('.ai-video-indicator-{{ ai_gen_id }}');
+        this.prevButton = this.querySelector('[data-action="prev"]');
+        this.nextButton = this.querySelector('[data-action="next"]');
+        this.playPauseButton = this.querySelector('[data-action="play-pause"]');
+        
+        this.autoplay = this.dataset.autoplay === 'true';
+        this.autoplayIntervalTime = parseInt(this.dataset.autoplayInterval) * 1000;
+
+        this.setupEventListeners();
+        this.updateControls();
+        
+        if (this.autoplay && this.slides.length > 1) {
+          this.startAutoplay();
+        }
+      }
+
+      setupEventListeners() {
+        if (this.prevButton) {
+          this.prevButton.addEventListener('click', () => this.previousSlide());
+        }
+        
+        if (this.nextButton) {
+          this.nextButton.addEventListener('click', () => this.nextSlide());
+        }
+        
+        if (this.playPauseButton) {
+          this.playPauseButton.addEventListener('click', () => this.togglePlayPause());
+        }
+
+        this.indicators.forEach((indicator, index) => {
+          indicator.addEventListener('click', () => this.goToSlide(index));
+        });
+
+        this.slides.forEach((slide) => {
+          const video = slide.querySelector('video');
+          if (video) {
+            video.addEventListener('ended', () => {
+              if (this.slides.length > 1) {
+                this.nextSlide();
+              }
+            });
+          }
+        });
+      }
+
+      previousSlide() {
+        this.pauseCurrentVideo();
+        this.currentSlide = this.currentSlide === 0 ? this.slides.length - 1 : this.currentSlide - 1;
+        this.showSlide(this.currentSlide);
+        this.resetAutoplay();
+      }
+
+      nextSlide() {
+        this.pauseCurrentVideo();
+        this.currentSlide = this.currentSlide === this.slides.length - 1 ? 0 : this.currentSlide + 1;
+        this.showSlide(this.currentSlide);
+        this.resetAutoplay();
+      }
+
+      goToSlide(index) {
+        if (index !== this.currentSlide) {
+          this.pauseCurrentVideo();
+          this.currentSlide = index;
+          this.showSlide(this.currentSlide);
+          this.resetAutoplay();
+        }
+      }
+
+      showSlide(index) {
+        this.slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+
+        this.indicators.forEach((indicator, i) => {
+          indicator.classList.toggle('active', i === index);
+        });
+
+        this.updateControls();
+      }
+
+      togglePlayPause() {
+        const currentVideo = this.getCurrentVideo();
+        if (currentVideo) {
+          if (this.isPlaying) {
+            this.pauseCurrentVideo();
+          } else {
+            this.playCurrentVideo();
+          }
+        }
+      }
+
+      playCurrentVideo() {
+        const currentVideo = this.getCurrentVideo();
+        if (currentVideo) {
+          currentVideo.play();
+          this.isPlaying = true;
+          this.updatePlayPauseButton();
+        }
+      }
+
+      pauseCurrentVideo() {
+        const currentVideo = this.getCurrentVideo();
+        if (currentVideo) {
+          currentVideo.pause();
+          this.isPlaying = false;
+          this.updatePlayPauseButton();
+        }
+      }
+
+      getCurrentVideo() {
+        const currentSlide = this.slides[this.currentSlide];
+        return currentSlide ? currentSlide.querySelector('video') : null;
+      }
+
+      updatePlayPauseButton() {
+        if (this.playPauseButton) {
+          const playIcon = this.playPauseButton.querySelector('.play-icon');
+          const pauseIcon = this.playPauseButton.querySelector('.pause-icon');
+          
+          if (this.isPlaying) {
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+          } else {
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+          }
+        }
+      }
+
+      updateControls() {
+        if (this.prevButton) {
+          this.prevButton.disabled = this.slides.length <= 1;
+        }
+        
+        if (this.nextButton) {
+          this.nextButton.disabled = this.slides.length <= 1;
+        }
+      }
+
+      startAutoplay() {
+        if (this.autoplayInterval) {
+          clearInterval(this.autoplayInterval);
+        }
+        
+        this.autoplayInterval = setInterval(() => {
+          if (!this.isPlaying) {
+            this.nextSlide();
+          }
+        }, this.autoplayIntervalTime);
+      }
+
+      resetAutoplay() {
+        if (this.autoplay && this.slides.length > 1) {
+          this.startAutoplay();
+        }
+      }
+
+      disconnectedCallback() {
+        if (this.autoplayInterval) {
+          clearInterval(this.autoplayInterval);
+        }
+      }
+    }
+
+    customElements.define('video-slideshow-{{ ai_gen_id }}', VideoSlideshow{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Video slideshow",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 300,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "video_height",
+      "min": 200,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Video height",
+      "default": 450
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Slideshow settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_interval",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay interval",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "transition_duration",
+      "min": 0.3,
+      "max": 2,
+      "step": 0.1,
+      "unit": "s",
+      "label": "Transition duration",
+      "default": 0.5
+    },
+    {
+      "type": "checkbox",
+      "id": "muted",
+      "label": "Mute videos by default",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "loop_videos",
+      "label": "Loop individual videos",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Controls style"
+    },
+    {
+      "type": "color",
+      "id": "control_bg_color",
+      "label": "Control background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "control_text_color",
+      "label": "Control text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "control_hover_bg_color",
+      "label": "Control hover background",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "color",
+      "id": "control_hover_text_color",
+      "label": "Control hover text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "indicator_active_color",
+      "label": "Active indicator color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Video 1"
+    },
+    {
+      "type": "url",
+      "id": "video_1",
+      "label": "Video file URL"
+    },
+    {
+      "type": "text",
+      "id": "video_1_title",
+      "label": "Video title"
+    },
+    {
+      "type": "textarea",
+      "id": "video_1_description",
+      "label": "Video description"
+    },
+    {
+      "type": "header",
+      "content": "Video 2"
+    },
+    {
+      "type": "url",
+      "id": "video_2",
+      "label": "Video file URL"
+    },
+    {
+      "type": "text",
+      "id": "video_2_title",
+      "label": "Video title"
+    },
+    {
+      "type": "textarea",
+      "id": "video_2_description",
+      "label": "Video description"
+    },
+    {
+      "type": "header",
+      "content": "Video 3"
+    },
+    {
+      "type": "url",
+      "id": "video_3",
+      "label": "Video file URL"
+    },
+    {
+      "type": "text",
+      "id": "video_3_title",
+      "label": "Video title"
+    },
+    {
+      "type": "textarea",
+      "id": "video_3_description",
+      "label": "Video description"
+    },
+    {
+      "type": "header",
+      "content": "Video 4"
+    },
+    {
+      "type": "url",
+      "id": "video_4",
+      "label": "Video file URL"
+    },
+    {
+      "type": "text",
+      "id": "video_4_title",
+      "label": "Video title"
+    },
+    {
+      "type": "textarea",
+      "id": "video_4_description",
+      "label": "Video description"
+    },
+    {
+      "type": "header",
+      "content": "Video 5"
+    },
+    {
+      "type": "url",
+      "id": "video_5",
+      "label": "Video file URL"
+    },
+    {
+      "type": "text",
+      "id": "video_5_title",
+      "label": "Video title"
+    },
+    {
+      "type": "textarea",
+      "id": "video_5_description",
+      "label": "Video description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video slideshow"
+    }
+  ]
+}
 {% endschema %}
