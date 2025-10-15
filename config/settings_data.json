@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "layout_body": "full",
+    "layout_body": "default",
     "mobile_menu": "default",
     "type_font_1": "google_fonts",
     "type_font_1_name": "Poppins",
