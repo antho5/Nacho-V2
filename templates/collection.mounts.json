@@ -12,16 +12,6 @@
     "banner": {
       "type": "main-collection-banner",
       "blocks": {
-        "9f9a1a80-3370-40db-9cd2-836840e2073b": {
-          "type": "image",
-          "settings": {
-            "show_image_parallax": false,
-            "show_bg_overlay": true,
-            "type": "full",
-            "image_mobile": "shopify://shop_images/nacho-collection-header.webp",
-            "bg_overlay": "#000000"
-          }
-        },
         "9147d182-d0c6-4b47-ad9e-97ad5cd6ae5a": {
           "type": "description",
           "settings": {
@@ -65,7 +55,6 @@
         }
       },
       "block_order": [
-        "9f9a1a80-3370-40db-9cd2-836840e2073b",
         "9147d182-d0c6-4b47-ad9e-97ad5cd6ae5a"
       ],
       "settings": {
@@ -77,11 +66,11 @@
         "breadcrumb_color": "#ffffff",
         "breadcrumb_bg": "#000000",
         "breadcrumb_gradient": "",
-        "breadcrumb_color_mb": "",
-        "breadcrumb_bg_mb": "#f6f6f6",
+        "breadcrumb_color_mb": "#ffffff",
+        "breadcrumb_bg_mb": "#000000",
         "breadcrumb_gradient_mb": "",
         "show_page_title": true,
-        "page_title_alignment": "left",
+        "page_title_alignment": "center",
         "mg_top_desktop": 0,
         "mg_top_tablet": 0,
         "mg_top_mobile": 0,
