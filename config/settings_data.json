@@ -10,6 +10,7 @@
 {
   "current": {
     "layout_body": "full",
+    "bg_color_layout_boxed": "#000000",
     "mobile_menu": "default",
     "type_font_1": "google_fonts",
     "type_font_1_name": "Poppins",
