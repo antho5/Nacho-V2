@@ -21,8 +21,8 @@
             "collection_description_align_tb": "center",
             "collection_description_align": "center",
             "maxwidth_collection_description": 100,
-            "collection_description_color": "#232323",
-            "collection_description_bg": "#ffffff",
+            "collection_description_color": "#ffffff",
+            "collection_description_bg": "#000000",
             "collection_description_bg_gradient": "",
             "show_sub_collection": true,
             "sub_collection_layout": "slider",
@@ -74,9 +74,9 @@
         "mg_top_desktop": 0,
         "mg_top_tablet": 0,
         "mg_top_mobile": 0,
-        "mg_bottom_desktop": 50,
-        "mg_bottom_tablet": 20,
-        "mg_bottom_mobile": 20
+        "mg_bottom_desktop": 0,
+        "mg_bottom_tablet": 0,
+        "mg_bottom_mobile": 0
       }
     },
     "product-grid": {
