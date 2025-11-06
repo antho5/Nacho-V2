@@ -67,7 +67,7 @@
           "type": "variant_picker",
           "settings": {
             "picker_type": "button",
-            "show_variant_image_group": false,
+            "show_variant_image_group": true,
             "enable_border_top": false,
             "enable_border_bottom": false,
             "color_border": "#e6e6e6",
@@ -117,7 +117,7 @@
             "color_icon": "#232323",
             "text": "Shipping Information",
             "color_title": "#232323",
-            "text_description": "<p>Please allow 24-48 for your order to be picked and shipped.</p>",
+            "text_description": "<p>Please allow 5-7 business days for your order to be picked and shipped.</p>",
             "color_des": "#4d4d4d",
             "fontsize_text": 12,
             "content_popup": "<p>Please allow 24-48 for your order to be picked and shipped. When you place an order, we will estimate shipping delivery dates for you based on the availability of your items and the shipping options you choose. Depending on the shipping provider you choose, shipping date estimates may appear on the shipping quotes page. Please also note that the shipping rates for many items we sell are weight-based. The weight of any such item can be found on its detail page. To reflect the policies of the shipping companies we use, all weights will be rounded up to the next full pound.</p>",
@@ -533,7 +533,7 @@
     "product-recommendations": {
       "type": "product-recommendations",
       "settings": {
-        "display_product_block": false,
+        "display_product_block": true,
         "product_block_container": "container",
         "padding_full_width": 0,
         "enable_border_top": true,
@@ -585,7 +585,7 @@
     "product-recently-viewed": {
       "type": "product-recently-viewed",
       "settings": {
-        "display_product_recently_viewed": false,
+        "display_product_recently_viewed": true,
         "product_recently_viewed_container": "container",
         "padding_full_width": 0,
         "enable_border_top": true,

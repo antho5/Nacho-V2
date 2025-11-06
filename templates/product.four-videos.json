@@ -61,7 +61,7 @@
           "type": "variant_picker",
           "settings": {
             "picker_type": "button",
-            "show_variant_image_group": false,
+            "show_variant_image_group": true,
             "enable_border_top": false,
             "enable_border_bottom": false,
             "color_border": "#e6e6e6",
