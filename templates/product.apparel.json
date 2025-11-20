@@ -153,6 +153,15 @@
             "spacing_top": 0,
             "spacing_bottom": 0
           }
+        },
+        "description_ndDW3f": {
+          "type": "description",
+          "settings": {
+            "open_tab_mobile": true,
+            "title": "Description",
+            "enable_btn_show_more": false,
+            "maximum_des_to_show": 300
+          }
         }
       },
       "block_order": [
@@ -167,7 +176,8 @@
         "04ea8843-f461-4f1d-8ea4-43f62fdfb21e",
         "f1b31d90-1e43-4948-9fe3-97ba43f6fb34",
         "10093fcf-2053-47e9-bedb-841bb0d046fa",
-        "2c38cf00-c2f0-4413-a324-01c020ddfceb"
+        "2c38cf00-c2f0-4413-a324-01c020ddfceb",
+        "description_ndDW3f"
       ],
       "custom_css": [
         ".installment {display: none;}"
