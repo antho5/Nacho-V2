@@ -422,7 +422,7 @@
         "show_image": false,
         "show_sku": false,
         "show_tab": true,
-        "tab_layout": "horizontal",
+        "tab_layout": "vertical",
         "tab_layout_mobile": "vertical",
         "icon_style_layout": "style_1",
         "title_font_size": 18,
@@ -463,6 +463,101 @@
         "mg_bottom_desktop": 0,
         "mg_bottom_tablet": 0,
         "mg_bottom_mobile": 0
+      }
+    },
+    "collapsible_content_EAaYq9": {
+      "type": "collapsible-content",
+      "blocks": {
+        "content_9FPQH4": {
+          "type": "content",
+          "settings": {
+            "heading": "Collapsible Row",
+            "content": "<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.</p>",
+            "page": ""
+          }
+        },
+        "content_PfPVcP": {
+          "type": "content",
+          "settings": {
+            "heading": "Collapsible Row",
+            "content": "<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.</p>",
+            "page": ""
+          }
+        },
+        "content_nkzU6j": {
+          "type": "content",
+          "settings": {
+            "heading": "Collapsible Row",
+            "content": "<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.</p>",
+            "page": ""
+          }
+        },
+        "content_ngrWTh": {
+          "type": "content",
+          "settings": {
+            "heading": "Collapsible Row",
+            "content": "<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.</p>",
+            "page": ""
+          }
+        },
+        "content_4aA86L": {
+          "type": "content",
+          "settings": {
+            "heading": "Collapsible Row",
+            "content": "<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.</p>",
+            "page": ""
+          }
+        },
+        "content_rRrPCw": {
+          "type": "content",
+          "settings": {
+            "heading": "Collapsible Row",
+            "content": "<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "content_9FPQH4",
+        "content_PfPVcP",
+        "content_nkzU6j",
+        "content_ngrWTh",
+        "content_4aA86L",
+        "content_rRrPCw"
+      ],
+      "custom_css": [
+        ".collapsible-image {margin-top: 0px;}"
+      ],
+      "name": "t:sections.collapsible_content.settings.collapsible_row",
+      "settings": {
+        "id_section": "",
+        "container": "container",
+        "padding_full_width": 0,
+        "collapsible_bg": "#000000",
+        "collapsible_bg_gradient": "",
+        "collapsible_title": "Product Ingredients",
+        "color_title": "#fff",
+        "fontsize_title": 24,
+        "fontsize_title_mb": 18,
+        "collapsible_des": "",
+        "color_des": "#3c3c3c",
+        "fontsize_des": 16,
+        "fontsize_des_mb": 14,
+        "max_width_des": 700,
+        "title_align": "center",
+        "enable_image_right": true,
+        "image_right": "shopify://shop_images/IMG_4738_202.jpg",
+        "bg_content_color": "#000000",
+        "content_color": "#fff",
+        "title_color": "#fff",
+        "icon_color": "#ff5a00",
+        "border_color": "#232323",
+        "mg_top_desktop": 25,
+        "mg_top_tablet": 25,
+        "mg_top_mobile": 25,
+        "mg_bottom_desktop": 25,
+        "mg_bottom_tablet": 25,
+        "mg_bottom_mobile": 25
       }
     },
     "172469934207cda7f8": {
@@ -1591,6 +1686,7 @@
   "order": [
     "image_banner_8PY3xL",
     "main",
+    "collapsible_content_EAaYq9",
     "172469934207cda7f8",
     "slide_show_UL7jcE",
     "1760481387a0316535",
