@@ -477,7 +477,7 @@
           }
         },
         "content_PfPVcP": {
-          "type": "content",
+          "type": "liquid",
           "settings": {
             "heading": "Collapsible Row",
             "content": "",
