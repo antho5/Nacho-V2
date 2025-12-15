@@ -476,6 +476,14 @@
             "page": ""
           }
         },
+        "content_3zAdDJ": {
+          "type": "content",
+          "settings": {
+            "heading": "Reviews",
+            "content": "<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.</p>",
+            "page": ""
+          }
+        },
         "content_PfPVcP": {
           "type": "content",
           "settings": {
@@ -519,6 +527,7 @@
       },
       "block_order": [
         "content_9FPQH4",
+        "content_3zAdDJ",
         "content_PfPVcP",
         "content_nkzU6j",
         "content_ngrWTh",
@@ -536,7 +545,7 @@
         "collapsible_bg": "#000000",
         "collapsible_bg_gradient": "",
         "collapsible_title": "Product Ingredients",
-        "color_title": "#fff",
+        "color_title": "#ffffff",
         "fontsize_title": 24,
         "fontsize_title_mb": 18,
         "collapsible_des": "",
@@ -548,8 +557,8 @@
         "enable_image_right": true,
         "image_right": "shopify://shop_images/IMG_4738_202.jpg",
         "bg_content_color": "#000000",
-        "content_color": "#fff",
-        "title_color": "#fff",
+        "content_color": "#ffffff",
+        "title_color": "#ffffff",
         "icon_color": "#ff5a00",
         "border_color": "#232323",
         "mg_top_desktop": 25,
