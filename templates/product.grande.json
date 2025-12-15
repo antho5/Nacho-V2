@@ -480,7 +480,7 @@
           "type": "content",
           "settings": {
             "heading": "Collapsible Row",
-            "content": "<div id=\"klaviyo-reviews-all\" data-id=\"{{product.id}}\"></div>",
+            "content": "",
             "page": ""
           }
         },
