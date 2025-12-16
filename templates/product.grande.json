@@ -158,7 +158,7 @@
             "type": "metafield",
             "content": "",
             "product_custom_source": "dynamic",
-            "product_tab_key_metafield": "{{ product.metafields.c_f.custom_tab1.value }}",
+            "product_tab_key_metafield": "",
             "enable_btn_show_more": false,
             "maximum_des_to_show": 300
           }
