@@ -803,14 +803,14 @@
       "type": "video-block",
       "name": "t:sections.video.presets.name",
       "settings": {
-        "container": "container",
+        "container": "fullwidth",
         "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "video_block_title": "",
         "color_title": "#232323",
         "fontsize_title": 16,
         "fontsize_title_mb": 22,
-        "margin_bottom_title": 45,
+        "margin_bottom_title": 0,
         "video_block_des": "",
         "color_des": "#3c3c3c",
         "fontsize_des": 16,
@@ -851,12 +851,12 @@
         "button_border_hover": "#232323",
         "button_background_hover": "#232323",
         "button_background_gradient_hover": "",
-        "mg_top_desktop": 50,
-        "mg_top_tablet": 50,
-        "mg_top_mobile": 50,
-        "mg_bottom_desktop": 50,
-        "mg_bottom_tablet": 50,
-        "mg_bottom_mobile": 50
+        "mg_top_desktop": 25,
+        "mg_top_tablet": 25,
+        "mg_top_mobile": 25,
+        "mg_bottom_desktop": 25,
+        "mg_bottom_tablet": 25,
+        "mg_bottom_mobile": 25
       }
     },
     "8ca832d8-6669-441d-b6d9-9db74f475d94": {
