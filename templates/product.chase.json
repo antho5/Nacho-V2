@@ -361,7 +361,7 @@
         "url_mp4": "",
         "url_mp4_mb": "",
         "description": "",
-        "full_width": false,
+        "full_width": true,
         "position_icon": "center",
         "heading": "",
         "font_size_heading": 40,
