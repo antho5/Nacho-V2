@@ -381,14 +381,14 @@
         "#halo-product-bundle {background: #000; color: #fff;}"
       ],
       "settings": {
-        "container": "container",
-        "padding_full_width": 0,
+        "container": "fullwidth",
+        "padding_full_width": 20,
         "show_sticky_info": false,
         "media_fit": "unset",
         "product_image_ratio": "square",
         "portrait_aspect_ratio": 148,
         "video_layout": "thumbnail",
-        "zoomed_image": false,
+        "zoomed_image": true,
         "product_image_popup": "fancybox",
         "main_image_show_custom_cursor": false,
         "icon_color": "#ffffff",
@@ -422,7 +422,7 @@
         "show_image": false,
         "show_sku": false,
         "show_tab": true,
-        "tab_layout": "vertical",
+        "tab_layout": "horizontal",
         "tab_layout_mobile": "vertical",
         "icon_style_layout": "style_1",
         "title_font_size": 18,
@@ -480,14 +480,14 @@
           "type": "content",
           "settings": {
             "heading": "Reviews",
-            "content": "<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo pharetras loremos.</p>",
+            "content": "",
             "page": ""
           }
         },
         "content_PfPVcP": {
           "type": "content",
           "settings": {
-            "heading": "Collapsible Row",
+            "heading": "Which Grande?",
             "content": "",
             "page": ""
           }
@@ -560,7 +560,7 @@
         "content_color": "#ffffff",
         "title_color": "#ffffff",
         "icon_color": "#ff5a00",
-        "border_color": "#232323",
+        "border_color": "#fff",
         "mg_top_desktop": 25,
         "mg_top_tablet": 25,
         "mg_top_mobile": 25,
