@@ -12,9 +12,66 @@
     "main": {
       "type": "main-page",
       "settings": {}
+    },
+    "custom_press_banner_xPj8eh": {
+      "type": "custom-press-banner",
+      "name": "t:sections.custom_press_banner.presets.name",
+      "settings": {
+        "container": "container",
+        "padding_full_width": 0,
+        "press_bg": "#fafafa",
+        "press_gradient": "",
+        "align_items": "center",
+        "press_image": "shopify://shop_images/Moe_Race_PNG.png",
+        "press_image_width": 320,
+        "press_image_width_ratio": 50,
+        "sub_title": "",
+        "letter_spacing_sub_title": "",
+        "font_size_sub_title": 14,
+        "font_size_sub_title_mb": 14,
+        "margin_bottom_sub_title": 14,
+        "font_weight_sub_title": "700",
+        "sub_title_position": "sub_title_above",
+        "color_sub_title": "#232323",
+        "title": "We’ve Got It Locked In!",
+        "title_font_size": 37,
+        "title_font_size_mb": 20,
+        "title_font_weight": "700",
+        "mg_bottom_title": 15,
+        "title_color": "#000000",
+        "des": "Thanks for reaching out to Nacho Offroad Lighting. We are shining a light on your submission right now. We want to make sure we give your inquiry the attention it deserves. Please give our team 5-7 business days to review the info and circle back to you.",
+        "des_font_size": 16,
+        "des_font_size_mb": 14,
+        "des_font_weight": "400",
+        "mg_bottom_des": 15,
+        "des_color": "#000000",
+        "item_spacing": 120,
+        "content_max_width": 680,
+        "button_text": "",
+        "button_link": "",
+        "fontsize_btn": 16,
+        "button_width": 190,
+        "color_button": "#fff",
+        "border_color_button": "#232323",
+        "bg_color_button": "#232323",
+        "bg_gradient_color_button": "",
+        "color_button_hover": "#fff",
+        "border_color_button_hover": "#232323",
+        "bg_color_button_hover": "#232323",
+        "bg_gradient_color_button_hover": "",
+        "btn_text_transform": "uppercase",
+        "image_behavior": "none",
+        "mg_top_desktop": 50,
+        "mg_top_tablet": 50,
+        "mg_top_mobile": 50,
+        "mg_bottom_desktop": 50,
+        "mg_bottom_tablet": 50,
+        "mg_bottom_mobile": 50
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "custom_press_banner_xPj8eh"
   ]
 }
