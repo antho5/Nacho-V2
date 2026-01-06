@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {}
     },
     "custom_press_banner_xPj8eh": {
@@ -24,7 +25,7 @@
         "align_items": "center",
         "press_image": "shopify://shop_images/Moe_Race_PNG.png",
         "press_image_width": 320,
-        "press_image_width_ratio": 50,
+        "press_image_width_ratio": 30,
         "sub_title": "",
         "letter_spacing_sub_title": "",
         "font_size_sub_title": 14,
