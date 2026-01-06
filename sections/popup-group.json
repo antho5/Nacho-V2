@@ -634,7 +634,7 @@
                       "type": "card-product-flex",
                       "static": true,
                       "settings": {
-                        "product": "quatro-chase",
+                        "product": "",
                         "inherit_color_scheme": true,
                         "scheme_background": "#ffffff",
                         "scheme_background_gradient": "",
