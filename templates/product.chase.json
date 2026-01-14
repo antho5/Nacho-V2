@@ -337,9 +337,10 @@
     },
     "video_block_cCKK3t": {
       "type": "video-block",
+      "disabled": true,
       "name": "t:sections.video.presets.name",
       "settings": {
-        "container": "container",
+        "container": "fullwidth",
         "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "video_block_title": "",
@@ -357,11 +358,11 @@
         "video_height_mb": "100",
         "style_video": "youtube",
         "video_url": "https://www.youtube.com/watch?v=5OpGmjMtMVI",
-        "video_url_mb": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video_url_mb": "https://www.youtube.com/watch?v=5OpGmjMtMVI",
         "url_mp4": "",
         "url_mp4_mb": "",
         "description": "",
-        "full_width": false,
+        "full_width": true,
         "position_icon": "center",
         "heading": "",
         "font_size_heading": 40,
@@ -397,9 +398,10 @@
     },
     "video_block_pMcbz4": {
       "type": "video-block",
+      "disabled": true,
       "name": "t:sections.video.presets.name",
       "settings": {
-        "container": "container",
+        "container": "fullwidth",
         "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "video_block_title": "",
@@ -418,11 +420,11 @@
         "video_height_mb": "100",
         "style_video": "youtube",
         "video_url": "https://www.youtube.com/watch?v=Lx7VU9gS_n8",
-        "video_url_mb": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video_url_mb": "https://www.youtube.com/watch?v=Lx7VU9gS_n8",
         "url_mp4": "",
         "url_mp4_mb": "",
         "description": "",
-        "full_width": false,
+        "full_width": true,
         "position_icon": "center",
         "heading": "",
         "font_size_heading": 40,
@@ -455,6 +457,56 @@
         "mg_bottom_tablet": 50,
         "mg_bottom_mobile": 50
       }
+    },
+    "176836153837a9be9d": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_8a0197b_QpmTNK": {
+          "type": "ai_gen_block_8a0197b",
+          "settings": {
+            "video_url": "5OpGmjMtMVI",
+            "autoplay": false,
+            "mute": false,
+            "show_link": false,
+            "link_text": "Watch on YouTube",
+            "link_button_bg": "#FF0000",
+            "link_button_bg_hover": "#CC0000",
+            "link_button_text": "#FFFFFF",
+            "link_button_radius": 4,
+            "max_width": 1600,
+            "border_radius": 8,
+            "section_padding_top": 50,
+            "section_padding_bottom": 50,
+            "background_color": "#FFFFFF"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_8a0197b_6TXc7y": {
+          "type": "ai_gen_block_8a0197b",
+          "settings": {
+            "video_url": "Lx7VU9gS_n8",
+            "autoplay": false,
+            "mute": false,
+            "show_link": false,
+            "link_text": "Watch on YouTube",
+            "link_button_bg": "#FF0000",
+            "link_button_bg_hover": "#CC0000",
+            "link_button_text": "#FFFFFF",
+            "link_button_radius": 4,
+            "max_width": 1600,
+            "border_radius": 8,
+            "section_padding_top": 50,
+            "section_padding_bottom": 50,
+            "background_color": "#FFFFFF"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_8a0197b_QpmTNK",
+        "ai_gen_block_8a0197b_6TXc7y"
+      ],
+      "settings": {}
     },
     "1724699610d861f76b": {
       "type": "apps",
@@ -587,6 +639,7 @@
     "main",
     "video_block_cCKK3t",
     "video_block_pMcbz4",
+    "176836153837a9be9d",
     "1724699610d861f76b",
     "product-recommendations",
     "product-recently-viewed",
