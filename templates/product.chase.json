@@ -339,7 +339,7 @@
       "type": "video-block",
       "name": "t:sections.video.presets.name",
       "settings": {
-        "container": "fullwidth",
+        "container": "container",
         "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "video_block_title": "",
@@ -400,7 +400,7 @@
       "type": "video-block",
       "name": "t:sections.video.presets.name",
       "settings": {
-        "container": "fullwidth",
+        "container": "container",
         "spotlight_bg": "#ffffff",
         "spotlight_bg_gradient": "",
         "video_block_title": "",
