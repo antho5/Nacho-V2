@@ -604,7 +604,7 @@
             "enable_des_hover": false,
             "button_style": "button_1",
             "button": "Shop Now",
-            "link": "shopify://products/quatro-supreme-adventure",
+            "link": "shopify://products/quatro-adv",
             "fontsize_btn": 16,
             "button_width": 190,
             "bg_opacity_button": 1,
