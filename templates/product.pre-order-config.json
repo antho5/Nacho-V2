@@ -313,7 +313,7 @@
         "title_padding_top_bottom": 15,
         "tab_border_color": "#000000",
         "tab_border_color_rgb": "",
-        "show_product_bundle": true,
+        "show_product_bundle": false,
         "background_color": "#f8f8f8",
         "block_title": "Frequently Bought Together",
         "block_title_align": "center",
