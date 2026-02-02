@@ -336,6 +336,22 @@
         "mg_bottom_mobile": 0
       }
     },
+    "177005400264e9b1d8": {
+      "type": "apps",
+      "blocks": {
+        "selleasy_lb_upsell_widget_bl_bqwUHV": {
+          "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-bl/790c1a03-a71f-4bc1-9869-00dad526d3c2",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "selleasy_lb_upsell_widget_bl_bqwUHV"
+      ],
+      "settings": {
+        "include_margins": false
+      }
+    },
     "1724699610d861f76b": {
       "type": "apps",
       "blocks": {
@@ -349,21 +365,6 @@
       ],
       "settings": {
         "include_margins": true
-      }
-    },
-    "177005400264e9b1d8": {
-      "type": "apps",
-      "blocks": {
-        "selleasy_lb_upsell_widget_bl_bqwUHV": {
-          "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-bl/790c1a03-a71f-4bc1-9869-00dad526d3c2",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "selleasy_lb_upsell_widget_bl_bqwUHV"
-      ],
-      "settings": {
-        "include_margins": false
       }
     },
     "video_block_zhAnwe": {
