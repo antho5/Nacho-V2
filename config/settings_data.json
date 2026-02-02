@@ -727,7 +727,8 @@
       ".govx-id-button img {margin: 5px auto !important;}",
       ".govx-id-full-wrapper .govx-id-full {margin: 0 auto !important;}",
       ".menu-lv-2__action,.menu-lv-3__action {text-transform: uppercase !important;}",
-      ".reviews_all_container {width: 75%; margin: 15px auto;}"
+      ".reviews_all_container {width: 75%; margin: 15px auto;}",
+      ".lb-button-bundle {text-transform: uppercase;}"
     ]
   }
 }
