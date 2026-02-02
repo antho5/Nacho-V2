@@ -198,34 +198,6 @@
             "spacing_top": 0,
             "spacing_bottom": 0
           }
-        },
-        "1180d91b-75f9-49d9-a9db-2b9f5a49408d": {
-          "type": "complementary_products",
-          "settings": {
-            "complementary_product_title": "Pairs well with",
-            "complementary_product_layout": "2",
-            "complementary_product_limit_1": 2,
-            "complementary_product_limit_2": 3,
-            "complementary_product_arrows": false,
-            "complementary_product_dots": true,
-            "complementary_product_object": "cover",
-            "complementary_product_button_atc": false,
-            "spacing_top": 30,
-            "spacing_bottom": 0
-          }
-        },
-        "grouped_product_8wkRbp": {
-          "type": "grouped_product",
-          "settings": {
-            "atc_color": "#ffffff",
-            "atc_border_color": "#232323",
-            "atc_bg_color": "#232323",
-            "atc_color_hover": "#232323",
-            "atc_border_color_hover": "#232323",
-            "atc_bg_color_hover": "#ffffff",
-            "spacing_top": 0,
-            "spacing_bottom": 0
-          }
         }
       },
       "block_order": [
@@ -244,9 +216,7 @@
         "87197f5f-be0e-4b89-9270-62bf6917ebe7",
         "custom_aNqVRp",
         "3d9ea84d-5527-4bce-abe6-5debef3ec955",
-        "19ab1d9f-74b2-4c76-bf2e-1bc749e5c2a3",
-        "1180d91b-75f9-49d9-a9db-2b9f5a49408d",
-        "grouped_product_8wkRbp"
+        "19ab1d9f-74b2-4c76-bf2e-1bc749e5c2a3"
       ],
       "custom_css": [
         ".installment {display: none;}"
@@ -341,7 +311,6 @@
       "blocks": {
         "selleasy_lb_upsell_widget_bl_bqwUHV": {
           "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-bl/790c1a03-a71f-4bc1-9869-00dad526d3c2",
-          "disabled": true,
           "settings": {}
         }
       },
