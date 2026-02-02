@@ -198,6 +198,10 @@
             "spacing_top": 0,
             "spacing_bottom": 0
           }
+        },
+        "selleasy_lb_upsell_widget_bl_xcXhpN": {
+          "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-bl/790c1a03-a71f-4bc1-9869-00dad526d3c2",
+          "settings": {}
         }
       },
       "block_order": [
@@ -216,7 +220,8 @@
         "87197f5f-be0e-4b89-9270-62bf6917ebe7",
         "custom_aNqVRp",
         "3d9ea84d-5527-4bce-abe6-5debef3ec955",
-        "19ab1d9f-74b2-4c76-bf2e-1bc749e5c2a3"
+        "19ab1d9f-74b2-4c76-bf2e-1bc749e5c2a3",
+        "selleasy_lb_upsell_widget_bl_xcXhpN"
       ],
       "custom_css": [
         ".installment {display: none;}"
@@ -273,7 +278,7 @@
         "title_padding_top_bottom": 15,
         "tab_border_color": "#000000",
         "tab_border_color_rgb": "",
-        "show_product_bundle": true,
+        "show_product_bundle": false,
         "background_color": "",
         "block_title": "Frequently Bought Together",
         "block_title_align": "center",
@@ -304,21 +309,6 @@
         "mg_bottom_desktop": 0,
         "mg_bottom_tablet": 0,
         "mg_bottom_mobile": 0
-      }
-    },
-    "177005400264e9b1d8": {
-      "type": "apps",
-      "blocks": {
-        "selleasy_lb_upsell_widget_bl_bqwUHV": {
-          "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-bl/790c1a03-a71f-4bc1-9869-00dad526d3c2",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "selleasy_lb_upsell_widget_bl_bqwUHV"
-      ],
-      "settings": {
-        "include_margins": false
       }
     },
     "1724699610d861f76b": {
@@ -630,7 +620,6 @@
   },
   "order": [
     "main",
-    "177005400264e9b1d8",
     "1724699610d861f76b",
     "video_block_zhAnwe",
     "video_block_zaUE3E",

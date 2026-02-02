@@ -162,6 +162,10 @@
             "enable_btn_show_more": false,
             "maximum_des_to_show": 300
           }
+        },
+        "selleasy_lb_upsell_widget_bl_ceJDHq": {
+          "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-bl/790c1a03-a71f-4bc1-9869-00dad526d3c2",
+          "settings": {}
         }
       },
       "block_order": [
@@ -177,7 +181,8 @@
         "f1b31d90-1e43-4948-9fe3-97ba43f6fb34",
         "10093fcf-2053-47e9-bedb-841bb0d046fa",
         "2c38cf00-c2f0-4413-a324-01c020ddfceb",
-        "description_ndDW3f"
+        "description_ndDW3f",
+        "selleasy_lb_upsell_widget_bl_ceJDHq"
       ],
       "custom_css": [
         ".installment {display: none;}"
@@ -234,7 +239,7 @@
         "title_padding_top_bottom": 15,
         "tab_border_color": "#4f4f4f",
         "tab_border_color_rgb": "",
-        "show_product_bundle": true,
+        "show_product_bundle": false,
         "background_color": "#f8f8f8",
         "block_title": "Frequently Bought Together",
         "block_title_align": "center",
@@ -336,7 +341,6 @@
     },
     "product-recently-viewed": {
       "type": "product-recently-viewed",
-      "disabled": true,
       "settings": {
         "display_product_recently_viewed": true,
         "product_recently_viewed_container": "1770",

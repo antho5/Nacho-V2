@@ -159,20 +159,9 @@
             "spacing_bottom": 12
           }
         },
-        "1180d91b-75f9-49d9-a9db-2b9f5a49408d": {
-          "type": "complementary_products",
-          "settings": {
-            "complementary_product_title": "Pairs well with",
-            "complementary_product_layout": "2",
-            "complementary_product_limit_1": 2,
-            "complementary_product_limit_2": 3,
-            "complementary_product_arrows": false,
-            "complementary_product_dots": true,
-            "complementary_product_object": "cover",
-            "complementary_product_button_atc": false,
-            "spacing_top": 30,
-            "spacing_bottom": 0
-          }
+        "selleasy_lb_upsell_widget_bl_V93gna": {
+          "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-bl/790c1a03-a71f-4bc1-9869-00dad526d3c2",
+          "settings": {}
         }
       },
       "block_order": [
@@ -189,7 +178,7 @@
         "bd066b80-c8e3-4f3e-8280-b27fbf6e9423",
         "19ab1d9f-74b2-4c76-bf2e-1bc749e5c2a3",
         "a86220cf-8641-4e06-87d3-b5ffa195501b",
-        "1180d91b-75f9-49d9-a9db-2b9f5a49408d"
+        "selleasy_lb_upsell_widget_bl_V93gna"
       ],
       "settings": {
         "container": "default",
