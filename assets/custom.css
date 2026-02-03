@@ -646,3 +646,50 @@ input.button.button--primary.button-bundle.style- {
     width: 100%;
   }
 }
+
+/* Spec Table Styling */
+.responsive-table {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  font-family: sans-serif;
+}
+
+.table-row {
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+
+.table-row.header {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.table-cell {
+  flex: 1;
+  padding: 12px;
+  text-align: left;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 600px) {
+  .table-row.header {
+    display: none; /* Hide headers on mobile */
+  }
+
+  .table-row {
+    flex-direction: column; /* Stack cells vertically */
+    padding: 10px 0;
+  }
+
+  .table-cell {
+    padding: 5px 12px;
+  }
+
+  /* Optional: Show label before value on mobile */
+  .table-cell:first-child {
+    font-weight: bold;
+    color: #333;
+  }
+}
