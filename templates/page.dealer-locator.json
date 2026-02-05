@@ -36,29 +36,11 @@
       "settings": {
         "include_margins": false
       }
-    },
-    "176064842411f59d6e": {
-      "type": "apps",
-      "blocks": {
-        "powr_map_store_locator_app_block_GxmwPB": {
-          "type": "shopify://apps/powr-map-store-locator/blocks/app-block/9044b7a6-9786-4034-a66f-350b6e75cfd1",
-          "settings": {
-            "app_id": "L7vEMp"
-          }
-        }
-      },
-      "block_order": [
-        "powr_map_store_locator_app_block_GxmwPB"
-      ],
-      "settings": {
-        "include_margins": false
-      }
     }
   },
   "order": [
     "main",
     "custom_liquid_G6V3c7",
-    "172494670144ef2210",
-    "176064842411f59d6e"
+    "172494670144ef2210"
   ]
 }
