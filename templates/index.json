@@ -809,7 +809,7 @@
             "aspect_ratio": "56.25",
             "enable_autoplay": false,
             "enable_mute": false,
-            "show_controls": true,
+            "show_controls": false,
             "enable_full_width": true,
             "desktop_width_percent": 100,
             "border_radius": 0,
