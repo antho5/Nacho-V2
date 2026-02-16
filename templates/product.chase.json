@@ -312,52 +312,6 @@
     },
     "176836153837a9be9d": {
       "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_8a0197b_QpmTNK": {
-          "type": "ai_gen_block_8a0197b",
-          "settings": {
-            "video_url": "5OpGmjMtMVI",
-            "autoplay": false,
-            "mute": false,
-            "show_link": false,
-            "link_text": "Watch on YouTube",
-            "link_button_bg": "#ff0000",
-            "link_button_bg_hover": "#cc0000",
-            "link_button_text": "#ffffff",
-            "link_button_radius": 4,
-            "max_width": 1600,
-            "border_radius": 8,
-            "section_padding_top": 50,
-            "section_padding_bottom": 50,
-            "background_color": "#ffffff"
-          },
-          "blocks": {}
-        },
-        "ai_gen_block_8a0197b_6TXc7y": {
-          "type": "ai_gen_block_8a0197b",
-          "settings": {
-            "video_url": "Lx7VU9gS_n8",
-            "autoplay": false,
-            "mute": false,
-            "show_link": false,
-            "link_text": "Watch on YouTube",
-            "link_button_bg": "#ff0000",
-            "link_button_bg_hover": "#cc0000",
-            "link_button_text": "#ffffff",
-            "link_button_radius": 4,
-            "max_width": 1600,
-            "border_radius": 8,
-            "section_padding_top": 50,
-            "section_padding_bottom": 50,
-            "background_color": "#ffffff"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_8a0197b_QpmTNK",
-        "ai_gen_block_8a0197b_6TXc7y"
-      ],
       "settings": {}
     },
     "1724699610d861f76b": {
@@ -374,6 +328,62 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "blocks_D66Kej": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_392d968_8BPEUG": {
+          "type": "ai_gen_block_392d968",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/watch?v=Lx7VU9gS_n8",
+            "aspect_ratio": "56.25",
+            "enable_autoplay": false,
+            "enable_mute": false,
+            "show_controls": true,
+            "enable_full_width": true,
+            "desktop_width_percent": 100,
+            "border_radius": 0,
+            "padding_top": 0,
+            "padding_bottom": 0,
+            "padding_left_right": 0,
+            "background_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_392d968_8BPEUG"
+      ],
+      "name": "YouTube video",
+      "settings": {}
+    },
+    "blocks_UWB7pq": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_392d968_MKKECC": {
+          "type": "ai_gen_block_392d968",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/watch?v=5OpGmjMtMVI&t=10s",
+            "aspect_ratio": "56.25",
+            "enable_autoplay": false,
+            "enable_mute": false,
+            "show_controls": true,
+            "enable_full_width": true,
+            "desktop_width_percent": 100,
+            "border_radius": 0,
+            "padding_top": 0,
+            "padding_bottom": 0,
+            "padding_left_right": 0,
+            "background_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_392d968_MKKECC"
+      ],
+      "name": "YouTube video",
+      "settings": {}
     },
     "product-recommendations": {
       "type": "product-recommendations",
@@ -491,6 +501,8 @@
     "main",
     "176836153837a9be9d",
     "1724699610d861f76b",
+    "blocks_D66Kej",
+    "blocks_UWB7pq",
     "product-recommendations",
     "product-recently-viewed",
     "product_backorder_popup_xPHVYk"
