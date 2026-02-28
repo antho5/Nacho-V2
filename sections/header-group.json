@@ -17,7 +17,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "<p class=\"message\">*** Check out our National Sales Rebate <a href=\"https://www.nachooffroadtechnology.com/rebate-form\">Here</a>  (Sept. 19, 2025 - Oct. 31, 2025) ***</p>",
+            "text": "<p class=\"message\">*** Check out our National Sales Rebate <a href=\"https://www.nachooffroadtechnology.com/rebate-form\">Here</a>  (March 1, 2026 - March 31, 2026) ***</p>",
             "btn_color": "#cc0e14",
             "btn_border_color": "#2da116",
             "btn_bg_color": "#232323",
@@ -28,7 +28,6 @@
       "block_order": [
         "announcement-bar-0"
       ],
-      "disabled": true,
       "custom_css": [
         ".message {text-transform: uppercase; font-family: var(--font-heading-family);}"
       ],
