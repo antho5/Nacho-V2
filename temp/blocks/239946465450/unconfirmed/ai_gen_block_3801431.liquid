@@ -1,6 +1,327 @@
+{% doc %}
+  @prompt
+    I need to create a section that will connect to our variant metafield custom.variant_description, This section needs to be reworked. Let's start over from scratch. After deleting everything create a section that will connect to a dynamic source. This dynamic source should be able to access our variant metafields and display rich text., I need the dynamic source that I can display be able to access variant level metafields not product level
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-variant-content-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.padding_top }}px {{ block.settings.padding_horizontal }}px {{ block.settings.padding_bottom }}px {{ block.settings.padding_horizontal }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-variant-content__wrapper-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.6;
+    text-align: {{ block.settings.text_alignment }};
+  }
+
+  .ai-variant-content__wrapper-{{ ai_gen_id }} h1,
+  .ai-variant-content__wrapper-{{ ai_gen_id }} h2,
+  .ai-variant-content__wrapper-{{ ai_gen_id }} h3,
+  .ai-variant-content__wrapper-{{ ai_gen_id }} h4,
+  .ai-variant-content__wrapper-{{ ai_gen_id }} h5,
+  .ai-variant-content__wrapper-{{ ai_gen_id }} h6 {
+    color: {{ block.settings.heading_color }};
+    margin-top: 0;
+    margin-bottom: 0.5em;
+  }
+
+  .ai-variant-content__wrapper-{{ ai_gen_id }} p {
+    margin: 0 0 1em 0;
+  }
+
+  .ai-variant-content__wrapper-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-variant-content__wrapper-{{ ai_gen_id }} ul,
+  .ai-variant-content__wrapper-{{ ai_gen_id }} ol {
+    margin: 0 0 1em 0;
+    padding-left: 1.5em;
+  }
+
+  .ai-variant-content__wrapper-{{ ai_gen_id }} a {
+    color: {{ block.settings.link_color }};
+    text-decoration: underline;
+  }
+
+  .ai-variant-content__wrapper-{{ ai_gen_id }} a:hover {
+    color: {{ block.settings.link_hover_color }};
+  }
+
+  .ai-variant-content__empty-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    opacity: 0.5;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-variant-content-{{ ai_gen_id }} {
+      width: 100%;
+      padding: {{ block.settings.padding_top_mobile }}px {{ block.settings.padding_horizontal_mobile }}px {{ block.settings.padding_bottom_mobile }}px {{ block.settings.padding_horizontal_mobile }}px;
+    }
+
+    .ai-variant-content__wrapper-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<variant-content-{{ ai_gen_id }}
+  class="ai-variant-content-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-variant-content__wrapper-{{ ai_gen_id }}" data-variant-content>
+    {% if product.selected_or_first_available_variant.metafields.custom.variant_description != blank %}
+      {{ product.selected_or_first_available_variant.metafields.custom.variant_description }}
+    {% elsif block.settings.variant_content != blank %}
+      {{ block.settings.variant_content }}
+    {% else %}
+      <div class="ai-variant-content__empty-{{ ai_gen_id }}">
+        Connect a variant metafield dynamic source
+      </div>
+    {% endif %}
+  </div>
+</variant-content-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class VariantContent{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.contentElement = this.querySelector('[data-variant-content]');
+      }
+
+      connectedCallback() {
+        this.setupVariantListener();
+      }
+
+      setupVariantListener() {
+        const productForm = document.querySelector('product-form');
+        if (!productForm) return;
+
+        productForm.addEventListener('variant-change', (event) => {
+          const variant = event.detail.variant;
+          if (variant) {
+            this.updateContent(variant);
+          }
+        });
+      }
+
+      updateContent(variant) {
+        if (!variant || !variant.id) return;
+
+        fetch(`${window.location.pathname}?variant=${variant.id}&section_id=${this.closest('.shopify-section').dataset.sectionId}`)
+          .then(response => response.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newContent = doc.querySelector('[data-variant-content]');
+            
+            if (newContent && this.contentElement) {
+              this.contentElement.innerHTML = newContent.innerHTML;
+            }
+          })
+          .catch(error => {
+            console.error('Error updating variant content:', error);
+          });
+      }
+    }
+
+    customElements.define('variant-content-{{ ai_gen_id }}', VariantContent{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Variant content",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "variant_content",
+      "label": "Content",
+      "info": "Connect to a variant metafield dynamic source (e.g., variant.metafields.custom.variant_description)"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Text size (mobile)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Headings",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Links",
+      "default": "#000F9F"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Links hover",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Horizontal",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top (mobile)",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Bottom (mobile)",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal_mobile",
+      "label": "Horizontal (mobile)",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Variant content"
+    }
+  ],
+  "tag": null
+}
 {% endschema %}
