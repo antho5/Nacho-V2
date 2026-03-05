@@ -471,8 +471,8 @@
           "settings": {
             "title": "Tab custom HTML",
             "open_by_default": false,
-            "custom_content_type": "all",
-            "product_tab_key_metafield": "",
+            "custom_content_type": "different",
+            "product_tab_key_metafield": "custom.variant_description",
             "content": "<p>Tab custom HTML</p>",
             "page": ""
           }
