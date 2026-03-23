@@ -328,6 +328,55 @@
         "mg_bottom_mobile": 0
       }
     },
+    "blocks_8dCdBT": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_392d968_kwXMMw": {
+          "type": "ai_gen_block_392d968",
+          "settings": {
+            "youtube_url": "https://www.youtube.com/watch?v=wlFKdv8p76E&t=21s",
+            "aspect_ratio": "56.25",
+            "enable_autoplay": false,
+            "enable_mute": false,
+            "show_controls": true,
+            "enable_full_width": true,
+            "desktop_width_percent": 100,
+            "border_radius": 0,
+            "padding_top": 0,
+            "padding_bottom": 0,
+            "padding_left_right": 0,
+            "background_color": "#ffffff"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_392d968_DVnnLx": {
+          "type": "ai_gen_block_392d968",
+          "name": "YouTube video",
+          "settings": {
+            "youtube_url": "",
+            "aspect_ratio": "56.25",
+            "enable_autoplay": false,
+            "enable_mute": false,
+            "show_controls": true,
+            "enable_full_width": true,
+            "desktop_width_percent": 100,
+            "border_radius": 0,
+            "padding_top": 0,
+            "padding_bottom": 0,
+            "padding_left_right": 0,
+            "background_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_392d968_kwXMMw",
+        "ai_gen_block_392d968_DVnnLx"
+      ],
+      "disabled": true,
+      "name": "YouTube video",
+      "settings": {}
+    },
     "172469934207cda7f8": {
       "type": "apps",
       "blocks": {
@@ -759,6 +808,7 @@
   },
   "order": [
     "main",
+    "blocks_8dCdBT",
     "172469934207cda7f8",
     "video_block_zhAnwe",
     "video_block_zaUE3E",
