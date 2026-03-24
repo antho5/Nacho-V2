@@ -716,7 +716,7 @@
       },
       "bss-b2b-b65e14db9ccd": {
         "type": "shopify://apps/bss-b2b-solution/blocks/config-header/451233f2-9631-4c49-8b6f-057e4ebcde7f",
-        "disabled": true,
+        "disabled": false,
         "settings": {}
       }
     }
