@@ -666,11 +666,6 @@
     },
     "content_for_index": [],
     "blocks": {
-      "bss-b2b-b65e14db9ccd": {
-        "type": "shopify://apps/bss-b2b-wholesale-solution/blocks/config-header/451233f2-9631-4c49-8b6f-057e4ebcde7f",
-        "disabled": false,
-        "settings": {}
-      },
       "1115855741281207229": {
         "type": "shopify://apps/powr-map-embed-store-locator/blocks/app-embed/9044b7a6-9786-4034-a66f-350b6e75cfd1",
         "disabled": false,
@@ -718,6 +713,11 @@
         "settings": {
           "storefrontAccessToken": ""
         }
+      },
+      "bss-b2b-b65e14db9ccd": {
+        "type": "shopify://apps/bss-b2b-solution/blocks/config-header/451233f2-9631-4c49-8b6f-057e4ebcde7f",
+        "disabled": true,
+        "settings": {}
       }
     }
   },
@@ -729,11 +729,11 @@
       ".menu-lv-2__action,.menu-lv-3__action {text-transform: uppercase !important;}",
       ".reviews_all_container {width: 75%; margin: 15px auto;}",
       ".lb-button-bundle {text-transform: uppercase;}",
-      "/* Spec Table Styling */.responsive-table {width: 100%; max-width: 800px; margin: 20px auto; border: 1px solid #ddd; font-family: sans-serif;}",
+      " /* Spec Table Styling */.responsive-table {width: 100%; max-width: 800px; margin: 20px auto; border: 1px solid #ddd; font-family: sans-serif;}",
       ".table-row {display: flex; border-bottom: 1px solid #eee;}",
       ".table-row.header {background-color: #f4f4f4; font-weight: bold;}",
       ".table-cell {flex: 1; padding: 12px; text-align: left;}",
-      "/* Mobile Responsive Adjustments */@media (max-width: 600px) {.table-row.header {display: none; /* Hide headers on mobile */ } .table-row {flex-direction: column; /* Stack cells vertically */ padding: 10px 0; } .table-cell {padding: 5px 12px; } /* Optional: Show label before value on mobile */ .table-cell:first-child {font-weight: bold; color: #333; }}"
+      " /* Mobile Responsive Adjustments */@media (max-width: 600px) {.table-row.header {display: none; /* Hide headers on mobile */ } .table-row {flex-direction: column; /* Stack cells vertically */ padding: 10px 0; } .table-cell {padding: 5px 12px; } /* Optional: Show label before value on mobile */ .table-cell:first-child {font-weight: bold; color: #333; }}"
     ]
   }
 }
