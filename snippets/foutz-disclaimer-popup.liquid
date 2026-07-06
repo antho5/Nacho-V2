@@ -2,8 +2,8 @@
   This snippet shows a disclaimer popup when a customer tries to add a product
   tagged "Foutz Motorsports LLC" to the cart. These products are manufactured
   and shipped directly by Foutz Motorsports LLC, so orders for them cannot be
-  cancelled or refunded once placed. The customer must check a confirmation
-  checkbox before the add to cart action is allowed to proceed.
+  cancelled or refunded once placed. The customer must click "I Agree, Add to
+  Cart" to acknowledge the disclaimer and proceed, or "Cancel" to back out.
 {% endcomment %}
 
 {%- if product.tags contains 'Foutz Motorsports LLC' -%}
@@ -53,33 +53,6 @@
             text-align: left;
         }
 
-        .foutz-disclaimer-popup-checkbox-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            text-align: left;
-            margin-bottom: 25px;
-            padding: 12px;
-            background-color: #f8f8f8;
-            border-radius: 6px;
-            border: 1px solid;
-        }
-
-        .foutz-disclaimer-popup-checkbox-row input[type="checkbox"] {
-            margin-top: 4px;
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
-            cursor: pointer;
-        }
-
-        .foutz-disclaimer-popup-checkbox-row label {
-            color: #333;
-            line-height: 1.5;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
         .foutz-disclaimer-popup-buttons {
             display: flex;
             justify-content: center;
@@ -108,11 +81,6 @@
         .foutz-disclaimer-btn-confirm:hover {
             background-color: #FF5A00;
         }
-        .foutz-disclaimer-btn-confirm:disabled {
-            background-color: #f1f1f1;
-            color: #999;
-            cursor: not-allowed;
-        }
 
         .foutz-disclaimer-btn-cancel {
             background-color: #f1f1f1;
@@ -129,13 +97,9 @@
 		<div id="foutz-disclaimer-popup-modal" class="foutz-disclaimer-popup-modal">
 			<h2>Please Read Before Continuing</h2>
 			<p>This product is manufactured and shipped directly by our partner <strong>Foutz Motorsports LLC</strong>. Because these items are built and fulfilled outside of our own warehouse, we are <strong>unable to cancel or refund</strong> this order once it has been placed.</p>
-			<div class="foutz-disclaimer-popup-checkbox-row">
-				<input type="checkbox" id="foutz-disclaimer-checkbox">
-				<label for="foutz-disclaimer-checkbox">I understand this product is manufactured and shipped by Foutz Motorsports LLC, and that this order cannot be cancelled or refunded once placed.</label>
-			</div>
 			<div class="foutz-disclaimer-popup-buttons">
 				<button id="foutz-disclaimer-cancel" class="foutz-disclaimer-popup-btn foutz-disclaimer-btn-cancel">Cancel</button>
-				<button id="foutz-disclaimer-confirm" class="foutz-disclaimer-popup-btn foutz-disclaimer-btn-confirm" disabled>I Agree, Add to Cart</button>
+				<button id="foutz-disclaimer-confirm" class="foutz-disclaimer-popup-btn foutz-disclaimer-btn-confirm">I Agree, Add to Cart</button>
 			</div>
 		</div>
 	</div>
@@ -145,20 +109,13 @@
             const popupOverlay = document.getElementById('foutz-disclaimer-popup-overlay');
             const confirmButton = document.getElementById('foutz-disclaimer-confirm');
             const cancelButton = document.getElementById('foutz-disclaimer-cancel');
-            const agreeCheckbox = document.getElementById('foutz-disclaimer-checkbox');
 
             if (!popupOverlay) {
                 console.error('Foutz Disclaimer Popup: Could not find the popup overlay element.');
                 return;
             }
 
-            const resetPopup = () => {
-                agreeCheckbox.checked = false;
-                confirmButton.disabled = true;
-            };
-
             const showPopup = () => {
-                resetPopup();
                 popupOverlay.style.display = 'flex';
                 setTimeout(() => {
                     popupOverlay.classList.add('visible');
@@ -171,10 +128,6 @@
                     popupOverlay.style.display = 'none';
                 }, 300);
             };
-
-            agreeCheckbox.addEventListener('change', () => {
-                confirmButton.disabled = !agreeCheckbox.checked;
-            });
 
             document.body.addEventListener('click', (event) => {
                 const addToCartButton = event.target.closest('#product-add-to-cart');
@@ -199,8 +152,6 @@
             }, true); // Use event capturing to run our script before the theme's.
 
             confirmButton.addEventListener('click', () => {
-                if (!agreeCheckbox.checked) return;
-
                 const addToCartButton = popupOverlay._pendingButton;
                 hidePopup();
 
