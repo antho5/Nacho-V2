@@ -390,6 +390,11 @@
       "type": "product-backorder-popup",
       "name": "Backorder Popup",
       "settings": {}
+    },
+    "product_foutz_disclaimer_popup": {
+      "type": "product-foutz-disclaimer-popup",
+      "name": "Foutz Disclaimer Popup",
+      "settings": {}
     }
   },
   "order": [
@@ -397,6 +402,7 @@
     "1724699716678c1158",
     "product-recommendations",
     "product-recently-viewed",
-    "product_backorder_popup_9nP3LQ"
+    "product_backorder_popup_9nP3LQ",
+    "product_foutz_disclaimer_popup"
   ]
 }

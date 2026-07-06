@@ -1,0 +1,223 @@
+{% comment %}
+  This snippet shows a disclaimer popup when a customer tries to add a product
+  tagged "Foutz Motorsports LLC" to the cart. These products are manufactured
+  and shipped directly by Foutz Motorsports LLC, so orders for them cannot be
+  cancelled or refunded once placed. The customer must check a confirmation
+  checkbox before the add to cart action is allowed to proceed.
+{% endcomment %}
+
+{%- if product.tags contains 'Foutz Motorsports LLC' -%}
+	<style>
+        .foutz-disclaimer-popup-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .foutz-disclaimer-popup-modal {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 520px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .foutz-disclaimer-popup-overlay.visible .foutz-disclaimer-popup-modal {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .foutz-disclaimer-popup-modal h2 {
+            margin-top: 0;
+            font-size: 2.5rem;
+            color: #1a1a1a;
+        }
+
+        .foutz-disclaimer-popup-modal p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .foutz-disclaimer-popup-checkbox-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            text-align: left;
+            margin-bottom: 25px;
+            padding: 12px;
+            background-color: #f8f8f8;
+            border-radius: 6px;
+        }
+
+        .foutz-disclaimer-popup-checkbox-row input[type="checkbox"] {
+            margin-top: 4px;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .foutz-disclaimer-popup-checkbox-row label {
+            color: #333;
+            line-height: 1.5;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .foutz-disclaimer-popup-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .foutz-disclaimer-popup-btn {
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.8rem;
+            transition: background-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+            font-family: var(--btn-2-font-family);
+        }
+
+        .foutz-disclaimer-popup-btn:active {
+            transform: scale(0.97);
+        }
+
+        .foutz-disclaimer-btn-confirm {
+            background-color: #FF5A00;
+            color: #000;
+        }
+        .foutz-disclaimer-btn-confirm:hover {
+            background-color: #FF5A00;
+        }
+        .foutz-disclaimer-btn-confirm:disabled {
+            background-color: #f1f1f1;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .foutz-disclaimer-btn-cancel {
+            background-color: #f1f1f1;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        .foutz-disclaimer-btn-cancel:hover {
+            background-color: #e6e6e6;
+        }
+	</style>
+
+	<!-- HTML structure for the popup -->
+	<div id="foutz-disclaimer-popup-overlay" class="foutz-disclaimer-popup-overlay">
+		<div id="foutz-disclaimer-popup-modal" class="foutz-disclaimer-popup-modal">
+			<h2>Please Read Before Continuing</h2>
+			<p>This product is manufactured and shipped directly by our partner <strong>Foutz Motorsports LLC</strong>. Because these items are built and fulfilled outside of our own warehouse, we are <strong>unable to cancel or refund</strong> this order once it has been placed.</p>
+			<div class="foutz-disclaimer-popup-checkbox-row">
+				<input type="checkbox" id="foutz-disclaimer-checkbox">
+				<label for="foutz-disclaimer-checkbox">I understand this product is manufactured and shipped by Foutz Motorsports LLC, and that this order cannot be cancelled or refunded once placed.</label>
+			</div>
+			<div class="foutz-disclaimer-popup-buttons">
+				<button id="foutz-disclaimer-cancel" class="foutz-disclaimer-popup-btn foutz-disclaimer-btn-cancel">Cancel</button>
+				<button id="foutz-disclaimer-confirm" class="foutz-disclaimer-popup-btn foutz-disclaimer-btn-confirm" disabled>Add to Cart</button>
+			</div>
+		</div>
+	</div>
+
+	<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const popupOverlay = document.getElementById('foutz-disclaimer-popup-overlay');
+            const confirmButton = document.getElementById('foutz-disclaimer-confirm');
+            const cancelButton = document.getElementById('foutz-disclaimer-cancel');
+            const agreeCheckbox = document.getElementById('foutz-disclaimer-checkbox');
+
+            if (!popupOverlay) {
+                console.error('Foutz Disclaimer Popup: Could not find the popup overlay element.');
+                return;
+            }
+
+            const resetPopup = () => {
+                agreeCheckbox.checked = false;
+                confirmButton.disabled = true;
+            };
+
+            const showPopup = () => {
+                resetPopup();
+                popupOverlay.style.display = 'flex';
+                setTimeout(() => {
+                    popupOverlay.classList.add('visible');
+                }, 10);
+            };
+
+            const hidePopup = () => {
+                popupOverlay.classList.remove('visible');
+                setTimeout(() => {
+                    popupOverlay.style.display = 'none';
+                }, 300);
+            };
+
+            agreeCheckbox.addEventListener('change', () => {
+                confirmButton.disabled = !agreeCheckbox.checked;
+            });
+
+            document.body.addEventListener('click', (event) => {
+                const addToCartButton = event.target.closest('#product-add-to-cart');
+
+                if (addToCartButton) {
+                    // Once the customer has agreed for this add to cart button, let
+                    // subsequent clicks (including re-triggered ones) pass through.
+                    if (addToCartButton.hasAttribute('data-foutz-disclaimer-agreed')) {
+                        return;
+                    }
+
+                    const productForm = addToCartButton.closest('form[data-type="add-to-cart-form"]');
+                    if (!productForm) return;
+
+                    // Stop the theme's default action and show our disclaimer first.
+                    event.preventDefault();
+                    event.stopPropagation();
+                    showPopup();
+                    popupOverlay.dataset.pendingButtonId = addToCartButton.id || '';
+                    popupOverlay._pendingButton = addToCartButton;
+                }
+            }, true); // Use event capturing to run our script before the theme's.
+
+            confirmButton.addEventListener('click', () => {
+                if (!agreeCheckbox.checked) return;
+
+                const addToCartButton = popupOverlay._pendingButton;
+                hidePopup();
+
+                if (addToCartButton) {
+                    // Mark this button as agreed so our listener steps aside, then
+                    // re-trigger the click so any other popups (e.g. backorder) or
+                    // the theme's own add-to-cart logic can run normally.
+                    addToCartButton.setAttribute('data-foutz-disclaimer-agreed', 'true');
+                    addToCartButton.click();
+                }
+            });
+
+            cancelButton.addEventListener('click', hidePopup);
+            popupOverlay.addEventListener('click', (event) => {
+                if (event.target === popupOverlay) {
+                    hidePopup();
+                }
+            });
+        });
+	</script>
+{%- endif -%}
